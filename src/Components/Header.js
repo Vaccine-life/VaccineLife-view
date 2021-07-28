@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header = () => {
-  return <div>Header 다은짱</div>
+  return <div>Header 사실은윤정이가짱</div>;
 };
 
 export default Header;
