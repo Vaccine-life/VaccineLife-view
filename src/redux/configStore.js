@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
+import user from "./modules/user";
 
 export const history = createBrowserHistory();
 
@@ -19,6 +20,7 @@ if (env === "development") {
 }
 
 const reducer = combineReducers({
+  user: user.reducer,
   router: connectRouter(history),
 });
 
