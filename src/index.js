@@ -6,11 +6,14 @@ import { Provider } from "react-redux";
 import store, { history } from "./redux/configStore";
 import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
+import ResponsiveStyles from "./styles/ResponsiveStyles";
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <ResponsiveStyles>
+        <App />
+      </ResponsiveStyles>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
