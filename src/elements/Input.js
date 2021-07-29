@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { Text, Grid } from "./index";
 
 import { history } from "../redux/configureStore";
@@ -71,6 +72,7 @@ const Input = (props) => {
         }}
         />
       </Grid>
+
     </React.Fragment>
   );
 };
