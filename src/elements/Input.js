@@ -1,94 +1,126 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Text, Grid } from "./index";
+
+import { history } from "../redux/configureStore";
+
+
 const Input = (props) => {
-  const {
-    width,
-    padding,
-    bg,
-    height,
+
+  const { 
+    label, 
+    placeholder, 
+    _onChange, 
+    type, 
+    multiLine, 
+    value, 
+    onSubmit , 
+    margin, 
+    is_comment,
     border,
-    size,
-    margin,
-    value,
-    placeholder,
-    _onChange,
-    type,
-    border_radius,
     color,
-    bold,
-    placeholderColor,
-    required,
+    radius,
+    height,
+    bg,
   } = props;
 
-  const styles = {
-    padding: padding,
-    width: width,
-    margin: margin,
-    height: height,
-    border: border,
-    size: size,
-    bg: bg,
-    border_radius,
-    color,
-    bold,
-    placeholderColor,
+  if (is_comment) {
+    return (
+        <CommentInput 
+        backgroundColor={bg}
+        borderRadius={radius}
+        margin={margin} 
+        type={type} 
+        placeholder={placeholder} 
+        onChange={_onChange} 
+        value={value}/>
+    );
   };
+
+  if (multiLine) {
+    return (
+      <Grid>
+        <Text margin="0px">{label ? label : ""}</Text>
+        <ElTextArea
+          rows={10}
+          value={value}
+          placeholder={placeholder}
+          onChange={_onChange}
+        ></ElTextArea>
+      </Grid>
+    );
+  };
+
   return (
     <React.Fragment>
-      <InputBox
-        {...styles}
-        placeholder={placeholder}
-        type={type}
-        onChange={_onChange}
+      <Grid>     
+        <ElInput
+        height={height}
+        color={color}
+        margin={margin}
         value={value}
-        required={required}
-      />
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        border={border}
+        borderRadius={radius}
+        onKeyPress={(e) => {
+            if(e.key === 'Enter'){
+            onSubmit(e);
+            }
+        }}
+        />
+      </Grid>
+
     </React.Fragment>
   );
 };
 
 Input.defaultProps = {
-  width: "100%",
-  padding: "",
-  height: "100%",
-  border: "",
-  size: "14px",
-  margin: "",
-  label: "",
-  value: "",
-  placeholder: "",
+  multiLine: false,
+  label: false,
+  placeholder: "텍스트를 입력해주세요.",
+  is_Submit: false,
   _onChange: () => {},
   type: "text",
-  name: "",
-  bg: null,
-  border_radius: "",
-  color: "",
-  multiline_noValue: "",
-  bold: false,
-  placeholderColor: "",
-  required: false,
+  value: "",
+  onSubmit: () => {},
+  margin:false,
+  is_comment: false,
+  width: false,
+  border: false,
+  color: false,
+  borderRadius: false,
+  height: false,
+  bg: false,
 };
 
-const InputBox = styled.input`
+//작성페이지 멀티라인 수정
+const ElTextArea = styled.textarea`
   border: none;
-  ${(props) => props.bold && `font-weight : 600;`}
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  padding: ${(props) => props.padding};
-  border: ${(props) => props.border};
-  font-size: ${(props) => props.size};
-  margin: ${(props) => props.margin};
-  background-color: ${(props) => props.bg};
-  border-radius: ${(props) => props.border_radius};
-  border: none;
-  color: ${(props) => props.color};
-  :focus {
-    outline: none;
-  }
-  ::placeholder {
-    color: ${(props) => props.placeholderColor};
-  }
+  width: 100%;
+  padding: 12px 4px;
+  box-sizing: border-box;
+  resize: none;
+`;
+
+const ElInput = styled.input`
+${(props) => props.margin? `margin:${props.margin}` : ''};
+  width: 100%
+  ${(props) => props.border? `border:${props.border}` : ''};
+  padding: 12px 4px;
+  box-sizing: border-box;
+  ${(props) => props.height? `height:${props.height}` : ''};
+`;
+
+const CommentInput = styled.input`
+${(props) => props.margin? `margin:${props.margin}` : ''};
+  border-style:none;
+${(props) => props.width? `width:${props.width}` : ''};
+${(props) => props.borderRadius? `border-radius:${props.borderRadius}` : ''};
+  padding: 12px 4px;
+  box-sizing: border-box;
 `;
 
 export default Input;
