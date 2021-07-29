@@ -36,7 +36,7 @@
 
 - align
 - width
-- is_flex
+- is_flex {center, space_low, space_column}
 - bg
 - padding
 - margin
