@@ -56,7 +56,7 @@ const Wrapper = styled.div`
    align-items: center;
      `;
     }
-    if (props.is_flex === "space_low") {
+    if (props.is_flex === "space_row") {
       return `
    display: flex;
    justify-content : space-between;
@@ -70,6 +70,8 @@ const Wrapper = styled.div`
    justify-content : space-between;
    align-items: center;
      `;
+    } else {
+      return ``;
     }
   }}
   padding : ${(props) => props.padding};

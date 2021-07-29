@@ -2,6 +2,7 @@ import React from "react";
 import logger from "../shared/logger";
 import { history } from "../redux/configStore";
 import styled from "styled-components";
+import Grid from "../elements/Grid";
 
 const Write = () => {
   const url = history.location.pathname;
@@ -9,7 +10,7 @@ const Write = () => {
   const urlExchanger = url === "/vboard/write" ? true : false;
 
   logger(urlExchanger);
-  return <div>write</div>;
+  return <Grid>write</Grid>;
 };
 
 export default Write;
