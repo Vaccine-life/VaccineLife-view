@@ -13,7 +13,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   children: null,
-  bg_color: "#0E693F",
+  bg: "#0E693F",
   width: "100%",
   margin: "auto",
   height: "100%",
@@ -28,15 +28,15 @@ const ButtonEle = styled.button`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
-  background-color: ${(props) => props.bg_color};
+  background-color: ${(props) => props.bg};
   color: ${(props) => props.hover_color};
   border-radius: ${(props) => props.border_radius};
   transition: background-color 0.3s;
   :hover {
     cursor: pointer;
     background-color: ${(props) => props.hover_color};
-    color: ${(props) => props.bg_color};
-    border: 1px solid ${(props) => props.bg_color};
+    color: ${(props) => props.bg};
+    border: 1px solid ${(props) => props.bg};
   }
 `;
 
