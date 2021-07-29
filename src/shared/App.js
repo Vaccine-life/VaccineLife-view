@@ -5,8 +5,8 @@ import Medical from "../pages/Medical";
 import Vaccine from "../pages/Vaccine";
 import Write from "../pages/Write";
 import "./App.css";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function App() {
   return (
