@@ -5,8 +5,8 @@ import Medical from "../pages/Medical";
 import Vaccine from "../pages/Vaccine";
 import Write from "../pages/Write";
 import "./App.css";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/medical" component={Medical} />
-        <Route exact path="/write" component={Write} />
+        <Route path="/vboard/write" component={Write} />
+        <Route path="/qboard/write" component={Write} />
         <Redirect from="*" to="/" />
       </Switch>
 
