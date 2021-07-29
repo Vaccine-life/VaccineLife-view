@@ -48,13 +48,30 @@ Grid.defaultProps = {
 const Wrapper = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  ${(props) =>
-    props.is_flex &&
-    `
-  display: flex;
-  justify-content : center;
-  align-items: center;
-  `}
+  ${(props) => {
+    if (props.is_flex === "center") {
+      return `
+   display: flex;
+   justify-content : center;
+   align-items: center;
+     `;
+    }
+    if (props.is_flex === "space_low") {
+      return `
+   display: flex;
+   justify-content : space-between;
+   align-items: center;
+     `;
+    }
+    if (props.is_flex === "space_column") {
+      return `
+   display: flex;
+   flex-direction : column;
+   justify-content : space-between;
+   align-items: center;
+     `;
+    }
+  }}
   padding : ${(props) => props.padding};
   margin: ${(props) => props.margin};
   background-color: ${(props) => props.bg};

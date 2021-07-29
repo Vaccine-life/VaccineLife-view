@@ -1,6 +1,7 @@
 import React from "react";
 import logger from "../shared/logger";
 import { history } from "../redux/configStore";
+import styled from "styled-components";
 
 const Write = () => {
   const url = history.location.pathname;
