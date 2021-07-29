@@ -3,20 +3,16 @@ import styled from "styled-components";
 
 import { Text, Grid } from "./index";
 
-import { history } from "../redux/configureStore";
-
-
 const Input = (props) => {
-
-  const { 
-    label, 
-    placeholder, 
-    _onChange, 
-    type, 
-    multiLine, 
-    value, 
-    onSubmit , 
-    margin, 
+  const {
+    label,
+    placeholder,
+    _onChange,
+    type,
+    multiLine,
+    value,
+    onSubmit,
+    margin,
     is_comment,
     border,
     color,
@@ -27,16 +23,17 @@ const Input = (props) => {
 
   if (is_comment) {
     return (
-        <CommentInput 
+      <CommentInput
         backgroundColor={bg}
         borderRadius={radius}
-        margin={margin} 
-        type={type} 
-        placeholder={placeholder} 
-        onChange={_onChange} 
-        value={value}/>
+        margin={margin}
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        value={value}
+      />
     );
-  };
+  }
 
   if (multiLine) {
     return (
@@ -50,29 +47,28 @@ const Input = (props) => {
         ></ElTextArea>
       </Grid>
     );
-  };
+  }
 
   return (
     <React.Fragment>
-      <Grid>     
+      <Grid>
         <ElInput
-        height={height}
-        color={color}
-        margin={margin}
-        value={value}
-        type={type}
-        placeholder={placeholder}
-        onChange={_onChange}
-        border={border}
-        borderRadius={radius}
-        onKeyPress={(e) => {
-            if(e.key === 'Enter'){
-            onSubmit(e);
+          height={height}
+          color={color}
+          margin={margin}
+          value={value}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          border={border}
+          borderRadius={radius}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              onSubmit(e);
             }
-        }}
+          }}
         />
       </Grid>
-
     </React.Fragment>
   );
 };
@@ -86,7 +82,7 @@ Input.defaultProps = {
   type: "text",
   value: "",
   onSubmit: () => {},
-  margin:false,
+  margin: false,
   is_comment: false,
   width: false,
   border: false,
@@ -106,19 +102,19 @@ const ElTextArea = styled.textarea`
 `;
 
 const ElInput = styled.input`
-${(props) => props.margin? `margin:${props.margin}` : ''};
-  width: 100%
-  ${(props) => props.border? `border:${props.border}` : ''};
+  ${(props) => (props.margin ? `margin:${props.margin}` : "")};
+  width: 100% ${(props) => (props.border ? `border:${props.border}` : "")};
   padding: 12px 4px;
   box-sizing: border-box;
-  ${(props) => props.height? `height:${props.height}` : ''};
+  ${(props) => (props.height ? `height:${props.height}` : "")};
 `;
 
 const CommentInput = styled.input`
-${(props) => props.margin? `margin:${props.margin}` : ''};
-  border-style:none;
-${(props) => props.width? `width:${props.width}` : ''};
-${(props) => props.borderRadius? `border-radius:${props.borderRadius}` : ''};
+  ${(props) => (props.margin ? `margin:${props.margin}` : "")};
+  border-style: none;
+  ${(props) => (props.width ? `width:${props.width}` : "")};
+  ${(props) =>
+    props.borderRadius ? `border-radius:${props.borderRadius}` : ""};
   padding: 12px 4px;
   box-sizing: border-box;
 `;
