@@ -5,12 +5,12 @@ const Text = (props) => {
   const { margin, color, size, children, bold, lineHeight } = props;
 
   const styles = {
-    margin: margin,
-    color: color,
-    size: size,
-    children: children,
-    bold: bold,
-    lineHeight: lineHeight,
+    margin,
+    color,
+    size,
+    children,
+    bold,
+    lineHeight,
   };
 
   return (
