@@ -1,11 +1,11 @@
 import React from "react";
-
 import { Grid, Image, Text, Button } from "../elements"; 
 import theme from "../styles/theme";
 
 
 const Header = (props) => {
   return (
+
     <React.Fragment>
       <Grid bg={theme.bg} is_flex="space_row">
 
@@ -25,6 +25,7 @@ const Header = (props) => {
 
       </Grid>
     </React.Fragment>
+
   );
 };
 
