@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../styles/theme";
 
 const Button = (props) => {
   const { _onClick, children, ...rest } = props;
@@ -13,7 +14,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   children: null,
-  bg: "#0E693F",
+  bg: theme.btnColor,
   width: "100%",
   margin: "auto",
   height: "100%",

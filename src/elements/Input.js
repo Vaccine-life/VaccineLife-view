@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text, Grid } from "./index";
+import theme from "../styles/theme";
 
 const Input = (props) => {
   const {
@@ -76,7 +77,7 @@ const Input = (props) => {
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
+  placeholder: "후기 정보를 나눠보세요! :)",
   is_Submit: false,
   _onChange: () => {},
   type: "text",
@@ -86,7 +87,7 @@ Input.defaultProps = {
   is_comment: false,
   width: false,
   border: false,
-  color: false,
+  color: theme.fontColor,
   borderRadius: false,
   height: false,
   bg: false,

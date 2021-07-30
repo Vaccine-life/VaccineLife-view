@@ -55,7 +55,8 @@ const AspectInner = styled.div`
   position: center;
   background-image: url("${(props) => props.src}");
   background-size: cover;
-  margin: auto;
+  /* margin: auto; */
+  margin: ${(props) => props.margin};
 `;
 
 const ImageCircle = styled.div`

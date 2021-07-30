@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Input, Button } from "../elements/index";
+import { Text, Button } from "../elements/index";
+import theme from "../styles/theme";
 
 const Survey = (props) => {
   console.log("Survey", props.history);
@@ -8,7 +9,9 @@ const Survey = (props) => {
     <>
       <Wrapper>
         <Modal>
-          <Text size="14px">회원가입이 곧 마무리됩니다</Text>
+          <Text margin="2vh auto" size="14px">
+            회원가입이 곧 마무리됩니다
+          </Text>
           <Text margin="2vh 0 6vh 0" size="20px" bold>
             여러분의 백신 접종 경험을 공유해주세요
           </Text>
@@ -130,6 +133,20 @@ const Survey = (props) => {
             </Options>
             <div></div>
           </SurveyItem>
+
+          <Button
+            margin="2vh auto"
+            width="20%"
+            height="3vh"
+            type="submit"
+            bg={theme.btnColor}
+            _onClick={() => {
+              props.history.push("/");
+              // 회원가입 완료 안내하기
+            }}
+          >
+            회원가입
+          </Button>
         </Modal>
       </Wrapper>
     </>
