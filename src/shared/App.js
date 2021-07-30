@@ -8,10 +8,11 @@ import Write from "../pages/Write";
 import "./App.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import styled from "styled-components";
 
 function App() {
   return (
-    <div className="App">
+    <Wrapper className="App">
       <Header />
       <Switch>
         <Route exact path="/" component={Main} />
@@ -19,13 +20,18 @@ function App() {
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/medical" component={Medical} />
-        <Route path="/vboard/write" component={Write} />
-        <Route path="/qboard/write" component={Write} />
+        <Route exact path="/vboard/write" component={Write} />
+        <Route exact path="/qboard/write" component={Write} />
         <Redirect from="*" to="/" />
       </Switch>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default App;
