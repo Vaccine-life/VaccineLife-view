@@ -3,6 +3,7 @@ import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
 import user from "./modules/user";
+import modal from "./modules/modal";
 
 export const history = createBrowserHistory();
 
@@ -21,6 +22,7 @@ if (env === "development") {
 
 const reducer = combineReducers({
   user: user.reducer,
+  modal: modal.reducer,
   router: connectRouter(history),
 });
 
