@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import Detail from "../pages/Detail";
 import Login from "../pages/Login";
 import Main from "../pages/Main";

@@ -1,12 +1,11 @@
 import React from "react";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment"
 
 
-const Comment = (props) => {
+const CommentWrite = (props) => {
     const dispatch = useDispatch();
     // console.log(props);
 
@@ -15,6 +14,7 @@ const Comment = (props) => {
 
     const changeComment = (e) => {
         setComment(e.target.value);
+        // console.log(e.target.value)
         // 인풋의 onChange에 넣어주고 콘솔 찍어보기
         // 바뀌는 내용이 바로 바로 오게 만든것!
       }
@@ -37,19 +37,10 @@ const Comment = (props) => {
                 onSubmit={write}
             />
             <Grid align="right">
-                <Button 
-                width="3rem" 
-                _onClick={write}
-                >등록</Button>
+                <Button width="3rem" _onClick={write}>등록</Button>
             </Grid>
         </React.Fragment>
     )
 }
 
-Comment.defaultProps = {
-    nickname: "명수는열두살",
-    comment: "응원합니다!",
-    insert_dt: moment().startOf('day').fromNow(),
-}
-
-export default Comment;
+export default CommentWrite;

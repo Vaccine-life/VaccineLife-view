@@ -19,7 +19,6 @@ const Medical = (props) => {
         </Grid>
         
         <CommentWrite/>
-        {/* <CommentList/> */}
         {comment_list.map((c, idx) => {
           return <CommentList key={idx} {...c}/>
         })}

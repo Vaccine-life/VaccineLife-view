@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
+
 
 const initialState = {
   list: [],
 };
+
+const initialComment = {
+    comment: "",
+    insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm:ss"),
+}
 
 // createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
 // action creator와 action type을 가진 reducer 자동 생성

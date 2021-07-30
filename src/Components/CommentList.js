@@ -6,15 +6,18 @@ import { Input, Text, Button, Grid } from "../elements";
 import { actionSetComment } from "../redux/modules/comment"
 
 
-const Comment = (props) => {
+const CommentList = (props) => {
     const dispatch = useDispatch();
 
     const comment_list = useSelector((state) => state.comment);
     console.log(comment_list);
+    const {comment_id} = props;
 
-    // React.useEffect = {() => {
-    //     dispatch(actionSetComment());
-    // }, []}
+    React.useEffect = (() => {
+        if(!comment_list[comment_id]){
+            dispatch(actionSetComment(comment_id));
+        }
+    }, [])
 
     return(
         <React.Fragment>
@@ -38,11 +41,10 @@ const Comment = (props) => {
     )
 }
 
-Comment.defaultProps = {
+CommentList.defaultProps = {
     nickname: "명수는열두살",
     comment: "응원합니다!",
-    insert_dt: moment().startOf('day').fromNow(),
-    contents: null,
+    insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm:ss"),
 }
 
-export default Comment;
+export default CommentList;
