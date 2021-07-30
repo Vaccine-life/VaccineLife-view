@@ -1,6 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import Detail from "../pages/Detail";
 import Login from "../pages/Login";
+import Survey from "../pages/Survey";
 import Main from "../pages/Main";
 import Medical from "../pages/Medical";
 import Vaccine from "../pages/Vaccine";
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/survey" component={Survey} />
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/medical" component={Medical} />

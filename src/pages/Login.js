@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Input from "../elements/Input";
+import { Text, Button } from "../elements/index";
+import LoginComponent from "../components/LoginComponent";
+import SignupComponent from "../components/SignupComponent";
 
 const Login = (props) => {
+  const [status, setStatus] = useState(false);
+
   return (
     <>
-      모달창을 켜면 배경에 있던 요소들은 Wrapper에 가려져 반투명하게 보입니다.
-      이것은 z-index라는 엄청난 css 속성 덕분에 가능한 일이죠.
+      Main
       <Wrapper>
         <Modal>
-          <ModalContents>
-            <Input width="20vw" placeholder="아이디" bg="#c4c4c4" />
-          </ModalContents>
+          {!status && <LoginComponent />}
+          {status && <SignupComponent />}
+          {!status && (
+            <Signup>
+              <Text>아직 회원이 아니신가요?</Text>
+              <Button
+                width="6em"
+                type="submit"
+                style={{
+                  margin: "0 2vw",
+                  backgroundColor: "white",
+                  color: "gray",
+                  borderBottom: "1px solid gray",
+                }}
+                _onClick={() => {
+                  setStatus(true);
+                }}
+                bg="white"
+              >
+                회원가입
+              </Button>
+            </Signup>
+          )}
         </Modal>
       </Wrapper>
     </>
@@ -29,20 +52,23 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
-  width: 40vw;
-  height: 70vh;
-  display: flex;
-  margin: auto;
+  width: 30vw;
+  height: 75vh;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0 5vw;
 `;
 
-const ModalContents = styled.div`
-  width: 35vw;
-  height: 60vh;
+const Signup = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

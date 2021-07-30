@@ -1,12 +1,18 @@
 import React from "react";
-import moment from "moment";
+import { withRouter } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div>
-      Header 다은짱 효유니도짱 {moment(new Date()).format("YYYY-MM-DD")}
+      <button
+        onClick={() => {
+          props.history.push("/login");
+        }}
+      >
+        Login
+      </button>
     </div>
   );
 };
 
-export default Header;
+export default withRouter(Header);
