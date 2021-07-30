@@ -8,7 +8,8 @@ import Write from "../pages/Write";
 import "./App.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import styled from "styled-components";
+import Banner from "../components/Banner";
+
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/qboard/write" component={Write} />
         <Redirect from="*" to="/" />
       </Switch>
+      <Banner />
       <Footer />
     </Wrapper>
   );
