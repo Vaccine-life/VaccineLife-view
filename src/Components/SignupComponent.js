@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { withRouter } from "react-router-dom";
 
@@ -9,7 +9,11 @@ import theme from "../styles/theme";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
+import Survey from "./Survey";
+
 const SignupComponent = (props) => {
+  const [next, setNext] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -36,73 +40,75 @@ const SignupComponent = (props) => {
   });
   return (
     <>
-      <Wrapper onSubmit={formik.handleSubmit}>
-        <Text margin="2vh auto" size="20px" bold>
-          회원가입
-        </Text>
-        <InputBox>
+      {!next && (
+        <Wrapper onSubmit={formik.handleSubmit}>
+          <Text margin="2vh auto" size="20px" bold>
+            회원가입
+          </Text>
+          <InputBox>
+            <Input
+              margin="2vh auto"
+              placeholder="아이디를 입력해 주세요"
+              id="username"
+              name="username"
+              type="username"
+              _onChange={formik.handleChange}
+              value={formik.values.userName}
+            />
+            <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
+              중복확인
+            </Button>
+          </InputBox>
+
           <Input
             margin="2vh auto"
-            placeholder="아이디를 입력해 주세요"
-            id="username"
-            name="username"
-            type="username"
-            _onChange={formik.handleChange}
-            value={formik.values.userName}
-          />
-          <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
-            중복확인
-          </Button>
-        </InputBox>
-
-        <Input
-          margin="2vh auto"
-          placeholder="비밀번호를 입력해 주세요"
-          id="password"
-          name="password"
-          type="password"
-          _onChange={formik.handleChange}
-          value={formik.values.pwd}
-        />
-
-        <Input
-          margin="2vh auto"
-          placeholder="비밀번호를 다시 입력해주세요"
-          id="password"
-          name="password"
-          type="password"
-          _onChange={formik.handleChange}
-          value={formik.values.pwd}
-        />
-
-        <InputBox>
-          <Input
-            margin="2vh auto"
-            placeholder="닉네임을 입력해 주세요"
+            placeholder="비밀번호를 입력해 주세요"
             id="password"
             name="password"
             type="password"
             _onChange={formik.handleChange}
             value={formik.values.pwd}
           />
-          <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
-            중복확인
-          </Button>
-        </InputBox>
 
-        <Button
-          margin="2vh auto"
-          width="20%"
-          type="submit"
-          bg={theme.btnColor}
-          _onClick={() => {
-            props.history.push("/survey");
-          }}
-          // disableElevation
-        >
-          다음단계
-        </Button>
-      </Wrapper>
+          <Input
+            margin="2vh auto"
+            placeholder="비밀번호를 다시 입력해주세요"
+            id="password"
+            name="password"
+            type="password"
+            _onChange={formik.handleChange}
+            value={formik.values.pwd}
+          />
+
+          <InputBox>
+            <Input
+              margin="2vh auto"
+              placeholder="닉네임을 입력해 주세요"
+              id="password"
+              name="password"
+              type="password"
+              _onChange={formik.handleChange}
+              value={formik.values.pwd}
+            />
+            <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
+              중복확인
+            </Button>
+          </InputBox>
+
+          <Button
+            margin="2vh auto"
+            width="20%"
+            type="submit"
+            bg={theme.btnColor}
+            _onClick={() => {
+              setNext(true);
+            }}
+          >
+            다음단계
+          </Button>
+        </Wrapper>
+      )}
+      {next && <Survey />}
     </>
   );
 };

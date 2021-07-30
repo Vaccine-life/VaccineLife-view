@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 
 import { Grid, Image, Text } from "../elements"; 
@@ -58,6 +59,7 @@ const Footer = () => {
       </FixedFooter>
     </React.Fragment>
   );
+
 };
 
 const FixedFooter = styled.div`

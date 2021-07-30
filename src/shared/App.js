@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import Detail from "../pages/Detail";
 import Login from "../pages/Login";
-import Survey from "../pages/Survey";
 import Main from "../pages/Main";
 import Medical from "../pages/Medical";
 import Vaccine from "../pages/Vaccine";
@@ -13,23 +13,27 @@ import Banner from "../components/Banner";
 
 function App() {
   return (
-    <div className="App">
+    <Wrapper className="App">
       <Header />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/survey" component={Survey} />
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/medical" component={Medical} />
-        <Route path="/vboard/write" component={Write} />
-        <Route path="/qboard/write" component={Write} />
+        <Route exact path="/vboard/write" component={Write} />
+        <Route exact path="/qboard/write" component={Write} />
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default App;

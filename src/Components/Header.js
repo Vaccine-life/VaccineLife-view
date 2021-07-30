@@ -1,11 +1,14 @@
 import React from "react";
-
 import { Grid, Image, Text, Button } from "../elements";
 import theme from "../styles/theme";
 
 import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionVisible } from "../redux/modules/modal";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+
   return (
     <React.Fragment>
       <Grid bg={theme.bg} is_flex="space_row">
@@ -23,9 +26,7 @@ const Header = (props) => {
           <Button
             width="5rem"
             margin="10px"
-            _onClick={() => {
-              props.history.push("/login");
-            }}
+            _onClick={() => dispatch(actionVisible())}
           >
             로그인
           </Button>

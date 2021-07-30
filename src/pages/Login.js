@@ -4,6 +4,7 @@ import { Text, Button } from "../elements/index";
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
 
+// 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
   const [status, setStatus] = useState(false);
 
@@ -24,7 +25,7 @@ const Login = (props) => {
                   margin: "0 2vw",
                   backgroundColor: "white",
                   color: "gray",
-                  borderBottom: "1px solid gray",
+                  textDecoration: "underline",
                 }}
                 _onClick={() => {
                   setStatus(true);
@@ -52,7 +53,7 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
-  width: 30vw;
+  width: 40vw;
   height: 75vh;
   position: relative;
   top: 50%;
