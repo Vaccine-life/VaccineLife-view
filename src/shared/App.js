@@ -1,7 +1,4 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-
-import styled from "styled-components";
-import Detail from "../pages/Detail";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
 import Medical from "../pages/Medical";
@@ -12,6 +9,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Banner from "../components/Banner";
 import QuarantineDetail from "../pages/QuarantineDetail";
+import Detail from "../pages/Detail";
+import styled from "styled-components";
 
 function App() {
   return (
@@ -23,7 +22,7 @@ function App() {
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/quarantine" component={Vaccine} />
         <Route exact path="/medical" component={Medical} />
-        <Route exact path="/vaccinedetail/:id" component={Detail} />
+        <Route exact path="/detail/:id" component={Detail} />
         <Route
           exact
           path="/quarantinedetail/:id"
@@ -31,6 +30,7 @@ function App() {
         />
         <Route exact path="/vaccineboard/write" component={Write} />
         <Route exact path="/quarantineboard/write" component={Write} />
+        <Route exact path="/modify/:id" component={Detail} />
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />

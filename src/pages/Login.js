@@ -49,12 +49,13 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: rgba(196, 196, 196, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Modal = styled.div`
-  width: 40vw;
-  height: 75vh;
+  width: 400px;
+  height: auto;
+  min-height: 470px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
