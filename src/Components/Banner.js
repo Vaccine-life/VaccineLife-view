@@ -7,7 +7,7 @@ import { Text, Grid } from "../elements"
 const Banner = (props) => {
 
     return(
-        <FixedBanner>
+        <Wrapper>
             <Grid bg="#f5f6fa" is_flex="center" padding="10px 0">
 
                 <Grid is_flex="center" width="12rem">
@@ -21,14 +21,15 @@ const Banner = (props) => {
                 </Grid>
                 
             </Grid>
-        </FixedBanner>
+        </Wrapper>
     )
 }
 
-const FixedBanner = styled.div`
-  position: absolute;
-  bottom: 160px;
+const Wrapper = styled.div`
+  bottom: 10rem;
   width: 100%;
+  position: fixed;
+  /* z-index: 1; */
 `;
 
 export default Banner;

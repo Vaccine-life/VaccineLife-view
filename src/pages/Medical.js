@@ -29,6 +29,8 @@ const Medical = (props) => {
 
 const Wrapper = styled.div`
   padding: 0 5rem;
+  padding-top: 4rem;
+  padding-bottom: 15rem;
 `;
 
 export default Medical;

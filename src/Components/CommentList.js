@@ -10,18 +10,16 @@ const CommentList = (props) => {
     const dispatch = useDispatch();
 
     const comment_list = useSelector((state) => state.comment);
-    console.log(comment_list);
-    const {comment_id} = props;
+    // console.log(comment_list);
+    // console.log(props)
 
     React.useEffect = (() => {
-        if(!comment_list[comment_id]){
-            dispatch(actionSetComment(comment_id));
-        }
+        dispatch(actionSetComment(comment_list));
     }, [])
 
     return(
         <React.Fragment>
-            <Grid is_flex="space_row" margin="20px 0">
+            <Grid is_flex="space_row" margin="10px 0">
                 <Grid width="10rem" bg="#273c75" border_radius="20px">
                     <Text margin="10px" bold color="#f5f6fa">{props.nickname}</Text>
                 </Grid>

@@ -9,7 +9,7 @@ import theme from "../styles/theme";
 const Footer = () => {
   return(
     <React.Fragment>
-      <FixedFooter>
+      <Wrapper>
         <Grid bg={theme.bg} is_flex="space_column" align="left">
           
           <Grid>
@@ -56,16 +56,17 @@ const Footer = () => {
           </Grid>
 
         </Grid>
-      </FixedFooter>
+      </Wrapper>
     </React.Fragment>
   );
 
 };
 
-const FixedFooter = styled.div`
-  position: absolute;
+const Wrapper = styled.div`
   bottom: 0;
   width: 100%;
+  position: fixed;
+  /* z-index: 1; */
 `;
 
 export default Footer;

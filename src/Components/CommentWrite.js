@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment";
+import 'moment/locale/ko';
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
@@ -7,7 +9,6 @@ import { actionAddComment } from "../redux/modules/comment"
 
 const CommentWrite = (props) => {
     const dispatch = useDispatch();
-    // console.log(props);
 
     // useState사용해서 인풋의 텍스트 내용 저장
     const [comment, setComment] = React.useState();
@@ -21,7 +22,8 @@ const CommentWrite = (props) => {
 
     const write = () => {
         // console.log(comment);
-        dispatch(actionAddComment());
+        // 오브젝트로 넣어줘야 
+        dispatch(actionAddComment({nickname: "명수는열두살", comment, insert_dt: moment().startOf('hour').fromNow()}));
         // 코멘트 작성 후 인풋태크에 있는 글 없애기
         setComment();
     }
