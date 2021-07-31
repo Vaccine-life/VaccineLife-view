@@ -48,7 +48,7 @@ const MoveBox = (props) => {
             : "게시글이 존재하지 않습니다."}
         </p>
       </Btn>
-      <Btn direction="right">
+      <Btn direction="right" onClick={handleClickRight}>
         <UpperWord>
           <p>다음글</p>
           <FontAwesomeIcon icon={faChevronRight} />
