@@ -9,7 +9,6 @@ import Input from "../elements/Input";
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
-import draftToHtml from "draftjs-to-html";
 
 const Write = () => {
   const url = history.location.pathname;
@@ -19,12 +18,14 @@ const Write = () => {
   // 타이틀 인풋값
   const [title, setTitle] = useState("");
   // 에디터 props값
+  const editor = useRef();
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const editor = useRef();
 
-  const contents = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  const contents = JSON.stringify(
+    convertToRaw(editorState.getCurrentContent())
+  );
 
   const onTitleChange = (event) => {
     const value = event.target.value;

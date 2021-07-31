@@ -2,20 +2,18 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { Grid, Image, Text } from "../elements"; 
+import { Grid, Image, Text } from "../elements";
 import theme from "../styles/theme";
 
-
 const Footer = () => {
-  return(
+  return (
     <React.Fragment>
       <FixedFooter>
         <Grid bg={theme.bg} is_flex="space_column" align="left">
-          
           <Grid>
             {/* 로고 */}
-            <Grid padding="10px 30px" width="auto" >
-              <Image 
+            <Grid padding="10px 30px" width="auto">
+              <Image
                 shape="rectangle"
                 width="5rem"
                 height="3rem"
@@ -52,19 +50,15 @@ const Footer = () => {
                 </Grid>
               </Grid>
             </Grid>
-
           </Grid>
-
         </Grid>
       </FixedFooter>
     </React.Fragment>
   );
-
 };
 
 const FixedFooter = styled.div`
-  position: absolute;
-  bottom: 0;
+  margin-top: auto;
   width: 100%;
 `;
 
