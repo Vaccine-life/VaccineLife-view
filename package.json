@@ -6,6 +6,7 @@
     "@draft-js-plugins/editor": "^4.1.0",
     "@draft-js-plugins/static-toolbar": "^4.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@reduxjs/toolkit": "^1.6.1",

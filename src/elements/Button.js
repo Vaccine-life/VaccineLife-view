@@ -22,10 +22,14 @@ Button.defaultProps = {
   type: "button",
   hover_color: "white",
   border_radius: "0px",
+  fontSize: "14px",
+  bold: false,
 };
 
 const ButtonEle = styled.button`
   border: none;
+  font-size: ${(props) => props.fontSize};
+  font-weight: ${(props) => props.bold && 600};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
