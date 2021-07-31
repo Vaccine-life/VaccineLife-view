@@ -1,10 +1,12 @@
+
 import React, { useEffect } from "react";
+import Login from "./Login";
 import BoardInfo from "../components/detail/BoardInfo";
 import UserInfo from "../components/detail/UserInfo";
 import Contents from "../components/detail/Contents";
 import MoveBox from "../components/detail/MoveBox";
 import { Grid } from "../elements";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionSetPrevNextPage } from "../redux/modules/board";
 
 const data = {
@@ -47,6 +49,7 @@ const Detail = () => {
   } = data;
 
   // 격리후기때는 MoveBox에 true 기입
+  const modal_status = useSelector((state) => state.modal.visible);
   const boardType = true;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -66,7 +69,9 @@ const Detail = () => {
       />
       <Contents contents={contents} likeCount={likeCount} />
       <MoveBox boardType={boardType} />
+            {modal_status && <Login />}
     </Grid>
+
   );
 };
 
