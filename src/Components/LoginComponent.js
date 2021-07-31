@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Text, Input, Button } from "../elements/index";
@@ -8,6 +8,19 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 const LoginComponent = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    console.log("handleUsernameChange", e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    console.log("handlePasswordChange", e.target.value);
+  };
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -26,6 +39,7 @@ const LoginComponent = (props) => {
       console.log("로그인버튼 클릭시", values);
     },
   });
+
   return (
     <>
       <Wrapper onSubmit={formik.handleSubmit}>
@@ -33,6 +47,7 @@ const LoginComponent = (props) => {
           로그인
         </Text>
 
+        <label htmlFor="username">아이디</label>
         <Input
           margin="2vh auto"
           label="Standard"
@@ -40,10 +55,11 @@ const LoginComponent = (props) => {
           id="username"
           name="username"
           type="username"
-          _onChange={formik.handleChange}
-          value={formik.values.username}
+          _onChange={handleUsernameChange}
+          value={username}
         />
 
+        <label htmlFor="password">비밀번호</label>
         <Input
           margin="2vh auto"
           label="Standard"
@@ -51,8 +67,8 @@ const LoginComponent = (props) => {
           id="password"
           name="password"
           type="password"
-          _onChange={formik.handleChange}
-          value={formik.values.password}
+          _onChange={handlePasswordChange}
+          value={password}
         />
         <Button margin="2vh auto" width="20%" type="submit" bg={theme.btnColor}>
           로그인

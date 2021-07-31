@@ -12,7 +12,31 @@ import { useFormik } from "formik";
 import Survey from "./Survey";
 
 const SignupComponent = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [nickname, setNickname] = useState("");
   const [next, setNext] = useState(false);
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    console.log("handleUsernameChange", e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    console.log("handlePasswordChange", e.target.value);
+  };
+
+  const handlePasswordCheckChange = (e) => {
+    setPasswordCheck(e.target.value);
+    console.log("handlePasswordCheckChange", e.target.value);
+  };
+
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+    console.log("handleNicknameChange", e.target.value);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -52,8 +76,8 @@ const SignupComponent = (props) => {
               id="username"
               name="username"
               type="username"
-              _onChange={formik.handleChange}
-              value={formik.values.userName}
+              _onChange={handleUsernameChange}
+              value={username}
             />
             <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
               중복확인
@@ -66,8 +90,8 @@ const SignupComponent = (props) => {
             id="password"
             name="password"
             type="password"
-            _onChange={formik.handleChange}
-            value={formik.values.pwd}
+            _onChange={handlePasswordChange}
+            value={password}
           />
 
           <Input
@@ -76,8 +100,8 @@ const SignupComponent = (props) => {
             id="password"
             name="password"
             type="password"
-            _onChange={formik.handleChange}
-            value={formik.values.pwd}
+            _onChange={handlePasswordCheckChange}
+            value={passwordCheck}
           />
 
           <InputBox>
@@ -87,8 +111,8 @@ const SignupComponent = (props) => {
               id="password"
               name="password"
               type="password"
-              _onChange={formik.handleChange}
-              value={formik.values.pwd}
+              _onChange={handleNicknameChange}
+              value={nickname}
             />
             <Button margin="2vh auto" width="20%" height="60%" bg="#8192B1">
               중복확인
@@ -98,6 +122,7 @@ const SignupComponent = (props) => {
           <Button
             margin="2vh auto"
             width="20%"
+            height="3vh"
             type="submit"
             bg={theme.btnColor}
             _onClick={() => {

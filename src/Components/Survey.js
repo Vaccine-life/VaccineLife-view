@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
+import { useDispatch } from "react-redux";
+import { actionVisible } from "../redux/modules/modal";
 
 const Survey = (props) => {
-  console.log("Survey", props.history);
+  const dispatch = useDispatch();
+
   return (
     <>
       <Text margin="2vh auto" size="14px">
@@ -138,42 +141,13 @@ const Survey = (props) => {
         height="3vh"
         type="submit"
         bg={theme.btnColor}
-        _onClick={() => {
-          props.history.push("/");
-          // 회원가입 완료 안내하기
-        }}
+        _onClick={() => dispatch(actionVisible())}
       >
         회원가입
       </Button>
     </>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  background-color: rgba(196, 196, 196, 0.7);
-`;
-
-const Modal = styled.div`
-  width: 40vw;
-  height: 70vh;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 0 5vw;
-`;
 
 const SurveyItem = styled.div`
   width: 100%;
