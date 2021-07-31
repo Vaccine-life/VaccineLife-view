@@ -7,12 +7,15 @@ import store, { history } from "./redux/configStore";
 import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
 import ResponsiveStyles from "./styles/ResponsiveStyles";
+import FontStyle from "./styles/FontStyle";
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ResponsiveStyles>
-        <App />
+        <FontStyle>
+          <App />
+        </FontStyle>
       </ResponsiveStyles>
     </ConnectedRouter>
   </Provider>,
