@@ -4,7 +4,7 @@ import { Button, Grid, Text } from "../../elements";
 import displayedAt from "../../shared/displayedAt";
 
 const BoardInfo = (props) => {
-  const { title, hits, createdAt, user } = props;
+  const { vacBoardId, title, hits, createdAt, user } = props;
   return (
     <Grid margin="30px auto 30px auto">
       <Grid is_flex="space_row">

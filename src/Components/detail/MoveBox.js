@@ -19,7 +19,7 @@ const MoveBox = (props) => {
       return;
     }
     if (boardType) {
-      history.push(`/vaccinedetail/${page.prev?.vacBoardId}`);
+      history.push(`/detail/${page.prev?.vacBoardId}`);
     } else {
       history.push(`/quarantinedetail/${page.prev?.quarBoardId}`);
     }
@@ -29,7 +29,7 @@ const MoveBox = (props) => {
       return;
     }
     if (boardType) {
-      history.push(`/vaccinedetail/${page.next?.vacBoardId}`);
+      history.push(`/detail/${page.next?.vacBoardId}`);
     } else {
       history.push(`/quarantinedetail/${page.next?.quarBoardId}`);
     }
