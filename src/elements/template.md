@@ -54,3 +54,5 @@
 - type
 - hover_color
 - border_radius
+- fontSize
+- bold
