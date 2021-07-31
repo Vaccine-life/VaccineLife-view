@@ -33,7 +33,7 @@ const data = {
   },
 };
 
-const VaccineDetail = () => {
+const Detail = () => {
   //격리후기떄는 id 변경
   const {
     vacBoardId,
@@ -70,4 +70,4 @@ const VaccineDetail = () => {
   );
 };
 
-export default VaccineDetail;
+export default Detail;

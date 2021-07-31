@@ -7,10 +7,10 @@ import Write from "../pages/Write";
 import "./App.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Banner from "../components/Banner";
+import Banner from "../Components/Banner";
 import styled from "styled-components";
 import QuarantineDetail from "../pages/QuarantineDetail";
-import VaccineDetail from "../pages/VaccineDetail";
+import Detail from "../pages/Detail";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/quarantine" component={Vaccine} />
         <Route exact path="/medical" component={Medical} />
-        <Route exact path="/vaccinedetail/:id" component={VaccineDetail} />
+        <Route exact path="/vaccinedetail/:id" component={Detail} />
         <Route
           exact
           path="/quarantinedetail/:id"
