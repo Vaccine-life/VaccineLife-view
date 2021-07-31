@@ -6,7 +6,7 @@ import { Text, Grid } from "../elements";
 const Banner = (props) => {
   return (
     <FixedBanner>
-      <Grid bg="#f5f6fa" is_flex="center" padding="10px 0">
+      <Grid bg="#F7F7F7" is_flex="center" padding="10px 0">
         <Grid is_flex="center" width="12rem">
           <Text bold>바로가기 모음</Text>
         </Grid>
