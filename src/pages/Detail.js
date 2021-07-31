@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Login from "./Login";
 import BoardInfo from "../components/detail/BoardInfo";
@@ -58,7 +57,13 @@ const Detail = () => {
 
   return (
     <Grid width="700px">
-      <BoardInfo user={user} title={title} hits={hits} createdAt={createdAt} />
+      <BoardInfo
+        vacBoardId={vacBoardId}
+        user={user}
+        title={title}
+        hits={hits}
+        createdAt={createdAt}
+      />
       <UserInfo
         type={user.type}
         gender={user.gender}
@@ -69,9 +74,8 @@ const Detail = () => {
       />
       <Contents contents={contents} likeCount={likeCount} />
       <MoveBox boardType={boardType} />
-            {modal_status && <Login />}
+      {modal_status && <Login />}
     </Grid>
-
   );
 };
 
