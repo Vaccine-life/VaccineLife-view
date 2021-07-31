@@ -11,9 +11,7 @@ import "./App.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Banner from "../components/Banner";
-import styled from "styled-components";
 import QuarantineDetail from "../pages/QuarantineDetail";
-import Detail from "../pages/Detail";
 
 function App() {
   return (
