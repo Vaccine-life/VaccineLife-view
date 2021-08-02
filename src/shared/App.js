@@ -11,6 +11,7 @@ import Banner from "../components/Banner";
 import QuarantineDetail from "../pages/QuarantineDetail";
 import Detail from "../pages/Detail";
 import styled from "styled-components";
+import Modify from "../pages/Modify";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         />
         <Route exact path="/vaccineboard/write" component={Write} />
         <Route exact path="/quarantineboard/write" component={Write} />
-        <Route exact path="/modify/:id" component={Detail} />
+        <Route exact path="/modify/:id" component={Modify} />
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />
@@ -42,6 +43,7 @@ function App() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 100vh;
 `;
 
 export default App;

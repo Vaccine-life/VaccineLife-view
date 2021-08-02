@@ -13,7 +13,7 @@ import { EditorState, convertToRaw } from "draft-js";
 const Write = () => {
   const url = history.location.pathname;
   // /vboard/write일때 true /qboard/write 일떄 false
-  const urlExchanger = url === "/vboard/write" ? true : false;
+  const urlExchanger = url === "/vaccineboard/write" ? true : false;
 
   // 타이틀 인풋값
   const [title, setTitle] = useState("");
@@ -22,7 +22,7 @@ const Write = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-
+  // 데이터 JSON 변환
   const contents = JSON.stringify(
     convertToRaw(editorState.getCurrentContent())
   );
@@ -34,20 +34,32 @@ const Write = () => {
 
   logger(contents);
   return (
-    <Grid width="800px">
-      <Grid is_flex="space_row">
-        <Text size="1.2rem" color={theme.fontColor} bold>
+    <Grid width={theme.writeWidth} margin="40px auto 40px auto">
+      <Grid is_flex="space_row" margin="auto auto 26px auto">
+        <Text size={theme.headOneSize} color={theme.fontColor} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
           {urlExchanger ? "백신" : "격리"} 후기 글쓰기
         </Text>
-        <Button width="50px" margin="0 20px 0 0" bg={theme.btnColor}>
+        <Button
+          width="88px"
+          height="42px"
+          fontSize={theme.bodyTwoSize}
+          bold
+          margin="0"
+          bg={theme.btnColor}
+          border_radius="10px"
+        >
           등록
         </Button>
       </Grid>
+      <Grid height="1px" bg="black"></Grid>
       {/* 타이틀 입력 */}
       <Grid margin="30px 0 0 0">
         <Input
           value={title}
+          width={theme.writeWidth}
+          height="72px"
+          border="none"
           _onChange={onTitleChange}
           placeholder="제목을 입력해 주세요."
         />
