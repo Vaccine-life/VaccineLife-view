@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  const { shape, src, size, width, height, cursor } = props;
+  const { shape, src, size, width, height, cursor, margin } = props;
 
   const styles = {
     src: src,
@@ -10,6 +10,7 @@ const Image = (props) => {
     width: width,
     height: height,
     cursor: cursor,
+    margin: margin,
   };
 
   if (shape === "circle") {
@@ -39,6 +40,7 @@ Image.defaultProps = {
   src: "",
   size: "40px",
   cursor: "",
+  margin: false,
 };
 
 const ImageDefault = styled.div`
@@ -74,8 +76,8 @@ const ImageCircle = styled.div`
 `;
 
 const ImageSquare = styled.div`
-  --size: ${(props) => props.size}px;
-  width: ${(props) => props.size}px;
+  --size: ${(props) => props.size};
+  width: ${(props) => props.size};
   height: var(--size);
   cursor: ${(props) => props.cursor};
   background-image: url("${(props) => props.src}");
