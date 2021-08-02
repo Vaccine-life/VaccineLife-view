@@ -7,6 +7,7 @@ import MoveBox from "../components/detail/MoveBox";
 import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionSetPrevNextPage } from "../redux/modules/board";
+import theme from "../styles/theme";
 
 const data = {
   vacBoardId: 0,
@@ -28,7 +29,7 @@ const data = {
     type: "모더나",
     gender: "여",
     age: 27,
-    disease: 0,
+    disease: "모름",
     degree: 2,
     afterEffect: "발열 , 두통, 근육통",
   },
@@ -56,13 +57,14 @@ const Detail = () => {
   }, []);
 
   return (
-    <Grid width="700px">
+    <Grid width={theme.detailWidth}>
       <BoardInfo
         vacBoardId={vacBoardId}
         user={user}
         title={title}
         hits={hits}
         createdAt={createdAt}
+        likeCount={likeCount}
       />
       <UserInfo
         type={user.type}
