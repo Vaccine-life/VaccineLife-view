@@ -16,17 +16,17 @@ const Contents = (props) => {
   logger(editorState);
   return (
     <Wrapper>
-      <Editor editorState={editorState} readOnly={true} />
       <Grid is_flex="space_row" height="30px" margin="0 auto 0 auto">
         <Text size="12px">
           증상이 수 일 지속될 시 가까운 병원에 내원하십시오. 특정 병원 이름
           언급시 무통보 삭제될 수 있습니다.
         </Text>
-        <LikeWrapper>
-          <LikeIconChanger isHeart={isHeart} />
-          <Text margin="0 0 0 10px">{likeCount}</Text>
-        </LikeWrapper>
       </Grid>
+      <Editor editorState={editorState} readOnly={true} />
+      <LikeWrapper>
+        <LikeIconChanger isHeart={isHeart} />
+        <Text margin="0 0 0 10px">{likeCount}</Text>
+      </LikeWrapper>
     </Wrapper>
   );
 };

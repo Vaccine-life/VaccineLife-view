@@ -8,59 +8,32 @@ const UserInfo = (props) => {
 
   return (
     <Wrapper>
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          백신 종류
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {type}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          성별
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {gender}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          연령대
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {age}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          기저질환 유무
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {disease === 1 ? "유" : "무"}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          차수
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {degree} 차
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          후유증
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {afterEffect}
-        </Grid>
-      </EachWrapper>
+      <Table>
+        <thead>
+          <tr>
+            <th>백신종류</th>
+            <th>차수</th>
+            <th>연령대</th>
+            <th>성별</th>
+            <th>기저질환</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{type}</th>
+            <th>{degree} 차</th>
+            <th>{age}</th>
+            <th>{gender}</th>
+            <th>{disease}</th>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>후유증</th>
+            <th colSpan="4">{afterEffect}</th>
+          </tr>
+        </tfoot>
+      </Table>
     </Wrapper>
   );
 };
@@ -71,6 +44,12 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: auto;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border: 1px solid #444444;
+  border-collapse: collapse;
 `;
 
 const EachWrapper = styled.div`

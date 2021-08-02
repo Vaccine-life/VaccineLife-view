@@ -1,49 +1,101 @@
+import moment from "moment";
 import React from "react";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
 import displayedAt from "../../shared/displayedAt";
+import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
-  const { vacBoardId, title, hits, createdAt, user } = props;
+  const { vacBoardId, title, hits, createdAt, user, likeCount } = props;
   const handleOnClick = () => {
     history.push(`/modify/${vacBoardId}`);
   };
 
   return (
-    <Grid margin="30px auto 30px auto">
-      <Grid is_flex="space_row">
-        <Text>{title}</Text>
-        <Grid width="200px" margin="0">
-          <Button _onClick={handleOnClick} width="70px">
+    <Grid margin="30px auto 24px auto">
+      <Grid is_flex="space_row" margin="0 auto 24px auto">
+        <Text bold size={theme.headOneSize}>
+          {title}
+        </Text>
+        <BtnWrapper>
+          <Button
+            _onClick={handleOnClick}
+            width="88px"
+            height="42px"
+            fontSize={theme.bodyTwoSize}
+            bg={theme.bg2}
+          >
             수정
           </Button>
-          <Button width="70px" margin="0 0 0 20px">
+          <Button
+            width="88px"
+            height="42px"
+            margin="0 0 0 16px"
+            fontSize={theme.bodyTwoSize}
+            bg={theme.bg}
+          >
             삭제
           </Button>
-        </Grid>
+        </BtnWrapper>
       </Grid>
       <NameHitWrapper>
-        <Text margin="20px 0 20px 0">{user.nickname}</Text>
-        <Hitdiv>
-          <Text>{displayedAt(createdAt)}</Text>
-          <Text margin="0 0 0 20px">{hits} 회</Text>
-        </Hitdiv>
+        <Text
+          size={theme.bodyOneSize}
+          margin="0 5px 0 0"
+          color={theme.typoGrey3}
+        >
+          작성자
+        </Text>
+        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+          {user.nickname}
+        </Text>
+        <VerticalLine />
+        <Text
+          size={theme.bodyOneSize}
+          margin="0 5px 0 0"
+          color={theme.typoGrey3}
+        >
+          조회
+        </Text>
+        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+          {hits} 회
+        </Text>
+        <VerticalLine />
+        <Text
+          size={theme.bodyOneSize}
+          margin="0 5px 0 0"
+          color={theme.typoGrey3}
+        >
+          추천
+        </Text>
+        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+          {likeCount}
+        </Text>
       </NameHitWrapper>
-      <Grid></Grid>
+      <NameHitWrapper>
+        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+          {moment(createdAt).format("YYYY.MM.DD hh:mm")}
+        </Text>
+      </NameHitWrapper>
     </Grid>
   );
 };
 
 const NameHitWrapper = styled.div`
+  height: 26px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
-const Hitdiv = styled.div`
-  display: flex;
+const BtnWrapper = styled.div``;
+
+const VerticalLine = styled.div`
+  height: 20px;
+  width: 1px;
+  background-color: ${theme.typoGrey3};
+  margin: 0 10px 0 10px;
 `;
 
 export default BoardInfo;
