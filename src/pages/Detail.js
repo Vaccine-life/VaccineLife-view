@@ -60,6 +60,7 @@ const Detail = () => {
   const boardType = true;
 
   const handleDelete = () => {};
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actionSetPrevNextPage(vacBoardId));
@@ -87,7 +88,7 @@ const Detail = () => {
       <MoveBox boardType={boardType} />
       {confirm_status && (
         <Confirm
-          confirmMessage="댓글을 삭제하시겠습니까?"
+          confirmMessage="게시글을 삭제하시겠습니까?"
           activeFunction={handleDelete}
         />
       )}

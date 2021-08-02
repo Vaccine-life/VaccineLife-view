@@ -2,13 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-
 import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
 
-import { useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 
 const Medical = () => {
@@ -18,8 +16,7 @@ const Medical = () => {
   const modal_status = useSelector((state) => state.modal.visible);
 
   const dispatch = useDispatch();
-  const comment_list = useSelector(state => state.comment.list);
-
+  const comment_list = useSelector((state) => state.comment.list);
 
   return (
     <React.Fragment>
@@ -30,15 +27,13 @@ const Medical = () => {
           </Text>
         </Grid>
 
-        
-        <CommentWrite/>
+        <CommentWrite />
         {comment_list.map((c, idx) => {
-          return <CommentList key={idx} {...c}/>
+          return <CommentList key={idx} {...c} />;
         })}
       </Wrapper>
       {modal_status && <Login />}
-           {alert_status && <Alert />}
-
+      {alert_status && <Alert />}
     </React.Fragment>
   );
 };
