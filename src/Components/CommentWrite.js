@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import 'moment/locale/ko';
+import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
@@ -34,26 +35,36 @@ const CommentWrite = (props) => {
 
     return(
         <React.Fragment>
-            <Grid is_flex="space_row" margin="10px 0">
+            <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
+
                 <Grid align="left" width="10rem">
-                    <Text bold>닉네임</Text>
+                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>닉네임</Text>
                 </Grid>
 
-                <Grid margin="0 5rem">
-                    <Input 
-                        value={comment} 
-                        height="150px" 
-                        placeholder="응원의 한마디!"
-                        maxLength="500"
-                        _onChange={changeComment}
-                        // 엔터키로 등록
-                        onSubmit={write}
-                    />
+                <Grid is_flex="space_column">
+                    <Grid margin="0 5rem">
+                        <Input 
+                            multiLine
+                            border="1px 1px 0 1px solid"
+                            value={comment} 
+                            placeholder="응원의 한마디!"
+                            maxLength="500"
+                            _onChange={changeComment}
+                            // 엔터키로 등록
+                            // onSubmit={write}
+                        />
+                    </Grid>
+
+                    <Grid is_flex="space_row" border="1px solid #c1c1c1">
+                        <Grid padding="10px" bg="#ffffff" align="right">
+                            <Text>현재입력 글자수/입력가능 글자수</Text>
+                        </Grid>
+
+                        <Button width="50px" height="34px" _onClick={write}>등록</Button>
+                    </Grid>
+
                 </Grid>
 
-                <Grid >
-                    <Button width="auto" _onClick={write}>등록</Button>
-                </Grid>
             </Grid>
         </React.Fragment>
     )

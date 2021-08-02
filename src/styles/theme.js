@@ -40,6 +40,7 @@ const theme = {
   //layout size
   writeWidth: "1190px",
   detailWidth: "1024px",
+  medicalWidth: "1024px",
 };
 
 export default theme;

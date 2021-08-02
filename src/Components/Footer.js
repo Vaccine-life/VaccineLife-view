@@ -10,15 +10,15 @@ const Footer = () => {
       <FixedFooter>
 
         <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center"}}>
-          <Grid margin="2rem 2rem 2rem 5rem" width="auto">
+          <Grid margin="2rem 2rem 2rem 5rem" width="auto" _onClick={() => {console.log("홈으로 가기!")}}>
             <Text color="#ffffff" cursor="pointer">슬기로운</Text>
             <Text color="#ffffff" cursor="pointer" size="16" bold>백신생활</Text>
           </Grid>
 
           <Grid margin="2rem 0" width="0 auto">
             <ul style={{display:"flex"}}>
-              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer">백신후기</Text>
-              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer">의료진분들께 한마디</Text>
+              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer" _onClick={() => {console.log("백신후기로 가기!")}}>백신후기</Text>
+              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer" _onClick={() => {console.log("의료진불들께로 가기!")}}>의료진분들께 한마디</Text>
             </ul>
 
             <ul style={{display:"flex"}}>

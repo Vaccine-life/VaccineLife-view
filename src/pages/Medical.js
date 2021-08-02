@@ -1,4 +1,5 @@
 import React from "react";
+import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -14,23 +15,25 @@ const Medical = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <Grid align="left" padding="2rem 0 0 0">
-          <Text bold size="24px" lineHeight="2">의료진분들께</Text>
-        </Grid>
+        <Grid width={theme.medicalWidth}>
         
-        <CommentWrite/>
-        {comment_list.map((c, idx) => {
-          return <CommentList key={idx} {...c}/>
-        })}
+          <Grid align="left" padding="2rem 0 0 0">
+            <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
+          </Grid>
+          
+          <CommentWrite/>
+          {comment_list.map((c, idx) => {
+            return <CommentList key={idx} {...c}/>
+          })}
+        
+        </Grid>
       </Wrapper>
     </React.Fragment>
   );
 };
 
 const Wrapper = styled.div`
-  padding: 0 5rem;
-  padding-top: 4rem;
-  padding-bottom: 15rem;
+  padding: 4rem 0 3rem 0;
   background-color: #F7F7F7;
 `;
 
