@@ -9,7 +9,6 @@ import board from "./modules/board";
 
 import modal from "./modules/modal";
 
-
 export const history = createBrowserHistory();
 
 const middlewares = [

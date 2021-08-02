@@ -4,6 +4,7 @@ import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
 import { useDispatch } from "react-redux";
 import { actionVisible } from "../redux/modules/modal";
+import { actionSetUser } from "../redux/modules/user";
 
 const Survey = (props) => {
   const dispatch = useDispatch();
@@ -17,38 +18,44 @@ const Survey = (props) => {
 
   const handleIsVaccineClick = (e) => {
     setIsVaccine(e.target.value);
-    console.log(e.target.value);
   };
   const handleDegreeClick = (e) => {
     setDegree(e.target.value);
-    console.log(e.target.value);
   };
   const handleTypeClick = (e) => {
     setType(e.target.value);
-    console.log(e.target.value);
   };
   const handleGenderClick = (e) => {
     setGender(e.target.value);
-    console.log(e.target.value);
   };
   const handleAgeClick = (e) => {
     setAge(e.target.value);
-    console.log(e.target.value);
   };
   const handleDiseaseClick = (e) => {
     setDisease(e.target.value);
-    console.log(e.target.value);
   };
   const handleAfterEffectClick = (e) => {
     setAfterEffect(e.target.value);
-    console.log(e.target.value);
   };
 
-  // const disableRest = () => {
-  //   if(!isVaccine) {
-  //     disabled
-  //   }
-  // }
+  const submitSurvey = () => {
+    let survey = {
+      isVaccine: isVaccine,
+      degree: degree,
+      type: type,
+      gender: gender,
+      age: age,
+      disease: disease,
+      afterEffect: afterEffect,
+    };
+
+    // state.user에 설문조사 데이터를 넣어줌
+    dispatch(actionSetUser(survey));
+    console.log(survey);
+
+    // 모달 끄기
+    dispatch(actionVisible());
+  };
 
   return (
     <>
@@ -353,9 +360,9 @@ const Survey = (props) => {
           margin="2vh auto"
           width="20%"
           height="3vh"
-          type="submit"
+          type="sumbit"
           bg={theme.btnColor}
-          _onClick={() => dispatch(actionVisible())}
+          _onClick={submitSurvey}
         >
           회원가입
         </Button>
