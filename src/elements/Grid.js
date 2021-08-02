@@ -13,6 +13,7 @@ const Grid = (props) => {
     height,
     border_radius,
     _onClick,
+    cursor,
   } = props;
 
   const styles = {
@@ -24,6 +25,7 @@ const Grid = (props) => {
     bg,
     border_radius,
     align,
+    cursor,
   };
   return (
     <Wrapper onClick={_onClick} {...styles}>
@@ -44,6 +46,7 @@ Grid.defaultProps = {
   border_radius: "",
   align: false,
   _onClick: () => {},
+  cursor: "",
 };
 
 const Wrapper = styled.div`
@@ -80,6 +83,7 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.bg};
   border-radius: ${(props) => props.border_radius};
   ${(props) => (props.align ? `text-align: ${props.align}` : "")};
+  cursor: ${(props) => props.cursor};
 `;
 
 export default Grid;

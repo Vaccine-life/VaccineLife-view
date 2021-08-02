@@ -19,9 +19,9 @@ const CommentList = (props) => {
 
     return(
         <React.Fragment>
-            <Grid is_flex="space_row" margin="10px 0">
-                <Grid width="10rem" border_radius="20px">
-                    <Text margin="10px" bold>{props.nickname}</Text>
+            <Grid is_flex="space_row" align="left" margin="2rem 0">
+                <Grid width="10rem">
+                    <Text bold>{props.nickname}</Text>
                 </Grid>
 
                 <Grid is_flex="space_row" align="left" padding="0 0 0 10px">

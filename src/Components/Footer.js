@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled from "styled-components";
 
 import { Grid, Image, Text } from "../elements";
@@ -18,16 +17,16 @@ const Footer = () => {
 
           <Grid margin="2rem 0" width="0 auto">
             <ul style={{display:"flex"}}>
-              <Text color="#ffffff" size="12px" margin="5px">백신후기</Text>
-              <Text color="#ffffff" size="12px" margin="5px">의료진분들께 한마디</Text>
+              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer">백신후기</Text>
+              <Text color="#ffffff" size="12px" margin="5px" cursor="pointer">의료진분들께 한마디</Text>
             </ul>
 
             <ul style={{display:"flex"}}>
-              <Text color="#A5A5A5" size="12px" margin="5px">대표자명</Text>
-              <Text color="#A5A5A5" size="12px" margin="5px">|</Text>
-              <Text color="#A5A5A5" size="12px" margin="5px">Contact. playder1427@gmail.com</Text>
-              <Text color="#A5A5A5" size="12px" margin="5px">|</Text>
-              <Text color="#A5A5A5" size="12px" margin="5px">Github. https://github.com/Vaccine-life</Text>
+              <Text color={theme.typoGrey2} size="12px" margin="5px">대표자명</Text>
+              <Text color={theme.typoGrey2} size="12px" margin="5px">|</Text>
+              <Text color={theme.typoGrey2} size="12px" margin="5px">Contact. playder1427@gmail.com</Text>
+              <Text color={theme.typoGrey2} size="12px" margin="5px">|</Text>
+              <Text color={theme.typoGrey2} size="12px" margin="5px">Github. https://github.com/Vaccine-life</Text>
             </ul>
           </Grid>
         </div>

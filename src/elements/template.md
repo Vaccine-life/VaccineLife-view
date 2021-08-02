@@ -48,6 +48,7 @@
 - height
 - border_radius
 - \_onClick (\ 뺄것 자동저장임)
+- cursor
 
 # Button
 

@@ -14,7 +14,7 @@ const Medical = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <Grid align="left" padding="20px 0 0 0">
+        <Grid align="left" padding="2rem 0 0 0">
           <Text bold size="24px" lineHeight="2">의료진분들께</Text>
         </Grid>
         
@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   padding: 0 5rem;
   padding-top: 4rem;
   padding-bottom: 15rem;
+  background-color: #F7F7F7;
 `;
 
 export default Medical;
