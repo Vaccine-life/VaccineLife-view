@@ -43,6 +43,7 @@ const ButtonEle = styled.button`
     color: ${(props) => props.bg};
     border: 1px solid ${(props) => props.bg};
   }
+  color: ${(props) => props.color};
 `;
 
 export default Button;

@@ -20,8 +20,8 @@ const CommentList = (props) => {
     return(
         <React.Fragment>
             <Grid is_flex="space_row" margin="10px 0">
-                <Grid width="10rem" bg="#273c75" border_radius="20px">
-                    <Text margin="10px" bold color="#f5f6fa">{props.nickname}</Text>
+                <Grid width="10rem" border_radius="20px">
+                    <Text margin="10px" bold>{props.nickname}</Text>
                 </Grid>
 
                 <Grid is_flex="space_row" align="left" padding="0 0 0 10px">

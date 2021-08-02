@@ -34,6 +34,7 @@ const CommentWrite = (props) => {
                 value={comment} 
                 height="100px" 
                 placeholder="응원의 한마디!"
+                maxLength="500"
                 _onChange={changeComment}
                 // 엔터키로 등록
                 onSubmit={write}

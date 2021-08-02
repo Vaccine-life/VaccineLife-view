@@ -20,6 +20,7 @@ const Input = (props) => {
     radius,
     height,
     bg,
+    maxLength,
   } = props;
 
   if (is_comment) {
@@ -63,6 +64,7 @@ const Input = (props) => {
           onChange={_onChange}
           border={border}
           borderRadius={radius}
+          maxLength={maxLength}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               onSubmit(e);
@@ -91,6 +93,7 @@ Input.defaultProps = {
   borderRadius: false,
   height: false,
   bg: false,
+  maxLength: false,
 };
 
 //작성페이지 멀티라인 수정
@@ -104,10 +107,12 @@ const ElTextArea = styled.textarea`
 
 const ElInput = styled.input`
   ${(props) => (props.margin ? `margin:${props.margin}` : "")};
-  width: 100% ${(props) => (props.border ? `border:${props.border}` : "")};
+  width: 100%; 
+  ${(props) => (props.border ? `border:${props.border}` : "")};
   padding: 12px 4px;
   box-sizing: border-box;
   ${(props) => (props.height ? `height:${props.height}` : "")};
+  ${(props) => (props.maxLength ? `maxLength:${props.maxLength}` : "")};
 `;
 
 const CommentInput = styled.input`
