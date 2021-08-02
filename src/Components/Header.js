@@ -36,14 +36,20 @@ const Header = (props) => {
           </Grid>
 
           <Grid is_flex="space_row" width="auto" margin="0 20px">
-            <Text><span style={{fontWeight: "bold"}}>{props.nickname}</span> 님, 안녕하세요</Text>
-            <Text width="5rem" cursor="pointer" margin="0 4rem"
-              _onClick={() => dispatch(actionVisible())}
-            >
-              <span style={{boxShadow:"inset 0 -1px 0 #242424"}}>로그인</span>
+            <Text>
+              <span style={{ fontWeight: "bold" }}>{props.nickname}</span> 님,
+              안녕하세요
             </Text>
+            <Text width="5rem" cursor="pointer" margin="0 4rem">
+              <span
+                style={{ boxShadow: "inset 0 -1px 0 #242424" }}
+                onClick={() => dispatch(actionVisible())}
+              >
+                로그인
+              </span>
+            </Text>
+          </Grid>
         </Grid>
-      </Grid>
       </Wrapper>
     </React.Fragment>
   );

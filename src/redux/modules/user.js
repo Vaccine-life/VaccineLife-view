@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user_info: {
+  user: {
     nickname: "",
+    isVaccine: 0,
+    degree: 1,
+    type: "",
+    gender: "",
+    age: "",
+    disease: "",
+    afterEffect: "",
   },
   is_login: false,
 };
@@ -12,7 +19,7 @@ const user = createSlice({
   initialState,
   reducers: {
     actionSetUser: (state, action) => {
-      state.user_info = action.payload;
+      state.user = action.payload;
     },
   },
 });
