@@ -29,17 +29,19 @@ const ExperienceWrite = (props) => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: ${`${1192 - 16}px`};
   height: 500px;
   box-sizing: content-box;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   cursor: text;
-  padding: 16px;
+  padding: 16px 0 0 16px;
   border-radius: 2px;
   margin-bottom: 2em;
-  box-shadow: inset 0px 1px 8px -3px #ababab;
   background: #fefefe;
   overflow: auto;
+  .public-DraftEditor-content {
+    line-height: 30px;
+  }
 `;
 
 export default ExperienceWrite;
