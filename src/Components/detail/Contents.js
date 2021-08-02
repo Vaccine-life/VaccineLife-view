@@ -66,6 +66,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   .public-DraftEditor-content {
+    font-size: ${theme.headTweSize};
     line-height: 30px;
   }
 `;

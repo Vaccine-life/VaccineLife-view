@@ -6,6 +6,7 @@ import { Editor } from "draft-js";
 import "draft-js/dist/Draft.css";
 import styled from "styled-components";
 import Toolbar from "./Toolbar";
+import theme from "../../styles/theme";
 
 const ExperienceWrite = (props) => {
   const { urlExchanger, editorState, setEditorState, editor } = props;
@@ -41,9 +42,11 @@ const Wrapper = styled.div`
   overflow: auto;
 
   .public-DraftEditor-content {
+    font-size: ${theme.headTweSize};
     line-height: 30px;
   }
   .public-DraftEditorPlaceholder-root {
+    font-size: ${theme.headTweSize};
     line-height: 30px;
   }
 `;
