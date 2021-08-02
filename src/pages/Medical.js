@@ -5,9 +5,12 @@ import styled from "styled-components";
 import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
-
+import Login from "./Login";
 
 const Medical = (props) => {
+  // Medical 페이지에서도 로그인모달창이 뜨게 함
+  const modal_status = useSelector((state) => state.modal.visible);
+
   const dispatch = useDispatch();
   const comment_list = useSelector(state => state.comment.list);
 
@@ -15,7 +18,9 @@ const Medical = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid align="left" padding="20px 0 0 0">
-          <Text bold size="24px" lineHeight="2">의료진분들께</Text>
+          <Text bold size="24px" lineHeight="2">
+            의료진분들께
+          </Text>
         </Grid>
         
         <CommentWrite/>
@@ -23,6 +28,7 @@ const Medical = (props) => {
           return <CommentList key={idx} {...c}/>
         })}
       </Wrapper>
+      {modal_status && <Login />}
     </React.Fragment>
   );
 };

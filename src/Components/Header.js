@@ -13,37 +13,47 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-      <Grid bg="#ffffff" is_flex="space_row">
-        <Grid  width="auto" margin="1rem 5rem">
-          <Grid is_flex="space_row">
-            <Grid>
-              <Text color={theme.bg2} cursor="pointer">슬기로운</Text>
-              <Text color={theme.bg2} cursor="pointer" size="16" bold>백신생활</Text>
-            </Grid>
+        <Grid bg="#ffffff" is_flex="space_row">
+          <Grid width="auto" margin="1rem 5rem">
+            <Grid is_flex="space_row">
+              <Grid>
+                <Text color={theme.bg2} cursor="pointer">
+                  슬기로운
+                </Text>
+                <Text color={theme.bg2} cursor="pointer" size="16" bold>
+                  백신생활
+                </Text>
+              </Grid>
 
-            <Grid is_flex="space_row" padding="0 3rem">
-              <Grid width="5em">
-                <Text >홈</Text>
-              </Grid>
-              <Grid width="6em">
-                <Text >백신후기</Text>
-              </Grid>
-              <Grid width="8em">
-                <Text >의료진분들께</Text>
+              <Grid is_flex="space_row" padding="0 3rem">
+                <Grid width="5em">
+                  <Text>홈</Text>
+                </Grid>
+                <Grid width="6em">
+                  <Text>백신후기</Text>
+                </Grid>
+                <Grid width="8em">
+                  <Text>의료진분들께</Text>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
 
-        <Grid is_flex="space_row" width="auto" margin="0 20px">
-          <Text><span style={{fontWeight: "bold"}}>{props.nickname}</span> 님, 안녕하세요</Text>
-          <Text width="5rem" cursor="pointer" margin="0 4rem"
-            _onClick={() => dispatch(actionVisible())}
-          >
-            <span style={{boxShadow:"inset 0 -1px 0 #242424"}}>로그인</span>
-          </Text>
+          <Grid is_flex="space_row" width="auto" margin="0 20px">
+            <Text>
+              <span style={{ fontWeight: "bold" }}>{props.nickname}</span> 님,
+              안녕하세요
+            </Text>
+            <Text width="5rem" cursor="pointer" margin="0 4rem">
+              <span
+                style={{ boxShadow: "inset 0 -1px 0 #242424" }}
+                onClick={() => dispatch(actionVisible())}
+              >
+                로그인
+              </span>
+            </Text>
+          </Grid>
         </Grid>
-      </Grid>
       </Wrapper>
     </React.Fragment>
   );

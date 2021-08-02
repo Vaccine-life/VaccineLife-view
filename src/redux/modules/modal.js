@@ -10,6 +10,7 @@ const modal = createSlice({
   reducers: {
     actionVisible: (state, action) => {
       state.visible = !state.visible;
+      console.log(state.visible);
     },
   },
 });
