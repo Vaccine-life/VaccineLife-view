@@ -3,6 +3,7 @@ import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
 import user from "./modules/user";
+import comment from "./modules/comment";
 
 import board from "./modules/board";
 
@@ -27,6 +28,7 @@ if (env === "development") {
 const reducer = combineReducers({
   board: board.reducer,
   user: user.reducer,
+  comment: comment.reducer,
   modal: modal.reducer,
   router: connectRouter(history),
 });

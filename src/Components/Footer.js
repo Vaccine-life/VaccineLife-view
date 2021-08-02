@@ -9,49 +9,29 @@ const Footer = () => {
   return (
     <React.Fragment>
       <FixedFooter>
-        <Grid bg={theme.bg} is_flex="space_column" align="left">
-          <Grid>
-            {/* 로고 */}
-            <Grid padding="10px 30px" width="auto">
-              <Image
-                shape="rectangle"
-                width="5rem"
-                height="3rem"
-                src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMjNfMjcw/MDAxNTE2NzEzOTE4OTgw.IduRnAf7H8eKuWuX-YJZuwhfoxq960sjOXByi7A3GiIg.hasRU00Lkjwqjr7XbeYTb9hnANSppWgejCMCH8M7aFIg.JPEG.timeless_soul/KakaoTalk_Moim_77yVkO7j8BC3E8PV7DJ9iSRRVOH4Y2.jpg?type=w800"
-              />
-            </Grid>
 
-            <Grid is_flex="space_row">
-              <Grid padding="10px 30px">
-                <Grid padding="5px 0">
-                  <Text>백신후기</Text>
-                </Grid>
-
-                <Grid padding="5px 0">
-                  <Text>자가격리 후기</Text>
-                </Grid>
-
-                <Grid padding="5px 0">
-                  <Text>의료진분들께</Text>
-                </Grid>
-              </Grid>
-
-              <Grid padding="10px 30px">
-                <Grid padding="5px 0">
-                  <Text>대표자명 팀18</Text>
-                </Grid>
-
-                <Grid padding="5px 0">
-                  <Text>Contact playder1427@gmail.com</Text>
-                </Grid>
-
-                <Grid padding="5px 0">
-                  <Text>Github https://github.com/Vaccine-life</Text>
-                </Grid>
-              </Grid>
-            </Grid>
+        <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center"}}>
+          <Grid margin="2rem 2rem 2rem 5rem" width="auto">
+            <Text color="#ffffff" cursor="pointer">슬기로운</Text>
+            <Text color="#ffffff" cursor="pointer" size="16" bold>백신생활</Text>
           </Grid>
-        </Grid>
+
+          <Grid margin="2rem 0" width="0 auto">
+            <ul style={{display:"flex"}}>
+              <Text color="#ffffff" size="12px" margin="5px">백신후기</Text>
+              <Text color="#ffffff" size="12px" margin="5px">의료진분들께 한마디</Text>
+            </ul>
+
+            <ul style={{display:"flex"}}>
+              <Text color="#A5A5A5" size="12px" margin="5px">대표자명</Text>
+              <Text color="#A5A5A5" size="12px" margin="5px">|</Text>
+              <Text color="#A5A5A5" size="12px" margin="5px">Contact. playder1427@gmail.com</Text>
+              <Text color="#A5A5A5" size="12px" margin="5px">|</Text>
+              <Text color="#A5A5A5" size="12px" margin="5px">Github. https://github.com/Vaccine-life</Text>
+            </ul>
+          </Grid>
+        </div>
+
       </FixedFooter>
     </React.Fragment>
   );
@@ -60,6 +40,8 @@ const Footer = () => {
 const FixedFooter = styled.div`
   margin-top: auto;
   width: 100%;
+  /* position: fixed; */
+  /* z-index: 1; */
 `;
 
 export default Footer;
