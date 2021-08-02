@@ -104,7 +104,8 @@ const ElTextArea = styled.textarea`
 
 const ElInput = styled.input`
   ${(props) => (props.margin ? `margin:${props.margin}` : "")};
-  width: 100% ${(props) => (props.border ? `border:${props.border}` : "")};
+  width: 100%;
+  ${(props) => (props.border ? `border:${props.border}` : "")};
   padding: 12px 4px;
   box-sizing: border-box;
   ${(props) => (props.height ? `height:${props.height}` : "")};

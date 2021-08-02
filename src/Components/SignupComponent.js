@@ -139,9 +139,8 @@ const SignupComponent = (props) => {
 };
 
 const Wrapper = styled.form`
-  width: 100%;
+  width: 400px;
   height: auto;
-  padding: 5vh 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;

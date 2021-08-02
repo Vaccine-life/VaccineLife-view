@@ -47,11 +47,10 @@ const LoginComponent = (props) => {
           로그인
         </Text>
 
-        <label htmlFor="username">아이디</label>
         <Input
           margin="2vh auto"
           label="Standard"
-          placeholder="아이디를 입력해 주세요"
+          placeholder="아이디"
           id="username"
           name="username"
           type="username"
@@ -59,18 +58,22 @@ const LoginComponent = (props) => {
           value={username}
         />
 
-        <label htmlFor="password">비밀번호</label>
         <Input
           margin="2vh auto"
           label="Standard"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="비밀번호"
           id="password"
           name="password"
           type="password"
           _onChange={handlePasswordChange}
           value={password}
         />
-        <Button margin="2vh auto" width="20%" type="submit" bg={theme.btnColor}>
+        <Button
+          margin="70px 0 20px 0"
+          width="20%"
+          type="submit"
+          bg={theme.btnColor}
+        >
           로그인
         </Button>
       </Wrapper>
@@ -79,8 +82,8 @@ const LoginComponent = (props) => {
 };
 
 const Wrapper = styled.form`
-  width: 100%;
-  padding: 0 5vw;
+  width: 400px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

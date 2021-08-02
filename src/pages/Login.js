@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
+import theme from "../styles/theme";
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
@@ -17,7 +18,7 @@ const Login = (props) => {
           {status && <SignupComponent />}
           {!status && (
             <Signup>
-              <Text>아직 회원이 아니신가요?</Text>
+              <Text color={theme.typoGrey2}>아직 회원이 아니신가요?</Text>
               <Button
                 width="6em"
                 type="submit"
@@ -53,9 +54,8 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
-  width: 400px;
-  height: auto;
-  min-height: 470px;
+  width: max-content;
+  height: max-content;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -66,7 +66,7 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 0 5vw;
+  padding: 50px;
 `;
 
 const Signup = styled.div`
