@@ -26,6 +26,8 @@
 - radius
 - height
 - bg
+- fontSize
+-
 
 # Image
 

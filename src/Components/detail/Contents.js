@@ -41,6 +41,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  .public-DraftEditor-content {
+    line-height: 30px;
+  }
 `;
 const LikeWrapper = styled.div`
   display: flex;
