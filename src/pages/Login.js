@@ -3,11 +3,16 @@ import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
 import theme from "../styles/theme";
+
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
   const [status, setStatus] = useState(false);
+  //alert 창
+  const alert_status = useSelector((state) => state.popup.alert);
 
   return (
     <>
@@ -38,6 +43,7 @@ const Login = (props) => {
             </Signup>
           )}
         </Modal>
+        {alert_status && <Alert />}
       </Wrapper>
     </>
   );

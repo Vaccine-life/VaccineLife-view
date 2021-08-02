@@ -5,27 +5,52 @@ import theme from "../../styles/theme";
 import "draft-js/dist/Draft.css";
 import { convertFromRaw } from "draft-js";
 import { Editor, EditorState } from "draft-js";
-import { Grid, Text } from "../../elements";
-import LikeIconChanger from "../LikeIconChanger";
+import { Button, Grid, Text } from "../../elements";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as amptyHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Contents = (props) => {
   const { contents, likeCount } = props;
+  // 클릭했을때 색 변경 추가할것
   const isHeart = true;
   const storedState = convertFromRaw(JSON.parse(contents));
   const editorState = EditorState.createWithContent(storedState);
   logger(editorState);
   return (
     <Wrapper>
-      <Grid is_flex="space_row" height="30px" margin="0 auto 0 auto">
-        <Text size="12px">
-          증상이 수 일 지속될 시 가까운 병원에 내원하십시오. 특정 병원 이름
-          언급시 무통보 삭제될 수 있습니다.
+      <Grid
+        is_flex="column_left_start"
+        height="120px"
+        bg={theme.bg4}
+        margin="0 0 67px 0"
+        padding="0 0 0 29px"
+      >
+        <Text lineHeight="26px" size={theme.bodyOneSize} bolds>
+          주의사항
+        </Text>
+        <Text lineHeight="26px" size={theme.bodyOneSize} margin="">
+          * 증상이 수 일 지속될 시 가까운 병원에 내원하십시오.
+        </Text>
+        <Text lineHeight="26px" size={theme.bodyOneSize}>
+          * 특정 병원 이름 언급시 무통보 삭제될 수 있습니다.
         </Text>
       </Grid>
       <Editor editorState={editorState} readOnly={true} />
       <LikeWrapper>
-        <LikeIconChanger isHeart={isHeart} />
-        <Text margin="0 0 0 10px">{likeCount}</Text>
+        <Button
+          width={theme.mediumButtonWidth}
+          height={theme.mediumButtonHeight}
+        >
+          <div style={{ fontSize: theme.bodyOneSize, fontWeight: "700" }}>
+            <FontAwesomeIcon
+              icon={amptyHeart}
+              size="lg"
+              style={{ marginRight: "10px" }}
+            />
+            추천
+          </div>
+        </Button>
       </LikeWrapper>
     </Wrapper>
   );
@@ -34,7 +59,6 @@ const Contents = (props) => {
 const Wrapper = styled.div`
   margin: 15px 0 15px 0;
   padding: 0 5px 0 5px;
-  border: 2px solid ${theme.bg};
   min-height: 400px;
   width: 100%;
   display: flex;
@@ -42,6 +66,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   .public-DraftEditor-content {
+    font-size: ${theme.headTweSize};
     line-height: 30px;
   }
 `;

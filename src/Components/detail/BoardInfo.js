@@ -1,13 +1,15 @@
 import moment from "moment";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
-import displayedAt from "../../shared/displayedAt";
+import { actionConfirm } from "../../redux/modules/popup";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
   const { vacBoardId, title, hits, createdAt, user, likeCount } = props;
+  const dispatch = useDispatch();
   const handleOnClick = () => {
     history.push(`/modify/${vacBoardId}`);
   };
@@ -34,6 +36,7 @@ const BoardInfo = (props) => {
             margin="0 0 0 16px"
             fontSize={theme.bodyTwoSize}
             bg={theme.bg}
+            _onClick={() => dispatch(actionConfirm())}
           >
             삭제
           </Button>
