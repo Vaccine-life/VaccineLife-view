@@ -1,182 +1,378 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
+import { useDispatch } from "react-redux";
+import { actionVisible } from "../redux/modules/modal";
+import { actionSetUser } from "../redux/modules/user";
 
 const Survey = (props) => {
-  console.log("Survey", props.history);
+  const dispatch = useDispatch();
+  const [isVaccine, setIsVaccine] = useState(1); // 0 1
+  const [degree, setDegree] = useState(1); // 1 2
+  const [type, setType] = useState(""); // 나머지 string
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState(10);
+  const [disease, setDisease] = useState(0);
+  const [afterEffect, setAfterEffect] = useState("");
+
+  const handleIsVaccineClick = (e) => {
+    setIsVaccine(e.target.value);
+  };
+  const handleDegreeClick = (e) => {
+    setDegree(e.target.value);
+  };
+  const handleTypeClick = (e) => {
+    setType(e.target.value);
+  };
+  const handleGenderClick = (e) => {
+    setGender(e.target.value);
+  };
+  const handleAgeClick = (e) => {
+    setAge(e.target.value);
+  };
+  const handleDiseaseClick = (e) => {
+    setDisease(e.target.value);
+  };
+  const handleAfterEffectClick = (e) => {
+    setAfterEffect(e.target.value);
+  };
+
+  const submitSurvey = () => {
+    let survey = {
+      isVaccine: isVaccine,
+      degree: degree,
+      type: type,
+      gender: gender,
+      age: age,
+      disease: disease,
+      afterEffect: afterEffect,
+    };
+
+    // state.user에 설문조사 데이터를 넣어줌
+    dispatch(actionSetUser(survey));
+    console.log(survey);
+
+    // 모달 끄기
+    dispatch(actionVisible());
+  };
+
   return (
     <>
-      <Text margin="2vh auto" size="14px">
-        회원가입이 곧 마무리됩니다
-      </Text>
-      <Text margin="2vh 0 6vh 0" size="20px" bold>
-        여러분의 백신 접종 경험을 공유해주세요
-      </Text>
+      <form>
+        <Text margin="2vh auto" size="14px">
+          회원가입이 곧 마무리됩니다
+        </Text>
+        <Text margin="2vh 0 6vh 0" size="20px" bold>
+          여러분의 백신 접종 경험을 공유해주세요
+        </Text>
 
-      <SurveyItem>
-        <Text bold>백신 접종 여부</Text>
-        <Options>
-          <input type="radio" name="isVaccine" value="true" />
-          접종함
-          <input type="radio" name="isVaccine" value="false" />
-          접종하지않음
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            백신 접종 여부
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="isVaccine"
+              value="1"
+              onClick={handleIsVaccineClick}
+            />
+            접종함
+            <input
+              type="radio"
+              name="isVaccine"
+              value="0"
+              onClick={handleIsVaccineClick}
+            />
+            접종하지않음
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>접종 회차</Text>
-        <Options>
-          <input type="radio" name="degree" value="first" />
-          1회차
-          <input type="radio" name="degree" value="second" />
-          2회차
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            접종 회차
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="degree"
+              value="1"
+              onClick={handleDegreeClick}
+            />
+            1차 접종 완료
+            <input
+              type="radio"
+              name="degree"
+              value="2"
+              onClick={handleDegreeClick}
+            />
+            2차 접종 완료
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>백신 종류</Text>
-        <Options>
-          <input type="radio" name="type" value="Moderna" />
-          모더나
-          <input type="radio" name="type" value="Janssen" />
-          얀센
-          <input type="radio" name="type" value="AZ" />
-          아스트라제네카
-        </Options>
-        <div></div>
-        <Options>
-          <input type="radio" name="type" value="Pfizer" />
-          화이자
-          <input type="radio" name="type" value="AZ+Pfizer" />
-          아스트라제네카 + 화이자
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            백신 종류
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="type"
+              value="모더나"
+              onClick={handleTypeClick}
+            />
+            모더나
+            <input
+              type="radio"
+              name="type"
+              value="얀센"
+              onClick={handleTypeClick}
+            />
+            얀센
+            <input
+              type="radio"
+              name="type"
+              value="아스트라제네카"
+              onClick={handleTypeClick}
+            />
+            아스트라제네카
+          </Options>
+          <div></div>
+          <Options>
+            <input
+              type="radio"
+              name="type"
+              value="화이자"
+              onClick={handleTypeClick}
+            />
+            화이자
+            <input
+              type="radio"
+              name="type"
+              value="아스트라제네카 + 화이자"
+              onClick={handleTypeClick}
+            />
+            아스트라제네카 + 화이자
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>성별</Text>
-        <Options>
-          <input type="radio" name="gender" value="male" />
-          남
-          <input type="radio" name="gender" value="female" />여
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            성별
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="gender"
+              value="남"
+              onClick={handleGenderClick}
+            />
+            남
+            <input
+              type="radio"
+              name="gender"
+              value="여"
+              onClick={handleGenderClick}
+            />
+            여
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>연령대</Text>
-        <Options>
-          <input type="radio" name="age" value="10" />
-          10대
-          <input type="radio" name="age" value="20" />
-          20대
-          <input type="radio" name="age" value="30" />
-          30대
-          <input type="radio" name="age" value="40" />
-          40대
-          <input type="radio" name="age" value="50" />
-          50대
-        </Options>
-        <div></div>
-        <Options>
-          <input type="radio" name="age" value="60" />
-          60대
-          <input type="radio" name="age" value="70" />
-          70대
-          <input type="radio" name="age" value="80" />
-          80대 이상
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            연령대
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="age"
+              value="10"
+              onClick={handleAgeClick}
+            />
+            10대
+            <input
+              type="radio"
+              name="age"
+              value="20"
+              onClick={handleAgeClick}
+            />
+            20대
+            <input
+              type="radio"
+              name="age"
+              value="30"
+              onClick={handleAgeClick}
+            />
+            30대
+            <input
+              type="radio"
+              name="age"
+              value="40"
+              onClick={handleAgeClick}
+            />
+            40대
+            <input
+              type="radio"
+              name="age"
+              value="50"
+              onClick={handleAgeClick}
+            />
+            50대
+          </Options>
+          <div></div>
+          <Options>
+            <input
+              type="radio"
+              name="age"
+              value="60"
+              onClick={handleAgeClick}
+            />
+            60대
+            <input
+              type="radio"
+              name="age"
+              value="70"
+              onClick={handleAgeClick}
+            />
+            70대
+            <input
+              type="radio"
+              name="age"
+              value="80"
+              onClick={handleAgeClick}
+            />
+            80대 이상
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>기저 질환</Text>
-        <Options>
-          <input type="radio" name="disease" value="true" />
-          유
-          <input type="radio" name="disease" value="false" />무
-          <input type="radio" name="disease" value="notSure" />
-          모름
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            기저 질환
+          </Text>
+          <Options>
+            <input
+              type="radio"
+              name="disease"
+              value="1"
+              onClick={handleDiseaseClick}
+            />
+            유
+            <input
+              type="radio"
+              name="disease"
+              value="0"
+              onClick={handleDiseaseClick}
+            />
+            무
+            <input
+              type="radio"
+              name="disease"
+              value="2"
+              onClick={handleDiseaseClick}
+            />
+            모름
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <SurveyItem>
-        <Text bold>후유증</Text>
-        <Options>
-          <input type="checkbox" name="afterEffect" value="fever" />
-          발열
-          <input type="checkbox" name="afterEffect" value="partialAche" />
-          접종부위 통증
-          <input type="checkbox" name="afterEffect" value="swelling" />
-          접종부위 부기/발적
-          <input type="checkbox" name="afterEffect" value="vomit" />
-          구토/매스꺼움
-        </Options>
-        <div></div>
-        <Options>
-          <input type="checkbox" name="afterEffect" value="ache" />
-          두통/관절통/근육통
-          <input type="checkbox" name="afterEffect" value="fatigue" />
-          피로감
-          <input type="checkbox" name="afterEffect" value="alergy" />
-          알러지 반응
-          <input type="checkbox" name="afterEffect" value="etc" />
-          기타
-          <input type="checkbox" name="afterEffect" value="noSymptom" />
-          무증상
-        </Options>
-        <div></div>
-      </SurveyItem>
+        <SurveyItem>
+          <Text bold color={theme.btnColor}>
+            후유증
+          </Text>
+          <Options>
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="fever"
+              onClick={handleAfterEffectClick}
+            />
+            발열
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="partialAche"
+              onClick={handleAfterEffectClick}
+            />
+            접종부위 통증
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="swelling"
+              onClick={handleAfterEffectClick}
+            />
+            접종부위 부기/발적
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="vomit"
+              onClick={handleAfterEffectClick}
+            />
+            구토/매스꺼움
+          </Options>
+          <div></div>
+          <Options>
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="ache"
+              onClick={handleAfterEffectClick}
+            />
+            두통/관절통/근육통
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="fatigue"
+              onClick={handleAfterEffectClick}
+            />
+            피로감
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="alergy"
+              onClick={handleAfterEffectClick}
+            />
+            알러지 반응
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="etc"
+              onClick={handleAfterEffectClick}
+            />
+            기타
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="noSymptom"
+              onClick={handleAfterEffectClick}
+            />
+            무증상
+          </Options>
+          <div></div>
+        </SurveyItem>
 
-      <Button
-        margin="2vh auto"
-        width="20%"
-        height="3vh"
-        type="submit"
-        bg={theme.btnColor}
-        _onClick={() => {
-          props.history.push("/");
-          // 회원가입 완료 안내하기
-        }}
-      >
-        회원가입
-      </Button>
+        <Button
+          margin="2vh auto"
+          width="20%"
+          height="3vh"
+          type="sumbit"
+          bg={theme.btnColor}
+          _onClick={submitSurvey}
+        >
+          회원가입
+        </Button>
+      </form>
     </>
   );
 };
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  background-color: rgba(196, 196, 196, 0.7);
-`;
-
-const Modal = styled.div`
-  width: 40vw;
-  height: 70vh;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 0 5vw;
-`;
-
 const SurveyItem = styled.div`
-  width: 100%;
+  width: 600px;
   height: auto;
   text-align: left;
   display: grid;

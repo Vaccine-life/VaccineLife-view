@@ -7,6 +7,8 @@
 - color
 - bold
 - lineHeight
+- cursor
+- \_onChange (\ 뺄것 자동저장임)
 
 # Input
 
@@ -33,6 +35,7 @@
 - size
 - width
 - height
+- cursor 
 
 # Grid
 

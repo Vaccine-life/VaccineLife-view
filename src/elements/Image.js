@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  const { shape, src, size, width, height } = props;
+  const { shape, src, size, width, height, cursor } = props;
 
   const styles = {
     src: src,
     size: size,
     width: width,
     height: height,
+    cursor: cursor,
   };
 
   if (shape === "circle") {
@@ -22,6 +23,9 @@ const Image = (props) => {
       </AspectOutter>
     );
   }
+  if (shape === "square") {
+    return <ImageSquare {...styles}></ImageSquare>;
+  }
 
   return (
     <React.Fragment>
@@ -34,6 +38,7 @@ Image.defaultProps = {
   shape: "circle",
   src: "",
   size: "40px",
+  cursor: "",
 };
 
 const ImageDefault = styled.div`
@@ -66,6 +71,16 @@ const ImageCircle = styled.div`
   border-radius: var(--size);
   background-image: url("${(props) => props.src}");
   background-size: cover;
+`;
+
+const ImageSquare = styled.div`
+  --size: ${(props) => props.size}px;
+  width: ${(props) => props.size}px;
+  height: var(--size);
+  cursor: ${(props) => props.cursor};
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
 `;
 
 export default Image;
