@@ -39,7 +39,11 @@ const Wrapper = styled.div`
   margin-bottom: 2em;
   background: #fefefe;
   overflow: auto;
+
   .public-DraftEditor-content {
+    line-height: 30px;
+  }
+  .public-DraftEditorPlaceholder-root {
     line-height: 30px;
   }
 `;

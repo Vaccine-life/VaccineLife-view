@@ -22,7 +22,7 @@ const Write = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-
+  // 데이터 JSON 변환
   const contents = JSON.stringify(
     convertToRaw(editorState.getCurrentContent())
   );
@@ -34,7 +34,7 @@ const Write = () => {
 
   logger(contents);
   return (
-    <Grid width="1192px" margin="40px auto 40px auto">
+    <Grid width={theme.writeWidth} margin="40px auto 40px auto">
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} color={theme.fontColor} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
@@ -57,7 +57,7 @@ const Write = () => {
       <Grid margin="30px 0 0 0">
         <Input
           value={title}
-          width="1192px"
+          width={theme.writeWidth}
           height="72px"
           border="none"
           _onChange={onTitleChange}

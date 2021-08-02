@@ -25,10 +25,9 @@ const Modify = () => {
 
   // 타이틀 인풋값
   const [title, setTitle] = useState(data.title);
-  // 에디터 props값
-  const storedState = convertFromRaw(JSON.parse(data.contents));
-
   const editor = useRef();
+  // 데이터 JSON 변환
+  const storedState = convertFromRaw(JSON.parse(data.contents));
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(storedState)
   );
