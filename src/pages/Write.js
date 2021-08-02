@@ -9,8 +9,12 @@ import Input from "../elements/Input";
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
 
 const Write = () => {
+  //alert
+  const alert_status = useSelector((state) => state.popup.alert);
   const url = history.location.pathname;
   // /vboard/write일때 true /qboard/write 일떄 false
   const urlExchanger = url === "/vaccineboard/write" ? true : false;
@@ -41,8 +45,8 @@ const Write = () => {
           {urlExchanger ? "백신" : "격리"} 후기 글쓰기
         </Text>
         <Button
-          width="88px"
-          height="42px"
+          width={theme.smallButtonWidth}
+          height={theme.smallButtonHeight}
           fontSize={theme.bodyTwoSize}
           bold
           margin="0"
@@ -72,6 +76,7 @@ const Write = () => {
         editorState={editorState}
         setEditorState={setEditorState}
       />
+      {alert_status && <Alert />}
     </Grid>
   );
 };

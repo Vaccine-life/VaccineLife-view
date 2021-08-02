@@ -56,20 +56,25 @@ const Wrapper = styled.div`
    justify-content : center;
    align-items: center;
      `;
-    }
-    if (props.is_flex === "space_row") {
+    } else if (props.is_flex === "space_row") {
       return `
    display: flex;
    justify-content : space-between;
    align-items: center;
      `;
-    }
-    if (props.is_flex === "space_column") {
+    } else if (props.is_flex === "space_column") {
       return `
    display: flex;
    flex-direction : column;
    justify-content : space-between;
    align-items: center;
+     `;
+    } else if (props.is_flex === "column_left_start") {
+      return `
+   display: flex;
+   flex-direction : column;
+   justify-content : center;
+   align-items: flex-start;
      `;
     } else {
       return ``;

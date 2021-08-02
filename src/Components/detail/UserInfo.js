@@ -10,28 +10,28 @@ const UserInfo = (props) => {
     <Wrapper>
       <Table>
         <thead>
-          <tr>
-            <th>백신종류</th>
-            <th>차수</th>
-            <th>연령대</th>
-            <th>성별</th>
-            <th>기저질환</th>
-          </tr>
+          <TableTr>
+            <Th>백신종류</Th>
+            <Th>차수</Th>
+            <Th>연령대</Th>
+            <Th>성별</Th>
+            <Th>기저질환</Th>
+          </TableTr>
         </thead>
         <tbody>
-          <tr>
-            <th>{type}</th>
-            <th>{degree} 차</th>
-            <th>{age}</th>
-            <th>{gender}</th>
-            <th>{disease}</th>
-          </tr>
+          <TableTr>
+            <Th>{type}</Th>
+            <Th>{degree} 차</Th>
+            <Th>{age}</Th>
+            <Th>{gender}</Th>
+            <Th>{disease}</Th>
+          </TableTr>
         </tbody>
         <tfoot>
-          <tr>
-            <th>후유증</th>
-            <th colSpan="4">{afterEffect}</th>
-          </tr>
+          <TableTr>
+            <ThSm>후유증</ThSm>
+            <ThLg colSpan="4">{afterEffect}</ThLg>
+          </TableTr>
         </tfoot>
       </Table>
     </Wrapper>
@@ -43,19 +43,39 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
+  margin: auto auto auto 16.5px;
 `;
 
 const Table = styled.table`
   width: 100%;
-  border: 1px solid #444444;
+  border-top: 1px solid ${theme.typoGrey3};
   border-collapse: collapse;
+  color: ${theme.typoGrey3};
+  font-size: ${theme.bodyOneSize};
 `;
 
-const EachWrapper = styled.div`
-  width: 30%;
-  display: flex;
-  height: 30px;
-  margin: 10px;
+const TableTr = styled.tr`
+  border-bottom: 1px solid ${theme.typoGrey3};
+  height: 40px;
 `;
+
+const Th = styled.th`
+  text-align: center;
+  line-height: 40px;
+  vertical-align: center;
+`;
+
+const ThSm = styled.th`
+  text-align: center;
+  line-height: 40px;
+  vertical-align: center;
+  border-right: 1px solid ${theme.typoGrey3};
+`;
+const ThLg = styled.th`
+  text-align: left;
+  line-height: 40px;
+  vertical-align: center;
+  padding-left: 10px;
+`;
+
 export default UserInfo;

@@ -4,7 +4,7 @@ const theme = {
   bg2: "#4F72F2",
   bg3: "#DCE5FE",
   bg4: "#EDF2FF",
-  shadow: "rgba(0 0 0 0.5)",
+  shadow: "rgba(0, 0, 0, 0.5)",
   typoGrey3: "#6F6F6F",
   typoGrey2: "#A5A5A5",
   typoGrey1: "#C1C1C1",
