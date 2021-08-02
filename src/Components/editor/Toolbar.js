@@ -48,18 +48,24 @@ const Toolbar = (props) => {
         onMouseDown={(e) => {
           handleBlockClick(e, "ordered-list-item");
           setToggle3((prev) => !prev);
+          if (toggle4) {
+            setToggle4((prev) => !prev);
+          }
         }}
       >
-        <FontAwesomeIcon icon={faListUl} size="lg" />
+        <FontAwesomeIcon icon={faListOl} size="lg" />
       </Btn>
       <Btn
         toggle={toggle4}
         onMouseDown={(e) => {
           handleBlockClick(e, "unordered-list-item");
           setToggle4((prev) => !prev);
+          if (toggle3) {
+            setToggle3((prev) => !prev);
+          }
         }}
       >
-        <FontAwesomeIcon icon={faListOl} size="lg" />
+        <FontAwesomeIcon icon={faListUl} size="lg" />
       </Btn>
     </Wrapper>
   );

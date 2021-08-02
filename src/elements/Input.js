@@ -20,6 +20,7 @@ const Input = (props) => {
     radius,
     height,
     bg,
+    fontSize,
   } = props;
 
   if (is_comment) {
@@ -54,6 +55,7 @@ const Input = (props) => {
     <React.Fragment>
       <Grid>
         <ElInput
+          fontSize={fontSize}
           height={height}
           color={color}
           margin={margin}
@@ -91,6 +93,7 @@ Input.defaultProps = {
   borderRadius: false,
   height: false,
   bg: false,
+  fontSize: theme.bodyTwoSize,
 };
 
 //작성페이지 멀티라인 수정
@@ -103,8 +106,13 @@ const ElTextArea = styled.textarea`
 `;
 
 const ElInput = styled.input`
+  font-size: ${(props) => props.fontSize};
+  :focus {
+    outline: none;
+  }
   ${(props) => (props.margin ? `margin:${props.margin}` : "")};
-  width: 100% ${(props) => (props.border ? `border:${props.border}` : "")};
+  width: 100%;
+  ${(props) => (props.border ? `border:${props.border}` : "")};
   padding: 12px 4px;
   box-sizing: border-box;
   ${(props) => (props.height ? `height:${props.height}` : "")};

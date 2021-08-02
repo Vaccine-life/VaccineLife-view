@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
+import { history } from "../../redux/configStore";
 import displayedAt from "../../shared/displayedAt";
 
 const BoardInfo = (props) => {
   const { vacBoardId, title, hits, createdAt, user } = props;
+  const handleOnClick = () => {
+    history.push(`/modify/${vacBoardId}`);
+  };
+
   return (
     <Grid margin="30px auto 30px auto">
       <Grid is_flex="space_row">
         <Text>{title}</Text>
         <Grid width="200px" margin="0">
-          <Button width="70px">수정</Button>
+          <Button _onClick={handleOnClick} width="70px">
+            수정
+          </Button>
           <Button width="70px" margin="0 0 0 20px">
             삭제
           </Button>
