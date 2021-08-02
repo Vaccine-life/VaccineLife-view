@@ -14,26 +14,22 @@ const Header = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-          <Grid width="auto" margin="1rem 5rem">
+          <Grid  width="auto" margin="1rem 5rem">
             <Grid is_flex="space_row">
-              <Grid>
-                <Text color={theme.bg2} cursor="pointer">
-                  슬기로운
-                </Text>
-                <Text color={theme.bg2} cursor="pointer" size="16" bold>
-                  백신생활
-                </Text>
+              <Grid _onClick={() => {console.log("홈으로 가기!")}}>
+                <Text color={theme.bg2} cursor="pointer">슬기로운</Text>
+                <Text color={theme.bg2} cursor="pointer" size="16" bold>백신생활</Text>
               </Grid>
 
               <Grid is_flex="space_row" padding="0 3rem">
-                <Grid width="5em">
-                  <Text>홈</Text>
+                <Grid width="5em" cursor="pointer" _onClick={() => {console.log("홈으로 가기!")}}>
+                  <Text >홈</Text>
                 </Grid>
-                <Grid width="6em">
-                  <Text>백신후기</Text>
+                <Grid width="6em" cursor="pointer" _onClick={() => {console.log("백신후기로 가기!")}}>
+                  <Text >백신후기</Text>
                 </Grid>
-                <Grid width="8em">
-                  <Text>의료진분들께</Text>
+                <Grid width="8em" cursor="pointer" _onClick={() => {console.log("의료진분들께로 가기!")}}>
+                  <Text >의료진분들께</Text>
                 </Grid>
               </Grid>
             </Grid>
@@ -64,9 +60,10 @@ Header.defaultProps = {
 };
 
 const Wrapper = styled.div`
+  top: 0;
   width: 100%;
   position: fixed;
-  /* z-index: 1; */
+  z-index: 2;
   border: 1px solid #dbdbdb;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 `;

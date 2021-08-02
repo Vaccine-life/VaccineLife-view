@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { margin, color, size, children, bold, lineHeight, cursor } = props;
+  const { margin, color, size, children, bold, lineHeight, cursor, _onClick } = props;
 
   const styles = {
     margin,
@@ -16,7 +16,7 @@ const Text = (props) => {
 
   return (
     <React.Fragment>
-      <P {...styles}>{children}</P>
+      <P {...styles} onClick={_onClick}>{children}</P>
     </React.Fragment>
   );
 };
