@@ -60,6 +60,7 @@ Header.defaultProps = {
 };
 
 const Wrapper = styled.div`
+  top: 0;
   width: 100%;
   position: fixed;
   z-index: 2;

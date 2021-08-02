@@ -16,7 +16,7 @@ const CommentWrite = (props) => {
 
     const changeComment = (e) => {
         setComment(e.target.value);
-        // console.log(e.target.value)
+        // console.log(typeof e.target.value)
         // 인풋의 onChange에 넣어주고 콘솔 찍어보기
         // 바뀌는 내용이 바로 바로 오게 만든것!
       }
@@ -41,28 +41,28 @@ const CommentWrite = (props) => {
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>닉네임</Text>
                 </Grid>
 
-                <Grid is_flex="space_column">
+                <Grid is_flex="space_column" border="1px solid #c1c1c1">
                     <Grid margin="0 5rem">
                         <Input 
                             multiLine
-                            border="1px 1px 0 1px solid"
+                            border="none"
                             value={comment} 
                             placeholder="응원의 한마디!"
                             maxLength="500"
                             _onChange={changeComment}
+                            
                             // 엔터키로 등록
                             // onSubmit={write}
                         />
                     </Grid>
 
-                    <Grid is_flex="space_row" border="1px solid #c1c1c1">
+                    <Grid is_flex="space_row" border="none">
                         <Grid padding="10px" bg="#ffffff" align="right">
-                            <Text>현재입력 글자수/입력가능 글자수</Text>
+                            <Text>현재입력 글자수 / 입력가능 글자수</Text>
                         </Grid>
 
                         <Button width="50px" height="34px" _onClick={write}>등록</Button>
                     </Grid>
-
                 </Grid>
 
             </Grid>

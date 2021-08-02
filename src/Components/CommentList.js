@@ -22,7 +22,7 @@ const CommentList = (props) => {
         <React.Fragment>
             <Grid is_flex="space_row" margin="2rem 0">
 
-                <Grid align="left" width="13rem">
+                <Grid align="left" width="12rem">
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
