@@ -58,7 +58,7 @@ const CommentWrite = (props) => {
 
                     <Grid is_flex="space_row" border="none">
                         <Grid padding="10px" bg="#ffffff" align="right">
-                            <Text>현재입력 글자수 / 입력가능 글자수</Text>
+                            <Text>현재입력 글자수 / 500</Text>
                         </Grid>
 
                         <Button width="50px" height="34px" _onClick={write}>등록</Button>

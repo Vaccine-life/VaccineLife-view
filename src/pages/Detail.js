@@ -57,7 +57,7 @@ const Detail = () => {
   }, []);
 
   return (
-    <Grid width={theme.detailWidth}>
+    <Grid width={theme.detailWidth} margin="100px auto 40px auto">
       <BoardInfo
         vacBoardId={vacBoardId}
         user={user}

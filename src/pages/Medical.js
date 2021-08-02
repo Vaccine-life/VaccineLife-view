@@ -17,10 +17,9 @@ const Medical = (props) => {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <Grid width={theme.medicalWidth}>
+        <Grid width={theme.medicalWidth} margin="100px auto 40px auto">
         
-          <Grid align="left" padding="2rem 0 0 0">
+          <Grid align="left">
             <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
           </Grid>
           
@@ -30,15 +29,9 @@ const Medical = (props) => {
           })}
         
         </Grid>
-      </Wrapper>
       {modal_status && <Login />}
     </React.Fragment>
   );
 };
-
-const Wrapper = styled.div`
-  padding: 4rem 0 3rem 0;
-  background-color: #F7F7F7;
-`;
 
 export default Medical;

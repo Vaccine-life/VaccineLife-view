@@ -11,7 +11,7 @@ const Footer = () => {
 
         <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center"}}>
           <Grid margin="2rem 2rem 2rem 5rem" width="auto" _onClick={() => {console.log("홈으로 가기!")}}>
-            <Text color="#ffffff" cursor="pointer">슬기로운</Text>
+            <Text color="#ffffff" cursor="pointer" margin="1px 0">슬기로운</Text>
             <Text color="#ffffff" cursor="pointer" size="16" bold>백신생활</Text>
           </Grid>
 
