@@ -22,7 +22,7 @@ const comment = createSlice({
       state.list.unshift(action.payload)
     },
     actionDeleteComment: (state, action) => {
-      
+
     },
   },
 });
