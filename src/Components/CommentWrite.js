@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import 'moment/locale/ko';
+import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
@@ -15,7 +16,7 @@ const CommentWrite = (props) => {
 
     const changeComment = (e) => {
         setComment(e.target.value);
-        // console.log(e.target.value)
+        // console.log(typeof e.target.value)
         // 인풋의 onChange에 넣어주고 콘솔 찍어보기
         // 바뀌는 내용이 바로 바로 오게 만든것!
       }
@@ -23,24 +24,47 @@ const CommentWrite = (props) => {
     const write = () => {
         // console.log(comment);
         // 오브젝트로 넣어줘야 
-        dispatch(actionAddComment({nickname: "명수는열두살", comment, insert_dt: moment().startOf('hour').fromNow()}));
+        dispatch(actionAddComment({
+            nickname: "명수는열두살", 
+            comment, 
+            insert_dt: moment().startOf('hour').fromNow()
+        }));
         // 코멘트 작성 후 인풋태크에 있는 글 없애기
         setComment();
     }
 
     return(
         <React.Fragment>
-            <Input 
-                value={comment} 
-                height="100px" 
-                placeholder="응원의 한마디!"
-                maxLength="500"
-                _onChange={changeComment}
-                // 엔터키로 등록
-                onSubmit={write}
-            />
-            <Grid align="right">
-                <Button width="3rem" _onClick={write}>등록</Button>
+            <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
+
+                <Grid align="left" width="10rem">
+                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>닉네임</Text>
+                </Grid>
+
+                <Grid is_flex="space_column" border="1px solid #c1c1c1">
+                    <Grid margin="0 5rem">
+                        <Input 
+                            multiLine
+                            border="none"
+                            value={comment} 
+                            placeholder="응원의 한마디!"
+                            maxLength="500"
+                            _onChange={changeComment}
+                            
+                            // 엔터키로 등록
+                            // onSubmit={write}
+                        />
+                    </Grid>
+
+                    <Grid is_flex="space_row" border="none">
+                        <Grid padding="10px" bg="#ffffff" align="right">
+                            <Text>현재입력 글자수 / 입력가능 글자수</Text>
+                        </Grid>
+
+                        <Button width="50px" height="34px" _onClick={write}>등록</Button>
+                    </Grid>
+                </Grid>
+
             </Grid>
         </React.Fragment>
     )
