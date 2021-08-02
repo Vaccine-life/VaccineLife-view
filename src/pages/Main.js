@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import Login from "./Login";
-import Map from "../components/Map";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 
 const Main = () => {
@@ -16,7 +15,6 @@ const Main = () => {
         <h1>여러분의 <span>백신 접종 후기</span>를 공유해주세요</h1>
       </Intro>
       <MapAndChart>
-        <Map />
         <HorizontalBarChart />
       </MapAndChart>
     </>
