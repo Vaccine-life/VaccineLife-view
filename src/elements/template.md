@@ -41,7 +41,7 @@
 
 - align
 - width
-- is_flex {center, space_row, space_column}
+- is_flex {center, space_row, space_column, column_left_start}
 - bg
 - padding
 - margin
