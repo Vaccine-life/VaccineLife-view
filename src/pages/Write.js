@@ -9,8 +9,12 @@ import Input from "../elements/Input";
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
 
 const Write = () => {
+  //alert
+  const alert_status = useSelector((state) => state.popup.alert);
   const url = history.location.pathname;
   // /vboard/write일때 true /qboard/write 일떄 false
   const urlExchanger = url === "/vaccineboard/write" ? true : false;
@@ -22,7 +26,7 @@ const Write = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-
+  // 데이터 JSON 변환
   const contents = JSON.stringify(
     convertToRaw(editorState.getCurrentContent())
   );
@@ -34,15 +38,15 @@ const Write = () => {
 
   logger(contents);
   return (
-    <Grid width="1192px" margin="40px auto 40px auto">
+    <Grid width={theme.writeWidth} margin="100px auto 40px auto">
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} color={theme.fontColor} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
           {urlExchanger ? "백신" : "격리"} 후기 글쓰기
         </Text>
         <Button
-          width="88px"
-          height="42px"
+          width={theme.smallButtonWidth}
+          height={theme.smallButtonHeight}
           fontSize={theme.bodyTwoSize}
           bold
           margin="0"
@@ -57,7 +61,7 @@ const Write = () => {
       <Grid margin="30px 0 0 0">
         <Input
           value={title}
-          width="1192px"
+          width={theme.writeWidth}
           height="72px"
           border="none"
           _onChange={onTitleChange}
@@ -72,6 +76,7 @@ const Write = () => {
         editorState={editorState}
         setEditorState={setEditorState}
       />
+      {alert_status && <Alert />}
     </Grid>
   );
 };

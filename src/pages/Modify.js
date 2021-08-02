@@ -10,6 +10,8 @@ import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
 import { convertFromRaw } from "draft-js";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
 
 const data = {
   vacBoardId: 0,
@@ -23,12 +25,14 @@ const data = {
 const Modify = () => {
   // /vboard/write일때 true /qboard/write 일떄 false
 
+  //alert 창
+  const alert_status = useSelector((state) => state.popup.alert);
+
   // 타이틀 인풋값
   const [title, setTitle] = useState(data.title);
-  // 에디터 props값
-  const storedState = convertFromRaw(JSON.parse(data.contents));
-
   const editor = useRef();
+  // 데이터 JSON 변환
+  const storedState = convertFromRaw(JSON.parse(data.contents));
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(storedState)
   );
@@ -82,6 +86,7 @@ const Modify = () => {
         editorState={editorState}
         setEditorState={setEditorState}
       />
+      {alert_status && <Alert />}
     </Grid>
   );
 };

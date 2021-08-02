@@ -7,6 +7,9 @@ import MoveBox from "../components/detail/MoveBox";
 import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionSetPrevNextPage } from "../redux/modules/board";
+import theme from "../styles/theme";
+import Confirm from "../components/popup/Confirm";
+import Alert from "../components/popup/Alert";
 
 const data = {
   vacBoardId: 0,
@@ -28,7 +31,7 @@ const data = {
     type: "모더나",
     gender: "여",
     age: 27,
-    disease: 0,
+    disease: "모름",
     degree: 2,
     afterEffect: "발열 , 두통, 근육통",
   },
@@ -47,22 +50,30 @@ const Detail = () => {
     user,
   } = data;
 
-  // 격리후기때는 MoveBox에 true 기입
+  // 격리후기때는 MoveBox에 false 기입
   const modal_status = useSelector((state) => state.modal.visible);
+  //confirm 창
+  const confirm_status = useSelector((state) => state.popup.confirm);
+  //alert 창
+  const alert_status = useSelector((state) => state.popup.alert);
+
   const boardType = true;
+
+  const handleDelete = () => {};
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actionSetPrevNextPage(vacBoardId));
   }, []);
 
   return (
-    <Grid width="700px">
+    <Grid width={theme.detailWidth}>
       <BoardInfo
         vacBoardId={vacBoardId}
         user={user}
         title={title}
         hits={hits}
         createdAt={createdAt}
+        likeCount={likeCount}
       />
       <UserInfo
         type={user.type}
@@ -74,7 +85,14 @@ const Detail = () => {
       />
       <Contents contents={contents} likeCount={likeCount} />
       <MoveBox boardType={boardType} />
+      {confirm_status && (
+        <Confirm
+          confirmMessage="댓글을 삭제하시겠습니까?"
+          activeFunction={handleDelete}
+        />
+      )}
       {modal_status && <Login />}
+      {alert_status && <Alert />}
     </Grid>
   );
 };

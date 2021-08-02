@@ -3,10 +3,16 @@ import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
+import theme from "../styles/theme";
+
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
   const [status, setStatus] = useState(false);
+  //alert 창
+  const alert_status = useSelector((state) => state.popup.alert);
 
   return (
     <>
@@ -17,7 +23,7 @@ const Login = (props) => {
           {status && <SignupComponent />}
           {!status && (
             <Signup>
-              <Text>아직 회원이 아니신가요?</Text>
+              <Text color={theme.typoGrey2}>아직 회원이 아니신가요?</Text>
               <Button
                 width="6em"
                 type="submit"
@@ -37,6 +43,7 @@ const Login = (props) => {
             </Signup>
           )}
         </Modal>
+        {alert_status && <Alert />}
       </Wrapper>
     </>
   );
@@ -49,12 +56,12 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: rgba(196, 196, 196, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Modal = styled.div`
-  width: 40vw;
-  height: 75vh;
+  width: max-content;
+  height: max-content;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -65,7 +72,7 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 0 5vw;
+  padding: 50px;
 `;
 
 const Signup = styled.div`

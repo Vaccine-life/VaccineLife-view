@@ -43,10 +43,18 @@ const Input = (props) => {
       <Grid>
         <Text margin="0px">{label ? label : ""}</Text>
         <ElTextArea
-          rows={10}
+          rows={5}
           value={value}
           placeholder={placeholder}
           onChange={_onChange}
+          type={type}
+          border={border}
+          maxLength={maxLength}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              onSubmit(e);
+            }
+          }}
         ></ElTextArea>
       </Grid>
     );
@@ -99,13 +107,16 @@ Input.defaultProps = {
   fontSize: theme.bodyTwoSize,
 };
 
-//작성페이지 멀티라인 수정
+//의료진페이지 멀티라인 수정
 const ElTextArea = styled.textarea`
-  border: none;
+  ${(props) => (props.border ? `border:${props.border}` : "")};
   width: 100%;
-  padding: 12px 4px;
+  padding: 10px;
   box-sizing: border-box;
   resize: none;
+  :focus {
+    outline: none;
+  }
 `;
 
 const ElInput = styled.input`

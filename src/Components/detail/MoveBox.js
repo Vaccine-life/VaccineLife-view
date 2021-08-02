@@ -36,41 +36,44 @@ const MoveBox = (props) => {
   };
 
   return (
-    <Grid is_flex="space_row">
-      <Btn direction="left" onClick={handleClickLeft}>
+    <Wrapper>
+      <Btn
+        direction="left"
+        onClick={handleClickLeft}
+        page={page.prev === undefined ? false : true}
+      >
         <UpperWord>
           <FontAwesomeIcon icon={faChevronLeft} />
           <p>이전글</p>
         </UpperWord>
-        <p>
-          {page.prev !== undefined
-            ? `${page.prev.title}`
-            : "게시글이 존재하지 않습니다."}
-        </p>
       </Btn>
-      <Btn direction="right" onClick={handleClickRight}>
+      <Btn
+        direction="right"
+        onClick={handleClickRight}
+        page={page.next === undefined ? false : true}
+      >
         <UpperWord>
           <p>다음글</p>
           <FontAwesomeIcon icon={faChevronRight} />
         </UpperWord>
-        <p>
-          {" "}
-          {page.next !== undefined
-            ? `${page.next.title}`
-            : "게시글이 존재하지 않습니다."}
-        </p>
       </Btn>
-    </Grid>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-top: 1px solid ${theme.typoGrey3};
+  border-bottom: 1px solid ${theme.typoGrey3};
+`;
+
 const Btn = styled.button`
-  font-size: 15px;
-  font-weight: 600;
-  color: white;
   width: 200px;
   border: none;
-  background-color: ${theme.btnColor};
+  background-color: white;
   color: ${theme};
   display: flex;
   flex-direction: column;
@@ -78,14 +81,24 @@ const Btn = styled.button`
   ${(props) =>
     props.direction === "left"
       ? `align-items: flex-start;`
-      : `align-items: flex-end;`}
+      : `align-items: flex-end;
+      margin: 0 0 0 auto;
+      `}
 
+  font-size: ${theme.bodyOneSize};
+  font-weight: 700;
+  ${(props) =>
+    props.page
+      ? `
+  color: ${theme.typoGrey3};
   :hover {
     cursor: pointer;
     color: ${theme.btnColor};
-    border: 1px solid ${theme.btnColor};
-    background-color: white;
   }
+  `
+      : `
+   color: ${theme.typoLightGrey2};
+  `}
 `;
 
 const UpperWord = styled.div`

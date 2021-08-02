@@ -8,59 +8,32 @@ const UserInfo = (props) => {
 
   return (
     <Wrapper>
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          백신 종류
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {type}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          성별
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {gender}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          연령대
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {age}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          기저질환 유무
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {disease === 1 ? "유" : "무"}
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          차수
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {degree} 차
-        </Grid>
-      </EachWrapper>
-
-      <EachWrapper>
-        <Grid bg={theme.bg} is_flex="center">
-          후유증
-        </Grid>
-        <Grid bg={theme.tagColor} is_flex="center">
-          {afterEffect}
-        </Grid>
-      </EachWrapper>
+      <Table>
+        <thead>
+          <TableTr>
+            <Th>백신종류</Th>
+            <Th>차수</Th>
+            <Th>연령대</Th>
+            <Th>성별</Th>
+            <Th>기저질환</Th>
+          </TableTr>
+        </thead>
+        <tbody>
+          <TableTr>
+            <Th>{type}</Th>
+            <Th>{degree} 차</Th>
+            <Th>{age}</Th>
+            <Th>{gender}</Th>
+            <Th>{disease}</Th>
+          </TableTr>
+        </tbody>
+        <tfoot>
+          <TableTr>
+            <ThSm>후유증</ThSm>
+            <ThLg colSpan="4">{afterEffect}</ThLg>
+          </TableTr>
+        </tfoot>
+      </Table>
     </Wrapper>
   );
 };
@@ -70,13 +43,39 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
+  margin: auto auto auto 16.5px;
 `;
 
-const EachWrapper = styled.div`
-  width: 30%;
-  display: flex;
-  height: 30px;
-  margin: 10px;
+const Table = styled.table`
+  width: 100%;
+  border-top: 1px solid ${theme.typoGrey3};
+  border-collapse: collapse;
+  color: ${theme.typoGrey3};
+  font-size: ${theme.bodyOneSize};
 `;
+
+const TableTr = styled.tr`
+  border-bottom: 1px solid ${theme.typoGrey3};
+  height: 40px;
+`;
+
+const Th = styled.th`
+  text-align: center;
+  line-height: 40px;
+  vertical-align: center;
+`;
+
+const ThSm = styled.th`
+  text-align: center;
+  line-height: 40px;
+  vertical-align: center;
+  border-right: 1px solid ${theme.typoGrey3};
+`;
+const ThLg = styled.th`
+  text-align: left;
+  line-height: 40px;
+  vertical-align: center;
+  padding-left: 10px;
+`;
+
 export default UserInfo;

@@ -9,6 +9,7 @@
 - lineHeight
 - cursor
 - \_onChange (\ 뺄것 자동저장임)
+- _onClick
 
 # Input
 
@@ -41,13 +42,15 @@
 
 - align
 - width
-- is_flex {center, space_row, space_column}
+- is_flex {center, space_row, space_column, column_left_start}
 - bg
 - padding
 - margin
 - height
 - border_radius
 - \_onClick (\ 뺄것 자동저장임)
+- cursor
+- border
 
 # Button
 

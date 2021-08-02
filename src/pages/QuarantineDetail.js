@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import Alert from "../components/popup/Alert";
 
 const QuarantineDetail = () => {
-  return <div></div>;
+  const alert_status = useSelector((state) => state.popup.alert);
+  return <div>{alert_status && <Alert />}</div>;
 };
 
 export default QuarantineDetail;

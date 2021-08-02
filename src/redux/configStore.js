@@ -9,6 +9,8 @@ import board from "./modules/board";
 import modal from "./modules/modal";
 import map from "./modules/map";
 
+import popup from "./modules/popup";
+
 
 export const history = createBrowserHistory();
 
@@ -26,6 +28,7 @@ if (env === "development") {
 }
 
 const reducer = combineReducers({
+  popup: popup.reducer,
   board: board.reducer,
   user: user.reducer,
   comment: comment.reducer,

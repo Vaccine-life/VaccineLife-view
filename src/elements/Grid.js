@@ -13,6 +13,8 @@ const Grid = (props) => {
     height,
     border_radius,
     _onClick,
+    cursor,
+    border,
   } = props;
 
   const styles = {
@@ -24,6 +26,8 @@ const Grid = (props) => {
     bg,
     border_radius,
     align,
+    cursor,
+    border,
   };
   return (
     <Wrapper onClick={_onClick} {...styles}>
@@ -44,6 +48,8 @@ Grid.defaultProps = {
   border_radius: "",
   align: false,
   _onClick: () => {},
+  cursor: "",
+  border: false,
 };
 
 const Wrapper = styled.div`
@@ -56,20 +62,25 @@ const Wrapper = styled.div`
    justify-content : center;
    align-items: center;
      `;
-    }
-    if (props.is_flex === "space_row") {
+    } else if (props.is_flex === "space_row") {
       return `
    display: flex;
    justify-content : space-between;
    align-items: center;
      `;
-    }
-    if (props.is_flex === "space_column") {
+    } else if (props.is_flex === "space_column") {
       return `
    display: flex;
    flex-direction : column;
    justify-content : space-between;
    align-items: center;
+     `;
+    } else if (props.is_flex === "column_left_start") {
+      return `
+   display: flex;
+   flex-direction : column;
+   justify-content : center;
+   align-items: flex-start;
      `;
     } else {
       return ``;
@@ -79,7 +90,10 @@ const Wrapper = styled.div`
   margin: ${(props) => props.margin};
   background-color: ${(props) => props.bg};
   border-radius: ${(props) => props.border_radius};
+  border: ${(props) => props.border};
   ${(props) => (props.align ? `text-align: ${props.align}` : "")};
+  cursor: ${(props) => props.cursor};
+  box-sizing: border-box;
 `;
 
 export default Grid;
