@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../styles/theme";
 
 const Text = (props) => {
-  const { margin, color, size, children, bold, lineHeight, cursor, _onClick } = props;
+  const { margin, color, size, children, bold, lineHeight, cursor, _onClick, hover } = props;
 
   const styles = {
     margin,
@@ -12,6 +13,7 @@ const Text = (props) => {
     bold,
     lineHeight,
     cursor,
+    hover,
   };
 
   return (
@@ -30,6 +32,7 @@ Text.defaultProps = {
   lineHeight: "",
   cursor:'',
   _onClick: () => {},
+  hover: false,
 };
 
 const P = styled.p`
@@ -43,10 +46,15 @@ const P = styled.p`
   /* :visited {
     border-bottom: 1px solid;
   } */
-  /* :hover {
+  ${(props) =>
+    props.hover &&
+    `
+    :hover {
     cursor: pointer;
-    font-weight: ${(props) => (props.bold ? "700" : "400")};
-  } */
+    color: ${theme.btnColor};
+  }
+  
+  `}
 `;
 
 export default Text;

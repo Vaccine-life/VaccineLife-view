@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Grid, Image, Text } from "../elements";
 import theme from "../styles/theme";
+import { history } from "../redux/configStore";
 
 import logo from "../assets/logowhite.png";
 
@@ -23,9 +24,9 @@ const Footer = () => {
                 color="#ffffff"
                 size="12px"
                 margin="5px"
-                cursor="pointer"
+                hover
                 _onClick={() => {
-                  console.log("백신후기로 가기!");
+                  history.push("/vaccine");
                 }}
               >
                 백신후기
@@ -34,10 +35,11 @@ const Footer = () => {
                 color="#ffffff"
                 size="12px"
                 margin="5px"
-                cursor="pointer"
+                hover
                 _onClick={() => {
-                  console.log("의료진불들께로 가기!");
+                  history.push("/medical");
                 }}
+                
               >
                 의료진분들께 한마디
               </Text>
