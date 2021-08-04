@@ -21,6 +21,7 @@ const theme = {
   headOneSize: "24px",
   headOneHeight: "34px",
   headTweSize: "20px",
+  headTwoHeight: "30px",
   SubHeadOneSize: "18px",
   SubHeadTwoSize: "16px",
   bodyOneSize: "18px",
