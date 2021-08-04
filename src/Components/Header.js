@@ -8,9 +8,13 @@ import { actionVisible } from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
+import theme from "../styles/theme";
+import logger from "../shared/logger";
 
 const Header = (props) => {
   const dispatch = useDispatch();
+  const url = history.location.pathname;
+  logger(url.includes("/detail"));
 
   return (
     <React.Fragment>
@@ -19,6 +23,7 @@ const Header = (props) => {
           <Grid width="auto" margin="1rem 5rem">
             <Grid is_flex="space_row">
               <Grid
+                is_flex="center"
                 _onClick={() => {
                   history.push("/");
                 }}
@@ -33,43 +38,49 @@ const Header = (props) => {
               </Grid>
 
               <Grid is_flex="space_row" padding="0 3rem">
-                <Grid
-                  width="5em"
-                  cursor="pointer"
-                  _onClick={() => {
+                <EachDiv
+                  nav={url === "/" ? true : false}
+                  onClick={() => {
                     history.push("/");
                   }}
                 >
-                  <Text>홈</Text>
-                </Grid>
-                <Grid
-                  width="6em"
-                  cursor="pointer"
-                  _onClick={() => {
+                  홈
+                </EachDiv>
+                <EachDiv
+                  nav={
+                    url === "/vaccine" || url.includes("/detail") ? true : false
+                  }
+                  onClick={() => {
                     history.push("/vaccine");
                   }}
                 >
-                  <Text>백신후기</Text>
-                </Grid>
-                <Grid
-                  width="8em"
-                  cursor="pointer"
-                  _onClick={() => {
+                  백신후기
+                </EachDiv>
+                <EachDiv
+                  nav={url === "/medical" ? true : false}
+                  onClick={() => {
                     history.push("/medical");
                   }}
                 >
-                  <Text>의료진분들께</Text>
-                </Grid>
+                  의료진분들께
+                </EachDiv>
               </Grid>
             </Grid>
           </Grid>
 
           <Grid is_flex="space_row" width="auto" margin="0 20px">
-            <Text>
+            <Text size={theme.headTweSize} lineHeight={theme.headTweSize}>
               <span style={{ fontWeight: "bold" }}>{props.nickname}</span> 님,
               안녕하세요
             </Text>
-            <Text width="5rem" cursor="pointer" margin="0 4rem">
+            <Text
+              width="5rem"
+              cursor="pointer"
+              margin="0 4rem"
+              size={theme.headTweSize}
+              lineHeight={theme.headTweSize}
+              bold
+            >
               <span
                 style={{ boxShadow: "inset 0 -1px 0 #242424" }}
                 onClick={() => dispatch(actionVisible())}
@@ -91,10 +102,29 @@ Header.defaultProps = {
 const Wrapper = styled.div`
   top: 0;
   width: 100%;
+  height: ${theme.headerHeight};
   position: fixed;
   z-index: 2;
   /* border: 1px solid #dbdbdb; */
   box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 7px 0px;
+`;
+
+const EachDiv = styled.div`
+  white-space: nowrap;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 28px 0 28px;
+  font-size: ${theme.headTweSize};
+  line-height: ${theme.headTwoHeight};
+
+  ${(props) =>
+    props.nav &&
+    ` border-bottom: 4px solid black;
+  font-weight: 700;`}
 `;
 
 export default withRouter(Header);
