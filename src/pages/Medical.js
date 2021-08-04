@@ -17,8 +17,7 @@ const Medical = () => {
   const modal_status = useSelector((state) => state.modal.visible);
 
   const dispatch = useDispatch();
-  const comment_list = useSelector(state => state.comment.list);
-
+  const comment_list = useSelector((state) => state.comment.list);
 
   return (
     <React.Fragment>
@@ -27,10 +26,10 @@ const Medical = () => {
           <Grid align="left">
             <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
           </Grid>
-          
-          <CommentWrite/>
+
+          <CommentWrite />
           {comment_list.map((c, idx) => {
-            return <CommentList key={idx} {...c}/>
+            return <CommentList key={idx} {...c} />;
           })}
 
         </Grid>

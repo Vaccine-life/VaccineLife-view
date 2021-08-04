@@ -4,12 +4,9 @@ import thunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
 import user from "./modules/user";
 import comment from "./modules/comment";
-
 import board from "./modules/board";
 import modal from "./modules/modal";
-
 import popup from "./modules/popup";
-
 
 export const history = createBrowserHistory();
 

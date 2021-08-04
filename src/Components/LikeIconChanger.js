@@ -8,7 +8,7 @@ import theme from "../styles/theme";
 const LikeIconChanger = (props) => {
   const { isHeart } = props;
   return (
-    <Wrapper>
+    <Wrapper isHeart={isHeart}>
       {isHeart ? (
         <FontAwesomeIcon icon={faHeart} />
       ) : (
@@ -20,11 +20,22 @@ const LikeIconChanger = (props) => {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${theme.btnColor};
+  transition: all 0.5s ease-out;
+  ${(props) =>
+    props.isHeart
+      ? `
+ color: ${theme.bg};
   :hover {
     cursor: pointer;
+    color: ${theme.typoGrey2};
   }
+  `
+      : `
+  color: ${theme.typoGrey2};
+  :hover {
+    cursor: pointer;
+    color: ${theme.bg};
+  }
+  `}
 `;
 export default LikeIconChanger;
