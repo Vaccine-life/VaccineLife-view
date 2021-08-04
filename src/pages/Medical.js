@@ -21,34 +21,23 @@ const Medical = () => {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <Grid width={theme.medicalWidth}>
-          <Grid align="left" padding="2rem 0 0 0">
-            <Text
-              bold
-              size={theme.headOneSize}
-              lineHeight="2"
-              color={theme.fontColor}
-            >
-              의료진분들께
-            </Text>
+        <Grid width={theme.medicalWidth} margin="100px auto 40px auto">
+        
+          <Grid align="left">
+            <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
           </Grid>
 
           <CommentWrite />
           {comment_list.map((c, idx) => {
             return <CommentList key={idx} {...c} />;
           })}
+
         </Grid>
-      </Wrapper>
-      {modal_status && <Login />}
-      {alert_status && <Alert />}
+          {modal_status && <Login />}
+          {alert_status && <Alert />}
+
     </React.Fragment>
   );
 };
-
-const Wrapper = styled.div`
-  padding: 4rem 0 3rem 0;
-  background-color: #f7f7f7;
-`;
 
 export default Medical;
