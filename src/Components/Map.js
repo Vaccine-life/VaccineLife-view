@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SouthKorea from "../images/South_Korea.png";
 import styled from "styled-components";
+import theme from "../styles/theme";
 
-const Map = () => {
+const Map = (props) => {
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
@@ -72,7 +73,7 @@ const Sido = styled.div`
     line-height: 24px;
     text-align: center;
     letter-spacing: -0.3px;
-    color: #242424;
+    color: ${theme.typoGrey3};
   }
 `;
 
