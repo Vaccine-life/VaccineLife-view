@@ -9,7 +9,6 @@ import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
 
-import { useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 
 const Medical = () => {
@@ -27,21 +26,21 @@ const Medical = () => {
       <Wrapper>
 
         <Grid width={theme.medicalWidth}>
-        
+
           <Grid align="left" padding="2rem 0 0 0">
             <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
           </Grid>
-          
-          <CommentWrite/>
+
+          <CommentWrite />
           {comment_list.map((c, idx) => {
-            return <CommentList key={idx} {...c}/>
+            return <CommentList key={idx} {...c} />
           })}
 
-        
+
         </Grid>
       </Wrapper>
       {modal_status && <Login />}
-           {alert_status && <Alert />}
+      {alert_status && <Alert />}
 
     </React.Fragment>
   );
