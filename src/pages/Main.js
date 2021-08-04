@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Login from "./Login";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
+import Input from "../elements/Input";
 import Map from "../components/Map";
 
 const Main = () => {
@@ -21,9 +22,9 @@ const Main = () => {
         </h1>
       </Intro>
       <MapAndChart>
+        <Map />
         <HorizontalBarChart />
       </MapAndChart>
-      <Map />
       {alert_status && <Alert />}
     </>
   );
