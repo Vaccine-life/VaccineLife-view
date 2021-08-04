@@ -48,7 +48,7 @@ const Modify = () => {
 
   logger(contents);
   return (
-    <Grid width="1192px" margin="40px auto 40px auto">
+    <Grid width="1192px" margin="100px auto 40px auto">
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} color={theme.fontColor} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
