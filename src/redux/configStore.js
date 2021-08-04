@@ -7,7 +7,6 @@ import comment from "./modules/comment";
 
 import board from "./modules/board";
 import modal from "./modules/modal";
-import map from "./modules/map";
 
 import popup from "./modules/popup";
 
@@ -33,7 +32,6 @@ const reducer = combineReducers({
   user: user.reducer,
   comment: comment.reducer,
   modal: modal.reducer,
-  map: map.reducer,
   router: connectRouter(history),
 });
 

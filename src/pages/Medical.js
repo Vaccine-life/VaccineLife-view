@@ -33,10 +33,9 @@ const Medical = () => {
             return <CommentList key={idx} {...c}/>
           })}
 
-        
         </Grid>
-      {modal_status && <Login />}
-           {alert_status && <Alert />}
+          {modal_status && <Login />}
+          {alert_status && <Alert />}
 
     </React.Fragment>
   );

@@ -35,6 +35,7 @@ const CommentWrite = (props) => {
 
     return(
         <React.Fragment>
+            {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
             <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
 
                 <Grid align="left" width="10rem">
@@ -43,6 +44,7 @@ const CommentWrite = (props) => {
 
                 <Grid is_flex="space_column" border="1px solid #c1c1c1">
                     <Grid margin="0 5rem">
+                        {/* <div contentEditable="true"> */}
                         <Input 
                             multiLine
                             border="none"
@@ -50,22 +52,24 @@ const CommentWrite = (props) => {
                             placeholder="응원의 한마디!"
                             maxLength="500"
                             _onChange={changeComment}
-                            
                             // 엔터키로 등록
                             // onSubmit={write}
+                            contentEditable="true"
                         />
+                        {/* </div> */}
                     </Grid>
 
                     <Grid is_flex="space_row" border="none">
                         <Grid padding="10px" bg="#ffffff" align="right">
-                            <Text>현재입력 글자수 / 500</Text>
+                            <Text><span>현재입력 글자수</span> / 500</Text>
                         </Grid>
 
                         <Button width="50px" height="34px" _onClick={write}>등록</Button>
                     </Grid>
                 </Grid>
-
+                
             </Grid>
+            {/* </div> */}
         </React.Fragment>
     )
 }
