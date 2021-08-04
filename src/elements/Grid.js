@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../styles/theme";
 
 const Grid = (props) => {
   const {
@@ -15,6 +16,7 @@ const Grid = (props) => {
     _onClick,
     cursor,
     border,
+    hover,
   } = props;
 
   const styles = {
@@ -28,6 +30,7 @@ const Grid = (props) => {
     align,
     cursor,
     border,
+    hover,
   };
   return (
     <Wrapper onClick={_onClick} {...styles}>
@@ -50,6 +53,7 @@ Grid.defaultProps = {
   _onClick: () => {},
   cursor: "",
   border: false,
+  hover: false,
 };
 
 const Wrapper = styled.div`
@@ -94,6 +98,18 @@ const Wrapper = styled.div`
   ${(props) => (props.align ? `text-align: ${props.align}` : "")};
   cursor: ${(props) => props.cursor};
   box-sizing: border-box;
+  transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+
+  ${(props) =>
+    props.hover &&
+    `
+  :hover {
+    cursor: pointer;
+   box-shadow: 5px 5px 5px 5px ${theme.typoLightGrey2};
+    transform: translateY(-12px);
+  }
+  
+  `}
 `;
 
 export default Grid;

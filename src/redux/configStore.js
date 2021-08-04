@@ -8,7 +8,6 @@ import board from "./modules/board";
 import modal from "./modules/modal";
 import popup from "./modules/popup";
 
-
 export const history = createBrowserHistory();
 
 const middlewares = [

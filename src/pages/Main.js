@@ -5,6 +5,7 @@ import Login from "./Login";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
 import Input from "../elements/Input";
+import Map from "../components/Map";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -19,6 +20,7 @@ const Main = () => {
         <h1>여러분의 <span>백신 접종 후기</span>를 공유해주세요</h1>
       </Intro>
       <MapAndChart>
+        <Map />
         <HorizontalBarChart />
       </MapAndChart>
       {alert_status && <Alert />}

@@ -1,6 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import List from "../components/board/List";
+import ListNav from "../components/board/ListNav";
+import Popular from "../components/board/Popular";
 import Alert from "../components/popup/Alert";
+import { Grid } from "../elements";
+import theme from "../styles/theme";
+
 import Login from "./Login";
 
 const Vaccine = () => {
@@ -10,10 +17,14 @@ const Vaccine = () => {
   const alert_status = useSelector((state) => state.popup.alert);
 
   return (
-    <>
-      Vaccine페이지{modal_status && <Login />}
+    <Grid width={theme.boardWidth} margin="150px auto auto auto">
+      {/* props 값 넣기 */}
+      <Popular board="vaccine" />
+      <ListNav board="vaccine" />
+      <List board="vaccine" />
+      {modal_status && <Login />}
       {alert_status && <Alert />}
-    </>
+    </Grid>
   );
 };
 
