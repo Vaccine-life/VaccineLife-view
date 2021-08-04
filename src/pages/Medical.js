@@ -21,20 +21,20 @@ const Medical = () => {
 
   return (
     <React.Fragment>
-        <Grid width={theme.medicalWidth} margin="100px auto 40px auto">
-        
-          <Grid align="left">
-            <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
-          </Grid>
+      <Grid width={theme.medicalWidth} margin="100px auto 40px auto">
 
-          <CommentWrite />
-          {comment_list.map((c, idx) => {
-            return <CommentList key={idx} {...c} />;
-          })}
-
+        <Grid align="left">
+          <Text bold size={theme.headOneSize} lineHeight="2" color={theme.fontColor}>의료진분들께</Text>
         </Grid>
-          {modal_status && <Login />}
-          {alert_status && <Alert />}
+
+        <CommentWrite />
+        {comment_list.map((c, idx) => {
+          return <CommentList key={idx} {...c} />
+        })}
+
+      </Grid>
+      {modal_status && <Login />}
+      {alert_status && <Alert />}
 
     </React.Fragment>
   );
