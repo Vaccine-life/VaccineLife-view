@@ -60,308 +60,351 @@ const Survey = (props) => {
   return (
     <>
       <form>
-        <Text margin="2vh auto" size="14px">
+        <Text margin="0 auto 15px auto" size="14px" color={theme.typoGrey3}>
           회원가입이 곧 마무리됩니다
         </Text>
-        <Text margin="2vh 0 6vh 0" size="20px" bold>
+        <Text margin="15px auto" size="20px" bold>
           여러분의 백신 접종 경험을 공유해주세요
         </Text>
 
+        <Line style={{ borderColor: "#242424" }} />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             백신 접종 여부
           </Text>
-          <Options>
+          <TwoOptions>
             <input
               type="radio"
               name="isVaccine"
               value="1"
+              id="isVaccine1"
               onClick={handleIsVaccineClick}
             />
-            접종함
+            <label htmlFor="isVaccine1">접종함</label>
             <input
               type="radio"
               name="isVaccine"
               value="0"
+              id="isVaccine0"
               onClick={handleIsVaccineClick}
             />
-            접종하지않음
-          </Options>
-          <div></div>
+            <label htmlFor="isVaccine0">접종하지않음</label>
+          </TwoOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             접종 회차
           </Text>
-          <Options>
+          <TwoOptions>
             <input
               type="radio"
               name="degree"
               value="1"
+              id="degree1"
               onClick={handleDegreeClick}
             />
-            1차 접종 완료
+            <label htmlFor="degree1">1차 접종 완료</label>
             <input
               type="radio"
               name="degree"
               value="2"
+              id="degree2"
               onClick={handleDegreeClick}
             />
-            2차 접종 완료
-          </Options>
-          <div></div>
+            <label htmlFor="degree2">2차 접종 완료</label>
+          </TwoOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             백신 종류
           </Text>
-          <Options>
+          <ThreeOptions>
             <input
               type="radio"
               name="type"
               value="모더나"
+              id="모더나"
               onClick={handleTypeClick}
             />
-            모더나
+            <label htmlFor="모더나">모더나</label>
             <input
               type="radio"
               name="type"
               value="얀센"
+              id="얀센"
               onClick={handleTypeClick}
             />
-            얀센
+            <label htmlFor="얀센">얀센</label>
             <input
               type="radio"
               name="type"
               value="아스트라제네카"
+              id="아스트라제네카"
               onClick={handleTypeClick}
             />
-            아스트라제네카
-          </Options>
+            <label htmlFor="아스트라제네카">아스트라제네카</label>
+          </ThreeOptions>
           <div></div>
-          <Options>
+          <TwoOptions>
             <input
               type="radio"
               name="type"
               value="화이자"
+              id="화이자"
               onClick={handleTypeClick}
             />
-            화이자
+            <label htmlFor="화이자">화이자</label>
             <input
               type="radio"
               name="type"
               value="아스트라제네카 + 화이자"
+              id="아스트라제네카 + 화이자"
               onClick={handleTypeClick}
             />
-            아스트라제네카 + 화이자
-          </Options>
-          <div></div>
+            <label htmlFor="아스트라제네카 + 화이자">
+              아스트라제네카 + 화이자
+            </label>
+          </TwoOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             성별
           </Text>
-          <Options>
+          <TwoOptions>
             <input
               type="radio"
               name="gender"
               value="남"
+              id="남"
               onClick={handleGenderClick}
             />
-            남
+            <label htmlFor="남">남</label>
             <input
               type="radio"
               name="gender"
               value="여"
+              id="여"
               onClick={handleGenderClick}
             />
-            여
-          </Options>
-          <div></div>
+            <label htmlFor="여">여</label>
+          </TwoOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             연령대
           </Text>
-          <Options>
+          <FourOptions>
             <input
               type="radio"
               name="age"
               value="10"
+              id="10대"
               onClick={handleAgeClick}
             />
-            10대
+            <label htmlFor="10대">10대</label>
             <input
               type="radio"
               name="age"
               value="20"
+              id="20대"
               onClick={handleAgeClick}
             />
-            20대
+            <label htmlFor="20대">20대</label>
             <input
               type="radio"
               name="age"
               value="30"
+              id="30대"
               onClick={handleAgeClick}
             />
-            30대
+            <label htmlFor="30대">30대</label>
             <input
               type="radio"
               name="age"
               value="40"
+              id="40대"
               onClick={handleAgeClick}
             />
-            40대
+            <label htmlFor="40대">40대</label>
+          </FourOptions>
+          <div></div>
+
+          <FourOptions>
             <input
               type="radio"
               name="age"
               value="50"
+              id="50대"
               onClick={handleAgeClick}
             />
-            50대
-          </Options>
-          <div></div>
-          <Options>
+            <label htmlFor="50대">50대</label>
             <input
               type="radio"
               name="age"
               value="60"
+              id="60대"
               onClick={handleAgeClick}
             />
-            60대
+            <label htmlFor="60대">60대</label>
             <input
               type="radio"
               name="age"
               value="70"
+              id="70대"
               onClick={handleAgeClick}
             />
-            70대
+            <label htmlFor="70대">70대</label>
             <input
               type="radio"
               name="age"
               value="80"
+              id="80대이상"
               onClick={handleAgeClick}
             />
-            80대 이상
-          </Options>
-          <div></div>
+            <label htmlFor="80대이상">80대 이상</label>
+          </FourOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             기저 질환
           </Text>
-          <Options>
+          <ThreeOptions>
             <input
               type="radio"
               name="disease"
               value="1"
+              id="유"
               onClick={handleDiseaseClick}
             />
-            유
+            <label htmlFor="유">유</label>
             <input
               type="radio"
               name="disease"
               value="0"
+              id="무"
               onClick={handleDiseaseClick}
             />
-            무
+            <label htmlFor="무">무</label>
             <input
               type="radio"
               name="disease"
               value="2"
+              id="모름"
               onClick={handleDiseaseClick}
             />
-            모름
-          </Options>
-          <div></div>
+            <label htmlFor="모름">모름</label>
+          </ThreeOptions>
+          {/* <div></div> */}
         </SurveyItem>
 
+        <Line />
         <SurveyItem>
           <Text bold color={theme.btnColor}>
             후유증
+            <br />
+            (중복선택가능)
           </Text>
-          <Options>
+          <FourCheckbox>
             <input
               type="checkbox"
               name="afterEffect"
               value="fever"
+              id="발열"
               onClick={handleAfterEffectClick}
             />
-            발열
+            <label htmlFor="발열">발열</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="partialAche"
+              id="접종부위통증"
               onClick={handleAfterEffectClick}
             />
-            접종부위 통증
+            <label htmlFor="접종부위통증">접종부위 통증</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="swelling"
+              id="접종부위부기발적"
               onClick={handleAfterEffectClick}
             />
-            접종부위 부기/발적
+            <label htmlFor="접종부위부기발적">접종부위 부기/발적</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="vomit"
+              id="구토매스꺼움"
               onClick={handleAfterEffectClick}
             />
-            구토/매스꺼움
-          </Options>
+            <label htmlFor="구토매스꺼움">구토/매스꺼움</label>
+          </FourCheckbox>
           <div></div>
-          <Options>
+          <FiveCheckbox>
             <input
               type="checkbox"
               name="afterEffect"
               value="ache"
+              id="두통관절통근육통"
               onClick={handleAfterEffectClick}
             />
-            두통/관절통/근육통
+            <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="fatigue"
+              id="피로감"
               onClick={handleAfterEffectClick}
             />
-            피로감
+            <label htmlFor="피로감">피로감</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="alergy"
+              id="알러지반응"
               onClick={handleAfterEffectClick}
             />
-            알러지 반응
+            <label htmlFor="알러지반응">알러지 반응</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="etc"
+              id="기타"
               onClick={handleAfterEffectClick}
             />
-            기타
+            <label htmlFor="기타">기타</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="noSymptom"
+              id="무증상"
               onClick={handleAfterEffectClick}
             />
-            무증상
-          </Options>
-          <div></div>
+            <label htmlFor="무증상">무증상</label>
+          </FiveCheckbox>
+          {/* <div></div> */}
         </SurveyItem>
 
         <Button
-          margin="2vh auto"
-          width="20%"
-          height="3vh"
-          type="sumbit"
-          bg={theme.btnColor}
+          margin="35px 0 0 0"
+          width={theme.mediumButtonWidth}
+          height={theme.mediumButtonHeight}
+          type="submit"
+          bg="#242424"
           _onClick={submitSurvey}
         >
           회원가입
@@ -371,18 +414,44 @@ const Survey = (props) => {
   );
 };
 
+const Line = styled.div`
+  width: 100%;
+  border-top: 1px solid ${theme.typoLightGrey2};
+  margin: 15px 0;
+`;
+
 const SurveyItem = styled.div`
-  width: 600px;
+  width: 550px;
   height: auto;
   text-align: left;
   display: grid;
-  grid-template-columns: 8em auto;
+  grid-template-columns: 100px auto;
   row-gap: 1rem;
 `;
 
-const Options = styled.div`
-  display: flex;
-  justify-content: left;
+const TwoOptions = styled.div`
+  display: grid;
+  grid-template-columns: 20px 220px 20px 220px;
+`;
+
+const ThreeOptions = styled.div`
+  display: grid;
+  grid-template-columns: 20px 120px 20px 120px 20px 160px;
+`;
+
+const FourOptions = styled.div`
+  display: grid;
+  grid-template-columns: 20px 60px 20px 60px 20px 60px 20px 90px;
+`;
+
+const FourCheckbox = styled.div`
+  display: grid;
+  grid-template-columns: 20px 38px 20px 98px 20px 135px 20px 100px;
+`;
+
+const FiveCheckbox = styled.div`
+  display: grid;
+  grid-template-columns: 20px 135px 20px 50px 20px 80px 20px 35px 20px 50px;
 `;
 
 export default Survey;

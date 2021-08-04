@@ -18,7 +18,7 @@ const Alert = () => {
     <Wrapper>
       <Modal>
         <Grid is_flex="center">
-          <Text size={theme.headTweSize}>{alertMessage}</Text>
+          <Text size={theme.headTwoSize}>{alertMessage}</Text>
         </Grid>
         <Grid is_flex="center">
           <Button

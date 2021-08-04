@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import { Text, Input, Button } from "../elements/index";
+import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
-
-import * as Yup from "yup";
-import { useFormik } from "formik";
 
 const LoginComponent = (props) => {
   const [username, setUsername] = useState("");
@@ -21,56 +17,35 @@ const LoginComponent = (props) => {
     console.log("handlePasswordChange", e.target.value);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-
-    validationSchema: Yup.object({
-      username: Yup.string().required("아이디를 입력해주세요."),
-      password: Yup.string()
-        .min(4, "비밀번호는 4자리 이상이여야 합니다.")
-        .matches(/[a-zA-Z]/, "패스워드에는 반드시 영문을 포함해야합니다.")
-        .required("패스워드를 입력해주세요."),
-    }),
-
-    onSubmit: (values) => {
-      console.log("로그인버튼 클릭시", values);
-    },
-  });
-
   return (
     <>
-      <Wrapper onSubmit={formik.handleSubmit}>
-        <Text margin="2vh auto" size="20px" bold>
+      <Wrapper>
+        <Text margin="15px auto 40px auto" size={theme.headOneSize} bold>
           로그인
         </Text>
 
-        <Input
-          margin="2vh auto"
-          label="Standard"
+        <LoginInput
           placeholder="아이디"
           id="username"
           name="username"
-          type="username"
-          _onChange={handleUsernameChange}
+          type="text"
+          onChange={handleUsernameChange}
           value={username}
         />
 
-        <Input
-          margin="2vh auto"
-          label="Standard"
+        <LoginInput
           placeholder="비밀번호"
           id="password"
           name="password"
           type="password"
-          _onChange={handlePasswordChange}
+          onChange={handlePasswordChange}
           value={password}
         />
+
         <Button
-          margin="70px 0 20px 0"
-          width="20%"
+          margin="50px 0 20px 0"
+          width={theme.mediumButtonWidth}
+          height={theme.mediumButtonHeight}
           type="submit"
           bg={theme.btnColor}
         >
@@ -82,11 +57,25 @@ const LoginComponent = (props) => {
 };
 
 const Wrapper = styled.form`
-  width: 400px;
+  width: 300px;
   height: auto;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
+`;
+
+const LoginInput = styled.input`
+  width: 100%;
+  margin: 10px auto;
+  border: none;
+  border-bottom: 1px solid ${theme.typoGrey1};
+  padding: 6px 0px;
+  color: #242424;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #242424;
+    color: #242424;
+  }
 `;
 
 export default LoginComponent;
