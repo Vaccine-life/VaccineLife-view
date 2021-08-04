@@ -30,41 +30,65 @@ const Map = () => {
 
     return (
         <div>
-            <h1>시도별 접종 현황</h1>
-            <div>
-                <img src={SouthKorea} alt=""
-                    style={{
-                        width: "auto",
-                        height: "auto",
-                        maxWidth: "100px",
-                        maxHeight: "100px",
-                    }} />
+            <MapBox>
+                <img src={SouthKorea} alt="" />
                 <Sido>
-                    <h3 style={{ margin: "0px 18px" }}>
+                    <h3>
                         경기
                     </h3>
                     <Shot>
                         접종수
                     </Shot>
                 </Sido>
-            </div>
+            </MapBox>
         </div>
     )
 }
 
 
+const MapBox = styled.div`
+    /* position: absolute; */
+    width: 504px;
+    height: 490px;
+    left: 208px;
+    top: 339px;
+    background: #EDF2FF;
+    border: 1px solid #DCE5FE;
+    box-sizing: border-box;
+    border-radius: 16px;
+
+    & > img {
+    /* position: absolute; */
+    width: 411px;
+    height: 410px;
+    left: 235px;
+    top: 379px; 
+    }
+`
+
 const Sido = styled.div`
     width: 70px;
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    z-index: 3;
 
+    & > h3 {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: -0.3px;
+        color: #242424;
+    }
 `
 
 const Shot = styled.div`
-    background-color: skyblue;
-    width: 70px;
-    height: 40px;
-    border-radius: 10px;
+    background-color: #3853C4;
+    color: white;
+    /* width: 70px;
+    height: 40px; */
+    width: 55px;
+    height: 24px; 
+    border-radius: 12px;
     text-align: center;
     line-height: 40px;
 `

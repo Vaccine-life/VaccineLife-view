@@ -43,7 +43,7 @@ const Input = (props) => {
       <Grid>
         <Text margin="0px">{label ? label : ""}</Text>
         <ElTextArea
-          rows={5}
+          rows={8}
           value={value}
           placeholder={placeholder}
           onChange={_onChange}
