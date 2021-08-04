@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
 import theme from "../styles/theme";
 
+import logo from "../assets/logowhite.png";
+
 const Footer = () => {
   return (
     <React.Fragment>
@@ -22,12 +24,7 @@ const Footer = () => {
               console.log("홈으로 가기!");
             }}
           >
-            <Text color="#ffffff" cursor="pointer">
-              슬기로운
-            </Text>
-            <Text color="#ffffff" cursor="pointer" size="16" bold>
-              백신생활
-            </Text>
+            <Image shape="rectangle" width="95px" height="51px" src={logo} />
           </Grid>
 
           <Grid margin="2rem 0" width="0 auto">

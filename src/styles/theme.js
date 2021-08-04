@@ -19,6 +19,7 @@ const theme = {
 
   //font size
   headOneSize: "24px",
+  headOneHeight: "34px",
   headTweSize: "20px",
   SubHeadOneSize: "18px",
   SubHeadTwoSize: "16px",
@@ -41,6 +42,9 @@ const theme = {
   writeWidth: "1190px",
   detailWidth: "1024px",
   medicalWidth: "1024px",
+  boardWidth: "1280px",
+  popularCardWidth: "400px",
+  popularCardHeight: "364px",
 };
 
 export default theme;
