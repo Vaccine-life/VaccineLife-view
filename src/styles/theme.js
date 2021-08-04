@@ -40,6 +40,7 @@ const theme = {
   userSurveyHeight: "24px",
 
   //layout size
+  headerHeight: "81px",
   writeWidth: "1190px",
   detailWidth: "1024px",
   medicalWidth: "1024px",
