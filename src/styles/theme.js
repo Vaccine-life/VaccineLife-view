@@ -20,7 +20,7 @@ const theme = {
   //font size
   headOneSize: "24px",
   headOneHeight: "34px",
-  headTweSize: "20px",
+  headTwoSize: "20px",
   SubHeadOneSize: "18px",
   SubHeadTwoSize: "16px",
   bodyOneSize: "18px",

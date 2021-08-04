@@ -6,6 +6,7 @@ import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
 import Input from "../elements/Input";
 import Map from "../components/Map";
+import theme from '../styles/theme';
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -34,7 +35,7 @@ const MapAndChart = styled.div`
 `
 
 const Intro = styled.div`
-  background-color: #3853C4;
+  background-color: ${theme.bg};
   height: 200px;
   margin-bottom: 100px;
   & > h1 {
