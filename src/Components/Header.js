@@ -27,7 +27,7 @@ const Header = (props) => {
                 _onClick={() => {
                   history.push("/");
                 }}
-              >
+                >
                 <Image
                   shape="rectangle"
                   width="95px"
@@ -118,7 +118,7 @@ const EachDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 28px 0 28px;
-  font-size: ${theme.headTweSize};
+  font-size: ${theme.headTwoSize};
   line-height: ${theme.headTwoHeight};
 
   ${(props) =>

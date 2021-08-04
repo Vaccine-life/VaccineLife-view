@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { Text, Grid } from "./index";
@@ -50,11 +50,11 @@ const Input = (props) => {
           type={type}
           border={border}
           maxLength={maxLength}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              onSubmit(e);
-            }
-          }}
+          // onKeyPress={(e) => {
+          //   if (e.key === "Enter") {
+          //     onSubmit(e);
+          //   }
+          // }}
         ></ElTextArea>
       </Grid>
     );

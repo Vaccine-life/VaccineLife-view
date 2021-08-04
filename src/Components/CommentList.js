@@ -16,7 +16,7 @@ const CommentList = (props) => {
 
     React.useEffect = (() => {
         dispatch(actionSetComment(comment_list));
-    }, [])
+    }, [])      
 
     return(
         <React.Fragment>
