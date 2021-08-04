@@ -27,6 +27,7 @@ const Header = (props) => {
                   shape="rectangle"
                   width="95px"
                   height="51px"
+                  cursor="pointer"
                   src={logo}
                 />
               </Grid>
@@ -92,8 +93,8 @@ const Wrapper = styled.div`
   width: 100%;
   position: fixed;
   z-index: 2;
-  border: 1px solid #dbdbdb;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  /* border: 1px solid #dbdbdb; */
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 7px 0px;
 `;
 
 export default withRouter(Header);

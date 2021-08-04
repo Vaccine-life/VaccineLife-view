@@ -38,8 +38,8 @@ const CommentWrite = (props) => {
             {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
             <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
 
-                <Grid align="left" width="10rem">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>닉네임</Text>
+                <Grid align="left" width="10rem" margin="0 0 auto 0">
+                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
                 <Grid is_flex="space_column" border="1px solid #c1c1c1">
@@ -72,6 +72,10 @@ const CommentWrite = (props) => {
             {/* </div> */}
         </React.Fragment>
     )
+}
+
+CommentWrite.defaultProps = {
+    nickname: "명수는열두살",
 }
 
 export default CommentWrite;
