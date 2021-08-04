@@ -38,11 +38,6 @@ const Medical = () => {
           {comment_list.map((c, idx) => {
             return <CommentList key={idx} {...c} />;
           })}
-
-          <CommentWrite />
-          {comment_list.map((c, idx) => {
-            return <CommentList key={idx} {...c} />;
-          })}
         </Grid>
       </Wrapper>
       {modal_status && <Login />}

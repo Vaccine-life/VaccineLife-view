@@ -1,11 +1,13 @@
 import React from "react";
-import { Grid, Image, Text, Button } from "../elements";
-import theme from "../styles/theme";
+import { Grid, Image, Text } from "../elements";
 import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionVisible } from "../redux/modules/modal";
+import { history } from "../redux/configStore";
+
+import logo from "../assets/mainlogo.png";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -14,22 +16,48 @@ const Header = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-          <Grid  width="auto" margin="1rem 5rem">
+          <Grid width="auto" margin="1rem 5rem">
             <Grid is_flex="space_row">
-              <Grid _onClick={() => {console.log("홈으로 가기!")}}>
-                <Text color={theme.bg2} cursor="pointer">슬기로운</Text>
-                <Text color={theme.bg2} cursor="pointer" size="16" bold>백신생활</Text>
+              <Grid
+                _onClick={() => {
+                  history.push("/");
+                }}
+              >
+                <Image
+                  shape="rectangle"
+                  width="95px"
+                  height="51px"
+                  src={logo}
+                />
               </Grid>
 
               <Grid is_flex="space_row" padding="0 3rem">
-                <Grid width="5em" cursor="pointer" _onClick={() => {console.log("홈으로 가기!")}}>
-                  <Text >홈</Text>
+                <Grid
+                  width="5em"
+                  cursor="pointer"
+                  _onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  <Text>홈</Text>
                 </Grid>
-                <Grid width="6em" cursor="pointer" _onClick={() => {console.log("백신후기로 가기!")}}>
-                  <Text >백신후기</Text>
+                <Grid
+                  width="6em"
+                  cursor="pointer"
+                  _onClick={() => {
+                    history.push("/vaccine");
+                  }}
+                >
+                  <Text>백신후기</Text>
                 </Grid>
-                <Grid width="8em" cursor="pointer" _onClick={() => {console.log("의료진분들께로 가기!")}}>
-                  <Text >의료진분들께</Text>
+                <Grid
+                  width="8em"
+                  cursor="pointer"
+                  _onClick={() => {
+                    history.push("/medical");
+                  }}
+                >
+                  <Text>의료진분들께</Text>
                 </Grid>
               </Grid>
             </Grid>

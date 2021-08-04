@@ -16,7 +16,7 @@ const Contents = (props) => {
   const isHeart = true;
   const storedState = convertFromRaw(JSON.parse(contents));
   const editorState = EditorState.createWithContent(storedState);
-  logger(editorState);
+
   return (
     <Wrapper>
       <Grid
