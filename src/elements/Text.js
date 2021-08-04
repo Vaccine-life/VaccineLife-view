@@ -39,6 +39,10 @@ const P = styled.p`
   margin: ${(props) => props.margin};
   line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
+  /* ${(props) => (props.is_active ? `:active: border-bottom: 1px solid` : "")}; */
+  /* :visited {
+    border-bottom: 1px solid;
+  } */
   /* :hover {
     cursor: pointer;
     font-weight: ${(props) => (props.bold ? "700" : "400")};

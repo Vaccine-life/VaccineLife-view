@@ -29,7 +29,6 @@ const reducer = combineReducers({
   user: user.reducer,
   comment: comment.reducer,
   modal: modal.reducer,
-
   router: connectRouter(history),
 });
 
