@@ -40,7 +40,7 @@ const PopularCard = (props) => {
       hover
       _onClick={handleMoveDetail}
     >
-      {board && (
+      {board === "vaccine" && (
         <InfoWrapper>
           <InfoDiv>{user.type}</InfoDiv>
         </InfoWrapper>

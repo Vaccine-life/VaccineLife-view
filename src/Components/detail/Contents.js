@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 import "draft-js/dist/Draft.css";
 import { convertFromRaw } from "draft-js";

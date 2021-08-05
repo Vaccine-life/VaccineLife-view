@@ -53,7 +53,7 @@ const Popular = (props) => {
       <Grid>
         {board && (
           <PopularCard
-            board
+            board={board}
             vacBoardId={vacBoardId}
             title={title}
             contents={contents}

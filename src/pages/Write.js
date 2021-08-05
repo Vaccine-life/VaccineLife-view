@@ -40,18 +40,17 @@ const Write = () => {
   return (
     <Grid width={theme.writeWidth} margin={`160px auto auto auto`}>
       <Grid is_flex="space_row" margin="auto auto 26px auto">
-        <Text size={theme.headOneSize} color={theme.fontColor} bold>
+        <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
           {urlExchanger ? "백신" : "격리"} 후기 글쓰기
         </Text>
         <Button
           width={theme.smallButtonWidth}
           height={theme.smallButtonHeight}
-          fontSize={theme.bodyTwoSize}
+          fontSize={theme.SubHeadTwoSize}
           bold
           margin="0"
-          bg={theme.btnColor}
-          border_radius="10px"
+          bg={theme.bg}
         >
           등록
         </Button>
@@ -60,12 +59,13 @@ const Write = () => {
       {/* 타이틀 입력 */}
       <Grid margin="30px 0 0 0">
         <Input
+          bg={theme.bg4}
           value={title}
           width={theme.writeWidth}
           height="72px"
           border="none"
           _onChange={onTitleChange}
-          fontSize={theme.bodyOneSize}
+          fontSize={theme.bodyTwoSize}
           placeholder="제목을 입력해 주세요."
         />
       </Grid>

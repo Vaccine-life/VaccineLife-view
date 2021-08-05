@@ -74,13 +74,14 @@ const Modify = () => {
       </Grid>
       <Grid height="1px" bg="black"></Grid>
       {/* 타이틀 입력 */}
-      <Grid margin="30px 0 0 0" bg={theme.bg}>
+      <Grid margin="30px 0 0 0">
         <Input
           value={title}
           width="1192px"
           height="72px"
           border="none"
-          fontSize={theme.bodyOneSize}
+          fontSize={theme.bodyTwoSize}
+          bg={theme.bg4}
           _onChange={onTitleChange}
           placeholder="제목을 입력해 주세요."
         />
