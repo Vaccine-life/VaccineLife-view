@@ -36,7 +36,7 @@ const Footer = () => {
             <ul style={{ display: "flex" }}>
               <Text
                 color="#ffffff"
-                size="12px"
+                size={theme.SubHeadTwoSize}
                 margin="5px"
                 hover
                 _onClick={() => {
@@ -47,32 +47,31 @@ const Footer = () => {
               </Text>
               <Text
                 color="#ffffff"
-                size="12px"
+                size={theme.SubHeadTwoSize}
                 margin="5px"
                 hover
                 _onClick={() => {
                   history.push("/medical");
                 }}
-                
               >
                 의료진분들께 한마디
               </Text>
             </ul>
 
             <ul style={{ display: "flex" }}>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 대표자명
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 |
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 Contact. playder1427@gmail.com
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 |
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 Github. https://github.com/Vaccine-life
               </Text>
             </ul>

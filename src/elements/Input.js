@@ -53,11 +53,11 @@ const Input = (props) => {
           border={border}
           maxLength={maxLength}
           fontSize={fontSize}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              onSubmit(e);
-            }
-          }}
+          // onKeyPress={(e) => {
+          //   if (e.key === "Enter") {
+          //     onSubmit(e);
+          //   }
+          // }}
         ></ElTextArea>
       </Grid>
     );

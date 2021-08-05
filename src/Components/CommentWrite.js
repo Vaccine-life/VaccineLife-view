@@ -67,7 +67,7 @@ const CommentWrite = (props) => {
         if (!comment){
             dispatch(actionAlert());
             dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
-            dispatch(actionAddComment(""))
+            return
         } else {
             // 오브젝트로 넣어줘야 
             dispatch(actionAddComment({
@@ -79,9 +79,7 @@ const CommentWrite = (props) => {
             // 코멘트 작성 후 인풋태크에 있는 글 없애기
             setComment();
             setLength(0);
-        }
-
-        
+        }  
     }
     
 
@@ -90,7 +88,7 @@ const CommentWrite = (props) => {
             {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
             <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
 
-                <Grid align="left" width="10rem" margin="0 0 auto 0">
+                <Grid align="left" width="10rem" margin="12px 0 auto 0">
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
@@ -104,16 +102,16 @@ const CommentWrite = (props) => {
                             maxLength="500"
                             _onChange={changeComment}
                             // 엔터키로 등록
-                            onSubmit={write}
+                            // onSubmit={write}
                         />
                     </Grid>
 
                     <Grid is_flex="space_row" border="none">
                         <Grid padding="10px" bg="#ffffff" align="right">
-                            <Text><span>{length}</span> / 1000(byte)</Text>
+                            <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text>
                         </Grid>
 
-                        <Button width="50px" height="34px" _onClick={write}>등록</Button>
+                        <Button width={theme.smallButtonWidth} height={theme.smallButtonHeight} _onClick={write}>등록</Button>
                     </Grid>
                 </Grid>
                 

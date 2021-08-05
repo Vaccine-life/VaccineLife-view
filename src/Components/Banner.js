@@ -3,6 +3,10 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 
 import { Text, Grid, Image } from "../elements";
+import syringe from "../images/syringe.png"
+import news from "../images/news.png"
+import phone from "../images/phone.png"
+
 
 const Banner = (props) => {
   return (
@@ -11,21 +15,21 @@ const Banner = (props) => {
       <div style={{display:"flex", alignItems:"center", margin:"3rem 10rem"}}>
 
         <Grid is_flex="space_column" cursor="pointer">
-          <Image shape="square" size="80px" margin="30px 0 0 0" src="https://pbs.twimg.com/media/EwiXRXDUUAEcOkL.jpg"/>
+          <Image shape="square" size="80px" margin="30px 0 0 0" src={syringe}/>
           <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 백신·치료제 정보</Text>
         </Grid>
 
           <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
 
         <Grid is_flex="space_column" cursor="pointer">
-          <Image shape="square" size="80px" margin="30px 0 0 0" src="https://pbs.twimg.com/media/EwiXRXDUUAEcOkL.jpg"/>
+          <Image shape="square" size="80px" margin="30px 0 0 0" src={news}/>
           <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 관련 안전성서한(속보)</Text>
         </Grid>
 
           <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
 
         <Grid is_flex="space_column" cursor="pointer">
-          <Image shape="square" size="80px" margin="30px 0 0 0" src="https://pbs.twimg.com/media/EwiXRXDUUAEcOkL.jpg"/>
+          <Image shape="square" size="80px" margin="30px 0 0 0" src={phone}/>
           <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 전자예방접종증명</Text>
         </Grid>
 
