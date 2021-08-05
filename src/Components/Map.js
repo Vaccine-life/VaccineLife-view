@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import SouthKorea from "../images/South_Korea.png"
+import disc from "../images/disc.png";
 import styled from 'styled-components';
-
+import theme from '../styles/theme';
 
 const Map = () => {
 
@@ -26,59 +27,89 @@ const Map = () => {
             console.log(todayNum);
         };
         fetchEvents();
-    })
+    }, [])
 
     return (
-        <div>
+        <Wrapper>
+            <MapTitle>
+                <img src={disc} alt="" />
+                <h3>지역별 접종수</h3>
+            </MapTitle>
             <MapBox>
                 <img src={SouthKorea} alt="" />
-                <Sido>
+                {/* <Sido>
                     <h3>
                         경기
                     </h3>
                     <Shot>
                         접종수
                     </Shot>
-                </Sido>
+                </Sido> */}
             </MapBox>
-        </div>
+        </Wrapper>
     )
 }
 
+const Wrapper = styled.div`
+    margin-right : 50px;
+`
 
-const MapBox = styled.div`
-    /* position: absolute; */
-    width: 504px;
-    height: 490px;
-    left: 208px;
-    top: 339px;
-    background: #EDF2FF;
-    border: 1px solid #DCE5FE;
-    box-sizing: border-box;
-    border-radius: 16px;
+const MapTitle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 26px;
 
     & > img {
-    /* position: absolute; */
-    width: 411px;
-    height: 410px;
-    left: 235px;
-    top: 379px; 
+        width: 24px;
+        height: 24px;   
+    }
+
+    & > h3 {
+        width: 102px;
+        height: 26px;
+
+        font-weight: bold;
+        font-size: ${theme.SubHeadOneSize};
+        line-height: 26px;
+
+        letter-spacing: -0.3px;
+
+        color: #242424;
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        padding-left: 4px;
+    }
+
+`
+
+const MapBox = styled.div`
+    width: 504px;
+    height: 490px;
+
+    background: ${theme.bg4};
+
+    border: 1px solid ${theme.bg3};
+    box-sizing: border-box;
+    border-radius: 16px;
+    
+    & > img {
+        width: auto;
+        height: auto;
+        max-width: 450px;
+        max-height: 450px;
+        padding-top: 20px;
     }
 `
 
 const Sido = styled.div`
     width: 70px;
     position: absolute;
-    z-index: 3;
-
-    & > h3 {
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: center;
-        letter-spacing: -0.3px;
-        color: #242424;
-    }
+    z-index: 1;
 `
 
 const Shot = styled.div`

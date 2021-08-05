@@ -17,7 +17,7 @@ const PopularCard = (props) => {
     title,
     contents,
     likeCount,
-    hits,
+    totalVisitors,
     commentCount,
     createdAt,
     user,
@@ -39,6 +39,7 @@ const PopularCard = (props) => {
       padding="32px"
       hover
       _onClick={handleMoveDetail}
+      bg="white"
     >
       {board && (
         <InfoWrapper>
@@ -66,7 +67,7 @@ const PopularCard = (props) => {
           </Grid>
           <Grid is_flex="center" margin="0 0 0 19px">
             <FontAwesomeIcon icon={faEye} />
-            <p style={{ marginLeft: "5.55px" }}>{hits}</p>
+            <p style={{ marginLeft: "5.55px" }}>{totalVisitors}</p>
           </Grid>
         </TextDiv>
       </Grid>

@@ -21,6 +21,7 @@ const theme = {
   headOneSize: "24px",
   headOneHeight: "34px",
   headTwoSize: "20px",
+  headTwoHeight: "30px",
   SubHeadOneSize: "18px",
   SubHeadTwoSize: "16px",
   bodyOneSize: "18px",
@@ -39,6 +40,7 @@ const theme = {
   userSurveyHeight: "24px",
 
   //layout size
+  headerHeight: "81px",
   writeWidth: "1190px",
   detailWidth: "1024px",
   medicalWidth: "1024px",
