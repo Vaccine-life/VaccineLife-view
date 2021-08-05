@@ -39,6 +39,7 @@ const PopularCard = (props) => {
       padding="32px"
       hover
       _onClick={handleMoveDetail}
+      bg="white"
     >
       {board && (
         <InfoWrapper>
