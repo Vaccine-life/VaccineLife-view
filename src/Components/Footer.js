@@ -3,49 +3,62 @@ import styled from "styled-components";
 
 import { Grid, Image, Text } from "../elements";
 import theme from "../styles/theme";
+import { history } from "../redux/configStore";
+
 import logo from "../assets/logowhite.png";
 
 const Footer = () => {
   return (
     <React.Fragment>
-      <FixedFooter>
-        <div
-          style={{
-            backgroundColor: "#242424",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Grid
-            margin="2rem 2rem 2rem 5rem"
-            width="auto"
+      {/* <FixedFooter> */}
+
+        <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center", height:"152px"}}>
+          <Grid 
+            width="auto" 
+            margin="1rem 5rem"
+            is_flex="center"
+            // _onClick={() => {
+            //   window.location.replace("/");
+            // }}
             _onClick={() => {
-              console.log("홈으로 가기!");
+              history.push("/");
             }}
-          >
-            <Image shape="rectangle" width="95px" height="51px" src={logo} />
+            >
+            <Image
+              shape="rectangle"
+              width="95px"
+              height="51px"
+              cursor="pointer"
+              src={logo}
+            />
           </Grid>
 
-          <Grid margin="2rem 0" width="0 auto">
+          <Grid margin="2rem 0" width="0 auto" height="auto">
             <ul style={{ display: "flex" }}>
               <Text
                 color="#ffffff"
-                size="12px"
+                size={theme.SubHeadTwoSize}
                 margin="5px"
-                cursor="pointer"
+                hover
+                // _onClick={() => {
+                //   window.location.replace("/vaccine");
+                // }}
                 _onClick={() => {
-                  console.log("백신후기로 가기!");
+                  history.push("/vaccine");
                 }}
               >
                 백신후기
               </Text>
               <Text
                 color="#ffffff"
-                size="12px"
+                size={theme.SubHeadTwoSize}
                 margin="5px"
-                cursor="pointer"
+                hover
+                // _onClick={() => {
+                //   window.location.replace("/medical");
+                // }}
                 _onClick={() => {
-                  console.log("의료진불들께로 가기!");
+                  history.push("/medical");
                 }}
               >
                 의료진분들께 한마디
@@ -53,25 +66,25 @@ const Footer = () => {
             </ul>
 
             <ul style={{ display: "flex" }}>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 대표자명
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 |
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 Contact. playder1427@gmail.com
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 |
               </Text>
-              <Text color={theme.typoGrey2} size="12px" margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px" hover _onClick={() => window.open("https://github.com/Vaccine-life")}>
                 Github. https://github.com/Vaccine-life
               </Text>
             </ul>
           </Grid>
         </div>
-      </FixedFooter>
+      {/* </FixedFooter> */}
     </React.Fragment>
   );
 };
