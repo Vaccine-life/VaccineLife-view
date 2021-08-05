@@ -23,7 +23,10 @@ const data = {
 };
 
 const Modify = () => {
-  // /vboard/write일때 true /qboard/write 일떄 false
+  // /modify일때 true /quarantinemodify 일떄 false
+  const url = history.location.pathname;
+  // true or false
+  const board = url.includes("/modify") ? true : false;
 
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
@@ -46,13 +49,17 @@ const Modify = () => {
     setTitle(value);
   };
 
-  logger(contents);
   return (
-    <Grid width="1192px" margin="100px auto 40px auto">
+    <Grid width="1192px" margin={`160px auto auto auto`}>
       <Grid is_flex="space_row" margin="auto auto 26px auto">
-        <Text size={theme.headOneSize} color={theme.fontColor} bold>
+        <Text
+          size={theme.headOneSize}
+          lineHeight={theme.headOneHeight}
+          color={theme.fontColor}
+          bold
+        >
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
-          백신 후기 수정하기
+          {board ? "백신" : "격리"} 후기 수정하기
         </Text>
         <Button
           width="88px"
@@ -60,20 +67,20 @@ const Modify = () => {
           fontSize={theme.bodyTwoSize}
           bold
           margin="0"
-          bg={theme.btnColor}
-          border_radius="10px"
+          bg={theme.bg}
         >
           등록
         </Button>
       </Grid>
       <Grid height="1px" bg="black"></Grid>
       {/* 타이틀 입력 */}
-      <Grid margin="30px 0 0 0">
+      <Grid margin="30px 0 0 0" bg={theme.bg}>
         <Input
           value={title}
           width="1192px"
           height="72px"
           border="none"
+          fontSize={theme.bodyOneSize}
           _onChange={onTitleChange}
           placeholder="제목을 입력해 주세요."
         />

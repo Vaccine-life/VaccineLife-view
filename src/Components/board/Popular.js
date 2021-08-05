@@ -11,7 +11,7 @@ const data = {
     {"blocks":[{"key":"5mn","text":"화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"casvv","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"an29s","text":"이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"u0iu","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1hj8l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"cq2dr","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"fpkla","text":"화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4uk0a","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"3922l","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"47kvs","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"9fk1h","text":"제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"7p2lp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"65lav","text":"화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다. 화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.화이자 백신 1차 접종 드디어 21년 7월 28일 화이자 백신 1차 접종 마치고 오늘이 3일째 입니다. 이제 좀 살것 같네요 ㅎㅎ제가 겪을 후기를 한번 적성해보겠습니다.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8dop3","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
   `,
   likeCount: 0,
-  hits: 1,
+  totalVisitors: 1,
   commentCount: 0,
   createdAt: new Date("Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)"),
   modifiedAt: "Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)",
@@ -36,7 +36,7 @@ const Popular = (props) => {
     title,
     contents,
     likeCount,
-    hits,
+    totalVisitors,
     commentCount,
     createdAt,
     user,
@@ -46,7 +46,7 @@ const Popular = (props) => {
   return (
     <>
       <Grid is_flex="space_row" margin="auto auto 40px auto">
-        <Text size={theme.headOneSize} bold>
+        <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
           {board === "vaccine" ? "백신접종" : "격리후기"} 인기글
         </Text>
       </Grid>
@@ -58,7 +58,7 @@ const Popular = (props) => {
             title={title}
             contents={contents}
             likeCount={likeCount}
-            hits={hits}
+            totalVisitors={totalVisitors}
             commentCount={commentCount}
             createdAt={createdAt}
             user={user}

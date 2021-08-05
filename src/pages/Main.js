@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from 'styled-components';
+import styled from "styled-components";
 import Login from "./Login";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
@@ -17,7 +17,9 @@ const Main = () => {
     <>
       {modal_status && <Login />}
       <Intro>
-        <h1>여러분의 <span>백신 접종 후기</span>를 공유해주세요</h1>
+        <h1>
+          여러분의 <span>백신 접종 후기</span>를 공유해주세요
+        </h1>
       </Intro>
       <MapAndChart>
         <Map />
@@ -31,10 +33,10 @@ const Main = () => {
 const MapAndChart = styled.div`
   display: flex;
   justify-content: space-around;
-`
+`;
 
 const Intro = styled.div`
-  background-color: #3853C4;
+  background-color: #3853c4;
   height: 200px;
   margin-bottom: 100px;
   & > h1 {
@@ -45,8 +47,6 @@ const Intro = styled.div`
       font-weight: 600;
     }
   }
-`
-
-
+`;
 
 export default Main;

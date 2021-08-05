@@ -85,7 +85,7 @@ const Btn = styled.button`
       margin: 0 0 0 auto;
       `}
 
-  font-size: ${theme.bodyOneSize};
+  font-size: ${theme.bodyTwoSize};
   font-weight: 700;
   ${(props) =>
     props.page
