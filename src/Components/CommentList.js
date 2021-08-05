@@ -16,13 +16,13 @@ const CommentList = (props) => {
 
     React.useEffect = (() => {
         dispatch(actionSetComment(comment_list));
-    }, [])
+    }, [])      
 
     return(
         <React.Fragment>
             <Grid is_flex="space_row" margin="2rem 0">
 
-                <Grid align="left" width="12rem">
+                <Grid align="left" width="12rem" margin="0 0 auto 0">
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
@@ -30,7 +30,7 @@ const CommentList = (props) => {
                     <Text size={theme.bodyTwoSize}>{props.comment}</Text>
                 </Grid>
                 
-                <Grid align="right" width="6rem">
+                <Grid align="right" width="6rem" margin="0 0 auto 0">
                     <Text 
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
@@ -39,7 +39,7 @@ const CommentList = (props) => {
                     >삭제</Text>
                 </Grid>
 
-                <Grid align="right" width="8rem">
+                <Grid align="right" width="8rem" margin="0 0 auto 0">
                     <Text size={theme.bodyTwoSize}>{props.insert_dt}</Text>
                 </Grid>
                                 
