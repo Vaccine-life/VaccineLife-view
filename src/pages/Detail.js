@@ -4,12 +4,15 @@ import BoardInfo from "../components/detail/BoardInfo";
 import UserInfo from "../components/detail/UserInfo";
 import Contents from "../components/detail/Contents";
 import MoveBox from "../components/detail/MoveBox";
-import { Grid } from "../elements";
+import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionSetPrevNextPage } from "../redux/modules/board";
 import theme from "../styles/theme";
 import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
+import CommentWrite from "../components/detail/CommentWrite";
+import CommentList from "../components/detail/CommentList";
+import styled from "styled-components";
 
 const data = {
   vacBoardId: 0,
@@ -19,7 +22,7 @@ const data = {
 {"blocks":[{"key":"47qis","text":"안녕하세요","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bdep6","text":"두번째 글 입니다.","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
   `,
   likeCount: 0,
-  hits: 1,
+  totalVisitors: 1,
   commentCount: 0,
   createdAt: new Date("Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)"),
   modifiedAt: "Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)",
@@ -44,7 +47,7 @@ const Detail = () => {
     title,
     contents,
     likeCount,
-    hits,
+    totalVisitors,
     commentCount,
     createdAt,
     user,
@@ -62,17 +65,18 @@ const Detail = () => {
   const handleDelete = () => {};
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(actionSetPrevNextPage(vacBoardId));
   }, []);
 
   return (
-    <Grid width={theme.detailWidth} margin="100px auto auto auto">
+    <Grid width={theme.detailWidth} margin={`160px auto auto auto`}>
       <BoardInfo
         vacBoardId={vacBoardId}
         user={user}
         title={title}
-        hits={hits}
+        totalVisitors={totalVisitors}
         createdAt={createdAt}
         likeCount={likeCount}
       />
@@ -92,6 +96,30 @@ const Detail = () => {
           activeFunction={handleDelete}
         />
       )}
+      <Grid is_flex="space_row">
+        <p
+          style={{
+            fontSize: `${theme.headTwoSize}`,
+            lineHeight: `${theme.headTwoSize}`,
+            textAlign: "start",
+            fontWeight: "700",
+            margin: "40px 0 40px 0",
+          }}
+        >
+          댓글 {commentCount} 개
+        </p>
+
+        <Button
+          fontSize={theme.bodyTwoSize}
+          margin="0"
+          width={theme.totalButtonWidth}
+          height={theme.mediumButtonHeight}
+        >
+          전체 게시글
+        </Button>
+      </Grid>
+      <CommentWrite board="vaccine" />
+      <CommentList board="vaccine" />
       {modal_status && <Login />}
       {alert_status && <Alert />}
     </Grid>

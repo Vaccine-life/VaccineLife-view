@@ -7,7 +7,8 @@ import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 import displayedAt from "../../shared/displayedAt";
 
 const TableTr = (props) => {
-  const { type, title, likeCount, commentCount, hits, createAt } = props;
+  const { type, title, likeCount, commentCount, totalVisitors, createAt } =
+    props;
   return (
     <TableThread>
       <Th style={{ color: "black" }}>{type}</Th>
@@ -25,7 +26,7 @@ const TableTr = (props) => {
       <Th>
         {" "}
         <FontAwesomeIcon icon={faEye} />
-        <p style={{ marginLeft: "5.55px" }}>{hits}</p>
+        <p style={{ marginLeft: "5.55px" }}>{totalVisitors}</p>
       </Th>
       <Th>{displayedAt(createAt)}</Th>
     </TableThread>

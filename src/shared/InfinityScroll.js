@@ -4,17 +4,18 @@ import _ from "lodash";
 const InfinityScroll = (props) => {
   const { nextCall, children, is_loading, is_next } = props;
   const throttle = _.throttle(() => {
-    if (is_loading) {
-      return;
-    }
     const scrollHeight = document.documentElement.scrollHeight;
     const innerHeight = window.innerHeight;
     const scrollTop =
-      (document.body && document.body.scrollTop) ||
-      document.documentElement.scrollTop;
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
     let current_height = scrollHeight - innerHeight - scrollTop;
 
     if (current_height < 200) {
+      if (is_loading) {
+        return;
+      }
+
       nextCall();
     }
   }, 300);
@@ -33,6 +34,13 @@ const InfinityScroll = (props) => {
     return () => window.removeEventListener("scroll", throttle_callback);
   }, [is_loading, is_next]);
   return <>{children}</>;
+};
+
+InfinityScroll.defaultProps = {
+  children: null,
+  nextCall: () => {},
+  is_next: false,
+  is_loading: false,
 };
 
 export default InfinityScroll;

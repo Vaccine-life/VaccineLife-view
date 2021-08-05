@@ -51,7 +51,8 @@ const Table = styled.table`
   border-top: 1px solid ${theme.typoGrey3};
   border-collapse: collapse;
   color: ${theme.typoGrey3};
-  font-size: ${theme.bodyOneSize};
+  font-size: ${theme.bodyTwoSize};
+  line-height: ${theme.bodyTwoHeight};
 `;
 
 const TableTr = styled.tr`
