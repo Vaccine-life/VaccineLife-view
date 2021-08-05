@@ -29,7 +29,7 @@ Button.defaultProps = {
 const ButtonEle = styled.button`
   border: none;
   font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => props.bold && 600};
+  font-weight: ${(props) => props.bold && 700};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};

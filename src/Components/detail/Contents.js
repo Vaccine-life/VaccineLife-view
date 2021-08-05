@@ -26,13 +26,17 @@ const Contents = (props) => {
         margin="0 0 67px 0"
         padding="0 0 0 29px"
       >
-        <Text lineHeight="26px" size={theme.bodyOneSize} bolds>
+        <Text lineHeight={theme.bodyTwoHeight} size={theme.bodyTwoSize} bolds>
           주의사항
         </Text>
-        <Text lineHeight="26px" size={theme.bodyOneSize} margin="">
+        <Text
+          lineHeight={theme.bodyTwoHeight}
+          size={theme.bodyTwoSize}
+          margin=""
+        >
           * 증상이 수 일 지속될 시 가까운 병원에 내원하십시오.
         </Text>
-        <Text lineHeight="26px" size={theme.bodyOneSize}>
+        <Text lineHeight={theme.bodyTwoHeight} size={theme.bodyTwoSize}>
           * 특정 병원 이름 언급시 무통보 삭제될 수 있습니다.
         </Text>
       </Grid>
@@ -42,7 +46,13 @@ const Contents = (props) => {
           width={theme.mediumButtonWidth}
           height={theme.mediumButtonHeight}
         >
-          <div style={{ fontSize: theme.bodyOneSize, fontWeight: "700" }}>
+          <div
+            style={{
+              fontSize: theme.SubHeadOneSize,
+              lineHeight: theme.SubHeadOneHeight,
+              fontWeight: "700",
+            }}
+          >
             <FontAwesomeIcon
               icon={amptyHeart}
               size="lg"
@@ -66,8 +76,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   .public-DraftEditor-content {
-    font-size: ${theme.headTweSize};
-    line-height: 30px;
+    font-size: ${theme.bodyOneSize};
+    line-height: ${theme.bodyOneHeight};
   }
 `;
 const LikeWrapper = styled.div`

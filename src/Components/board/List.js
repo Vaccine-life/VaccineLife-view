@@ -7,11 +7,7 @@ import InfinityScroll from "../../shared/InfinityScroll";
 
 const List = (props) => {
   const { board } = props;
-  const is_loading = false;
-  const next_checker = true;
-  const nextCall = () => {
-    logger("ok");
-  };
+
   return (
     <Table>
       <thead>
@@ -26,11 +22,7 @@ const List = (props) => {
       </thead>
       <tbody>
         {/* map돌리기 */}
-        <InfinityScroll
-          is_loading={is_loading}
-          is_next={next_checker}
-          nextCall={nextCall}
-        >
+        <InfinityScroll>
           <TableTr />
         </InfinityScroll>
       </tbody>
@@ -43,7 +35,8 @@ const Table = styled.table`
   border-top: 1px solid ${theme.typoGrey2};
   border-collapse: collapse;
   color: ${theme.typoGrey2};
-  font-size: ${theme.bodyOneSize};
+  font-size: ${theme.bodyTwoSize};
+  line-height: ${theme.bodyTwoHeight};
 `;
 
 const TableThread = styled.tr`

@@ -68,7 +68,7 @@ const Header = (props) => {
           </Grid>
 
           <Grid is_flex="space_row" width="auto" margin="0 20px">
-            <Text size={theme.headTweSize} lineHeight={theme.headTweSize}>
+            <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
               <span style={{ fontWeight: "bold" }}>{props.nickname}</span> 님,
               안녕하세요
             </Text>
@@ -76,8 +76,8 @@ const Header = (props) => {
               width="5rem"
               cursor="pointer"
               margin="0 4rem"
-              size={theme.headTweSize}
-              lineHeight={theme.headTweSize}
+              size={theme.headTwoSize}
+              lineHeight={theme.headTwoHeight}
               bold
             >
               <span
@@ -117,7 +117,7 @@ const EachDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 28px 0 28px;
-  font-size: ${theme.headTweSize};
+  font-size: ${theme.headTwoSize};
   line-height: ${theme.headTwoHeight};
 
   ${(props) =>

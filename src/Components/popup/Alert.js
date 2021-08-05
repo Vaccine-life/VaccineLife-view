@@ -18,13 +18,15 @@ const Alert = () => {
     <Wrapper>
       <Modal>
         <Grid is_flex="center">
-          <Text size={theme.headTweSize}>{alertMessage}</Text>
+          <Text size={theme.bodyOneSize} lineHeight={theme.bodyOneHeight}>
+            {alertMessage}
+          </Text>
         </Grid>
         <Grid is_flex="center">
           <Button
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
-            fontSize={theme.bodyOneSize}
+            fontSize={theme.SubHeadOneSize}
             bg={theme.bg}
             bold
             _onClick={handleClick}

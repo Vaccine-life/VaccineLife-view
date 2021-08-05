@@ -24,8 +24,20 @@ const theme = {
   headTwoHeight: "30px",
   SubHeadOneSize: "18px",
   SubHeadTwoSize: "16px",
-  bodyOneSize: "18px",
-  bodyTwoSize: "16px",
+  bodyOneSize: "20px",
+  bodyTwoSize: "18px",
+  bodyThreeSize: "16x",
+  bodyfourSize: "14px",
+
+  //line Height
+  headOneHeight: "34px",
+  headTwoHeight: "30px",
+  SubHeadOneHeight: "26px",
+  SubHeadTwoHeight: "16px",
+  bodyOneHeight: "30px",
+  bodyTwoHeight: "26px",
+  bodyThreeHeight: "24px",
+  bodyfourHeight: "22px",
 
   // div size
   smallButtonWidth: "88px",
@@ -38,6 +50,7 @@ const theme = {
   isVaccineHeight: "42px",
   userSurveywidth: "44px",
   userSurveyHeight: "24px",
+  totalButtonWidth: "138px",
 
   //layout size
   headerHeight: "81px",

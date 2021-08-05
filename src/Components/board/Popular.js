@@ -36,7 +36,7 @@ const Popular = (props) => {
     title,
     contents,
     likeCount,
-    hits,
+    totalVisitors,
     commentCount,
     createdAt,
     user,
@@ -46,7 +46,7 @@ const Popular = (props) => {
   return (
     <>
       <Grid is_flex="space_row" margin="auto auto 40px auto">
-        <Text size={theme.headOneSize} bold>
+        <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
           {board === "vaccine" ? "백신접종" : "격리후기"} 인기글
         </Text>
       </Grid>
@@ -58,7 +58,7 @@ const Popular = (props) => {
             title={title}
             contents={contents}
             likeCount={likeCount}
-            hits={hits}
+            totalVisitors={totalVisitors}
             commentCount={commentCount}
             createdAt={createdAt}
             user={user}

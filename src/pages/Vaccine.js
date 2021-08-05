@@ -17,7 +17,7 @@ const Vaccine = () => {
   const alert_status = useSelector((state) => state.popup.alert);
 
   return (
-    <Grid width={theme.boardWidth} margin="150px auto auto auto">
+    <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>
       {/* props 값 넣기 */}
       <Popular board="vaccine" />
       <ListNav board="vaccine" />

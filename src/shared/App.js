@@ -32,6 +32,7 @@ function App() {
         <Route exact path="/vaccineboard/write" component={Write} />
         <Route exact path="/quarantineboard/write" component={Write} />
         <Route exact path="/modify/:id" component={Modify} />
+        <Route exact path="/quarantinemodify/:id" component={Modify} />
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />

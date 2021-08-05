@@ -8,7 +8,8 @@ import { actionConfirm } from "../../redux/modules/popup";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
-  const { vacBoardId, title, hits, createdAt, user, likeCount } = props;
+  const { vacBoardId, title, totalVisitors, createdAt, user, likeCount } =
+    props;
   const dispatch = useDispatch();
   const handleOnClick = () => {
     history.push(`/modify/${vacBoardId}`);
@@ -17,25 +18,27 @@ const BoardInfo = (props) => {
   return (
     <Grid margin="30px auto 24px auto">
       <Grid is_flex="space_row" margin="0 auto 24px auto">
-        <Text bold size={theme.headOneSize}>
+        <Text bold size={theme.headOneSize} lineHeight={theme.headOneHeight}>
           {title}
         </Text>
         <BtnWrapper>
           <Button
-            _onClick={handleOnClick}
-            width="88px"
-            height="42px"
-            fontSize={theme.bodyTwoSize}
+            width={theme.smallButtonWidth}
+            height={theme.smallButtonHeight}
+            fontSize={theme.SubHeadTwoSize}
             bg={theme.bg2}
+            bold
+            _onClick={handleOnClick}
           >
             수정
           </Button>
           <Button
-            width="88px"
-            height="42px"
             margin="0 0 0 16px"
-            fontSize={theme.bodyTwoSize}
+            width={theme.smallButtonWidth}
+            height={theme.smallButtonHeight}
+            fontSize={theme.SubHeadTwoSize}
             bg={theme.bg}
+            bold
             _onClick={() => dispatch(actionConfirm())}
           >
             삭제
@@ -44,40 +47,59 @@ const BoardInfo = (props) => {
       </Grid>
       <NameHitWrapper>
         <Text
-          size={theme.bodyOneSize}
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
           margin="0 5px 0 0"
           color={theme.typoGrey3}
         >
           작성자
         </Text>
-        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+        <Text
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
+          color={theme.typoGrey3}
+        >
           {user.nickname}
         </Text>
         <VerticalLine />
         <Text
-          size={theme.bodyOneSize}
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
           margin="0 5px 0 0"
           color={theme.typoGrey3}
         >
           조회
         </Text>
-        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
-          {hits} 회
+        <Text
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
+          color={theme.typoGrey3}
+        >
+          {totalVisitors} 회
         </Text>
         <VerticalLine />
         <Text
-          size={theme.bodyOneSize}
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
           margin="0 5px 0 0"
           color={theme.typoGrey3}
         >
           추천
         </Text>
-        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+        <Text
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
+          color={theme.typoGrey3}
+        >
           {likeCount}
         </Text>
       </NameHitWrapper>
       <NameHitWrapper>
-        <Text size={theme.bodyOneSize} color={theme.typoGrey3}>
+        <Text
+          size={theme.bodyTwoSize}
+          lineHeight={theme.bodyTwoHeight}
+          color={theme.typoGrey3}
+        >
           {moment(createdAt).format("YYYY.MM.DD hh:mm")}
         </Text>
       </NameHitWrapper>
