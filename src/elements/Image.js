@@ -64,6 +64,7 @@ const AspectInner = styled.div`
   background-size: cover;
   /* margin: auto; */
   margin: ${(props) => props.margin};
+  cursor: ${(props) => props.cursor};
 `;
 
 const ImageCircle = styled.div`
