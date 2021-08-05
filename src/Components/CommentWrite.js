@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment"
+import Alert from "./popup/Alert";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import { replace } from "formik";
 
 
 const CommentWrite = (props) => {
@@ -30,7 +33,7 @@ const CommentWrite = (props) => {
               }
               len++;
             }
-            console.log(len);
+            // console.log(len);
             setLength(len);
           };
           getTextLength(e.target.value);
@@ -47,34 +50,41 @@ const CommentWrite = (props) => {
     if (betweenTime < 60) {
         return `${betweenTime}분전`;
     }
-
     const betweenTimeHour = Math.floor(betweenTime / 60);
     if (betweenTimeHour < 24) {
         return `${betweenTimeHour}시간전`;
     }
-
     const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
     if (betweenTimeDay < 365) {
         return `${betweenTimeDay}일전`;
     }
-
     return `${Math.floor(betweenTimeDay / 365)}년전`;
     }
 
+
     const write = () => {
-        // 오브젝트로 넣어줘야 
-        dispatch(actionAddComment({
-            nickname: "명수는열두살", 
-            comment, 
-            // insert_dt: moment().startOf('hour').fromNow(),
-            insert_dt: timeForToday(moment().format())
+        // 빈 내용이면 alert창
+        if (!comment){
+            dispatch(actionAlert());
+            dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
+            dispatch(actionAddComment(""))
+        } else {
+            // 오브젝트로 넣어줘야 
+            dispatch(actionAddComment({
+                nickname: "명수는열두살", 
+                comment, 
+                // insert_dt: moment().startOf('hour').fromNow(),
+                insert_dt: timeForToday(moment().format())
         }));
-        // 코멘트 작성 후 인풋태크에 있는 글 없애기
-        setComment();
-        setLength(0);
+            // 코멘트 작성 후 인풋태크에 있는 글 없애기
+            setComment();
+            setLength(0);
+        }
+
+        
     }
-    console.log(comment)
     
+
     return(
         <React.Fragment>
             {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
