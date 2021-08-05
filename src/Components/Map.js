@@ -15,7 +15,7 @@ const Map = (props) => {
     const makeData = (items) => {
       // todayList는 2000개가 넘던 items 중, 가장 최근인 '오늘'에 해당하는 요소들만 긁어옴
       const todayList = items.slice(items.length - 17, items.length);
-      console.log(todayList);
+      // console.log(todayList);
 
       // todayNum이라는 빈객체에 {시도: 2차접종자수}로 이루어진 키값쌍을 넣어준다.
       // 근데 모든 시도를 다 돌아야 하니까 map해줌
@@ -24,7 +24,7 @@ const Map = (props) => {
         // 객체에다가 새로운 "키 = 값" 쌍을 넣어주는 방법
         todayNum[item.sido] = Math.floor(item.totalSecondCnt / 10000);
       });
-      console.log(todayNum);
+      // console.log(todayNum);
     };
     fetchEvents();
   });

@@ -14,7 +14,19 @@ const Survey = (props) => {
   const [gender, setGender] = useState("");
   const [age, setAge] = useState(10);
   const [disease, setDisease] = useState(0);
-  const [afterEffect, setAfterEffect] = useState("");
+  const [afterEffect, setAfterEffect] = useState([]);
+
+  // {
+  //   fever: false,
+  //   partialAche: false,
+  //   swelling: false,
+  //   vomit: false,
+  //   ache: false,
+  //   fatigue: false,
+  //   alergy: false,
+  //   etc: false,
+  //   noSymptom: false,
+  // }
 
   const handleIsVaccineClick = (e) => {
     setIsVaccine(e.target.value);
@@ -34,8 +46,13 @@ const Survey = (props) => {
   const handleDiseaseClick = (e) => {
     setDisease(e.target.value);
   };
-  const handleAfterEffectClick = (e) => {
-    setAfterEffect(e.target.value);
+  const handleAfterEffectClick = (checked, value) => {
+    if (checked) {
+      setAfterEffect([...afterEffect, value]);
+    } else {
+      // 체크 해제
+      setAfterEffect(afterEffect.filter((el) => el !== value));
+    }
   };
 
   const submitSurvey = () => {
@@ -323,33 +340,41 @@ const Survey = (props) => {
             <input
               type="checkbox"
               name="afterEffect"
-              value="fever"
+              value="발열"
               id="발열"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="발열">발열</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="partialAche"
+              value="접종부위 통증"
               id="접종부위통증"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="접종부위통증">접종부위 통증</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="swelling"
+              value="접종부위 부기/발적"
               id="접종부위부기발적"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="접종부위부기발적">접종부위 부기/발적</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="vomit"
+              value="구토/매스꺼움"
               id="구토매스꺼움"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="구토매스꺼움">구토/매스꺼움</label>
           </FourCheckbox>
@@ -358,41 +383,51 @@ const Survey = (props) => {
             <input
               type="checkbox"
               name="afterEffect"
-              value="ache"
+              value="두통/관절통/근육통"
               id="두통관절통근육통"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="fatigue"
+              value="피로감"
               id="피로감"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="피로감">피로감</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="alergy"
+              value="알러지 반응"
               id="알러지반응"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="알러지반응">알러지 반응</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="etc"
+              value="기타"
               id="기타"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="기타">기타</label>
             <input
               type="checkbox"
               name="afterEffect"
-              value="noSymptom"
+              value="무증상"
               id="무증상"
-              onClick={handleAfterEffectClick}
+              onClick={(e) => {
+                handleAfterEffectClick(e.currentTarget.checked);
+              }}
             />
             <label htmlFor="무증상">무증상</label>
           </FiveCheckbox>
