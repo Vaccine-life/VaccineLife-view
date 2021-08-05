@@ -38,7 +38,7 @@ const Write = () => {
 
   logger(contents);
   return (
-    <Grid width={theme.writeWidth} margin="100px auto 40px auto">
+    <Grid width={theme.writeWidth} margin={`160px auto auto auto`}>
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} color={theme.fontColor} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
@@ -65,6 +65,7 @@ const Write = () => {
           height="72px"
           border="none"
           _onChange={onTitleChange}
+          fontSize={theme.bodyOneSize}
           placeholder="제목을 입력해 주세요."
         />
       </Grid>

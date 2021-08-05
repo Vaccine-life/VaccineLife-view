@@ -20,14 +20,17 @@ const Confirm = (props) => {
     <Wrapper>
       <Modal>
         <Grid is_flex="center">
-          <Text size={theme.headTweSize}>{confirmMessage}</Text>
+          <Text size={theme.bodyOneSize} lineHeight={theme.bodyOneHeight}>
+            {confirmMessage}
+          </Text>
         </Grid>
         <Grid is_flex="center">
           <Button
             margin="0 15px 0 0"
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
-            fontSize={theme.bodyOneSize}
+            fontSize={theme.SubHeadOneSize}
+            lineHeight={theme.SubHeadOneHeight}
             bg={theme.shadow}
             bold
             _onClick={() => dispatch(actionConfirm())}

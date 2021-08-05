@@ -22,6 +22,7 @@ const Input = (props) => {
     bg,
     maxLength,
     fontSize,
+    rows,
   } = props;
 
   if (is_comment) {
@@ -34,6 +35,7 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         value={value}
+        fontSize={fontSize}
       />
     );
   }
@@ -43,18 +45,19 @@ const Input = (props) => {
       <Grid>
         <Text margin="0px">{label ? label : ""}</Text>
         <ElTextArea
-          rows={8}
+          rows={rows}
           value={value}
           placeholder={placeholder}
           onChange={_onChange}
           type={type}
           border={border}
           maxLength={maxLength}
-          // onKeyPress={(e) => {
-          //   if (e.key === "Enter") {
-          //     onSubmit(e);
-          //   }
-          // }}
+          fontSize={fontSize}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              onSubmit(e);
+            }
+          }}
         ></ElTextArea>
       </Grid>
     );
@@ -105,10 +108,12 @@ Input.defaultProps = {
   bg: false,
   maxLength: false,
   fontSize: theme.bodyTwoSize,
+  rows: 8,
 };
 
 //의료진페이지 멀티라인 수정
 const ElTextArea = styled.textarea`
+  font-size: ${(props) => props.fontSize};
   ${(props) => (props.border ? `border:${props.border}` : "")};
   width: 100%;
   padding: 10px;
@@ -116,6 +121,10 @@ const ElTextArea = styled.textarea`
   resize: none;
   :focus {
     outline: none;
+  }
+  ::placeholder {
+    font-size: ${(props) => props.fontSize};
+    color: ${theme.typoGrey3};
   }
 `;
 
@@ -134,6 +143,7 @@ const ElInput = styled.input`
 `;
 
 const CommentInput = styled.input`
+  font-size: ${(props) => props.fontSize};
   ${(props) => (props.margin ? `margin:${props.margin}` : "")};
   border-style: none;
   ${(props) => (props.width ? `width:${props.width}` : "")};

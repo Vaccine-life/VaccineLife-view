@@ -17,7 +17,7 @@ const PopularCard = (props) => {
     title,
     contents,
     likeCount,
-    hits,
+    totalVisitors,
     commentCount,
     createdAt,
     user,
@@ -43,15 +43,20 @@ const PopularCard = (props) => {
       {board && (
         <InfoWrapper>
           <InfoDiv>{user.type}</InfoDiv>
-          <InfoDiv right>{user.age}</InfoDiv>
         </InfoWrapper>
       )}
       <TitleWrapper>{title}</TitleWrapper>
+
       <ContentWrapper>
         <Editor editorState={editorState} readOnly={true} />
       </ContentWrapper>
+
       <Grid height={theme.headOneSize} is_flex="space_row" margin="72px 0 0 0">
-        <Text color={theme.typoGrey2} size={theme.bodyTwoSize}>
+        <Text
+          color={theme.typoGrey2}
+          size={theme.bodyThreeSize}
+          lineHeight={theme.bodyThreeHeight}
+        >
           {displayedAt(createdAt)}
         </Text>
 
@@ -66,7 +71,7 @@ const PopularCard = (props) => {
           </Grid>
           <Grid is_flex="center" margin="0 0 0 19px">
             <FontAwesomeIcon icon={faEye} />
-            <p style={{ marginLeft: "5.55px" }}>{hits}</p>
+            <p style={{ marginLeft: "5.55px" }}>{totalVisitors}</p>
           </Grid>
         </TextDiv>
       </Grid>
@@ -78,24 +83,22 @@ const InfoWrapper = styled.div`
   margin-bottom: 24px;
 `;
 const InfoDiv = styled.div`
-  padding: 0 8px 0 8px;
-  line-height: ${theme.headOneSize};
-  font-size: ${theme.bodyTwoSize};
+  width: 60px;
+  height: 24px;
+  font-size: ${theme.SubHeadTwoSize};
+  line-height: ${theme.SubHeadTwoHeight};
   font-weight: 700;
   background-color: ${theme.bg2};
   color: white;
-  ${(props) =>
-    props.right &&
-    `
-   background-color: ${theme.bg3};
-    color: ${theme.bg2};
-    margin-left: 8px;
-  `}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const TitleWrapper = styled.div`
   width: 100%;
   height: 60px;
-  font-size: ${theme.headTweSize};
+  font-size: ${theme.headTwoSize};
+  line-height: ${theme.headTwoHeight};
   font-weight: 700;
   line-height: 30px;
   text-overflow: ellipsis;
@@ -105,10 +108,10 @@ const TitleWrapper = styled.div`
 const ContentWrapper = styled.div`
   width: 100%;
   height: 72px;
-  font-size: ${theme.bodyTwoSize};
+  font-size: ${theme.bodyThreeSize};
+  line-height: ${theme.bodyThreeHeight};
   color: ${theme.typoGrey2};
   font-weight: 700;
-  line-height: 30px;
   overflow: hidden;
   text-align: start;
 `;
@@ -116,8 +119,8 @@ const ContentWrapper = styled.div`
 const TextDiv = styled.div`
   display: flex;
   color: ${theme.typoGrey2};
-  font-size: ${theme.bodyTwoSize};
-  line-height: ${theme.headOneSize};
+  font-size: ${theme.bodyThreeSize};
+  line-height: ${theme.bodyThreeHeight};
 `;
 
 export default PopularCard;

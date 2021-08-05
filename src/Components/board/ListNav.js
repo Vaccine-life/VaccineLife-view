@@ -23,7 +23,7 @@ const ListNav = (props) => {
       <Button
         width={theme.mediumButtonWidth}
         height={theme.mediumButtonHeight}
-        fontSize={theme.bodyOneSize}
+        fontSize={theme.SubHeadOneSize}
         margin="0"
         _onClick={handleMoveWrite}
         bold
