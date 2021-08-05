@@ -8,50 +8,40 @@ import { actionSetUser } from "../redux/modules/user";
 
 const Survey = (props) => {
   const dispatch = useDispatch();
-  const [isVaccine, setIsVaccine] = useState(1); // 0 1
-  const [degree, setDegree] = useState(1); // 1 2
-  const [type, setType] = useState(""); // 나머지 string
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState(10);
-  const [disease, setDisease] = useState(0);
-  const [afterEffect, setAfterEffect] = useState([]);
 
-  // {
-  //   fever: false,
-  //   partialAche: false,
-  //   swelling: false,
-  //   vomit: false,
-  //   ache: false,
-  //   fatigue: false,
-  //   alergy: false,
-  //   etc: false,
-  //   noSymptom: false,
-  // }
+  const [inputs, setInputs] = useState({
+    isVaccine: 1,
+    degree: 1,
+    type: "",
+    gender: "",
+    age: 10,
+    disease: 0,
+    afterEffect: [],
+  });
 
-  const handleIsVaccineClick = (e) => {
-    setIsVaccine(e.target.value);
+  const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
+
+  const handleRadioClick = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    setInputs({
+      ...inputs, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
+    });
   };
-  const handleDegreeClick = (e) => {
-    setDegree(e.target.value);
-  };
-  const handleTypeClick = (e) => {
-    setType(e.target.value);
-  };
-  const handleGenderClick = (e) => {
-    setGender(e.target.value);
-  };
-  const handleAgeClick = (e) => {
-    setAge(e.target.value);
-  };
-  const handleDiseaseClick = (e) => {
-    setDisease(e.target.value);
-  };
-  const handleAfterEffectClick = (checked, value) => {
-    if (checked) {
-      setAfterEffect([...afterEffect, value]);
+
+  const handleCheckboxClick = (e) => {
+    const { value, name } = e.target;
+
+    if (afterEffect.includes(value)) {
+      setInputs({
+        ...inputs,
+        [name]: afterEffect.filter((el) => el !== value),
+      });
     } else {
-      // 체크 해제
-      setAfterEffect(afterEffect.filter((el) => el !== value));
+      setInputs({
+        ...inputs,
+        [name]: [...afterEffect, value],
+      });
     }
   };
 
@@ -95,7 +85,7 @@ const Survey = (props) => {
               name="isVaccine"
               value="1"
               id="isVaccine1"
-              onClick={handleIsVaccineClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="isVaccine1">접종함</label>
             <input
@@ -103,7 +93,7 @@ const Survey = (props) => {
               name="isVaccine"
               value="0"
               id="isVaccine0"
-              onClick={handleIsVaccineClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="isVaccine0">접종하지않음</label>
           </TwoOptions>
@@ -121,7 +111,7 @@ const Survey = (props) => {
               name="degree"
               value="1"
               id="degree1"
-              onClick={handleDegreeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="degree1">1차 접종 완료</label>
             <input
@@ -129,7 +119,7 @@ const Survey = (props) => {
               name="degree"
               value="2"
               id="degree2"
-              onClick={handleDegreeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="degree2">2차 접종 완료</label>
           </TwoOptions>
@@ -147,7 +137,7 @@ const Survey = (props) => {
               name="type"
               value="모더나"
               id="모더나"
-              onClick={handleTypeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="모더나">모더나</label>
             <input
@@ -155,7 +145,7 @@ const Survey = (props) => {
               name="type"
               value="얀센"
               id="얀센"
-              onClick={handleTypeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="얀센">얀센</label>
             <input
@@ -163,7 +153,7 @@ const Survey = (props) => {
               name="type"
               value="아스트라제네카"
               id="아스트라제네카"
-              onClick={handleTypeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="아스트라제네카">아스트라제네카</label>
           </ThreeOptions>
@@ -174,17 +164,17 @@ const Survey = (props) => {
               name="type"
               value="화이자"
               id="화이자"
-              onClick={handleTypeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="화이자">화이자</label>
             <input
               type="radio"
               name="type"
               value="아스트라제네카 + 화이자"
-              id="아스트라제네카 + 화이자"
-              onClick={handleTypeClick}
+              id="아스트라제네카+화이자"
+              onClick={handleRadioClick}
             />
-            <label htmlFor="아스트라제네카 + 화이자">
+            <label htmlFor="아스트라제네카+화이자">
               아스트라제네카 + 화이자
             </label>
           </TwoOptions>
@@ -202,7 +192,7 @@ const Survey = (props) => {
               name="gender"
               value="남"
               id="남"
-              onClick={handleGenderClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="남">남</label>
             <input
@@ -210,7 +200,7 @@ const Survey = (props) => {
               name="gender"
               value="여"
               id="여"
-              onClick={handleGenderClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="여">여</label>
           </TwoOptions>
@@ -228,7 +218,7 @@ const Survey = (props) => {
               name="age"
               value="10"
               id="10대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="10대">10대</label>
             <input
@@ -236,7 +226,7 @@ const Survey = (props) => {
               name="age"
               value="20"
               id="20대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="20대">20대</label>
             <input
@@ -244,7 +234,7 @@ const Survey = (props) => {
               name="age"
               value="30"
               id="30대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="30대">30대</label>
             <input
@@ -252,7 +242,7 @@ const Survey = (props) => {
               name="age"
               value="40"
               id="40대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="40대">40대</label>
           </FourOptions>
@@ -264,7 +254,7 @@ const Survey = (props) => {
               name="age"
               value="50"
               id="50대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="50대">50대</label>
             <input
@@ -272,7 +262,7 @@ const Survey = (props) => {
               name="age"
               value="60"
               id="60대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="60대">60대</label>
             <input
@@ -280,7 +270,7 @@ const Survey = (props) => {
               name="age"
               value="70"
               id="70대"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="70대">70대</label>
             <input
@@ -288,7 +278,7 @@ const Survey = (props) => {
               name="age"
               value="80"
               id="80대이상"
-              onClick={handleAgeClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="80대이상">80대 이상</label>
           </FourOptions>
@@ -306,7 +296,7 @@ const Survey = (props) => {
               name="disease"
               value="1"
               id="유"
-              onClick={handleDiseaseClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="유">유</label>
             <input
@@ -314,7 +304,7 @@ const Survey = (props) => {
               name="disease"
               value="0"
               id="무"
-              onClick={handleDiseaseClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="무">무</label>
             <input
@@ -322,7 +312,7 @@ const Survey = (props) => {
               name="disease"
               value="2"
               id="모름"
-              onClick={handleDiseaseClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="모름">모름</label>
           </ThreeOptions>
@@ -342,9 +332,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="발열"
               id="발열"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="발열">발열</label>
             <input
@@ -352,9 +340,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="접종부위 통증"
               id="접종부위통증"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="접종부위통증">접종부위 통증</label>
             <input
@@ -362,9 +348,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="접종부위 부기/발적"
               id="접종부위부기발적"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="접종부위부기발적">접종부위 부기/발적</label>
             <input
@@ -372,9 +356,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="구토/매스꺼움"
               id="구토매스꺼움"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="구토매스꺼움">구토/매스꺼움</label>
           </FourCheckbox>
@@ -385,9 +367,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="두통/관절통/근육통"
               id="두통관절통근육통"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
             <input
@@ -395,9 +375,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="피로감"
               id="피로감"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="피로감">피로감</label>
             <input
@@ -405,9 +383,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="알러지 반응"
               id="알러지반응"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="알러지반응">알러지 반응</label>
             <input
@@ -415,9 +391,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="기타"
               id="기타"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="기타">기타</label>
             <input
@@ -425,9 +399,7 @@ const Survey = (props) => {
               name="afterEffect"
               value="무증상"
               id="무증상"
-              onClick={(e) => {
-                handleAfterEffectClick(e.currentTarget.checked);
-              }}
+              onClick={handleCheckboxClick}
             />
             <label htmlFor="무증상">무증상</label>
           </FiveCheckbox>
