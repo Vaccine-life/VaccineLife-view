@@ -126,6 +126,7 @@ const ElTextArea = styled.textarea`
     font-size: ${(props) => props.fontSize};
     color: ${theme.typoGrey3};
   }
+  font-family: "Noto Sans KR";
 `;
 
 const ElInput = styled.input`

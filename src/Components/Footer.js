@@ -12,13 +12,14 @@ const Footer = () => {
     <React.Fragment>
       {/* <FixedFooter> */}
 
-        <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center"}}>
-          {/* <Grid margin="2rem 2rem 2rem 5rem" width="auto" _onClick={() => {console.log("홈으로 가기!")}}>
-            <Text color="#ffffff" cursor="pointer" margin="1px 0">슬기로운</Text>
-            <Text color="#ffffff" cursor="pointer" size="16" bold>백신생활</Text>
-          </Grid> */}
-          <Grid width="auto" margin="1rem 5rem"
+        <div style={{backgroundColor:"#242424", display:"flex", alignItems:"center", height:"152px"}}>
+          <Grid 
+            width="auto" 
+            margin="1rem 5rem"
             is_flex="center"
+            // _onClick={() => {
+            //   window.location.replace("/");
+            // }}
             _onClick={() => {
               history.push("/");
             }}
@@ -32,13 +33,16 @@ const Footer = () => {
             />
           </Grid>
 
-          <Grid margin="2rem 0" width="0 auto">
+          <Grid margin="2rem 0" width="0 auto" height="auto">
             <ul style={{ display: "flex" }}>
               <Text
                 color="#ffffff"
                 size={theme.SubHeadTwoSize}
                 margin="5px"
                 hover
+                // _onClick={() => {
+                //   window.location.replace("/vaccine");
+                // }}
                 _onClick={() => {
                   history.push("/vaccine");
                 }}
@@ -50,6 +54,9 @@ const Footer = () => {
                 size={theme.SubHeadTwoSize}
                 margin="5px"
                 hover
+                // _onClick={() => {
+                //   window.location.replace("/medical");
+                // }}
                 _onClick={() => {
                   history.push("/medical");
                 }}
@@ -71,7 +78,7 @@ const Footer = () => {
               <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
                 |
               </Text>
-              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px">
+              <Text color={theme.typoGrey2} size={theme.SubHeadTwoSize} margin="5px" hover _onClick={() => window.open("https://github.com/Vaccine-life")}>
                 Github. https://github.com/Vaccine-life
               </Text>
             </ul>

@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment"
-import Alert from "./popup/Alert";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import { replace } from "formik";
 
 
 const CommentWrite = (props) => {
@@ -88,7 +86,7 @@ const CommentWrite = (props) => {
             {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
             <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
 
-                <Grid align="left" width="10rem" margin="12px 0 auto 0">
+                <Grid align="left" width="10rem" margin="15px 0 auto 0">
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
@@ -111,7 +109,12 @@ const CommentWrite = (props) => {
                             <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text>
                         </Grid>
 
-                        <Button width={theme.smallButtonWidth} height={theme.smallButtonHeight} _onClick={write}>등록</Button>
+                        <Button 
+                            width={theme.smallButtonWidth} 
+                            height={theme.smallButtonHeight}
+                            fontSize={theme.SubHeadOneSize}
+                            _onClick={write} 
+                        >등록</Button>
                     </Grid>
                 </Grid>
                 

@@ -106,7 +106,8 @@ const Wrapper = styled.div`
   position: fixed;
   z-index: 2;
   /* border: 1px solid #dbdbdb; */
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 7px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  /* box-shadow: ${theme.shadow} 0px 3px 10px 0px; */
 `;
 
 const EachDiv = styled.div`
