@@ -43,11 +43,11 @@ const Wrapper = styled.div`
 
   .public-DraftEditor-content {
     font-size: ${theme.headTweSize};
-    line-height: 30px;
+    line-height: ${theme.headTwoHeight};
   }
   .public-DraftEditorPlaceholder-root {
     font-size: ${theme.headTweSize};
-    line-height: 30px;
+    line-height: ${theme.headTwoHeight};
   }
 `;
 
