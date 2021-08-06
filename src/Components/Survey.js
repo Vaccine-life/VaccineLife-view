@@ -5,22 +5,42 @@ import theme from "../styles/theme";
 import { useDispatch } from "react-redux";
 import { actionVisible } from "../redux/modules/modal";
 import { actionSetUser } from "../redux/modules/user";
+import survey from "./survey.css";
 
 const Survey = (props) => {
   const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
-    isVaccine: 1,
-    degree: 1,
+    isVaccine: 2,
+    degree: 0,
     type: "",
     gender: "",
-    age: 10,
-    disease: 0,
-    afterEffect: [],
+    age: "",
+    disease: "",
+    afterEffect: "",
   });
 
+  // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
+  // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, submit button을 disabled처리한다. 코드 하단 Button태그 참조.
+  const ableSubmitButton = () => {
+    if (
+      isVaccine === 2 ||
+      degree === 0 ||
+      type === "" ||
+      gender === "" ||
+      age === "" ||
+      disease === "" ||
+      afterEffect === ""
+    ) {
+      return false;
+    } else if (isVaccine === 0) {
+      return true;
+    }
+  };
+
+  // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setInputs({
@@ -29,9 +49,11 @@ const Survey = (props) => {
     });
   };
 
+  // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
 
+    // if문: 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
     if (afterEffect.includes(value)) {
       setInputs({
         ...inputs,
@@ -45,20 +67,39 @@ const Survey = (props) => {
     }
   };
 
-  const submitSurvey = () => {
+  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 store에 저장
+  const handleIsVaccineClick = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: parseInt(value),
+    });
+
     let survey = {
       isVaccine: isVaccine,
-      degree: degree,
+    };
+
+    console.log(survey);
+    console.log(value, name);
+    // state.user에 설문조사 데이터를 넣어줌
+    dispatch(actionSetUser(survey));
+  };
+
+  const submitSurvey = () => {
+    let survey = {
+      isVaccine: parseInt(isVaccine),
+      degree: parseInt(degree),
       type: type,
       gender: gender,
       age: age,
       disease: disease,
-      afterEffect: afterEffect,
+      afterEffect: afterEffect.sort().join(", "),
     };
+
+    console.log(survey);
 
     // state.user에 설문조사 데이터를 넣어줌
     dispatch(actionSetUser(survey));
-    console.log(survey);
 
     // 모달 끄기
     dispatch(actionVisible());
@@ -93,7 +134,7 @@ const Survey = (props) => {
               name="isVaccine"
               value="0"
               id="isVaccine0"
-              onClick={handleRadioClick}
+              onClick={handleIsVaccineClick}
             />
             <label htmlFor="isVaccine0">접종하지않음</label>
           </TwoOptions>
@@ -102,7 +143,10 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             접종 회차
           </Text>
           <TwoOptions>
@@ -112,6 +156,7 @@ const Survey = (props) => {
               value="1"
               id="degree1"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="degree1">1차 접종 완료</label>
             <input
@@ -120,6 +165,7 @@ const Survey = (props) => {
               value="2"
               id="degree2"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="degree2">2차 접종 완료</label>
           </TwoOptions>
@@ -128,7 +174,10 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             백신 종류
           </Text>
           <ThreeOptions>
@@ -138,6 +187,7 @@ const Survey = (props) => {
               value="모더나"
               id="모더나"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="모더나">모더나</label>
             <input
@@ -146,6 +196,7 @@ const Survey = (props) => {
               value="얀센"
               id="얀센"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="얀센">얀센</label>
             <input
@@ -154,6 +205,7 @@ const Survey = (props) => {
               value="아스트라제네카"
               id="아스트라제네카"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="아스트라제네카">아스트라제네카</label>
           </ThreeOptions>
@@ -165,6 +217,7 @@ const Survey = (props) => {
               value="화이자"
               id="화이자"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="화이자">화이자</label>
             <input
@@ -173,6 +226,7 @@ const Survey = (props) => {
               value="아스트라제네카 + 화이자"
               id="아스트라제네카+화이자"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="아스트라제네카+화이자">
               아스트라제네카 + 화이자
@@ -183,7 +237,10 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             성별
           </Text>
           <TwoOptions>
@@ -193,6 +250,7 @@ const Survey = (props) => {
               value="남"
               id="남"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="남">남</label>
             <input
@@ -201,6 +259,7 @@ const Survey = (props) => {
               value="여"
               id="여"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="여">여</label>
           </TwoOptions>
@@ -209,7 +268,10 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             연령대
           </Text>
           <FourOptions>
@@ -219,6 +281,7 @@ const Survey = (props) => {
               value="10"
               id="10대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="10대">10대</label>
             <input
@@ -227,6 +290,7 @@ const Survey = (props) => {
               value="20"
               id="20대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="20대">20대</label>
             <input
@@ -235,6 +299,7 @@ const Survey = (props) => {
               value="30"
               id="30대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="30대">30대</label>
             <input
@@ -243,6 +308,7 @@ const Survey = (props) => {
               value="40"
               id="40대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="40대">40대</label>
           </FourOptions>
@@ -255,6 +321,7 @@ const Survey = (props) => {
               value="50"
               id="50대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="50대">50대</label>
             <input
@@ -263,6 +330,7 @@ const Survey = (props) => {
               value="60"
               id="60대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="60대">60대</label>
             <input
@@ -271,6 +339,7 @@ const Survey = (props) => {
               value="70"
               id="70대"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="70대">70대</label>
             <input
@@ -279,6 +348,7 @@ const Survey = (props) => {
               value="80"
               id="80대이상"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="80대이상">80대 이상</label>
           </FourOptions>
@@ -287,32 +357,38 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             기저 질환
           </Text>
           <ThreeOptions>
             <input
               type="radio"
               name="disease"
-              value="1"
+              value="유"
               id="유"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="유">유</label>
             <input
               type="radio"
               name="disease"
-              value="0"
+              value="무"
               id="무"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="무">무</label>
             <input
               type="radio"
               name="disease"
-              value="2"
+              value="모름"
               id="모름"
               onClick={handleRadioClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="모름">모름</label>
           </ThreeOptions>
@@ -321,7 +397,10 @@ const Survey = (props) => {
 
         <Line />
         <SurveyItem>
-          <Text bold color={theme.btnColor}>
+          <Text
+            bold
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+          >
             후유증
             <br />
             (중복선택가능)
@@ -333,6 +412,7 @@ const Survey = (props) => {
               value="발열"
               id="발열"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="발열">발열</label>
             <input
@@ -341,6 +421,7 @@ const Survey = (props) => {
               value="접종부위 통증"
               id="접종부위통증"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="접종부위통증">접종부위 통증</label>
             <input
@@ -349,6 +430,7 @@ const Survey = (props) => {
               value="접종부위 부기/발적"
               id="접종부위부기발적"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="접종부위부기발적">접종부위 부기/발적</label>
             <input
@@ -357,6 +439,7 @@ const Survey = (props) => {
               value="구토/매스꺼움"
               id="구토매스꺼움"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="구토매스꺼움">구토/매스꺼움</label>
           </FourCheckbox>
@@ -368,6 +451,7 @@ const Survey = (props) => {
               value="두통/관절통/근육통"
               id="두통관절통근육통"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
             <input
@@ -376,6 +460,7 @@ const Survey = (props) => {
               value="피로감"
               id="피로감"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="피로감">피로감</label>
             <input
@@ -384,6 +469,7 @@ const Survey = (props) => {
               value="알러지 반응"
               id="알러지반응"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="알러지반응">알러지 반응</label>
             <input
@@ -392,6 +478,7 @@ const Survey = (props) => {
               value="기타"
               id="기타"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="기타">기타</label>
             <input
@@ -400,22 +487,23 @@ const Survey = (props) => {
               value="무증상"
               id="무증상"
               onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
             />
             <label htmlFor="무증상">무증상</label>
           </FiveCheckbox>
           {/* <div></div> */}
         </SurveyItem>
 
-        <Button
-          margin="35px 0 0 0"
-          width={theme.mediumButtonWidth}
-          height={theme.mediumButtonHeight}
+        <SubmitButton
           type="submit"
-          bg="#242424"
           _onClick={submitSurvey}
+          disabled={
+            (ableSubmitButton() === false && "disabled") ||
+            (ableSubmitButton() === true && "enabled")
+          }
         >
           회원가입
-        </Button>
+        </SubmitButton>
       </form>
     </>
   );
@@ -443,7 +531,7 @@ const TwoOptions = styled.div`
 
 const ThreeOptions = styled.div`
   display: grid;
-  grid-template-columns: 20px 120px 20px 120px 20px 160px;
+  grid-template-columns: 20px 100px 20px 100px 20px 160px;
 `;
 
 const FourOptions = styled.div`
@@ -459,6 +547,28 @@ const FourCheckbox = styled.div`
 const FiveCheckbox = styled.div`
   display: grid;
   grid-template-columns: 20px 135px 20px 50px 20px 80px 20px 35px 20px 50px;
+`;
+
+const SubmitButton = styled.button`
+  margin: 35px 0 0 0;
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  background-color: ${theme.typoBlack};
+  border: none;
+  color: white;
+  transition: background-color 0.3s;
+  :hover {
+    cursor: pointer;
+    background-color: white;
+    color: ${theme.typoBlack};
+    border: 1px solid ${theme.typoBlack};
+  }
+  :disabled {
+    background-color: ${theme.typoLightGrey2};
+    cursor: default;
+    color: white;
+    border: none;
+  }
 `;
 
 export default Survey;

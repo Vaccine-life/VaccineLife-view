@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from '../styles/theme';
 import PopularCard from "./board/PopularCard";
 import Arrow from "../images/Arrow.png";
+import { history } from "../redux/configStore";
 
 const data = {
     vacBoardId: 0,
@@ -50,8 +51,17 @@ const MainPopular = (props) => {
 
                 <PopularTitle>
                     <h1>백신 접종 후기 인기글</h1>
-                    <h3>더보기</h3>
-                    <img src={Arrow} alt="" />
+
+                    <div>
+                        <h3
+                            onClick={() => {
+                                history.push("/vaccine")
+                            }}>
+                            더보기
+                        </h3>
+                        <img src={Arrow} alt="" />
+                    </div>
+
                 </PopularTitle>
 
                 <PopularCards>
@@ -104,6 +114,10 @@ const GreyBox = styled.div`
 
 const PopularTitle = styled.div`
     display : flex;
+    width: 80vw;
+    justify-content: space-between;
+    /* background-color: red; */
+    margin: auto;
 
     & > h1 {
         width: 212px;
@@ -118,12 +132,21 @@ const PopularTitle = styled.div`
 
         color: #242424;
 
-        padding-top: 96px; 
-        padding-left: 290px;
+        padding-top: 5%; 
     }
 
-    & > h3 {
-        width: 50px;
+    & > div {
+        display: flex;
+        cursor: pointer;
+        margin-top: 6%;
+        
+        &:hover{
+            text-decoration: underline;
+            text-underline-position: under;
+        }
+
+        & > h3 {
+        width: 60px;
         height: 26px;
 
         font-weight: normal;
@@ -134,27 +157,25 @@ const PopularTitle = styled.div`
         letter-spacing: -0.3px;
 
         color: ${theme.typoGrey3};
-
-        padding-left: 55%;
-        padding-top: 108px;
-        
     }
 
-    & > img {
+        & > img {
         width: auto;
         height: auto;
         max-width: 15px;
         max-height: 15px;
-
-        padding-left: 10px;
-        padding-top: 115px;
+        
+        margin-top: 7px;
+        margin-left: 8px;
+        }
     }
 `
 
 const PopularCards = styled.div`
     display: flex;
-    margin-left: 250px;
-    margin-right: 250px;
+    width: 90vw;
+    /* background-color: gray; */
+    margin-left: 5%;
 
     padding-top: 40px;
 `

@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: {
     nickname: "",
-    isVaccine: 0,
+    isVaccine: 1,
     degree: 1,
     type: "",
     gender: "",
-    age: "",
-    disease: "",
+    age: 10,
+    disease: 0,
     afterEffect: "",
   },
   is_login: false,

@@ -16,7 +16,6 @@ const Map = () => {
     const makeData = (items) => {
       // todayList는 2000개가 넘던 items 중, 가장 최근인 '오늘'에 해당하는 요소들만 긁어옴
       const todayList = items.slice(items.length - 17, items.length);
-      console.log(todayList);
 
       // todayNum이라는 빈객체에 {시도: 2차접종자수}로 이루어진 키값쌍을 넣어준다.
       // 근데 모든 시도를 다 돌아야 하니까 map해줌
@@ -36,16 +35,14 @@ const Map = () => {
         <img src={disc} alt="" />
         <h3>지역별 접종수</h3>
       </MapTitle>
+
       <MapBox>
         <img src={SouthKorea} alt="" />
-        {/* <Sido>
-                    <h3>
-                        경기
-                    </h3>
-                    <Shot>
-                        접종수
-                    </Shot>
-                </Sido> */}
+
+        <Sido>
+          <h3>경기</h3>
+          <Shot>접종수</Shot>
+        </Sido>
       </MapBox>
     </Wrapper>
   );
@@ -110,18 +107,34 @@ const Sido = styled.div`
   width: 70px;
   position: absolute;
   z-index: 1;
+
+  & > h3 {
+    width: 30px;
+    height: 24px;
+
+    font-weight: bold;
+    font-size: ${theme.SubHeadTwoSize};
+    line-height: 24px;
+
+    text-align: center;
+    letter-spacing: -0.3px;
+
+    color: #242424;
+  }
 `;
 
 const Shot = styled.div`
-  background-color: #3853c4;
-  color: white;
-  /* width: 70px;
-    height: 40px; */
-  width: 55px;
-  height: 24px;
+  padding: 0px 8px;
+  width: 50px;
+  height: 22px;
+
+  background: #${theme.btnColor};
   border-radius: 12px;
-  text-align: center;
-  line-height: 40px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 0px;
 `;
 
 export default Map;
