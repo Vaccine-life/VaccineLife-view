@@ -4,9 +4,12 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as amptyHeart } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import theme from "../styles/theme";
+import { useSelector } from "react-redux";
 
 const LikeIconChanger = (props) => {
-  const { isHeart } = props;
+  const { boardId } = props;
+  const like_list = useSelector((state) => state.user.likeList);
+  const isHeart = like_list.includes(boardId);
   return (
     <Wrapper isHeart={isHeart}>
       {isHeart ? (

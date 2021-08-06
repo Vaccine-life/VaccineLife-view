@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+/* import { Bar } from "react-chartjs-2"; */
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
@@ -90,87 +90,86 @@ const HorizontalBarChart = () => (
   </Wrapper>
 );
 
-
 const Wrapper = styled.div`
-margin-left: 50px;
+  margin-left: 50px;
 `;
 
 const BarTitle1 = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-width: 166px;
-height: 26px;
+  width: 166px;
+  height: 26px;
 
-& > img {
-width: 24px;
-height: 24px;
-}
+  & > img {
+    width: 24px;
+    height: 24px;
+  }
 
-& > h3 {
-width: 138px;
-height: 26px;
+  & > h3 {
+    width: 138px;
+    height: 26px;
 
-font-weight: bold;
-font-size: ${theme.SubHeadOneSize};
-line-height: 26px;
-letter-spacing: -0.3px;
-color: #242424;
+    font-weight: bold;
+    font-size: ${theme.SubHeadOneSize};
+    line-height: 26px;
+    letter-spacing: -0.3px;
+    color: #242424;
 
-padding-left: 4px;
-}
+    padding-left: 4px;
+  }
 `;
 
 const BarBox1 = styled.div`
-width: 510px;
-height: 220px;
-background: #ffffff;
+  width: 510px;
+  height: 220px;
+  background: #ffffff;
 
-border: 1px solid ${theme.typoLightGrey2};
-box-sizing: border-box;
-border-radius: 16px;
+  border: 1px solid ${theme.typoLightGrey2};
+  box-sizing: border-box;
+  border-radius: 16px;
 `;
 
 const BarTitle2 = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
 
-width: 183px;
-height: 26px;
+  width: 183px;
+  height: 26px;
 
-& > img {
-width: 24px;
-height: 24px;
-}
+  & > img {
+    width: 24px;
+    height: 24px;
+  }
 
-& > h3 {
-width: 155px;
-height: 26px;
+  & > h3 {
+    width: 155px;
+    height: 26px;
 
-font-weight: bold;
-font-size: ${theme.SubHeadOneSize};
-line-height: 26px;
-letter-spacing: -0.3px;
-color: #242424;
+    font-weight: bold;
+    font-size: ${theme.SubHeadOneSize};
+    line-height: 26px;
+    letter-spacing: -0.3px;
+    color: #242424;
 
-padding-left: 4px;
-}
+    padding-left: 4px;
+  }
 `;
 
 const BarBox2 = styled.div`
-width: 510px;
-height: 220px;
+  width: 510px;
+  height: 220px;
 
-background: #ffffff;
+  background: #ffffff;
 
-border: 1px solid ${theme.typoLightGrey2};
-box-sizing: border-box;
-border-radius: 16px;
+  border: 1px solid ${theme.typoLightGrey2};
+  box-sizing: border-box;
+  border-radius: 16px;
 `;
 
 export default HorizontalBarChart;
