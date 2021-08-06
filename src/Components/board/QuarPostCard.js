@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 
 // 사용시 props에 board 타입줄것 (true or false)
-const PopularCard = (props) => {
+const QuarPostCard = (props) => {
   const {
     title,
     contents,
@@ -20,7 +20,6 @@ const PopularCard = (props) => {
     commentCount,
     createdAt,
     boardId,
-    type,
   } = props;
 
   /* 로그인 했을때 isHeart 구현*/
@@ -29,7 +28,7 @@ const PopularCard = (props) => {
   const editorState = EditorState.createWithContent(storedState);
 
   const handleMoveDetail = () => {
-    history.push(`/detail/${boardId}`);
+    history.push(`/quarantinedetail/${boardId}`);
   };
 
   return (
@@ -41,10 +40,6 @@ const PopularCard = (props) => {
       _onClick={handleMoveDetail}
       bg="white"
     >
-      <InfoWrapper>
-        <InfoDiv>{type}</InfoDiv>
-      </InfoWrapper>
-
       <TitleWrapper>{title}</TitleWrapper>
 
       <ContentWrapper>
@@ -79,27 +74,11 @@ const PopularCard = (props) => {
   );
 };
 
-PopularCard.defaultProps = {
+QuarPostCard.defaultProps = {
   vacBoardId: -1,
   quarBoardId: -1,
 };
 
-const InfoWrapper = styled.div`
-  display: flex;
-  margin-bottom: 24px;
-`;
-const InfoDiv = styled.div`
-  width: 60px;
-  height: 24px;
-  font-size: ${theme.SubHeadTwoSize};
-  line-height: ${theme.SubHeadTwoHeight};
-  font-weight: 700;
-  background-color: ${theme.bg2};
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 const TitleWrapper = styled.div`
   width: 100%;
   height: 60px;
@@ -129,4 +108,4 @@ const TextDiv = styled.div`
   line-height: ${theme.bodyThreeHeight};
 `;
 
-export default PopularCard;
+export default QuarPostCard;

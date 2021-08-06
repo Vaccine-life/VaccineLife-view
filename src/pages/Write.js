@@ -9,10 +9,13 @@ import Input from "../elements/Input";
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
+import { actionWriteExperience } from "../redux/modules/board";
 
 const Write = () => {
+  const userId = useSelector((state) => state.user.user.userId);
+  const dispatch = useDispatch();
   //alert
   const alert_status = useSelector((state) => state.popup.alert);
   const url = history.location.pathname;
@@ -37,11 +40,19 @@ const Write = () => {
     setTitle(value);
   };
 
+  const contentObj = {
+    userId: userId,
+    title: title,
+    contents: contents,
+  };
+
   const handlePostEx = () => {
     if (urlExchanger) {
       //백신후기 dispatch
+      dispatch(actionWriteExperience("vaccine", contentObj));
     } else {
       //격리후기 dispatch
+      dispatch(actionWriteExperience("quarantine", contentObj));
     }
   };
 

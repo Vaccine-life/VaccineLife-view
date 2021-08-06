@@ -13,8 +13,21 @@ import Detail from "../pages/Detail";
 import styled from "styled-components";
 import Modify from "../pages/Modify";
 import Quarantine from "../pages/Quarantine";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCookie } from "./cookie";
+import { actionGetUseInfo } from "../redux/modules/user";
 
 function App() {
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
+
+  useEffect(() => {
+    if (!is_login && getCookie("vaccine_life_token")) {
+      dispatch(actionGetUseInfo());
+    }
+  }, []);
+
   return (
     <Wrapper className="App">
       <Header />
@@ -23,16 +36,22 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
-        <Route exact path="/vaccineboard/write" component={Write} />
-        <Route exact path="/modify/:id" component={Modify} />
+        {is_login && (
+          <Route exact path="/vaccineboard/write" component={Write} />
+        )}
+        {is_login && <Route exact path="/modify/:id" component={Modify} />}
         <Route exact path="/quarantine" component={Quarantine} />
         <Route
           exact
           path="/quarantinedetail/:id"
           component={QuarantineDetail}
         />
-        <Route exact path="/quarantineboard/write" component={Write} />
-        <Route exact path="/quarantinemodify/:id" component={Modify} />
+        {is_login && (
+          <Route exact path="/quarantineboard/write" component={Write} />
+        )}
+        {is_login && (
+          <Route exact path="/quarantinemodify/:id" component={Modify} />
+        )}
         <Route exact path="/medical" component={Medical} />
         <Redirect from="*" to="/" />
       </Switch>
