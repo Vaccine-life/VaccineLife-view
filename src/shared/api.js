@@ -17,6 +17,7 @@ export const boardAxios = {
   getPageVac: (page) =>
     api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
   topThreeVac: () => api.get("/api/vacBoard/topLike"),
+  topThreeQuar: () => api.get("/api/quarBoard/topLike"),
 };
 
 export const writeAxios = {

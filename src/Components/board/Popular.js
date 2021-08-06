@@ -41,8 +41,9 @@ const Popular = (props) => {
   useEffect(() => {
     //  게시판 타입에 따라 디스패치 다르게 할 것
     if (board === "vaccine") {
-      dispatch(actionGetTopThreeVac());
+      dispatch(actionGetTopThreeVac("vaccine"));
     } else {
+      dispatch(actionGetTopThreeVac("quarantine"));
     }
   }, []);
 

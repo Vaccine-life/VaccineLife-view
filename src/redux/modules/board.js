@@ -46,11 +46,16 @@ const board = createSlice({
 });
 
 export const actionGetTopThreeVac =
-  () =>
+  (board) =>
   async (dispatch, getState, { history }) => {
     try {
-      const getData = await boardAxios.topThreeVac();
-      dispatch(actionSetTopThree(getData.data));
+      if (board === "vaccine") {
+        const getData = await boardAxios.topThreeVac();
+        dispatch(actionSetTopThree(getData.data));
+      } else {
+        const getData = await boardAxios.topThreeQuar();
+        dispatch(actionSetTopThree(getData.data));
+      }
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
