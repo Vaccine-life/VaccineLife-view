@@ -121,7 +121,7 @@ const CommentWrite = (props) => {
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
-                <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/>
+                {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
 
                 <Grid is_flex="space_column" border="1px solid #c1c1c1">
                     <Grid margin="0 5rem">

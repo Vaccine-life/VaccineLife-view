@@ -21,7 +21,7 @@ const Medical = () => {
 
   return (
     <React.Fragment>
-      <Grid width={theme.medicalWidth} margin={`160px auto auto auto`}>
+      <Grid width={theme.medicalWidth} margin={`160px auto 100px auto`}>
         <Grid align="left">
           <Text
             bold
