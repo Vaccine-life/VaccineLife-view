@@ -33,6 +33,7 @@ const Popular = (props) => {
   const { board } = props;
   const {
     vacBoardId,
+    quarBoardId,
     title,
     contents,
     likeCount,
@@ -51,22 +52,26 @@ const Popular = (props) => {
         </Text>
       </Grid>
       <Grid>
-        {board && (
-          <PopularCard
-            board
-            vacBoardId={vacBoardId}
-            title={title}
-            contents={contents}
-            likeCount={likeCount}
-            totalVisitors={totalVisitors}
-            commentCount={commentCount}
-            createdAt={createdAt}
-            user={user}
-          />
-        )}
+        {/* 맵돌리는 부분 카드 하나당*/}
+        <PopularCard
+          board={board}
+          boardId={board === "vaccine" ? vacBoardId : quarBoardId}
+          title={title}
+          contents={contents}
+          likeCount={likeCount}
+          totalVisitors={totalVisitors}
+          commentCount={commentCount}
+          createdAt={createdAt}
+          user={user}
+        />
       </Grid>
     </>
   );
+};
+
+Popular.defaultProps = {
+  vacBoardId: -1,
+  quarBoardId: -1,
 };
 
 export default Popular;

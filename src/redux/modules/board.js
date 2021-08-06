@@ -18,10 +18,10 @@ const board = createSlice({
     actionSetBoard: (state, action) => {
       state.board = action.payload;
     },
-    // action을  vacBoardId 값을 가져옴
+    // action을  vacBoardId, board 값을 가져옴
     actionSetPrevNextPage: (state, action) => {
       const currentIndex = state.list.findIndex((each) => {
-        return each.vacBoardId === action.payload;
+        return each.boardId === action.payload;
       });
       const totalLength = state.list.length;
       state.page.prev =

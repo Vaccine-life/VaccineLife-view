@@ -4,9 +4,9 @@ import _ from "lodash";
 const InfinityScroll = (props) => {
   const { nextCall, children, is_loading, is_next } = props;
   const throttle = _.throttle(() => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const innerHeight = window.innerHeight;
-    const scrollTop =
+    let scrollHeight = document.documentElement.scrollHeight;
+    let innerHeight = window.innerHeight;
+    let scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     let current_height = scrollHeight - innerHeight - scrollTop;

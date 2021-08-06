@@ -40,30 +40,29 @@ const Main = () => {
 
 
 const Intro = styled.div`
-  width: 100vw;
-  height: 200px;
-  background-color: ${theme.bg};
-  
-  & > h1 {
-    padding-top: 120px;
+width: 100vw;
+height: 200px;
+background-color: ${theme.bg};
 
-    font-size: ${theme.headTwoHeight};
-    line-height: 42px;
+& > h1 {
+padding-top: 120px;
 
-    color: #FFFFFF;
-    
-    & > span {
-      font-weight: 600;
-    }
-  }
+font-size: ${theme.headTwoHeight};
+line-height: 42px;
+
+color: #FFFFFF;
+
+& > span {
+  font-weight: 600;
+}
+}
 `
 
 const MapAndChart = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 80px auto;
+display: flex;
+justify-content: center;
+margin: 80px auto;
 `
-
 
 
 export default Main;

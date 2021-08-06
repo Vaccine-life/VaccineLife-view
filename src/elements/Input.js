@@ -67,6 +67,7 @@ const Input = (props) => {
     <React.Fragment>
       <Grid>
         <ElInput
+          bg={bg}
           fontSize={fontSize}
           height={height}
           color={color}
@@ -134,6 +135,7 @@ const ElInput = styled.input`
   :focus {
     outline: none;
   }
+  ${(props) => props.bg && `background-color: ${props.bg};`}
   ${(props) => (props.margin ? `margin:${props.margin}` : "")};
   width: 100%;
   ${(props) => (props.border ? `border:${props.border}` : "")};
