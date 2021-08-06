@@ -1,3 +1,5 @@
+// vaccine_life_token
+
 const getCookie = (name) => {
   let value = ";" + document.cookie;
   let parts = value.split(`;${name}=`);
@@ -7,9 +9,9 @@ const getCookie = (name) => {
 };
 
 //set
-
 const setCookie = (name, value, exp = 1) => {
   let date = new Date();
+
   date.setTime(date.getTime() + exp * 30 * 60 * 1000);
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
 };
