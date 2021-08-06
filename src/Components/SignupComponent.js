@@ -47,7 +47,7 @@ const SignupComponent = (props) => {
     },
 
     validationSchema: Yup.object({
-      username: Yup.string().required("이름을 입력해주세요."),
+      username: Yup.string().required("아이디를 입력해주세요."),
       password: Yup.string()
         .min(4, "비밀번호는 4자리 이상이여야 합니다.")
         .matches(/[a-zA-Z]/, "패스워드에는 반드시 영문을 포함해야합니다.")

@@ -21,17 +21,22 @@ const PopularCard = (props) => {
     commentCount,
     createdAt,
     user,
-    vacBoardId,
+    boardId,
   } = props;
+
+  /* 로그인 했을때 isHeart 구현*/
 
   const storedState = convertFromRaw(JSON.parse(contents));
   const editorState = EditorState.createWithContent(storedState);
 
   const handleMoveDetail = () => {
-    if (board) {
-      history.push(`/detail/${vacBoardId}`);
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else {
+      history.push(`/quarantinedetail/${boardId}`);
     }
   };
+
   return (
     <Grid
       width={theme.popularCardWidth}
@@ -39,10 +44,11 @@ const PopularCard = (props) => {
       padding="32px"
       hover
       _onClick={handleMoveDetail}
+      bg="white"
     >
       {board === "vaccine" && (
         <InfoWrapper>
-          <InfoDiv>{user.type}</InfoDiv>
+          <InfoDiv>{user.type && user.type}</InfoDiv>
         </InfoWrapper>
       )}
       <TitleWrapper>{title}</TitleWrapper>
@@ -78,6 +84,12 @@ const PopularCard = (props) => {
     </Grid>
   );
 };
+
+PopularCard.defaultProps = {
+  vacBoardId: -1,
+  quarBoardId: -1,
+};
+
 const InfoWrapper = styled.div`
   display: flex;
   margin-bottom: 24px;

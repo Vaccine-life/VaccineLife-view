@@ -16,6 +16,7 @@ const Write = () => {
   //alert
   const alert_status = useSelector((state) => state.popup.alert);
   const url = history.location.pathname;
+
   // /vboard/write일때 true /qboard/write 일떄 false
   const urlExchanger = url === "/vaccineboard/write" ? true : false;
 
@@ -36,6 +37,14 @@ const Write = () => {
     setTitle(value);
   };
 
+  const handlePostEx = () => {
+    if (urlExchanger) {
+      //백신후기 dispatch
+    } else {
+      //격리후기 dispatch
+    }
+  };
+
   logger(contents);
   return (
     <Grid width={theme.writeWidth} margin={`160px auto auto auto`}>
@@ -51,6 +60,7 @@ const Write = () => {
           bold
           margin="0"
           bg={theme.bg}
+          _onClick={handlePostEx}
         >
           등록
         </Button>

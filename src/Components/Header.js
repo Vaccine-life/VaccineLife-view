@@ -30,8 +30,9 @@ const Header = (props) => {
               >
                 <Image
                   shape="rectangle"
-                  width="95px"
-                  height="51px"
+                  width={theme.logoWidth}
+                  height={theme.logoHeight}
+                  cursor="pointer"
                   src={logo}
                 />
               </Grid>
@@ -47,13 +48,33 @@ const Header = (props) => {
                 </EachDiv>
                 <EachDiv
                   nav={
-                    url === "/vaccine" || url.includes("/detail") ? true : false
+                    url === "/vaccine" ||
+                    url.includes("/detail") ||
+                    url === "/vaccineboard/write" ||
+                    url.includes("/modify")
+                      ? true
+                      : false
                   }
                   onClick={() => {
                     history.push("/vaccine");
                   }}
                 >
                   백신후기
+                </EachDiv>
+                <EachDiv
+                  nav={
+                    url === "/quarantine" ||
+                    url.includes("/quarantinedetail") ||
+                    url === "/quarantineboard/write" ||
+                    url.includes("/quarantinemodify")
+                      ? true
+                      : false
+                  }
+                  onClick={() => {
+                    history.push("/quarantine");
+                  }}
+                >
+                  격리후기
                 </EachDiv>
                 <EachDiv
                   nav={url === "/medical" ? true : false}
@@ -104,8 +125,9 @@ const Wrapper = styled.div`
   height: ${theme.headerHeight};
   position: fixed;
   z-index: 2;
-  border: 1px solid #dbdbdb;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  /* border: 1px solid #dbdbdb; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  /* box-shadow: ${theme.shadow} 0px 3px 10px 0px; */
 `;
 
 const EachDiv = styled.div`
