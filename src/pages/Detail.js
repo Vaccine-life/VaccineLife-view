@@ -71,9 +71,10 @@ const Detail = () => {
   }, []);
 
   return (
-    <Grid width={theme.detailWidth} margin={`160px auto auto auto`}>
+    <Grid width={theme.detailWidth} margin="160px auto auto auto">
       <BoardInfo
-        vacBoardId={vacBoardId}
+        board="vaccine"
+        boardId={vacBoardId}
         user={user}
         title={title}
         totalVisitors={totalVisitors}
@@ -88,7 +89,7 @@ const Detail = () => {
         degree={user.degree}
         afterEffect={user.afterEffect}
       />
-      <Contents contents={contents} likeCount={likeCount} />
+      <Contents board="vaccine" contents={contents} likeCount={likeCount} />
       <MoveBox boardType={boardType} />
       {confirm_status && (
         <Confirm

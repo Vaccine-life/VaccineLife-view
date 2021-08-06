@@ -12,6 +12,7 @@ import QuarantineDetail from "../pages/QuarantineDetail";
 import Detail from "../pages/Detail";
 import styled from "styled-components";
 import Modify from "../pages/Modify";
+import Quarantine from "../pages/Quarantine";
 
 function App() {
   return (
@@ -21,18 +22,18 @@ function App() {
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/vaccine" component={Vaccine} />
-        <Route exact path="/quarantine" component={Vaccine} />
-        <Route exact path="/medical" component={Medical} />
         <Route exact path="/detail/:id" component={Detail} />
+        <Route exact path="/vaccineboard/write" component={Write} />
+        <Route exact path="/modify/:id" component={Modify} />
+        <Route exact path="/quarantine" component={Quarantine} />
         <Route
           exact
           path="/quarantinedetail/:id"
           component={QuarantineDetail}
         />
-        <Route exact path="/vaccineboard/write" component={Write} />
         <Route exact path="/quarantineboard/write" component={Write} />
-        <Route exact path="/modify/:id" component={Modify} />
         <Route exact path="/quarantinemodify/:id" component={Modify} />
+        <Route exact path="/medical" component={Medical} />
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />

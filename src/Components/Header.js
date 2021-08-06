@@ -27,11 +27,11 @@ const Header = (props) => {
                 _onClick={() => {
                   history.push("/");
                 }}
-                >
+              >
                 <Image
                   shape="rectangle"
-                  width="95px"
-                  height="51px"
+                  width={theme.logoWidth}
+                  height={theme.logoHeight}
                   cursor="pointer"
                   src={logo}
                 />
@@ -48,7 +48,12 @@ const Header = (props) => {
                 </EachDiv>
                 <EachDiv
                   nav={
-                    url === "/vaccine" || url.includes("/detail") ? true : false
+                    url === "/vaccine" ||
+                    url.includes("/detail") ||
+                    url === "/vaccineboard/write" ||
+                    url.includes("/modify")
+                      ? true
+                      : false
                   }
                   onClick={() => {
                     history.push("/vaccine");
@@ -58,7 +63,12 @@ const Header = (props) => {
                 </EachDiv>
                 <EachDiv
                   nav={
-                    url === "/quarantine" || url.includes("/detail") ? true : false
+                    url === "/quarantine" ||
+                    url.includes("/quarantinedetail") ||
+                    url === "/quarantineboard/write" ||
+                    url.includes("/quarantinemodify")
+                      ? true
+                      : false
                   }
                   onClick={() => {
                     history.push("/quarantine");
