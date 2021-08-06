@@ -32,6 +32,30 @@ const SignupComponent = (props) => {
     console.log("handleNicknameChange", e.target.value);
   };
 
+  // const formik = useFormik({
+  //   initialValues: {
+  //     username: "",
+  //     password: "",
+  //     passwordCheck: "",
+  //     nickname: "",
+  //   },
+
+  //   validationSchema: Yup.object({
+  //     username: Yup.string().required("아이디를 입력해주세요."),
+  //     password: Yup.string()
+  //       .min(4, "비밀번호는 4자리 이상이여야 합니다.")
+  //       .matches(/[a-zA-Z]/, "패스워드에는 반드시 영문을 포함해야합니다.")
+  //       .required("패스워드를 입력해주세요."),
+  //     passwordCheck: Yup.string()
+  //       .required("패스워드를 재입력해주세요")
+  //       .oneOf([Yup.ref("pwd"), null], "비밀번호가 일치하지 않습니다."),
+  //     nickname: Yup.string().required("닉네임을 입력해주세요."),
+  //   }),
+
+  //   onSubmit: (values) => {
+  //     console.log("회원가입버튼 클릭시", values);
+  //   },
+  // });
   return (
     <>
       {!next && (

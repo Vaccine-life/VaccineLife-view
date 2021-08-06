@@ -19,9 +19,9 @@ const MoveBox = (props) => {
       return;
     }
     if (boardType) {
-      history.push(`/detail/${page.prev?.vacBoardId}`);
+      history.push(`/detail/${page.prev?.boardId}`);
     } else {
-      history.push(`/quarantinedetail/${page.prev?.quarBoardId}`);
+      history.push(`/quarantinedetail/${page.prev?.boardId}`);
     }
   };
   const handleClickRight = () => {
@@ -29,9 +29,9 @@ const MoveBox = (props) => {
       return;
     }
     if (boardType) {
-      history.push(`/detail/${page.next?.vacBoardId}`);
+      history.push(`/detail/${page.next?.boardId}`);
     } else {
-      history.push(`/quarantinedetail/${page.next?.quarBoardId}`);
+      history.push(`/quarantinedetail/${page.next?.boardId}`);
     }
   };
 

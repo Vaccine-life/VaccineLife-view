@@ -23,8 +23,11 @@ const Survey = (props) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
-  // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, submit button을 disabled처리한다. 코드 하단 Button태그 참조.
+  // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, SubmitButton을 disabled처리한다.
   const ableSubmitButton = () => {
+    if (isVaccine === 0) {
+      return "!disabled";
+    }
     if (
       isVaccine === 2 ||
       degree === 0 ||
@@ -34,9 +37,7 @@ const Survey = (props) => {
       disease === "" ||
       afterEffect === ""
     ) {
-      return false;
-    } else if (isVaccine === 0) {
-      return true;
+      return "disabled";
     }
   };
 
@@ -76,11 +77,11 @@ const Survey = (props) => {
     });
 
     let survey = {
-      isVaccine: isVaccine,
+      name: parseInt(value),
     };
 
-    console.log(survey);
-    console.log(value, name);
+    console.log(name, value);
+    console.log(isVaccine);
     // state.user에 설문조사 데이터를 넣어줌
     dispatch(actionSetUser(survey));
   };
@@ -126,7 +127,7 @@ const Survey = (props) => {
               name="isVaccine"
               value="1"
               id="isVaccine1"
-              onClick={handleRadioClick}
+              onClick={handleIsVaccineClick}
             />
             <label htmlFor="isVaccine1">접종함</label>
             <input
@@ -497,10 +498,7 @@ const Survey = (props) => {
         <SubmitButton
           type="submit"
           _onClick={submitSurvey}
-          disabled={
-            (ableSubmitButton() === false && "disabled") ||
-            (ableSubmitButton() === true && "enabled")
-          }
+          // disabled={ableSubmitButton}
         >
           회원가입
         </SubmitButton>
