@@ -39,14 +39,12 @@ const Map = () => {
             <MapBox>
                 <img src={SouthKorea} alt="" />
 
-                <Sido>
-                    <h3>
-                        경기
-                    </h3>
+                <Gyeonggi>
+                    <h3>경기</h3>
                     <Shot>
-                        접종수
+                        <h4>접종수</h4>
                     </Shot>
-                </Sido>
+                </Gyeonggi>
 
             </MapBox>
 
@@ -55,93 +53,112 @@ const Map = () => {
 }
 
 const Wrapper = styled.div`
-    margin-right : 50px;
+margin-right : 50px;
 `
 
 const MapTitle = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    height: 26px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 130px;
+height: 26px;
 
-    & > img {
-        width: 24px;
-        height: 24px;   
-    }
+& > img {
+width: 24px;
+height: 24px;   
+}
 
-    & > h3 {
-        width: 102px;
-        height: 26px;
+& > h3 {
+width: 102px;
+height: 26px;
 
-        font-weight: bold;
-        font-size: ${theme.SubHeadOneSize};
-        line-height: 26px;
+font-weight: bold;
+font-size: ${theme.SubHeadOneSize};
+line-height: 26px;
 
-        letter-spacing: -0.3px;
+letter-spacing: -0.3px;
 
-        color: #242424;
+color: #242424;
 
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-        padding-left: 4px;
-    }
+flex: none;
+order: 1;
+flex-grow: 0;
+padding-left: 4px;
+}
 
 `
 
 const MapBox = styled.div`
-    width: 504px;
-    height: 490px;
+position: relative;
+width: 504px;
+height: 490px;
 
-    background: ${theme.bg4};
+background: ${theme.bg4};
 
-    border: 1px solid ${theme.bg3};
-    box-sizing: border-box;
-    border-radius: 16px;
-    
-    & > img {
-        width: auto;
-        height: auto;
-        max-width: 450px;
-        max-height: 450px;
-        padding-top: 20px;
-    }
+border: 1px solid ${theme.bg3};
+box-sizing: border-box;
+border-radius: 16px;
+
+& > img {
+width: auto;
+height: auto;
+max-width: 450px;
+max-height: 450px;
+padding-top: 20px;
+}
 `
 
-const Sido = styled.div`
-    width: 70px;
-    position: absolute;
-    z-index: 1;
+const Gyeonggi = styled.div`
+position: absolute;
+left: 160px;
+top: 30px;
+width: 70px;
+z-index: 1;
 
-    & > h3 {
-        width: 30px;
-        height: 24px;
+& > h3 {
+width: 30px;
+height: 24px;
+margin: 0px auto;
 
-        font-weight: bold;
-        font-size: ${theme.SubHeadTwoSize};
-        line-height: 24px;
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: 24px;
 
-        text-align: center;
-        letter-spacing: -0.3px;
+text-align: center;
+letter-spacing: -0.3px;
 
-        color: #242424;
-    }
+color: #242424;
+}
 `
 
 const Shot = styled.div`
-    padding: 0px 8px;
-    width: 50px;
-    height: 22px;
+/* display: flex; */
+/* flex-direction: row; */
+/* align-items: flex-start; */
+padding: 0px 10px;
 
-    background: #${theme.btnColor};
-    border-radius: 12px;
+position: static;
+width: 55px;
+height: 24px;
+left: 0px;
+top: 24px;
 
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-    margin: 0px 0px;
+background: ${theme.bg};
+border-radius: 12px;
+
+& > h4 {
+width: 50px;
+height: 24px;
+
+font-weight: normal;
+font-size: ${theme.bodyThreeSize};
+line-height: 24px;
+
+color: #FFFFFF;
+
+margin: 0px auto;
+}
 `
 
 export default Map;
