@@ -49,6 +49,8 @@ const theme = {
   userSurveywidth: "44px",
   userSurveyHeight: "24px",
   totalButtonWidth: "138px",
+  logoWidth: "95px",
+  logoHeight: "51px",
 
   //layout size
   headerHeight: "81px",

@@ -42,12 +42,12 @@ const Wrapper = styled.div`
   overflow: auto;
 
   .public-DraftEditor-content {
-    font-size: ${theme.headTweSize};
-    line-height: ${theme.headTwoHeight};
+    font-size: ${theme.bodyOneSize};
+    line-height: ${theme.bodyOneHeight};
   }
   .public-DraftEditorPlaceholder-root {
-    font-size: ${theme.headTweSize};
-    line-height: ${theme.headTwoHeight};
+    font-size: ${theme.bodyOneSize};
+    line-height: ${theme.bodyOneHeight};
   }
 `;
 

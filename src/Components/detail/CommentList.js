@@ -7,10 +7,14 @@ import { Input, Text, Button, Grid } from "../../elements";
 import { dispatch } from "react-redux";
 
 const CommentList = (props) => {
-  const { board, comment_list } = props;
+  const { board } = props;
   const dispatch = useDispatch();
   // 리덕스 이용 comment_list 받기
-  React.useEffect = (() => {}, []);
+  const handleOnDelete = () => {
+    if (board === "vaccine") {
+    } else {
+    }
+  };
 
   return (
     <React.Fragment>
@@ -35,9 +39,7 @@ const CommentList = (props) => {
             color={theme.typoLightGrey2}
             size={theme.bodyTwoSize}
             cursor="pointer"
-            _onClick={() => {
-              console.log("삭제!");
-            }}
+            _onClick={handleOnDelete}
           >
             삭제
           </Text>

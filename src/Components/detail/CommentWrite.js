@@ -24,6 +24,9 @@ const CommentWrite = (props) => {
   const write = () => {
     // console.log(comment);
     // 오브젝트로 넣어줘야
+    if (board === "vaccine") {
+    } else {
+    }
 
     dispatch();
     // 코멘트 작성 후 인풋태크에 있는 글 없애기

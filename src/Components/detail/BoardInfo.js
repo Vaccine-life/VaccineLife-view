@@ -8,11 +8,15 @@ import { actionConfirm } from "../../redux/modules/popup";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
-  const { vacBoardId, title, totalVisitors, createdAt, user, likeCount } =
+  const { board, boardId, title, totalVisitors, createdAt, user, likeCount } =
     props;
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    history.push(`/modify/${vacBoardId}`);
+    if (board === "vaccine") {
+      history.push(`/modify/${boardId}`);
+    } else {
+      history.push(`/quarantinemodify/${boardId}`);
+    }
   };
 
   return (
