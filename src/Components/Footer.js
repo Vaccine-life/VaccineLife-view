@@ -55,6 +55,20 @@ const Footer = () => {
                 margin="5px"
                 hover
                 // _onClick={() => {
+                //   window.location.replace("/vaccine");
+                // }}
+                _onClick={() => {
+                  history.push("/quarantine");
+                }}
+              >
+                격리후기
+              </Text>
+              <Text
+                color="#ffffff"
+                size={theme.SubHeadTwoSize}
+                margin="5px"
+                hover
+                // _onClick={() => {
                 //   window.location.replace("/medical");
                 // }}
                 _onClick={() => {

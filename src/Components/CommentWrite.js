@@ -3,6 +3,7 @@ import moment from "moment";
 import 'moment/locale/ko';
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment"
@@ -35,7 +36,7 @@ const CommentWrite = (props) => {
             setLength(len);
           };
           getTextLength(e.target.value);
-    }
+    }   
 
 
     // 몇 분 전(axios로 이어서 시간변화 확인필요)
@@ -79,7 +80,37 @@ const CommentWrite = (props) => {
             setLength(0);
         }  
     }
-    
+
+    // // test
+    // // interface TextAreaProp {
+    // //     className?: string;
+    // //     value?: ReactText | ReadonlyArray<string>;
+    // //     placeholder?: string;
+    // //     onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    // //   }
+      
+    // // const TextArea = memo<TextAreaProp>(
+    //     // ({ className, value, onChange, placeholder }) => {
+    //       const ref = useRef(null);
+      
+    //     //   useEffect(() => {
+    //     //     if (ref === null || ref.current === null) {
+    //     //       return;
+    //     //     }
+    //     //     ref.current.style.height = '38px';
+    //     //     ref.current.style.height = ref.current.scrollHeight + 'px';
+    //     //   }, []);
+      
+    //       const handleResizeHeight = useCallback(() => {
+    //         if (ref === null || ref.current === null) {
+    //           return;
+    //         }
+    //         ref.current.style.height = '38px';
+    //         ref.current.style.height = ref.current.scrollHeight + 'px';
+    //       }, []);
+    //     // }
+    // // )
+
 
     return(
         <React.Fragment>
@@ -89,6 +120,8 @@ const CommentWrite = (props) => {
                 <Grid align="left" width="10rem" margin="15px 0 auto 0">
                     <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
+
+                <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/>
 
                 <Grid is_flex="space_column" border="1px solid #c1c1c1">
                     <Grid margin="0 5rem">
@@ -103,6 +136,7 @@ const CommentWrite = (props) => {
                             // onSubmit={write}
                         />
                     </Grid>
+                    
 
                     <Grid is_flex="space_row" border="none">
                         <Grid padding="10px" bg="#ffffff" align="right">
