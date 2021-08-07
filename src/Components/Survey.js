@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Text, Button } from "../elements/index";
+import { Text } from "../elements/index";
 import theme from "../styles/theme";
-import { useDispatch, useSelector } from "react-redux";
-import { actionVisible } from "../redux/modules/modal";
-import { actionSetUser } from "../redux/modules/user";
 import survey from "./survey.css";
 
 const Survey = (props) => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-
   const [inputs, setInputs] = useState({
     isVaccine: 2,
     degree: 0,
@@ -21,28 +15,23 @@ const Survey = (props) => {
     afterEffect: "",
   });
 
-  // useEffect(() => {
-  //   // dispatch(actionSetUser(inputs));
-  //   console.log(user);
-  // }, []);
-
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
   // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, SubmitButton을 disabled처리한다.
+  // 모든 문항이 선택되었거나, 접종하지않음을 선택한 경우 SubmitButton을 enabled처리한다.
   const ableSubmitButton = () => {
-    console.log("inputs.isVaccine", inputs.isVaccine);
-    if (inputs.isVaccine === 0) {
+    if (isVaccine === 0) {
       return false;
     }
     if (
-      inputs.isVaccine === 2 ||
-      inputs.degree === 0 ||
-      inputs.type === "" ||
-      inputs.gender === "" ||
-      inputs.age === "" ||
-      inputs.disease === "" ||
-      inputs.afterEffect === ""
+      isVaccine === 2 ||
+      degree === 0 ||
+      type === "" ||
+      gender === "" ||
+      age === "" ||
+      disease === "" ||
+      afterEffect === ""
     ) {
       return true;
     }
@@ -55,24 +44,22 @@ const Survey = (props) => {
       ...inputs,
       [name]: parseInt(value),
     });
-
-    console.log(name, value);
-    console.log(inputs);
-    // state.user에 설문조사 데이터를 넣어줌
-    dispatch(actionSetUser(inputs));
   };
 
   // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-    setInputs({
-      ...inputs, // 기존의 input 객체를 복사한 뒤
-      [name]: value, // name 키를 가진 값을 value 로 설정
-    });
-
-    console.log(name, value);
-    // state.user에 설문조사 데이터를 넣어줌
-    dispatch(actionSetUser(inputs));
+    if (name === "degree") {
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사한 뒤
+        [name]: parseInt(value), // name 키를 가진 값을 value 로 설정
+      });
+    } else {
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사한 뒤
+        [name]: value, // name 키를 가진 값을 value 로 설정
+      });
+    }
   };
 
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
@@ -94,26 +81,11 @@ const Survey = (props) => {
   };
 
   const submitSurvey = (e) => {
-    // let survey = {
-    //   isVaccine: parseInt(isVaccine),
-    //   degree: parseInt(degree),
-    //   type: type,
-    //   gender: gender,
-    //   age: age,
-    //   disease: disease,
-    //   afterEffect: afterEffect.sort().join(", "),
-    // };
     e.preventDefault();
     console.log(inputs);
-
-    // // state.user에 설문조사 데이터를 넣어줌
-    // dispatch(actionSetUser(survey));
-
-    // // 모달 끄기
-    // dispatch(actionVisible());
   };
 
-  // form onSubmit에 함수 줘 제발
+  // form태그 onSubmit에 제출시 일어날 일을 함수로 주자.. 꼭!
   return (
     <>
       <form onSubmit={submitSurvey}>
