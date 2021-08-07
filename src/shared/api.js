@@ -16,11 +16,13 @@ export const userAxios = {
 export const boardAxios = {
   getPageVac: (page) =>
     api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
+  getDetailVac: (boardId) => api.get(`/api/vacBoard/${boardId}`),
+  getDetailQuar: (boardId) => api.get(`/api/quarBoard/${boardId}`),
   topThreeVac: () => api.get("/api/vacBoard/topLike"),
   topThreeQuar: () => api.get("/api/quarBoard/topLike"),
 };
 
 export const writeAxios = {
   vacWrite: (obj) => api.post("/api/vacBoard", obj),
-  quarWrite: (obj) => api.post("/api/vacBoard", obj),
+  quarWrite: (obj) => api.post("/api/quarBoard", obj),
 };

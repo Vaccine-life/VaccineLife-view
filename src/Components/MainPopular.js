@@ -6,7 +6,7 @@ import Arrow from "../images/Arrow.png";
 import { history } from "../redux/configStore";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionGetTopThreeVac } from "../redux/modules/board";
+import { actionGetTopThree } from "../redux/modules/board";
 
 const MainPopular = (props) => {
   const { board } = props;
@@ -15,13 +15,10 @@ const MainPopular = (props) => {
   // 추후 격리용으로 재사용시 참고하기: board==="vaccine"이 true면 백신top3가 나오는거고 false면 격리top3 나오는거
   useEffect(() => {
     //  게시판 타입에 따라 디스패치 다르게 할 것
-    if (board === "vaccine") {
-      dispatch(actionGetTopThreeVac("vaccine"));
-    } else {
-      dispatch(actionGetTopThreeVac("quarantine"));
-    }
+
+    dispatch(actionGetTopThree("vaccine"));
   }, []);
-  const top_list = useSelector((state) => state.board.topThree);
+  const top_list = useSelector((state) => state.board.topThreeVac);
   return (
     <div>
       <GreyBox>

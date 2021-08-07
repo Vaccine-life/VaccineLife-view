@@ -9,10 +9,17 @@ import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
-  const username = useSelector((state) => state.user.user.username);
+  const lonin_username = useSelector((state) => state.user.user.username);
 
-  const { board, boardId, title, totalVisitors, createdAt, user, likeCount } =
-    props;
+  const {
+    board,
+    boardId,
+    title,
+    totalVisitors,
+    createdAt,
+    nickname,
+    likeCount,
+  } = props;
   const dispatch = useDispatch();
   const handleOnClick = () => {
     if (board === "vaccine") {
@@ -66,7 +73,7 @@ const BoardInfo = (props) => {
           lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
-          {user.nickname}
+          {nickname}
         </Text>
         <VerticalLine />
         <Text
