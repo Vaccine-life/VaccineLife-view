@@ -8,6 +8,7 @@ const theme = {
   typoGrey3: "#6F6F6F",
   typoGrey2: "#A5A5A5",
   typoGrey1: "#C1C1C1",
+  typoBlack: "#242424",
   typoLightGrey2: "#DFDFDF",
   typoLightGrey1: "#F7F7F7",
   errorColor: "#F25F5C",

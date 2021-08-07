@@ -9,6 +9,7 @@ const api = axios.create({
 
 export const userAxios = {
   login: (user) => api.post("/api/login", user),
+  signup: (obj) => api.post("/api/signup", obj),
   getLikeListVac: (userId) => api.get(`/api/vacBoard/like/${userId}`),
   getLikeListQuar: (userId) => api.get(`/api/quarBoard/like/${userId}`),
 };
