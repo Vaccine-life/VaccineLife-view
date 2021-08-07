@@ -26,7 +26,7 @@ const Medical = () => {
           <Text
             bold
             size={theme.headOneSize}
-            lineHeight="2"
+            lineHeight={theme.headOneHeight}
             color={theme.fontColor}
           >
             의료진분들께
