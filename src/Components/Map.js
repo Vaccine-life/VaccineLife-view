@@ -269,8 +269,8 @@ width: max-content;
 height: max-content;
 
 background: ${theme.bg};
-border-radius: 12px;
-/* border-radius: 9px; */
+/* border-radius: 12px; */
+border-radius: 9px;
 /* border-radius: 0px; */
 
 font-weight: normal;

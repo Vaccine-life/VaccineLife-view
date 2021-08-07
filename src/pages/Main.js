@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Login from "./Login";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
-import Input from "../elements/Input";
+
 import Map from "../components/Map";
-import theme from '../styles/theme';
-import MainTo from '../components/MainTo';
-import MainPopular from '../components/MainPopular';
+import theme from "../styles/theme";
+import MainTo from "../components/MainTo";
+import MainPopular from "../components/MainPopular";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -21,7 +21,9 @@ const Main = () => {
       {modal_status && <Login />}
 
       <Intro>
-        <h1>여러분의 <span>백신 접종 후기</span>를 공유해주세요!</h1>
+        <h1>
+          여러분의 <span>백신 접종 후기</span>를 공유해주세요!
+        </h1>
       </Intro>
 
       <MapAndChart>
@@ -38,31 +40,29 @@ const Main = () => {
   );
 };
 
-
 const Intro = styled.div`
-width: 100vw;
-height: 200px;
-background-color: ${theme.bg};
+  width: 100vw;
+  height: 200px;
+  background-color: ${theme.bg};
 
-& > h1 {
-padding-top: 120px;
+  & > h1 {
+    padding-top: 120px;
 
-font-size: ${theme.headTwoHeight};
-line-height: 42px;
+    font-size: ${theme.headTwoHeight};
+    line-height: 42px;
 
-color: #FFFFFF;
+    color: #ffffff;
 
-& > span {
-  font-weight: 600;
-}
-}
-`
+    & > span {
+      font-weight: 600;
+    }
+  }
+`;
 
 const MapAndChart = styled.div`
-display: flex;
-justify-content: center;
-margin: 80px auto;
-`
-
+  display: flex;
+  justify-content: center;
+  margin: 80px auto;
+`;
 
 export default Main;
