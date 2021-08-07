@@ -88,6 +88,13 @@ export const actionGetUseInfo = () => (dispatch) => {
   dispatch(actionSetUser(userInfo));
 };
 
+export const actionLogoutCookie =
+  () =>
+  async (dispatch, getState, { history }) => {
+    deleteCookie("vaccine_life_token");
+    dispatch(actionLogout());
+  };
+
 export const actionGetLike =
   (board) =>
   async (dispatch, getState, { history }) => {

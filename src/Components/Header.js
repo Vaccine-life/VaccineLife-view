@@ -9,6 +9,8 @@ import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
 import theme from "../styles/theme";
+import { deleteCookie } from "../shared/cookie";
+import { actionLogoutCookie } from "../redux/modules/user";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -90,10 +92,27 @@ const Header = (props) => {
 
           <Grid is_flex="space_row" width="auto" margin="0 50px">
             {is_login ? (
-              <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
-                <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
-                안녕하세요
-              </Text>
+              <>
+                <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
+                  <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
+                  안녕하세요
+                </Text>
+                <Text
+                  width="5rem"
+                  cursor="pointer"
+                  margin="0 4rem"
+                  size={theme.headTwoSize}
+                  lineHeight={theme.headTwoHeight}
+                  bold
+                >
+                  <span
+                    style={{ boxShadow: "inset 0 -1px 0 #242424" }}
+                    onClick={() => dispatch(actionLogoutCookie())}
+                  >
+                    로그아웃
+                  </span>
+                </Text>
+              </>
             ) : (
               <Text
                 width="5rem"
