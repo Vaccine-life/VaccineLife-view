@@ -1,15 +1,26 @@
 import moment from "moment";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
 import { actionConfirm } from "../../redux/modules/popup";
+import displayedRestrict from "../../shared/displayedRestrict";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
-  const { board, boardId, title, totalVisitors, createdAt, user, likeCount } =
-    props;
+  const is_login = useSelector((state) => state.user.is_login);
+  const lonin_username = useSelector((state) => state.user.user.username);
+
+  const {
+    board,
+    boardId,
+    title,
+    totalVisitors,
+    createdAt,
+    nickname,
+    likeCount,
+  } = props;
   const dispatch = useDispatch();
   const handleOnClick = () => {
     if (board === "vaccine") {
@@ -63,7 +74,7 @@ const BoardInfo = (props) => {
           lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
-          {user.nickname}
+          {nickname}
         </Text>
         <VerticalLine />
         <Text
@@ -104,7 +115,7 @@ const BoardInfo = (props) => {
           lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
-          {moment(createdAt).format("YYYY.MM.DD hh:mm")}
+          {displayedRestrict(createdAt)}
         </Text>
       </NameHitWrapper>
     </Grid>

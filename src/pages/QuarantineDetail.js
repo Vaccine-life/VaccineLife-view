@@ -6,50 +6,21 @@ import Contents from "../components/detail/Contents";
 import MoveBox from "../components/detail/MoveBox";
 import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSetPrevNextPage } from "../redux/modules/board";
+import {
+  actionGetDetail,
+  actionSetPrevNextPageQuar,
+} from "../redux/modules/board";
 import theme from "../styles/theme";
 import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
 import CommentWrite from "../components/detail/CommentWrite";
 import CommentList from "../components/detail/CommentList";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import logger from "../shared/logger";
 
-const data = {
-  quarBoardId: 0,
-  userId: "유저 아이디",
-  title: "화이자 1차 썰 푼다",
-  contents: `
-{"blocks":[{"key":"47qis","text":"안녕하세요","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bdep6","text":"두번째 글 입니다.","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-  `,
-  likeCount: 0,
-  totalVisitors: 1,
-  commentCount: 0,
-  createdAt: new Date("Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)"),
-  modifiedAt: "Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)",
-
-  user: {
-    username: "유저 아이디",
-    nickname: "닉네임",
-    isVaccine: 1,
-    type: "모더나",
-    gender: "여",
-    age: 27,
-    disease: "모름",
-    degree: 2,
-    afterEffect: "발열 , 두통, 근육통",
-  },
-};
 const QuarantineDetail = () => {
-  const {
-    quarBoardId,
-    title,
-    contents,
-    likeCount,
-    totalVisitors,
-    commentCount,
-    createdAt,
-    user,
-  } = data;
+  const boardId_detail = useParams().id;
 
   // 격리후기때는 MoveBox에 false 기입
   const modal_status = useSelector((state) => state.modal.visible);
@@ -63,24 +34,29 @@ const QuarantineDetail = () => {
   const handleDelete = () => {};
 
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(actionSetPrevNextPage(quarBoardId));
+    dispatch(actionGetDetail("quarantine", boardId_detail));
+    dispatch(actionSetPrevNextPageQuar(boardId_detail));
   }, []);
+  const board_content = useSelector((state) => state.board.board);
 
   return (
     <Grid width={theme.detailWidth} margin="160px auto auto auto">
       <BoardInfo
         board="quarantine"
-        boardId={quarBoardId}
-        user={user}
-        title={title}
-        totalVisitors={totalVisitors}
-        createdAt={createdAt}
-        likeCount={likeCount}
+        boardId={board_content.boardId}
+        nickname={board_content.nickname}
+        title={board_content.title}
+        totalVisitors={board_content.totalVisitors}
+        createdAt={board_content.createdAt}
+        likeCount={board_content.likeCount}
       />
 
-      <Contents board="quarantine" contents={contents} likeCount={likeCount} />
+      <Contents
+        board="quarantine"
+        contents={board_content.contents}
+        likeCount={board_content.likeCount}
+      />
       <MoveBox boardType={boardType} />
       {confirm_status && (
         <Confirm
@@ -98,7 +74,7 @@ const QuarantineDetail = () => {
             margin: "40px 0 40px 0",
           }}
         >
-          댓글 {commentCount} 개
+          댓글 {/* 추후 */} 개
         </p>
 
         <Button

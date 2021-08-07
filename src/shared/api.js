@@ -1,7 +1,29 @@
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 const api = axios.create({
-  baseURL: "",
-  Headers: "",
-  params: {},
+  // 태현님 api 주소
+  baseURL: "http://52.78.76.184:8080",
+  Headers: `${getCookie("vaccine_life_token")}`,
 });
+
+export const userAxios = {
+  login: (user) => api.post("/api/login", user),
+  signup: (obj) => api.post("/api/signup", obj),
+  getLikeListVac: (userId) => api.get(`/api/vacBoard/like/${userId}`),
+  getLikeListQuar: (userId) => api.get(`/api/quarBoard/like/${userId}`),
+};
+
+export const boardAxios = {
+  getPageVac: (page) =>
+    api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
+  getDetailVac: (boardId) => api.get(`/api/vacBoard/${boardId}`),
+  getDetailQuar: (boardId) => api.get(`/api/quarBoard/${boardId}`),
+  topThreeVac: () => api.get("/api/vacBoard/topLike"),
+  topThreeQuar: () => api.get("/api/quarBoard/topLike"),
+};
+
+export const writeAxios = {
+  vacWrite: (obj) => api.post("/api/vacBoard", obj),
+  quarWrite: (obj) => api.post("/api/quarBoard", obj),
+};

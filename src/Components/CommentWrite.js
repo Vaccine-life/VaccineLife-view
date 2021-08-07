@@ -1,14 +1,13 @@
 import React from "react";
 import moment from "moment";
-import 'moment/locale/ko';
+import "moment/locale/ko";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
-import { actionAddComment } from "../redux/modules/comment"
+import { actionAddComment } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-
 
 const CommentWrite = (props) => {
     const dispatch = useDispatch();
@@ -44,42 +43,45 @@ const CommentWrite = (props) => {
     const today = new Date();
     const timeValue = new Date(value);
 
-    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-    if (betweenTime < 1) return '방금전';
+    const betweenTime = Math.floor(
+      (today.getTime() - timeValue.getTime()) / 1000 / 60
+    );
+    if (betweenTime < 1) return "방금전";
     if (betweenTime < 60) {
-        return `${betweenTime}분전`;
+      return `${betweenTime}분전`;
     }
     const betweenTimeHour = Math.floor(betweenTime / 60);
     if (betweenTimeHour < 24) {
-        return `${betweenTimeHour}시간전`;
+      return `${betweenTimeHour}시간전`;
     }
     const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
     if (betweenTimeDay < 365) {
-        return `${betweenTimeDay}일전`;
+      return `${betweenTimeDay}일전`;
     }
     return `${Math.floor(betweenTimeDay / 365)}년전`;
-    }
+  }
 
-
-    const write = () => {
-        // 빈 내용이면 alert창
-        if (!comment){
-            dispatch(actionAlert());
-            dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
-            return
-        } else {
-            // 오브젝트로 넣어줘야 
-            dispatch(actionAddComment({
-                nickname: "명수는열두살", 
-                comment, 
-                // insert_dt: moment().startOf('hour').fromNow(),
-                insert_dt: timeForToday(moment().format())
-        }));
-            // 코멘트 작성 후 인풋태크에 있는 글 없애기
-            setComment();
-            setLength(0);
-        }  
+  const write = () => {
+    // 빈 내용이면 alert창
+    if (!comment) {
+      dispatch(actionAlert());
+      dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
+      return;
+    } else {
+      // 오브젝트로 넣어줘야
+      dispatch(
+        actionAddComment({
+          nickname: "명수는열두살",
+          comment,
+          // insert_dt: moment().startOf('hour').fromNow(),
+          insert_dt: timeForToday(moment().format()),
+        })
+      );
+      // 코멘트 작성 후 인풋태크에 있는 글 없애기
+      setComment();
+      setLength(0);
     }
+  }
 
     // // test
     // // interface TextAreaProp {
@@ -152,14 +154,14 @@ const CommentWrite = (props) => {
                     </Grid>
                 </Grid>
                 
-            </Grid>
-            {/* </div> */}
-        </React.Fragment>
-    )
-}
+
+      </Grid>
+    </React.Fragment>
+  );
+};
 
 CommentWrite.defaultProps = {
-    nickname: "명수는열두살",
-}
+  nickname: "명수는열두살",
+};
 
 export default CommentWrite;

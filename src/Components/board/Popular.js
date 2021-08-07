@@ -1,7 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text } from "../../elements";
+import { actionGetTopThree } from "../../redux/modules/board";
+
 import theme from "../../styles/theme";
 import PopularCard from "./PopularCard";
+import QuarPostCard from "./QuarPostCard";
 
 const data = {
   vacBoardId: 0,
@@ -31,18 +36,20 @@ const data = {
 
 const Popular = (props) => {
   const { board } = props;
-  const {
-    vacBoardId,
-    quarBoardId,
-    title,
-    contents,
-    likeCount,
-    totalVisitors,
-    commentCount,
-    createdAt,
-    user,
-  } = data;
-  //  게시판 타입에 따라 디스패치 다르게 할 것
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //  게시판 타입에 따라 디스패치 다르게 할 것
+    if (board === "vaccine") {
+      dispatch(actionGetTopThree("vaccine"));
+    } else {
+      dispatch(actionGetTopThree("quarantine"));
+    }
+  }, []);
+
+  const top_list_vac = useSelector((state) => state.board.topThreeVac);
+  const top_list_quar = useSelector((state) => state.board.topThreeQuar);
 
   return (
     <>
@@ -51,19 +58,40 @@ const Popular = (props) => {
           {board === "vaccine" ? "백신접종" : "격리후기"} 인기글
         </Text>
       </Grid>
-      <Grid>
+      <Grid is_flex="center">
         {/* 맵돌리는 부분 카드 하나당*/}
-        <PopularCard
-          board={board}
-          boardId={board === "vaccine" ? vacBoardId : quarBoardId}
-          title={title}
-          contents={contents}
-          likeCount={likeCount}
-          totalVisitors={totalVisitors}
-          commentCount={commentCount}
-          createdAt={createdAt}
-          user={user}
-        />
+        {board === "vaccine" &&
+          top_list_vac?.map((each, index) => {
+            return (
+              <PopularCard
+                key={index}
+                boardId={each.vacBoardId}
+                title={each.title}
+                likeCount={each.likeCount}
+                totalVisitors={each.totalVisitors}
+                commentCount={each.commentCount}
+                contents={each.contents}
+                createdAt={each.createdAt}
+                type={each.type}
+              />
+            );
+          })}
+        {board === "quarantine" &&
+          top_list_quar?.map((each, index) => {
+            return (
+              <QuarPostCard
+                key={index}
+                boardId={each.quarBoardId}
+                title={each.title}
+                likeCount={each.likeCount}
+                totalVisitors={each.totalVisitors}
+                commentCount={each.commentCount}
+                contents={each.contents}
+                createdAt={each.createdAt}
+                type={each.type}
+              />
+            );
+          })}
       </Grid>
     </>
   );

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import theme from "../styles/theme";
 
-
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
   const [status, setStatus] = useState(false);
@@ -25,18 +24,18 @@ const Login = (props) => {
             <Signup>
               <Text color={theme.typoGrey2}>아직 회원이 아니신가요?</Text>
               <Button
-                width="6em"
                 type="submit"
-                style={{
-                  margin: "0 2vw",
-                  backgroundColor: "white",
-                  color: "gray",
-                  textDecoration: "underline",
-                }}
                 _onClick={() => {
                   setStatus(true);
                 }}
-                bg="white"
+                margin="0"
+                width="6em"
+                bg="transparent"
+                color={theme.typoGrey2}
+                style={{
+                  textDecoration: "underline",
+                  color: "#A5A5A5",
+                }}
               >
                 회원가입
               </Button>
@@ -50,8 +49,8 @@ const Login = (props) => {
 };
 
 const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -72,11 +71,12 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 50px;
+  padding: 40px;
 `;
 
 const Signup = styled.div`
   width: 100%;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;

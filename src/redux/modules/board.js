@@ -1,38 +1,173 @@
 import { createSlice } from "@reduxjs/toolkit";
+import jwtDecode from "jwt-decode";
+import { boardAxios, writeAxios } from "../../shared/api";
+import logger from "../../shared/logger";
+import { actionAlert, actionSetMessage } from "./popup";
 
 const board = createSlice({
   name: "board",
   initialState: {
-    list: [],
-    board: {},
+    listVac: [],
+    listQuar: [],
+    topThreeVac: [],
+    topThreeQuar: [],
+    board: {
+      contents:
+        '{"blocks":[{"key":"2qrus","text":"슬기로운 백신생활","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+    },
     page: {
       // list에서 각각 board값
       prev: {},
       next: {},
     },
+    paging: {
+      nextPage: 1,
+      totalPage: 10,
+    },
   },
   reducers: {
-    actionSetList: (state, action) => {
-      state.list = action.payload;
+    actionSetListVac: (state, action) => {
+      state.listVac = action.payload;
+    },
+    actionSetListQuar: (state, action) => {
+      state.listQuar = action.payload;
     },
     actionSetBoard: (state, action) => {
       state.board = action.payload;
     },
+
+    actionSetTopThreeVac: (state, action) => {
+      state.topThreeVac = action.payload;
+    },
+    actionSetTopThreeQuar: (state, action) => {
+      state.topThreeQuar = action.payload;
+    },
     // action을  vacBoardId, board 값을 가져옴
-    actionSetPrevNextPage: (state, action) => {
-      const currentIndex = state.list.findIndex((each) => {
-        return each.boardId === action.payload;
+    actionSetPrevNextPageVac: (state, action) => {
+      const currentIndex = state.listVac.findIndex((each) => {
+        return each.vacBoardId === action.payload;
       });
-      const totalLength = state.list.length;
+      const totalLength = state.listVac.length;
       state.page.prev =
-        totalLength === currentIndex ? undefined : state.list[currentIndex + 1];
+        totalLength === currentIndex
+          ? undefined
+          : state.listVac[currentIndex + 1];
       state.page.next =
-        0 === currentIndex ? undefined : state.list[currentIndex - 1];
+        0 === currentIndex ? undefined : state.listVac[currentIndex - 1];
+    },
+    actionSetPrevNextPageQuar: (state, action) => {
+      const currentIndex = state.listQuar.findIndex((each) => {
+        return each.quarBoardId === action.payload;
+      });
+      const totalLength = state.listQuar.length;
+      state.page.prev =
+        totalLength === currentIndex
+          ? undefined
+          : state.listQuar[currentIndex + 1];
+      state.page.next =
+        0 === currentIndex ? undefined : state.listQuar[currentIndex - 1];
     },
   },
 });
 
-export const { actionSetList, actionSetBoard, actionSetPrevNextPage } =
-  board.actions;
+export const actionGetDetail =
+  (board, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      let board_input = {};
+      if (board === "vaccine") {
+        const getData = await boardAxios.getDetailVac(boardId);
+        const data = getData.data;
+        board_input = {
+          afterEffect: data.afterEffect,
+          age: data.age,
+          degree: data.degree,
+          disease: data.disease,
+          gender: data.gender,
+          isVaccine: data.isVaccine,
+          type: data.type,
+          nickname: data.nickname,
+          userId: data.userId,
+          username: data.username,
+          createdAt: data.createdAt,
+          boardId: data.id,
+          title: data.title,
+          contents: data.contents,
+          likeCount: data.likeCount,
+          totalVisitors: data.totalVisitors,
+          modifiedAt: data.modifiedAt,
+        };
+      } else {
+        const getData = await boardAxios.getDetailQuar(boardId);
+        const data = getData.data;
+        board_input = {
+          username: data.username,
+          userId: data.userId,
+          nickname: data.nickname,
+          createdAt: data.createdAt,
+          boardId: data.id,
+          contents: data.contents,
+          likeCount: data.likeCount,
+          title: data.title,
+          modifiedAt: data.modifiedAt,
+          totalVisitors: data.totalVisitors,
+        };
+      }
+      dispatch(actionSetBoard(board_input));
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionGetTopThree =
+  (board) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        const getData = await boardAxios.topThreeVac();
+        dispatch(actionSetTopThreeVac(getData.data));
+      } else {
+        const getData = await boardAxios.topThreeQuar();
+        dispatch(actionSetTopThreeQuar(getData.data));
+      }
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionWriteExperience =
+  (board, contenstObj) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        await writeAxios.vacWrite(contenstObj);
+        history.replace("/vaccine");
+      } else {
+        await writeAxios.quarWrite(contenstObj);
+        history.replace("/quarantine");
+      }
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const {
+  actionSetListVac,
+  actionSetListQuar,
+  actionSetBoard,
+  actionSetTopThreeVac,
+  actionSetTopThreeQuar,
+  actionSetPrevNextPageVac,
+  actionSetPrevNextPageQuar,
+} = board.actions;
 
 export default board;

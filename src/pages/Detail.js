@@ -6,53 +6,30 @@ import Contents from "../components/detail/Contents";
 import MoveBox from "../components/detail/MoveBox";
 import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSetPrevNextPage } from "../redux/modules/board";
+import {
+  actionGetDetail,
+  actionSetPrevNextPageVac,
+} from "../redux/modules/board";
 import theme from "../styles/theme";
 import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
 import CommentWrite from "../components/detail/CommentWrite";
 import CommentList from "../components/detail/CommentList";
 import styled from "styled-components";
-
-const data = {
-  vacBoardId: 0,
-  userId: "유저 아이디",
-  title: "화이자 1차 썰 푼다",
-  contents: `
-{"blocks":[{"key":"47qis","text":"안녕하세요","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bdep6","text":"두번째 글 입니다.","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-  `,
-  likeCount: 0,
-  totalVisitors: 1,
-  commentCount: 0,
-  createdAt: new Date("Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)"),
-  modifiedAt: "Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)",
-
-  user: {
-    username: "유저 아이디",
-    nickname: "닉네임",
-    isVaccine: 1,
-    type: "모더나",
-    gender: "여",
-    age: 27,
-    disease: "모름",
-    degree: 2,
-    afterEffect: "발열 , 두통, 근육통",
-  },
-};
+import { history } from "../redux/configStore";
+import logger from "../shared/logger";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
-  //격리후기떄는 id 변경
-  const {
-    vacBoardId,
-    title,
-    contents,
-    likeCount,
-    totalVisitors,
-    commentCount,
-    createdAt,
-    user,
-  } = data;
+  const boardId = useParams().id;
+  useEffect(() => {
+    dispatch(actionGetDetail("vaccine", boardId));
+    dispatch(actionSetPrevNextPageVac(boardId));
+  }, []);
 
+  //격리후기떄는 id 변경
+
+  const dispatch = useDispatch();
   // 격리후기때는 MoveBox에 false 기입
   const modal_status = useSelector((state) => state.modal.visible);
   //confirm 창
@@ -62,34 +39,33 @@ const Detail = () => {
 
   const boardType = true;
 
+  const board_content = useSelector((state) => state.board.board);
+  logger(board_content);
   const handleDelete = () => {};
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actionSetPrevNextPage(vacBoardId));
-  }, []);
-
   return (
     <Grid width={theme.detailWidth} margin="160px auto auto auto">
       <BoardInfo
         board="vaccine"
-        boardId={vacBoardId}
-        user={user}
-        title={title}
-        totalVisitors={totalVisitors}
-        createdAt={createdAt}
-        likeCount={likeCount}
+        boardId={board_content.BoardId}
+        nickname={board_content.nickname}
+        title={board_content.title}
+        totalVisitors={board_content.totalVisitors}
+        createdAt={board_content.createdAt}
+        likeCount={board_content.likeCount}
       />
       <UserInfo
-        type={user.type}
-        gender={user.gender}
-        age={user.age}
-        disease={user.disease}
-        degree={user.degree}
-        afterEffect={user.afterEffect}
+        type={board_content.type}
+        gender={board_content.gender}
+        age={board_content.age}
+        disease={board_content.disease}
+        degree={board_content.degree}
+        afterEffect={board_content.afterEffect}
       />
-      <Contents board="vaccine" contents={contents} likeCount={likeCount} />
+      <Contents
+        board="vaccine"
+        contents={board_content.contents}
+        likeCount={board_content.likeCount}
+      />
       <MoveBox boardType={boardType} />
       {confirm_status && (
         <Confirm
@@ -107,7 +83,7 @@ const Detail = () => {
             margin: "40px 0 40px 0",
           }}
         >
-          댓글 {commentCount} 개
+          댓글 {/* 추후 */} 개
         </p>
 
         <Button
