@@ -9,7 +9,7 @@ import { actionAlert, actionSetMessage } from "./popup";
 const initialState = {
   user: {
     nickname: "",
-    isVaccine: 0,
+    isVaccine: false,
     degree: 1,
     type: "",
     gender: "",

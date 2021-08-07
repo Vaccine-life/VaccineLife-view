@@ -10,6 +10,7 @@ import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
 const ListNav = (props) => {
   const { board } = props;
   const is_login = useSelector((state) => state.user.is_login);
+  const is_vaccine = useSelector((state) => state.user.user.isVaccine);
   const dispatch = useDispatch();
 
   const handleMoveWrite = () => {
@@ -19,6 +20,11 @@ const ListNav = (props) => {
       return;
     }
     if (board === "vaccine") {
+      if (!is_vaccine) {
+        dispatch(actionSetMessage("설문조사 후 이용해 주세요"));
+        dispatch(actionAlert());
+        return;
+      }
       history.push("/vaccineboard/write");
     } else {
       history.push("/quarantineboard/write");

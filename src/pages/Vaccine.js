@@ -15,7 +15,7 @@ const Vaccine = () => {
   const is_login = useSelector((state) => state.user.is_login);
   // vacBoard페이지에서도 모달 로그인창이 뜰수 있게 함
   const modal_status = useSelector((state) => state.modal.visible);
-  //alert
+  // alert
   const alert_status = useSelector((state) => state.popup.alert);
 
   const dispatch = useDispatch();

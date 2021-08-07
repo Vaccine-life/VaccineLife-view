@@ -36,6 +36,7 @@ const PopularCard = (props) => {
     <Grid
       width={theme.popularCardWidth}
       height={theme.popularCardHeight}
+      border={`1px solid ${theme.typoLightGrey2}`}
       padding="32px"
       hover
       _onClick={handleMoveDetail}
