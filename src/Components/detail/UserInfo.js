@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import theme from "../../styles/theme";
 
 const UserInfo = (props) => {
-  const { type, gender, age, disease, degree, afterEffect } = props;
+  const board_list = useSelector((state) => state.board.board);
+  const { type, gender, age, disease, degree, afterEffect } = board_list;
 
   return (
     <Wrapper>
@@ -43,7 +45,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto auto auto 16.5px;
+  margin: auto;
 `;
 
 const Table = styled.table`
