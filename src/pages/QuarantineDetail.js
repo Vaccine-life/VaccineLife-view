@@ -19,31 +19,6 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import logger from "../shared/logger";
 
-const data = {
-  quarBoardId: 0,
-  userId: "유저 아이디",
-  title: "화이자 1차 썰 푼다",
-  contents: `
-{"blocks":[{"key":"47qis","text":"안녕하세요","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bdep6","text":"두번째 글 입니다.","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-  `,
-  likeCount: 0,
-  totalVisitors: 1,
-  commentCount: 0,
-  createdAt: new Date("Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)"),
-  modifiedAt: "Tue Jul 27 2021 23:22:46 GMT+0900 (대한민국 표준시)",
-
-  user: {
-    username: "유저 아이디",
-    nickname: "닉네임",
-    isVaccine: 1,
-    type: "모더나",
-    gender: "여",
-    age: 27,
-    disease: "모름",
-    degree: 2,
-    afterEffect: "발열 , 두통, 근육통",
-  },
-};
 const QuarantineDetail = () => {
   const boardId_detail = useParams().id;
 

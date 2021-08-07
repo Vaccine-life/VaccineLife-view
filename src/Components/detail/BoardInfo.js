@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
 import { actionConfirm } from "../../redux/modules/popup";
+import displayedRestrict from "../../shared/displayedRestrict";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
@@ -114,7 +115,7 @@ const BoardInfo = (props) => {
           lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
-          {moment(createdAt).format("YYYY.MM.DD hh:mm")}
+          {displayedRestrict(createdAt)}
         </Text>
       </NameHitWrapper>
     </Grid>
