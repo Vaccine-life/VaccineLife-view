@@ -6,13 +6,30 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 
 const Map = () => {
+
+  const [GyeonggiShot, setGyeonggiShot] = useState("");
+  const [SeoulShot, setSeoulShot] = useState("");
+  const [GangwonShot, setGangwonShot] = useState("");
+  const [GyeongNamShot, setGyeongNamShot] = useState("");
+  const [GyeongBookShot, setGyeongBookShot] = useState("");
+  const [GwangjuShot, setGwangjuShot] = useState("");
+  const [DaeguShot, setDaeguShot] = useState("");
+  const [BusanShot, setBusanShot] = useState("");
+  const [SejongShot, setSejongShot] = useState("");
+  const [WoolsanShot, setWoolsanShot] = useState("");
+  const [IncheonShot, setIncheonShot] = useState("");
+  const [JeonNamShot, setJeonNamShot] = useState("");
+  const [JeonBookShot, setJeonBookShot] = useState("");
+  const [JejuShot, setJejuShot] = useState("");
+  const [ChoongNamShot, setChoongNamShot] = useState("");
+  const [ChoongBookShot, setChoongBookShot] = useState("");
+  const [DaejeonShot, setDaejeonShot] = useState("");
+
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axios.get(
-        "https://api.odcloud.kr/api/15077756/v1/vaccine-stat?page=1&perPage=100000&serviceKey=g7z%2FjYsaSLHc65MfRAm09lQoXM3RSvq7toXdEiu%2BlYesH2wWNE%2FjrvSfRh%2FtyStEmKU9D4G6Ho6Ia9%2FHNJkITA%3D%3D"
-      );
-      makeData(res.data.data);
-    };
+      const res = await axios.get("https://api.odcloud.kr/api/15077756/v1/vaccine-stat?page=1&perPage=100000&serviceKey=g7z%2FjYsaSLHc65MfRAm09lQoXM3RSvq7toXdEiu%2BlYesH2wWNE%2FjrvSfRh%2FtyStEmKU9D4G6Ho6Ia9%2FHNJkITA%3D%3D")
+      makeData(res.data.data)
+    }
     const makeData = (items) => {
       // todayList는 2000개가 넘던 items 중, 가장 최근인 '오늘'에 해당하는 요소들만 긁어옴
       const todayList = items.slice(items.length - 17, items.length);
@@ -22,15 +39,39 @@ const Map = () => {
       const todayNum = {};
       todayList.map((item) => {
         // 객체에다가 새로운 "키 = 값" 쌍을 넣어주는 방법
-        todayNum[item.sido] = Math.floor(item.totalSecondCnt / 10000);
+        todayNum[item.sido] = Math.floor(item.totalSecondCnt);
       });
-      console.log(todayNum);
+      // console.log(todayNum);
+      setGyeonggiShot(todayNum.경기도)
+      setSeoulShot(todayNum.서울특별시)
+      setGangwonShot(todayNum.강원도)
+      setGyeongNamShot(todayNum.경상남도)
+      setGyeongBookShot(todayNum.경상북도)
+      setGwangjuShot(todayNum.광주광역시)
+      setDaeguShot(todayNum.대구광역시)
+      setBusanShot(todayNum.부산광역시)
+      setSejongShot(todayNum.세종특별자치시)
+      setWoolsanShot(todayNum.울산광역시)
+      setIncheonShot(todayNum.인천광역시)
+      setJeonNamShot(todayNum.전라남도)
+      setJeonBookShot(todayNum.전라북도)
+      setJejuShot(todayNum.제주특별자치도)
+      setChoongNamShot(todayNum.충청남도)
+      setChoongBookShot(todayNum.충청북도)
+      setDaejeonShot(todayNum.대전광역시)
     };
     fetchEvents();
-  }, []);
+  }, [])
+
+  // const GyeonggiShot = () => {
+  //     setTodayShot(todayNum.경기도)
+  // }
+
+
 
   return (
     <Wrapper>
+
       <MapTitle>
         <img src={disc} alt="" />
         <h3>지역별 접종수</h3>
@@ -41,92 +82,128 @@ const Map = () => {
 
         <Gyeonggi>
           <h3>경기</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {GyeonggiShot.toLocaleString('ko-KR')}
+          </Shot>
         </Gyeonggi>
 
         <Gangwon>
           <h3>강원</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {GangwonShot.toLocaleString('ko-KR')}
+          </Shot>
         </Gangwon>
 
         <Seoul>
           <h3>서울</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {SeoulShot.toLocaleString('ko-KR')}
+          </Shot>
         </Seoul>
 
         <Incheon>
           <h3>인천</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {IncheonShot.toLocaleString('ko-KR')}
+          </Shot>
         </Incheon>
 
         <Sejong>
           <h3>세종</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {SejongShot.toLocaleString('ko-KR')}
+          </Shot>
         </Sejong>
 
         <ChoongNam>
           <h3>충남</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {ChoongNamShot.toLocaleString('ko-KR')}
+          </Shot>
         </ChoongNam>
 
         <ChoongBook>
           <h3>충북</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {ChoongBookShot.toLocaleString('ko-KR')}
+          </Shot>
         </ChoongBook>
 
         <GyeongBook>
           <h3>경북</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {GyeongBookShot.toLocaleString('ko-KR')}
+          </Shot>
         </GyeongBook>
 
         <Daejeon>
           <h3>대전</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {DaejeonShot.toLocaleString('ko-KR')}
+          </Shot>
         </Daejeon>
 
         <JeonBook>
           <h3>전북</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {JeonBookShot.toLocaleString('ko-KR')}
+          </Shot>
         </JeonBook>
 
         <Gwangju>
           <h3>광주</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {GwangjuShot.toLocaleString('ko-KR')}
+          </Shot>
         </Gwangju>
 
         <JeonNam>
           <h3>전남</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {JeonNamShot.toLocaleString('ko-KR')}
+          </Shot>
         </JeonNam>
 
         <Jeju>
           <h3>제주</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {JejuShot.toLocaleString('ko-KR')}
+          </Shot>
         </Jeju>
 
-        <GyeonNam>
+        <GyeongNam>
           <h3>경남</h3>
-          <Shot>접종수</Shot>
-        </GyeonNam>
+          <Shot>
+            {GyeongNamShot.toLocaleString('ko-KR')}
+          </Shot>
+        </GyeongNam>
 
         <Daegu>
           <h3>대구</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {DaeguShot.toLocaleString('ko-KR')}
+          </Shot>
         </Daegu>
 
         <Woolsan>
           <h3>울산</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {WoolsanShot.toLocaleString('ko-KR')}
+          </Shot>
         </Woolsan>
 
         <Busan>
           <h3>부산</h3>
-          <Shot>접종수</Shot>
+          <Shot>
+            {BusanShot.toLocaleString('ko-KR')}
+          </Shot>
         </Busan>
+
       </MapBox>
+
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   margin-right: 50px;
@@ -174,6 +251,26 @@ const MapBox = styled.div`
     padding-top: 20px;
   }
 `;
+
+const Shot = styled.div`
+padding: 0px 5px;
+
+width: max-content;
+height: max-content;
+
+background: ${theme.bg};
+/* border-radius: 12px; */
+border-radius: 9px;
+/* border-radius: 0px; */
+
+font-weight: normal;
+font-size: ${theme.bodyThreeSize};
+/* font-size: ${theme.bodyfourSize}; */
+line-height: 24px;
+color: #FFFFFF;
+
+/* margin: 0px auto; */
+`
 
 const Gyeonggi = styled.div`
   position: absolute;
@@ -392,41 +489,49 @@ const JeonNam = styled.div`
   }
 `;
 const Jeju = styled.div`
-  position: absolute;
-  left: 190px;
-  top: 425px;
-  width: 70px;
-  z-index: 1;
-  & > h3 {
-    width: 30px;
-    height: 24px;
-    margin: 0px auto;
-    font-weight: bold;
-    font-size: ${theme.SubHeadTwoSize};
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: -0.3px;
-    color: #242424;
-  }
-`;
-const GyeonNam = styled.div`
-  position: absolute;
-  left: 250px;
-  top: 280px;
-  width: 70px;
-  z-index: 1;
-  & > h3 {
-    width: 30px;
-    height: 24px;
-    margin: 0px auto;
-    font-weight: bold;
-    font-size: ${theme.SubHeadTwoSize};
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: -0.3px;
-    color: #242424;
-  }
-`;
+position: absolute;
+left: 190px;
+top: 425px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: 0px auto;
+
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: 24px;
+
+text-align: center;
+letter-spacing: -0.3px;
+
+color: #242424;
+}
+`
+const GyeongNam = styled.div`
+position: absolute;
+left: 250px;
+top: 280px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: 0px auto;
+
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: 24px;
+
+text-align: center;
+letter-spacing: -0.3px;
+
+color: #242424;
+}
+`
 const Daegu = styled.div`
   position: absolute;
   left: 300px;
@@ -464,36 +569,27 @@ const Woolsan = styled.div`
   }
 `;
 const Busan = styled.div`
-  position: absolute;
-  left: 320px;
-  top: 320px;
-  width: 70px;
-  z-index: 1;
-  & > h3 {
-    width: 30px;
-    height: 24px;
-    margin: 0px auto;
-    font-weight: bold;
-    font-size: ${theme.SubHeadTwoSize};
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: -0.3px;
-    color: #242424;
-  }
-`;
-const Shot = styled.div`
-  padding: 0px 10px;
-  width: auto;
-  height: auto;
-  min-width: 55px;
-  min-height: 24px;
-  background: ${theme.bg};
-  border-radius: 12px;
-  font-weight: normal;
-  font-size: ${theme.bodyThreeSize};
-  line-height: 24px;
-  color: #ffffff;
-  margin: 0px auto;
-`;
+position: absolute;
+left: 320px;
+top: 320px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: 0px auto;
+
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: 24px;
+
+text-align: center;
+letter-spacing: -0.3px;
+
+color: #242424;
+}
+`
+
 
 export default Map;
