@@ -31,18 +31,18 @@ const Survey = (props) => {
 
   // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, SubmitButton을 disabled처리한다.
   const ableSubmitButton = () => {
-    console.log("user.isVaccine", user.isVaccine);
-    if (user.isVaccine === 0) {
+    console.log("inputs.isVaccine", inputs.isVaccine);
+    if (inputs.isVaccine === 0) {
       return false;
     }
     if (
-      user.isVaccine === 2 ||
-      user.degree === 0 ||
-      user.type === "" ||
-      user.gender === "" ||
-      user.age === "" ||
-      user.disease === "" ||
-      user.afterEffect === ""
+      inputs.isVaccine === 2 ||
+      inputs.degree === 0 ||
+      inputs.type === "" ||
+      inputs.gender === "" ||
+      inputs.age === "" ||
+      inputs.disease === "" ||
+      inputs.afterEffect === ""
     ) {
       return true;
     }
@@ -93,29 +93,30 @@ const Survey = (props) => {
     }
   };
 
-  const submitSurvey = () => {
-    let survey = {
-      isVaccine: parseInt(isVaccine),
-      degree: parseInt(degree),
-      type: type,
-      gender: gender,
-      age: age,
-      disease: disease,
-      afterEffect: afterEffect.sort().join(", "),
-    };
+  const submitSurvey = (e) => {
+    // let survey = {
+    //   isVaccine: parseInt(isVaccine),
+    //   degree: parseInt(degree),
+    //   type: type,
+    //   gender: gender,
+    //   age: age,
+    //   disease: disease,
+    //   afterEffect: afterEffect.sort().join(", "),
+    // };
+    e.preventDefault();
+    console.log(inputs);
 
-    console.log(survey);
+    // // state.user에 설문조사 데이터를 넣어줌
+    // dispatch(actionSetUser(survey));
 
-    // state.user에 설문조사 데이터를 넣어줌
-    dispatch(actionSetUser(survey));
-
-    // 모달 끄기
-    dispatch(actionVisible());
+    // // 모달 끄기
+    // dispatch(actionVisible());
   };
 
+  // form onSubmit에 함수 줘 제발
   return (
     <>
-      <form>
+      <form onSubmit={submitSurvey}>
         <Text margin="0 auto 15px auto" size="14px" color={theme.typoGrey3}>
           회원가입이 곧 마무리됩니다
         </Text>
@@ -502,11 +503,7 @@ const Survey = (props) => {
           {/* <div></div> */}
         </SurveyItem>
 
-        <SubmitButton
-          type="submit"
-          onClick={submitSurvey}
-          disabled={ableSubmitButton()}
-        >
+        <SubmitButton type="submit" disabled={ableSubmitButton()}>
           회원가입
         </SubmitButton>
       </form>

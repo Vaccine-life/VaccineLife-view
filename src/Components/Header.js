@@ -3,18 +3,18 @@ import { Grid, Image, Text } from "../elements";
 import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionVisible } from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
 import theme from "../styles/theme";
-import logger from "../shared/logger";
 
 const Header = (props) => {
+  const is_login = useSelector((state) => state.user.is_login);
+  const nickname = useSelector((state) => state.user.user.nickname);
   const dispatch = useDispatch();
   const url = history.location.pathname;
-  logger(url.includes("/detail"));
 
   return (
     <React.Fragment>
@@ -88,26 +88,29 @@ const Header = (props) => {
             </Grid>
           </Grid>
 
-          <Grid is_flex="space_row" width="auto" margin="0 20px">
-            <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
-              <span style={{ fontWeight: "bold" }}>{props.nickname}</span> 님,
-              안녕하세요
-            </Text>
-            <Text
-              width="5rem"
-              cursor="pointer"
-              margin="0 4rem"
-              size={theme.headTwoSize}
-              lineHeight={theme.headTwoHeight}
-              bold
-            >
-              <span
-                style={{ boxShadow: "inset 0 -1px 0 #242424" }}
-                onClick={() => dispatch(actionVisible())}
+          <Grid is_flex="space_row" width="auto" margin="0 50px">
+            {is_login ? (
+              <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
+                <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
+                안녕하세요
+              </Text>
+            ) : (
+              <Text
+                width="5rem"
+                cursor="pointer"
+                margin="0 4rem"
+                size={theme.headTwoSize}
+                lineHeight={theme.headTwoHeight}
+                bold
               >
-                로그인
-              </span>
-            </Text>
+                <span
+                  style={{ boxShadow: "inset 0 -1px 0 #242424" }}
+                  onClick={() => dispatch(actionVisible())}
+                >
+                  로그인
+                </span>
+              </Text>
+            )}
           </Grid>
         </Grid>
       </Wrapper>
