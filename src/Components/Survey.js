@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionVisible } from "../redux/modules/modal";
 import { actionSetUser } from "../redux/modules/user";
 import survey from "./survey.css";
 
 const Survey = (props) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   const [inputs, setInputs] = useState({
     isVaccine: 2,
@@ -20,25 +21,45 @@ const Survey = (props) => {
     afterEffect: "",
   });
 
+  // useEffect(() => {
+  //   // dispatch(actionSetUser(inputs));
+  //   console.log(user);
+  // }, []);
+
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
   // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, SubmitButton을 disabled처리한다.
   const ableSubmitButton = () => {
-    if (isVaccine === 0) {
-      return "!disabled";
+    console.log("user.isVaccine", user.isVaccine);
+    if (user.isVaccine === 0) {
+      return false;
     }
     if (
-      isVaccine === 2 ||
-      degree === 0 ||
-      type === "" ||
-      gender === "" ||
-      age === "" ||
-      disease === "" ||
-      afterEffect === ""
+      user.isVaccine === 2 ||
+      user.degree === 0 ||
+      user.type === "" ||
+      user.gender === "" ||
+      user.age === "" ||
+      user.disease === "" ||
+      user.afterEffect === ""
     ) {
-      return "disabled";
+      return true;
     }
+  };
+
+  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 store에 저장
+  const handleIsVaccineClick = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: parseInt(value),
+    });
+
+    console.log(name, value);
+    console.log(inputs);
+    // state.user에 설문조사 데이터를 넣어줌
+    dispatch(actionSetUser(inputs));
   };
 
   // 클릭된 radio의 value를 setState
@@ -48,6 +69,10 @@ const Survey = (props) => {
       ...inputs, // 기존의 input 객체를 복사한 뒤
       [name]: value, // name 키를 가진 값을 value 로 설정
     });
+
+    console.log(name, value);
+    // state.user에 설문조사 데이터를 넣어줌
+    dispatch(actionSetUser(inputs));
   };
 
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
@@ -66,24 +91,6 @@ const Survey = (props) => {
         [name]: [...afterEffect, value],
       });
     }
-  };
-
-  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 store에 저장
-  const handleIsVaccineClick = (e) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: parseInt(value),
-    });
-
-    let survey = {
-      name: parseInt(value),
-    };
-
-    console.log(name, value);
-    console.log(isVaccine);
-    // state.user에 설문조사 데이터를 넣어줌
-    dispatch(actionSetUser(survey));
   };
 
   const submitSurvey = () => {
@@ -497,8 +504,8 @@ const Survey = (props) => {
 
         <SubmitButton
           type="submit"
-          _onClick={submitSurvey}
-          // disabled={ableSubmitButton}
+          onClick={submitSurvey}
+          disabled={ableSubmitButton()}
         >
           회원가입
         </SubmitButton>
