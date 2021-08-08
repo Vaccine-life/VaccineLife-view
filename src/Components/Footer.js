@@ -5,7 +5,7 @@ import { Grid, Image, Text } from "../elements";
 import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
-import logo from "../assets/logowhite.png";
+import logo from "../assets/슬기로운-white.png";
 
 const Footer = () => {
   return (

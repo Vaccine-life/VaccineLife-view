@@ -1,5 +1,5 @@
 import React from "react";
-/* import { Bar } from "react-chartjs-2"; */
+// import { Bar } from "react-chartjs-2";
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
