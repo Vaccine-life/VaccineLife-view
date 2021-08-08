@@ -12,6 +12,16 @@ const SignupComponent = (props) => {
   const [nickname, setNickname] = useState("");
   const [next, setNext] = useState(false);
 
+  const [inputs, setInputs] = useState({
+    isVaccine: 2,
+    degree: 0,
+    type: "",
+    gender: "",
+    age: "",
+    disease: "",
+    afterEffect: "",
+  });
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
     console.log("handleUsernameChange", e.target.value);
@@ -30,6 +40,11 @@ const SignupComponent = (props) => {
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
     console.log("handleNicknameChange", e.target.value);
+  };
+
+  const submitSurvey = (e) => {
+    e.preventDefault();
+    console.log(inputs);
   };
 
   // const formik = useFormik({
@@ -138,7 +153,13 @@ const SignupComponent = (props) => {
           </Button>
         </Wrapper>
       )}
-      {next && <Survey />}
+      {next && (
+        <Survey
+          inputs={inputs}
+          setInputs={setInputs}
+          submitSurvey={submitSurvey}
+        />
+      )}
     </>
   );
 };

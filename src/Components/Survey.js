@@ -4,17 +4,9 @@ import { Text } from "../elements/index";
 import theme from "../styles/theme";
 import survey from "./survey.css";
 
-const Survey = (props) => {
-  const [inputs, setInputs] = useState({
-    isVaccine: 2,
-    degree: 0,
-    type: "",
-    gender: "",
-    age: "",
-    disease: "",
-    afterEffect: "",
-  });
+// 10-18번째줄 signup compo로 올려주자
 
+const Survey = ({ inputs, setInputs, submitSurvey }) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
@@ -78,11 +70,6 @@ const Survey = (props) => {
         [name]: [...afterEffect, value],
       });
     }
-  };
-
-  const submitSurvey = (e) => {
-    e.preventDefault();
-    console.log(inputs);
   };
 
   // form태그 onSubmit에 제출시 일어날 일을 함수로 주자.. 꼭!
