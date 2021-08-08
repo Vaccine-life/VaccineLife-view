@@ -14,7 +14,7 @@ const Footer = () => {
 
       <div
         style={{
-          backgroundColor: "#242424",
+          backgroundColor: `${theme.typoBlack}`,
           display: "flex",
           alignItems: "center",
           height: "152px",

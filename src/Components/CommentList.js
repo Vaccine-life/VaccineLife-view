@@ -4,7 +4,8 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
-import { actionSetComment } from "../redux/modules/comment"
+import { actionSetComment, actionDeleteComment } from "../redux/modules/comment";
+import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
 
 
 const CommentList = (props) => {
@@ -16,7 +17,15 @@ const CommentList = (props) => {
 
     React.useEffect = (() => {
         dispatch(actionSetComment(comment_list));
-    }, [])      
+    }, [])
+
+    const deleteComment = () => {
+        // 작성자가 나일때만 삭제 가능하게 하기
+        dispatch(actionConfirm());
+        // dispatch(actionSetMessage("삭제하시겠습니까?"));
+        // dispatch(actionDeleteComment(props.medicalId));
+    }
+
 
     return(
         <React.Fragment>
@@ -35,7 +44,8 @@ const CommentList = (props) => {
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
                         cursor="pointer"
-                        _onClick={() => {console.log("삭제!")}}
+                        // _onClick={() => {console.log("삭제!")}}
+                        _onClick={deleteComment}
                     >삭제</Text>
                 </Grid>
 
