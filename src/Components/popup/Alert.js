@@ -27,7 +27,7 @@ const Alert = () => {
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
             fontSize={theme.SubHeadOneSize}
-            bg={theme.bg}
+            bg={theme.btnColor}
             bold
             _onClick={handleClick}
           >
@@ -60,5 +60,7 @@ const Modal = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 `;
+
 export default Alert;

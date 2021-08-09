@@ -1,5 +1,6 @@
 // vaccine_life_token
 
+//get: 설정된 쿠키를 가져온다
 const getCookie = (name) => {
   let value = ";" + document.cookie;
   let parts = value.split(`;${name}=`);
@@ -8,7 +9,7 @@ const getCookie = (name) => {
   }
 };
 
-//set
+//set: 쿠키에 값을 할당해서 새로 만든다
 const setCookie = (name, value, exp = 1) => {
   let date = new Date();
 
@@ -16,8 +17,7 @@ const setCookie = (name, value, exp = 1) => {
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
 };
 
-//remove
-
+//remove: 쿠키를 expire시켜 없애버린다
 const deleteCookie = (name) => {
   let date = new Date("2020-01-01").toUTCString();
   document.cookie = name + `=; expires=${date}`;
