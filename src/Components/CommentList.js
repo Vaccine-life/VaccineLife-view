@@ -7,25 +7,28 @@ import { Input, Text, Button, Grid } from "../elements";
 import { actionSetComment, actionDeleteComment, actionGetMedical } from "../redux/modules/comment";
 import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
 import Confirm from "../components/popup/Confirm";
+import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
+    // console.log(props)
     const dispatch = useDispatch();
 
     const nickname = useSelector((state) => state.user.user.nickname)
     const comment_list = useSelector((state) => state.comment.list);
+    // console.log(comment_list)
 
     // confirm 창
     const confirm_status = useSelector((state) => state.popup.confirm);
 
     // 의료진분들께 글을 작성하고 다른 페이지로 넘어가면 Object오류 뜨는 문제의 원인 발견
     // 그럼 어떻게 목록 불러오지...?
-    React.useEffect = (() => {
-        dispatch(actionGetMedical(comment_list));
-        // dispatch(actionGetMedical());
-    }, [])
+    // React.useEffect = (() => {
+    //     dispatch(actionSetComment(...comment_list));
+    //     // dispatch(actionGetMedical(...comment_list));
+    // }, [])
 
-    const deleteComment = (props) => {
+    const deleteComment = () => {
         // 작성자가 나일때만 삭제 가능하게 하기
         dispatch(actionDeleteComment());
     }

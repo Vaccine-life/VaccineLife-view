@@ -100,7 +100,7 @@ const CommentWrite = (props) => {
   // medicalWrite랑 둘중에 하나 사용? dispatch만 다름
   const medicalObj = {
     userId: user_id,
-    comment,
+    contents: comment,
   }
   const handleMedical = () => {
     // 로그인 후 이용
@@ -159,7 +159,7 @@ const CommentWrite = (props) => {
                 width={theme.smallButtonWidth} 
                 height={theme.smallButtonHeight}
                 fontSize={theme.SubHeadOneSize}
-                _onClick={medicalWrite}
+                _onClick={handleMedical}
               >등록
             </Button>
           </Grid>
