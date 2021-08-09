@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import _ from "lodash";
+import logger from "./logger";
 
 const InfinityScroll = (props) => {
   const { nextCall, children, is_loading, is_next } = props;
@@ -10,8 +11,8 @@ const InfinityScroll = (props) => {
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     let current_height = scrollHeight - innerHeight - scrollTop;
-
-    if (current_height < 200) {
+    logger(current_height);
+    if (current_height < 300) {
       if (is_loading) {
         return;
       }

@@ -7,7 +7,7 @@ import theme from "../styles/theme";
 import { useSelector } from "react-redux";
 
 const LikeIconChanger = (props) => {
-  const { boardId } = props;
+  const { board, boardId } = props;
   const like_list = useSelector((state) => state.user.likeList);
   const isHeart = like_list.includes(boardId);
   return (
@@ -23,6 +23,8 @@ const LikeIconChanger = (props) => {
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.5s ease-out;
   ${(props) =>
     props.isHeart

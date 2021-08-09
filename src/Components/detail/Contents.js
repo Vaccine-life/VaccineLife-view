@@ -14,7 +14,6 @@ const Contents = (props) => {
   const { contents, board } = props;
   // 클릭했을때 색 변경 추가할것
   const isHeart = true;
-  console.log(contents);
   const storedState = convertFromRaw(JSON.parse(contents));
   const editorState = EditorState.createWithContent(storedState);
 
