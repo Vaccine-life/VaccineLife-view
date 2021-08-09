@@ -82,7 +82,6 @@ const CommentWrite = (props) => {
               width={theme.smallButtonWidth}
               height={theme.smallButtonHeight}
               fontSize={theme.SubHeadOneSize}
-              bold
               _onClick={write}
             >
               등록

@@ -6,21 +6,24 @@ import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
 import { actionConfirm } from "../../redux/modules/popup";
 import displayedRestrict from "../../shared/displayedRestrict";
+import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
-  const lonin_username = useSelector((state) => state.user.user.username);
+  const lonin_userId = useSelector((state) => state.user.user.userId);
 
   const {
     board,
     boardId,
     title,
+    userId,
     totalVisitors,
     createdAt,
     nickname,
     likeCount,
   } = props;
+  //logger(boardId);
   const dispatch = useDispatch();
   const handleOnClick = () => {
     if (board === "vaccine") {
@@ -37,27 +40,31 @@ const BoardInfo = (props) => {
           {title}
         </Text>
         <BtnWrapper>
-          <Button
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.SubHeadTwoSize}
-            bg={theme.bg2}
-            bold
-            _onClick={handleOnClick}
-          >
-            수정
-          </Button>
-          <Button
-            margin="0 0 0 16px"
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.SubHeadTwoSize}
-            bg={theme.bg}
-            bold
-            _onClick={() => dispatch(actionConfirm())}
-          >
-            삭제
-          </Button>
+          {userId === lonin_userId && is_login && (
+            <Button
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.SubHeadTwoSize}
+              bg={theme.bg2}
+              bold
+              _onClick={handleOnClick}
+            >
+              수정
+            </Button>
+          )}
+          {userId === lonin_userId && is_login && (
+            <Button
+              margin="0 0 0 16px"
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.SubHeadTwoSize}
+              bg={theme.bg}
+              bold
+              _onClick={() => dispatch(actionConfirm())}
+            >
+              삭제
+            </Button>
+          )}
         </BtnWrapper>
       </Grid>
       <NameHitWrapper>
