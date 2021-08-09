@@ -5,7 +5,7 @@ const displayedAt = (createdAt) => {
   const timeValue = new Date(createdAt);
 
   const betweenTime = Math.floor(
-    (today.getTime() - timeValue.getTime() - 9 * 60 * 60 * 1000) / 1000 / 60
+    (today.getTime() - timeValue.getTime()) / 1000 / 60
   );
   if (betweenTime < 1) return "방금 전";
   if (betweenTime < 60) {
@@ -17,7 +17,7 @@ const displayedAt = (createdAt) => {
     return `${betweenTimeHour}시간 전`;
   }
 
-  return moment(createdAt).format("YYYY년 M월 D일");
+  return moment(createdAt).format("YYYY.MM.DD");
 };
 
 export default displayedAt;

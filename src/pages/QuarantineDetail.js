@@ -7,6 +7,7 @@ import MoveBox from "../components/detail/MoveBox";
 import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  actionDeleteEx,
   actionGetDetail,
   actionSetPrevNextPageQuar,
 } from "../redux/modules/board";
@@ -31,8 +32,6 @@ const QuarantineDetail = () => {
 
   const boardType = false;
 
-  const handleDelete = () => {};
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actionGetDetail("quarantine", boardId_detail));
@@ -40,12 +39,17 @@ const QuarantineDetail = () => {
   }, []);
   const board_content = useSelector((state) => state.board.board);
 
+  const handleDelete = () => {
+    dispatch(actionDeleteEx("quarantine", board_content.boardId));
+  };
+
   return (
     <Grid width={theme.detailWidth} margin="160px auto auto auto">
       <BoardInfo
         board="quarantine"
         boardId={board_content.boardId}
         nickname={board_content.nickname}
+        userId={board_content.userId}
         title={board_content.title}
         totalVisitors={board_content.totalVisitors}
         createdAt={board_content.createdAt}

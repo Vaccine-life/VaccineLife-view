@@ -20,6 +20,10 @@ export const boardAxios = {
     api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
   getDetailVac: (boardId) => api.get(`/api/vacBoard/${boardId}`),
   getDetailQuar: (boardId) => api.get(`/api/quarBoard/${boardId}`),
+  modifyVac: (boardId, obj) => api.put(`/api/vacBoard/${boardId}`, obj),
+  modifyQuar: (boardId, obj) => api.put(`/api/quarBoard/${boardId}`, obj),
+  deleteVac: (boardId) => api.delete(`/api/vacBoard/${boardId}`),
+  deleteQuar: (boardId) => api.delete(`/api/quarBoard/${boardId}`),
   topThreeVac: () => api.get("/api/vacBoard/topLike"),
   topThreeQuar: () => api.get("/api/quarBoard/topLike"),
 };
