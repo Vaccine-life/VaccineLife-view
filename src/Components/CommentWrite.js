@@ -1,13 +1,12 @@
 import React from "react";
-import moment from "moment";
 import "moment/locale/ko";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import displayedAt from "../shared/displayedAt";
 
 
 const CommentWrite = (props) => {
@@ -44,63 +43,10 @@ const CommentWrite = (props) => {
     }   
 
 
-    // 몇 분 전(axios로 이어서 시간변화 확인필요)
-    function timeForToday(value) {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60
-    );
-    if (betweenTime < 1) return "방금전";
-    if (betweenTime < 60) {
-      return `${betweenTime}분전`;
-    }
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour}시간전`;
-    }
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay}일전`;
-    }
-    return `${Math.floor(betweenTimeDay / 365)}년전`;
-  }
-
-  const medicalWrite = () => {
-    // 로그인 후 이용
-    if(!is_login) {
-      dispatch(actionSetMessage("로그인 후 이용해 주세요"));
-      dispatch(actionAlert());
-      return;
-    }
-
-    // 빈 내용이면 alert창
-    if (!comment) {
-      dispatch(actionAlert());
-      dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
-      return;
-    } else {
-      // 오브젝트로 넣어줘야
-      dispatch(
-        actionAddComment({
-          // nickname,
-          comment,
-          insert_dt: timeForToday(moment().format()),
-          // userId: user_id,
-          // contents: comment,
-        })
-      );
-      // 코멘트 작성 후 인풋태그와 글자수(byte) 초기화
-      setComment();
-      setLength(0);
-    }
-  }
-
-  // medicalWrite랑 둘중에 하나 사용? dispatch만 다름
   const medicalObj = {
     userId: user_id,
     contents: comment,
+    // createdAt: displayedAt(),
   }
   const handleMedical = () => {
     // 로그인 후 이용
@@ -117,6 +63,7 @@ const CommentWrite = (props) => {
       return;
     } else {
       // 의료진분들께 dispatch
+      dispatch(actionAddComment(medicalObj));
       dispatch(actionAddMedical(medicalObj));
       setComment();
       setLength(0);
