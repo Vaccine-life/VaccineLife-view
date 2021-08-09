@@ -20,6 +20,11 @@ const popup = createSlice({
   },
 });
 
-export const { actionAlert, actionConfirm, actionSetMessage } = popup.actions;
+export const {
+  actionAlert,
+  actionConfirm,
+  actionSetMessage,
+  actionConfirmChannge,
+} = popup.actions;
 
 export default popup;

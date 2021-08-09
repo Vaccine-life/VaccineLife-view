@@ -42,6 +42,7 @@ const board = createSlice({
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
     },
+
     // action을  vacBoardId, board 값을 가져옴
     actionSetPrevNextPageVac: (state, action) => {
       const currentIndex = state.listVac.findIndex((each) => {
@@ -114,6 +115,44 @@ export const actionGetDetail =
         };
       }
       dispatch(actionSetBoard(board_input));
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionModifyDB =
+  (board, boardId, obj) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        await boardAxios.modifyVac(boardId, obj);
+        history.replace("/vaccine");
+      } else {
+        await boardAxios.modifyQuar(boardId, obj);
+        history.replace("/quarantine");
+      }
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionDeleteEx =
+  (board, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        await boardAxios.deleteVac(boardId);
+        history.replace("/vaccine");
+      } else {
+        await boardAxios.deleteQuar(boardId);
+        history.replace("/quarantine");
+      }
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
