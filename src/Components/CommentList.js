@@ -24,7 +24,7 @@ const CommentList = (props) => {
     // 의료진분들께 글을 작성하고 다른 페이지로 넘어가면 Object오류 뜨는 문제의 원인 발견
     // 그럼 어떻게 목록 불러오지...?
     // React.useEffect = (() => {
-    //     dispatch(actionSetComment(...comment_list));
+    //     dispatch(actionGetMedical());
     //     // dispatch(actionGetMedical(...comment_list));
     // }, [])
 

@@ -66,7 +66,7 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      console.log(data)
+      console.log(getData)
       // let medical_input = {
       //   nickname: data.nickname,
       //   contents: data.comment,

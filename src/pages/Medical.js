@@ -7,6 +7,7 @@ import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
+import { actionSetComment, actionDeleteComment, actionGetMedical } from "../redux/modules/comment";
 
 import Alert from "../components/popup/Alert";
 
@@ -18,6 +19,11 @@ const Medical = () => {
 
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
+
+//   React.useEffect = (() => {
+//     dispatch(actionSetComment());
+//     // dispatch(actionGetMedical());
+// }, [])
 
   return (
     <React.Fragment>
