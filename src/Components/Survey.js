@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Text } from "../elements/index";
 import theme from "../styles/theme";
@@ -6,7 +6,7 @@ import survey from "./survey.css";
 
 // 10-18번째줄 signup compo로 올려주자
 
-const Survey = ({ inputs, setInputs, submitSurvey }) => {
+const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
@@ -462,8 +462,14 @@ const Survey = ({ inputs, setInputs, submitSurvey }) => {
           {/* <div></div> */}
         </SurveyItem>
 
-        <SubmitButton type="submit" disabled={ableSubmitButton()}>
-          회원가입
+        <SubmitButton
+          type="submit"
+          disabled={ableSubmitButton()}
+          onClick={() => {
+            setStatus("signup");
+          }}
+        >
+          다음단계
         </SubmitButton>
       </form>
     </>

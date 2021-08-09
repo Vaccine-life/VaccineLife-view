@@ -63,7 +63,63 @@ export const actionLogin =
       dispatch(actionSetUser(userInfo));
       dispatch(actionVisible());
     } catch (error) {
-      dispatch(actionSetMessage("비밀번호를 다시 확인해 주세요"));
+      dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionSignup =
+  ({
+    username,
+    password,
+    passwordChecker,
+    nickname,
+    isVaccine,
+    type,
+    gender,
+    age,
+    disease,
+    degree,
+    afterEffect,
+  }) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      // 여기가 찐 회원가입에만 관여하는 부분
+
+      await userAxios.signup({
+        username,
+        password,
+        passwordChecker,
+        nickname,
+        isVaccine,
+        type,
+        gender,
+        age,
+        disease,
+        degree,
+        afterEffect,
+      });
+
+      //여기부터는 회원가입 즉시 로그인 하기위한 애들
+      // userAxios.login({ username, password });
+      // const newuserDecode = jwtDecode(newuserObj.data);
+      // logger(newuserDecode);
+      // const newuser = {
+      //   afterEffect: newuserDecode.afterEffect,
+      //   age: newuserDecode.age,
+      //   degree: newuserDecode.degree,
+      //   disease: newuserDecode.disease,
+      //   gender: newuserDecode.gender,
+      //   isVaccine: newuserDecode.isVaccine,
+      //   nickname: newuserDecode.nickname,
+      //   roles: newuserDecode.roles,
+      //   username: newuserDecode.sub,
+      //   userId: newuserDecode.id,
+      //   type: newuserDecode.type,
+      // };
+      // dispatch(actionSetUser(newuser));
+    } catch (error) {
+      dispatch(actionSetMessage("회원가입 실패"));
       dispatch(actionAlert());
     }
   };
@@ -117,7 +173,7 @@ export const actionGetLike =
       dispatch(actionSetLike(makeData));
     } catch (error) {
       dispatch(
-        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요.")
       );
       dispatch(actionAlert());
     }
