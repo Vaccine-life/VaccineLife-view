@@ -101,23 +101,31 @@ export const actionSignup =
       });
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
-      // userAxios.login({ username, password });
-      // const newuserDecode = jwtDecode(newuserObj.data);
-      // logger(newuserDecode);
-      // const newuser = {
-      //   afterEffect: newuserDecode.afterEffect,
-      //   age: newuserDecode.age,
-      //   degree: newuserDecode.degree,
-      //   disease: newuserDecode.disease,
-      //   gender: newuserDecode.gender,
-      //   isVaccine: newuserDecode.isVaccine,
-      //   nickname: newuserDecode.nickname,
-      //   roles: newuserDecode.roles,
-      //   username: newuserDecode.sub,
-      //   userId: newuserDecode.id,
-      //   type: newuserDecode.type,
-      // };
-      // dispatch(actionSetUser(newuser));
+      const newuserObj = await userAxios.login({ username, password });
+      console.log(newuserObj);
+      const newuserDecode = jwtDecode(newuserObj.data);
+      logger(newuserDecode);
+      const newuser = {
+        afterEffect: newuserDecode.afterEffect,
+        age: newuserDecode.age,
+        degree: newuserDecode.degree,
+        disease: newuserDecode.disease,
+        gender: newuserDecode.gender,
+        isVaccine: newuserDecode.isVaccine,
+        nickname: newuserDecode.nickname,
+        roles: newuserDecode.roles,
+        username: newuserDecode.sub,
+        userId: newuserDecode.id,
+        type: newuserDecode.type,
+      };
+      dispatch(actionSetUser(newuser));
+      dispatch(
+        actionSetMessage(
+          `반갑습니다 ${nickname}님! 회원가입 및 로그인 되었습니다`
+        )
+      );
+      dispatch(actionAlert());
+      dispatch(actionVisible());
     } catch (error) {
       dispatch(actionSetMessage("회원가입 실패"));
       dispatch(actionAlert());
