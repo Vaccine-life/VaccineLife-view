@@ -91,7 +91,7 @@ const HorizontalBarChart = () => (
 );
 
 const Wrapper = styled.div`
-  margin-left: 50px;
+  /* margin-left: 50px; */
 `;
 
 const BarTitle1 = styled.div`
@@ -102,6 +102,8 @@ const BarTitle1 = styled.div`
 
   width: 166px;
   height: 26px;
+
+  margin-bottom: 10px;
 
   & > img {
     width: 24px;
@@ -141,6 +143,8 @@ const BarTitle2 = styled.div`
 
   width: 183px;
   height: 26px;
+
+  margin-bottom: 10px;
 
   & > img {
     width: 24px;

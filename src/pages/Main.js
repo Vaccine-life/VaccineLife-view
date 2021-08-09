@@ -43,31 +43,30 @@ const Main = () => {
 };
 
 const Intro = styled.div`
+/* display: flex;
+position: relative; */
 display: flex;
-position: relative;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 
 width: 100vw;
-height: 200px;
+height: 230px;
 background-color: ${theme.bg};
 
 & > img {
-  width: auto;
-  height: auto;
-  max-width: 330px;
-  max-height: 330px;
-  
-  position: absolute;
-  left: 300px;
-  top: 85px;
+width: auto;
+height: auto;
+max-width: 330px;
+max-height: 330px;
+
+padding-top: 92px;
+
 }
 
 & > h1 {
-  position: absolute;
-  left: 550px;
-  top: 120px;
-
-
-/* padding: 120px 0px 0px 500px; */
+padding-left: 0px;
+padding-top: 75px;
 font-size: ${theme.headTwoHeight};
 line-height: 42px;
 
@@ -80,9 +79,9 @@ font-weight: 600;
 `;
 
 const MapAndChart = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 80px auto;
+display: flex;
+justify-content: center;
+margin: 80px auto;
 `;
 
 export default Main;

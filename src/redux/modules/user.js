@@ -93,6 +93,7 @@ export const actionLogoutCookie =
   async (dispatch, getState, { history }) => {
     deleteCookie("vaccine_life_token");
     dispatch(actionLogout());
+    history.replace("/");
   };
 
 export const actionGetLike =

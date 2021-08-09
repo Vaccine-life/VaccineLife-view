@@ -36,7 +36,7 @@ const ListNav = (props) => {
         전체글
       </Text>
       <Button
-        width={theme.mediumButtonWidth}
+        width={theme.totalButtonWidth}
         height={theme.mediumButtonHeight}
         fontSize={theme.SubHeadOneSize}
         margin="0"
