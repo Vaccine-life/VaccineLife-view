@@ -216,6 +216,7 @@ const MapTitle = styled.div`
   align-items: center;
   width: 130px;
   height: 26px;
+  margin-bottom: 10px;
   & > img {
     width: 24px;
     height: 24px;
