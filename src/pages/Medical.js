@@ -21,16 +21,17 @@ const Medical = () => {
 
   return (
     <React.Fragment>
-      <Grid width={theme.medicalWidth} margin={`160px auto auto auto`}>
+      <Grid width={theme.medicalWidth} margin={`160px auto 100px auto`}>
         <Grid align="left">
           <Text
             bold
             size={theme.headOneSize}
-            lineHeight="2"
+            lineHeight={theme.headOneHeight}
             color={theme.fontColor}
           >
             의료진분들께
           </Text>
+          <div style={{borderBottom:"1px solid", margin:"2rem 0 0 0"}}></div>
         </Grid>
 
         <CommentWrite />

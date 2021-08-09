@@ -3,10 +3,12 @@ import moment from "moment";
 import "moment/locale/ko";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
@@ -23,21 +25,22 @@ const CommentWrite = (props) => {
 
     // 현재 글자 수
     const getTextLength = (str) => {
-      let len = 0;
-      for (let i = 0; i < str.length; i++) {
-        if (escape(str.charAt(i)).length === 6) {
+        let len = 0;
+        for (let i = 0; i < str.length; i++) {
+          if (escape(str.charAt(i)).length === 6) {
+            len++;
+          }
           len++;
         }
-        len++;
-      }
-      // console.log(len);
-      setLength(len);
-    };
-    getTextLength(e.target.value);
-  };
+        // console.log(len);
+        setLength(len);
+      };
+      getTextLength(e.target.value);
+    }   
 
-  // 몇 분 전(axios로 이어서 시간변화 확인필요)
-  function timeForToday(value) {
+
+    // 몇 분 전(axios로 이어서 시간변화 확인필요)
+    function timeForToday(value) {
     const today = new Date();
     const timeValue = new Date(value);
 
@@ -69,34 +72,36 @@ const CommentWrite = (props) => {
       // 오브젝트로 넣어줘야
       dispatch(
         actionAddComment({
+          medicalId: "",
           nickname: "명수는열두살",
           comment,
           // insert_dt: moment().startOf('hour').fromNow(),
           insert_dt: timeForToday(moment().format()),
         })
       );
-      // 코멘트 작성 후 인풋태크에 있는 글 없애기
+      // 코멘트 작성 후 인풋태그와 글자수(byte) 초기화
       setComment();
       setLength(0);
     }
-  };
+  }
 
-  return (
+
+    return(
     <React.Fragment>
-      {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
-      <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
-        <Grid align="left" width="10rem" margin="15px 0 auto 0">
-          <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>
-            {props.nickname}
-          </Text>
+      <Grid is_flex="space_column" width={theme.medicalWidth}>
+
+        <Grid align="left" margin="1.3rem 0">
+          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{props.nickname}</Text>
         </Grid>
+
+        {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
 
         <Grid is_flex="space_column" border="1px solid #c1c1c1">
           <Grid margin="0 5rem">
-            <Input
+            <Input 
               multiLine
               border="none"
-              value={comment}
+              value={comment} 
               placeholder="응원의 한마디!"
               maxLength="500"
               _onChange={changeComment}
@@ -104,24 +109,22 @@ const CommentWrite = (props) => {
               // onSubmit={write}
             />
           </Grid>
-
+            
           <Grid is_flex="space_row" border="none">
             <Grid padding="10px" bg="#ffffff" align="right">
-              <Text size={theme.bodyTwoSize}>
-                <span>{length}</span> / 1000(byte)
-              </Text>
+              <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text>
             </Grid>
 
-            <Button
-              width={theme.smallButtonWidth}
-              height={theme.smallButtonHeight}
-              fontSize={theme.SubHeadOneSize}
-              _onClick={write}
-            >
-              등록
+            <Button 
+                width={theme.smallButtonWidth} 
+                height={theme.smallButtonHeight}
+                fontSize={theme.SubHeadOneSize}
+                _onClick={write} 
+              >등록
             </Button>
           </Grid>
         </Grid>
+
       </Grid>
     </React.Fragment>
   );

@@ -22,7 +22,7 @@ const Header = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-          <Grid width="auto" margin="1rem 5rem">
+          <Grid width="auto" margin="1rem 0 1rem 5rem">
             <Grid is_flex="space_row">
               <Grid
                 is_flex="center"
