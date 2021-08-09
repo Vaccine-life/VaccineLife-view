@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { history } from "../redux/configStore";
 import theme from "../styles/theme";
 import Grid from "../elements/Grid";
@@ -10,8 +10,9 @@ import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
 import { convertFromRaw } from "draft-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
+import { actionGetDetail, actionModifyDB } from "../redux/modules/board";
 
 const data = {
   vacBoardId: 0,
@@ -23,23 +24,34 @@ const data = {
 };
 
 const Modify = () => {
+  const dispatch = useDispatch();
   // /modify일때 true /quarantinemodify 일떄 false
   const url = history.location.pathname;
   const urlLength = url.length;
   // true or false
-  const board = url.includes("/modify") ? true : false;
-  let boardId = board
-    ? url.substr(8, urlLength - 1)
-    : url.substr(18, urlLength - 1);
-  logger(boardId);
+  const board = url.includes("/modify") ? "vaccine" : "quarantine";
+  let boardId =
+    board === "vaccine"
+      ? url.substr(8, urlLength - 1)
+      : url.substr(18, urlLength - 1);
+  // 리덕스 정보 없어졌을시 재저장
+  useEffect(() => {
+    if (board === "vaccine") {
+      dispatch(actionGetDetail("vaccine", boardId));
+    } else {
+      dispatch(actionGetDetail("quarantine", boardId));
+    }
+  }, []);
+
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
-
+  // 리덕스에서 정보 가져오기
+  const board_store = useSelector((state) => state.board.board);
   // 타이틀 인풋값
-  const [title, setTitle] = useState(data.title);
+  const [title, setTitle] = useState(board_store.title);
   const editor = useRef();
   // 데이터 JSON 변환
-  const storedState = convertFromRaw(JSON.parse(data.contents));
+  const storedState = convertFromRaw(JSON.parse(board_store.contents));
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(storedState)
   );
@@ -53,12 +65,24 @@ const Modify = () => {
     setTitle(value);
   };
 
+  // 타입에 따른 오브젝트 수정
+  const modifyObj =
+    board === "vaccine"
+      ? {
+          title,
+          contents,
+          userId: board_store.userId,
+          id: board_store.boardId,
+        }
+      : {
+          title,
+          contents,
+          userId: board_store.userId,
+          id: board_store.boardId,
+        };
+
   const handlePostEx = () => {
-    if (board) {
-      //백신후기 dispatch
-    } else {
-      //격리후기 dispatch
-    }
+    dispatch(actionModifyDB(board, boardId, modifyObj));
   };
 
   return (
@@ -71,7 +95,7 @@ const Modify = () => {
           bold
         >
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
-          {board ? "백신" : "격리"} 후기 수정하기
+          {board === "vaccine" ? "백신 후기 수정하기" : "격리 후기 수정하기"}
         </Text>
         <Button
           width="88px"

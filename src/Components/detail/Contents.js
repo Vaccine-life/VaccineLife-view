@@ -46,14 +46,13 @@ const Contents = (props) => {
       <Editor editorState={editorState} readOnly={true} />
       <LikeWrapper>
         <Button
-          width={theme.mediumButtonWidth}
+          width={theme.totalButtonWidth}
           height={theme.mediumButtonHeight}
         >
           <div
             style={{
               fontSize: theme.SubHeadOneSize,
               lineHeight: theme.SubHeadOneHeight,
-              fontWeight: "700",
             }}
           >
             <FontAwesomeIcon

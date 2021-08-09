@@ -90,8 +90,8 @@ const InfoWrapper = styled.div`
   margin-bottom: 24px;
 `;
 const InfoDiv = styled.div`
-  width: 60px;
-  height: 24px;
+  width: 63px;
+  height: 32px;
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
   font-weight: 700;
