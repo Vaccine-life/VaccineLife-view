@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import jwtDecode from "jwt-decode";
 import { boardAxios, writeAxios } from "../../shared/api";
 import logger from "../../shared/logger";
+import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
 
 const board = createSlice({
@@ -20,17 +20,25 @@ const board = createSlice({
       prev: {},
       next: {},
     },
-    paging: {
+    pagingVac: {
       nextPage: 1,
-      totalPage: 10,
+      totalPage: 0,
+    },
+    pagingQuar: {
+      nextPage: 1,
+      totalPage: 0,
     },
   },
   reducers: {
     actionSetListVac: (state, action) => {
-      state.listVac = action.payload;
+      state.listVac.push(...action.payload.board);
+      state.pagingVac.nextPage += 1;
+      state.pagingVac.totalPage = action.payload.totalPageInData;
     },
     actionSetListQuar: (state, action) => {
-      state.listQuar = action.payload;
+      state.listQuar.push(...action.payload.board);
+      state.pagingQuar.nextPage += 1;
+      state.pagingQuar.totalPage = action.payload.totalPageInData;
     },
     actionSetBoard: (state, action) => {
       state.board = action.payload;
@@ -42,11 +50,10 @@ const board = createSlice({
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
     },
-
     // action을  vacBoardId, board 값을 가져옴
     actionSetPrevNextPageVac: (state, action) => {
       const currentIndex = state.listVac.findIndex((each) => {
-        return each.vacBoardId === action.payload;
+        return each.id === action.payload;
       });
       const totalLength = state.listVac.length;
       state.page.prev =
@@ -58,8 +65,9 @@ const board = createSlice({
     },
     actionSetPrevNextPageQuar: (state, action) => {
       const currentIndex = state.listQuar.findIndex((each) => {
-        return each.quarBoardId === action.payload;
+        return each.id === action.payload;
       });
+      logger(currentIndex);
       const totalLength = state.listQuar.length;
       state.page.prev =
         totalLength === currentIndex
@@ -70,6 +78,53 @@ const board = createSlice({
     },
   },
 });
+
+//Data 얻기
+
+export const actionGetBoard =
+  (board) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        // 백신후기
+        const { nextPage, totalPage } = getState().board.pagingVac;
+        if (nextPage > totalPage && nextPage !== 1) {
+          return;
+        }
+        //loading => true
+        dispatch(actionLoading());
+
+        const getData = await boardAxios.getPageVac(nextPage);
+        logger(getData);
+        const board = getData.data.content;
+        const totalPageInData = getData.data.totalPages;
+
+        dispatch(actionSetListVac({ board, totalPageInData }));
+      } else {
+        // 격리후기
+        const { nextPage, totalPage } = getState().board.pagingQuar;
+        if (nextPage > totalPage && nextPage !== 1) {
+          return;
+        }
+        //loading => true
+        dispatch(actionLoading());
+
+        const getData = await boardAxios.getPageQuar(nextPage);
+        const board = getData.data.content;
+        const totalPageInData = getData.data.totalPages;
+
+        dispatch(actionSetListQuar({ board, totalPageInData }));
+      }
+      //loading => false
+      dispatch(actionLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const actionGetDetail =
   (board, boardId) =>
