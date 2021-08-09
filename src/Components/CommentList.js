@@ -4,30 +4,30 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../elements";
-import { actionSetComment, actionDeleteComment } from "../redux/modules/comment";
+import { actionSetComment, actionDeleteComment, actionGetMedical } from "../redux/modules/comment";
 import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
+import Confirm from "../components/popup/Confirm";
 
 
 const CommentList = (props) => {
     const dispatch = useDispatch();
 
     const nickname = useSelector((state) => state.user.user.nickname)
-    // console.log(nickname)
     const comment_list = useSelector((state) => state.comment.list);
-    // console.log(comment_list);
-    // console.log(props)
+
+    // confirm 창
+    const confirm_status = useSelector((state) => state.popup.confirm);
 
     // 의료진분들께 글을 작성하고 다른 페이지로 넘어가면 Object오류 뜨는 문제의 원인 발견
     // 그럼 어떻게 목록 불러오지...?
-    // React.useEffect = (() => {
-    //     dispatch(actionSetComment(comment_list));
-    // }, [])
+    React.useEffect = (() => {
+        dispatch(actionGetMedical(comment_list));
+        // dispatch(actionGetMedical());
+    }, [])
 
-    const deleteComment = () => {
+    const deleteComment = (props) => {
         // 작성자가 나일때만 삭제 가능하게 하기
-        dispatch(actionConfirm());
-        // dispatch(actionSetMessage("삭제하시겠습니까?"));
-        // dispatch(actionDeleteComment(props.medicalId));
+        dispatch(actionDeleteComment());
     }
 
 
@@ -49,9 +49,14 @@ const CommentList = (props) => {
                         size={theme.bodyTwoSize}
                         cursor="pointer"
                         // _onClick={() => {console.log("삭제!")}}
-                        _onClick={deleteComment}
+                        _onClick={() => dispatch(actionConfirm())}
                     >삭제</Text>
                 </Grid>
+
+                {confirm_status && <Confirm 
+                    confirmMessage="응원을 삭제하시겠습니까?"
+                    activeFunction={deleteComment}
+                />}
 
                 <Grid align="right" width="8rem" margin="0 0 auto 0">
                     <Text size={theme.bodyTwoSize}>{props.insert_dt}</Text>

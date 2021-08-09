@@ -6,15 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
-import { actionAddComment } from "../redux/modules/comment";
+import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import { actionAddMedical } from "../redux/modules/comment";
 
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
 
-  const nickname = useSelector((state) => state.user.user.nickname)
+  const is_login = useSelector((state) => state.user.is_login);
+  const nickname = useSelector((state) => state.user.user.nickname);
+  const user_id = useSelector((state) => state.user.user.userId);
   // console.log(nickname)
 
   // useState사용해서 인풋의 텍스트 내용 저장
@@ -67,6 +68,13 @@ const CommentWrite = (props) => {
   }
 
   const medicalWrite = () => {
+    // 로그인 후 이용
+    if(!is_login) {
+      dispatch(actionSetMessage("로그인 후 이용해 주세요"));
+      dispatch(actionAlert());
+      return;
+    }
+
     // 빈 내용이면 alert창
     if (!comment) {
       dispatch(actionAlert());
@@ -76,11 +84,11 @@ const CommentWrite = (props) => {
       // 오브젝트로 넣어줘야
       dispatch(
         actionAddComment({
-          medicalId: "",
-          nickname,
+          // nickname,
           comment,
-          // insert_dt: moment().startOf('hour').fromNow(),
           insert_dt: timeForToday(moment().format()),
+          // userId: user_id,
+          // contents: comment,
         })
       );
       // 코멘트 작성 후 인풋태그와 글자수(byte) 초기화
@@ -91,12 +99,17 @@ const CommentWrite = (props) => {
 
   // medicalWrite랑 둘중에 하나 사용? dispatch만 다름
   const medicalObj = {
-    medicalId: "",
-    nickname,
+    userId: user_id,
     comment,
-    insert_dt: timeForToday(moment().format()),
   }
   const handleMedical = () => {
+    // 로그인 후 이용
+    if(!is_login) {
+      dispatch(actionSetMessage("로그인 후 이용해 주세요"));
+      dispatch(actionAlert());
+      return;
+    }
+    
     // 빈 내용이면 alert창
     if (!comment) {
       dispatch(actionAlert());
@@ -146,7 +159,7 @@ const CommentWrite = (props) => {
                 width={theme.smallButtonWidth} 
                 height={theme.smallButtonHeight}
                 fontSize={theme.SubHeadOneSize}
-                _onClick={medicalWrite} 
+                _onClick={medicalWrite}
               >등록
             </Button>
           </Grid>

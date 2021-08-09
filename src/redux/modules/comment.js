@@ -43,8 +43,8 @@ const comment = createSlice({
   // action을 선언하고 해당 action이 dispatch되면 바로 state를 가지고 action처리 함.
   reducers: {
     actionSetComment: (state, action) => {
-      state.list = action.payload;
-      // state.list.push(...action.payload);
+      // state.list = action.payload;
+      state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload)
@@ -64,17 +64,17 @@ export const actionGetMedical =
   () =>
   async (dispatch, getState, { history }) => {
     try {
-      let medical_input = {};
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      medical_input = {
-        medicalId: data.id,
-        nickname: data.nickname,
-        comment: data.comment,
-        createdAt: data.createdAt,
-      };
+      console.log(data)
+      // let medical_input = {
+      //   nickname: data.nickname,
+      //   contents: data.comment,
+      //   createdAt: data.createdAt,
+      // };
+      // await medicalAxios.getMedical()
 
-      dispatch(actionSetComment(medical_input));
+      dispatch(actionSetComment(data));
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -84,10 +84,10 @@ export const actionGetMedical =
   };
 
 export const actionAddMedical = 
-  (medicalObj) =>
+  (contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      await medicalAxios.addMedical(medicalObj);
+      await medicalAxios.addMedical(contents);
       history.replace("/medical");
     } catch (err) {
       dispatch(

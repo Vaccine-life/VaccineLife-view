@@ -34,6 +34,6 @@ export const writeAxios = {
 
 export const medicalAxios = {
   getMedical: () => api.get("/api/medical"),
-  addMedical: (obj) => api.post("/api/medical", obj),
+  addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
 }
