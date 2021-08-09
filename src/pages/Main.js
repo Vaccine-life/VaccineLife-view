@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Login from "./Login";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
+import IntroCharacter from "../images/IntroCharacter.png"
 
 import Map from "../components/Map";
 import theme from "../styles/theme";
@@ -21,6 +22,7 @@ const Main = () => {
       {modal_status && <Login />}
 
       <Intro>
+        <img src={IntroCharacter} alt="" />
         <h1>
           여러분의 <span>백신 접종 후기</span>를 공유해주세요!
         </h1>
@@ -41,28 +43,45 @@ const Main = () => {
 };
 
 const Intro = styled.div`
-  width: 100vw;
-  height: 200px;
-  background-color: ${theme.bg};
+/* display: flex;
+position: relative; */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 
-  & > h1 {
-    padding-top: 120px;
+width: 100vw;
+height: 230px;
+background-color: ${theme.bg};
 
-    font-size: ${theme.headTwoHeight};
-    line-height: 42px;
+& > img {
+width: auto;
+height: auto;
+max-width: 330px;
+max-height: 330px;
 
-    color: #ffffff;
+padding-top: 92px;
 
-    & > span {
-      font-weight: 600;
-    }
-  }
+}
+
+& > h1 {
+padding-left: 0px;
+padding-top: 75px;
+font-size: ${theme.headTwoHeight};
+line-height: 42px;
+
+color: #ffffff;
+
+& > span {
+font-weight: 600;
+}
+}
 `;
 
 const MapAndChart = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 80px auto;
+display: flex;
+justify-content: center;
+margin: 80px auto;
 `;
 
 export default Main;
