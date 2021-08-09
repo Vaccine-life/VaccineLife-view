@@ -10,12 +10,12 @@ const initialState = {
   user: {
     nickname: "",
     isVaccine: false,
-    degree: 1,
-    type: "",
-    gender: "",
-    age: "",
-    disease: "",
-    afterEffect: "",
+    degree: undefined,
+    type: undefined,
+    gender: undefined,
+    age: undefined,
+    disease: undefined,
+    afterEffect: undefined,
   },
   likeList: [],
   is_login: false,
@@ -119,13 +119,14 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
+      dispatch(actionVisible());
       dispatch(
         actionSetMessage(
-          `반갑습니다 ${nickname}님! 회원가입 및 로그인 되었습니다`
+          `반갑습니다 ${nickname}님!
+          회원가입 및 로그인 되었습니다`
         )
       );
       dispatch(actionAlert());
-      dispatch(actionVisible());
     } catch (error) {
       dispatch(actionSetMessage("회원가입 실패"));
       dispatch(actionAlert());

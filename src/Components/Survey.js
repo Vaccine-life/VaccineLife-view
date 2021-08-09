@@ -18,12 +18,12 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
     }
     if (
       isVaccine === 2 ||
-      degree === 0 ||
-      type === "" ||
-      gender === "" ||
-      age === "" ||
-      disease === "" ||
-      afterEffect === ""
+      degree === undefined ||
+      type === undefined ||
+      gender === undefined ||
+      age === undefined ||
+      disease === undefined ||
+      afterEffect === undefined
     ) {
       return true;
     }

@@ -34,7 +34,7 @@ const SignupComponent = ({ formik }) => {
         </InputBox>
         <InputBox>
           <SignupInput
-            placeholder="8자 이상의 비밀번호를 입력하세요"
+            placeholder="비밀번호를 입력하세요"
             id="password"
             name="password"
             type="password"

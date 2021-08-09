@@ -21,12 +21,12 @@ const Login = (props) => {
 
   const [inputs, setInputs] = useState({
     isVaccine: 2,
-    degree: 0,
-    type: "",
-    gender: "",
-    age: "",
-    disease: "",
-    afterEffect: "",
+    degree: undefined,
+    type: undefined,
+    gender: undefined,
+    age: undefined,
+    disease: undefined,
+    afterEffect: undefined,
   });
 
   const formik = useFormik({
@@ -38,20 +38,26 @@ const Login = (props) => {
     },
 
     validationSchema: Yup.object({
-      username: Yup.string().required("아이디를 입력해주세요."),
+      username: Yup.string()
+        .required("아이디를 입력해주세요")
+        .min(6, "아이디는 6자리 이상이어야 합니다")
+        .max(15, "아이디는 15자리 이하여야 합니다")
+        .matches(/^[0-9a-zA-Z]+$/, "영문과 숫자만 이용 가능합니다"),
       password: Yup.string()
-        .min(4, "비밀번호는 4자리 이상이여야 합니다.")
-        .matches(/[a-zA-Z]/, "비밀번호는 반드시 영문을 포함해야합니다.")
-        .required("비밀번호를 입력해주세요."),
+        .required("비밀번호를 입력해주세요")
+        .min(8, "비밀번호는 8자리 이상이어야 합니다.")
+        .max(20, "비밀번호는 20자리 이하여야 합니다")
+        .matches(/[a-zA-Z]/, "비밀번호는 영문을 포함해야합니다"),
       passwordChecker: Yup.string()
         .required("비밀번호를 재입력해주세요")
-        .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다."),
-      nickname: Yup.string().required("닉네임을 입력해주세요."),
+        .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다"),
+      nickname: Yup.string()
+        .required("닉네임을 입력해주세요")
+        .max(6, "닉네임은 6자리 이하여야 합니다"),
     }),
 
     onSubmit: (values) => {
       const user = { ...values, ...inputs };
-      console.log("회원가입 버튼 누르면 얘가 넘어감", user);
       dispatch(actionSignup(user));
     },
   });
