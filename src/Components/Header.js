@@ -22,7 +22,7 @@ const Header = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-          <Grid width="auto" margin="1rem 0 1rem 5rem">
+          <Grid width="auto" margin="0 0 0 5rem">
             <Grid is_flex="space_row">
               <Grid
                 is_flex="center"
@@ -90,7 +90,7 @@ const Header = (props) => {
             </Grid>
           </Grid>
 
-          <Grid is_flex="space_row" width="auto" margin="0 50px">
+          <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
                 <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
@@ -100,7 +100,7 @@ const Header = (props) => {
                 <Text
                   width="5rem"
                   cursor="pointer"
-                  margin="0 4rem"
+                  margin="0 5rem 0 3rem"
                   size={theme.headTwoSize}
                   lineHeight={theme.headTwoHeight}
                   bold

@@ -1,9 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { medicalAxios } from "../../shared/api";
+import { actionAlert, actionSetMessage } from "./popup";
 import moment from "moment";
 
 
+// function timeForToday(value) {
+//   const today = new Date();
+//   const timeValue = new Date(value);
+
+//   const betweenTime = Math.floor(
+//     (today.getTime() - timeValue.getTime()) / 1000 / 60
+//   );
+//   if (betweenTime < 1) return "방금전";
+//   if (betweenTime < 60) {
+//     return `${betweenTime}분전`;
+//   }
+//   const betweenTimeHour = Math.floor(betweenTime / 60);
+//   if (betweenTimeHour < 24) {
+//     return `${betweenTimeHour}시간전`;
+//   }
+//   const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+//   if (betweenTimeDay < 365) {
+//     return `${betweenTimeDay}일전`;
+//   }
+//   return `${Math.floor(betweenTimeDay / 365)}년전`;
+//   }
+
 const initialState = {
   list: [],
+  // medicalId: "",
+  // nickname: "",
+  // comment: "",
+  // insert_dt: timeForToday(moment().format()),
 };
 
 // createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
@@ -16,6 +44,7 @@ const comment = createSlice({
   reducers: {
     actionSetComment: (state, action) => {
       state.list = action.payload;
+      // state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload)
@@ -30,6 +59,49 @@ const comment = createSlice({
   },
 });
 
-export const { actionSetComment, actionAddComment, actionDeleteComment } = comment.actions;
+// 비동기...?
+export const actionGetMedical =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      let medical_input = {};
+      const getData = await medicalAxios.getMedical();
+      const data = getData.data;
+      medical_input = {
+        medicalId: data.id,
+        nickname: data.nickname,
+        comment: data.comment,
+        createdAt: data.createdAt,
+      };
+
+      dispatch(actionSetComment(medical_input));
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionAddMedical = 
+  (medicalObj) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      await medicalAxios.addMedical(medicalObj);
+      history.replace("/medical");
+    } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  }
+
+
+export const { 
+  actionSetComment, 
+  actionAddComment, 
+  actionDeleteComment 
+} = comment.actions;
 
 export default comment;

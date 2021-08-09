@@ -11,13 +11,17 @@ import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
 const CommentList = (props) => {
     const dispatch = useDispatch();
 
-    const comment_list = useSelector((state) => state.comment);
+    const nickname = useSelector((state) => state.user.user.nickname)
+    // console.log(nickname)
+    const comment_list = useSelector((state) => state.comment.list);
     // console.log(comment_list);
     // console.log(props)
 
-    React.useEffect = (() => {
-        dispatch(actionSetComment(comment_list));
-    }, [])
+    // 의료진분들께 글을 작성하고 다른 페이지로 넘어가면 Object오류 뜨는 문제의 원인 발견
+    // 그럼 어떻게 목록 불러오지...?
+    // React.useEffect = (() => {
+    //     dispatch(actionSetComment(comment_list));
+    // }, [])
 
     const deleteComment = () => {
         // 작성자가 나일때만 삭제 가능하게 하기
@@ -32,7 +36,7 @@ const CommentList = (props) => {
             <Grid is_flex="space_row" margin="2rem 0">
 
                 <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
+                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{nickname}</Text>
                 </Grid>
 
                 <Grid align="left">

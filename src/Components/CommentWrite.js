@@ -8,10 +8,14 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import { actionAddMedical } from "../redux/modules/comment";
 
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
+
+  const nickname = useSelector((state) => state.user.user.nickname)
+  // console.log(nickname)
 
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState();
@@ -62,7 +66,7 @@ const CommentWrite = (props) => {
     return `${Math.floor(betweenTimeDay / 365)}년전`;
   }
 
-  const write = () => {
+  const medicalWrite = () => {
     // 빈 내용이면 alert창
     if (!comment) {
       dispatch(actionAlert());
@@ -73,7 +77,7 @@ const CommentWrite = (props) => {
       dispatch(
         actionAddComment({
           medicalId: "",
-          nickname: "명수는열두살",
+          nickname,
           comment,
           // insert_dt: moment().startOf('hour').fromNow(),
           insert_dt: timeForToday(moment().format()),
@@ -85,13 +89,34 @@ const CommentWrite = (props) => {
     }
   }
 
+  // medicalWrite랑 둘중에 하나 사용? dispatch만 다름
+  const medicalObj = {
+    medicalId: "",
+    nickname,
+    comment,
+    insert_dt: timeForToday(moment().format()),
+  }
+  const handleMedical = () => {
+    // 빈 내용이면 alert창
+    if (!comment) {
+      dispatch(actionAlert());
+      dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
+      return;
+    } else {
+      // 의료진분들께 dispatch
+      dispatch(actionAddMedical(medicalObj));
+      setComment();
+      setLength(0);
+    }
+  };
 
-    return(
+
+  return(
     <React.Fragment>
       <Grid is_flex="space_column" width={theme.medicalWidth}>
 
         <Grid align="left" margin="1.3rem 0">
-          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{props.nickname}</Text>
+          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{nickname}</Text>
         </Grid>
 
         {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
@@ -112,14 +137,16 @@ const CommentWrite = (props) => {
             
           <Grid is_flex="space_row" border="none">
             <Grid padding="10px" bg="#ffffff" align="right">
-              <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text>
+              {/* <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text> */}
+              {/* obj?.prop => obj가 존재하면 obj.prop을 반환. 아니면 undefined반환 */}
+              <Text size={theme.bodyTwoSize}><span>{comment?.length || 0}</span> / 500</Text>
             </Grid>
 
             <Button 
                 width={theme.smallButtonWidth} 
                 height={theme.smallButtonHeight}
                 fontSize={theme.SubHeadOneSize}
-                _onClick={write} 
+                _onClick={medicalWrite} 
               >등록
             </Button>
           </Grid>

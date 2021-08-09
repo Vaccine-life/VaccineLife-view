@@ -27,3 +27,9 @@ export const writeAxios = {
   vacWrite: (obj) => api.post("/api/vacBoard", obj),
   quarWrite: (obj) => api.post("/api/quarBoard", obj),
 };
+
+export const medicalAxios = {
+  getMedical: () => api.get("/api/medical"),
+  addMedical: (obj) => api.post("/api/medical", obj),
+  deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
+}
