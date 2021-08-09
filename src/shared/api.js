@@ -18,6 +18,8 @@ export const userAxios = {
 export const boardAxios = {
   getPageVac: (page) =>
     api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
+  getPageQuar: (page) =>
+    api.get(`/api/quarBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
   getDetailVac: (boardId) => api.get(`/api/vacBoard/${boardId}`),
   getDetailQuar: (boardId) => api.get(`/api/quarBoard/${boardId}`),
   modifyVac: (boardId, obj) => api.put(`/api/vacBoard/${boardId}`, obj),
