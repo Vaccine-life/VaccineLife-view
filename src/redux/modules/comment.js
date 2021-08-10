@@ -23,9 +23,7 @@ const comment = createSlice({
       state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      let idx = state.list.findIndex(
-        (c) => c === action.payload
-      );
+      let idx = state.list.findIndex((c) => c === action.payload);
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
       if (idx !== action.payload) {
         state.list.splice(idx, 1);
