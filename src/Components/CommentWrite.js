@@ -1,17 +1,21 @@
 import React from "react";
-import moment from "moment";
 import "moment/locale/ko";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { Input, Text, Button, Grid } from "../elements";
-import { actionAddComment } from "../redux/modules/comment";
+import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import displayedAt from "../shared/displayedAt";
 
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
+
+  const is_login = useSelector((state) => state.user.is_login);
+  const nickname = useSelector((state) => state.user.user.nickname);
+  const user_id = useSelector((state) => state.user.user.userId);
+  // console.log(nickname)
 
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState();
@@ -39,59 +43,40 @@ const CommentWrite = (props) => {
     }   
 
 
-    // 몇 분 전(axios로 이어서 시간변화 확인필요)
-    function timeForToday(value) {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60
-    );
-    if (betweenTime < 1) return "방금전";
-    if (betweenTime < 60) {
-      return `${betweenTime}분전`;
-    }
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour}시간전`;
-    }
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay}일전`;
-    }
-    return `${Math.floor(betweenTimeDay / 365)}년전`;
+  const medicalObj = {
+    userId: user_id,
+    contents: comment,
+    // createdAt: displayedAt(),
   }
-
-  const write = () => {
+  const handleMedical = () => {
+    // 로그인 후 이용
+    if(!is_login) {
+      dispatch(actionSetMessage("로그인 후 이용해 주세요"));
+      dispatch(actionAlert());
+      return;
+    }
+    
     // 빈 내용이면 alert창
     if (!comment) {
       dispatch(actionAlert());
       dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
       return;
     } else {
-      // 오브젝트로 넣어줘야
-      dispatch(
-        actionAddComment({
-          medicalId: "",
-          nickname: "명수는열두살",
-          comment,
-          // insert_dt: moment().startOf('hour').fromNow(),
-          insert_dt: timeForToday(moment().format()),
-        })
-      );
-      // 코멘트 작성 후 인풋태그와 글자수(byte) 초기화
+      // 의료진분들께 dispatch
+      dispatch(actionAddComment(medicalObj));
+      dispatch(actionAddMedical(medicalObj));
       setComment();
       setLength(0);
     }
-  }
+  };
 
 
-    return(
+  return(
     <React.Fragment>
       <Grid is_flex="space_column" width={theme.medicalWidth}>
 
         <Grid align="left" margin="1.3rem 0">
-          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{props.nickname}</Text>
+          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{nickname}</Text>
         </Grid>
 
         {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
@@ -112,14 +97,16 @@ const CommentWrite = (props) => {
             
           <Grid is_flex="space_row" border="none">
             <Grid padding="10px" bg="#ffffff" align="right">
-              <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text>
+              {/* <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text> */}
+              {/* obj?.prop => obj가 존재하면 obj.prop을 반환. 아니면 undefined반환 */}
+              <Text size={theme.bodyTwoSize}><span>{comment?.length || 0}</span> / 500</Text>
             </Grid>
 
             <Button 
                 width={theme.smallButtonWidth} 
                 height={theme.smallButtonHeight}
                 fontSize={theme.SubHeadOneSize}
-                _onClick={write} 
+                _onClick={handleMedical}
               >등록
             </Button>
           </Grid>

@@ -1,13 +1,12 @@
 import React from "react";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 
 import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
-
+import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 
 const Medical = () => {
@@ -18,6 +17,10 @@ const Medical = () => {
 
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
+
+  React.useEffect (() => {
+    dispatch(actionGetMedical())
+}, [])
 
   return (
     <React.Fragment>
@@ -31,7 +34,9 @@ const Medical = () => {
           >
             의료진분들께
           </Text>
-          <div style={{borderBottom:"1px solid", margin:"2rem 0 0 0"}}></div>
+          <div
+            style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
+          ></div>
         </Grid>
 
         <CommentWrite />
