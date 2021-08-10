@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Login from "./Login";
-import HorizontalBarChart from "../components/HorizontalBarChart";
 import Alert from "../components/popup/Alert";
 import IntroCharacter from "../images/IntroCharacter.png"
 
@@ -10,6 +9,7 @@ import Map from "../components/Map";
 import theme from "../styles/theme";
 import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
+import MainNivoBar from '../components/MainNivoBar';
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -30,7 +30,7 @@ const Main = () => {
 
       <MapAndChart>
         <Map />
-        <HorizontalBarChart />
+        <MainNivoBar />
       </MapAndChart>
 
       <MainTo />
@@ -81,7 +81,7 @@ font-weight: 600;
 const MapAndChart = styled.div`
 display: flex;
 justify-content: center;
-margin: 80px auto;
+margin: 80px auto 60px auto;
 `;
 
 export default Main;
