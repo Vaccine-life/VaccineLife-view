@@ -9,13 +9,13 @@ import { actionAlert, actionSetMessage } from "./popup";
 const initialState = {
   user: {
     nickname: "",
-    isVaccine: false,
+    isVaccine: 2,
     degree: undefined,
     type: undefined,
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: undefined,
+    afterEffect: [],
   },
 
   is_login: false,
@@ -82,7 +82,6 @@ export const actionSignup =
   async (dispatch, getState, { history }) => {
     try {
       // 여기가 찐 회원가입에만 관여하는 부분
-
       await userAxios.signup({
         username,
         password,
@@ -94,8 +93,10 @@ export const actionSignup =
         age,
         disease,
         degree,
-        afterEffect,
+        afterEffect: afterEffect.sort().join(", "),
       });
+
+      dispatch(actionVisible());
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
       const newuserObj = await userAxios.login({ username, password });
@@ -116,7 +117,6 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      dispatch(actionVisible());
       dispatch(
         actionSetMessage(
           `반갑습니다 ${nickname}님!
@@ -125,8 +125,9 @@ export const actionSignup =
       );
       dispatch(actionAlert());
     } catch (error) {
-      dispatch(actionSetMessage("회원가입 실패"));
-      dispatch(actionAlert());
+      // dispatch(actionSetMessage("회원가입 실패"));
+      // dispatch(actionAlert());
+      dispatch(actionSetMessage(error.response.data.message));
     }
   };
 
@@ -158,7 +159,6 @@ export const actionLogoutCookie =
     history.replace("/");
   };
 
-
 export const actionGetLike =
   (board) =>
   async (dispatch, getState, { history }) => {
@@ -187,6 +187,5 @@ export const actionGetLike =
   };
 
 export const { actionSetUser, actionLogout, actionSetLike } = user.actions;
-
 
 export default user;
