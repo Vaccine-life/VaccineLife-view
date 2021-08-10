@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { medicalAxios } from "../../shared/api";
+import { commentAxios, medicalAxios } from "../../shared/api";
+import logger from "../../shared/logger";
+import { actionMinusComment, actionPlusComment } from "./board";
+import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
-
-
 
 const initialState = {
   list: [],
+  commentVac: [],
+  commentQuar: [],
   // nickname: "",
   // comment: "",
   // insert_dt: timeForToday(moment().format()),
@@ -36,24 +39,35 @@ const comment = createSlice({
         state.list.splice(idx, 1);
       }
     },
+    actionSetCommentListState: (state, action) => {
+      const { board, data } = action.payload;
+      if (board === "vaccine") {
+        state.commentVac = data;
+      } else {
+        state.commentQuar = data;
+      }
+    },
+    actionAddCommentListState: (state, action) => {},
+    actionDeleteCommentListState: (state, action) => {
+      const { board, commentId } = action.payload;
+      if (board === "vaccine") {
+        const deleteIndex = state.commentVac.findIndex(
+          (each) => each.id === commentId
+        );
+        if (deleteIndex !== -1) {
+          state.commentVac.splice(deleteIndex, 1);
+        }
+      } else {
+        const deleteIndex = state.commentQuar.findIndex(
+          (each) => each.id === commentId
+        );
+        if (deleteIndex !== -1) {
+          state.commentQuar.splice(deleteIndex, 1);
+        }
+      }
+    },
   },
 });
-
-
-export const actionGetCommentList =
-  (board, boardId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      if (board === "vaccine") {
-      } else {
-      }
-  } catch (error) {
-      dispatch(
-        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-      );
-      dispatch(actionAlert());
-    }
-  };
 
 // 서버에 저장된 medical 불러오기
 export const actionGetMedical =
@@ -62,10 +76,9 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      console.log(data)
+      console.log(data);
 
       dispatch(actionSetComment(data));
-
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -74,9 +87,8 @@ export const actionGetMedical =
     }
   };
 
-
 // 서버에 medical 저장하기
-export const actionAddMedical = 
+export const actionAddMedical =
   (contents) =>
   async (dispatch, getState, { history }) => {
     try {
@@ -88,14 +100,85 @@ export const actionAddMedical =
       );
       dispatch(actionAlert());
     }
-  }
+  };
 
+export const actionGetCommentList =
+  (board, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      if (board === "vaccine") {
+        const getData = await commentAxios.getVacComment(boardId);
+        const data = getData.data;
+        dispatch(actionSetCommentListState({ board, data }));
+      } else {
+        const getData = await commentAxios.getQuarComment(boardId);
+        const data = getData.data;
+        dispatch(actionSetCommentListState({ board, data }));
+      }
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+export const actionAddCommentList =
+  (board, boardId, obj) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        await commentAxios.writeVacComment(obj);
+        const getData = await commentAxios.getVacComment(boardId);
+        const data = getData.data;
+        dispatch(actionSetCommentListState({ board, data }));
+        dispatch(actionPlusComment({ board, boardId }));
+      } else {
+        await commentAxios.writeQuarComment(obj);
+        const getData = await commentAxios.getQuarComment(boardId);
+        const data = getData.data;
+        dispatch(actionSetCommentListState({ board, data }));
+        dispatch(actionPlusComment({ board, boardId }));
+      }
+    } catch (error) {
+      logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
-export const { 
-  actionSetComment, 
-  actionAddComment, 
-  actionDeleteComment 
+export const actionDeleteCommentList =
+  (board, commentId, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        await commentAxios.deleteVacComment(commentId, boardId);
+        dispatch(actionDeleteCommentListState({ board, commentId }));
+        dispatch(actionMinusComment({ board, commentId }));
+      } else {
+        await commentAxios.deleteQuarComment(commentId, boardId);
+        dispatch(actionDeleteCommentListState({ board, commentId }));
+        dispatch(actionMinusComment({ board, commentId }));
+      }
+    } catch (error) {
+      logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const {
+  actionSetComment,
+  actionAddComment,
+  actionDeleteComment,
+  actionSetCommentListState,
+  actionAddCommentListState,
+  actionDeleteCommentListState,
 } = comment.actions;
-
 
 export default comment;
