@@ -1,10 +1,9 @@
 import axios from "axios";
 import { getCookie } from "./cookie";
-
+import logger from "./logger";
 
 // 얘가 있으면, 앞으로 api라고만 써도 baseURL과 Headers가 따라다닌다.
 const api = axios.create({
-
   // 태현님 api 주소
   baseURL: "http://52.78.76.184:8080",
   Headers: `${getCookie("vaccine_life_token")}`,
@@ -35,7 +34,6 @@ export const writeAxios = {
   quarWrite: (obj) => api.post("/api/quarBoard", obj),
 };
 
-
 export const likeAxios = {
   likeVac: (obj) => api.post("/api/vacBoard/like", obj),
   likeQuar: (obj) => api.post("/api/quarBoard/like", obj),
@@ -43,9 +41,19 @@ export const likeAxios = {
   getLikeListQuar: (userId) => api.get(`/api/quarBoard/like/${userId}`),
 };
 
+export const commentAxios = {
+  getVacComment: (boardId) => api.get(`/api/vacBoard/${boardId}/comments`),
+  getQuarComment: (boardId) => api.get(`/api/quarBoard/${boardId}/comments`),
+  writeVacComment: (obj) => api.post(`/api/comment`, obj),
+  writeQuarComment: (obj) => api.post(`/api/quarcomment`, obj),
+  deleteVacComment: (commentId, boardId) =>
+    api.delete(`/api/comment/${boardId}/${commentId}`),
+  deleteQuarComment: (commentId, boardId) =>
+    api.delete(`/api/quarcomment/${boardId}/${commentId}`),
+};
+
 export const medicalAxios = {
   getMedical: () => api.get("/api/medical"),
   addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
-}
-
+};

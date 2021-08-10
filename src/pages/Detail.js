@@ -5,24 +5,24 @@ import UserInfo from "../components/detail/UserInfo";
 import Contents from "../components/detail/Contents";
 import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionDeleteEx,
-  actionGetDetail,
-  actionSetPrevNextPageVac,
-} from "../redux/modules/board";
+import { actionDeleteEx, actionGetDetail } from "../redux/modules/board";
 import theme from "../styles/theme";
 import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
 import CommentWrite from "../components/detail/CommentWrite";
 import CommentList from "../components/detail/CommentList";
-import logger from "../shared/logger";
 import { useParams } from "react-router-dom";
-import { actionGetLike } from "../redux/modules/like";
+import { actionGetCommentList } from "../redux/modules/comment";
+import Spinner from "../shared/Spinner";
+import logger from "../shared/logger";
 
 const Detail = () => {
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
   const boardId = useParams().id;
+
   useEffect(() => {
     dispatch(actionGetDetail("vaccine", boardId));
+    dispatch(actionGetCommentList("vaccine", boardId));
     //  dispatch(actionGetLike("vaccine"));
   }, []);
 
@@ -39,6 +39,8 @@ const Detail = () => {
   const boardType = true;
 
   const board_content = useSelector((state) => state.board.board);
+
+  const comment_list = useSelector((state) => state.comment.commentVac);
 
   const handleDelete = () => {
     dispatch(actionDeleteEx("vaccine", board_content.boardId));
@@ -85,7 +87,7 @@ const Detail = () => {
             margin: "40px 0 40px 0",
           }}
         >
-          댓글 {/* 추후 */} 개
+          댓글 {comment_list.length} 개
         </p>
 
         <Button
@@ -97,10 +99,25 @@ const Detail = () => {
           전체 게시글
         </Button>
       </Grid>
-      <CommentWrite board="vaccine" />
-      <CommentList board="vaccine" />
+      <CommentWrite board="vaccine" boardId={boardId} />
+      {comment_list?.map((each, index) => {
+        return (
+          <CommentList
+            key={index}
+            board="vaccine"
+            commentId={each.id}
+            boardId={each.vacBoardId}
+            comment={each.comment}
+            createdAt={each.createdAt}
+            userId={each.userId}
+            nickname={each.nickname}
+          />
+        );
+      })}
+
       {modal_status && <Login />}
       {alert_status && <Alert />}
+      {isLoading && <Spinner />}
     </Grid>
   );
 };

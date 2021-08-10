@@ -6,13 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Input, Text, Button, Grid } from "../../elements";
 import theme from "../../styles/theme";
+import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
+import styled from "styled-components";
+import { actionAddCommentList } from "../../redux/modules/comment";
 
 const CommentWrite = (props) => {
-  const { board } = props;
+  const { board, boardId } = props;
+  const userId = useSelector((state) => state.user.user.userId);
+  const nickname = useSelector((state) => state.user.user.nickname);
+  const is_login = useSelector((state) => state.user.is_login);
   const dispatch = useDispatch();
 
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState();
+
+  const obj =
+    board === "vaccine"
+      ? {
+          vacBoardId: boardId,
+          userId,
+          comment,
+        }
+      : {
+          quarBoardId: boardId,
+          userId,
+          quarcomment: comment,
+        };
 
   const changeComment = (e) => {
     setComment(e.target.value);
@@ -22,13 +41,12 @@ const CommentWrite = (props) => {
   };
 
   const write = () => {
-    // console.log(comment);
-    // 오브젝트로 넣어줘야
-    if (board === "vaccine") {
-    } else {
+    if (!is_login) {
+      dispatch(actionSetMessage("로그인 후 이용해 주세요."));
+      dispatch(actionAlert());
+      return;
     }
-
-    dispatch();
+    dispatch(actionAddCommentList(board, boardId, obj));
     // 코멘트 작성 후 인풋태크에 있는 글 없애기
     setComment();
   };
@@ -37,15 +55,16 @@ const CommentWrite = (props) => {
     <React.Fragment>
       {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
       <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
-        <Grid align="left" width="10rem">
+        <NicknameWrapper>
           <Text
             bold
+            margin="7px 0 0 0"
             size={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
           >
-            닉네임
+            {nickname}
           </Text>
-        </Grid>
+        </NicknameWrapper>
 
         <Grid is_flex="space_column" border="1px solid #c1c1c1">
           <Grid margin="0 5rem">
@@ -55,7 +74,9 @@ const CommentWrite = (props) => {
               rows={3}
               border="none"
               value={comment}
-              placeholder="댓글을 남겨보세요."
+              placeholder={
+                is_login ? "댓글을 남겨보세요." : "로그인 후 이용해 주세요."
+              }
               maxLength="300"
               _onChange={changeComment}
               // 엔터키로 등록
@@ -93,5 +114,11 @@ const CommentWrite = (props) => {
     </React.Fragment>
   );
 };
+
+const NicknameWrapper = styled.div`
+  width: 10rem;
+  height: 140px;
+  text-align: start;
+`;
 
 export default CommentWrite;
