@@ -7,9 +7,11 @@ import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
+// import displayedRestrict from "../shared/displayedRestrictt";
 
 
 const CommentWrite = (props) => {
+  const { createdAt } = props;
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
@@ -46,13 +48,16 @@ const CommentWrite = (props) => {
   const medicalObj = {
     userId: user_id,
     contents: comment,
-    // createdAt: displayedAt(),
+    nickname: nickname,
+    // createdAt: displayedAt(createdAt),
+    createdAt: displayedAt(createdAt),
   }
   const handleMedical = () => {
     // 로그인 후 이용
     if(!is_login) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요"));
       dispatch(actionAlert());
+      setComment();
       return;
     }
     
@@ -66,7 +71,7 @@ const CommentWrite = (props) => {
       dispatch(actionAddComment(medicalObj));
       dispatch(actionAddMedical(medicalObj));
       setComment();
-      setLength(0);
+      // setLength(0);
     }
   };
 
@@ -76,7 +81,13 @@ const CommentWrite = (props) => {
       <Grid is_flex="space_column" width={theme.medicalWidth}>
 
         <Grid align="left" margin="1.3rem 0">
-          <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>{nickname}</Text>
+          <Text 
+            bold 
+            size={theme.SubHeadOneSize} 
+            color={theme.fontColor}
+            >
+            {is_login? nickname : "로그인 후 이용해 주세요 :)"}
+          </Text>
         </Grid>
 
         {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
@@ -99,7 +110,10 @@ const CommentWrite = (props) => {
             <Grid padding="10px" bg="#ffffff" align="right">
               {/* <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text> */}
               {/* obj?.prop => obj가 존재하면 obj.prop을 반환. 아니면 undefined반환 */}
-              <Text size={theme.bodyTwoSize}><span>{comment?.length || 0}</span> / 500</Text>
+              <Text 
+                size={theme.bodyTwoSize}>
+                <span>{comment?.length || 0}</span> / 500
+              </Text>
             </Grid>
 
             <Button 
@@ -117,8 +131,8 @@ const CommentWrite = (props) => {
   );
 };
 
-CommentWrite.defaultProps = {
-  nickname: "명수는열두살",
-};
+// CommentWrite.defaultProps = {
+//   nickname: "명수는열두살",
+// };
 
 export default CommentWrite;

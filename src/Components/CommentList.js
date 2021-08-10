@@ -10,10 +10,9 @@ import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
-    // console.log(props)
+    console.log(props)
     const dispatch = useDispatch();
 
-    const nickname = useSelector((state) => state.user.user.nickname)
     // confirm 창
     const confirm_status = useSelector((state) => state.popup.confirm);
 
@@ -28,7 +27,7 @@ const CommentList = (props) => {
             <Grid is_flex="space_row" margin="2rem 0">
 
                 <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{nickname}</Text>
+                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
                 </Grid>
 
                 <Grid align="left">

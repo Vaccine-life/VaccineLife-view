@@ -65,6 +65,7 @@ const Popular = (props) => {
             return (
               <PopularCard
                 key={index}
+                board={board}
                 boardId={each.vacBoardId}
                 title={each.title}
                 likeCount={each.likeCount}
@@ -81,6 +82,7 @@ const Popular = (props) => {
             return (
               <QuarPostCard
                 key={index}
+                board={board}
                 boardId={each.quarBoardId}
                 title={each.title}
                 likeCount={each.likeCount}
