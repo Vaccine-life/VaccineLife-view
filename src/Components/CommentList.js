@@ -52,7 +52,7 @@ const CommentList = (props) => {
                     activeFunction={deleteComment}
                 />}
 
-                <Grid align="right" width="8rem" margin="0 0 auto 0">
+                <Grid align="right" width="9rem" margin="0 0 auto 0">
                     <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
                 </Grid>
                                 
