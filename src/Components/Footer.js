@@ -18,6 +18,7 @@ const Footer = () => {
           display: "flex",
           alignItems: "center",
           height: "152px",
+          width: "100vw",
         }}
       >
         <Grid
@@ -40,51 +41,51 @@ const Footer = () => {
           />
         </Grid>
 
-          <Grid margin="2rem 0" width="0 auto" height="auto">
-            <ul style={{ display: "flex" }}>
-              <Text
-                color="#ffffff"
-                size={theme.SubHeadTwoSize}
-                margin="5px"
-                hover
-                // _onClick={() => {
-                //   window.location.replace("/vaccine");
-                // }}
-                _onClick={() => {
-                  history.push("/vaccine");
-                }}
-              >
-                백신후기
-              </Text>
-              <Text
-                color="#ffffff"
-                size={theme.SubHeadTwoSize}
-                margin="5px"
-                hover
-                // _onClick={() => {
-                //   window.location.replace("/vaccine");
-                // }}
-                _onClick={() => {
-                  history.push("/quarantine");
-                }}
-              >
-                격리후기
-              </Text>
-              <Text
-                color="#ffffff"
-                size={theme.SubHeadTwoSize}
-                margin="5px"
-                hover
-                // _onClick={() => {
-                //   window.location.replace("/medical");
-                // }}
-                _onClick={() => {
-                  history.push("/medical");
-                }}
-              >
-                의료진분들께 한마디
-              </Text>
-            </ul>
+        <Grid margin="2rem 0" width="0 auto" height="auto">
+          <ul style={{ display: "flex" }}>
+            <Text
+              color="#ffffff"
+              size={theme.SubHeadTwoSize}
+              margin="5px"
+              hover
+              // _onClick={() => {
+              //   window.location.replace("/vaccine");
+              // }}
+              _onClick={() => {
+                history.push("/vaccine");
+              }}
+            >
+              백신후기
+            </Text>
+            <Text
+              color="#ffffff"
+              size={theme.SubHeadTwoSize}
+              margin="5px"
+              hover
+              // _onClick={() => {
+              //   window.location.replace("/vaccine");
+              // }}
+              _onClick={() => {
+                history.push("/quarantine");
+              }}
+            >
+              격리후기
+            </Text>
+            <Text
+              color="#ffffff"
+              size={theme.SubHeadTwoSize}
+              margin="5px"
+              hover
+              // _onClick={() => {
+              //   window.location.replace("/medical");
+              // }}
+              _onClick={() => {
+                history.push("/medical");
+              }}
+            >
+              의료진분들께 한마디
+            </Text>
+          </ul>
 
           <ul style={{ display: "flex" }}>
             <Text
@@ -134,7 +135,7 @@ const Footer = () => {
 
 const FixedFooter = styled.div`
   margin-top: auto;
-  width: 100%;
+  width: 100vw;
   /* position: fixed; */
   /* z-index: 1; */
 `;
