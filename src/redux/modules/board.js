@@ -91,7 +91,54 @@ const board = createSlice({
         state.board.likeCount = state.board.likeCount + 1;
       }
     },
-
+    actionMinusComment: (state, action) => {
+      const { board, boardId } = action.payload;
+      if (board === "vaccine") {
+        const targetIndex = state.listVac.findIndex(
+          (each) => each.id === boardId
+        );
+        if (targetIndex !== -1) {
+          state.listVac[targetIndex] = {
+            ...state.listVac[targetIndex],
+            commentCount: state.listVac[targetIndex].commentCount - 1,
+          };
+        }
+      } else {
+        const targetIndex = state.listQuar.findIndex(
+          (each) => each.id === boardId
+        );
+        if (targetIndex !== -1) {
+          state.listQuar[targetIndex] = {
+            ...state.listQuar[targetIndex],
+            commentCount: state.listQuar[targetIndex].commentCount - 1,
+          };
+        }
+      }
+    },
+    actionPlusComment: (state, action) => {
+      const { board, boardId } = action.payload;
+      if (board === "vaccine") {
+        const targetIndex = state.listVac.findIndex(
+          (each) => each.id === boardId
+        );
+        if (targetIndex !== -1) {
+          state.listVac[targetIndex] = {
+            ...state.listVac[targetIndex],
+            commentCount: state.listVac[targetIndex].commentCount + 1,
+          };
+        }
+      } else {
+        const targetIndex = state.listQuar.findIndex(
+          (each) => each.id === boardId
+        );
+        if (targetIndex !== -1) {
+          state.listQuar[targetIndex] = {
+            ...state.listQuar[targetIndex],
+            commentCount: state.listQuar[targetIndex].commentCount + 1,
+          };
+        }
+      }
+    },
     // action을  vacBoardId, board 값을 가져옴
     actionSetPrevNextPageVac: (state, action) => {
       const currentIndex = state.listVac.findIndex((each) => {
@@ -169,131 +216,141 @@ export const actionGetBoard =
 
 export const actionGetDetail =
   (board, boardId) =>
-    async (dispatch, getState, { history }) => {
-      try {
-        let board_input = {};
-        if (board === "vaccine") {
-          const getData = await boardAxios.getDetailVac(boardId);
-          const data = getData.data;
-          board_input = {
-            afterEffect: data.afterEffect,
-            age: data.age,
-            degree: data.degree,
-            disease: data.disease,
-            gender: data.gender,
-            isVaccine: data.isVaccine,
-            type: data.type,
-            nickname: data.nickname,
-            userId: data.userId,
-            username: data.username,
-            createdAt: data.createdAt,
-            boardId: data.id,
-            title: data.title,
-            contents: data.contents,
-            likeCount: data.likeCount,
-            totalVisitors: data.totalVisitors,
-            modifiedAt: data.modifiedAt,
-          };
-        } else {
-          const getData = await boardAxios.getDetailQuar(boardId);
-          const data = getData.data;
-          board_input = {
-            username: data.username,
-            userId: data.userId,
-            nickname: data.nickname,
-            createdAt: data.createdAt,
-            boardId: data.id,
-            contents: data.contents,
-            likeCount: data.likeCount,
-            title: data.title,
-            modifiedAt: data.modifiedAt,
-            totalVisitors: data.totalVisitors,
-          };
-        }
-        dispatch(actionSetBoard(board_input));
-      } catch (error) {
-        dispatch(
-          actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-        );
-        dispatch(actionAlert());
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      let board_input = {};
+      if (board === "vaccine") {
+        const getData = await boardAxios.getDetailVac(boardId);
+        const data = getData.data;
+        board_input = {
+          afterEffect: data.afterEffect,
+          age: data.age,
+          degree: data.degree,
+          disease: data.disease,
+          gender: data.gender,
+          isVaccine: data.isVaccine,
+          type: data.type,
+          nickname: data.nickname,
+          userId: data.userId,
+          username: data.username,
+          createdAt: data.createdAt,
+          boardId: data.id,
+          title: data.title,
+          contents: data.contents,
+          likeCount: data.likeCount,
+          totalVisitors: data.totalVisitors,
+          modifiedAt: data.modifiedAt,
+        };
+      } else {
+        const getData = await boardAxios.getDetailQuar(boardId);
+        const data = getData.data;
+        board_input = {
+          username: data.username,
+          userId: data.userId,
+          nickname: data.nickname,
+          createdAt: data.createdAt,
+          boardId: data.id,
+          contents: data.contents,
+          likeCount: data.likeCount,
+          title: data.title,
+          modifiedAt: data.modifiedAt,
+          totalVisitors: data.totalVisitors,
+        };
       }
-    };
+      dispatch(actionSetBoard(board_input));
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const actionModifyDB =
   (board, boardId, obj) =>
-    async (dispatch, getState, { history }) => {
-      try {
-        if (board === "vaccine") {
-          await boardAxios.modifyVac(boardId, obj);
-          history.replace("/vaccine");
-        } else {
-          await boardAxios.modifyQuar(boardId, obj);
-          history.replace("/quarantine");
-        }
-      } catch (error) {
-        dispatch(
-          actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-        );
-        dispatch(actionAlert());
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      if (board === "vaccine") {
+        await boardAxios.modifyVac(boardId, obj);
+        history.replace("/vaccine");
+      } else {
+        await boardAxios.modifyQuar(boardId, obj);
+        history.replace("/quarantine");
       }
-    };
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const actionDeleteEx =
   (board, boardId) =>
-    async (dispatch, getState, { history }) => {
-      try {
-        if (board === "vaccine") {
-          await boardAxios.deleteVac(boardId);
-          history.replace("/vaccine");
-        } else {
-          await boardAxios.deleteQuar(boardId);
-          history.replace("/quarantine");
-        }
-      } catch (error) {
-        dispatch(
-          actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-        );
-        dispatch(actionAlert());
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      if (board === "vaccine") {
+        await boardAxios.deleteVac(boardId);
+        history.replace("/vaccine");
+      } else {
+        await boardAxios.deleteQuar(boardId);
+        history.replace("/quarantine");
       }
-    };
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const actionGetTopThree =
   (board) =>
-    async (dispatch, getState, { history }) => {
-      try {
-        if (board === "vaccine") {
-          const getData = await boardAxios.topThreeVac();
-          dispatch(actionSetTopThreeVac(getData.data));
-        } else {
-          const getData = await boardAxios.topThreeQuar();
-          dispatch(actionSetTopThreeQuar(getData.data));
-        }
-      } catch (error) {
-        dispatch(
-          actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-        );
-        dispatch(actionAlert());
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      if (board === "vaccine") {
+        const getData = await boardAxios.topThreeVac();
+        dispatch(actionSetTopThreeVac(getData.data));
+      } else {
+        const getData = await boardAxios.topThreeQuar();
+        dispatch(actionSetTopThreeQuar(getData.data));
       }
-    };
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const actionWriteExperience =
   (board, contenstObj) =>
-    async (dispatch, getState, { history }) => {
-      try {
-        if (board === "vaccine") {
-          await writeAxios.vacWrite(contenstObj);
-          history.replace("/vaccine");
-        } else {
-          await writeAxios.quarWrite(contenstObj);
-          history.replace("/quarantine");
-        }
-      } catch (error) {
-        dispatch(
-          actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-        );
-        dispatch(actionAlert());
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      if (board === "vaccine") {
+        await writeAxios.vacWrite(contenstObj);
+        history.replace("/vaccine");
+      } else {
+        await writeAxios.quarWrite(contenstObj);
+        history.replace("/quarantine");
       }
-    };
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 export const {
   actionSetListVac,
@@ -303,6 +360,8 @@ export const {
   actionSetTopThreeQuar,
   acionMinusLike,
   acionPlusLike,
+  actionMinusComment,
+  actionPlusComment,
   actionSetPrevNextPageVac,
   actionSetPrevNextPageQuar,
 } = board.actions;
