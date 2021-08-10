@@ -23,7 +23,7 @@ const SignupComponent = ({ formik }) => {
     ) {
       return "중복된 사용자 ID가 존재합니다.";
     }
-    dispatch(actionSignup({ username: formik.values.username }));
+    // dispatch(actionSignup({ username: formik.values.username }));
   };
 
   const nicknameErrorMsg = () => {
