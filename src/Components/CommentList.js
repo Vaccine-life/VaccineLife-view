@@ -3,22 +3,36 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
-import { actionDeleteComment } from "../redux/modules/comment";
-import { actionConfirm } from "../redux/modules/popup";
+import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
 import Confirm from "../components/popup/Confirm";
+import { actionConfirm, actionAlert, actionSetMessage } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
-    console.log(props)
+    // console.log(props)
     const dispatch = useDispatch();
 
     // confirm 창
     const confirm_status = useSelector((state) => state.popup.confirm);
 
+    const is_login = useSelector((state) => state.user.is_login);
+    const userId = useSelector((state) => state.user.user.userId);
+    // const medicalId = useSelector((state) => state.comment.list.id);
+
     const deleteComment = () => {
+        if(!is_login) {
+            dispatch(actionSetMessage("로그인 후 이용해 주세요 :)"));
+            dispatch(actionAlert());
+            return;
+        }
+        if(userId !== props.userId) {
+            dispatch(actionSetMessage("본인 글만 삭제할 수 있어요!"));
+            dispatch(actionAlert());
+            return;
+        }
         // 작성자가 나일때만 삭제 가능하게 하기
-        dispatch(actionDeleteComment());
+        dispatch(actionDeleteMedical());
     }
 
 

@@ -1,15 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import { medicalAxios } from "../../shared/api";
 import { actionAlert, actionSetMessage } from "./popup";
 
 
-
 const initialState = {
   list: [],
-  // nickname: "",
-  // comment: "",
-  // insert_dt: timeForToday(moment().format()),
 };
 
 // createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
@@ -29,10 +24,10 @@ const comment = createSlice({
     },
     actionDeleteComment: (state, action) => {
       let idx = state.list.findIndex(
-        (c) => c.medicalId === action.payload.medicalId
+        (c) => c === action.payload
       );
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx !== action.payload.medicalId) {
+      if (idx !== action.payload) {
         state.list.splice(idx, 1);
       }
     },
@@ -62,7 +57,7 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      console.log(data)
+      // console.log(data)
 
       dispatch(actionSetComment(data));
 
@@ -71,7 +66,7 @@ export const actionGetMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
+    };
   };
 
 
@@ -87,8 +82,24 @@ export const actionAddMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
-  }
+    };
+  };
+
+
+// 서버의 medical 삭제하기 
+export const actionDeleteMedical = 
+  (medicalId) => 
+  async (dispatch, getState, {history}) => {
+    try {
+      await medicalAxios.deleteMedical(medicalId);
+      history.replace("/medical");
+    } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    };
+  };
 
 
 export const { 

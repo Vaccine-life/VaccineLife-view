@@ -6,12 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import displayedAt from "../shared/displayedAt";
-// import displayedRestrict from "../shared/displayedRestrictt";
 
 
 const CommentWrite = (props) => {
-  const { createdAt } = props;
+  const createdAt = new Date();
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
@@ -49,8 +47,7 @@ const CommentWrite = (props) => {
     userId: user_id,
     contents: comment,
     nickname: nickname,
-    // createdAt: displayedAt(createdAt),
-    createdAt: displayedAt(createdAt),
+    createdAt: createdAt,
   }
   const handleMedical = () => {
     // 로그인 후 이용
