@@ -7,7 +7,7 @@ import ListNav from "../components/board/ListNav";
 import Popular from "../components/board/Popular";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
-import { actionGetLike } from "../redux/modules/user";
+import { actionGetLike } from "../redux/modules/like";
 import theme from "../styles/theme";
 import Login from "./Login";
 
@@ -17,6 +17,8 @@ const Vaccine = () => {
   const modal_status = useSelector((state) => state.modal.visible);
   // alert
   const alert_status = useSelector((state) => state.popup.alert);
+  // like
+  const like_status = useSelector((state) => state.like.likeListVac);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,7 +26,7 @@ const Vaccine = () => {
       return;
     }
     dispatch(actionGetLike("vaccine"));
-  }, [is_login]);
+  }, []);
 
   return (
     <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>

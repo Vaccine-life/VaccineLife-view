@@ -11,7 +11,7 @@ const InfinityScroll = (props) => {
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     let current_height = scrollHeight - innerHeight - scrollTop;
-    logger(current_height);
+
     if (current_height < 300) {
       if (is_loading) {
         return;

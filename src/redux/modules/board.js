@@ -50,6 +50,48 @@ const board = createSlice({
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
     },
+    //like 관련
+    acionMinusLike: (state, action) => {
+      const { board, boardId } = action.payload;
+      if (board === "vaccine") {
+        state.listVac = state.listVac.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+        state.board.likeCount = state.board.likeCount - 1;
+      } else {
+        state.listVac = state.listQuar.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+        state.board.likeCount = state.board.likeCount - 1;
+      }
+    },
+    acionPlusLike: (state, action) => {
+      const { board, boardId } = action.payload;
+      if (board === "vaccine") {
+        state.listVac = state.listVac.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
+        state.board.likeCount = state.board.likeCount + 1;
+      } else {
+        state.listVac = state.listQuar.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
+        state.board.likeCount = state.board.likeCount + 1;
+      }
+    },
+
     // action을  vacBoardId, board 값을 가져옴
     actionSetPrevNextPageVac: (state, action) => {
       const currentIndex = state.listVac.findIndex((each) => {
@@ -95,7 +137,6 @@ export const actionGetBoard =
         dispatch(actionLoading());
 
         const getData = await boardAxios.getPageVac(nextPage);
-        logger(getData);
         const board = getData.data.content;
         const totalPageInData = getData.data.totalPages;
 
@@ -260,6 +301,8 @@ export const {
   actionSetBoard,
   actionSetTopThreeVac,
   actionSetTopThreeQuar,
+  acionMinusLike,
+  acionPlusLike,
   actionSetPrevNextPageVac,
   actionSetPrevNextPageQuar,
 } = board.actions;
