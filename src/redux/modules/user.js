@@ -85,7 +85,6 @@ export const actionSignup =
   async (dispatch, getState, { history }) => {
     try {
       // 여기가 찐 회원가입에만 관여하는 부분
-
       await userAxios.signup({
         username,
         password,
@@ -130,6 +129,7 @@ export const actionSignup =
     } catch (error) {
       dispatch(actionSetMessage("회원가입 실패"));
       dispatch(actionAlert());
+      console.log(error.response.data.message);
     }
   };
 
