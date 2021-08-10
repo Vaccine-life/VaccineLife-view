@@ -9,13 +9,13 @@ import { actionAlert, actionSetMessage } from "./popup";
 const initialState = {
   user: {
     nickname: "",
-    isVaccine: false,
+    isVaccine: 2,
     degree: undefined,
     type: undefined,
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: undefined,
+    afterEffect: "",
   },
 
   is_login: false,
@@ -93,7 +93,7 @@ export const actionSignup =
         age,
         disease,
         degree,
-        afterEffect,
+        afterEffect: afterEffect.sort().join(", "),
       });
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
@@ -124,9 +124,9 @@ export const actionSignup =
       );
       dispatch(actionAlert());
     } catch (error) {
-      dispatch(actionSetMessage("회원가입 실패"));
-      dispatch(actionAlert());
-      console.log(error.response.data.message);
+      // dispatch(actionSetMessage("회원가입 실패"));
+      // dispatch(actionAlert());
+      dispatch(actionSetMessage(error.response.data.message));
     }
   };
 
@@ -158,7 +158,6 @@ export const actionLogoutCookie =
     history.replace("/");
   };
 
-
 export const actionGetLike =
   (board) =>
   async (dispatch, getState, { history }) => {
@@ -187,6 +186,5 @@ export const actionGetLike =
   };
 
 export const { actionSetUser, actionLogout, actionSetLike } = user.actions;
-
 
 export default user;

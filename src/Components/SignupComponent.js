@@ -1,10 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
 
 const SignupComponent = ({ formik }) => {
+  const errorMsg = useSelector((state) => state.popup.alertMessage);
+
   return (
     <>
       <Wrapper onSubmit={formik.handleSubmit}>
@@ -27,6 +30,9 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.username && formik.errors.username ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
+          {errorMsg === "중복된 사용자 ID가 존재합니다." && (
+            <SignupError>{errorMsg}</SignupError>
+          )}
         </InputBox>
 
         <InputBox>
@@ -78,6 +84,9 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.nickname && formik.errors.nickname ? (
             <SignupError>{formik.errors.nickname}</SignupError>
           ) : null}
+          {errorMsg === "중복된 닉네임이 존재합니다." && (
+            <SignupError>{errorMsg}</SignupError>
+          )}
         </InputBox>
 
         <Button
