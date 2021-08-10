@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import PopularCard from "./board/PopularCard";
-import QuarPostCard from "./board/QuarPostCard"
+import QuarPostCard from "./board/QuarPostCard";
 import Arrow from "../images/Arrow.png";
 import { history } from "../redux/configStore";
 import { useEffect } from "react";
@@ -45,6 +45,7 @@ const MainPopular = (props) => {
                 <div>
                   <PopularCard
                     key={index}
+                    board="vaccine"
                     boardId={each.vacBoardId}
                     title={each.title}
                     likeCount={each.likeCount}
@@ -75,24 +76,24 @@ const MainPopular = (props) => {
           </div>
         </PopularTitle>
         <PopularCards>
-          {
-            top_list_quar?.map((each, index) => {
-              return (
-                <div>
-                  <QuarPostCard
-                    key={index}
-                    boardId={each.quarBoardId}
-                    title={each.title}
-                    likeCount={each.likeCount}
-                    totalVisitors={each.totalVisitors}
-                    commentCount={each.commentCount}
-                    contents={each.contents}
-                    createdAt={each.createdAt}
-                    type={each.type}
-                  />
-                </div>
-              );
-            })}
+          {top_list_quar?.map((each, index) => {
+            return (
+              <div>
+                <QuarPostCard
+                  key={index}
+                  board="quarantine"
+                  boardId={each.quarBoardId}
+                  title={each.title}
+                  likeCount={each.likeCount}
+                  totalVisitors={each.totalVisitors}
+                  commentCount={each.commentCount}
+                  contents={each.contents}
+                  createdAt={each.createdAt}
+                  type={each.type}
+                />
+              </div>
+            );
+          })}
         </PopularCards>
       </GreyBox>
     </div>
@@ -100,78 +101,78 @@ const MainPopular = (props) => {
 };
 
 const GreyBox = styled.div`
-background-color: ${theme.typoLightGrey1};
-width: 100vw;
-height: 550px;
+  background-color: ${theme.typoLightGrey1};
+  width: 100vw;
+  height: 550px;
 `;
 
 const PopularTitle = styled.div`
-display: flex;
-width: 1250px;
-justify-content: space-between;
-margin: auto;
-padding-bottom: 20px;
-/* background-color: red; */
+  display: flex;
+  width: 1250px;
+  justify-content: space-between;
+  margin: auto;
+  padding-bottom: 20px;
+  /* background-color: red; */
 
-& > h1 {
-width: 212px;
-height: 34px;
+  & > h1 {
+    width: 212px;
+    height: 34px;
 
-font-weight: bold;
-font-size: ${theme.headOneSize};
-line-height: 34px;
+    font-weight: bold;
+    font-size: ${theme.headOneSize};
+    line-height: 34px;
 
-text-align: center;
-letter-spacing: -0.3px;
+    text-align: center;
+    letter-spacing: -0.3px;
 
-color: #242424;
+    color: #242424;
 
-padding-top: 5%;
-}
+    padding-top: 5%;
+  }
 
-& > div {
-display: flex;
-cursor: pointer;
-margin-top: 6%;
+  & > div {
+    display: flex;
+    cursor: pointer;
+    margin-top: 6%;
 
-&:hover {
-text-decoration: underline;
-text-underline-position: under;
-}
+    &:hover {
+      text-decoration: underline;
+      text-underline-position: under;
+    }
 
-& > h3 {
-width: 60px;
-height: 26px;
+    & > h3 {
+      width: 60px;
+      height: 26px;
 
-font-weight: normal;
-font-size: ${theme.bodyOneSize};
-line-height: 26px;
+      font-weight: normal;
+      font-size: ${theme.bodyOneSize};
+      line-height: 26px;
 
-text-align: center;
-letter-spacing: -0.3px;
+      text-align: center;
+      letter-spacing: -0.3px;
 
-color: ${theme.typoGrey3};
-}
+      color: ${theme.typoGrey3};
+    }
 
-& > img {
-width: auto;
-height: auto;
-max-width: 15px;
-max-height: 15px;
+    & > img {
+      width: auto;
+      height: auto;
+      max-width: 15px;
+      max-height: 15px;
 
-margin-top: 7px;
-margin-left: 8px;
-}
-}
+      margin-top: 7px;
+      margin-left: 8px;
+    }
+  }
 `;
 
 const PopularCards = styled.div`
-display: flex;
-justify-content: space-between;
-width: 1250px;
-height: 66%;
-margin: auto;
-/* background-color: gray; */
+  display: flex;
+  justify-content: space-between;
+  width: 1250px;
+  height: 66%;
+  margin: auto;
+  /* background-color: gray; */
 `;
 
 export default MainPopular;
