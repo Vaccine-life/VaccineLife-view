@@ -19,8 +19,8 @@ const comment = createSlice({
   // action을 선언하고 해당 action이 dispatch되면 바로 state를 가지고 action처리 함.
   reducers: {
     actionSetComment: (state, action) => {
-      // state.list = action.payload;
-      state.list.push(...action.payload);
+      state.list = action.payload;
+      // state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload)

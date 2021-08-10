@@ -18,6 +18,7 @@ const Footer = () => {
           display: "flex",
           alignItems: "center",
           height: "152px",
+          width: "100vw"
         }}
       >
         <Grid
@@ -134,7 +135,7 @@ const Footer = () => {
 
 const FixedFooter = styled.div`
   margin-top: auto;
-  width: 100%;
+  width: 100vw;
   /* position: fixed; */
   /* z-index: 1; */
 `;
