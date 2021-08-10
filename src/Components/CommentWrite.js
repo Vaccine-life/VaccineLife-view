@@ -7,8 +7,10 @@ import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
+// import displayedRestrict from "../shared/displayedRestrictt";
 
 const CommentWrite = (props) => {
+  const { createdAt } = props;
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
@@ -44,13 +46,15 @@ const CommentWrite = (props) => {
   const medicalObj = {
     userId: user_id,
     contents: comment,
-    // createdAt: displayedAt(),
+    nickname: nickname,
+    createdAt: displayedAt(createdAt),
   };
   const handleMedical = () => {
     // 로그인 후 이용
     if (!is_login) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요"));
       dispatch(actionAlert());
+      setComment();
       return;
     }
 
@@ -64,7 +68,7 @@ const CommentWrite = (props) => {
       dispatch(actionAddComment(medicalObj));
       dispatch(actionAddMedical(medicalObj));
       setComment();
-      setLength(0);
+      // setLength(0);
     }
   };
 
@@ -73,7 +77,7 @@ const CommentWrite = (props) => {
       <Grid is_flex="space_column" width={theme.medicalWidth}>
         <Grid align="left" margin="1.3rem 0">
           <Text bold size={theme.SubHeadOneSize} color={theme.fontColor}>
-            {nickname}
+            {is_login ? nickname : "로그인 후 이용해 주세요 :)"}
           </Text>
         </Grid>
 
@@ -117,8 +121,8 @@ const CommentWrite = (props) => {
   );
 };
 
-CommentWrite.defaultProps = {
-  nickname: "명수는열두살",
-};
+// CommentWrite.defaultProps = {
+//   nickname: "명수는열두살",
+// };
 
 export default CommentWrite;

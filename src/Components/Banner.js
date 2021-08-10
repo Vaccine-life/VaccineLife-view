@@ -81,7 +81,7 @@ const Banner = (props) => {
 
 const FixedBanner = styled.div`
   margin-top: auto;
-  width: 100%;
+  width: 100vw;
   /* position: fixed; */
   /* ${(props) =>
     props.nav &&
