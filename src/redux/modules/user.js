@@ -17,7 +17,7 @@ const initialState = {
     disease: undefined,
     afterEffect: undefined,
   },
-  likeList: [],
+
   is_login: false,
 };
 
@@ -32,9 +32,6 @@ const user = createSlice({
     actionLogout: (state, action) => {
       deleteCookie("vaccine_life_token");
       state.is_login = false;
-    },
-    actionSetLike: (state, action) => {
-      state.likeList = action.payload;
     },
   },
 });
@@ -161,6 +158,7 @@ export const actionLogoutCookie =
     history.replace("/");
   };
 
+
 export const actionGetLike =
   (board) =>
   async (dispatch, getState, { history }) => {
@@ -189,5 +187,6 @@ export const actionGetLike =
   };
 
 export const { actionSetUser, actionLogout, actionSetLike } = user.actions;
+
 
 export default user;

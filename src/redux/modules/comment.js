@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { medicalAxios } from "../../shared/api";
 import { actionAlert, actionSetMessage } from "./popup";
+
 
 
 const initialState = {
@@ -23,17 +25,35 @@ const comment = createSlice({
       // state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
-      state.list.unshift(action.payload)
+      state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      let idx = state.list.findIndex((c) => c.medicalId === action.payload.medicalId);
+      let idx = state.list.findIndex(
+        (c) => c.medicalId === action.payload.medicalId
+      );
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx !== action.payload.medicalId){
+      if (idx !== action.payload.medicalId) {
         state.list.splice(idx, 1);
       }
     },
   },
 });
+
+
+export const actionGetCommentList =
+  (board, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+      } else {
+      }
+  } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
 
 // 서버에 저장된 medical 불러오기
 export const actionGetMedical =
@@ -45,6 +65,7 @@ export const actionGetMedical =
       console.log(data)
 
       dispatch(actionSetComment(data));
+
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -52,6 +73,7 @@ export const actionGetMedical =
       dispatch(actionAlert());
     }
   };
+
 
 // 서버에 medical 저장하기
 export const actionAddMedical = 
@@ -74,5 +96,6 @@ export const {
   actionAddComment, 
   actionDeleteComment 
 } = comment.actions;
+
 
 export default comment;

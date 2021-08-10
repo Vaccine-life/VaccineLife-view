@@ -6,7 +6,7 @@ import Popular from "../components/board/Popular";
 import QuarList from "../components/board/QuarList";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
-import { actionGetLike } from "../redux/modules/user";
+import { actionGetLike } from "../redux/modules/like";
 import theme from "../styles/theme";
 import Login from "./Login";
 
@@ -14,6 +14,7 @@ const Quarantine = () => {
   const is_login = useSelector((state) => state.user.is_login);
   const modal_status = useSelector((state) => state.modal.visible);
   const alert_status = useSelector((state) => state.popup.alert);
+  const like_status = useSelector((state) => state.like.likeListQuar);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Quarantine = () => {
       return;
     }
     dispatch(actionGetLike("quarantine"));
-  }, [is_login]);
+  }, []);
 
   return (
     <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>
