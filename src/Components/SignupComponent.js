@@ -4,9 +4,40 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
+import { useDispatch } from "react-redux";
+import { actionSignup } from "../redux/modules/user";
 
 const SignupComponent = ({ formik }) => {
-  const errorMsg = useSelector((state) => state.popup.alertMessage);
+  const errorMessage = useSelector((state) => state.popup.alertMessage);
+  console.log(errorMessage);
+
+  const dispatch = useDispatch();
+
+  console.log(formik.values.username);
+
+  const idErrorMsg = () => {
+    if (
+      errorMessage === "중복된 사용자 ID가 존재합니다." ||
+      errorMessage ===
+        "중복된 사용자 ID가 존재합니다.  중복된 닉네임이 존재합니다."
+    ) {
+      return "중복된 사용자 ID가 존재합니다.";
+    }
+    dispatch(actionSignup({ username: formik.values.username }));
+  };
+
+  const nicknameErrorMsg = () => {
+    if (
+      errorMessage === "중복된 닉네임이 존재합니다." ||
+      errorMessage ===
+        "중복된 사용자 ID가 존재합니다.  중복된 닉네임이 존재합니다."
+    ) {
+      return "중복된 닉네임이 존재합니다.";
+    }
+  };
+
+  console.log(idErrorMsg());
+  console.log(nicknameErrorMsg());
 
   return (
     <>
@@ -30,9 +61,7 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.username && formik.errors.username ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
-          {errorMsg === "중복된 사용자 ID가 존재합니다." && (
-            <SignupError>{errorMsg}</SignupError>
-          )}
+          {idErrorMsg() && <SignupError>{idErrorMsg()}</SignupError>}
         </InputBox>
 
         <InputBox>
@@ -84,8 +113,8 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.nickname && formik.errors.nickname ? (
             <SignupError>{formik.errors.nickname}</SignupError>
           ) : null}
-          {errorMsg === "중복된 닉네임이 존재합니다." && (
-            <SignupError>{errorMsg}</SignupError>
+          {nicknameErrorMsg() && (
+            <SignupError>{nicknameErrorMsg()}</SignupError>
           )}
         </InputBox>
 
