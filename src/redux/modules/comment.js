@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import moment from "moment";
+
+import { medicalAxios } from "../../shared/api";
 import { actionAlert, actionSetMessage } from "./popup";
+
+
 
 const initialState = {
   list: [],
+  // nickname: "",
+  // comment: "",
+  // insert_dt: timeForToday(moment().format()),
 };
 
 // createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
@@ -15,7 +21,8 @@ const comment = createSlice({
   // action을 선언하고 해당 action이 dispatch되면 바로 state를 가지고 action처리 함.
   reducers: {
     actionSetComment: (state, action) => {
-      state.list = action.payload;
+      // state.list = action.payload;
+      state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
@@ -32,6 +39,7 @@ const comment = createSlice({
   },
 });
 
+
 export const actionGetCommentList =
   (board, boardId) =>
   async (dispatch, getState, { history }) => {
@@ -39,6 +47,25 @@ export const actionGetCommentList =
       if (board === "vaccine") {
       } else {
       }
+  } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+// 서버에 저장된 medical 불러오기
+export const actionGetMedical =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const getData = await medicalAxios.getMedical();
+      const data = getData.data;
+      console.log(data)
+
+      dispatch(actionSetComment(data));
+
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -47,7 +74,28 @@ export const actionGetCommentList =
     }
   };
 
-export const { actionSetComment, actionAddComment, actionDeleteComment } =
-  comment.actions;
+
+// 서버에 medical 저장하기
+export const actionAddMedical = 
+  (contents) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      await medicalAxios.addMedical(contents);
+      history.replace("/medical");
+    } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  }
+
+
+export const { 
+  actionSetComment, 
+  actionAddComment, 
+  actionDeleteComment 
+} = comment.actions;
+
 
 export default comment;
