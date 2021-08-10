@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
-
+import { actionAlert, actionSetMessage } from "./popup";
 
 const initialState = {
   list: [],
@@ -18,18 +18,36 @@ const comment = createSlice({
       state.list = action.payload;
     },
     actionAddComment: (state, action) => {
-      state.list.unshift(action.payload)
+      state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      let idx = state.list.findIndex((c) => c.medicalId === action.payload.medicalId);
+      let idx = state.list.findIndex(
+        (c) => c.medicalId === action.payload.medicalId
+      );
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx !== action.payload.medicalId){
+      if (idx !== action.payload.medicalId) {
         state.list.splice(idx, 1);
       }
     },
   },
 });
 
-export const { actionSetComment, actionAddComment, actionDeleteComment } = comment.actions;
+export const actionGetCommentList =
+  (board, boardId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+      } else {
+      }
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const { actionSetComment, actionAddComment, actionDeleteComment } =
+  comment.actions;
 
 export default comment;

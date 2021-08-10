@@ -3,7 +3,6 @@ import Login from "./Login";
 import BoardInfo from "../components/detail/BoardInfo";
 import UserInfo from "../components/detail/UserInfo";
 import Contents from "../components/detail/Contents";
-import MoveBox from "../components/detail/MoveBox";
 import { Button, Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,16 +15,15 @@ import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
 import CommentWrite from "../components/detail/CommentWrite";
 import CommentList from "../components/detail/CommentList";
-import styled from "styled-components";
-import { history } from "../redux/configStore";
 import logger from "../shared/logger";
 import { useParams } from "react-router-dom";
+import { actionGetLike } from "../redux/modules/like";
 
 const Detail = () => {
   const boardId = useParams().id;
   useEffect(() => {
     dispatch(actionGetDetail("vaccine", boardId));
-    dispatch(actionSetPrevNextPageVac(boardId));
+    //  dispatch(actionGetLike("vaccine"));
   }, []);
 
   //격리후기떄는 id 변경
@@ -67,10 +65,10 @@ const Detail = () => {
       />
       <Contents
         board="vaccine"
+        boardId={board_content.boardId}
         contents={board_content.contents}
         likeCount={board_content.likeCount}
       />
-      <MoveBox boardType={boardType} />
       {confirm_status && (
         <Confirm
           confirmMessage="게시글을 삭제하시겠습니까?"

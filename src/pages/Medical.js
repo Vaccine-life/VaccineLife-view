@@ -31,7 +31,9 @@ const Medical = () => {
           >
             의료진분들께
           </Text>
-          <div style={{borderBottom:"1px solid", margin:"2rem 0 0 0"}}></div>
+          <div
+            style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
+          ></div>
         </Grid>
 
         <CommentWrite />

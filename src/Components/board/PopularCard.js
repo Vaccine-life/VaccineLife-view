@@ -13,6 +13,7 @@ import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 // 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
   const {
+    board,
     title,
     contents,
     likeCount,
@@ -63,7 +64,7 @@ const PopularCard = (props) => {
 
         <TextDiv>
           <Grid is_flex="center" margin="0 0 0 19px">
-            <LikeIconChanger boardId={boardId} />
+            <LikeIconChanger board={board} boardId={boardId} />
             <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
           </Grid>
           <Grid is_flex="center" margin="0 0 0 19px">

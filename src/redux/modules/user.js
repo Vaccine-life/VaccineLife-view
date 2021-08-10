@@ -17,7 +17,7 @@ const initialState = {
     disease: "",
     afterEffect: "",
   },
-  likeList: [],
+
   is_login: false,
 };
 
@@ -32,9 +32,6 @@ const user = createSlice({
     actionLogout: (state, action) => {
       deleteCookie("vaccine_life_token");
       state.is_login = false;
-    },
-    actionSetLike: (state, action) => {
-      state.likeList = action.payload;
     },
   },
 });
@@ -96,33 +93,6 @@ export const actionLogoutCookie =
     history.replace("/");
   };
 
-export const actionGetLike =
-  (board) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const userId = getState().user.user.userId;
-      let getData = [];
-      let makeData = [];
-      if (board === "vaccine") {
-        getData = await userAxios.getLikeListVac(userId);
-        getData.data.map((each) => {
-          makeData.push(each.vacBoardId);
-        });
-      } else {
-        getData = await userAxios.getLikeListQuar(userId);
-        getData.data.map((each) => {
-          makeData.push(each.quarBoardId);
-        });
-      }
-      dispatch(actionSetLike(makeData));
-    } catch (error) {
-      dispatch(
-        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-      );
-      dispatch(actionAlert());
-    }
-  };
-
-export const { actionSetUser, actionLogout, actionSetLike } = user.actions;
+export const { actionSetUser, actionLogout } = user.actions;
 
 export default user;

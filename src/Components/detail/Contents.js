@@ -5,15 +5,13 @@ import "draft-js/dist/Draft.css";
 import { convertFromRaw } from "draft-js";
 import { Editor, EditorState } from "draft-js";
 import { Button, Grid, Text } from "../../elements";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as amptyHeart } from "@fortawesome/free-regular-svg-icons";
 import logger from "../../shared/logger";
+import LikeIconChanger from "../LikeIconChanger";
 
 const Contents = (props) => {
-  const { contents, board } = props;
+  const { contents, board, boardId } = props;
   // 클릭했을때 색 변경 추가할것
-  const isHeart = true;
+
   const storedState = convertFromRaw(JSON.parse(contents));
   const editorState = EditorState.createWithContent(storedState);
 
@@ -44,24 +42,17 @@ const Contents = (props) => {
       )}
       <Editor editorState={editorState} readOnly={true} />
       <LikeWrapper>
-        <Button
-          width={theme.totalButtonWidth}
-          height={theme.mediumButtonHeight}
+        <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+        <p
+          style={{
+            fontSize: `${theme.headTwoSize}`,
+            marginLeft: "5.55px",
+            fontWeight: "700",
+            color: `${theme.bg}`,
+          }}
         >
-          <div
-            style={{
-              fontSize: theme.SubHeadOneSize,
-              lineHeight: theme.SubHeadOneHeight,
-            }}
-          >
-            <FontAwesomeIcon
-              icon={amptyHeart}
-              size="lg"
-              style={{ marginRight: "10px" }}
-            />
-            추천
-          </div>
-        </Button>
+          추천
+        </p>
       </LikeWrapper>
     </Wrapper>
   );
@@ -76,6 +67,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  border-bottom: 1px solid ${theme.typoGrey3};
   .public-DraftEditor-content {
     font-size: ${theme.bodyOneSize};
     line-height: ${theme.bodyOneHeight};
@@ -83,7 +75,9 @@ const Wrapper = styled.div`
 `;
 const LikeWrapper = styled.div`
   display: flex;
-  margin: auto;
+  margin: 87px 0 45px 10px;
+  font-size: ${theme.SubHeadOneSize};
+  line-height: ${theme.SubHeadOneHeight};
 `;
 
 export default Contents;

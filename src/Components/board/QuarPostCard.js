@@ -14,6 +14,7 @@ import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 const QuarPostCard = (props) => {
   const {
     title,
+    board,
     contents,
     likeCount,
     totalVisitors,
@@ -58,7 +59,7 @@ const QuarPostCard = (props) => {
 
         <TextDiv>
           <Grid is_flex="center" margin="0 0 0 19px">
-            <LikeIconChanger boardId={boardId} />
+            <LikeIconChanger board={board} boardId={boardId} />
             <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
           </Grid>
           <Grid is_flex="center" margin="0 0 0 19px">
