@@ -17,8 +17,11 @@ import CommentList from "../components/detail/CommentList";
 import { useParams } from "react-router-dom";
 import logger from "../shared/logger";
 import { actionGetLike } from "../redux/modules/like";
+import { actionGetCommentList } from "../redux/modules/comment";
+import Spinner from "../shared/Spinner";
 
 const QuarantineDetail = () => {
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
   const boardId_detail = useParams().id;
 
   // 격리후기때는 MoveBox에 false 기입
@@ -27,12 +30,15 @@ const QuarantineDetail = () => {
   const confirm_status = useSelector((state) => state.popup.confirm);
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
+  // 코멘트 리스트 불러오기
+  const comment_list = useSelector((state) => state.comment.commentQuar);
 
   const boardType = false;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actionGetDetail("quarantine", boardId_detail));
+    dispatch(actionGetCommentList("quarantine", boardId_detail));
     // dispatch(actionGetLike("quarantine"));
   }, []);
   const board_content = useSelector((state) => state.board.board);
@@ -77,7 +83,7 @@ const QuarantineDetail = () => {
             margin: "40px 0 40px 0",
           }}
         >
-          댓글 {/* 추후 */} 개
+          댓글 {comment_list.length} 개
         </p>
 
         <Button
@@ -89,10 +95,24 @@ const QuarantineDetail = () => {
           전체 게시글
         </Button>
       </Grid>
-      <CommentWrite board="quarantine" />
-      <CommentList board="quarantine" />
+      <CommentWrite board="quarantine" boardId={boardId_detail} />
+      {comment_list?.map((each, index) => {
+        return (
+          <CommentList
+            key={index}
+            board="quarantine"
+            commentId={each.id}
+            boardId={each.quarBoardId}
+            comment={each.quarcomment}
+            createdAt={each.createdAt}
+            userId={each.userId}
+            nickname={each.nickname}
+          />
+        );
+      })}
       {modal_status && <Login />}
       {alert_status && <Alert />}
+      {isLoading && <Spinner />}
     </Grid>
   );
 };

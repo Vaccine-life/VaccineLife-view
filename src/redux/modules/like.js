@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { likeAxios, userAxios } from "../../shared/api";
+import { likeAxios } from "../../shared/api";
 import { getCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
 import { acionMinusLike, acionPlusLike } from "./board";
