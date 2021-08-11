@@ -5,7 +5,6 @@ import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
 
-
 const initialState = {
   list: [],
   commentVac: [],
@@ -27,12 +26,13 @@ const comment = createSlice({
       state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      // const { medicalId } = action.payload;
-      let idx = state.list.findIndex((c) => c.id === action.payload);
+      const { medicalId } = action.payload;
+      let idx = state.list.findIndex((c) => c.id === medicalId);
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx === action.payload.medicalId) {
+      if (idx !== -1) {
         state.list.splice(idx, 1);
       }
+      console.log("idx, medicalId", idx, medicalId);
     },
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
@@ -79,7 +79,7 @@ export const actionGetMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
 // 서버에 medical 저장하기
@@ -93,17 +93,16 @@ export const actionAddMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
-
-// 서버의 medical 삭제하기 
-export const actionDeleteMedical = 
-  (medicalId) => 
-  async (dispatch, getState, {history}) => {
+// 서버의 medical 삭제하기
+export const actionDeleteMedical =
+  (medicalId) =>
+  async (dispatch, getState, { history }) => {
     try {
       await medicalAxios.deleteMedical(medicalId);
-      dispatch(actionDeleteComment({medicalId}))
+      dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");
     } catch (err) {
       dispatch(
@@ -158,7 +157,7 @@ export const actionAddCommentList =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
 export const actionDeleteCommentList =
