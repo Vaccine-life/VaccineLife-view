@@ -128,6 +128,7 @@ export const actionSignup =
       // dispatch(actionSetMessage("회원가입 실패"));
       // dispatch(actionAlert());
       dispatch(actionSetMessage(error.response.data.message));
+      dispatch(actionAlert());
     }
   };
 

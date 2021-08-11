@@ -41,7 +41,7 @@ const Login = (props) => {
       username: Yup.string()
         .required("아이디를 입력해주세요")
         .min(6, "아이디는 6자리 이상이어야 합니다")
-        .max(15, "아이디는 15자리 이하여야 합니다")
+        .max(12, "아이디는 12자리 이하여야 합니다")
         .matches(/^[0-9a-zA-Z]+$/, "영문과 숫자만 이용 가능합니다"),
       password: Yup.string()
         .required("비밀번호를 입력해주세요")
