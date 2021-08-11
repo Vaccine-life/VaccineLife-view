@@ -22,18 +22,20 @@ const comment = createSlice({
   reducers: {
     actionSetComment: (state, action) => {
       state.list = action.payload;
+      // state.list.push(...action.payload)
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      // const { medicalId } = action.payload;
-      let idx = state.list.findIndex((c) => c.id === action.payload);
-      // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx === action.payload.medicalId) {
+      const { medicalId } = action.payload;
+      let idx = state.list.findIndex((c) => c.id === medicalId);
+      console.log(idx)
+
+      if (idx !== -1) {
         state.list.splice(idx, 1);
       }
-    },
+    }, 
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
       if (board === "vaccine") {
@@ -71,7 +73,6 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      // console.log(data)
 
       dispatch(actionSetComment(data));
     } catch (error) {
@@ -95,7 +96,6 @@ export const actionAddMedical =
       dispatch(actionAlert());
     };
   };
-
 
 // 서버의 medical 삭제하기 
 export const actionDeleteMedical = 

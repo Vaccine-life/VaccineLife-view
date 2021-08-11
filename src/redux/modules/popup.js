@@ -6,6 +6,7 @@ const popup = createSlice({
     alert: false,
     confirm: false,
     commentConfirm: false,
+    medicalConfirm: false,
     commentObj: {},
     alertMessage: "",
   },
@@ -18,6 +19,9 @@ const popup = createSlice({
     },
     actionCommentConfirm: (state, action) => {
       state.commentConfirm = !state.commentConfirm;
+    },
+    actionMedicalConfirm: (state, action) => {
+      state.medicalConfirm = !state.medicalConfirm;
     },
     actionSetMessage: (state, action) => {
       state.alertMessage = action.payload;
@@ -33,6 +37,7 @@ export const {
   actionConfirm,
   actionSetMessage,
   actionCommentConfirm,
+  actionMedicalConfirm,
   acionSetCommentObj,
 } = popup.actions;
 
