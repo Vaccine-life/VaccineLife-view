@@ -19,6 +19,7 @@ import { getCookie } from "./cookie";
 import { actionGetUseInfo } from "../redux/modules/user";
 import { actionGetLike } from "../redux/modules/like";
 import { actionGetClickList } from "../redux/modules/read";
+import MetaScript from "./MetaScript";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <Wrapper className="App">
+      <MetaScript title="슬기로운 백신생활" />
       <Header />
       <Switch>
         <Route exact path="/" component={Main} />

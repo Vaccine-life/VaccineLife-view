@@ -7,7 +7,7 @@ const api = axios.create({
   // 태현님 api 주소
   baseURL: "http://52.78.76.184:8080",
   // 지현님 api 주소
-  //baseURL: "http://13.124.210.87:8080",
+  //baseURL: "http://13.124.210.87:8081",
   Headers: `${getCookie("vaccine_life_token")}`,
 });
 

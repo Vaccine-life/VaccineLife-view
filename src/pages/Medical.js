@@ -8,6 +8,7 @@ import CommentList from "../components/CommentList";
 import Login from "./Login";
 import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
+import MetaScript from "../shared/MetaScript";
 
 const Medical = () => {
   //alert 창
@@ -18,12 +19,13 @@ const Medical = () => {
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
 
-  React.useEffect (() => {
-    dispatch(actionGetMedical())
-}, [])
+  React.useEffect(() => {
+    dispatch(actionGetMedical());
+  }, []);
 
   return (
     <React.Fragment>
+      <MetaScript title="슬기로운 백신생활 | 의료진" />
       <Grid width={theme.medicalWidth} margin={`160px auto 100px auto`}>
         <Grid align="left">
           <Text
