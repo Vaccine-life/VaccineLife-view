@@ -51,16 +51,6 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
-  /* width: 400px;
-  height: 256px;
-  border-radius: 16px;
-  position: relative;
-  top: 200px;
-  background-color: white;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 20px; */
   width: max-content;
   height: max-content;
   position: relative;
@@ -73,7 +63,7 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 40px;
+  padding: 40px 60px;
 `;
 
 export default Alert;

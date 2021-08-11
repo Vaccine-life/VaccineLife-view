@@ -6,6 +6,7 @@ import QuarList from "../components/board/QuarList";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
 import { actionGetLike } from "../redux/modules/like";
+import MetaScript from "../shared/MetaScript";
 import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
@@ -26,6 +27,7 @@ const Quarantine = () => {
 
   return (
     <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>
+      <MetaScript title="슬기로운 백신생활 | 격리 후기" />
       {/* props 값 넣기 */}
       <Popular board="quarantine" />
       <ListNav board="quarantine" />

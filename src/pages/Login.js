@@ -30,7 +30,7 @@ const Login = (props) => {
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: [],
+    afterEffect: "",
   });
 
   const formik = useFormik({
