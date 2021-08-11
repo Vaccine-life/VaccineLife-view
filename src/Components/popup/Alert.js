@@ -24,11 +24,11 @@ const Alert = () => {
         </Grid>
         <Grid is_flex="center">
           <Button
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.SubHeadOneSize}
+            margin="30px 0 10px 0"
+            width={theme.mediumButtonWidth}
+            height={theme.mediumButtonHeight}
             bg={theme.btnColor}
-            bold
+            fontSize={theme.bodyTwoSize}
             _onClick={handleClick}
           >
             확인
@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 `;
 
 const Modal = styled.div`
-  width: 400px;
+  /* width: 400px;
   height: 256px;
   border-radius: 16px;
   position: relative;
@@ -60,7 +60,20 @@ const Modal = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px; */
+  width: max-content;
+  height: max-content;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 40px;
 `;
 
 export default Alert;

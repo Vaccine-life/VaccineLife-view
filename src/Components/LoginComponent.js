@@ -64,12 +64,15 @@ const LoginComponent = ({ status, setStatus }) => {
           height={theme.mediumButtonHeight}
           type="submit"
           bg={theme.btnColor}
+          fontSize={theme.bodyTwoSize}
         >
           로그인
         </Button>
 
         <Signup>
-          <Text color={theme.typoGrey2}>아직 회원이 아니신가요?</Text>
+          <Text color={theme.typoGrey2} size={theme.bodyThreeSize}>
+            아직 회원이 아니신가요?
+          </Text>
           <Button
             type="submit"
             _onClick={() => {
@@ -81,8 +84,9 @@ const LoginComponent = ({ status, setStatus }) => {
             color={theme.typoGrey2}
             style={{
               textDecoration: "underline",
-              color: "#A5A5A5",
+              color: `${theme.typoGrey2}`,
             }}
+            fontSize={theme.bodyThreeSize}
           >
             회원가입
           </Button>

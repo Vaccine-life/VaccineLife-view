@@ -60,8 +60,8 @@ export const actionLogin =
       dispatch(actionSetUser(userInfo));
       dispatch(actionVisible());
     } catch (error) {
-      // dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
-      // dispatch(actionAlert());
+      dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
+      dispatch(actionAlert());
     }
   };
 

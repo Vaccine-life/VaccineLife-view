@@ -3,73 +3,87 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
-import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
+import {
+  actionDeleteComment,
+  actionDeleteMedical,
+} from "../redux/modules/comment";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
-import { actionConfirm, actionSetMessage, acionSetMedicalObj, actionMedicalConfirm,} from "../redux/modules/popup";
+import {
+  actionConfirm,
+  actionSetMessage,
+  acionSetMedicalObj,
+  actionMedicalConfirm,
+} from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
-
 const CommentList = (props) => {
-    console.log(props)
-    const medi_id = props.id;
-    const { medicalId } = props;
-    const dispatch = useDispatch();
+  // console.log(props);
+  const medi_id = useSelector((state) => state.popup.medicalObj);
+  const { medicalId } = props;
+  const dispatch = useDispatch();
 
-    const confirm_status = useSelector((state) => state.popup.confirm);
-    const is_login = useSelector((state) => state.user.is_login);
-    const userId = useSelector((state) => state.user.user.userId);
-    const medical_status = useSelector((state) => state.popup.medicalConfirm);
+  const confirm_status = useSelector((state) => state.popup.confirm);
+  const is_login = useSelector((state) => state.user.is_login);
+  const userId = useSelector((state) => state.user.user.userId);
+  const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
-    // const medicalId = useSelector((state) => state.comment.list);
-    // console.log(medicalId)
+  // const medicalId = useSelector((state) => state.comment.list);
+  // console.log(medicalId)
 
-    const deleteComment = () => {
-        dispatch(actionDeleteMedical(props.id));
-        // dispatch(actionDeleteMedical({medicalId}));
-    }
+  // const medicalId = useSelector((state) => state.comment.list.id);
+  // console.log(medicalId)
 
+  const deleteComment = () => {
+    dispatch(actionDeleteMedical(medi_id));
+    // console.log(props.id);
+    // dispatch(actionDeleteMedical({medicalId}));
+  };
 
-    return(
-        <React.Fragment>
-            <Grid is_flex="space_row" margin="2rem 0">
+  return (
+    <React.Fragment>
+      <Grid is_flex="space_row" margin="2rem 0">
+        <Grid align="left" width="12rem" margin="0 0 auto 0">
+          <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>
+            {props.nickname}
+          </Text>
+        </Grid>
 
-                <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
-                </Grid>
+        <Grid align="left">
+          <Text size={theme.bodyTwoSize}>{props.contents}</Text>
+        </Grid>
 
-                <Grid align="left">
-                    <Text size={theme.bodyTwoSize}>{props.contents}</Text>
-                </Grid>
-                
-                <Grid align="right" width="6rem" margin="0 0 auto 0">
-                    {is_login && userId === props.userId ? (
-                    <Text 
-                        color={theme.typoLightGrey2}
-                        size={theme.bodyTwoSize}
-                        cursor="pointer"
-                        _onClick={() => {
-                            dispatch(acionSetMedicalObj({ medi_id }));
-                            dispatch(actionMedicalConfirm());
-                        }}
-                    >삭제</Text>
-                    )
-                    : ""}
-                    
-                </Grid>
+        <Grid align="right" width="6rem" margin="0 0 auto 0">
+          {is_login && userId === props.userId ? (
+            <Text
+              color={theme.typoLightGrey2}
+              size={theme.bodyTwoSize}
+              cursor="pointer"
+              _onClick={() => {
+                dispatch(acionSetMedicalObj({ medi_id }));
+                dispatch(actionMedicalConfirm());
+              }}
+            >
+              삭제
+            </Text>
+          ) : (
+            ""
+          )}
+        </Grid>
 
-                {medical_status && <MedicalConfirm 
-                    confirmMessage="삭제하시겠습니까?"
-                    // activeFunction={deleteComment}
-                />}
+        {medical_status && (
+          <MedicalConfirm
+            confirmMessage="삭제하시겠습니까?"
+            activeFunction={deleteComment}
+          />
+        )}
 
-                <Grid align="right" width="9rem" margin="0 0 auto 0">
-                    <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
-                </Grid>
-                                
-            </Grid>
-        </React.Fragment>
-    )
-}
+        <Grid align="right" width="9rem" margin="0 0 auto 0">
+          <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
+        </Grid>
+      </Grid>
+    </React.Fragment>
+  );
+};
 
 // CommentList.defaultProps = {
 //     nickname: "명수는열두살",
