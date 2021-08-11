@@ -24,11 +24,11 @@ const Alert = () => {
         </Grid>
         <Grid is_flex="center">
           <Button
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.SubHeadOneSize}
+            margin="30px 0 10px 0"
+            width={theme.mediumButtonWidth}
+            height={theme.mediumButtonHeight}
             bg={theme.btnColor}
-            bold
+            fontSize={theme.bodyTwoSize}
             _onClick={handleClick}
           >
             확인

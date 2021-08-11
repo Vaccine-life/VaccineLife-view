@@ -2,22 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
-import { actionDeleteCommentList } from "../../redux/modules/comment";
-import { actionCommentConfirm } from "../../redux/modules/popup";
+import { actionDeleteMedical } from "../../redux/modules/comment";
+import { actionMedicalConfirm } from "../../redux/modules/popup";
 import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 
-const CommentConfirm = (props) => {
+const MedicalConfirm = (props) => {
   const { confirmMessage } = props;
-  const { board, commentId, boardId } = useSelector(
-    (state) => state.popup.commentObj
-  );
-  console.log(board, commentId, boardId)
+  const { medicalId } = useSelector((state) => state.popup.medicalObj);
+  console.log(medicalId)
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(actionDeleteCommentList(board, commentId, boardId));
-    dispatch(actionCommentConfirm());
+    dispatch(actionDeleteMedical(medicalId));
+    dispatch(actionMedicalConfirm());
   };
 
   return (
@@ -37,7 +35,7 @@ const CommentConfirm = (props) => {
             lineHeight={theme.SubHeadOneHeight}
             bg={theme.shadow}
             bold
-            _onClick={() => dispatch(actionCommentConfirm())}
+            _onClick={() => dispatch(actionMedicalConfirm())}
           >
             취소
           </Button>
@@ -80,4 +78,4 @@ const Modal = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export default CommentConfirm;
+export default MedicalConfirm;

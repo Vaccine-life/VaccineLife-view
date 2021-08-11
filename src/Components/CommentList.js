@@ -7,25 +7,35 @@ import {
   actionDeleteComment,
   actionDeleteMedical,
 } from "../redux/modules/comment";
-import Confirm from "../components/popup/Confirm";
-import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
+import MedicalConfirm from "../components/popup/MedicalConfirm";
+import {
+  actionConfirm,
+  actionSetMessage,
+  acionSetMedicalObj,
+  actionMedicalConfirm,
+} from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 const CommentList = (props) => {
-  const { medicalId } = props.id;
-  console.log(medicalId);
+  // console.log(props);
+  const medi_id = useSelector((state) => state.popup.medicalObj);
+  const { medicalId } = props;
   const dispatch = useDispatch();
 
   const confirm_status = useSelector((state) => state.popup.confirm);
   const is_login = useSelector((state) => state.user.is_login);
   const userId = useSelector((state) => state.user.user.userId);
+  const medical_status = useSelector((state) => state.popup.medicalConfirm);
+
+  // const medicalId = useSelector((state) => state.comment.list);
+  // console.log(medicalId)
 
   // const medicalId = useSelector((state) => state.comment.list.id);
   // console.log(medicalId)
 
   const deleteComment = () => {
-    dispatch(actionDeleteMedical(medicalId));
-    console.log(props.id);
+    dispatch(actionDeleteMedical(medi_id));
+    // console.log(props.id);
     // dispatch(actionDeleteMedical({medicalId}));
   };
 
@@ -48,7 +58,10 @@ const CommentList = (props) => {
               color={theme.typoLightGrey2}
               size={theme.bodyTwoSize}
               cursor="pointer"
-              _onClick={() => dispatch(actionConfirm(props.id))}
+              _onClick={() => {
+                dispatch(acionSetMedicalObj({ medi_id }));
+                dispatch(actionMedicalConfirm());
+              }}
             >
               삭제
             </Text>
@@ -57,9 +70,9 @@ const CommentList = (props) => {
           )}
         </Grid>
 
-        {confirm_status && (
-          <Confirm
-            confirmMessage="응원을 삭제하시겠습니까?"
+        {medical_status && (
+          <MedicalConfirm
+            confirmMessage="삭제하시겠습니까?"
             activeFunction={deleteComment}
           />
         )}

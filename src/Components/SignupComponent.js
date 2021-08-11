@@ -15,7 +15,9 @@ const SignupComponent = ({ formik }) => {
         </Text>
 
         <InputBox>
-          <Text margin="0 auto 0 0">아이디</Text>
+          <Text margin="0 auto 0 0" size={theme.bodyThreeSize}>
+            아이디
+          </Text>
         </InputBox>
         <InputBox>
           <SignupInput
@@ -32,7 +34,9 @@ const SignupComponent = ({ formik }) => {
         </InputBox>
 
         <InputBox>
-          <Text margin="40px auto 0 0">비밀번호</Text>
+          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
+            비밀번호
+          </Text>
         </InputBox>
         <InputBox>
           <SignupInput
@@ -49,7 +53,9 @@ const SignupComponent = ({ formik }) => {
         </InputBox>
 
         <InputBox>
-          <Text margin="40px auto 0 0">비밀번호 확인</Text>
+          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
+            비밀번호 확인
+          </Text>
         </InputBox>
         <InputBox>
           <SignupInput
@@ -66,7 +72,9 @@ const SignupComponent = ({ formik }) => {
         </InputBox>
 
         <InputBox>
-          <Text margin="40px auto 0 0">닉네임</Text>
+          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
+            닉네임
+          </Text>
         </InputBox>
         <InputBox>
           <SignupInput
@@ -88,6 +96,7 @@ const SignupComponent = ({ formik }) => {
           height={theme.mediumButtonHeight}
           type="submit"
           bg={theme.btnColor}
+          fontSize={theme.bodyTwoSize}
         >
           회원가입
         </Button>
