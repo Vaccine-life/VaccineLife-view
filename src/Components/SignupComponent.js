@@ -1,36 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
-import Alert from "../components/popup/Alert";
 
 const SignupComponent = ({ formik }) => {
-  //alert 창
-  const alert_status = useSelector((state) => state.popup.alert);
-
   // const errorMessage = useSelector((state) => state.popup.alertMessage);
-
-  // const idErrorMsg = () => {
-  //   if (
-  //     errorMessage === "중복된 사용자 ID가 존재합니다." ||
-  //     errorMessage ===
-  //       "중복된 사용자 ID가 존재합니다.  중복된 닉네임이 존재합니다."
-  //   ) {
-  //     return "중복된 사용자 ID가 존재합니다.";
-  //   }
-  // };
-
-  // const nicknameErrorMsg = () => {
-  //   if (
-  //     errorMessage === "중복된 닉네임이 존재합니다." ||
-  //     errorMessage ===
-  //       "중복된 사용자 ID가 존재합니다.  중복된 닉네임이 존재합니다."
-  //   ) {
-  //     return "중복된 닉네임이 존재합니다.";
-  //   }
-  // };
 
   return (
     <>
@@ -54,7 +29,6 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.username && formik.errors.username ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
-          {/* {idErrorMsg() && <SignupError>{idErrorMsg()}</SignupError>} */}
         </InputBox>
 
         <InputBox>
@@ -106,9 +80,6 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.nickname && formik.errors.nickname ? (
             <SignupError>{formik.errors.nickname}</SignupError>
           ) : null}
-          {/* {nicknameErrorMsg() && (
-            <SignupError>{nicknameErrorMsg()}</SignupError>
-          )} */}
         </InputBox>
 
         <Button
@@ -120,7 +91,6 @@ const SignupComponent = ({ formik }) => {
         >
           회원가입
         </Button>
-        {alert_status && <Alert />}
       </Wrapper>
     </>
   );
