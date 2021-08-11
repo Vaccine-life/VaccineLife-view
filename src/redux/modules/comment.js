@@ -5,6 +5,7 @@ import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
 
+
 const initialState = {
   list: [],
   commentVac: [],
@@ -28,13 +29,14 @@ const comment = createSlice({
     },
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
-      // let idx = state.list.findIndex((c) => c.id === medicalId);
-      // console.log(idx);
+      // console.log(action.payload)
+      let idx = state.list.findIndex((c) => c.id === medicalId);
+      // console.log(idx)
 
-      // if (idx !== -1) {
-      //   state.list.splice(idx, 1);
-      // }
-    },
+      if (idx !== -1) {
+        state.list.splice(idx, 1);
+      }
+    }, 
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
       if (board === "vaccine") {
@@ -46,6 +48,7 @@ const comment = createSlice({
     actionAddCommentListState: (state, action) => {},
     actionDeleteCommentListState: (state, action) => {
       const { board, commentId } = action.payload;
+      console.log(action.payload)
       if (board === "vaccine") {
         const deleteIndex = state.commentVac.findIndex(
           (each) => each.id === commentId
@@ -72,7 +75,6 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      console.log(data);
 
       dispatch(actionSetComment(data));
     } catch (error) {
@@ -80,37 +82,30 @@ export const actionGetMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
+    };
   };
 
 // 서버에 medical 저장하기
 export const actionAddMedical =
-  (medicalObj) =>
+  (contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      await medicalAxios.addMedical(medicalObj);
-      const getData = await medicalAxios.getMedical();
-      const data = getData.data;
-      dispatch();
+      await medicalAxios.addMedical(contents);
     } catch (err) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
+    };
   };
 
-// 서버의 medical 삭제하기
-export const actionDeleteMedical =
-  (medicalId) =>
-  async (dispatch, getState, { history }) => {
+// 서버의 medical 삭제하기 
+export const actionDeleteMedical = 
+  (medicalId) => 
+  async (dispatch, getState, {history}) => {
     try {
-      // const getData = await medicalAxios.deleteMedical(medicalId);
-      // const data = getData.data;
-      // console.log(data)
-
       await medicalAxios.deleteMedical(medicalId);
-      // dispatch(actionDeleteComment({ medicalId }));
+      dispatch(actionDeleteComment({medicalId}))
       history.replace("/medical");
     } catch (err) {
       dispatch(
@@ -165,7 +160,7 @@ export const actionAddCommentList =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
+    };
   };
 
 export const actionDeleteCommentList =
