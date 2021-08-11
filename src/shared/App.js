@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { getCookie } from "./cookie";
 import { actionGetUseInfo } from "../redux/modules/user";
 import { actionGetLike } from "../redux/modules/like";
+import { actionGetClickList } from "../redux/modules/read";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
     if (!is_login && getCookie("vaccine_life_token")) {
       dispatch(actionGetUseInfo());
     }
+    dispatch(actionGetClickList());
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLike("quarantine"));
   }, []);

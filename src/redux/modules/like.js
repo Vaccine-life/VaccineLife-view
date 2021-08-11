@@ -41,6 +41,10 @@ export const actionGetLike =
   (board) =>
   async (dispatch, getState, { history }) => {
     try {
+      const is_login = getState().user.is_login;
+      if (!is_login) {
+        return;
+      }
       const userId = getState().user.user.userId;
       let getData = [];
       let makeData = [];
