@@ -29,7 +29,7 @@ const Quarantine = () => {
       {/* props 값 넣기 */}
       <Popular board="quarantine" />
       <ListNav board="quarantine" />
-      <QuarList />
+      <QuarList board="quarantine" />
       {modal_status && <Login />}
       {alert_status && <Alert />}
       {isLoading && <Spinner />}

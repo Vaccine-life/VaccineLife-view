@@ -9,6 +9,7 @@ import modal from "./modules/modal";
 import popup from "./modules/popup";
 import isLoading from "./modules/isLoading";
 import like from "./modules/like";
+import read from "./modules/read";
 
 export const history = createBrowserHistory();
 
@@ -26,6 +27,7 @@ if (env === "development") {
 }
 
 const reducer = combineReducers({
+  read: read.reducer,
   like: like.reducer,
   isLoading: isLoading.reducer,
   popup: popup.reducer,
