@@ -117,6 +117,7 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
+      console.log("actionSetUser에 들어갈 newuser", newuser);
       dispatch(
         actionSetMessage(
           `반갑습니다 ${nickname}님!
