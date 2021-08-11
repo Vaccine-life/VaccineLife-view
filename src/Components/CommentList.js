@@ -3,22 +3,27 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
-import { actionDeleteComment } from "../redux/modules/comment";
-import { actionConfirm } from "../redux/modules/popup";
+import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
 import Confirm from "../components/popup/Confirm";
+import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
     console.log(props)
+    const { medicalId } = props;
     const dispatch = useDispatch();
 
-    // confirm 창
     const confirm_status = useSelector((state) => state.popup.confirm);
+    const is_login = useSelector((state) => state.user.is_login);
+    const userId = useSelector((state) => state.user.user.userId);
+
+    // const medicalId = useSelector((state) => state.comment.list.id);
+    // console.log(medicalId)
 
     const deleteComment = () => {
-        // 작성자가 나일때만 삭제 가능하게 하기
-        dispatch(actionDeleteComment());
+        dispatch(actionDeleteMedical(props.id));
+        // dispatch(actionDeleteMedical({medicalId}));
     }
 
 
@@ -35,12 +40,15 @@ const CommentList = (props) => {
                 </Grid>
                 
                 <Grid align="right" width="6rem" margin="0 0 auto 0">
+                    {is_login && userId === props.userId ? 
                     <Text 
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
                         cursor="pointer"
-                        _onClick={() => dispatch(actionConfirm())}
+                        _onClick={() => dispatch(actionConfirm(props.id))}
                     >삭제</Text>
+                    : ""}
+                    
                 </Grid>
 
                 {confirm_status && <Confirm 
@@ -48,7 +56,7 @@ const CommentList = (props) => {
                     activeFunction={deleteComment}
                 />}
 
-                <Grid align="right" width="8rem" margin="0 0 auto 0">
+                <Grid align="right" width="9rem" margin="0 0 auto 0">
                     <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
                 </Grid>
                                 
