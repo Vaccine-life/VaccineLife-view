@@ -60,8 +60,8 @@ export const actionLogin =
       dispatch(actionSetUser(userInfo));
       dispatch(actionVisible());
     } catch (error) {
-      dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
-      dispatch(actionAlert());
+      // dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
+      // dispatch(actionAlert());
     }
   };
 
@@ -117,17 +117,19 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      dispatch(
-        actionSetMessage(
-          `반갑습니다 ${nickname}님!
-          회원가입 및 로그인 되었습니다`
-        )
-      );
+      // dispatch(
+      //   actionSetMessage(
+      //     `반갑습니다 ${nickname}님!
+      //     회원가입 및 로그인 되었습니다`
+      //   )
+      // );
       dispatch(actionAlert());
     } catch (error) {
       // dispatch(actionSetMessage("회원가입 실패"));
       // dispatch(actionAlert());
       dispatch(actionSetMessage(error.response.data.message));
+      dispatch(actionAlert());
+      console.log(error.response.data.message);
     }
   };
 
