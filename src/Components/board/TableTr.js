@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 import displayedAt from "../../shared/displayedAt";
 import { history } from "../../redux/configStore";
+import { useDispatch, useSelector } from "react-redux";
+import { actionClickContents } from "../../redux/modules/read";
+import logger from "../../shared/logger";
 
 const TableTr = (props) => {
   const {
@@ -18,15 +21,22 @@ const TableTr = (props) => {
     totalVisitors,
     createAt,
   } = props;
+  const dispatch = useDispatch();
+  // 읽고 쓰기 색변경
+  const vac_read_list = useSelector((state) => state.read.vacList);
+  const is_read = vac_read_list?.includes(boardId);
 
   const handleMovePage = () => {
+    dispatch(actionClickContents(board, boardId));
     history.push(`/detail/${boardId}`);
   };
 
   return (
     <TableThread>
       <Td style={{ color: "black" }}>{type}</Td>
-      <TdTitle onClick={handleMovePage}>{title}</TdTitle>
+      <TdTitle onClick={handleMovePage} is_read={is_read}>
+        {title}
+      </TdTitle>
       <Td>
         <EachTdDiv>
           {" "}
@@ -65,7 +75,7 @@ const TdTitle = styled.td`
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
-  color: black;
+  ${(props) => (props.is_read ? `color:${theme.typoGrey2};` : `color: black;`)}
   cursor: pointer;
   :hover {
     color: ${theme.bg2};

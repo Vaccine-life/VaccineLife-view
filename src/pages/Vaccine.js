@@ -20,7 +20,6 @@ const Vaccine = () => {
   // alert
   const alert_status = useSelector((state) => state.popup.alert);
   // like
-  const like_status = useSelector((state) => state.like.likeListVac);
 
   const dispatch = useDispatch();
   useEffect(() => {
