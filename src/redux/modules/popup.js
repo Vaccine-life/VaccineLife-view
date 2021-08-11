@@ -29,10 +29,12 @@ const popup = createSlice({
     },
     acionSetCommentObj: (state, action) => {
       state.commentObj = action.payload;
+      console.log(state.commentObj)
     },
     acionSetMedicalObj: (state, action) => {
       state.medicalObj = action.payload;
       console.log(state.medicalObj)
+      // {medi_id: 245} 잘 찍힘
     },
   },
 });

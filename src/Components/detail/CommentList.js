@@ -20,6 +20,7 @@ const CommentList = (props) => {
   const { board, commentId, boardId, comment, createdAt, userId, nickname } =
     props;
   const login_user = useSelector((state) => state.user.user.userId);
+  const is_login = useSelector((state) => state.user.is_login);
   const comment_status = useSelector((state) => state.popup.commentConfirm);
   const dispatch = useDispatch();
   // 리덕스 이용 comment_list 받기
@@ -43,7 +44,7 @@ const CommentList = (props) => {
         </Grid>
 
         <Grid align="right" width="6rem">
-          {login_user === userId && (
+          {is_login && login_user === userId ? (
             <Text
               color={theme.typoLightGrey2}
               size={theme.bodyTwoSize}
@@ -55,7 +56,7 @@ const CommentList = (props) => {
             >
               <FontAwesomeIcon icon={faTrashAlt} />
             </Text>
-          )}
+          ) : ""}
         </Grid>
 
         <Grid align="right" width="8rem">
