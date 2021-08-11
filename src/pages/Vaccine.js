@@ -8,6 +8,7 @@ import Popular from "../components/board/Popular";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
 import { actionGetLike } from "../redux/modules/like";
+import MetaScript from "../shared/MetaScript";
 import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
@@ -31,6 +32,7 @@ const Vaccine = () => {
 
   return (
     <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>
+      <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
       {/* props 값 넣기 */}
       <Popular board="vaccine" />
       <ListNav board="vaccine" />

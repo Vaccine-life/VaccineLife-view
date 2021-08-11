@@ -15,10 +15,12 @@ import { useParams } from "react-router-dom";
 import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
 import logger from "../shared/logger";
+import MetaScript from "../shared/MetaScript";
 
 const Detail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
   const boardId = useParams().id;
+  const title = useSelector((state) => state.board.board.title);
 
   useEffect(() => {
     dispatch(actionGetDetail("vaccine", boardId));
@@ -47,6 +49,7 @@ const Detail = () => {
   };
   return (
     <Grid width={theme.detailWidth} margin="160px auto auto auto">
+      <MetaScript title={`슬기로운 백신생활 | ${title}`} />
       <BoardInfo
         board="vaccine"
         boardId={board_content.boardId}

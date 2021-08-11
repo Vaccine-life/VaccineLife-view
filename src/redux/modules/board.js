@@ -40,6 +40,36 @@ const board = createSlice({
       state.pagingQuar.nextPage += 1;
       state.pagingQuar.totalPage = action.payload.totalPageInData;
     },
+    actionDeleteBoardInList: (state, action) => {
+      const { board, boardId } = action.payload;
+      if (board === "vaccine") {
+        const deleteIndex = state.listVac.findIndex(
+          (each) => each.id === boardId
+        );
+        if (deleteIndex !== -1) {
+          state.listVac.splice(deleteIndex, 1);
+        }
+      } else {
+        const deleteIndex = state.listQuar.findIndex(
+          (each) => each.id === boardId
+        );
+        if (deleteIndex !== -1) {
+          state.listQuar.splice(deleteIndex, 1);
+        }
+      }
+    },
+    actionResetList: (state, action) => {
+      const { board, boardContents, totalPageInData } = action.payload;
+      if (board === "vaccine") {
+        state.listVac = boardContents;
+        state.pagingVac.nextPage = 2;
+        state.pagingVac.totalPage = totalPageInData;
+      } else {
+        state.listQuar = boardContents;
+        state.pagingQuar.nextPage = 2;
+        state.pagingQuar.totalPage = totalPageInData;
+      }
+    },
     actionSetBoard: (state, action) => {
       state.board = action.payload;
     },
@@ -296,11 +326,11 @@ export const actionDeleteEx =
       dispatch(actionLoading());
       if (board === "vaccine") {
         await boardAxios.deleteVac(boardId);
-        history.replace("/vaccine");
       } else {
         await boardAxios.deleteQuar(boardId);
-        history.replace("/quarantine");
       }
+      dispatch(actionDeleteBoardInList({ board, boardId }));
+      history.replace(`/${board}`);
       dispatch(actionLoading());
     } catch (error) {
       dispatch(
@@ -338,11 +368,19 @@ export const actionWriteExperience =
       dispatch(actionLoading());
       if (board === "vaccine") {
         await writeAxios.vacWrite(contenstObj);
-        history.replace("/vaccine");
+        const getData = await boardAxios.getPageVac(1);
+        const boardContents = getData.data.content;
+        const totalPageInData = getData.data.totalPages;
+        dispatch(actionResetList({ board, boardContents, totalPageInData }));
       } else {
         await writeAxios.quarWrite(contenstObj);
-        history.replace("/quarantine");
+        const getData = await boardAxios.getPageQuar(1);
+        const boardContents = getData.data.content;
+        const totalPageInData = getData.data.totalPages;
+        dispatch(actionResetList({ board, boardContents, totalPageInData }));
       }
+
+      history.replace(`/${board}`);
       dispatch(actionLoading());
     } catch (error) {
       dispatch(
@@ -355,6 +393,8 @@ export const actionWriteExperience =
 export const {
   actionSetListVac,
   actionSetListQuar,
+  actionDeleteBoardInList,
+  actionResetList,
   actionSetBoard,
   actionSetTopThreeVac,
   actionSetTopThreeQuar,

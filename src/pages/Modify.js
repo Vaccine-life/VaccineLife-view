@@ -13,6 +13,7 @@ import { convertFromRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import { actionGetDetail, actionModifyDB } from "../redux/modules/board";
+import MetaScript from "../shared/MetaScript";
 
 const data = {
   vacBoardId: 0,
@@ -87,6 +88,7 @@ const Modify = () => {
 
   return (
     <Grid width="1192px" margin={`160px auto auto auto`}>
+      <MetaScript title="슬기로운 백신생활 | 수정" />
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text
           size={theme.headOneSize}
