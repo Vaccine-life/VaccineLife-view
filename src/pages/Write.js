@@ -12,6 +12,7 @@ import { EditorState, convertToRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import { actionWriteExperience } from "../redux/modules/board";
+import MetaScript from "../shared/MetaScript";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -59,6 +60,7 @@ const Write = () => {
   logger(contents);
   return (
     <Grid width={theme.writeWidth} margin={`160px auto auto auto`}>
+      <MetaScript title="슬기로운 백신생활 | 글쓰기" />
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}

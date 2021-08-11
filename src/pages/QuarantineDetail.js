@@ -19,10 +19,12 @@ import logger from "../shared/logger";
 import { actionGetLike } from "../redux/modules/like";
 import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
+import MetaScript from "../shared/MetaScript";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
   const boardId_detail = useParams().id;
+  const title = useSelector((state) => state.board.board.title);
 
   // 격리후기때는 MoveBox에 false 기입
   const modal_status = useSelector((state) => state.modal.visible);
@@ -49,6 +51,7 @@ const QuarantineDetail = () => {
 
   return (
     <Grid width={theme.detailWidth} margin="160px auto auto auto">
+      <MetaScript title={`슬기로운 백신생활 | ${title}`} />
       <BoardInfo
         board="quarantine"
         boardId={board_content.boardId}
