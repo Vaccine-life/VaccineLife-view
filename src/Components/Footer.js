@@ -18,7 +18,7 @@ const Footer = () => {
           display: "flex",
           alignItems: "center",
           height: "152px",
-          width: "100vw"
+          width: "100vw",
         }}
       >
         <Grid
@@ -107,7 +107,7 @@ const Footer = () => {
               size={theme.SubHeadTwoSize}
               margin="5px"
             >
-              Contact. playder1427@gmail.com
+              Contact. quokkalee654@gmail.com
             </Text>
             <Text
               color={theme.typoGrey2}

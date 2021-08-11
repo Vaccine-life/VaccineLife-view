@@ -28,6 +28,7 @@ const comment = createSlice({
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
       let idx = state.list.findIndex((c) => c.id === medicalId);
+      console.log(idx);
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
       if (idx !== -1) {
         state.list.splice(idx, 1);
@@ -102,7 +103,7 @@ export const actionDeleteMedical =
   async (dispatch, getState, { history }) => {
     try {
       await medicalAxios.deleteMedical(medicalId);
-      dispatch(actionDeleteComment({ medicalId }));
+      // dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");
     } catch (err) {
       dispatch(

@@ -64,6 +64,7 @@ const LoginComponent = ({ status, setStatus }) => {
           height={theme.mediumButtonHeight}
           type="submit"
           bg={theme.btnColor}
+          fontSize={theme.bodyTwoSize}
         >
           로그인
         </Button>
