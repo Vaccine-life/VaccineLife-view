@@ -59,7 +59,6 @@ const Login = (props) => {
     onSubmit: (values) => {
       const user = { ...values, ...inputs };
       dispatch(actionSignup(user));
-      console.log(user);
     },
   });
 

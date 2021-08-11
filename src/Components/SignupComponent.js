@@ -32,10 +32,6 @@ const SignupComponent = ({ formik }) => {
   //   }
   // };
 
-  const handleUsernameChange = (e) => {
-    console.log("handleUsernameChange", e.target.value);
-  };
-
   return (
     <>
       <Wrapper onSubmit={formik.handleSubmit}>
