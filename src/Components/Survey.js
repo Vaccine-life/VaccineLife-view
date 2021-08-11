@@ -4,14 +4,31 @@ import { Text } from "../elements/index";
 import theme from "../styles/theme";
 import survey from "./survey.css";
 
-// 10-18번째줄 signup compo로 올려주자
-
 const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
   // 어느 하나라도 입력이 안되어 기본값으로만 되어있다면, SubmitButton을 disabled처리한다.
   // 모든 문항이 선택되었거나, 접종하지않음을 선택한 경우 SubmitButton을 enabled처리한다.
+  // const ableSubmitButton = () => {
+  //   if (isVaccine === 0) {
+  //     return false;
+  //   }
+  //   if (
+  //     isVaccine === 2 ||
+  //     degree === undefined ||
+  //     type === undefined ||
+  //     gender === undefined ||
+  //     age === undefined ||
+  //     disease === undefined ||
+  //     afterEffect === [] ||
+  //     afterEffect === "" ||
+  //     afterEffect === undefined
+  //   ) {
+  //     return true;
+  //   }
+  // };
+
   const ableSubmitButton = () => {
     if (isVaccine === 0) {
       return false;
@@ -23,7 +40,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect === []
+      afterEffect === ""
     ) {
       return true;
     }
