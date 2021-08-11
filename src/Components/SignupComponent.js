@@ -120,7 +120,7 @@ const SignupComponent = ({ formik }) => {
         >
           회원가입
         </Button>
-        {alert_status && <Alert />}
+        {/* {alert_status && <Alert />} */}
       </Wrapper>
     </>
   );
