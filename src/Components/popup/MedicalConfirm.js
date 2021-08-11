@@ -10,7 +10,7 @@ import theme from "../../styles/theme";
 const MedicalConfirm = (props) => {
   const { confirmMessage } = props;
   const { medi_id } = useSelector((state) => state.popup.medicalObj);
-  console.log(medi_id)
+  console.log(medi_id);
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -28,24 +28,22 @@ const MedicalConfirm = (props) => {
         </Grid>
         <Grid is_flex="center">
           <Button
-            margin="0 15px 0 0"
+            margin="30px 15px 0 0"
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
             fontSize={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
             bg={theme.shadow}
-            bold
             _onClick={() => dispatch(actionMedicalConfirm())}
           >
             취소
           </Button>
           <Button
-            margin="0"
+            margin="30px 0 0 0"
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
             fontSize={theme.bodyOneSize}
             bg={theme.bg}
-            bold
             _onClick={handleDelete}
           >
             삭제
@@ -63,12 +61,11 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: ${theme.shadow};
-  padding: 300px auto 0 auto;
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 const Modal = styled.div`
-  width: 400px;
+  /* width: 400px;
   height: 256px;
   border-radius: 16px;
   position: relative;
@@ -76,6 +73,19 @@ const Modal = styled.div`
   background-color: white;
   margin: auto;
   display: flex;
+  flex-direction: column; */
+  width: max-content;
+  height: max-content;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 40px 60px;
 `;
 export default MedicalConfirm;

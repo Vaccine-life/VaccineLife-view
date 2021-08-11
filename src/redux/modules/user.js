@@ -15,7 +15,7 @@ const initialState = {
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: [],
+    afterEffect: "",
   },
 
   is_login: false,
