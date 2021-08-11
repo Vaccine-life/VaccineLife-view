@@ -62,7 +62,7 @@ const CommentWrite = (props) => {
             size={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
           >
-            {nickname}
+            {is_login ? nickname : ""}
           </Text>
         </NicknameWrapper>
 
@@ -88,7 +88,7 @@ const CommentWrite = (props) => {
           </Grid>
 
           <Grid is_flex="space_row" border="none">
-            <Grid padding="10px" bg="#ffffff" align="right">
+            <Grid bg="#ffffff" align="right">
               <Text
                 color={theme.typoGrey3}
                 size={theme.bodyTwoSize}
