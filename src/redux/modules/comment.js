@@ -21,6 +21,7 @@ const comment = createSlice({
   reducers: {
     actionSetComment: (state, action) => {
       state.list = action.payload;
+      // state.list.push(...action.payload)
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
@@ -28,12 +29,12 @@ const comment = createSlice({
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
       let idx = state.list.findIndex((c) => c.id === medicalId);
-      // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
+      console.log(idx)
+
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
-      console.log("idx, medicalId", idx, medicalId);
-    },
+    }, 
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
       if (board === "vaccine") {
@@ -71,7 +72,7 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-      // console.log(data)
+      console.log(data)
 
       dispatch(actionSetComment(data));
     } catch (error) {
@@ -84,11 +85,14 @@ export const actionGetMedical =
 
 // 서버에 medical 저장하기
 export const actionAddMedical =
-  (contents) =>
+  (medicalObj) =>
   async (dispatch, getState, { history }) => {
     try {
-      await medicalAxios.addMedical(contents);
-    } catch (err) {
+      await medicalAxios.addMedical(medicalObj);
+      const getData = await medicalAxios.getMedical()
+      const data = getData.data;
+      dispatch()
+    } catch (err) {;
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
@@ -96,11 +100,15 @@ export const actionAddMedical =
     }
   };
 
-// 서버의 medical 삭제하기
-export const actionDeleteMedical =
-  (medicalId) =>
-  async (dispatch, getState, { history }) => {
+// 서버의 medical 삭제하기 
+export const actionDeleteMedical = 
+  (medicalId) => 
+  async (dispatch, getState, {history}) => {
     try {
+      // const getData = await medicalAxios.deleteMedical(medicalId);
+      // const data = getData.data;
+      // console.log(data)
+
       await medicalAxios.deleteMedical(medicalId);
       dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");

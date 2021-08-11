@@ -4,21 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
 import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
-import Confirm from "../components/popup/Confirm";
-import { actionConfirm, actionSetMessage } from "../redux/modules/popup";
+import MedicalConfirm from "../components/popup/MedicalConfirm";
+import { actionConfirm, actionSetMessage, acionSetMedicalObj, actionMedicalConfirm,} from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
     console.log(props)
+    const medi_id = props.id;
     const { medicalId } = props;
     const dispatch = useDispatch();
 
     const confirm_status = useSelector((state) => state.popup.confirm);
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
+    const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
-    // const medicalId = useSelector((state) => state.comment.list.id);
+    // const medicalId = useSelector((state) => state.comment.list);
     // console.log(medicalId)
 
     const deleteComment = () => {
@@ -40,20 +42,24 @@ const CommentList = (props) => {
                 </Grid>
                 
                 <Grid align="right" width="6rem" margin="0 0 auto 0">
-                    {is_login && userId === props.userId ? 
+                    {is_login && userId === props.userId ? (
                     <Text 
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
                         cursor="pointer"
-                        _onClick={() => dispatch(actionConfirm(props.id))}
+                        _onClick={() => {
+                            dispatch(acionSetMedicalObj({ medi_id }));
+                            dispatch(actionMedicalConfirm());
+                        }}
                     >삭제</Text>
+                    )
                     : ""}
                     
                 </Grid>
 
-                {confirm_status && <Confirm 
-                    confirmMessage="응원을 삭제하시겠습니까?"
-                    activeFunction={deleteComment}
+                {medical_status && <MedicalConfirm 
+                    confirmMessage="삭제하시겠습니까?"
+                    // activeFunction={deleteComment}
                 />}
 
                 <Grid align="right" width="9rem" margin="0 0 auto 0">
