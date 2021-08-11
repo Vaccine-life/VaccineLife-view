@@ -10,16 +10,20 @@ import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
-    // console.log(props)
+    console.log(props)
+    const { medicalId } = props;
     const dispatch = useDispatch();
 
     const confirm_status = useSelector((state) => state.popup.confirm);
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
+
     // const medicalId = useSelector((state) => state.comment.list.id);
+    // console.log(medicalId)
 
     const deleteComment = () => {
-        dispatch(actionDeleteComment());
+        dispatch(actionDeleteMedical(props.id));
+        // dispatch(actionDeleteMedical({medicalId}));
     }
 
 
@@ -41,7 +45,7 @@ const CommentList = (props) => {
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
                         cursor="pointer"
-                        _onClick={() => dispatch(actionConfirm())}
+                        _onClick={() => dispatch(actionConfirm(props.id))}
                     >삭제</Text>
                     : ""}
                     

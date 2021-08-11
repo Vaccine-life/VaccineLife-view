@@ -1,18 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import { commentAxios, medicalAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
 
+
 const initialState = {
   list: [],
   commentVac: [],
   commentQuar: [],
-  // nickname: "",
-  // comment: "",
-  // insert_dt: timeForToday(moment().format()),
 };
 
 // createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
@@ -25,15 +22,15 @@ const comment = createSlice({
   reducers: {
     actionSetComment: (state, action) => {
       state.list = action.payload;
-      // state.list.push(...action.payload);
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
     },
     actionDeleteComment: (state, action) => {
-      let idx = state.list.findIndex((c) => c === action.payload);
+      // const { medicalId } = action.payload;
+      let idx = state.list.findIndex((c) => c.id === action.payload);
       // index위치에 있는 항목 제거(맞아야 제거하는거 아닌가..?)
-      if (idx !== action.payload) {
+      if (idx === action.payload.medicalId) {
         state.list.splice(idx, 1);
       }
     },
@@ -91,7 +88,6 @@ export const actionAddMedical =
   async (dispatch, getState, { history }) => {
     try {
       await medicalAxios.addMedical(contents);
-      history.replace("/medical");
     } catch (err) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -107,8 +103,13 @@ export const actionDeleteMedical =
   async (dispatch, getState, {history}) => {
     try {
       await medicalAxios.deleteMedical(medicalId);
+      dispatch(actionDeleteComment({medicalId}))
       history.replace("/medical");
     } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
     }
   };
 

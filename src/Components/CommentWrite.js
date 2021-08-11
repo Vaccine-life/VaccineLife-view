@@ -8,13 +8,13 @@ import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 
 const CommentWrite = (props) => {
-  const createdAt = new Date();
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
   const user_id = useSelector((state) => state.user.user.userId);
-  // console.log(nickname)
+
+  const createdAt = new Date();
 
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState();
