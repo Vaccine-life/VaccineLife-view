@@ -7,9 +7,10 @@ import { actionMedicalConfirm } from "../../redux/modules/popup";
 import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 
-const CommentConfirm = (props) => {
+const MedicalConfirm = (props) => {
   const { confirmMessage } = props;
-  const { medicalId } = useSelector((state) => state.popup.commentObj);
+  const { medicalId } = useSelector((state) => state.popup.medicalObj);
+  console.log(medicalId)
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -77,4 +78,4 @@ const Modal = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export default CommentConfirm;
+export default MedicalConfirm;

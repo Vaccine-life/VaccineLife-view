@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Text, Grid } from "../elements";
 import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
-import { actionConfirm, actionSetMessage, acionSetCommentObj, actionMedicalConfirm,} from "../redux/modules/popup";
+import { actionConfirm, actionSetMessage, acionSetMedicalObj, actionMedicalConfirm,} from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
     console.log(props)
+    const medi_id = props.id;
     const { medicalId } = props;
     const dispatch = useDispatch();
 
@@ -41,16 +42,17 @@ const CommentList = (props) => {
                 </Grid>
                 
                 <Grid align="right" width="6rem" margin="0 0 auto 0">
-                    {is_login && userId === props.userId ? 
+                    {is_login && userId === props.userId ? (
                     <Text 
                         color={theme.typoLightGrey2}
                         size={theme.bodyTwoSize}
                         cursor="pointer"
                         _onClick={() => {
-                            dispatch(acionSetCommentObj({ medicalId }));
+                            dispatch(acionSetMedicalObj({ medi_id }));
                             dispatch(actionMedicalConfirm());
                         }}
                     >삭제</Text>
+                    )
                     : ""}
                     
                 </Grid>

@@ -117,12 +117,12 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      // dispatch(
-      //   actionSetMessage(
-      //     `반갑습니다 ${nickname}님!
-      //     회원가입 및 로그인 되었습니다`
-      //   )
-      // );
+      dispatch(
+        actionSetMessage(
+          `반갑습니다 ${nickname}님!
+          회원가입 및 로그인 되었습니다`
+        )
+      );
       dispatch(actionAlert());
     } catch (error) {
       // dispatch(actionSetMessage("회원가입 실패"));

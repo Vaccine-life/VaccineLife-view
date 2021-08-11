@@ -12,6 +12,7 @@ const CommentConfirm = (props) => {
   const { board, commentId, boardId } = useSelector(
     (state) => state.popup.commentObj
   );
+  console.log(board, commentId, boardId)
   const dispatch = useDispatch();
 
   const handleDelete = () => {

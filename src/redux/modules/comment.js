@@ -72,6 +72,7 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
+      console.log(data)
 
       dispatch(actionSetComment(data));
     } catch (error) {
@@ -84,11 +85,14 @@ export const actionGetMedical =
 
 // 서버에 medical 저장하기
 export const actionAddMedical =
-  (contents) =>
+  (medicalObj) =>
   async (dispatch, getState, { history }) => {
     try {
-      await medicalAxios.addMedical(contents);
-    } catch (err) {
+      await medicalAxios.addMedical(medicalObj);
+      const getData = await medicalAxios.getMedical()
+      const data = getData.data;
+      dispatch()
+    } catch (err) {;
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
@@ -101,6 +105,10 @@ export const actionDeleteMedical =
   (medicalId) => 
   async (dispatch, getState, {history}) => {
     try {
+      // const getData = await medicalAxios.deleteMedical(medicalId);
+      // const data = getData.data;
+      // console.log(data)
+
       await medicalAxios.deleteMedical(medicalId);
       dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");
