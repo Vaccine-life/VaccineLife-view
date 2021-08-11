@@ -9,12 +9,12 @@ import theme from "../../styles/theme";
 
 const MedicalConfirm = (props) => {
   const { confirmMessage } = props;
-  const { medicalId } = useSelector((state) => state.popup.medicalObj);
-  console.log(medicalId)
+  const { medi_id } = useSelector((state) => state.popup.medicalObj);
+  console.log(medi_id)
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(actionDeleteMedical(medicalId));
+    dispatch(actionDeleteMedical(medi_id));
     dispatch(actionMedicalConfirm());
   };
 
