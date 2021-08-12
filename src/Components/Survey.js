@@ -46,7 +46,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
     }
   };
 
-  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 store에 저장
+  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 setState
   const handleIsVaccineClick = (e) => {
     const { value, name } = e.target;
     setInputs({
