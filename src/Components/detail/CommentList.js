@@ -48,6 +48,7 @@ const CommentList = (props) => {
             <Text
               color={theme.typoLightGrey2}
               size={theme.bodyTwoSize}
+              margin="auto 5px auto auto"
               cursor="pointer"
               _onClick={() => {
                 dispatch(acionSetCommentObj({ board, commentId, boardId }));
@@ -56,7 +57,9 @@ const CommentList = (props) => {
             >
               <FontAwesomeIcon icon={faTrashAlt} />
             </Text>
-          ) : ""}
+          ) : (
+            ""
+          )}
         </Grid>
 
         <Grid align="right" width="8rem">
