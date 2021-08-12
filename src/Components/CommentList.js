@@ -3,30 +3,19 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
-import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
-import { actionConfirm, actionSetMessage, actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup";
+import { actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 
 
 const CommentList = (props) => {
     const medi_id = props.id;
-    // console.log(props)
-    // const { medicalId } = props;
+
     const dispatch = useDispatch();
 
-    const confirm_status = useSelector((state) => state.popup.confirm);
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
     const medical_status = useSelector((state) => state.popup.medicalConfirm);
-
-    // const medicalId = useSelector((state) => state.comment.list);
-    // console.log(medicalId)
-
-    const deleteComment = () => {
-        dispatch(actionDeleteMedical(medi_id));
-        // dispatch(actionDeleteMedical({medicalId}));
-    }
 
 
     return(

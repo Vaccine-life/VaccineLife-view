@@ -48,7 +48,7 @@ const comment = createSlice({
     actionAddCommentListState: (state, action) => {},
     actionDeleteCommentListState: (state, action) => {
       const { board, commentId } = action.payload;
-      console.log(action.payload)
+      // console.log(action.payload)
       if (board === "vaccine") {
         const deleteIndex = state.commentVac.findIndex(
           (each) => each.id === commentId
