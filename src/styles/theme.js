@@ -13,6 +13,7 @@ const theme = {
   typoLightGrey1: "#F7F7F7",
   errorColor: "#F25F5C",
   successColor: "#70C1B3",
+  winningColor: "#F8D272",
   btnColor: "#4F72F2",
   fontColor: "#353b48",
   tagColor: "#dfe4ea",

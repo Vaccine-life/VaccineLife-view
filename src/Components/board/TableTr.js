@@ -75,7 +75,7 @@ const TdTitle = styled.td`
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
-  ${(props) => (props.is_read ? `color:${theme.typoGrey2};` : `color: black;`)}
+  ${(props) => (props.is_read ? `color:#7D2779;` : `color: black;`)}
   cursor: pointer;
   :hover {
     color: ${theme.bg2};
