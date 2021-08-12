@@ -7,11 +7,10 @@ import { ResponsiveBar } from '@nivo/bar'
 const MainNivoBar = () => {
     return (
         <div>
-
             <div>
                 <BarTitle1>
                     <img src={disc} alt="" />
-                    <h3>백신 종류별 접종률</h3>
+                    <h3>백신 종류별 접종수</h3>
                 </BarTitle1>
                 <BarBox>
                     <ResponsiveBar
@@ -108,6 +107,20 @@ const MainNivoBar = () => {
                         labelSkipHeight={12}
                         labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                         legends={[]}
+                        tooltip={({ value, color }) => (
+                            <div
+                                style={{
+                                    padding: 12,
+                                    color,
+                                    background: "#f7f7f7",
+                                    borderRadius: "10px",
+                                }}
+                            >
+                                <strong>
+                                    {value.toLocaleString('ko-KR')}명
+                                </strong>
+                            </div>
+                        )}
                     />
                 </BarBox>
             </div>
@@ -212,6 +225,20 @@ const MainNivoBar = () => {
                         labelSkipHeight={12}
                         labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                         legends={[]}
+                        tooltip={({ value, color }) => (
+                            <div
+                                style={{
+                                    padding: 12,
+                                    color,
+                                    background: '#f7f7f7',
+                                    borderRadius: "10px",
+                                }}
+                            >
+                                <strong>
+                                    {value}%
+                                </strong>
+                            </div>
+                        )}
                     />
                 </BarBox>
             </div>
@@ -247,6 +274,10 @@ letter-spacing: -0.3px;
 color: #242424;
 
 padding-left: 4px;
+}
+
+& > h6 {
+width: 200px;
 }
 `;
 
