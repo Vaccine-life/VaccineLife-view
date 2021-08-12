@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
-import { Text, Grid, Image } from "../elements";
+import { Text, Image } from "../elements";
 import syringe from "../images/syringe.png"
 import news from "../images/news.png"
 import phone from "../images/phone.png"
@@ -79,14 +79,19 @@ const Banner = (props) => {
   
 };
 
-const FixedBanner = styled.div`
+const FixedBanner = styled.div.attrs({
+  className: "banner-div"
+})`
   margin-top: auto;
   width: 100vw;
-  /* position: fixed; */
-  /* ${(props) =>
-    props.nav &&
-    `background-color: #ffffff`} */
 `;
+
+// const Wrapper = styled.div`
+//   display: flex;
+//   align-items: center;
+//   padding: 3rem 10rem;
+//   background-color: ${theme.typoLightGrey1};
+// `;
 
 const EachDiv = styled.div`
   white-space: nowrap;

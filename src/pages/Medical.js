@@ -10,6 +10,7 @@ import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
 
+
 const Medical = () => {
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
