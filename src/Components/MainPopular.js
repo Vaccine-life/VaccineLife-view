@@ -102,7 +102,7 @@ const MainPopular = (props) => {
 
 const GreyBox = styled.div`
   background-color: ${theme.typoLightGrey1};
-  width: 100vw;
+  width: 100%;
   height: 550px;
 `;
 
@@ -138,6 +138,7 @@ const PopularTitle = styled.div`
     &:hover {
       text-decoration: underline;
       text-underline-position: under;
+      color: ${theme.typoGrey1};
     }
 
     & > h3 {

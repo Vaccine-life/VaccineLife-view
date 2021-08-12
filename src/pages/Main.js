@@ -43,14 +43,12 @@ const Main = () => {
 };
 
 const Intro = styled.div`
-  /* display: flex;
-position: relative; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  width: 100vw;
+  width: 100%;
   height: 230px;
   background-color: ${theme.bg};
 
