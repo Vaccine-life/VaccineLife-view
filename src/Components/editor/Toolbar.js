@@ -83,6 +83,7 @@ const Wrapper = styled.div`
 const Btn = styled.button`
   border: none;
   margin-right: 5px;
+  background-color: white;
   color: ${(props) => (props.toggle ? theme.btnColor : theme.fontColor)};
   :hover {
     color: ${theme.btnColor};

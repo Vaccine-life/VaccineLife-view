@@ -48,6 +48,7 @@ const Write = () => {
   };
 
   const handlePostEx = () => {
+    window.scrollTo(0, 0);
     if (urlExchanger) {
       //백신후기 dispatch
       dispatch(actionWriteExperience("vaccine", contentObj));
@@ -59,7 +60,7 @@ const Write = () => {
 
   logger(contents);
   return (
-    <Grid width={theme.writeWidth} margin={`160px auto auto auto`}>
+    <Grid width={theme.writeWidth} margin={`160px auto 120px auto`}>
       <MetaScript title="슬기로운 백신생활 | 글쓰기" />
       <Grid is_flex="space_row" margin="auto auto 26px auto">
         <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
@@ -72,7 +73,7 @@ const Write = () => {
           fontSize={theme.SubHeadTwoSize}
           bold
           margin="0"
-          bg={theme.bg}
+          bg={theme.bg2}
           _onClick={handlePostEx}
         >
           등록

@@ -20,6 +20,8 @@ import { actionGetLike } from "../redux/modules/like";
 import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
 import MetaScript from "../shared/MetaScript";
+import styled from "styled-components";
+import { history } from "../redux/configStore";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -39,6 +41,7 @@ const QuarantineDetail = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(actionGetDetail("quarantine", boardId_detail));
     dispatch(actionGetCommentList("quarantine", boardId_detail));
     // dispatch(actionGetLike("quarantine"));
@@ -49,8 +52,12 @@ const QuarantineDetail = () => {
     dispatch(actionDeleteEx("quarantine", board_content.boardId));
   };
 
+  const handleMoveTotal = () => {
+    history.push("/quarantine");
+  };
+
   return (
-    <Grid width={theme.detailWidth} margin="160px auto auto auto">
+    <Grid width={theme.detailWidth} margin="160px auto 120px auto">
       <MetaScript title={`슬기로운 백신생활 | ${title}`} />
       <BoardInfo
         board="quarantine"
@@ -62,6 +69,8 @@ const QuarantineDetail = () => {
         createdAt={board_content.createdAt}
         likeCount={board_content.likeCount}
       />
+
+      <CenterLine />
 
       <Contents
         board="quarantine"
@@ -89,14 +98,7 @@ const QuarantineDetail = () => {
           댓글 {comment_list.length} 개
         </p>
 
-        <Button
-          fontSize={theme.bodyTwoSize}
-          margin="0"
-          width={theme.totalButtonWidth}
-          height={theme.mediumButtonHeight}
-        >
-          전체 게시글
-        </Button>
+        <TextDiv onClick={handleMoveTotal}>전체 게시글</TextDiv>
       </Grid>
       <CommentWrite board="quarantine" boardId={boardId_detail} />
       {comment_list?.map((each, index) => {
@@ -119,4 +121,24 @@ const QuarantineDetail = () => {
     </Grid>
   );
 };
+
+const TextDiv = styled.div`
+  font-size: ${theme.bodyTwoSize};
+  width: ${theme.totalButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 700;
+  :hover {
+    cursor: pointer;
+    color: ${theme.typoGrey2};
+  }
+`;
+
+const CenterLine = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${theme.typoGrey3};
+`;
+
 export default QuarantineDetail;

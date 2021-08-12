@@ -10,13 +10,16 @@ import theme from "../styles/theme";
 import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
+import { useEffect } from "react";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
   const modal_status = useSelector((state) => state.modal.visible);
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       {modal_status && <Login />}
