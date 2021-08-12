@@ -58,7 +58,7 @@ const Popular = (props) => {
           {board === "vaccine" ? "백신접종" : "격리후기"} 인기글
         </Text>
       </Grid>
-      <Grid is_flex="center">
+      <Grid is_flex="space_row">
         {/* 맵돌리는 부분 카드 하나당*/}
         {board === "vaccine" &&
           top_list_vac?.map((each, index) => {

@@ -16,15 +16,24 @@ import Quarantine from "../pages/Quarantine";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCookie } from "./cookie";
-import { actionGetUseInfo } from "../redux/modules/user";
+import { actionGetUseInfo, actionLogoutCookie } from "../redux/modules/user";
 import { actionGetLike } from "../redux/modules/like";
 import { actionGetClickList } from "../redux/modules/read";
 import MetaScript from "./MetaScript";
+import logger from "./logger";
 
 function App() {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+  const exp_time = useSelector((state) => state.user.expTime);
+  let remainTime = new Date(exp_time) - new Date();
+  logger(remainTime);
 
+  if (exp_time !== 0) {
+    setTimeout(() => {
+      dispatch(actionLogoutCookie());
+    }, remainTime);
+  }
   useEffect(() => {
     if (!is_login && getCookie("vaccine_life_token")) {
       dispatch(actionGetUseInfo());
