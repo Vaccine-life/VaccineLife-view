@@ -26,7 +26,7 @@ const Header = (props) => {
             <Grid is_flex="space_row">
               <Grid
                 is_flex="center"
-                _onClick={() => {
+                onClick={() => {
                   history.push("/");
                 }}
               >

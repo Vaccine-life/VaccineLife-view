@@ -34,6 +34,7 @@ const QuarPostCard = (props) => {
 
   return (
     <Grid
+      margin="0"
       width={theme.popularCardWidth}
       height={theme.popularCardHeight}
       border={`1px solid ${theme.typoLightGrey2}`}
@@ -58,15 +59,15 @@ const QuarPostCard = (props) => {
         </Text>
 
         <TextDiv>
-          <Grid is_flex="center" margin="0 0 0 19px">
+          <Grid is_flex="center" margin="0 0 0 19px" color={theme.typoGrey2}>
             <LikeIconChanger board={board} boardId={boardId} />
             <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
           </Grid>
-          <Grid is_flex="center" margin="0 0 0 19px">
+          <Grid is_flex="center" margin="0 0 0 19px" color={theme.typoGrey2}>
             <FontAwesomeIcon icon={faCommentAlt} />
             <p style={{ marginLeft: "5.55px" }}>{commentCount}</p>
           </Grid>
-          <Grid is_flex="center" margin="0 0 0 19px">
+          <Grid is_flex="center" margin="0 0 0 19px" color={theme.typoGrey2}>
             <FontAwesomeIcon icon={faEye} />
             <p style={{ marginLeft: "5.55px" }}>{totalVisitors}</p>
           </Grid>
@@ -90,6 +91,7 @@ const TitleWrapper = styled.div`
   line-height: 30px;
   text-overflow: ellipsis;
   text-align: start;
+  margin-top: 50px;
   margin-bottom: 16px;
 `;
 const ContentWrapper = styled.div`

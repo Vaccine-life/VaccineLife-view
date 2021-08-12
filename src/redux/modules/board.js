@@ -123,49 +123,81 @@ const board = createSlice({
     },
     actionMinusComment: (state, action) => {
       const { board, boardId } = action.payload;
+      const toIntboardId = parseInt(boardId);
       if (board === "vaccine") {
-        const targetIndex = state.listVac.findIndex(
-          (each) => each.id === boardId
-        );
+        const targetIndex = state.listVac.findIndex((each) => {
+          return each.id === toIntboardId;
+        });
         if (targetIndex !== -1) {
-          state.listVac[targetIndex] = {
-            ...state.listVac[targetIndex],
-            commentCount: state.listVac[targetIndex].commentCount - 1,
-          };
+          const newState = state.listVac.map((each, index) => {
+            if (index === targetIndex) {
+              return {
+                ...each,
+                commentCount: each.commentCount - 1,
+              };
+            } else {
+              return each;
+            }
+          });
+          state.listVac = newState;
         }
       } else {
-        const targetIndex = state.listQuar.findIndex(
-          (each) => each.id === boardId
-        );
+        const targetIndex = state.listVac.findIndex((each) => {
+          return each.id === toIntboardId;
+        });
+
         if (targetIndex !== -1) {
-          state.listQuar[targetIndex] = {
-            ...state.listQuar[targetIndex],
-            commentCount: state.listQuar[targetIndex].commentCount - 1,
-          };
+          const newState = state.listQuar.map((each, index) => {
+            if (index === targetIndex) {
+              return {
+                ...each,
+                commentCount: each.commentCount - 1,
+              };
+            } else {
+              return each;
+            }
+          });
+          state.listQuar = newState;
         }
       }
     },
     actionPlusComment: (state, action) => {
       const { board, boardId } = action.payload;
+      const toIntboardId = parseInt(boardId);
       if (board === "vaccine") {
-        const targetIndex = state.listVac.findIndex(
-          (each) => each.id === boardId
-        );
+        const targetIndex = state.listVac.findIndex((each) => {
+          return each.id === toIntboardId;
+        });
         if (targetIndex !== -1) {
-          state.listVac[targetIndex] = {
-            ...state.listVac[targetIndex],
-            commentCount: state.listVac[targetIndex].commentCount + 1,
-          };
+          const newState = state.listVac.map((each, index) => {
+            if (index === targetIndex) {
+              return {
+                ...each,
+                commentCount: each.commentCount + 1,
+              };
+            } else {
+              return each;
+            }
+          });
+          state.listVac = newState;
         }
       } else {
-        const targetIndex = state.listQuar.findIndex(
-          (each) => each.id === boardId
-        );
+        const targetIndex = state.listVac.findIndex((each) => {
+          return each.id === toIntboardId;
+        });
+
         if (targetIndex !== -1) {
-          state.listQuar[targetIndex] = {
-            ...state.listQuar[targetIndex],
-            commentCount: state.listQuar[targetIndex].commentCount + 1,
-          };
+          const newState = state.listQuar.map((each, index) => {
+            if (index === targetIndex) {
+              return {
+                ...each,
+                commentCount: each.commentCount + 1,
+              };
+            } else {
+              return each;
+            }
+          });
+          state.listQuar = newState;
         }
       }
     },

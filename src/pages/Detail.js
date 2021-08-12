@@ -16,6 +16,8 @@ import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
 import logger from "../shared/logger";
 import MetaScript from "../shared/MetaScript";
+import styled from "styled-components";
+import { history } from "../redux/configStore";
 
 const Detail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -23,6 +25,7 @@ const Detail = () => {
   const title = useSelector((state) => state.board.board.title);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(actionGetDetail("vaccine", boardId));
     dispatch(actionGetCommentList("vaccine", boardId));
     //  dispatch(actionGetLike("vaccine"));
@@ -47,8 +50,12 @@ const Detail = () => {
   const handleDelete = () => {
     dispatch(actionDeleteEx("vaccine", board_content.boardId));
   };
+
+  const handleMoveTotal = () => {
+    history.push("/vaccine");
+  };
   return (
-    <Grid width={theme.detailWidth} margin="160px auto auto auto">
+    <Grid width={theme.detailWidth} margin="160px auto 120px auto">
       <MetaScript title={`슬기로운 백신생활 | ${title}`} />
       <BoardInfo
         board="vaccine"
@@ -88,19 +95,13 @@ const Detail = () => {
             textAlign: "start",
             fontWeight: "700",
             margin: "40px 0 40px 0",
+            color: `${theme.typoBlack}`,
           }}
         >
-          댓글 {comment_list.length} 개
+          댓글 {comment_list.length}개
         </p>
 
-        <Button
-          fontSize={theme.bodyTwoSize}
-          margin="0"
-          width={theme.totalButtonWidth}
-          height={theme.mediumButtonHeight}
-        >
-          전체 게시글
-        </Button>
+        <TextDiv onClick={handleMoveTotal}>전체 게시글</TextDiv>
       </Grid>
       <CommentWrite board="vaccine" boardId={boardId} />
       {comment_list?.map((each, index) => {
@@ -124,5 +125,18 @@ const Detail = () => {
     </Grid>
   );
 };
+
+const TextDiv = styled.div`
+  font-size: ${theme.bodyTwoSize};
+  width: ${theme.totalButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 700;
+  :hover {
+    cursor: pointer;
+    color: ${theme.typoGrey2};
+  }
+`;
 
 export default Detail;

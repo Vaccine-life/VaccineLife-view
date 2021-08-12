@@ -8,54 +8,22 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
 import ResponsiveStyles from "./styles/ResponsiveStyles";
 import FontStyle from "./styles/FontStyle";
-import { hydrate, render } from "react-dom";
 import { HelmetProvider } from "react-helmet-async";
 
-const rootElement = document.getElementById("root");
-if (rootElement.hasChildNodes()) {
-  hydrate(
-    <Provider store={store}>
-      <HelmetProvider>
-        <ConnectedRouter history={history}>
-          <ResponsiveStyles>
-            <FontStyle>
-              <App />
-            </FontStyle>
-          </ResponsiveStyles>
-        </ConnectedRouter>
-      </HelmetProvider>
-    </Provider>,
-    rootElement
-  );
-} else {
-  render(
-    <Provider store={store}>
-      <HelmetProvider>
-        <ConnectedRouter history={history}>
-          <ResponsiveStyles>
-            <FontStyle>
-              <App />
-            </FontStyle>
-          </ResponsiveStyles>
-        </ConnectedRouter>
-      </HelmetProvider>
-    </Provider>,
-    rootElement
-  );
-}
-
-/* ReactDOM.render(
+ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <ResponsiveStyles>
-        <FontStyle>
-          <App />
-        </FontStyle>
-      </ResponsiveStyles>
-    </ConnectedRouter>
+    <HelmetProvider>
+      <ConnectedRouter history={history}>
+        <ResponsiveStyles>
+          <FontStyle>
+            <App />
+          </FontStyle>
+        </ResponsiveStyles>
+      </ConnectedRouter>
+    </HelmetProvider>
   </Provider>,
   document.getElementById("root")
-); */
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
