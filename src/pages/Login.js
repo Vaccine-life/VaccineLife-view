@@ -66,11 +66,26 @@ const Login = (props) => {
     },
   });
 
+  // 모달 바깥 부분 클릭시 모달 off
+  const handleModalOff = (e) => {
+    const clicked = e.target.closest(".modal");
+    console.log(clicked);
+    if (clicked) {
+      return;
+    } else {
+      dispatch(actionVisible());
+    }
+  };
+
   return (
     <>
       Main
-      <Wrapper>
-        <Modal>
+      <Wrapper
+        onClick={(e) => {
+          handleModalOff(e);
+        }}
+      >
+        <Modal className="modal">
           <Xbutton
             onClick={() => {
               dispatch(actionVisible());
