@@ -71,14 +71,6 @@ const BoardInfo = (props) => {
         <Text
           size={theme.bodyTwoSize}
           lineHeight={theme.bodyTwoHeight}
-          margin="0 5px 0 0"
-          color={theme.typoGrey3}
-        >
-          작성자
-        </Text>
-        <Text
-          size={theme.bodyTwoSize}
-          lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
           {nickname}
@@ -97,7 +89,7 @@ const BoardInfo = (props) => {
           lineHeight={theme.bodyTwoHeight}
           color={theme.typoGrey3}
         >
-          {totalVisitors} 회
+          {totalVisitors}
         </Text>
         <VerticalLine />
         <Text
