@@ -51,8 +51,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "react-snap"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -74,15 +73,5 @@
   },
   "devDependencies": {
     "react-snap": "^1.23.0"
-  },
-  "reactSnap": {
-    "include": [
-      "/",
-      "/vaccine",
-      "/vaccineboard/write",
-      "/quarantine",
-      "/quarantineboard/write",
-      "/medical"
-    ]
   }
 }
