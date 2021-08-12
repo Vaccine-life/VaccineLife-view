@@ -18,7 +18,7 @@ const Footer = () => {
           display: "flex",
           alignItems: "center",
           height: "152px",
-          width: "100vw",
+          width: "100%",
         }}
       >
         <Grid
