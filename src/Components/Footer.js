@@ -10,24 +10,12 @@ import logo from "../assets/슬기로운-white.png";
 const Footer = () => {
   return (
     <React.Fragment>
-      {/* <FixedFooter> */}
+      <FixedFooter>
 
-      <div
-        style={{
-          backgroundColor: `${theme.typoBlack}`,
-          display: "flex",
-          alignItems: "center",
-          height: "152px",
-          width: "100%",
-        }}
-      >
         <Grid
           width="auto"
           margin="1rem 5rem"
           is_flex="center"
-          // _onClick={() => {
-          //   window.location.replace("/");
-          // }}
           _onClick={() => {
             history.push("/");
           }}
@@ -127,17 +115,19 @@ const Footer = () => {
             </Text>
           </ul>
         </Grid>
-      </div>
-      {/* </FixedFooter> */}
+      </FixedFooter>
     </React.Fragment>
   );
 };
 
 const FixedFooter = styled.div`
   margin-top: auto;
-  width: 100vw;
-  /* position: fixed; */
-  /* z-index: 1; */
+  background-color: ${theme.typoBlack};
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  padding: 1.2rem 0;
 `;
 
 export default Footer;
