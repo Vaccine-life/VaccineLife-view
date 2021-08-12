@@ -97,7 +97,7 @@ const LoginComponent = ({ status, setStatus }) => {
 };
 
 const Wrapper = styled.form`
-  width: 300px;
+  width: 350px;
   height: auto;
   /* display: flex;
   flex-direction: column;
@@ -106,11 +106,13 @@ const Wrapper = styled.form`
 
 const LoginInput = styled.input`
   width: 100%;
+  height: 30px;
   margin: 15px auto 5px auto;
   border: none;
   border-bottom: 1px solid ${theme.typoGrey1};
   padding: 6px 0px;
   color: ${theme.typoBlack};
+  font-size: ${theme.bodyTwoSize};
   &:focus {
     outline: none;
     border-bottom: 1px solid ${theme.typoBlack};

@@ -25,13 +25,13 @@ const Contents = (props) => {
           margin="0 0 67px 0"
           padding="0 0 0 29px"
         >
-          <Text lineHeight={theme.bodyTwoHeight} size={theme.bodyTwoSize} bolds>
+          <Text lineHeight={theme.bodyTwoHeight} size={theme.bodyTwoSize} bold>
             주의사항
           </Text>
           <Text
             lineHeight={theme.bodyTwoHeight}
             size={theme.bodyTwoSize}
-            margin=""
+            margin="0"
           >
             * 증상이 수 일 지속될 시 가까운 병원에 내원하십시오.
           </Text>
@@ -60,9 +60,7 @@ const Contents = (props) => {
 
 const Wrapper = styled.div`
   margin: 15px 0 15px 0;
-  padding: 0 5px 0 5px;
   min-height: 400px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,7 +73,7 @@ const Wrapper = styled.div`
 `;
 const LikeWrapper = styled.div`
   display: flex;
-  margin: 87px 0 45px 10px;
+  margin: 87px 0 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
 `;
