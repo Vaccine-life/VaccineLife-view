@@ -100,6 +100,7 @@ export const actionSignup =
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
       const newuserObj = await userAxios.login({ username, password });
+      setCookie("vaccine_life_token", newuserObj.data);
       console.log(newuserObj);
       const newuserDecode = jwtDecode(newuserObj.data);
       logger(newuserDecode);
