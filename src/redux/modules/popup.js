@@ -29,7 +29,7 @@ const popup = createSlice({
     },
     acionSetCommentObj: (state, action) => {
       state.commentObj = action.payload;
-      console.log(state.commentObj)
+      // console.log(state.commentObj)
     },
     acionSetMedicalObj: (state, action) => {
       state.medicalObj = action.payload;

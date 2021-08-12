@@ -10,7 +10,7 @@ import theme from "../../styles/theme";
 const MedicalConfirm = (props) => {
   const { confirmMessage } = props;
   const { medi_id } = useSelector((state) => state.popup.medicalObj);
-  console.log(medi_id);
+  // console.log(medi_id);
   const dispatch = useDispatch();
 
   const handleDelete = () => {

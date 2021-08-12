@@ -3,30 +3,21 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
-import { actionDeleteComment, actionDeleteMedical } from "../redux/modules/comment";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
-import { actionConfirm, actionSetMessage, actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup";
+import { actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 
 const CommentList = (props) => {
     const medi_id = props.id;
-    // console.log(props)
-    // const { medicalId } = props;
+
     const dispatch = useDispatch();
 
-    const confirm_status = useSelector((state) => state.popup.confirm);
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
     const medical_status = useSelector((state) => state.popup.medicalConfirm);
-
-    // const medicalId = useSelector((state) => state.comment.list);
-    // console.log(medicalId)
-
-    const deleteComment = () => {
-        dispatch(actionDeleteMedical(medi_id));
-        // dispatch(actionDeleteMedical({medicalId}));
-    }
 
 
     return(
@@ -34,11 +25,11 @@ const CommentList = (props) => {
             <Grid is_flex="space_row" margin="2rem 0">
 
                 <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
+                    <Text bold size={theme.bodyTwoSize} color={theme.typoBlack}>{props.nickname}</Text>
                 </Grid>
 
                 <Grid align="left">
-                    <Text size={theme.bodyTwoSize}>{props.contents}</Text>
+                    <Text size={theme.bodyTwoSize} color={theme.typoBlack}>{props.contents}</Text>
                 </Grid>
                 
                 <Grid align="right" width="6rem" margin="0 0 auto 0">
@@ -51,9 +42,10 @@ const CommentList = (props) => {
                             dispatch(acionSetMedicalObj({medi_id}))
                             dispatch(actionMedicalConfirm());
                         }}
-                    >삭제</Text>
+                    ><FontAwesomeIcon icon={faTrashAlt} />
+                    </Text>
                     : ""}
-                    
+                     
                 </Grid>
 
                 {medical_status && <MedicalConfirm 
@@ -62,7 +54,7 @@ const CommentList = (props) => {
                 />}
 
                 <Grid align="right" width="9rem" margin="0 0 auto 0">
-                    <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
+                    <Text size={theme.bodyTwoSize} color={theme.typoGrey2}>{displayedAt(props.createdAt)}</Text>
                 </Grid>
                                 
             </Grid>

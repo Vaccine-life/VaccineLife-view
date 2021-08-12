@@ -93,7 +93,7 @@ const Header = (props) => {
           <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
-                <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight}>
+                <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight} color={theme.typoBlack}>
                   <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
                   안녕하세요
                 </Text>
@@ -103,6 +103,7 @@ const Header = (props) => {
                   margin="0 5rem 0 3rem"
                   size={theme.headTwoSize}
                   lineHeight={theme.headTwoHeight}
+                  color={theme.typoBlack}
                   bold
                 >
                   <span
@@ -120,6 +121,7 @@ const Header = (props) => {
                 margin="0 4rem"
                 size={theme.headTwoSize}
                 lineHeight={theme.headTwoHeight}
+                color={theme.typoBlack}
                 bold
               >
                 <span
@@ -147,8 +149,8 @@ const Wrapper = styled.div`
   height: ${theme.headerHeight};
   position: fixed;
   z-index: 2;
-  /* border: 1px solid #dbdbdb; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  color: ${theme.typoBlack};
   /* box-shadow: ${theme.shadow} 0px 3px 10px 0px; */
 `;
 
