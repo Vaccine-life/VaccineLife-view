@@ -33,6 +33,16 @@ const PopularCard = (props) => {
     history.push(`/detail/${boardId}`);
   };
 
+  const typeChanger = (type) => {
+    if (type === "아스트라제네카") {
+      return "AZ";
+    } else if (type === "아스트라제네카 + 화이자") {
+      return "AZ + PF";
+    } else {
+      return type;
+    }
+  };
+
   return (
     <Grid
       width={theme.popularCardWidth}
@@ -44,7 +54,7 @@ const PopularCard = (props) => {
       bg="white"
     >
       <InfoWrapper>
-        <InfoDiv>{type}</InfoDiv>
+        <InfoDiv>{typeChanger(type)}</InfoDiv>
       </InfoWrapper>
 
       <TitleWrapper>{title}</TitleWrapper>
