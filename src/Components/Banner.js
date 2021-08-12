@@ -56,21 +56,36 @@ const Banner = (props) => {
 
         <EachDiv onClick={() => {window.open(syringeAddress)}}>
           <Image shape="square" size="80px" margin="20px 0 0 0" src={syringe}/>
-          <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 백신·치료제 정보</Text>
+          <Text 
+            size={theme.bodyTwoSize} 
+            color={theme.typoBlack} 
+            margin="20px">
+              <span style={{color: theme.bg2}}>코로나19</span> 백신·치료제 정보
+          </Text>
         </EachDiv>
 
-          <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+        <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
 
         <EachDiv onClick={() => {window.open(newsAddress)}}>
           <Image shape="square" size="80px" margin="20px 0 0 0" src={news}/>
-          <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 관련 안전성서한(속보)</Text>
+          <Text 
+            size={theme.bodyTwoSize} 
+            color={theme.typoBlack} 
+            margin="20px">
+              <span style={{color: theme.bg2}}>코로나19</span> 관련 안전성서한(속보)
+          </Text>
         </EachDiv>
 
-          <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+        <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
 
         <EachDiv onClick={() => {window.open(phoneAddress)}}>
           <Image shape="square" size="80px" margin="20px 0 0 0" src={phone}/>
-          <Text size={theme.bodyTwoSize} margin="20px"><span style={{color: theme.bg2}}>코로나19</span> 전자예방접종증명</Text>
+          <Text 
+            size={theme.bodyTwoSize} 
+            color={theme.typoBlack} 
+            margin="20px">
+              <span style={{color: theme.bg2}}>코로나19</span> 전자예방접종증명
+          </Text>
         </EachDiv>
 
       </div>
@@ -79,19 +94,10 @@ const Banner = (props) => {
   
 };
 
-const FixedBanner = styled.div.attrs({
-  className: "banner-div"
-})`
+const FixedBanner = styled.div`
   margin-top: auto;
-  width: 100vw;
+  width: 100%;
 `;
-
-// const Wrapper = styled.div`
-//   display: flex;
-//   align-items: center;
-//   padding: 3rem 10rem;
-//   background-color: ${theme.typoLightGrey1};
-// `;
 
 const EachDiv = styled.div`
   white-space: nowrap;
@@ -104,12 +110,7 @@ const EachDiv = styled.div`
   margin: auto;
   font-size: ${theme.headTwoSize};
   line-height: ${theme.headTwoHeight};
-
   flex-direction : column;
-
-  /* ${(props) =>
-    props.nav &&
-    `background-color: ${theme.typoLightGrey1}`} */
 `;
 
 export default withRouter(Banner);

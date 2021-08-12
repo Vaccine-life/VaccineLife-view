@@ -6,6 +6,8 @@ import { Text, Grid } from "../elements";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
 import { actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 
 const CommentList = (props) => {
@@ -23,11 +25,11 @@ const CommentList = (props) => {
             <Grid is_flex="space_row" margin="2rem 0">
 
                 <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text bold size={theme.bodyTwoSize} color={theme.fontColor}>{props.nickname}</Text>
+                    <Text bold size={theme.bodyTwoSize} color={theme.typoBlack}>{props.nickname}</Text>
                 </Grid>
 
                 <Grid align="left">
-                    <Text size={theme.bodyTwoSize}>{props.contents}</Text>
+                    <Text size={theme.bodyTwoSize} color={theme.typoBlack}>{props.contents}</Text>
                 </Grid>
                 
                 <Grid align="right" width="6rem" margin="0 0 auto 0">
@@ -40,9 +42,10 @@ const CommentList = (props) => {
                             dispatch(acionSetMedicalObj({medi_id}))
                             dispatch(actionMedicalConfirm());
                         }}
-                    >삭제</Text>
+                    ><FontAwesomeIcon icon={faTrashAlt} />
+                    </Text>
                     : ""}
-                    
+                     
                 </Grid>
 
                 {medical_status && <MedicalConfirm 
@@ -51,7 +54,7 @@ const CommentList = (props) => {
                 />}
 
                 <Grid align="right" width="9rem" margin="0 0 auto 0">
-                    <Text size={theme.bodyTwoSize}>{displayedAt(props.createdAt)}</Text>
+                    <Text size={theme.bodyTwoSize} color={theme.typoGrey2}>{displayedAt(props.createdAt)}</Text>
                 </Grid>
                                 
             </Grid>
