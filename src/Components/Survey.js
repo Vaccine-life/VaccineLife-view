@@ -46,7 +46,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
     }
   };
 
-  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 store에 저장
+  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 setState
   const handleIsVaccineClick = (e) => {
     const { value, name } = e.target;
     setInputs({
@@ -93,10 +93,14 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   return (
     <>
       <form onSubmit={submitSurvey}>
-        <Text margin="0 auto 15px auto" size="14px" color={theme.typoGrey3}>
+        <Text
+          margin="0 auto 15px auto"
+          size={theme.bodyThreeSize}
+          color={theme.typoGrey3}
+        >
           회원가입이 곧 마무리됩니다
         </Text>
-        <Text margin="15px auto" size="20px" bold>
+        <Text margin="15px auto" size={theme.headOneSize} bold>
           여러분의 백신 접종 경험을 공유해주세요
         </Text>
 
@@ -541,6 +545,7 @@ const SubmitButton = styled.button`
   border: none;
   color: white;
   transition: background-color 0.3s;
+  font-size: ${theme.bodyTwoSize};
   :hover {
     cursor: pointer;
     background-color: white;

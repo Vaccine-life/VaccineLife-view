@@ -99,7 +99,7 @@ const CommentWrite = (props) => {
             <Grid padding="10px" bg="#ffffff" align="right">
               {/* <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text> */}
               {/* obj?.prop => obj가 존재하면 obj.prop을 반환. 아니면 undefined반환 */}
-              <Text size={theme.bodyTwoSize}>
+              <Text size={theme.bodyTwoSize} color={theme.typoGrey3}>
                 <span>{comment?.length || 0}</span> / 500
               </Text>
             </Grid>

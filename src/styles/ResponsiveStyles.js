@@ -11,10 +11,13 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 100px) {
+
   }
   @media (min-width: 640px) {
+
   }
   @media (min-width: 1000px) {
+
   }
 
   /* Landscape 모드일 때 적용할 CSS */
