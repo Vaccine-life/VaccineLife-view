@@ -20,6 +20,7 @@ const Medical = () => {
   const comment_list = useSelector((state) => state.comment.list);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(actionGetMedical());
   }, []);
 

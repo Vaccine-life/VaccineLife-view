@@ -103,7 +103,7 @@ Input.defaultProps = {
   is_comment: false,
   width: false,
   border: false,
-  color: theme.fontColor,
+  color: theme.typoBlack,
   borderRadius: false,
   height: false,
   bg: false,

@@ -17,6 +17,7 @@ const Grid = (props) => {
     cursor,
     border,
     hover,
+    color,
   } = props;
 
   const styles = {
@@ -31,6 +32,7 @@ const Grid = (props) => {
     cursor,
     border,
     hover,
+    color,
   };
   return (
     <Wrapper onClick={_onClick} {...styles}>
@@ -54,9 +56,11 @@ Grid.defaultProps = {
   cursor: "",
   border: false,
   hover: false,
+  color: theme.typoBlack,
 };
 
 const Wrapper = styled.div`
+  color: ${(props) => props.color};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   ${(props) => {

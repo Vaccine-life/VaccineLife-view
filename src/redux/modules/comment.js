@@ -5,7 +5,6 @@ import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
 
-
 const initialState = {
   list: [],
   commentVac: [],
@@ -36,7 +35,7 @@ const comment = createSlice({
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
-    }, 
+    },
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
       if (board === "vaccine") {
@@ -48,7 +47,7 @@ const comment = createSlice({
     actionAddCommentListState: (state, action) => {},
     actionDeleteCommentListState: (state, action) => {
       const { board, commentId } = action.payload;
-      console.log(action.payload)
+      console.log(action.payload);
       if (board === "vaccine") {
         const deleteIndex = state.commentVac.findIndex(
           (each) => each.id === commentId
@@ -82,7 +81,7 @@ export const actionGetMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
 // 서버에 medical 저장하기
@@ -96,16 +95,16 @@ export const actionAddMedical =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
-// 서버의 medical 삭제하기 
-export const actionDeleteMedical = 
-  (medicalId) => 
-  async (dispatch, getState, {history}) => {
+// 서버의 medical 삭제하기
+export const actionDeleteMedical =
+  (medicalId) =>
+  async (dispatch, getState, { history }) => {
     try {
       await medicalAxios.deleteMedical(medicalId);
-      dispatch(actionDeleteComment({medicalId}))
+      dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");
     } catch (err) {
       dispatch(
@@ -160,7 +159,7 @@ export const actionAddCommentList =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    };
+    }
   };
 
 export const actionDeleteCommentList =

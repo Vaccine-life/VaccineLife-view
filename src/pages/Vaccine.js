@@ -24,6 +24,7 @@ const Vaccine = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!is_login) {
       return;
     }
@@ -31,7 +32,7 @@ const Vaccine = () => {
   }, []);
 
   return (
-    <Grid width={theme.boardWidth} margin={`160px auto auto auto`}>
+    <Grid width={theme.boardWidth} margin={`160px auto 120px auto`}>
       <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
       {/* props 값 넣기 */}
       <Popular board="vaccine" />

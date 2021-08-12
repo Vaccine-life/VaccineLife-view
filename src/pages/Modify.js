@@ -37,6 +37,7 @@ const Modify = () => {
       : url.substr(18, urlLength - 1);
   // 리덕스 정보 없어졌을시 재저장
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (board === "vaccine") {
       dispatch(actionGetDetail("vaccine", boardId));
     } else {
