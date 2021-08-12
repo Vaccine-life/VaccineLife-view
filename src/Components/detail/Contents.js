@@ -73,7 +73,7 @@ const Wrapper = styled.div`
 `;
 const LikeWrapper = styled.div`
   display: flex;
-  margin: 87px 0 45px 10px;
+  margin: 87px 0 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
 `;
