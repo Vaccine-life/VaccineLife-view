@@ -45,6 +45,7 @@ const PopularCard = (props) => {
 
   return (
     <Grid
+      margin="0"
       width={theme.popularCardWidth}
       height={theme.popularCardHeight}
       border={`1px solid ${theme.typoLightGrey2}`}
