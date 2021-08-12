@@ -55,17 +55,6 @@ const CommentWrite = (props) => {
     <React.Fragment>
       {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
       <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
-        <NicknameWrapper>
-          <Text
-            bold
-            margin="7px 0 0 0"
-            size={theme.SubHeadOneSize}
-            lineHeight={theme.SubHeadOneHeight}
-          >
-            {is_login ? nickname : ""}
-          </Text>
-        </NicknameWrapper>
-
         <Grid is_flex="space_column" border="1px solid #c1c1c1">
           <Grid margin="0 5rem">
             {/* <div contentEditable="true"> */}
