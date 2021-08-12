@@ -20,25 +20,24 @@ const Footer = () => {
             history.push("/");
           }}
         >
-          <Image
-            shape="rectangle"
-            width={theme.logoWidth}
-            height={theme.logoHeight}
-            cursor="pointer"
-            src={logo}
-          />
+          {/* <Img> */}
+            <Image
+              shape="rectangle"
+              width={theme.logoWidth}
+              height={theme.logoHeight}
+              cursor="pointer"
+              src={logo}
+            />
+          {/* </Img> */}
         </Grid>
 
         <Grid margin="2rem 0" width="0 auto" height="auto">
-          <ul style={{ display: "flex" }}>
+          <Common style={{ display: "flex" }}>
             <Text
               color="#ffffff"
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/vaccine");
-              // }}
               _onClick={() => {
                 history.push("/vaccine");
               }}
@@ -50,9 +49,6 @@ const Footer = () => {
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/vaccine");
-              // }}
               _onClick={() => {
                 history.push("/quarantine");
               }}
@@ -64,18 +60,15 @@ const Footer = () => {
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/medical");
-              // }}
               _onClick={() => {
                 history.push("/medical");
               }}
             >
               의료진분들께 한마디
             </Text>
-          </ul>
+          </Common>
 
-          <ul style={{ display: "flex" }}>
+          <Common>
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -83,13 +76,17 @@ const Footer = () => {
             >
               대표자명
             </Text>
-            <Text
-              color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
-              margin="5px"
-            >
-              |
-            </Text>
+
+            <Stick>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.SubHeadTwoSize}
+                margin="5px"
+              >
+                |
+              </Text>
+            </Stick>
+
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -97,13 +94,16 @@ const Footer = () => {
             >
               Contact. quokkalee654@gmail.com
             </Text>
-            <Text
-              color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
-              margin="5px"
-            >
-              |
-            </Text>
+
+            <Stick>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.SubHeadTwoSize}
+                margin="5px"
+              >
+                |
+              </Text>
+            </Stick>
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -113,7 +113,7 @@ const Footer = () => {
             >
               Github. https://github.com/Vaccine-life
             </Text>
-          </ul>
+          </Common>
         </Grid>
       </FixedFooter>
     </React.Fragment>
@@ -128,6 +128,29 @@ const FixedFooter = styled.div`
   height: auto;
   width: 100%;
   padding: 1.2rem 0;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
+const Common = styled.ul`
+  display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    text-align: left;
+    white-space: nowrap;
+  }
+`
+const Stick = styled.div`
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
+const Img = styled.div`
+  @media (max-width: 700px) {
+    float: left;
+  }
 `;
 
 export default Footer;
