@@ -76,15 +76,21 @@ const PopularCard = (props) => {
         <TextDiv>
           <Grid is_flex="center" margin="0 0 0 19px">
             <LikeIconChanger board={board} boardId={boardId} />
-            <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
+            <p style={{ marginLeft: "5.55px", color: `${theme.typoGrey2}` }}>
+              {likeCount}
+            </p>
           </Grid>
-          <Grid is_flex="center" margin="0 0 0 19px">
+          <Grid is_flex="center" margin="0 0 0 19px" color={theme.typoGrey2}>
             <FontAwesomeIcon icon={faCommentAlt} />
-            <p style={{ marginLeft: "5.55px" }}>{commentCount}</p>
+            <p style={{ marginLeft: "5.55px", color: `${theme.typoGrey2}` }}>
+              {commentCount}
+            </p>
           </Grid>
-          <Grid is_flex="center" margin="0 0 0 19px">
+          <Grid is_flex="center" margin="0 0 0 19px" color={theme.typoGrey2}>
             <FontAwesomeIcon icon={faEye} />
-            <p style={{ marginLeft: "5.55px" }}>{totalVisitors}</p>
+            <p style={{ marginLeft: "5.55px", color: `${theme.typoGrey2}` }}>
+              {totalVisitors}
+            </p>
           </Grid>
         </TextDiv>
       </Grid>
