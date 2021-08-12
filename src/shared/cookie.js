@@ -1,5 +1,7 @@
 // vaccine_life_token
 
+import jwtDecode from "jwt-decode";
+
 //get: 설정된 쿠키를 가져온다
 const getCookie = (name) => {
   let value = ";" + document.cookie;
@@ -12,8 +14,11 @@ const getCookie = (name) => {
 //set: 쿠키에 값을 할당해서 새로 만든다
 const setCookie = (name, value, exp = 1) => {
   let date = new Date();
+  const decodeToken = jwtDecode(value);
 
-  date.setTime(date.getTime() + exp * 30 * 60 * 1000);
+  date.setTime(
+    date.getTime() + exp * (decodeToken.exp - decodeToken.iat) * 1000
+  );
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
 };
 

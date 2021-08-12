@@ -17,8 +17,8 @@ const initialState = {
     disease: undefined,
     afterEffect: "",
   },
-
   is_login: false,
+  expTime: 0,
 };
 
 const user = createSlice({
@@ -33,6 +33,9 @@ const user = createSlice({
       deleteCookie("vaccine_life_token");
       state.is_login = false;
     },
+    actionSetTime: (state, action) => {
+      state.expTime = action.payload * 1000;
+    },
   },
 });
 
@@ -43,7 +46,7 @@ export const actionLogin =
       const userInfoObj = await userAxios.login({ username, password });
       setCookie("vaccine_life_token", userInfoObj.data);
       const userInfoDecode = jwtDecode(userInfoObj.data);
-      logger(userInfoDecode);
+      dispatch(actionSetTime(userInfoDecode.exp));
       const userInfo = {
         afterEffect: userInfoDecode.afterEffect,
         age: userInfoDecode.age,
@@ -103,7 +106,7 @@ export const actionSignup =
       setCookie("vaccine_life_token", newuserObj.data);
       console.log(newuserObj);
       const newuserDecode = jwtDecode(newuserObj.data);
-      logger(newuserDecode);
+      dispatch(actionSetTime(newuserDecode.exp));
       const newuser = {
         afterEffect: newuserDecode.afterEffect,
         age: newuserDecode.age,
@@ -138,6 +141,7 @@ export const actionSignup =
 export const actionGetUseInfo = () => (dispatch) => {
   const getUserToken = getCookie("vaccine_life_token");
   const userInfoDecode = jwtDecode(getUserToken);
+  dispatch(actionSetTime(userInfoDecode.exp));
 
   const userInfo = {
     afterEffect: userInfoDecode.afterEffect,
@@ -160,36 +164,11 @@ export const actionLogoutCookie =
   async (dispatch, getState, { history }) => {
     deleteCookie("vaccine_life_token");
     dispatch(actionLogout());
+    dispatch(actionSetMessage("로그아웃 되었습니다."));
+    dispatch(actionAlert());
     history.replace("/");
   };
 
-export const actionGetLike =
-  (board) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const userId = getState().user.user.userId;
-      let getData = [];
-      let makeData = [];
-      if (board === "vaccine") {
-        getData = await userAxios.getLikeListVac(userId);
-        getData.data.map((each) => {
-          makeData.push(each.vacBoardId);
-        });
-      } else {
-        getData = await userAxios.getLikeListQuar(userId);
-        getData.data.map((each) => {
-          makeData.push(each.quarBoardId);
-        });
-      }
-      dispatch(actionSetLike(makeData));
-    } catch (error) {
-      dispatch(
-        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요.")
-      );
-      dispatch(actionAlert());
-    }
-  };
-
-export const { actionSetUser, actionLogout, actionSetLike } = user.actions;
+export const { actionSetUser, actionLogout, actionSetTime } = user.actions;
 
 export default user;
