@@ -4,6 +4,7 @@ import SouthKorea from "../images/South_Korea.png";
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
+import { isMobile } from "react-device-detect";
 
 const Map = () => {
 
@@ -63,11 +64,140 @@ const Map = () => {
     fetchEvents();
   }, [])
 
-  // const GyeonggiShot = () => {
-  //     setTodayShot(todayNum.경기도)
-  // }
+  if (isMobile) {
+    return (
+      <WrapperMobile>
+        <MapTitleMobile>
+          <img src={disc} alt="" />
+          <h3>지역별 접종수</h3>
+        </MapTitleMobile>
 
+        <MapBoxMobile>
+          <img src={SouthKorea} alt="" />
 
+          <GyeonggiMobile>
+            <h3>경기</h3>
+            <ShotMobile>
+              {GyeonggiShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </GyeonggiMobile>
+
+          <GangwonMobile>
+            <h3>강원</h3>
+            <ShotMobile>
+              {GangwonShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </GangwonMobile>
+
+          <SeoulMobile>
+            <h3>서울</h3>
+            <ShotMobile>
+              {SeoulShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </SeoulMobile>
+
+          <IncheonMobile>
+            <h3>인천</h3>
+            <ShotMobile>
+              {IncheonShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </IncheonMobile>
+
+          <SejongMobile>
+            <h3>세종</h3>
+            <ShotMobile>
+              {SejongShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </SejongMobile>
+
+          <ChoongNamMobile>
+            <h3>충남</h3>
+            <ShotMobile>
+              {ChoongNamShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </ChoongNamMobile>
+
+          <ChoongBookMobile>
+            <h3>충북</h3>
+            <ShotMobile>
+              {ChoongBookShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </ChoongBookMobile>
+
+          <GyeongBookMobile>
+            <h3>경북</h3>
+            <ShotMobile>
+              {GyeongBookShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </GyeongBookMobile>
+
+          <DaejeonMobile>
+            <h3>대전</h3>
+            <ShotMobile>
+              {DaejeonShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </DaejeonMobile>
+
+          <JeonBookMobile>
+            <h3>전북</h3>
+            <ShotMobile>
+              {JeonBookShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </JeonBookMobile>
+
+          <GwangjuMobile>
+            <h3>광주</h3>
+            <ShotMobile>
+              {GwangjuShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </GwangjuMobile>
+
+          <JeonNamMobile>
+            <h3>전남</h3>
+            <ShotMobile>
+              {JeonNamShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </JeonNamMobile>
+
+          <JejuMobile>
+            <h3>제주</h3>
+            <ShotMobile>
+              {JejuShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </JejuMobile>
+
+          <GyeongNamMobile>
+            <h3>경남</h3>
+            <ShotMobile>
+              {GyeongNamShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </GyeongNamMobile>
+
+          <DaeguMobile>
+            <h3>대구</h3>
+            <ShotMobile>
+              {DaeguShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </DaeguMobile>
+
+          <WoolsanMobile>
+            <h3>울산</h3>
+            <ShotMobile>
+              {WoolsanShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </WoolsanMobile>
+
+          <BusanMobile>
+            <h3>부산</h3>
+            <ShotMobile>
+              {BusanShot.toLocaleString('ko-KR')}
+            </ShotMobile>
+          </BusanMobile>
+
+        </MapBoxMobile>
+      </WrapperMobile>
+    )
+  }
 
   return (
     <Wrapper>
@@ -255,22 +385,15 @@ const MapBox = styled.div`
 
 const Shot = styled.div`
 padding: 0px 5px;
-
 width: max-content;
 height: max-content;
-
 background: ${theme.bg};
-/* border-radius: 12px; */
 border-radius: 9px;
-/* border-radius: 0px; */
-
 font-weight: normal;
 font-size: ${theme.bodyThreeSize};
-/* font-size: ${theme.bodyfourSize}; */
 line-height: 24px;
 color: #FFFFFF;
-
-/* margin: 0px auto; */
+margin:auto;
 `
 
 const Gyeonggi = styled.div`
@@ -592,5 +715,409 @@ color: #242424;
 }
 `
 
+// <========= Mobile ==========>
+
+const WrapperMobile = styled.div`
+margin: "auto";
+`
+
+const MapTitleMobile = styled.div`
+display: flex;
+flex-direction: row;
+width: 130px;
+height: 26px;
+margin: 40px auto 10px 16px;
+
+& > img {
+width: 24px;
+height: 24px;
+}
+
+& > h3 {
+width: 102px;
+height: 26px;
+font-weight: bold;
+font-size: ${theme.SubHeadOneSize};
+line-height: 20px;
+letter-spacing: -0.3px;
+color: #242424;
+flex: none;
+order: 1;
+flex-grow: 0;
+padding-left: 4px;
+}
+`;
+
+const MapBoxMobile = styled.div`
+position: relative;
+width: 382px;
+height: 472px;
+background: ${theme.bg4};
+border: 1px solid ${theme.bg3};
+box-sizing: border-box;
+border-radius: 16px;
+margin-left: 16px;
+
+& > img {
+width: auto;
+height: auto;
+max-width: 370px;
+max-height: 370px;
+padding-top: 50px;
+}
+`
+
+const ShotMobile = styled.div`
+padding: 0px 3px;
+width: max-content;
+height: max-content;
+background: ${theme.bg};
+border-radius: 9px;
+font-weight: normal;
+font-size: 12px;
+line-height: 24px;
+color: #FFFFFF;
+margin:auto;
+`
+
+const GyeonggiMobile = styled.div`
+position: absolute;
+left: 120px;
+top: 40px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const GangwonMobile = styled.div`
+position: absolute;
+right: 105px;
+top: 80px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const SeoulMobile = styled.div`
+position: absolute;
+left: 130px;
+top: 85px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const IncheonMobile = styled.div`
+position: absolute;
+left: 65px;
+top: 75px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const SejongMobile = styled.div`
+position: absolute;
+left: 120px;
+top: 128px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`
+
+const ChoongNamMobile = styled.div`
+position: absolute;
+left: 85px;
+top: 165px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const ChoongBookMobile = styled.div`
+position: absolute;
+left: 170px;
+top: 140px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const GyeongBookMobile = styled.div`
+position: absolute;
+right: 80px;
+top: 170px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const DaejeonMobile = styled.div`
+position: absolute;
+left: 135px;
+top: 180px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const JeonBookMobile = styled.div`
+position: absolute;
+left: 130px;
+bottom: 195px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const GwangjuMobile = styled.div`
+position: absolute;
+left: 120px;
+bottom: 150px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const JeonNamMobile = styled.div`
+position: absolute;
+left: 80px;
+bottom: 110px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const JejuMobile = styled.div`
+position: absolute;
+left: 120px;
+bottom: 50px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const GyeongNamMobile = styled.div`
+position: absolute;
+right: 120px;
+bottom: 160px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const DaeguMobile = styled.div`
+position: absolute;
+right: 105px;
+top: 210px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const WoolsanMobile = styled.div`
+position: absolute;
+right: 45px;
+top: 235px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+`;
+
+const BusanMobile = styled.div`
+position: absolute;
+right: 60px;
+bottom: 140px;
+width: 70px;
+z-index: 1;
+
+& > h3 {
+width: 30px;
+height: 24px;
+margin: auto;
+font-weight: bold;
+font-size: 12px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+};
+`
 
 export default Map;
