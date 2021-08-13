@@ -11,12 +11,17 @@ import logo from "../assets/mainlogo.png";
 import theme from "../styles/theme";
 import { deleteCookie } from "../shared/cookie";
 import { actionLogoutCookie } from "../redux/modules/user";
+import { isMobile } from "react-device-detect";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
   const dispatch = useDispatch();
   const url = history.location.pathname;
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <React.Fragment>
@@ -92,7 +97,11 @@ const Header = (props) => {
           <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
-                <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight} color={theme.typoBlack}>
+                <Text
+                  size={theme.headTwoSize}
+                  lineHeight={theme.headTwoHeight}
+                  color={theme.typoBlack}
+                >
                   <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
                   안녕하세요
                 </Text>

@@ -18,6 +18,7 @@ const theme = {
   fontColor: "#353b48",
   tagColor: "#dfe4ea",
   disabledColor: "#DFDFDF",
+  white: "#FFFFFF",
 
   //font size
   headOneSize: "24px",
