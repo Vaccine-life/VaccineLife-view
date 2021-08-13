@@ -6,12 +6,7 @@ const BoardName = (props) => {
   const { board } = props;
   return (
     <>
-      <Grid
-        is_flex="center"
-        margin="60px auto 0 auto"
-        height="60px"
-        bg={theme.bg2}
-      >
+      <Grid is_flex="center" margin="70px 0 0 0" height="60px" bg={theme.bg2}>
         <Text
           color={theme.white}
           size={theme.SubHeadOneSize}
