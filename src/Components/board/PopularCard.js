@@ -9,6 +9,7 @@ import "draft-js/dist/Draft.css";
 import LikeIconChanger from "../LikeIconChanger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
+import { isMobile } from "react-device-detect";
 
 // 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
@@ -42,6 +43,83 @@ const PopularCard = (props) => {
       return type;
     }
   };
+
+  if (isMobile) {
+    return (
+      <Grid
+        margin="0"
+        width="380px"
+        height="200px"
+        border={`1px solid ${theme.typoLightGrey2}`}
+        padding="24px 24px 0 24px"
+        _onClick={handleMoveDetail}
+        bg={theme.white}
+      >
+        <InfoWrapperM>
+          <InfoDiv>{typeChanger(type)}</InfoDiv>
+        </InfoWrapperM>
+
+        <TitleWrapperM>{title}</TitleWrapperM>
+
+        <ContentWrapperM>
+          <Editor editorState={editorState} readOnly={true} />
+        </ContentWrapperM>
+
+        <Grid
+          height={theme.headOneSize}
+          is_flex="space_row"
+          margin="10px 0 0 0"
+        >
+          <Text
+            color={theme.typoGrey2}
+            size={theme.bodyfourSize}
+            lineHeight={theme.bodyfourHeight}
+          >
+            {displayedAt(createdAt)}
+          </Text>
+
+          <TextDiv>
+            <Grid is_flex="center" margin="0 0 0 11px">
+              <LikeIconChanger board={board} boardId={boardId} />
+              <p
+                style={{
+                  fontSize: `${theme.bodyfourSize}`,
+                  marginLeft: "5.55px",
+                  color: `${theme.typoGrey2}`,
+                }}
+              >
+                {likeCount}
+              </p>
+            </Grid>
+            <Grid is_flex="center" margin="0 0 0 11px" color={theme.typoGrey2}>
+              <FontAwesomeIcon icon={faCommentAlt} />
+              <p
+                style={{
+                  fontSize: `${theme.bodyfourSize}`,
+                  marginLeft: "5.55px",
+                  color: `${theme.typoGrey2}`,
+                }}
+              >
+                {commentCount}
+              </p>
+            </Grid>
+            <Grid is_flex="center" margin="0 0 0 11px" color={theme.typoGrey2}>
+              <FontAwesomeIcon icon={faEye} />
+              <p
+                style={{
+                  fontSize: `${theme.bodyfourSize}`,
+                  marginLeft: "5.55px",
+                  color: `${theme.typoGrey2}`,
+                }}
+              >
+                {totalVisitors}
+              </p>
+            </Grid>
+          </TextDiv>
+        </Grid>
+      </Grid>
+    );
+  }
 
   return (
     <Grid
@@ -107,6 +185,11 @@ const InfoWrapper = styled.div`
   display: flex;
   margin-bottom: 24px;
 `;
+const InfoWrapperM = styled.div`
+  display: flex;
+  margin-bottom: 16px;
+`;
+
 const InfoDiv = styled.div`
   width: 63px;
   height: 32px;
@@ -118,23 +201,47 @@ const InfoDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: ellipsis;
 `;
+
 const TitleWrapper = styled.div`
   width: 100%;
   height: 60px;
   font-size: ${theme.headTwoSize};
   line-height: ${theme.headTwoHeight};
   font-weight: 700;
-  line-height: 30px;
   text-overflow: ellipsis;
   text-align: start;
   margin-bottom: 16px;
 `;
+
+const TitleWrapperM = styled.div`
+  width: 100%;
+  font-size: ${theme.SubHeadTwoSize};
+  line-height: ${theme.SubHeadTwoHeight};
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  text-align: start;
+  margin-bottom: 8px;
+`;
+
 const ContentWrapper = styled.div`
   width: 100%;
   height: 72px;
   font-size: ${theme.bodyThreeSize};
   line-height: ${theme.bodyThreeHeight};
+  color: ${theme.typoGrey2};
+  font-weight: 700;
+  overflow: hidden;
+  text-align: start;
+`;
+
+const ContentWrapperM = styled.div`
+  width: 100%;
+  height: 44px;
+  font-size: ${theme.bodyfourSize};
+  line-height: ${theme.bodyfourHeight};
   color: ${theme.typoGrey2};
   font-weight: 700;
   overflow: hidden;
