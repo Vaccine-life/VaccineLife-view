@@ -65,6 +65,7 @@ const Login = (props) => {
 
     onSubmit: (values) => {
       const user = { ...values, ...inputs };
+      console.log(user);
       dispatch(actionSignup(user));
     },
   });
@@ -72,7 +73,6 @@ const Login = (props) => {
   // 모달 바깥 부분 클릭시 모달 off
   const handleModalOff = (e) => {
     const clicked = e.target.closest(".modal");
-    console.log(clicked);
     if (clicked) {
       return;
     } else {
@@ -166,6 +166,7 @@ const Login = (props) => {
   );
 };
 
+// 모달 떴을 때 배경에 깔리는 반투명한 까망이
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -176,6 +177,7 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
+// (하얀 배경의) 모달
 const Modal = styled.div`
   width: max-content;
   height: max-content;
@@ -192,6 +194,7 @@ const Modal = styled.div`
   padding: 40px;
 `;
 
+// 얘는 로그인, 설문조사, 회원가입에 다 들어가는 버튼이라서, 부모 파일인 Login.js에 넣어논거임!
 const Xbutton = styled.div`
   margin: 0 0 0 auto;
   &:hover {

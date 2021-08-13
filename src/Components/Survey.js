@@ -8,7 +8,8 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
-  const ableSubmitButton = () => {
+  // '접종하지않음'선택시 '다음단계'버튼을 활성화, 어느 하나라도 선택하지 않은 문항이 있다면 '다음단계'버튼을 비활성화
+  const disableSubmitButton = () => {
     if (isVaccine === 0) {
       return false;
     }
@@ -25,27 +26,40 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
     }
   };
 
-  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 setState
-  const handleIsVaccineClick = (e) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: parseInt(value),
-    });
-  };
-
   // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-    if (name === "degree") {
+
+    // '접종하지않음' 선택시 나머지 input을 (선택하지 않은) 기본값으로 set
+    if (name === "isVaccine" && value === "0") {
       setInputs({
-        ...inputs, // 기존의 input 객체를 복사한 뒤
-        [name]: parseInt(value), // name 키를 가진 값을 value 로 설정
+        [name]: parseInt(value),
+        degree: undefined,
+        type: undefined,
+        gender: undefined,
+        age: undefined,
+        disease: undefined,
+        afterEffect: [],
+      });
+    }
+
+    if (name === "isVaccine" && value === "1") {
+      setInputs({
+        ...inputs,
+        [name]: parseInt(value),
+      });
+    }
+
+    // 접종 회차는 백쪽에서 Int로 받아야해서 parseInt해준다
+    else if (name === "degree") {
+      setInputs({
+        ...inputs,
+        [name]: parseInt(value),
       });
     } else {
       setInputs({
-        ...inputs, // 기존의 input 객체를 복사한 뒤
-        [name]: value, // name 키를 가진 값을 value 로 설정
+        ...inputs,
+        [name]: value,
       });
     }
   };
@@ -54,11 +68,19 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
 
-    // if문: 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
+    // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
     if (afterEffect.includes(value)) {
       setInputs({
         ...inputs,
         [name]: afterEffect.filter((el) => el !== value),
+      });
+    }
+
+    // 유저가 '없음'을 클릭한 경우, 나머지 선택지를 없애고 '없음'만 남긴다.
+    else if (value === "없음") {
+      setInputs({
+        ...inputs,
+        [name]: ["없음"],
       });
     } else {
       setInputs({
@@ -94,7 +116,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               name="isVaccine"
               value="1"
               id="isVaccine1"
-              onClick={handleIsVaccineClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="isVaccine1">접종함</label>
             <input
@@ -102,7 +124,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               name="isVaccine"
               value="0"
               id="isVaccine0"
-              onClick={handleIsVaccineClick}
+              onClick={handleRadioClick}
             />
             <label htmlFor="isVaccine0">접종하지않음</label>
           </TwoOptions>
@@ -369,36 +391,76 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
             bold
             color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
           >
-            후유증
+            부작용
             <br />
             (중복선택가능)
           </Text>
-          <FourCheckbox>
+          <UpperCheckbox>
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="없음"
+              id="없음"
+              onClick={handleCheckboxClick}
+              disabled={!isVaccine && "disabled"}
+            />
+            <label htmlFor="없음">없음</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="발열"
               id="발열"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="발열">발열</label>
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="두통/관절통/근육통"
+              id="두통관절통근육통"
+              onClick={handleCheckboxClick}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
+            />
+            <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="접종부위 통증"
               id="접종부위통증"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="접종부위통증">접종부위 통증</label>
+            <input
+              type="checkbox"
+              name="afterEffect"
+              value="피로감"
+              id="피로감"
+              onClick={handleCheckboxClick}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
+            />
+            <label htmlFor="피로감">피로감</label>
+          </UpperCheckbox>
+          <div></div>
+          <LowerCheckbox>
             <input
               type="checkbox"
               name="afterEffect"
               value="접종부위 부기/발적"
               id="접종부위부기발적"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="접종부위부기발적">접종부위 부기/발적</label>
             <input
@@ -407,37 +469,20 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               value="구토/매스꺼움"
               id="구토매스꺼움"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="구토매스꺼움">구토/매스꺼움</label>
-          </FourCheckbox>
-          <div></div>
-          <FiveCheckbox>
-            <input
-              type="checkbox"
-              name="afterEffect"
-              value="두통/관절통/근육통"
-              id="두통관절통근육통"
-              onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
-            />
-            <label htmlFor="두통관절통근육통">두통/관절통/근육통</label>
-            <input
-              type="checkbox"
-              name="afterEffect"
-              value="피로감"
-              id="피로감"
-              onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
-            />
-            <label htmlFor="피로감">피로감</label>
             <input
               type="checkbox"
               name="afterEffect"
               value="알러지 반응"
               id="알러지반응"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="알러지반응">알러지 반응</label>
             <input
@@ -446,26 +491,20 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               value="기타"
               id="기타"
               onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
+              disabled={
+                (!isVaccine || afterEffect.includes("없음")) && "disabled"
+              }
             />
             <label htmlFor="기타">기타</label>
-            <input
-              type="checkbox"
-              name="afterEffect"
-              value="무증상"
-              id="무증상"
-              onClick={handleCheckboxClick}
-              disabled={!isVaccine && "disabled"}
-            />
-            <label htmlFor="무증상">무증상</label>
-          </FiveCheckbox>
+          </LowerCheckbox>
           {/* <div></div> */}
         </SurveyItem>
 
         <SubmitButton
           type="submit"
-          disabled={ableSubmitButton()}
+          disabled={disableSubmitButton()}
           onClick={() => {
+            console.log(inputs);
             setStatus("signup");
           }}
         >
@@ -506,14 +545,14 @@ const FourOptions = styled.div`
   grid-template-columns: 20px 60px 20px 60px 20px 60px 20px 90px;
 `;
 
-const FourCheckbox = styled.div`
+const UpperCheckbox = styled.div`
   display: grid;
-  grid-template-columns: 20px 38px 20px 98px 20px 135px 20px 100px;
+  grid-template-columns: 18px 38px 18px 38px 18px 138px 18px 98px 18px 50px;
 `;
 
-const FiveCheckbox = styled.div`
+const LowerCheckbox = styled.div`
   display: grid;
-  grid-template-columns: 20px 135px 20px 50px 20px 80px 20px 35px 20px 50px;
+  grid-template-columns: 18px 145px 18px 108px 18px 90px 18px 100px;
 `;
 
 const SubmitButton = styled.button`

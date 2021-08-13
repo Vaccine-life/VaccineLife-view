@@ -40,7 +40,7 @@ const SignupComponent = ({ formik }) => {
         </InputBox> */}
         <InputBox>
           <SignupInput
-            placeholder="비밀번호를 입력하세요"
+            placeholder="비밀번호를 입력해주세요"
             id="password"
             name="password"
             type="password"
@@ -91,7 +91,7 @@ const SignupComponent = ({ formik }) => {
         </InputBox>
 
         <Button
-          margin="30px 0 10px 0"
+          margin="50px 0 20px 0"
           width={theme.mediumButtonWidth}
           height={theme.mediumButtonHeight}
           type="submit"
@@ -122,7 +122,7 @@ const InputBox = styled.div`
 
 const SignupInput = styled.input`
   width: 100%;
-  margin: 5px auto 5px auto;
+  margin: 25px auto 5px auto;
   border: none;
   border-bottom: 1px solid ${theme.typoGrey1};
   padding: 6px 0px;
