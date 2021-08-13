@@ -35,7 +35,7 @@ const Vaccine = () => {
 
   if (isMobile) {
     return (
-      <Grid margin={`160px auto 120px auto`}>
+      <Grid margin={`0 auto 120px auto`}>
         <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
         <BoardName board="vaccine" />
         <Popular board="vaccine" />
