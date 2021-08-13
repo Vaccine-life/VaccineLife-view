@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
+import { isMobile } from "react-device-detect";
+import styled from "styled-components";
 
 const ListNav = (props) => {
   const { board } = props;
@@ -30,6 +32,39 @@ const ListNav = (props) => {
       history.push("/quarantineboard/write");
     }
   };
+
+  if (isMobile) {
+    return (
+      <>
+        <Grid
+          is_flex="space_row"
+          margin="32px auto 16px auto"
+          padding="0 24px 0 24px"
+        >
+          <Text
+            size={theme.SubHeadOneSize}
+            lineHeight={theme.SubHeadOneHeight}
+            bold
+          >
+            전체글
+          </Text>
+          <Button
+            width="100px"
+            height={theme.SubHeadOneHeight}
+            fontSize={theme.bodyThreeSize}
+            margin="0"
+            _onClick={handleMoveWrite}
+            bold
+          >
+            글쓰기{" "}
+            <FontAwesomeIcon icon={faEdit} style={{ marginLeft: "10px" }} />
+          </Button>
+        </Grid>
+        <Div></Div>
+      </>
+    );
+  }
+
   return (
     <Grid is_flex="space_row" margin="96px auto 32px auto">
       <Text size={theme.headOneSize} bold lineHeight={theme.headOneHeight}>
@@ -48,5 +83,12 @@ const ListNav = (props) => {
     </Grid>
   );
 };
+
+const Div = styled.div`
+  margin: 0 auto 0 auto;
+  background-color: ${theme.typoLightGrey2};
+  height: 1px;
+  width: 382px;
+`;
 
 export default ListNav;

@@ -33,7 +33,7 @@ const Header = (props) => {
             _onClick={() => {
               history.push("/");
             }}
-            >
+          >
             <Image
               shape="rectangle"
               width={theme.logoWidth}
@@ -56,14 +56,13 @@ const Header = (props) => {
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-
           <Grid is_flex="space_row" width="auto" margin="0 0 0 5rem">
             <Grid
               is_flex="center"
               _onClick={() => {
                 history.push("/");
               }}
-              >
+            >
               <Image
                 shape="rectangle"
                 width={theme.logoWidth}
@@ -170,7 +169,6 @@ const Header = (props) => {
               </Text>
             )}
           </Grid>
-
         </Grid>
       </Wrapper>
     </React.Fragment>
@@ -190,7 +188,7 @@ const Wrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
   color: ${theme.typoBlack};
   display: flex;
-  
+
   @media (max-width: 500px) {
     flex-direction: column;
   }
@@ -215,7 +213,7 @@ const EachDiv = styled.div`
 
   @media (max-width: 500px) {
     flex-direction: column;
-    align-items:flex-end;
+    align-items: flex-end;
     /* display: none; */
   }
 `;
