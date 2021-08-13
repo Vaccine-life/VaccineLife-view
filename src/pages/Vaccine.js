@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
+import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import List from "../components/board/List";
 import ListNav from "../components/board/ListNav";
 import Popular from "../components/board/Popular";
+import BoardName from "../components/mobile/BoardName";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
 import { actionGetLike } from "../redux/modules/like";
@@ -30,6 +32,21 @@ const Vaccine = () => {
     }
     dispatch(actionGetLike("vaccine"));
   }, []);
+
+  if (isMobile) {
+    return (
+      <Grid margin={`160px auto 120px auto`}>
+        <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
+        <BoardName board="vaccine" />
+        <Popular board="vaccine" />
+        <ListNav board="vaccine" />
+        <List board="vaccine" />
+        {modal_status && <Login />}
+        {alert_status && <Alert />}
+        {isLoading && <Spinner />}
+      </Grid>
+    );
+  }
 
   return (
     <Grid width={theme.boardWidth} margin={`160px auto 120px auto`}>
