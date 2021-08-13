@@ -1,4 +1,3 @@
-import { Slider } from "@material-ui/core";
 import React from "react";
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
@@ -8,6 +7,7 @@ import { Grid, Text } from "../../elements";
 import { actionGetTopThree } from "../../redux/modules/board";
 
 import theme from "../../styles/theme";
+import Silder from "../mobile/board/Silder";
 import PopularCard from "./PopularCard";
 import QuarPostCard from "./QuarPostCard";
 
@@ -31,13 +31,9 @@ const Popular = (props) => {
   if (isMobile) {
     return (
       <Wrapper>
-        <Grid
-          height={theme.headOneHeight}
-          is_flex="space_row"
-          margin="0 auto 40px auto"
-        >
+        <Grid height={theme.headOneHeight} is_flex="space_row">
           <Text
-            margin="32px auto auto 24px"
+            margin="42px 0 10px 24px"
             size={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
             bold
@@ -45,10 +41,11 @@ const Popular = (props) => {
             인기글
           </Text>
         </Grid>
-        <Grid margin="0">
-          <Slider
+        <Grid>
+          <Silder
             board={board}
-            topList={board === "vaccine" ? top_list_vac : top_list_quar}
+            top_list_vac={top_list_vac}
+            top_list_quar={top_list_quar}
           />
         </Grid>
       </Wrapper>
@@ -57,7 +54,7 @@ const Popular = (props) => {
 
   return (
     <>
-      <Grid is_flex="space_row" margin="0 auto 0 0">
+      <Grid is_flex="space_row" margin="0 auto 40px 0">
         <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
           {board === "vaccine" ? "백신접종" : "격리후기"} 인기글
         </Text>
@@ -109,6 +106,8 @@ Popular.defaultProps = {
 };
 
 const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
   background-color: ${theme.typoLightGrey1};
   height: 334px;
 `;

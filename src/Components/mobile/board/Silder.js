@@ -1,37 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 //CSS
 import "swiper/swiper.min.css";
-import "swiper/components/scrollbar/scrollbar.min.css";
+import "swiper/components/pagination/pagination.min.css";
 
-import "../../../index.css";
-import SwiperCore, { Scrollbar } from "swiper/core";
+import SwiperCore, { Pagination } from "swiper/core";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+
+import logger from "../../../shared/logger";
+
 import PopularCard from "../../board/PopularCard";
 
-SwiperCore.use([Scrollbar]);
+SwiperCore.use([Pagination]);
 
 const Silder = (props) => {
-  const { board, topList } = props;
+  const { board, top_list_vac, top_list_quar } = props;
+
+  logger(top_list_vac);
+
   return (
     <Swiper
       style={{
-        padding: "10px 0 10px",
-        width: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
-        borderRadius: "20px",
+        height: "235px",
+        padding: "24px 0 0 0",
       }}
-      scrollbar={{
-        hide: true,
-      }}
+      pagination={true}
       className="mySwiper"
     >
       {board === "vaccine" &&
-        topList?.map((each, index) => {
+        top_list_vac?.map((each, index) => {
           return (
-            <Wrapper>
+            <SwiperSlide
+              style={{ backgroundColor: `transparent`, height: "200px" }}
+            >
               <PopularCard
                 key={index}
                 board={board}
@@ -44,7 +46,7 @@ const Silder = (props) => {
                 createdAt={each.createdAt}
                 type={each.type}
               />
-            </Wrapper>
+            </SwiperSlide>
           );
         })}
     </Swiper>
