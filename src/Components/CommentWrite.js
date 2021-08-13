@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import { isMobile } from "react-device-detect";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
@@ -70,6 +71,58 @@ const CommentWrite = (props) => {
     }
   };
 
+
+  if(isMobile) {
+    return (
+      <>
+        <Grid is_flex="space_column" padding="0 1rem">
+          <Grid align="left" margin="1.3rem 0">
+            <Text 
+              bold
+              size={theme.SubHeadOneSize}
+              lineHeight={theme.SubHeadOneHeight}
+              color={theme.fontColor}>
+              {is_login ? nickname : "로그인 후 이용해 주세요 :)"}
+            </Text>
+          </Grid>
+
+          {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
+
+          <Grid is_flex="space_column" border="1px solid #c1c1c1">
+            <Grid margin="0 5rem">
+              <Input
+                multiLine
+                border="none"
+                value={comment}
+                placeholder="응원의 한마디!"
+                maxLength="500"
+                _onChange={changeComment}
+              />
+            </Grid>
+
+            <Grid is_flex="space_row" border="none">
+              <Grid padding="10px" bg="#ffffff" align="right">
+                {/* <Text size={theme.bodyTwoSize}><span>{length}</span> / 1000(byte)</Text> */}
+                {/* obj?.prop => obj가 존재하면 obj.prop을 반환. 아니면 undefined반환 */}
+                <Text size={theme.bodyTwoSize} color={theme.typoGrey3}>
+                  <span>{comment?.length || 0}</span> / 500
+                </Text>
+              </Grid>
+
+              <Button
+                width={theme.smallButtonWidth}
+                height={theme.smallButtonHeight}
+                fontSize={theme.SubHeadOneSize}
+                _onClick={handleMedical}
+              >
+                등록
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </>
+    )
+  }
   return (
     <React.Fragment>
       <Grid is_flex="space_column" width={theme.medicalWidth}>
