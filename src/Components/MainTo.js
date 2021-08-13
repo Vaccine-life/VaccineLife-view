@@ -25,13 +25,7 @@ const MainTo = (props) => {
                     <h3>자가격리 후기 보러가기</h3>
                     {/* <hr /> */}
                     <h6>
-                        {/* 1. 자가격리 후기를 확인하고 경험이 있다면 공유해주세요!
-                    2. 여러분의 소중한 2주간의 경험을 공유해주세요!
-                    4. 조금이나마 더 쾌적한? 나은? 격리생활을 위해 여러분의 경험을 공유해주세요!
-                    5. 함께하면 좀 더 나은? 즐거운? 괜찮은? 격리생활!
-                    6. 다양한 격리 후기를 보면서 자가격리 경험을 공유하고, 다채로운 2주를 경험해 보세요. */}
-
-                        더 나은 2주를 위해 여러분의 소중한 경험을 공유해주세요!
+                        다른 사람들은 2주를 어떻게 보냈을까? 다양한 자가격리 후기를 공유해주세요!
                     </h6>
                 </ToQuarBoard>
 
@@ -117,8 +111,7 @@ max-height: 283px;
 
 position: absolute;
 right: 10px;
-top: 250px;
-
+top: 249px;
 }
 `
 
@@ -148,7 +141,7 @@ transition-duration:0.1s;
 width: 142px;
 height: 68px;
 
-padding-top: 50px;
+padding-top: 45px;
 
 font-weight: bold;
 font-size: ${theme.headOneSize};
@@ -165,7 +158,7 @@ margin-left: 0px;
 }
 
 & > h6 {
-width: 260px;
+width: 280px;
 height: 48px;
 
 padding-top: 10px;
@@ -202,7 +195,7 @@ transition-duration: 0.1s;
 width: 158px;
 height: 68px;
 
-padding-top: 50px;
+padding-top: 45px;
 
 font-weight: bold;
 font-size: ${theme.headOneSize};
