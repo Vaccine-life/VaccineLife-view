@@ -25,17 +25,15 @@ const Main = () => {
 
   if (isMobile) {
     return (
-      <Grid margin={`160px auto 120px auto`}>
+      <>
         {modal_status && <Login />}
         {alert_status && <Alert />}
         <Intro />
-        <MapAndChart>
-          <Map />
-          <MainNivoBar />
-        </MapAndChart>
+        <Map />
+        <MainNivoBar />
         <MainTo />
         <MainPopular board="vaccine" />
-      </Grid>
+      </>
     );
   }
 
