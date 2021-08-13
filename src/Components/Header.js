@@ -12,6 +12,8 @@ import theme from "../styles/theme";
 import { deleteCookie } from "../shared/cookie";
 import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobile } from "react-device-detect";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -20,78 +22,97 @@ const Header = (props) => {
   const url = history.location.pathname;
 
   if (isMobile) {
-    return null;
+    return (
+      <>
+        <Grid is_flex="space_row" padding="1rem 1.5rem">
+          <Grid
+            is_flex="center"
+            _onClick={() => {
+              history.push("/");
+            }}
+            >
+            <Image
+              shape="rectangle"
+              width={theme.logoWidth}
+              height={theme.logoHeight}
+              cursor="pointer"
+              src={logo}
+            />
+          </Grid>
+          <FontAwesomeIcon icon={faSquare} />
+        </Grid>
+      </>
+    );
   }
 
   return (
     <React.Fragment>
       <Wrapper>
         <Grid bg="#ffffff" is_flex="space_row">
-          <Grid width="auto" margin="0 0 0 5rem">
-            <Grid is_flex="space_row">
-              <Grid
-                is_flex="center"
-                _onClick={() => {
+
+          <Grid is_flex="space_row" width="auto" margin="0 0 0 5rem">
+            <Grid
+              is_flex="center"
+              _onClick={() => {
+                history.push("/");
+              }}
+              >
+              <Image
+                shape="rectangle"
+                width={theme.logoWidth}
+                height={theme.logoHeight}
+                cursor="pointer"
+                src={logo}
+              />
+            </Grid>
+
+            <Grid is_flex="space_row" padding="0 3rem">
+              <EachDiv
+                nav={url === "/" ? true : false}
+                onClick={() => {
                   history.push("/");
                 }}
               >
-                <Image
-                  shape="rectangle"
-                  width={theme.logoWidth}
-                  height={theme.logoHeight}
-                  cursor="pointer"
-                  src={logo}
-                />
-              </Grid>
-
-              <Grid is_flex="space_row" padding="0 3rem">
-                <EachDiv
-                  nav={url === "/" ? true : false}
-                  onClick={() => {
-                    history.push("/");
-                  }}
-                >
-                  홈
-                </EachDiv>
-                <EachDiv
-                  nav={
-                    url === "/vaccine" ||
-                    url.includes("/detail") ||
-                    url === "/vaccineboard/write" ||
-                    url.includes("/modify")
-                      ? true
-                      : false
-                  }
-                  onClick={() => {
-                    history.push("/vaccine");
-                  }}
-                >
-                  백신후기
-                </EachDiv>
-                <EachDiv
-                  nav={
-                    url === "/quarantine" ||
-                    url.includes("/quarantinedetail") ||
-                    url === "/quarantineboard/write" ||
-                    url.includes("/quarantinemodify")
-                      ? true
-                      : false
-                  }
-                  onClick={() => {
-                    history.push("/quarantine");
-                  }}
-                >
-                  격리후기
-                </EachDiv>
-                <EachDiv
-                  nav={url === "/medical" ? true : false}
-                  onClick={() => {
-                    history.push("/medical");
-                  }}
-                >
-                  의료진분들께
-                </EachDiv>
-              </Grid>
+                홈
+              </EachDiv>
+              <EachDiv
+                nav={
+                  url === "/vaccine" ||
+                  url.includes("/detail") ||
+                  url === "/vaccineboard/write" ||
+                  url.includes("/modify")
+                    ? true
+                    : false
+                }
+                onClick={() => {
+                  history.push("/vaccine");
+                }}
+              >
+                백신후기
+              </EachDiv>
+              <EachDiv
+                nav={
+                  url === "/quarantine" ||
+                  url.includes("/quarantinedetail") ||
+                  url === "/quarantineboard/write" ||
+                  url.includes("/quarantinemodify")
+                    ? true
+                    : false
+                }
+                onClick={() => {
+                  history.push("/quarantine");
+                }}
+              >
+                격리후기
+              </EachDiv>
+              <EachDiv
+                nav={url === "/medical" ? true : false}
+                onClick={() => {
+                  history.push("/medical");
+                }}
+              >
+                의료진분들께
+              </EachDiv>
             </Grid>
           </Grid>
 
@@ -142,6 +163,7 @@ const Header = (props) => {
               </Text>
             )}
           </Grid>
+
         </Grid>
       </Wrapper>
     </React.Fragment>
@@ -160,7 +182,11 @@ const Wrapper = styled.div`
   z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
   color: ${theme.typoBlack};
-  /* box-shadow: ${theme.shadow} 0px 3px 10px 0px; */
+  display: flex;
+  
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const EachDiv = styled.div`
@@ -177,8 +203,20 @@ const EachDiv = styled.div`
 
   ${(props) =>
     props.nav &&
-    ` border-bottom: 4px solid black;
+    ` border-bottom: 4px solid #242424;
   font-weight: 700;`}
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items:flex-end;
+    /* display: none; */
+  }
+`;
+
+const Nav = styled.div`
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 export default withRouter(Header);
