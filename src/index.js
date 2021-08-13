@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import store, { history } from "./redux/configStore";
 import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
-import ResponsiveStyles from "./styles/ResponsiveStyles";
 import FontStyle from "./styles/FontStyle";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -14,11 +13,9 @@ ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>
       <ConnectedRouter history={history}>
-        <ResponsiveStyles>
-          <FontStyle>
-            <App />
-          </FontStyle>
-        </ResponsiveStyles>
+        <FontStyle>
+          <App />
+        </FontStyle>
       </ConnectedRouter>
     </HelmetProvider>
   </Provider>,
