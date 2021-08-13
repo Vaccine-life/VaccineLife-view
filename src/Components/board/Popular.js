@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
+import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { Grid, Text } from "../../elements";
 import { actionGetTopThree } from "../../redux/modules/board";
 
@@ -50,6 +52,23 @@ const Popular = (props) => {
 
   const top_list_vac = useSelector((state) => state.board.topThreeVac);
   const top_list_quar = useSelector((state) => state.board.topThreeQuar);
+
+  if (isMobile) {
+    return (
+      <Wrapper>
+        <Grid is_flex="space_row" margin="auto auto 40px auto">
+          <Text
+            size={theme.SubHeadOneSize}
+            lineHeight={theme.SubHeadOneHeight}
+            bold
+          >
+            인기글
+          </Text>
+        </Grid>
+        <Grid is_flex="space_row">{/* 맵돌리는 부분 카드 하나당*/}</Grid>
+      </Wrapper>
+    );
+  }
 
   return (
     <>
@@ -103,5 +122,10 @@ Popular.defaultProps = {
   vacBoardId: -1,
   quarBoardId: -1,
 };
+
+const Wrapper = styled.div`
+  background-color: ${theme.typoLightGrey1};
+  height: 334px;
+`;
 
 export default Popular;
