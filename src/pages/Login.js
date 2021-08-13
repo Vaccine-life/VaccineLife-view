@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { actionSignup } from "../redux/modules/user";
+import { actionVisible } from "../redux/modules/modal";
+
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
 import Survey from "../components/Survey";
-import { useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { actionSignup } from "../redux/modules/user";
-import { actionVisible } from "../redux/modules/modal";
+
+import styled from "styled-components";
+import { isMobile } from "react-device-detect";
+import theme from "../styles/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import theme from "../styles/theme";
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
@@ -62,6 +65,7 @@ const Login = (props) => {
 
     onSubmit: (values) => {
       const user = { ...values, ...inputs };
+      console.log(user);
       dispatch(actionSignup(user));
     },
   });
@@ -69,13 +73,54 @@ const Login = (props) => {
   // 모달 바깥 부분 클릭시 모달 off
   const handleModalOff = (e) => {
     const clicked = e.target.closest(".modal");
-    console.log(clicked);
     if (clicked) {
       return;
     } else {
       dispatch(actionVisible());
     }
   };
+
+  if (isMobile) {
+    return (
+      <React.Fragment
+        onClick={(e) => {
+          handleModalOff(e);
+        }}
+      >
+        <MobileLogin className="modal">
+          <Xbutton
+            onClick={() => {
+              dispatch(actionVisible());
+            }}
+          >
+            <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
+          </Xbutton>
+
+          {status === "login" && (
+            <LoginComponent status={status} setStatus={setStatus} />
+          )}
+
+          {status === "survey" && (
+            <Survey
+              status={status}
+              setStatus={setStatus}
+              inputs={inputs}
+              setInputs={setInputs}
+            />
+          )}
+
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              formik={formik}
+            />
+          )}
+        </MobileLogin>
+        {alert_status && <Alert />}
+      </React.Fragment>
+    );
+  }
 
   return (
     <>
@@ -121,6 +166,7 @@ const Login = (props) => {
   );
 };
 
+// 모달 떴을 때 배경에 깔리는 반투명한 까망이
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -131,6 +177,7 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
+// (하얀 배경의) 모달
 const Modal = styled.div`
   width: max-content;
   height: max-content;
@@ -147,11 +194,23 @@ const Modal = styled.div`
   padding: 40px;
 `;
 
+// 얘는 로그인, 설문조사, 회원가입에 다 들어가는 버튼이라서, 부모 파일인 Login.js에 넣어논거임!
 const Xbutton = styled.div`
   margin: 0 0 0 auto;
   &:hover {
     cursor: pointer;
   }
+`;
+
+const MobileLogin = styled.div`
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 40px;
 `;
 
 export default Login;

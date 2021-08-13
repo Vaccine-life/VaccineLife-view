@@ -35,6 +35,8 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   // 격리후기때는 MoveBox에 false 기입
+
+  // 어느 페이지에서나 로그인 모달창을 뜨게 하게 위해 얘를 가져옴
   const modal_status = useSelector((state) => state.modal.visible);
   //confirm 창
   const confirm_status = useSelector((state) => state.popup.confirm);
