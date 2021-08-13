@@ -10,6 +10,7 @@ import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
 import { isMobile } from "react-device-detect";
+import NavModal from "../components/mobile/NavModal";
 
 
 const Medical = () => {
@@ -50,7 +51,7 @@ const Medical = () => {
             return <CommentList key={idx} {...c} />;
           })}
         </Grid>
-        {modal_status && <Login />}
+        {modal_status && <NavModal/>}
         {alert_status && <Alert />}
       </>
     )

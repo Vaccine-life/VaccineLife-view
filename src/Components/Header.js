@@ -14,12 +14,13 @@ import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "./mobile/NavBar";
+import NavModal from "./mobile/NavModal";
 
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
+  const modal_status = useSelector((state) => state.modal.visible);
   const dispatch = useDispatch();
   const url = history.location.pathname;
 
@@ -46,7 +47,7 @@ const Header = (props) => {
             icon={faBars} 
             color={theme.bg2} 
             size="2x"
-            onClick={() => {<NavBar/>}}
+            onClick={() => dispatch(actionVisible())}
           />
         </Grid>
       </>
