@@ -27,7 +27,6 @@ function App() {
   const is_login = useSelector((state) => state.user.is_login);
   const exp_time = useSelector((state) => state.user.expTime);
   let remainTime = new Date(exp_time) - new Date();
-  logger(remainTime);
 
   if (exp_time !== 0) {
     setTimeout(() => {

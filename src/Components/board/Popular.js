@@ -41,7 +41,7 @@ const Popular = (props) => {
             인기글
           </Text>
         </Grid>
-        <Grid>
+        <Grid margin="0">
           <Silder
             board={board}
             top_list_vac={top_list_vac}

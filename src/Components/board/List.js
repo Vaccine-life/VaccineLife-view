@@ -5,6 +5,8 @@ import TableTr from "./TableTr";
 import InfinityScroll from "../../shared/InfinityScroll";
 import { useDispatch, useSelector } from "react-redux";
 import { actionGetBoard } from "../../redux/modules/board";
+import { isMobile } from "react-device-detect";
+import Ariticle from "../mobile/board/Ariticle";
 
 const List = (props) => {
   const { board } = props;
@@ -20,6 +22,34 @@ const List = (props) => {
   useEffect(() => {
     dispatch(actionGetBoard(board));
   }, []);
+
+  if (isMobile) {
+    return (
+      <InfinityScroll
+        nextCall={nextCall}
+        is_next={nextPage <= totalPage ? true : false}
+        is_loading={is_loading}
+      >
+        {/* map돌리기 */}
+        {vac_list?.map((each, index) => {
+          return (
+            <Ariticle
+              key={index}
+              board={board}
+              type={each.type}
+              title={each.title}
+              likeCount={each.likeCount}
+              commentCount={each.commentCount}
+              totalVisitors={each.totalVisitors}
+              createAt={each.createdAt}
+              boardId={each.id}
+            />
+          );
+        })}
+      </InfinityScroll>
+    );
+  }
+
   return (
     <Table>
       <thead>
