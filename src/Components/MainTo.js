@@ -3,8 +3,45 @@ import styled from 'styled-components';
 import theme from '../styles/theme';
 import { history } from "../redux/configStore";
 import ToVacImage from "../images/ToVacImage.png"
+import { isMobile } from 'react-device-detect';
 
 const MainTo = (props) => {
+
+    if (isMobile) {
+        return (
+            <>
+                <ToVacBoardMobile
+                    onClick={() => {
+                        history.push("/vaccine");
+                    }}
+                >
+                    <h3>백신 접종 후기 보러가기</h3>
+                    <hr />
+                    <img src={ToVacImage} alt="" />
+                </ToVacBoardMobile>
+                <CardDownSideMobile>
+                    <ToQuarBoardMobile
+                        onClick={() => {
+                            history.push("/quarantine");
+                        }}
+                    >
+                        <h3>자가격리 후기 보러가기</h3>
+                        <hr />
+                    </ToQuarBoardMobile>
+
+                    <ToMedicalBoardMobile
+                        onClick={() => {
+                            history.push("/medical");
+                        }}
+                    >
+                        <h3>의료진 분들께 감사인사 전하기</h3>
+                        <hr />
+                    </ToMedicalBoardMobile>
+                </CardDownSideMobile>
+            </>
+        );
+    }
+
     return (
         <Wrapper>
             <ToVacBoard
@@ -29,14 +66,14 @@ const MainTo = (props) => {
                     </h6>
                 </ToQuarBoard>
 
-                <ToMedical
+                <ToMedicalBoard
                     onClick={() => {
                         history.push("/medical");
                     }}>
                     <h3>의료진 분들께 감사인사 전하기</h3>
                     {/* <hr /> */}
                     <h6>코로나 19 최전선에서 헌신하는 의료진을 위한 응원 메시지를 남겨주세요!</h6>
-                </ToMedical>
+                </ToMedicalBoard>
             </CardRightSide>
         </Wrapper >
     )
@@ -45,7 +82,7 @@ const MainTo = (props) => {
 const Wrapper = styled.div`
 display : flex;
 justify-content: center;
-`
+`;
 
 const ToVacBoard = styled.div`
 width: 450px;
@@ -113,12 +150,12 @@ position: absolute;
 right: 10px;
 top: 249px;
 }
-`
+`;
 
 const CardRightSide = styled.div`
 display: flex;
 flex-direction: column;
-`
+`;
 
 const ToQuarBoard = styled.div`
 width: 450px;
@@ -171,9 +208,9 @@ text-align: left;
 
 color: #FFFFFF;
 }
-`
+`;
 
-const ToMedical = styled.div`
+const ToMedicalBoard = styled.div`
 width: 450px;
 height: 215px;
 
@@ -225,7 +262,126 @@ text-align: left;
 
 color: #FFFFFF;
 }
-`
+`;
+
+//<========= Mobile ===========>
+
+const ToVacBoardMobile = styled.div`
+position: relative;
+width: 366px;
+height: 120px;
+background: ${theme.bg2};
+border-radius: 16px;
+padding: 16px 0px 0px 16px;
+margin: 40px auto 8px 16px;
+
+& > h3 {
+width: 100px;
+height: 50px;
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: ${theme.bodyThreeHeight};
+letter-spacing: -0.3px;
+text-align: left;
+color: #FFFFFF;
+}
+
+& > hr {
+width: 24px;
+margin-left: 0px;
+}
+
+& > img {
+width: auto;
+height: auto;
+max-width: 150px;
+max-height: 150px;
+
+position: absolute;
+right: 10px;
+top: 29px;
+}
+`;
+
+const CardDownSideMobile = styled.div`
+display: flex;
+flex-direction: row;
+`;
+
+const ToQuarBoardMobile = styled.div`
+position: relative;
+width: 171px;
+height: 120px;
+background: ${theme.bg2};
+border-radius: 16px;
+padding: 16px 0px 0px 16px;
+margin-left: 16px;
+margin-right: 8px;
+
+& > h3 {
+width: 100px;
+height: 50px;
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: ${theme.bodyThreeHeight};
+letter-spacing: -0.3px;
+text-align: left;
+color: #FFFFFF;
+}
+
+& > hr {
+width: 24px;
+margin-left: 0px;
+}
+
+& > img {
+width: auto;
+height: auto;
+max-width: 150px;
+max-height: 150px;
+
+position: absolute;
+right: 10px;
+top: 29px;
+}
+`;
+
+const ToMedicalBoardMobile = styled.div`
+position: relative;
+width: 171px;
+height: 120px;
+background: ${theme.bg};
+border-radius: 16px;
+padding: 16px 0px 0px 16px;
+/* margin-left: 16px; */
+
+& > h3 {
+width: 105px;
+height: 50px;
+font-weight: bold;
+font-size: ${theme.SubHeadTwoSize};
+line-height: ${theme.bodyThreeHeight};
+letter-spacing: -0.3px;
+text-align: left;
+color: #FFFFFF;
+}
+
+& > hr {
+width: 24px;
+margin-left: 0px;
+}
+
+& > img {
+width: auto;
+height: auto;
+max-width: 150px;
+max-height: 150px;
+
+position: absolute;
+right: 10px;
+top: 29px;
+}
+`;
 
 
 export default MainTo;

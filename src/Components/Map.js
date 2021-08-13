@@ -726,7 +726,7 @@ display: flex;
 flex-direction: row;
 width: 130px;
 height: 26px;
-margin: 50px auto 10px 16px;
+margin: 40px auto 10px 16px;
 
 & > img {
 width: 24px;

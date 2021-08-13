@@ -9,6 +9,7 @@ import Login from "./Login";
 import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
+import { isMobile } from "react-device-detect";
 
 
 const Medical = () => {
@@ -24,6 +25,36 @@ const Medical = () => {
     window.scrollTo(0, 0);
     dispatch(actionGetMedical());
   }, []);
+
+  if(isMobile) {
+    return (
+      <>
+        <MetaScript title="슬기로운 백신생활 | 의료진" />
+        <Grid margin={`20px auto 0 auto`}>
+          <Grid align="left" padding="0 1rem">
+            <Text
+              bold
+              size={theme.SubHeadOneSize}
+              lineHeight={theme.SubHeadOneHeight}
+              color={theme.fontColor}
+            >
+              의료진분들께
+            </Text>
+            <div
+              style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
+            ></div>
+          </Grid>
+
+          <CommentWrite />
+          {comment_list.map((c, idx) => {
+            return <CommentList key={idx} {...c} />;
+          })}
+        </Grid>
+        {modal_status && <Login />}
+        {alert_status && <Alert />}
+      </>
+    )
+  }
 
   return (
     <React.Fragment>
