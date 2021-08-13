@@ -20,15 +20,8 @@ const Banner = (props) => {
   if (url === "/") {
     return (
       <FixedBanner>
-        <Common>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "3rem 10rem",
-            backgroundColor: "white",
-          }}
-        >
+        <Common style={{backgroundColor: "white"}}>
+        
           <EachDiv
             onClick={() => {
               window.open(syringeAddress);
@@ -77,22 +70,14 @@ const Banner = (props) => {
               전자예방접종증명
             </Text>
           </EachDiv>
-        </div>
+
         </Common>
       </FixedBanner>
     );
   }
   return (
     <FixedBanner>
-      <Common>
-      <div 
-        style={{
-          display:"flex", 
-          alignItems:"center", 
-          padding:"3rem 10rem", 
-          backgroundColor:`${theme.typoLightGrey1}`
-        }}
-      >
+      <Common style={{backgroundColor:`${theme.typoLightGrey1}`}}>
 
         <EachDiv onClick={() => {window.open(syringeAddress)}}>
           <Image shape="square" size="80px" margin="20px 0 0 0" src={syringe}/>
@@ -132,7 +117,6 @@ const Banner = (props) => {
           </Text>
         </EachDiv>
 
-      </div>
       </Common>
     </FixedBanner>
   );
@@ -158,17 +142,20 @@ const EachDiv = styled.div`
 `;
 
 const Common = styled.div`
-  
-  @media (max-width: 700px) {
-    display: block;
+  display: flex;
+  /* flex-direction: row; */
+  padding: 3rem 10rem;
+  align-items: center;
+  @media (max-width: 960px) {
     flex-direction: column;
-    text-align: left;
-    
+    text-align: center;
+    padding: 1rem;
+    margin: auto;
   }
 `
 
 const Stick = styled.div`
-  @media (max-width: 700px) {
+  @media (max-width: 960px) {
     display: none;
   }
 `;
