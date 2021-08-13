@@ -13,13 +13,16 @@ import { deleteCookie } from "../shared/cookie";
 import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquare } from "@fortawesome/free-regular-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import NavBar from "./mobile/NavBar";
+
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
   const dispatch = useDispatch();
   const url = history.location.pathname;
+
 
   if (isMobile) {
     return (
@@ -39,12 +42,16 @@ const Header = (props) => {
               src={logo}
             />
           </Grid>
-          <FontAwesomeIcon icon={faSquare} />
+          <FontAwesomeIcon 
+            icon={faBars} 
+            color={theme.bg2} 
+            size="2x"
+            onClick={() => {<NavBar/>}}
+          />
         </Grid>
       </>
     );
   }
-
   return (
     <React.Fragment>
       <Wrapper>
