@@ -12,6 +12,8 @@ import theme from "../styles/theme";
 import { deleteCookie } from "../shared/cookie";
 import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobile } from "react-device-detect";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -20,7 +22,27 @@ const Header = (props) => {
   const url = history.location.pathname;
 
   if (isMobile) {
-    return null;
+    return (
+      <>
+        <Grid is_flex="space_row" padding="1rem 1.5rem">
+          <Grid
+            is_flex="center"
+            _onClick={() => {
+              history.push("/");
+            }}
+            >
+            <Image
+              shape="rectangle"
+              width={theme.logoWidth}
+              height={theme.logoHeight}
+              cursor="pointer"
+              src={logo}
+            />
+          </Grid>
+          <FontAwesomeIcon icon={faSquare} />
+        </Grid>
+      </>
+    );
   }
 
   return (
@@ -34,7 +56,7 @@ const Header = (props) => {
               _onClick={() => {
                 history.push("/");
               }}
-            >
+              >
               <Image
                 shape="rectangle"
                 width={theme.logoWidth}
