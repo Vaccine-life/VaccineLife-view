@@ -14,11 +14,11 @@ const SignupComponent = ({ formik }) => {
           회원가입
         </Text>
 
-        <InputBox>
+        {/* <InputBox>
           <Text margin="0 auto 0 0" size={theme.bodyThreeSize}>
             아이디
           </Text>
-        </InputBox>
+        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="아이디를 입력해주세요"
@@ -33,11 +33,11 @@ const SignupComponent = ({ formik }) => {
           ) : null}
         </InputBox>
 
-        <InputBox>
+        {/* <InputBox>
           <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
             비밀번호
           </Text>
-        </InputBox>
+        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="비밀번호를 입력하세요"
@@ -52,11 +52,11 @@ const SignupComponent = ({ formik }) => {
           ) : null}
         </InputBox>
 
-        <InputBox>
+        {/* <InputBox>
           <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
             비밀번호 확인
           </Text>
-        </InputBox>
+        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="비밀번호를 다시 입력해주세요"
@@ -71,11 +71,11 @@ const SignupComponent = ({ formik }) => {
           ) : null}
         </InputBox>
 
-        <InputBox>
+        {/* <InputBox>
           <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
             닉네임
           </Text>
-        </InputBox>
+        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="닉네임을 신중히 입력해주세요(수정불가)"
