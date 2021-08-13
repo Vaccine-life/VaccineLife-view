@@ -49,7 +49,6 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/login" component={Login} />
         <Route exact path="/vaccine" component={Vaccine} />
         <Route exact path="/detail/:id" component={Detail} />
         {is_login && (

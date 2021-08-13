@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { actionSignup } from "../redux/modules/user";
+import { actionVisible } from "../redux/modules/modal";
+
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
 import Survey from "../components/Survey";
-import { useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { actionSignup } from "../redux/modules/user";
-import { actionVisible } from "../redux/modules/modal";
+
+import styled from "styled-components";
+import { isMobile } from "react-device-detect";
+import theme from "../styles/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import theme from "../styles/theme";
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
 const Login = (props) => {
@@ -76,6 +79,48 @@ const Login = (props) => {
       dispatch(actionVisible());
     }
   };
+
+  if (isMobile) {
+    return (
+      <React.Fragment
+        onClick={(e) => {
+          handleModalOff(e);
+        }}
+      >
+        <MobileLogin className="modal">
+          <Xbutton
+            onClick={() => {
+              dispatch(actionVisible());
+            }}
+          >
+            <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
+          </Xbutton>
+
+          {status === "login" && (
+            <LoginComponent status={status} setStatus={setStatus} />
+          )}
+
+          {status === "survey" && (
+            <Survey
+              status={status}
+              setStatus={setStatus}
+              inputs={inputs}
+              setInputs={setInputs}
+            />
+          )}
+
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              formik={formik}
+            />
+          )}
+        </MobileLogin>
+        {alert_status && <Alert />}
+      </React.Fragment>
+    );
+  }
 
   return (
     <>
@@ -152,6 +197,17 @@ const Xbutton = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const MobileLogin = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 40px;
 `;
 
 export default Login;
