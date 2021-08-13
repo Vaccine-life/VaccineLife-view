@@ -6,51 +6,39 @@ import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/슬기로운-white.png";
+import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect";
 
 const Footer = () => {
   return (
     <React.Fragment>
-      {/* <FixedFooter> */}
+      <FixedFooter>
 
-      <div
-        style={{
-          backgroundColor: `${theme.typoBlack}`,
-          display: "flex",
-          alignItems: "center",
-          height: "152px",
-          width: "100%",
-        }}
-      >
         <Grid
           width="auto"
           margin="1rem 5rem"
           is_flex="center"
-          // _onClick={() => {
-          //   window.location.replace("/");
-          // }}
           _onClick={() => {
             history.push("/");
           }}
         >
-          <Image
-            shape="rectangle"
-            width={theme.logoWidth}
-            height={theme.logoHeight}
-            cursor="pointer"
-            src={logo}
-          />
+          {/* <Img> */}
+            <Image
+              shape="rectangle"
+              width={theme.logoWidth}
+              height={theme.logoHeight}
+              cursor="pointer"
+              src={logo}
+            />
+          {/* </Img> */}
         </Grid>
 
         <Grid margin="2rem 0" width="0 auto" height="auto">
-          <ul style={{ display: "flex" }}>
+          <Common>
             <Text
               color="#ffffff"
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/vaccine");
-              // }}
               _onClick={() => {
                 history.push("/vaccine");
               }}
@@ -62,9 +50,6 @@ const Footer = () => {
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/vaccine");
-              // }}
               _onClick={() => {
                 history.push("/quarantine");
               }}
@@ -76,18 +61,15 @@ const Footer = () => {
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
-              // _onClick={() => {
-              //   window.location.replace("/medical");
-              // }}
               _onClick={() => {
                 history.push("/medical");
               }}
             >
               의료진분들께 한마디
             </Text>
-          </ul>
+          </Common>
 
-          <ul style={{ display: "flex" }}>
+          <Common>
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -95,13 +77,17 @@ const Footer = () => {
             >
               대표자명
             </Text>
-            <Text
-              color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
-              margin="5px"
-            >
-              |
-            </Text>
+
+            <Stick>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.SubHeadTwoSize}
+                margin="5px"
+              >
+                |
+              </Text>
+            </Stick>
+
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -109,13 +95,16 @@ const Footer = () => {
             >
               Contact. quokkalee654@gmail.com
             </Text>
-            <Text
-              color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
-              margin="5px"
-            >
-              |
-            </Text>
+
+            <Stick>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.SubHeadTwoSize}
+                margin="5px"
+              >
+                |
+              </Text>
+            </Stick>
             <Text
               color={theme.typoGrey2}
               size={theme.SubHeadTwoSize}
@@ -125,19 +114,45 @@ const Footer = () => {
             >
               Github. https://github.com/Vaccine-life
             </Text>
-          </ul>
+          </Common>
         </Grid>
-      </div>
-      {/* </FixedFooter> */}
+
+      </FixedFooter>
     </React.Fragment>
   );
 };
 
 const FixedFooter = styled.div`
   margin-top: auto;
-  width: 100vw;
-  /* position: fixed; */
-  /* z-index: 1; */
+  background-color: ${theme.typoBlack};
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  padding: 1.2rem 0;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`;
+
+const Common = styled.ul`
+  display: flex;
+  @media (max-width: 960px) {
+    flex-direction: column;
+    text-align: left;
+    white-space: nowrap;
+  }
+`
+const Stick = styled.div`
+  @media (max-width: 960px) {
+    display: none;
+  }
+`;
+
+const Img = styled.div`
+  @media (max-width: 960px) {
+    float: left;
+  }
 `;
 
 export default Footer;
