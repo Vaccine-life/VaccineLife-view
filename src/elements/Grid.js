@@ -52,7 +52,7 @@ Grid.defaultProps = {
   bg: null,
   border_radius: "",
   align: false,
-  _onClick: () => {},
+  _onClick: () => { },
   cursor: "",
   border: false,
   hover: false,

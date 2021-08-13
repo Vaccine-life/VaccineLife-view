@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
-import IntroCharacter from "../images/IntroCharacter.png";
+import Intro from '../components/Intro';
 
 import Map from "../components/Map";
-import theme from "../styles/theme";
+import { Grid } from '../elements';
 import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
@@ -20,63 +21,38 @@ const Main = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+  if (isMobile) {
+    return (
+      <>
+        {modal_status && <Login />}
+        {alert_status && <Alert />}
+        <Intro />
+        <Map />
+        <MainNivoBar />
+        <MainTo />
+        <MainPopular board="vaccine" />
+      </>
+    );
+  }
+
+
   return (
     <>
       {modal_status && <Login />}
-
-      <Intro>
-        <img src={IntroCharacter} alt="" />
-        <h1>
-          여러분의 <span>백신 접종 후기</span>를 공유해주세요!
-        </h1>
-      </Intro>
-
+      {alert_status && <Alert />}
+      <Intro />
       <MapAndChart>
         <Map />
         <MainNivoBar />
       </MapAndChart>
-
       <MainTo />
-
       <MainPopular board="vaccine" />
-
-      {alert_status && <Alert />}
     </>
   );
 };
 
-const Intro = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 230px;
-  background-color: ${theme.bg};
-
-  & > img {
-    width: auto;
-    height: auto;
-    max-width: 330px;
-    max-height: 330px;
-
-    padding-top: 92px;
-  }
-
-  & > h1 {
-    padding-left: 0px;
-    padding-top: 75px;
-    font-size: ${theme.headTwoHeight};
-    line-height: 42px;
-
-    color: #ffffff;
-
-    & > span {
-      font-weight: 600;
-    }
-  }
-`;
 
 const MapAndChart = styled.div`
   display: flex;
