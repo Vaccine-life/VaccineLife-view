@@ -31,26 +31,23 @@ const Medical = () => {
     return (
       <>
         <MetaScript title="슬기로운 백신생활 | 의료진" />
-        <Grid margin={`20px auto 0 auto`}>
-          <Grid align="left" padding="0 1rem">
-            <Text
-              bold
-              size={theme.SubHeadOneSize}
-              lineHeight={theme.SubHeadOneHeight}
-              color={theme.fontColor}
-            >
-              의료진분들께
-            </Text>
-            <div
-              style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
-            ></div>
-          </Grid>
+        <Grid is_flex="center" height="60px" bg={theme.bg2}>
+          <Text
+            color={theme.white}
+            size={theme.SubHeadOneSize}
+            lineHeight={theme.headOneHeight}
+            bold
+          >의료진분들께
+          </Text>
+        </Grid>
 
+        <Grid margin={`30px auto 0 auto`}>
           <CommentWrite />
           {comment_list.map((c, idx) => {
             return <CommentList key={idx} {...c} />;
           })}
         </Grid>
+
         {modal_status && <NavModal/>}
         {alert_status && <Alert />}
       </>
@@ -66,13 +63,13 @@ const Medical = () => {
             bold
             size={theme.headOneSize}
             lineHeight={theme.headOneHeight}
-            color={theme.fontColor}
+            color={theme.typoBlack}
           >
             의료진분들께
           </Text>
-          <div
+          {/* <div
             style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
-          ></div>
+          ></div> */}
         </Grid>
 
         <CommentWrite />
