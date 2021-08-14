@@ -26,24 +26,34 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
     }
   };
 
+  // 백신 접종 여부에서 '접종하지 않음'선택시 나머지 input을 disable하기 위해, isVaccine값은 선택 즉시 setState
+  const handleIsVaccineClick = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: parseInt(value),
+    });
+  };
+
   // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    // console.log(name, value);
 
-    // '접종하지않음' 선택시 나머지 input을 (선택하지 않은) 기본값으로 set
-    if (name === "isVaccine" && value === "0") {
-      setInputs({
-        [name]: parseInt(value),
-        degree: undefined,
-        type: undefined,
-        gender: undefined,
-        age: undefined,
-        disease: undefined,
-        afterEffect: [],
-      });
-    }
+    // // '접종하지않음' 선택시 나머지 input을 (선택하지 않은) 기본값으로 set
+    // if (name === "isVaccine" && value === 0) {
+    //   setInputs({
+    //     [name]: parseInt(value),
+    //     degree: undefined,
+    //     type: undefined,
+    //     gender: undefined,
+    //     age: undefined,
+    //     disease: undefined,
+    //     afterEffect: [],
+    //   });
+    // }
 
-    if (name === "isVaccine" && value === "1") {
+    if (name === "isVaccine" && value === 1) {
       setInputs({
         ...inputs,
         [name]: parseInt(value),
@@ -116,7 +126,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               name="isVaccine"
               value="1"
               id="isVaccine1"
-              onClick={handleRadioClick}
+              onClick={handleIsVaccineClick}
             />
             <label htmlFor="isVaccine1">접종함</label>
             <input
@@ -124,7 +134,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
               name="isVaccine"
               value="0"
               id="isVaccine0"
-              onClick={handleRadioClick}
+              onClick={handleIsVaccineClick}
             />
             <label htmlFor="isVaccine0">접종하지않음</label>
           </TwoOptions>
