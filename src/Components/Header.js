@@ -14,7 +14,7 @@ import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "./mobile/NavBar";
+import NavModal from "./mobile/NavModal";
 
 
 const Header = (props) => {
@@ -28,25 +28,21 @@ const Header = (props) => {
     return (
       <>
         <Grid is_flex="space_row" padding="1rem 1.5rem">
-          <Grid
-            is_flex="center"
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
             <Image
               shape="rectangle"
               width={theme.logoWidth}
               height={theme.logoHeight}
               cursor="pointer"
               src={logo}
+              _onClick={() => {
+                history.push("/");
+              }}
             />
-          </Grid>
           <FontAwesomeIcon 
             icon={faBars} 
             color={theme.bg2} 
             size="2x"
-            onClick={() => {<NavBar/>}}
+            onClick={() => dispatch(actionVisible())}
           />
         </Grid>
       </>
