@@ -13,6 +13,7 @@ import { isMobile } from "react-device-detect";
 
 
 const CommentList = (props) => {
+    // console.log(props)
     const medi_id = props.id;
 
     const dispatch = useDispatch();

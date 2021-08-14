@@ -19,6 +19,7 @@ const theme = {
   tagColor: "#dfe4ea",
   disabledColor: "#DFDFDF",
   white: "#FFFFFF",
+  SuccessGreen: "#00B3A6",
 
   //font size
   headOneSize: "24px",

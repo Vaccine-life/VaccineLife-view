@@ -41,17 +41,18 @@ const NavModal = (props) => {
                         dispatch(actionVisible());
                         }}
                         >
-                        <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
+                        <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg"/>
                     </Xbutton>
 
                     <Grid align="left">
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>{nickname}님, 환영합니다</Text>
+                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+                            <span style={{color: `{theme.SuccessGreen}`}}>{nickname}</span>님, 환영합니다</Text>
                         <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}/>
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
                         <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}/>
-                        <Text>로그아웃</Text>
+                        <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">로그아웃</Text>
                     </Grid>
                 </Modal>
             </Wrapper>
@@ -94,13 +95,14 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  margin-left: auto;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Modal = styled.div`
   width: 50%;
-  height: 50%;
+  height: 90%;
   position: relative;
   top: 50%;
   right: 50%;
@@ -117,7 +119,7 @@ const Modal = styled.div`
 `;
 
 const Xbutton = styled.div`
-  margin: 0 0 0 auto;
+  margin: 1rem 0 1rem auto;
   &:hover {
     cursor: pointer;
   }

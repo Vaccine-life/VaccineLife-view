@@ -12,6 +12,7 @@ import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
 import { useEffect } from "react";
+import NavModal from "../components/mobile/NavModal";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -26,7 +27,8 @@ const Main = () => {
   if (isMobile) {
     return (
       <>
-        {modal_status && <Login />}
+        {modal_status && <NavModal/>}
+        {/* {modal_status && <Login />} */}
         {alert_status && <Alert />}
         <Intro />
         <Map />

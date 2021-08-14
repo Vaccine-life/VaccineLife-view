@@ -152,6 +152,7 @@ const Stick = styled.div`
 const Img = styled.div`
   @media (max-width: 960px) {
     float: left;
+    text-align: left;
   }
 `;
 

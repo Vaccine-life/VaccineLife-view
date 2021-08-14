@@ -20,7 +20,6 @@ import NavModal from "./mobile/NavModal";
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
-  const modal_status = useSelector((state) => state.modal.visible);
   const dispatch = useDispatch();
   const url = history.location.pathname;
 
@@ -29,20 +28,16 @@ const Header = (props) => {
     return (
       <>
         <Grid is_flex="space_row" padding="1rem 1.5rem">
-          <Grid
-            is_flex="center"
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
             <Image
               shape="rectangle"
               width={theme.logoWidth}
               height={theme.logoHeight}
               cursor="pointer"
               src={logo}
+              _onClick={() => {
+                history.push("/");
+              }}
             />
-          </Grid>
           <FontAwesomeIcon 
             icon={faBars} 
             color={theme.bg2} 
