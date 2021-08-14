@@ -5,9 +5,9 @@ import logger from "./logger";
 // 얘가 있으면, 앞으로 api라고만 써도 baseURL과 Headers가 따라다닌다.
 const api = axios.create({
   // 태현님 api 주소
-  //baseURL: "http://52.78.76.184:8080",
+  baseURL: "http://52.78.76.184:8080",
   // 지현님 api 주소
-  baseURL: "http://3.36.91.191:8081",
+  // baseURL: "http://3.36.91.191:8081",
   Headers: `${getCookie("vaccine_life_token")}`,
 });
 
