@@ -29,7 +29,7 @@ const Footer = () => {
           />
         </Grid>
 
-        <Grid width="auto" height="auto">
+        <Grid margin="2rem 0" width="auto" height="auto">
           <TitleNav>
             <Text
               bold
@@ -131,18 +131,18 @@ const FixedFooter = styled.div`
   padding: 1.2rem 0;
   @media (max-width: 960px) {
     flex-direction: column;
-    padding: 4rem 0;
+    padding: 3rem 0 1rem 0;
   }
 `;
 
 const TitleNav = styled.div`
   display: flex;
-  padding: 1.8rem 0;
-  justify-content: space-evenly;
   @media (max-width: 960px) {
     flex-direction: row;
     text-align: center;
     white-space: nowrap;
+    padding: 0 0 1.8rem 0;
+    justify-content: space-evenly;
   }
 `;
 
