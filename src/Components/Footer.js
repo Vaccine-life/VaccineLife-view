@@ -6,13 +6,17 @@ import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/슬기로운-white.png";
-import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 
 const Footer = () => {
   return (
     <React.Fragment>
       <FixedFooter>
-
         <Grid
           width="auto"
           margin="1rem 5rem"
@@ -22,13 +26,13 @@ const Footer = () => {
           }}
         >
           {/* <Img> */}
-            <Image
-              shape="rectangle"
-              width={theme.logoWidth}
-              height={theme.logoHeight}
-              cursor="pointer"
-              src={logo}
-            />
+          <Image
+            shape="rectangle"
+            width={theme.logoWidth}
+            height={theme.logoHeight}
+            cursor="pointer"
+            src={logo}
+          />
           {/* </Img> */}
         </Grid>
 
@@ -116,7 +120,6 @@ const Footer = () => {
             </Text>
           </Common>
         </Grid>
-
       </FixedFooter>
     </React.Fragment>
   );
@@ -124,6 +127,7 @@ const Footer = () => {
 
 const FixedFooter = styled.div`
   margin-top: auto;
+
   background-color: ${theme.typoBlack};
   display: flex;
   align-items: center;
@@ -142,7 +146,7 @@ const Common = styled.ul`
     text-align: left;
     white-space: nowrap;
   }
-`
+`;
 const Stick = styled.div`
   @media (max-width: 960px) {
     display: none;
