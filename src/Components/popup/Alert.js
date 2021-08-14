@@ -25,7 +25,7 @@ const Alert = () => {
         <Grid is_flex="center">
           <Button
             margin="30px 0 10px 0"
-            width={theme.mediumButtonWidth}
+            width="120px"
             height={theme.mediumButtonHeight}
             bg={theme.btnColor}
             fontSize={theme.bodyTwoSize}

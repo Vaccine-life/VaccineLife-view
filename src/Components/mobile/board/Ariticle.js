@@ -48,8 +48,8 @@ const Ariticle = (props) => {
   };
 
   return (
-    <Grid padding="16px">
-      <TitleDiv onClick={handleMovePage}>
+    <Grid padding="0 16px 0 16px">
+      <TextDiv onClick={handleMovePage}>
         {board === "vaccine" && (
           <Text size={theme.bodyfourSize} color={theme.bg} margin="0 4px 0 0">
             [{typeChanger(type)}]
@@ -61,14 +61,51 @@ const Ariticle = (props) => {
         >
           {title}
         </Text>
-      </TitleDiv>
+      </TextDiv>
+      <Grid is_flex="space_row">
+        <TextDiv>
+          <EachDiv>
+            {" "}
+            <LikeIconChanger board={board} boardId={boardId} />
+            <p style={{ marginLeft: "3px" }}>{likeCount}</p>
+          </EachDiv>
+          <EachDiv>
+            {" "}
+            <FontAwesomeIcon icon={faCommentAlt} />
+            <p style={{ marginLeft: "3px" }}>{commentCount}</p>
+          </EachDiv>
+          <EachDiv>
+            {" "}
+            <FontAwesomeIcon icon={faEye} />
+            <p style={{ marginLeft: "3px" }}>{totalVisitors}</p>
+          </EachDiv>
+        </TextDiv>
+        <Text color={theme.typoGrey1}>{displayedAt(createAt)}</Text>
+      </Grid>
+      <Div></Div>
     </Grid>
   );
 };
 
-const TitleDiv = styled.div`
+const TextDiv = styled.div`
   text-align: start;
   display: flex;
+`;
+const Div = styled.div`
+  background-color: ${theme.typoLightGrey2};
+  height: 1px;
+  margin: 16px 0 16px 0;
+`;
+const EachDiv = styled.div`
+  height: 100%;
+  color: ${theme.typoGrey1};
+  font-size: ${theme.bodyfourSize};
+  line-height: ${theme.bodyfourHeight};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 16px;
+  margin-top: 3px;
 `;
 
 export default Ariticle;

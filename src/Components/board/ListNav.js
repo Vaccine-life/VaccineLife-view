@@ -85,10 +85,10 @@ const ListNav = (props) => {
 };
 
 const Div = styled.div`
-  margin: 0 auto 0 auto;
+  margin: 0 16px 0 16px;
   background-color: ${theme.typoLightGrey2};
   height: 1px;
-  width: 382px;
+  margin-bottom: 16px;
 `;
 
 export default ListNav;
