@@ -37,7 +37,7 @@ const Medical = () => {
             size={theme.SubHeadOneSize}
             lineHeight={theme.headOneHeight}
             bold
-          >의료진분들께
+          >의료진 분들께
           </Text>
         </Grid>
 
