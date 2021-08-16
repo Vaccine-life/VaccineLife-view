@@ -20,7 +20,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect === ""
+      afterEffect === []
     ) {
       return true;
     }

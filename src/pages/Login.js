@@ -33,7 +33,7 @@ const Login = (props) => {
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: "",
+    afterEffect: [],
   });
 
   const formik = useFormik({
@@ -65,7 +65,6 @@ const Login = (props) => {
 
     onSubmit: (values) => {
       const user = { ...values, ...inputs };
-      console.log(user);
       dispatch(actionSignup(user));
     },
   });

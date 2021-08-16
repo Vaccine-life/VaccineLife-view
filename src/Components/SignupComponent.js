@@ -3,8 +3,11 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
+import { idDupCheck } from "../redux/modules/user";
+import { useDispatch } from "react-redux";
 
 const SignupComponent = ({ formik }) => {
+  const dispatch = useDispatch();
   // const errorMessage = useSelector((state) => state.popup.alertMessage);
 
   return (
@@ -32,6 +35,7 @@ const SignupComponent = ({ formik }) => {
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
         </InputBox>
+        <button onClick={idDupCheck(formik.values.username)}>중복확인</button>
 
         {/* <InputBox>
           <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>

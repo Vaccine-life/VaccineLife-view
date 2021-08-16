@@ -15,7 +15,7 @@ const initialState = {
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: "",
+    afterEffect: [],
   },
   is_login: false,
   expTime: 0,
@@ -99,8 +99,6 @@ export const actionSignup =
         afterEffect: afterEffect.sort().join(", "),
       });
 
-      console.log("없음", afterEffect);
-
       dispatch(actionVisible());
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
@@ -122,7 +120,6 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      console.log(newuser);
       dispatch(
         actionSetMessage(
           `반갑습니다 ${nickname}님!
@@ -130,6 +127,23 @@ export const actionSignup =
         )
       );
       dispatch(actionAlert());
+    } catch (error) {
+      logger(error);
+      dispatch(actionSetMessage(error.response.data.message));
+      dispatch(actionAlert());
+    }
+  };
+
+export const idDupCheck =
+  ({ username }) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      // 여기가 찐 회원가입에만 관여하는 부분
+      const idDupRes = await userAxios.idDupCheck({
+        username,
+      });
+
+      console.log("idDupCheck", idDupRes);
     } catch (error) {
       logger(error);
       dispatch(actionSetMessage(error.response.data.message));
