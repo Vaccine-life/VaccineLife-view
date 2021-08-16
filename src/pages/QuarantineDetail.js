@@ -208,13 +208,13 @@ const TextDiv = styled.div`
 const CenterLine = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${theme.typoGrey3};
+  background-color: ${theme.typoLightGrey2};
 `;
 
 const CenterLineM = styled.div`
   width: 100%;
-  height: 100px;
-  background-color: ${theme.bg3};
+  height: 1px;
+  background-color: ${theme.typoLightGrey2};
 `;
 const TextDivM = styled.div`
   font-size: ${theme.SubHeadTwoSize};
