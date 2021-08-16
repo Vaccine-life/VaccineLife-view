@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import theme from '../styles/theme';
 import { history } from "../redux/configStore";
 import ToVacImage from "../images/ToVacImage.png"
-import { isMobile } from 'react-device-detect';
+import { isMobileOnly } from 'react-device-detect';
 
 const MainTo = (props) => {
 
-    if (isMobile) {
+    if (isMobileOnly) {
         return (
             <>
                 <ToVacBoardMobile

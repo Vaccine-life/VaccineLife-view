@@ -2,11 +2,11 @@ import React from 'react'
 import IntroCharacter from "../images/IntroCharacter.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 
 const Intro = () => {
 
-    if (isMobile) {
+    if (isMobileOnly) {
         return (
             <MainIntroMobile>
                 <img src={IntroCharacter} alt="" />
