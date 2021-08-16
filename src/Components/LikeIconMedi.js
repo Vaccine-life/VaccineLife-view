@@ -6,35 +6,29 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
-import { actionPostLike } from "../redux/modules/like";
+import { actionMediLike } from "../redux/modules/like";
 
-const LikeIconChanger = (props) => {
-  const { board, boardId, size, bigHeart } = props;
-  const is_login = useSelector((state) => state.user.is_login);
+const LikeIconMedi = (props) => {
+  // console.log(props)
+  const { boardId, size, bigHeart } = props;
   const userId = useSelector((state) => state.user.user.userId);
-  const like_list_vac = useSelector((state) => state.like.likeListVac);
-  const like_list_quar = useSelector((state) => state.like.likeListQuar);
-  const dispatch = useDispatch();
-  const isHeart =
-    board === "vaccine"
-      ? like_list_vac.includes(boardId)
-      : like_list_quar.includes(boardId);
+  const like_list_medi = useSelector((state) => state.like.likeListMedi);
 
-  const likeObj =
-    board === "vaccine"
-      ? {
-          vacBoardId: boardId,
-          userId,
-        }
-      : {
-          quarBoardId: boardId,
-          userId,
-        };
-        console.log(likeObj)
-        
-  const handleLikeClick = () => {
-    dispatch(actionPostLike(board, likeObj));
+  const dispatch = useDispatch();
+
+  const isHeart = like_list_medi.includes(boardId);
+  console.log(isHeart)
+
+  const likeObj = {
+    medicalId: boardId,
+    userId,
   };
+  console.log(likeObj)
+
+  const handleLikeClick = () => {
+    dispatch(actionMediLike(likeObj));
+  };
+
 
   if (bigHeart) {
     return (
@@ -59,7 +53,7 @@ const LikeIconChanger = (props) => {
   }
 };
 
-LikeIconChanger.defaultProps = {
+LikeIconMedi.defaultProps = {
   size: "1x",
   bigHeart: false,
 };
@@ -110,4 +104,4 @@ const BigWrapper = styled.div`
   `}
 `;
 
-export default LikeIconChanger;
+export default LikeIconMedi;

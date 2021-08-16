@@ -9,6 +9,7 @@ import logger from "../../shared/logger";
 import LikeIconChanger from "../LikeIconChanger";
 
 const Contents = (props) => {
+  console.log(props)
   const { contents, board, boardId } = props;
   // 클릭했을때 색 변경 추가할것
 

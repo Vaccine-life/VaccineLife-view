@@ -9,8 +9,10 @@ import Login from "./Login";
 import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import NavModal from "../components/mobile/NavModal";
+import PopularComment from "../components/PopularComment";
+import { actionGetLikeMedi } from "../redux/modules/like";
 
 
 const Medical = () => {
@@ -25,9 +27,10 @@ const Medical = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(actionGetMedical());
+    dispatch(actionGetLikeMedi());
   }, []);
 
-  if(isMobile) {
+  if(isMobileOnly) {
     return (
       <>
         <MetaScript title="슬기로운 백신생활 | 의료진" />
@@ -67,12 +70,10 @@ const Medical = () => {
           >
             의료진분들께
           </Text>
-          {/* <div
-            style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
-          ></div> */}
         </Grid>
 
         <CommentWrite />
+        <PopularComment />
         {comment_list.map((c, idx) => {
           return <CommentList key={idx} {...c} />;
         })}

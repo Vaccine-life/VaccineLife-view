@@ -9,11 +9,12 @@ import { actionMedicalConfirm, acionSetMedicalObj } from "../redux/modules/popup
 import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { isMobile } from "react-device-detect";
+import LikeIconMedi from "./LikeIconMedi";
+import { isMobileOnly } from "react-device-detect";
 
 
 const CommentList = (props) => {
-    // console.log(props)
+    console.log(props)
     const medi_id = props.id;
 
     const dispatch = useDispatch();
@@ -21,9 +22,10 @@ const CommentList = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
     const medical_status = useSelector((state) => state.popup.medicalConfirm);
+    const likeCount = useSelector((state) => state.comment.likeCount);
 
 
-    if(isMobile) {
+    if(isMobileOnly) {
         return (
             <>
             <Grid is_flex="column_left_start" margin="2rem 0" padding="0 1rem">
@@ -39,7 +41,7 @@ const CommentList = (props) => {
                         </Text>
                     </Grid>
 
-                    <Grid align="right" width="9rem" margin="auto 0.5rem">
+                    <Grid align="right" margin="auto 0.5rem">
                         {is_login && userId === props.userId ? 
                         <Text 
                             color={theme.typoGrey3}
@@ -86,7 +88,7 @@ const CommentList = (props) => {
             <Grid is_flex="column_left_start" margin="4rem 0">
 
                 <CommentHead>
-                    <Grid align="left" width="10rem" padding="1rem 0.5rem">
+                    <Grid align="left" width="20rem" padding="1rem 0.5rem">
                         <Text 
                             bold
                             size={theme.SubHeadTwoSize}
@@ -110,6 +112,20 @@ const CommentList = (props) => {
                         ><FontAwesomeIcon icon={faTrashAlt}/>
                         </Text>
                         : ""}
+                    </Grid>
+                    
+                    {/* 하트아이콘 및 갯수 */}
+                    <Grid is_flex="center" margin="0 0 0 11px">
+                        <LikeIconMedi boardId={props.id} />
+                        <p
+                        style={{
+                            fontSize: `${theme.bodyfourSize}`,
+                            marginLeft: "5.55px",
+                            color: `${theme.typoGrey1}`,
+                        }}
+                        >
+                        {props.likeCount}
+                        </p>
                     </Grid>
 
                     <Grid align="right" margin="auto 0.5rem">
@@ -145,13 +161,14 @@ const CommentList = (props) => {
 //     insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm:ss"),
 // }
 
-const CommentHead = styled.ul`
+const CommentHead = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
     border-top: 2px solid ${theme.typoGrey2};
     border-bottom: 1px solid ${theme.typoLightGrey2};
+    align-items: center;
 `
 
 export default CommentList;

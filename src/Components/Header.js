@@ -11,7 +11,7 @@ import logo from "../assets/mainlogo.png";
 import theme from "../styles/theme";
 import { deleteCookie } from "../shared/cookie";
 import { actionLogoutCookie } from "../redux/modules/user";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavModal from "./mobile/NavModal";
@@ -24,7 +24,7 @@ const Header = (props) => {
   const url = history.location.pathname;
 
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <>
         <Grid is_flex="space_row" padding="1rem 1.5rem">

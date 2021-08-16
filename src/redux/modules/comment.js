@@ -7,6 +7,7 @@ import { actionAlert, actionSetMessage } from "./popup";
 
 const initialState = {
   list: [],
+  topThreeMedi: [],
   commentVac: [],
   commentQuar: [],
 };
@@ -35,6 +36,31 @@ const comment = createSlice({
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
+    },
+    // 의료진 좋아요 관련
+    actionSetTopThreeMedi: (state, action) => {
+      state.topThreeMedi = action.payload;
+    },
+    acionMinusLikeMedi: (state, action) => {
+      const { medicalId } = action.payload;
+      state.list = state.list.map((each) => {
+        if (each.id === medicalId) {
+          return { ...each, likeCount: each.likeCount - 1 };
+        }
+        return { ...each };
+      });
+      state.likeCount = state.likeCount - 1;
+     
+    },
+    acionPlusLikeMedi: (state, action) => {
+      const { medicalId } = action.payload;
+      state.listVac = state.list.map((each) => {
+        if (each.id === medicalId) {
+          return { ...each, likeCount: each.likeCount + 1 };
+        }
+        return { ...each };
+      });
+      state.likeCount = state.likeCount + 1;
     },
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
@@ -107,6 +133,23 @@ export const actionDeleteMedical =
       dispatch(actionDeleteComment({ medicalId }));
       history.replace("/medical");
     } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+// 서버의 medical top3 가져오기
+export const actionGetTopThreeMedi =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      const getData = await medicalAxios.topThreeMedi();
+      dispatch(actionSetTopThreeMedi(getData.data));
+      dispatch(actionLoading());
+    } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
@@ -188,6 +231,9 @@ export const {
   actionSetComment,
   actionAddComment,
   actionDeleteComment,
+  actionSetTopThreeMedi,
+  acionMinusLikeMedi,
+  acionPlusLikeMedi,
   actionSetCommentListState,
   actionAddCommentListState,
   actionDeleteCommentListState,

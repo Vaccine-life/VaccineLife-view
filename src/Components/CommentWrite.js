@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const CommentWrite = (props) => {
   };
 
 
-  if(isMobile) {
+  if(isMobileOnly) {
     return (
       <>
         <Grid is_flex="space_column" padding="0 1rem">

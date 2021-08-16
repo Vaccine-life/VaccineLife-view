@@ -3,6 +3,7 @@ import { likeAxios } from "../../shared/api";
 import { getCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
 import { acionMinusLike, acionPlusLike } from "./board";
+import { acionMinusLikeMedi, acionPlusLikeMedi } from "./comment";
 import { actionAlert, actionSetMessage } from "./popup";
 
 const like = createSlice({
@@ -10,6 +11,7 @@ const like = createSlice({
   initialState: {
     likeListVac: [],
     likeListQuar: [],
+    likeListMedi: [],
   },
   reducers: {
     actionSetLikeVac: (state, action) => {
@@ -17,6 +19,9 @@ const like = createSlice({
     },
     actionSetLikeQuar: (state, action) => {
       state.likeListQuar = action.payload;
+    },
+    actionSetLikeMedi: (state, action) => {
+      state.likeListMedi = action.payload;
     },
     actionMinusLikeInLikeListVac: (state, action) => {
       state.likeListVac = state.likeListVac.filter((each) => {
@@ -28,11 +33,19 @@ const like = createSlice({
         return each !== action.payload;
       });
     },
+    actionMinusLikeInLikeListMedi: (state, action) => {
+      state.likeListMedi = state.likeListMedi.filter((each) => {
+        return each !== action.payload;
+      });
+    },
     actionPlusLikeInLikeListVac: (state, action) => {
       state.likeListVac.push(action.payload);
     },
     actionPlusLikeInLikeListQuar: (state, action) => {
       state.likeListQuar.push(action.payload);
+    },
+    actionPlusLikeInLikeListMedi: (state, action) => {
+      state.likeListMedi.push(action.payload);
     },
   },
 });
@@ -61,6 +74,32 @@ export const actionGetLike =
         });
         dispatch(actionSetLikeQuar(makeData));
       }
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+// 의료진 좋아요 가져오기 미들웨어
+export const actionGetLikeMedi =
+  (board) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const is_login = getState().user.is_login;
+      if (!is_login) {
+        return;
+      }
+      const userId = getState().user.user.userId;
+      let getData = [];
+      let makeData = [];
+      getData = await likeAxios.getLikeListMedi(userId);
+      getData.data.map((each) => {
+        makeData.push(each.medicalId);
+      });
+      dispatch(actionSetLikeMedi(makeData));
+     
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -111,13 +150,46 @@ export const actionPostLike =
     }
   };
 
+// 의료진 좋아요 하기 미들웨어
+export const actionMediLike =
+  (obj) =>
+  async (dispatch, getState, { history }) => {
+    const is_cookie = getCookie("vaccine_life_token");
+    if (is_cookie === undefined) {
+      dispatch(actionSetMessage("로그인 후 이용해 주세요."));
+      dispatch(actionAlert());
+      return;
+    }
+    try {
+      const getData = await likeAxios.likeMedi(obj);
+      const result = getData.data.ok;
+      const boardId = obj.medicalId;
+      if (!result) {
+        dispatch(actionMinusLikeInLikeListMedi(boardId));
+        dispatch(acionMinusLikeMedi({ boardId }));
+      } else {
+        dispatch(actionPlusLikeInLikeListMedi(boardId));
+        dispatch(acionPlusLikeMedi({ boardId }));
+      }
+    } catch (error) {
+      logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
 export const {
   actionSetLikeVac,
   actionSetLikeQuar,
+  actionSetLikeMedi,
   actionMinusLikeInLikeListVac,
   actionMinusLikeInLikeListQuar,
+  actionMinusLikeInLikeListMedi,
   actionPlusLikeInLikeListVac,
   actionPlusLikeInLikeListQuar,
+  actionPlusLikeInLikeListMedi,
 } = like.actions;
 
 export default like;
