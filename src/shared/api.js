@@ -16,6 +16,8 @@ export const userAxios = {
   signup: (obj) => api.post("/api/signup", obj),
   idDupCheck: (username) =>
     api.get(`/api/signup/username?username=${username}`),
+  nicknameDupCheck: (nickname) =>
+    api.get(`/api/signup/nickname?nickname=${nickname}`),
 };
 
 export const boardAxios = {

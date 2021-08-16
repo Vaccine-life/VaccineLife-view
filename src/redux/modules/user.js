@@ -135,21 +135,6 @@ export const actionSignup =
     }
   };
 
-// idDupCheck는 함수인데.. 특이하게 생겼죵? 썽크를 통해 쓰이기 땜시 함수를 한 번 더 감싼 것임다
-// 근데 컴포넌트에서 직접 쓰일 때는 함수 = async(username) 어쩌고 하면서 쓰면 됨. 이중으로 쓸 필요 없다 이거야..!
-
-// export const idDupCheck = (username) => async () => {
-//   try {
-//     const idDupRes = await userAxios.idDupCheck(username);
-
-//     console.log("idDupCheck", idDupRes);
-//   } catch (error) {
-//     logger(error);
-//     // dispatch(actionSetMessage(error.response.data.message));
-//     // dispatch(actionAlert());
-//   }
-// };
-
 export const actionGetUseInfo = () => (dispatch) => {
   const getUserToken = getCookie("vaccine_life_token");
   const userInfoDecode = jwtDecode(getUserToken);

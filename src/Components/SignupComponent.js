@@ -12,12 +12,26 @@ const SignupComponent = ({ formik }) => {
 
   const [idDupOk, setIdDupOk] = useState(false);
   const [idDupMsg, setIdDupMsg] = useState("");
+  const [nicknameDupOk, setNicknameDupOk] = useState(false);
+  const [nicknameDupMsg, setNicknameDupMsg] = useState("");
 
   const idDupCheck = (username) => async () => {
     try {
       const idDupRes = await userAxios.idDupCheck(username);
       setIdDupOk(idDupRes.data.ok);
       setIdDupMsg(idDupRes.data.msg);
+    } catch (error) {
+      logger(error);
+      // dispatch(actionSetMessage(error.response.data.message));
+      // dispatch(actionAlert());
+    }
+  };
+
+  const nicknameDupCheck = (nickname) => async () => {
+    try {
+      const nicknameDupRes = await userAxios.nicknameDupCheck(nickname);
+      setNicknameDupOk(nicknameDupRes.data.ok);
+      setNicknameDupMsg(nicknameDupRes.data.msg);
     } catch (error) {
       logger(error);
       // dispatch(actionSetMessage(error.response.data.message));
@@ -32,11 +46,6 @@ const SignupComponent = ({ formik }) => {
           회원가입
         </Text>
 
-        {/* <InputBox>
-          <Text margin="0 auto 0 0" size={theme.bodyThreeSize}>
-            아이디
-          </Text>
-        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="아이디를 입력해주세요"
@@ -52,22 +61,9 @@ const SignupComponent = ({ formik }) => {
           {formik.touched.username && formik.errors.username ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
-          {idDupOk ? (
-            <SignupError style={{ color: `${theme.successColor}` }}>
-              {idDupMsg}
-            </SignupError>
-          ) : (
-            <SignupError style={{ color: `${theme.errorColor}` }}>
-              {idDupMsg}
-            </SignupError>
-          )}
+          {!idDupOk ? <SignupError>{idDupMsg}</SignupError> : null}
         </InputBox>
 
-        {/* <InputBox>
-          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
-            비밀번호
-          </Text>
-        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="비밀번호를 입력해주세요"
@@ -82,11 +78,6 @@ const SignupComponent = ({ formik }) => {
           ) : null}
         </InputBox>
 
-        {/* <InputBox>
-          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
-            비밀번호 확인
-          </Text>
-        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="비밀번호를 다시 입력해주세요"
@@ -101,23 +92,22 @@ const SignupComponent = ({ formik }) => {
           ) : null}
         </InputBox>
 
-        {/* <InputBox>
-          <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
-            닉네임
-          </Text>
-        </InputBox> */}
         <InputBox>
           <SignupInput
             placeholder="닉네임을 신중히 입력해주세요(수정불가)"
             id="nickname"
             name="nickname"
             type="text"
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              dispatch(nicknameDupCheck(e.target.value));
+            }}
             value={formik.values.nickname}
           />
           {formik.touched.nickname && formik.errors.nickname ? (
             <SignupError>{formik.errors.nickname}</SignupError>
           ) : null}
+          {!nicknameDupOk ? <SignupError>{nicknameDupMsg}</SignupError> : null}
         </InputBox>
 
         <Button
@@ -169,6 +159,7 @@ const SignupError = styled.div`
   width: 100%;
   text-align: right;
   font-size: ${theme.bodyfourSize};
+  color: ${theme.errorColor};
 `;
 
 export default withRouter(SignupComponent);
