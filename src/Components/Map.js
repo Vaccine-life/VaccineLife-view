@@ -4,7 +4,7 @@ import SouthKorea from "../images/South_Korea.png";
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 
 const Map = () => {
 
@@ -64,7 +64,7 @@ const Map = () => {
     fetchEvents();
   }, [])
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <WrapperMobile>
         <MapTitleMobile>

@@ -1,13 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
 import Intro from '../components/Intro';
 
 import Map from "../components/Map";
-import { Grid } from '../elements';
 import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
@@ -24,17 +23,17 @@ const Main = () => {
   }, []);
 
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <>
-        {modal_status && <NavModal/>}
+        {modal_status && <NavModal />}
         {/* {modal_status && <Login />} */}
         {alert_status && <Alert />}
         <Intro />
         <Map />
         <MainNivoBar />
         <MainTo />
-        <MainPopular board="vaccine" />
+        <MainPopular />
       </>
     );
   }
