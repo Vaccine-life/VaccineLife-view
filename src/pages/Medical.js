@@ -9,8 +9,10 @@ import Login from "./Login";
 import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import NavModal from "../components/mobile/NavModal";
+import PopularComment from "../components/PopularComment";
+import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
 
 const Medical = () => {
@@ -21,13 +23,20 @@ const Medical = () => {
 
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
+  const is_login = useSelector((state) => state.user.is_login);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    // if (!is_login) {
+    //   return;
+    // }
+    // 로그인이 안된다고 나옴. 로그인 한 상태인데???
     dispatch(actionGetMedical());
+    // dispatch(actionSetLikeMedi());
+    // dispatch(actionGetLikeMedi());
   }, []);
 
-  if(isMobile) {
+  if(isMobileOnly) {
     return (
       <>
         <MetaScript title="슬기로운 백신생활 | 의료진" />
@@ -67,12 +76,10 @@ const Medical = () => {
           >
             의료진분들께
           </Text>
-          {/* <div
-            style={{ borderBottom: "1px solid", margin: "2rem 0 0 0" }}
-          ></div> */}
         </Grid>
 
         <CommentWrite />
+        {/* <PopularComment /> */}
         {comment_list.map((c, idx) => {
           return <CommentList key={idx} {...c} />;
         })}

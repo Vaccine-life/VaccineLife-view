@@ -16,6 +16,7 @@ import NavModal from "../components/mobile/NavModal";
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
   useEffect(() => {
@@ -26,7 +27,7 @@ const Main = () => {
   if (isMobileOnly) {
     return (
       <>
-        {modal_status && <NavModal />}
+        {navModal_status && <NavModal />}
         {/* {modal_status && <Login />} */}
         {alert_status && <Alert />}
         <Intro />

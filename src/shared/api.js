@@ -43,8 +43,10 @@ export const writeAxios = {
 export const likeAxios = {
   likeVac: (obj) => api.post("/api/vacBoard/like", obj),
   likeQuar: (obj) => api.post("/api/quarBoard/like", obj),
+  likeMedi: (obj) => api.post("/api/medical/like", obj),
   getLikeListVac: (userId) => api.get(`/api/vacBoard/like/${userId}`),
   getLikeListQuar: (userId) => api.get(`/api/quarBoard/like/${userId}`),
+  getLikeListMedi: (userId) => api.get(`/api/medical/like/${userId}`),
 };
 
 export const commentAxios = {
@@ -62,4 +64,5 @@ export const medicalAxios = {
   getMedical: () => api.get("/api/medical"),
   addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
+  topThreeMedi: () => api.get("/api/medical/toplike"),
 };

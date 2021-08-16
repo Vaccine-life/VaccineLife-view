@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCookie } from "./cookie";
 import { actionGetUseInfo, actionLogoutCookie } from "../redux/modules/user";
-import { actionGetLike } from "../redux/modules/like";
+import { actionGetLike, actionGetLikeMedi } from "../redux/modules/like";
 import { actionGetClickList } from "../redux/modules/read";
 import MetaScript from "./MetaScript";
 import logger from "./logger";
@@ -40,6 +40,7 @@ function App() {
     dispatch(actionGetClickList());
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLike("quarantine"));
+    dispatch(actionGetLikeMedi());
   }, []);
 
   return (
