@@ -384,4 +384,4 @@ top: 29px;
 `;
 
 
-export default MainTo;
+export default MainTo
