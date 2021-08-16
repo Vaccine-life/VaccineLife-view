@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 
 const ListNav = (props) => {
@@ -33,7 +33,7 @@ const ListNav = (props) => {
     }
   };
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <>
         <Grid
@@ -49,15 +49,14 @@ const ListNav = (props) => {
             전체글
           </Text>
           <Button
-            width="100px"
-            height={theme.SubHeadOneHeight}
-            fontSize={theme.bodyThreeSize}
+            width="89px"
+            height="26px"
+            fontSize={theme.bodyfourSize}
             margin="0"
             _onClick={handleMoveWrite}
             bold
           >
-            글쓰기{" "}
-            <FontAwesomeIcon icon={faEdit} style={{ marginLeft: "10px" }} />
+            글쓰기
           </Button>
         </Grid>
         <Div></Div>

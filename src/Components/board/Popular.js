@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements";
@@ -28,7 +28,7 @@ const Popular = (props) => {
   const top_list_vac = useSelector((state) => state.board.topThreeVac);
   const top_list_quar = useSelector((state) => state.board.topThreeQuar);
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <Wrapper>
         <Grid height={theme.headOneHeight} is_flex="space_row">

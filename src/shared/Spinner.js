@@ -20,7 +20,6 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: ${theme.shadow};
   padding: 300px auto 0 auto;
 `;
 export default Spinner;

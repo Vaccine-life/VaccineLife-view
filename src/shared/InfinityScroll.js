@@ -3,7 +3,7 @@ import _ from "lodash";
 import logger from "./logger";
 
 const InfinityScroll = (props) => {
-  const { nextCall, children, is_loading, is_next } = props;
+  const { nextCall, children, is_loading, is_next, size } = props;
   const throttle = _.throttle(() => {
     let scrollHeight = document.documentElement.scrollHeight;
     let innerHeight = window.innerHeight;
@@ -12,14 +12,14 @@ const InfinityScroll = (props) => {
       document.body.scrollTop;
     let current_height = scrollHeight - innerHeight - scrollTop;
 
-    if (current_height < 300) {
+    if (current_height < size) {
       if (is_loading) {
         return;
       }
 
       nextCall();
     }
-  }, 300);
+  }, size);
   const throttle_callback = useCallback(throttle, [is_loading]);
 
   useEffect(() => {
