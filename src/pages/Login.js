@@ -89,12 +89,8 @@ const Login = (props) => {
 
   if (isMobileOnly) {
     return (
-      <React.Fragment
-        onClick={(e) => {
-          handleModalOff(e);
-        }}
-      >
-        <MobileLogin className="modal">
+      <>
+        <MobileLogin>
           <Xbutton
             onClick={() => {
               dispatch(actionVisible());
@@ -128,7 +124,7 @@ const Login = (props) => {
           )}
         </MobileLogin>
         {alert_status && <Alert />}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -214,15 +210,18 @@ const Xbutton = styled.div`
   }
 `;
 
+// <========= Mobile ==========>
+
 const MobileLogin = styled.div`
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
   padding: 40px;
+  z-index: 3;
 `;
 
 export default Login;

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
+import { isMobileOnly } from "react-device-detect";
 
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -26,6 +27,76 @@ const LoginComponent = ({ status, setStatus }) => {
       dispatch(actionLogin(values.username, values.password));
     },
   });
+
+  if (isMobileOnly) {
+    return (
+      <>
+        <MobileWrapper onSubmit={formik.handleSubmit}>
+          <Text margin={theme.headOneHeight} auto size={theme.headOneSize} bold>
+            로그인
+          </Text>
+
+          <LoginInput
+            placeholder="아이디"
+            id="username"
+            name="username"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.username}
+          />
+          {formik.touched.username && formik.errors.username ? (
+            <LoginError>{formik.errors.username}</LoginError>
+          ) : null}
+
+          <LoginInput
+            placeholder="비밀번호"
+            id="password"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <LoginError>{formik.errors.password}</LoginError>
+          ) : null}
+
+          <Button
+            margin="50px 0 20px 0"
+            width={theme.mediumButtonWidth}
+            height={theme.mediumButtonHeight}
+            type="submit"
+            bg={theme.btnColor}
+            fontSize={theme.bodyTwoSize}
+          >
+            로그인
+          </Button>
+
+          <Signup>
+            <Text color={theme.typoGrey2} size={theme.bodyThreeSize}>
+              아직 회원이 아니신가요?
+            </Text>
+            <Button
+              type="submit"
+              _onClick={() => {
+                setStatus("signup");
+              }}
+              margin="0"
+              width="6em"
+              bg="transparent"
+              color={theme.typoGrey2}
+              style={{
+                textDecoration: "underline",
+                color: `${theme.typoGrey2}`,
+              }}
+              fontSize={theme.bodyThreeSize}
+            >
+              회원가입
+            </Button>
+          </Signup>
+        </MobileWrapper>
+      </>
+    );
+  }
 
   return (
     <>
@@ -133,6 +204,14 @@ const Signup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const MobileWrapper = styled.form`
+  width: 100%;
+  height: auto;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
 `;
 
 export default LoginComponent;
