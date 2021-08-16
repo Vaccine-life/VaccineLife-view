@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionVisible } from "../redux/modules/modal";
+import { actionVisible, actionNavVisible } from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
@@ -42,7 +42,7 @@ const Header = (props) => {
             icon={faBars} 
             color={theme.bg2} 
             size="2x"
-            onClick={() => dispatch(actionVisible())}
+            onClick={() => dispatch(actionNavVisible())}
           />
         </Grid>
       </>

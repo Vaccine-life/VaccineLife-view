@@ -101,7 +101,7 @@ export const actionGetLikeMedi =
       let makeData = [];
       getData = await likeAxios.getLikeListMedi(userId);
       console.log(getData)
-      // 왜 안나옴???
+      // 왜 안나옴??? -> dispatch(actionGetLikeMedi())하니까 나옴
       getData.data.map((each) => {
         makeData.push(each.medicalId);
       });

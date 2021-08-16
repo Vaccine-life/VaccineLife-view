@@ -6,7 +6,7 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
-import { actionMediLike } from "../redux/modules/like";
+import { actionMediLike, actionSetLikeMedi } from "../redux/modules/like";
 
 const LikeIconMedi = (props) => {
   // console.log(props)
@@ -17,7 +17,7 @@ const LikeIconMedi = (props) => {
   const dispatch = useDispatch();
 
   const isHeart = like_list_medi.includes(boardId);
-  // console.log(isHeart)
+  console.log(isHeart)
 
   const likeObj = {
     medicalId: boardId,

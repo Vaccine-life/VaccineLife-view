@@ -13,6 +13,7 @@ import { isMobileOnly } from "react-device-detect";
 
 // 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
+  console.log(props)
   const {
     board,
     title,

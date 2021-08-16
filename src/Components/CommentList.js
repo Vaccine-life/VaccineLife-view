@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
 import { isMobileOnly } from "react-device-detect";
+import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
 
 const CommentList = (props) => {
@@ -22,7 +23,7 @@ const CommentList = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
     const medical_status = useSelector((state) => state.popup.medicalConfirm);
-
+    
 
     if(isMobileOnly) {
         return (
@@ -114,7 +115,7 @@ const CommentList = (props) => {
                     </Grid>
                     
                     <Grid is_flex="center">
-                        <LikeIconMedi boardId={props.id}/>
+                        <LikeIconMedi boardId={medi_id}/>
                         <Text
                             fontSize={theme.bodyfourSize}
                             margin= "0 0 0 5.55px"
