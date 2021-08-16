@@ -514,7 +514,6 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
           type="submit"
           disabled={disableSubmitButton()}
           onClick={() => {
-            console.log(inputs);
             setStatus("signup");
           }}
         >

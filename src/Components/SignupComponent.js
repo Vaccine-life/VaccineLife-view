@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 import theme from "../styles/theme";
-import { idDupCheck } from "../redux/modules/user";
+import { userAxios } from "../shared/api";
+import logger from "../shared/logger";
 import { useDispatch } from "react-redux";
 
 const SignupComponent = ({ formik }) => {
   const dispatch = useDispatch();
-  // const errorMessage = useSelector((state) => state.popup.alertMessage);
+
+  const [idDupOk, setIdDupOk] = useState(false);
+  const [idDupMsg, setIdDupMsg] = useState("");
+
+  const idDupCheck = (username) => async () => {
+    try {
+      const idDupRes = await userAxios.idDupCheck(username);
+      setIdDupOk(idDupRes.data.ok);
+      setIdDupMsg(idDupRes.data.msg);
+    } catch (error) {
+      logger(error);
+      // dispatch(actionSetMessage(error.response.data.message));
+      // dispatch(actionAlert());
+    }
+  };
 
   return (
     <>
@@ -28,14 +43,25 @@ const SignupComponent = ({ formik }) => {
             id="username"
             name="username"
             type="text"
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              dispatch(idDupCheck(e.target.value));
+            }}
             value={formik.values.username}
           />
           {formik.touched.username && formik.errors.username ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
+          {idDupOk ? (
+            <SignupError style={{ color: `${theme.successColor}` }}>
+              {idDupMsg}
+            </SignupError>
+          ) : (
+            <SignupError style={{ color: `${theme.errorColor}` }}>
+              {idDupMsg}
+            </SignupError>
+          )}
         </InputBox>
-        <button onClick={idDupCheck(formik.values.username)}>중복확인</button>
 
         {/* <InputBox>
           <Text margin="40px auto 0 0" size={theme.bodyThreeSize}>
@@ -143,7 +169,6 @@ const SignupError = styled.div`
   width: 100%;
   text-align: right;
   font-size: ${theme.bodyfourSize};
-  color: ${theme.errorColor};
 `;
 
 export default withRouter(SignupComponent);
