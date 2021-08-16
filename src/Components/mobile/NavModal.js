@@ -3,7 +3,7 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import { Grid, Text } from "../../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { actionNavVisible } from "../../redux/modules/modal";
+import { actionVisible, actionNavVisible } from "../../redux/modules/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Accordion from "@material-ui/core/Accordion";
@@ -17,7 +17,7 @@ const NavModal = (props) => {
 
   // 모달 바깥 부분 클릭시 모달 off
   const handleModalOff = (e) => {
-    const clicked = e.target.closest(".navModal");
+    const clicked = e.target.closest(".modal");
     // console.log(clicked);
     if (clicked) {
       return;
@@ -105,7 +105,7 @@ const NavModal = (props) => {
         <Modal className="modal">
           <Xbutton
             onClick={() => {
-              dispatch(actionVisible());
+              dispatch(actionNavVisible());
             }}
           >
             <FontAwesomeIcon
