@@ -61,6 +61,10 @@ export const actionLogin =
         type: userInfoDecode.type,
       };
       dispatch(actionSetUser(userInfo));
+
+      dispatch(actionSetMessage("로그인 되었습니다"));
+      dispatch(actionAlert());
+
       dispatch(actionVisible());
     } catch (error) {
       dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
@@ -161,7 +165,7 @@ export const actionLogoutCookie =
   async (dispatch, getState, { history }) => {
     deleteCookie("vaccine_life_token");
     dispatch(actionLogout());
-    dispatch(actionSetMessage("로그아웃 되었습니다."));
+    dispatch(actionSetMessage("로그아웃 되었습니다"));
     dispatch(actionAlert());
     history.replace("/");
   };

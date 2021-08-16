@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Text } from "../elements/index";
 import theme from "../styles/theme";
-import survey from "./survey.css";
+import survey from "../styles/survey.css";
 
 const Survey = ({ setStatus, inputs, setInputs, formik }) => {
   // inputs에 있는 각각의 값들을 추출

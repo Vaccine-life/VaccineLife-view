@@ -39,6 +39,7 @@ const Login = (props) => {
   const [signupInputs, setSignupInputs] = useState({
     username: "",
     password: "",
+    passwordChecker: "",
     nickname: "",
   });
 
@@ -69,10 +70,9 @@ const Login = (props) => {
         .max(6, "닉네임은 6자리 이하여야 합니다"),
     }),
 
+    // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다
     onSubmit: () => {
-      console.log(signupInputs);
       const user = { ...signupInputs, ...inputs };
-      console.log(user);
       dispatch(actionSignup(user));
     },
   });
