@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
@@ -12,6 +12,7 @@ import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
 import { useEffect } from "react";
+import NavModal from "../components/mobile/NavModal";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
@@ -23,16 +24,17 @@ const Main = () => {
   }, []);
 
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <>
-        {modal_status && <Login />}
+        {modal_status && <NavModal />}
+        {/* {modal_status && <Login />} */}
         {alert_status && <Alert />}
         <Intro />
         <Map />
         <MainNivoBar />
         <MainTo />
-        <MainPopular board="vaccine" />
+        <MainPopular />
       </>
     );
   }

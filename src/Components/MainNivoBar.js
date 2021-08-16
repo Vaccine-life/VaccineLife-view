@@ -3,11 +3,11 @@ import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import { ResponsiveBar } from '@nivo/bar'
-import { isMobile } from 'react-device-detect';
+import { isMobileOnly } from 'react-device-detect';
 
 const MainNivoBar = () => {
 
-    if (isMobile) {
+    if (isMobileOnly) {
         return (
             <div>
                 <div>
