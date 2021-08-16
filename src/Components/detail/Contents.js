@@ -115,7 +115,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid ${theme.typoGrey3};
+  border-bottom: 1px solid ${theme.typoLightGrey2};
   .public-DraftEditor-content {
     font-size: ${theme.bodyOneSize};
     line-height: ${theme.bodyOneHeight};

@@ -4,10 +4,12 @@ import theme from "../styles/theme";
 import PopularCard from "./board/PopularCard";
 import QuarPostCard from "./board/QuarPostCard";
 import Arrow from "../images/Arrow.png";
+import Slider from "./mobile/board/Silder";
 import { history } from "../redux/configStore";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionGetTopThree } from "../redux/modules/board";
+import { isMobileOnly } from 'react-device-detect';
 
 const MainPopular = (props) => {
   const { board } = props;
@@ -21,6 +23,45 @@ const MainPopular = (props) => {
   }, []);
   const top_list_vac = useSelector((state) => state.board.topThreeVac);
   const top_list_quar = useSelector((state) => state.board.topThreeQuar);
+
+  if (isMobileOnly) {
+    return (
+      <div>
+        <GreyBoxMobile>
+          <PopularTitleMobile>
+            <h1>백신 접종 후기 인기글</h1>
+            <h3
+              onClick={() => {
+                history.push("/vaccine");
+              }}
+            >
+              더보기
+            </h3>
+          </PopularTitleMobile>
+          <Slider
+            board="vaccine"
+            top_list_vac={top_list_vac}
+            top_list_quar={top_list_quar}
+          />
+          <PopularTitleMobile style={{ marginTop: "32px" }}>
+            <h1>자가 격리 후기 인기글</h1>
+            <h3
+              onClick={() => {
+                history.push("/vaccine");
+              }}
+            >
+              더보기
+            </h3>
+          </PopularTitleMobile>
+          <Slider
+            board="quarantine"
+            top_list_vac={top_list_vac}
+            top_list_quar={top_list_quar}
+          />
+        </GreyBoxMobile>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginTop: "90px" }}>
@@ -176,4 +217,42 @@ const PopularCards = styled.div`
   /* background-color: gray; */
 `;
 
-export default MainPopular;
+const GreyBoxMobile = styled.div`
+background-color: ${theme.typoLightGrey1};
+width: 100%;
+height: 640px;
+margin-top: 48px;
+padding-top: 32px;
+`
+
+const PopularTitleMobile = styled.div`
+display: flex;
+width: 380px;
+margin: auto;
+justify-content: space-between;
+
+& > h1 {
+width: 160px;
+height: 34px;
+font-weight: bold;
+font-size: ${theme.SubHeadOneSize};
+line-height: 34px;
+text-align: center;
+letter-spacing: -0.3px;
+color: #242424;
+}
+
+& > h3 {
+width: 50px;
+height: 34px;
+font-weight: normal;
+font-size: ${theme.bodyThreeSize};
+line-height: 34px;
+text-align: center;
+letter-spacing: -0.3px;
+color: ${theme.typoGrey3};
+}
+`
+
+
+export default MainPopular
