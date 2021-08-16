@@ -10,8 +10,6 @@ import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
-import { convertFromRaw } from "draft-js";
-import { Editor, EditorState } from "draft-js";
 import { isMobileOnly } from "react-device-detect";
 
 
@@ -115,18 +113,15 @@ const CommentList = (props) => {
                         : ""}
                     </Grid>
                     
-                    {/* 하트아이콘 및 갯수 */}
-                    <Grid is_flex="center" margin="0 0 0 11px">
-                        <LikeIconMedi boardId={props.id} />
-                        <p
-                        style={{
-                            fontSize: `${theme.bodyfourSize}`,
-                            marginLeft: "5.55px",
-                            color: `${theme.typoGrey1}`,
-                        }}
+                    <Grid is_flex="center">
+                        <LikeIconMedi boardId={props.id}/>
+                        <Text
+                            fontSize={theme.bodyfourSize}
+                            margin= "0 0 0 5.55px"
+                            color={theme.typoGrey1}
                         >
                         {props.likeCount}
-                        </p>
+                        </Text>
                     </Grid>
 
                     <Grid align="right" margin="auto 0.5rem">

@@ -58,11 +58,14 @@ export const actionGetLike =
       if (!is_login) {
         return;
       }
+      console.log(is_login)
       const userId = getState().user.user.userId;
+      console.log(userId)
       let getData = [];
       let makeData = [];
       if (board === "vaccine") {
         getData = await likeAxios.getLikeListVac(userId);
+        console.log(getData)
         getData.data.map((each) => {
           makeData.push(each.vacBoardId);
         });
@@ -84,22 +87,25 @@ export const actionGetLike =
 
 // 의료진 좋아요 가져오기 미들웨어
 export const actionGetLikeMedi =
-  (board) =>
+  () =>
   async (dispatch, getState, { history }) => {
     try {
       const is_login = getState().user.is_login;
       if (!is_login) {
         return;
       }
+      console.log(is_login)
       const userId = getState().user.user.userId;
+      console.log(userId)
       let getData = [];
       let makeData = [];
       getData = await likeAxios.getLikeListMedi(userId);
+      console.log(getData)
+      // 왜 안나옴???
       getData.data.map((each) => {
         makeData.push(each.medicalId);
       });
       dispatch(actionSetLikeMedi(makeData));
-     
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -147,7 +153,7 @@ export const actionPostLike =
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
       dispatch(actionAlert());
-    }
+    }console.log(actionPostLike)
   };
 
 // 의료진 좋아요 하기 미들웨어
@@ -165,7 +171,7 @@ export const actionMediLike =
       console.log(getData)
       const result = getData.data.ok;
       const boardId = obj.medicalId;
-      // console.log(obj)
+      console.log(boardId)
       if (!result) {
         dispatch(actionMinusLikeInLikeListMedi(boardId));
         dispatch(acionMinusLikeMedi({ boardId }));
