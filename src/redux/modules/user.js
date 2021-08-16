@@ -102,6 +102,7 @@ export const actionSignup =
       dispatch(actionVisible());
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
+
       const newuserObj = await userAxios.login({ username, password });
       setCookie("vaccine_life_token", newuserObj.data);
       const newuserDecode = jwtDecode(newuserObj.data);
@@ -129,7 +130,7 @@ export const actionSignup =
       dispatch(actionAlert());
     } catch (error) {
       logger(error);
-      dispatch(actionSetMessage(error.response.data.message));
+      dispatch(actionSetMessage(error?.response?.data?.message));
       dispatch(actionAlert());
     }
   };
