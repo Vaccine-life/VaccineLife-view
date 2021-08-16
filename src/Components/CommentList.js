@@ -10,11 +10,13 @@ import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
+import { convertFromRaw } from "draft-js";
+import { Editor, EditorState } from "draft-js";
 import { isMobileOnly } from "react-device-detect";
 
 
 const CommentList = (props) => {
-    console.log(props)
+    // console.log(props)
     const medi_id = props.id;
 
     const dispatch = useDispatch();
@@ -22,7 +24,6 @@ const CommentList = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const userId = useSelector((state) => state.user.user.userId);
     const medical_status = useSelector((state) => state.popup.medicalConfirm);
-    const likeCount = useSelector((state) => state.comment.likeCount);
 
 
     if(isMobileOnly) {

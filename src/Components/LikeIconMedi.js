@@ -7,6 +7,7 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
 import { actionMediLike } from "../redux/modules/like";
+import { acionMinusLikeMedi, acionPlusLikeMedi } from "../redux/modules/comment";
 
 const LikeIconMedi = (props) => {
   // console.log(props)
@@ -17,13 +18,13 @@ const LikeIconMedi = (props) => {
   const dispatch = useDispatch();
 
   const isHeart = like_list_medi.includes(boardId);
-  console.log(isHeart)
+  // console.log(isHeart)
 
   const likeObj = {
     medicalId: boardId,
     userId,
   };
-  console.log(likeObj)
+  // console.log(likeObj)
 
   const handleLikeClick = () => {
     dispatch(actionMediLike(likeObj));

@@ -30,7 +30,6 @@ const LikeIconChanger = (props) => {
           quarBoardId: boardId,
           userId,
         };
-        console.log(likeObj)
         
   const handleLikeClick = () => {
     dispatch(actionPostLike(board, likeObj));

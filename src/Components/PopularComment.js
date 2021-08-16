@@ -36,11 +36,9 @@ const PopularComment = (props) => {
 export default PopularComment;
 
 const PopularCommentItem = (props) => {
-  
   const { contents, likeCount, createdAt, boardId } = props;
   const medi_id = props.id;
   console.log(props)
-  
 
   const dispatch = useDispatch();
 
@@ -88,7 +86,7 @@ const PopularCommentItem = (props) => {
                 color: `${theme.typoGrey2}`,
               }}
             >
-              {likeCount}
+              {props.likeCount}
             </p>
           </Grid>
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { likeAxios } from "../../shared/api";
+import { commentAxios, likeAxios } from "../../shared/api";
 import { getCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
 import { acionMinusLike, acionPlusLike } from "./board";
@@ -162,8 +162,10 @@ export const actionMediLike =
     }
     try {
       const getData = await likeAxios.likeMedi(obj);
+      console.log(getData)
       const result = getData.data.ok;
       const boardId = obj.medicalId;
+      // console.log(obj)
       if (!result) {
         dispatch(actionMinusLikeInLikeListMedi(boardId));
         dispatch(acionMinusLikeMedi({ boardId }));
@@ -179,6 +181,7 @@ export const actionMediLike =
       dispatch(actionAlert());
     }
   };
+
 
 export const {
   actionSetLikeVac,

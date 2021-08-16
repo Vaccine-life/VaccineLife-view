@@ -42,20 +42,19 @@ const comment = createSlice({
       state.topThreeMedi = action.payload;
     },
     acionMinusLikeMedi: (state, action) => {
-      const { medicalId } = action.payload;
+      const { boardId } = action.payload;
       state.list = state.list.map((each) => {
-        if (each.id === medicalId) {
+        if (each.id === boardId) {
           return { ...each, likeCount: each.likeCount - 1 };
         }
         return { ...each };
       });
       state.likeCount = state.likeCount - 1;
-     
     },
     acionPlusLikeMedi: (state, action) => {
-      const { medicalId } = action.payload;
-      state.listVac = state.list.map((each) => {
-        if (each.id === medicalId) {
+      const { boardId } = action.payload;
+      state.list = state.list.map((each) => {
+        if (each.id === boardId) {
           return { ...each, likeCount: each.likeCount + 1 };
         }
         return { ...each };
