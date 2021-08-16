@@ -18,7 +18,7 @@ const NavModal = (props) => {
 
     // 모달 바깥 부분 클릭시 모달 off
     const handleModalOff = (e) => {
-        const clicked = e.target.closest(".navModal");
+        const clicked = e.target.closest(".modal");
         // console.log(clicked);
         if (clicked) {
         return;
