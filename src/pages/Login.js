@@ -12,7 +12,7 @@ import Survey from "../components/Survey";
 import Alert from "../components/popup/Alert";
 
 import styled from "styled-components";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import theme from "../styles/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -33,7 +33,14 @@ const Login = (props) => {
     gender: undefined,
     age: undefined,
     disease: undefined,
-    afterEffect: "",
+    afterEffect: [],
+  });
+
+  const [signupInputs, setSignupInputs] = useState({
+    username: "",
+    password: "",
+    passwordChecker: "",
+    nickname: "",
   });
 
   const formik = useFormik({
@@ -63,9 +70,9 @@ const Login = (props) => {
         .max(6, "닉네임은 6자리 이하여야 합니다"),
     }),
 
-    onSubmit: (values) => {
-      const user = { ...values, ...inputs };
-      console.log(user);
+    // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다
+    onSubmit: () => {
+      const user = { ...signupInputs, ...inputs };
       dispatch(actionSignup(user));
     },
   });
@@ -80,7 +87,7 @@ const Login = (props) => {
     }
   };
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <React.Fragment
         onClick={(e) => {
@@ -100,19 +107,22 @@ const Login = (props) => {
             <LoginComponent status={status} setStatus={setStatus} />
           )}
 
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              signupInputs={signupInputs}
+              setSignupInputs={setSignupInputs}
+              formik={formik}
+            />
+          )}
+
           {status === "survey" && (
             <Survey
               status={status}
               setStatus={setStatus}
               inputs={inputs}
               setInputs={setInputs}
-            />
-          )}
-
-          {status === "signup" && (
-            <SignupComponent
-              status={status}
-              setStatus={setStatus}
               formik={formik}
             />
           )}
@@ -124,7 +134,6 @@ const Login = (props) => {
 
   return (
     <>
-      Main
       <Wrapper
         onClick={(e) => {
           handleModalOff(e);
@@ -143,19 +152,22 @@ const Login = (props) => {
             <LoginComponent status={status} setStatus={setStatus} />
           )}
 
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              signupInputs={signupInputs}
+              setSignupInputs={setSignupInputs}
+              formik={formik}
+            />
+          )}
+
           {status === "survey" && (
             <Survey
               status={status}
               setStatus={setStatus}
               inputs={inputs}
               setInputs={setInputs}
-            />
-          )}
-
-          {status === "signup" && (
-            <SignupComponent
-              status={status}
-              setStatus={setStatus}
               formik={formik}
             />
           )}
