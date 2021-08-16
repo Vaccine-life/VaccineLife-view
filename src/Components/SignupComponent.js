@@ -7,7 +7,12 @@ import { userAxios } from "../shared/api";
 import logger from "../shared/logger";
 import { useDispatch } from "react-redux";
 
-const SignupComponent = ({ formik, setStatus, status }) => {
+const SignupComponent = ({
+  formik,
+  setStatus,
+  signupInputs,
+  setSignupInputs,
+}) => {
   const dispatch = useDispatch();
 
   const [idDupOk, setIdDupOk] = useState(false);
@@ -39,6 +44,40 @@ const SignupComponent = ({ formik, setStatus, status }) => {
     }
   };
 
+  const disableNextButton = () => {
+    console.log(
+      formik.errors.username,
+      formik.errors.password,
+      formik.errors.passwordChecker,
+      formik.errors.nickname,
+      idDupOk,
+      nicknameDupOk
+    );
+
+    if (
+      formik.errors.username === undefined &&
+      formik.errors.password === undefined &&
+      formik.errors.passwordChecker === undefined &&
+      formik.errors.nickname === undefined &&
+      idDupOk === true &&
+      nicknameDupOk === true
+    ) {
+      return false;
+    }
+    if (
+      signupInputs ===
+      {
+        username: "",
+        password: "",
+        nickname: "",
+      }
+    ) {
+      return true;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <>
       <Wrapper onSubmit={formik.handleSubmit}>
@@ -54,6 +93,10 @@ const SignupComponent = ({ formik, setStatus, status }) => {
             type="text"
             onChange={(e) => {
               formik.handleChange(e);
+              setSignupInputs({
+                ...signupInputs,
+                username: e.target.value,
+              });
               dispatch(idDupCheck(e.target.value));
             }}
             value={formik.values.username}
@@ -70,7 +113,13 @@ const SignupComponent = ({ formik, setStatus, status }) => {
             id="password"
             name="password"
             type="password"
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              setSignupInputs({
+                ...signupInputs,
+                password: e.target.value,
+              });
+            }}
             value={formik.values.password}
           />
           {formik.touched.password && formik.errors.password ? (
@@ -100,6 +149,10 @@ const SignupComponent = ({ formik, setStatus, status }) => {
             type="text"
             onChange={(e) => {
               formik.handleChange(e);
+              setSignupInputs({
+                ...signupInputs,
+                nickname: e.target.value,
+              });
               dispatch(nicknameDupCheck(e.target.value));
             }}
             value={formik.values.nickname}
@@ -110,7 +163,7 @@ const SignupComponent = ({ formik, setStatus, status }) => {
           {!nicknameDupOk ? <SignupError>{nicknameDupMsg}</SignupError> : null}
         </InputBox>
 
-        <Button
+        {/* <Button
           margin="50px 0 20px 0"
           width={theme.mediumButtonWidth}
           height={theme.mediumButtonHeight}
@@ -120,9 +173,19 @@ const SignupComponent = ({ formik, setStatus, status }) => {
           _onClick={() => {
             setStatus("survey");
           }}
+          disabled={true}
         >
           다음단계
-        </Button>
+        </Button> */}
+        <NextButton
+          type="submit"
+          disabled={disableNextButton()}
+          onClick={() => {
+            setStatus("survey");
+          }}
+        >
+          다음단계
+        </NextButton>
       </Wrapper>
     </>
   );
@@ -163,6 +226,29 @@ const SignupError = styled.div`
   text-align: right;
   font-size: ${theme.bodyfourSize};
   color: ${theme.errorColor};
+`;
+
+const NextButton = styled.button`
+  margin: 35px 0 0 0;
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  background-color: ${theme.btnColor};
+  border: none;
+  color: white;
+  transition: background-color 0.3s;
+  font-size: ${theme.bodyTwoSize};
+  :hover {
+    cursor: pointer;
+    background-color: white;
+    color: ${theme.btnColor};
+    border: 1px solid ${theme.btnColor};
+  }
+  :disabled {
+    background-color: ${theme.typoLightGrey2};
+    cursor: default;
+    color: white;
+    border: none;
+  }
 `;
 
 export default withRouter(SignupComponent);

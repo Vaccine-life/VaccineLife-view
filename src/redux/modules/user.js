@@ -130,7 +130,7 @@ export const actionSignup =
       dispatch(actionAlert());
     } catch (error) {
       logger(error);
-      dispatch(actionSetMessage(error?.response?.data?.message));
+      dispatch(actionSetMessage(error.response.data.message));
       dispatch(actionAlert());
     }
   };

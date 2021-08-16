@@ -4,7 +4,7 @@ import { Text } from "../elements/index";
 import theme from "../styles/theme";
 import survey from "./survey.css";
 
-const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
+const Survey = ({ setStatus, inputs, setInputs, formik }) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
@@ -20,7 +20,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect === []
+      afterEffect.length === 0
     ) {
       return true;
     }
@@ -103,7 +103,7 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
   // form태그 onSubmit에 제출시 일어날 일을 함수로 주자.. 꼭!
   return (
     <>
-      <form onSubmit={submitSurvey}>
+      <form onSubmit={formik.handleSubmit}>
         <Text
           margin="0 auto 15px auto"
           size={theme.bodyThreeSize}
