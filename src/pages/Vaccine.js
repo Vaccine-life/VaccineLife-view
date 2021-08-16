@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import List from "../components/board/List";
@@ -33,9 +33,9 @@ const Vaccine = () => {
     dispatch(actionGetLike("vaccine"));
   }, []);
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
-      <Grid margin={`0 auto 120px auto`}>
+      <Grid margin="0 auto 40px auto">
         <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
         <BoardName board="vaccine" />
         <Popular board="vaccine" />
