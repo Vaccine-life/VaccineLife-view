@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
@@ -14,8 +15,34 @@ const Alert = () => {
     dispatch(actionSetMessage(""));
   };
 
+  if (isMobileOnly) {
+    return (
+      <Wrapper isMobile={true}>
+        <Modal>
+          <Grid is_flex="center">
+            <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
+              {alertMessage}
+            </Text>
+          </Grid>
+          <Grid is_flex="center">
+            <Button
+              margin="30px 0 10px 0"
+              width="89px"
+              height="42px"
+              bg={theme.btnColor}
+              fontSize={theme.SubHeadTwoSize}
+              _onClick={handleClick}
+            >
+              확인
+            </Button>
+          </Grid>
+        </Modal>
+      </Wrapper>
+    );
+  }
+
   return (
-    <Wrapper>
+    <Wrapper isMobile={false}>
       <Modal>
         <Grid is_flex="center">
           <Text size={theme.bodyOneSize} lineHeight={theme.bodyOneHeight}>
@@ -25,7 +52,7 @@ const Alert = () => {
         <Grid is_flex="center">
           <Button
             margin="30px 0 10px 0"
-            width={theme.mediumButtonWidth}
+            width="120px"
             height={theme.mediumButtonHeight}
             bg={theme.btnColor}
             fontSize={theme.bodyTwoSize}
@@ -47,6 +74,14 @@ const Wrapper = styled.div`
   left: 0;
   z-index: 2;
   background-color: ${theme.shadow};
+  ${(prop) =>
+    prop.isMobile
+      ? `
+   padding: 150px auto 0 auto;
+  `
+      : `
+   padding: 300px auto 0 auto;
+  `}
   padding: 300px auto 0 auto;
 `;
 

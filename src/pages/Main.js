@@ -7,7 +7,6 @@ import Alert from "../components/popup/Alert";
 import Intro from '../components/Intro';
 
 import Map from "../components/Map";
-import { Grid } from '../elements';
 import MainTo from "../components/MainTo";
 import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";

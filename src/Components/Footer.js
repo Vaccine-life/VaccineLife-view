@@ -6,36 +6,34 @@ import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/슬기로운-white.png";
-import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect";
+
 
 const Footer = () => {
   return (
     <React.Fragment>
       <FixedFooter>
-
         <Grid
           width="auto"
-          margin="1rem 5rem"
+          margin="0 5rem"
           is_flex="center"
           _onClick={() => {
             history.push("/");
           }}
         >
-          {/* <Img> */}
-            <Image
-              shape="rectangle"
-              width={theme.logoWidth}
-              height={theme.logoHeight}
-              cursor="pointer"
-              src={logo}
-            />
-          {/* </Img> */}
+          <Image
+            shape="rectangle"
+            width={theme.logoWidth}
+            height={theme.logoHeight}
+            cursor="pointer"
+            src={logo}
+          />
         </Grid>
 
-        <Grid margin="2rem 0" width="0 auto" height="auto">
-          <Common>
+        <Grid margin="2rem 0" width="auto" height="auto">
+          <TitleNav>
             <Text
-              color="#ffffff"
+              bold
+              color={theme.white}
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
@@ -46,7 +44,8 @@ const Footer = () => {
               백신후기
             </Text>
             <Text
-              color="#ffffff"
+              bold
+              color={theme.white}
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
@@ -57,7 +56,8 @@ const Footer = () => {
               격리후기
             </Text>
             <Text
-              color="#ffffff"
+              bold
+              color={theme.white}
               size={theme.SubHeadTwoSize}
               margin="5px"
               hover
@@ -65,23 +65,23 @@ const Footer = () => {
                 history.push("/medical");
               }}
             >
-              의료진분들께 한마디
+              의료진분들께
             </Text>
-          </Common>
+          </TitleNav>
 
-          <Common>
+          <TeamInfo>
             <Text
               color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
+              size={theme.bodyThreeSize}
               margin="5px"
             >
-              대표자명
+              Team. 백신후기관리위원회
             </Text>
 
             <Stick>
               <Text
                 color={theme.typoGrey2}
-                size={theme.SubHeadTwoSize}
+                size={theme.bodyThreeSize}
                 margin="5px"
               >
                 |
@@ -90,7 +90,7 @@ const Footer = () => {
 
             <Text
               color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
+              size={theme.bodyThreeSize}
               margin="5px"
             >
               Contact. quokkalee654@gmail.com
@@ -99,7 +99,7 @@ const Footer = () => {
             <Stick>
               <Text
                 color={theme.typoGrey2}
-                size={theme.SubHeadTwoSize}
+                size={theme.bodyThreeSize}
                 margin="5px"
               >
                 |
@@ -107,16 +107,15 @@ const Footer = () => {
             </Stick>
             <Text
               color={theme.typoGrey2}
-              size={theme.SubHeadTwoSize}
+              size={theme.bodyThreeSize}
               margin="5px"
               hover
               _onClick={() => window.open("https://github.com/Vaccine-life")}
             >
               Github. https://github.com/Vaccine-life
             </Text>
-          </Common>
+          </TeamInfo>
         </Grid>
-
       </FixedFooter>
     </React.Fragment>
   );
@@ -132,26 +131,33 @@ const FixedFooter = styled.div`
   padding: 1.2rem 0;
   @media (max-width: 960px) {
     flex-direction: column;
+    padding: 3rem 0 1rem 0;
   }
 `;
 
-const Common = styled.ul`
+const TitleNav = styled.div`
+  display: flex;
+  @media (max-width: 960px) {
+    flex-direction: row;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0 0 1.8rem 0;
+    justify-content: space-evenly;
+  }
+`;
+
+const TeamInfo = styled.ul`
   display: flex;
   @media (max-width: 960px) {
     flex-direction: column;
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
-  }
-`
-const Stick = styled.div`
-  @media (max-width: 960px) {
-    display: none;
   }
 `;
 
-const Img = styled.div`
+const Stick = styled.div`
   @media (max-width: 960px) {
-    float: left;
+    display: none;
   }
 `;
 

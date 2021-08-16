@@ -9,7 +9,7 @@ import "draft-js/dist/Draft.css";
 import LikeIconChanger from "../LikeIconChanger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 
 // 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
@@ -44,7 +44,7 @@ const PopularCard = (props) => {
     }
   };
 
-  if (isMobile) {
+  if (isMobileOnly) {
     return (
       <Grid
         margin="0"

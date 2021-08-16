@@ -13,6 +13,7 @@ import { isMobile } from "react-device-detect";
 
 
 const CommentList = (props) => {
+    // console.log(props)
     const medi_id = props.id;
 
     const dispatch = useDispatch();
@@ -27,47 +28,54 @@ const CommentList = (props) => {
             <>
             <Grid is_flex="column_left_start" margin="2rem 0" padding="0 1rem">
 
-                <Text 
-                    bold 
-                    size={theme.SubHeadOneSize} 
-                    color={theme.typoBlack}
-                    margin="5px 0"
-                    >{props.nickname}
-                </Text>
+                <CommentHead>
+                    <Grid align="left" width="15rem" padding="1rem 0.5rem">
+                        <Text 
+                            bold
+                            size={theme.SubHeadTwoSize}
+                            lineHeight={theme.SubHeadTwoHeight}
+                            color={theme.bg2}
+                            >{props.nickname}
+                        </Text>
+                    </Grid>
 
-                {is_login && userId === props.userId ? 
-                <Text 
-                    color={theme.typoLightGrey2}
-                    size={theme.bodyTwoSize}
-                    cursor="pointer"
-                    margin="5px 0"
-                    _onClick={() => {
-                        dispatch(acionSetMedicalObj({medi_id}))
-                        dispatch(actionMedicalConfirm());
-                    }}
-                ><FontAwesomeIcon icon={faTrashAlt} />
-                </Text>
-                : ""}
-                     
+                    <Grid align="right" width="9rem" margin="auto 0.5rem">
+                        {is_login && userId === props.userId ? 
+                        <Text 
+                            color={theme.typoGrey3}
+                            size={theme.bodyTwoSize}
+                            lineHeight={theme.bodyThreeSize}
+                            cursor="pointer"
+                            _onClick={() => {
+                                dispatch(acionSetMedicalObj({medi_id}))
+                                dispatch(actionMedicalConfirm());
+                            }}
+                        ><FontAwesomeIcon icon={faTrashAlt}/>
+                        </Text>
+                        : ""}
+                    </Grid>
+                </CommentHead>
+                
+                <Grid align="left" padding="1rem 0.5rem">
+                    <Text 
+                        size={theme.bodyThreeSize} 
+                        lineHeight={theme.bodyThreeHeight}
+                        color={theme.typoBlack}
+                        >{props.contents}
+                    </Text>
+                </Grid>
+
+                <Grid align="left" margin="2.5rem 0.5rem 0 0.5rem">
+                    <Text 
+                        size={theme.bodyfourSize} 
+                        color={theme.typoGrey1}
+                        >{displayedAt(props.createdAt)}
+                    </Text>
+                </Grid>
 
                 {medical_status && <MedicalConfirm 
                     confirmMessage="삭제하시겠습니까?"
-                    // activeFunction={deleteComment}
                 />}
-
-                <Text 
-                    size={theme.bodyTwoSize} 
-                    color={theme.typoGrey2}
-                    margin="5px 0"
-                    >{displayedAt(props.createdAt)}
-                </Text>
-            
-                <Text 
-                    size={theme.bodyTwoSize} 
-                    color={theme.typoBlack}
-                    margin="5px 0"
-                    >{props.contents}
-                </Text>
                                 
             </Grid>
             </>
@@ -75,53 +83,56 @@ const CommentList = (props) => {
     }
     return(
         <React.Fragment>
-            <Grid is_flex="space_row" margin="2rem 0">
+            <Grid is_flex="column_left_start" margin="4rem 0">
 
-                <Grid align="left" width="12rem" margin="0 0 auto 0">
-                    <Text 
-                        bold 
-                        size={theme.SubHeadOneSize} 
-                        color={theme.typoBlack}
-                        >{props.nickname}
-                    </Text>
-                </Grid>
+                <CommentHead>
+                    <Grid align="left" width="10rem" padding="1rem 0.5rem">
+                        <Text 
+                            bold
+                            size={theme.SubHeadTwoSize}
+                            lineHeight={theme.SubHeadTwoHeight}
+                            color={theme.bg2}
+                            >{props.nickname}
+                        </Text>
+                    </Grid>
 
-                <Grid align="left">
+                    <Grid align="left" width="9rem">
+                        {is_login && userId === props.userId ? 
+                        <Text 
+                            color={theme.typoGrey3}
+                            size={theme.bodyTwoSize}
+                            lineHeight={theme.bodyThreeSize}
+                            cursor="pointer"
+                            _onClick={() => {
+                                dispatch(acionSetMedicalObj({medi_id}))
+                                dispatch(actionMedicalConfirm());
+                            }}
+                        ><FontAwesomeIcon icon={faTrashAlt}/>
+                        </Text>
+                        : ""}
+                    </Grid>
+
+                    <Grid align="right" margin="auto 0.5rem">
+                        <Text 
+                            size={theme.bodyfourSize} 
+                            color={theme.typoGrey1}
+                            >{displayedAt(props.createdAt)}
+                        </Text>
+                    </Grid>
+                </CommentHead>
+
+                <Grid align="left" padding="1rem 0.5rem">
                     <Text 
-                        size={theme.bodyTwoSize} 
+                        size={theme.bodyThreeSize} 
+                        lineHeight={theme.bodyThreeHeight}
                         color={theme.typoBlack}
                         >{props.contents}
                     </Text>
                 </Grid>
-                
-                <Grid align="right" width="6rem" margin="0 0 auto 0">
-                    {is_login && userId === props.userId ? 
-                    <Text 
-                        color={theme.typoLightGrey2}
-                        size={theme.bodyTwoSize}
-                        cursor="pointer"
-                        _onClick={() => {
-                            dispatch(acionSetMedicalObj({medi_id}))
-                            dispatch(actionMedicalConfirm());
-                        }}
-                    ><FontAwesomeIcon icon={faTrashAlt} />
-                    </Text>
-                    : ""}
-                     
-                </Grid>
 
                 {medical_status && <MedicalConfirm 
                     confirmMessage="삭제하시겠습니까?"
-                    // activeFunction={deleteComment}
                 />}
-
-                <Grid align="right" width="9rem" margin="0 0 auto 0">
-                    <Text 
-                        size={theme.bodyTwoSize} 
-                        color={theme.typoGrey2}
-                        >{displayedAt(props.createdAt)}
-                    </Text>
-                </Grid>
                                 
             </Grid>
         </React.Fragment>
@@ -134,19 +145,13 @@ const CommentList = (props) => {
 //     insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm:ss"),
 // }
 
-const FixedCommentList = styled.div`
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-`;
-
-const Common = styled.ul`
-  @media (max-width: 960px) {
+const CommentHead = styled.ul`
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    text-align: left;
-    white-space: nowrap;
-  }
+    flex-direction: row;
+    border-top: 2px solid ${theme.typoGrey2};
+    border-bottom: 1px solid ${theme.typoLightGrey2};
 `
 
 export default CommentList;

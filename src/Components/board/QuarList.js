@@ -6,6 +6,8 @@ import QuarTableTr from "./QuarTableTr";
 import InfinityScroll from "../../shared/InfinityScroll";
 import { useDispatch, useSelector } from "react-redux";
 import { actionGetBoard } from "../../redux/modules/board";
+import { isMobileOnly } from "react-device-detect";
+import Ariticle from "../mobile/board/Ariticle";
 
 const QuarList = (props) => {
   const { board } = props;
@@ -21,6 +23,35 @@ const QuarList = (props) => {
   useEffect(() => {
     dispatch(actionGetBoard(board));
   }, []);
+
+  if (isMobileOnly) {
+    return (
+      <InfinityScroll
+        nextCall={nextCall}
+        is_next={nextPage <= totalPage ? true : false}
+        is_loading={is_loading}
+        size={750}
+      >
+        {/* map돌리기 */}
+        {quar_list?.map((each, index) => {
+          return (
+            <Ariticle
+              key={index}
+              board={board}
+              type={each.type}
+              title={each.title}
+              likeCount={each.likeCount}
+              commentCount={each.commentCount}
+              totalVisitors={each.totalVisitors}
+              createAt={each.createdAt}
+              boardId={each.id}
+            />
+          );
+        })}
+      </InfinityScroll>
+    );
+  }
+
   return (
     <Table>
       <thead>
@@ -37,6 +68,7 @@ const QuarList = (props) => {
           nextCall={nextCall}
           is_next={nextPage <= totalPage ? true : false}
           is_loading={is_loading}
+          size={300}
         >
           {/* map돌리기 */}
           {quar_list?.map((each, index) => {

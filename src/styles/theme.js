@@ -19,6 +19,7 @@ const theme = {
   tagColor: "#dfe4ea",
   disabledColor: "#DFDFDF",
   white: "#FFFFFF",
+  SuccessGreen: "#00B3A6",
 
   //font size
   headOneSize: "24px",
@@ -34,7 +35,7 @@ const theme = {
   headOneHeight: "34px",
   headTwoHeight: "30px",
   SubHeadOneHeight: "26px",
-  SubHeadTwoHeight: "16px",
+  SubHeadTwoHeight: "24px",
   bodyOneHeight: "30px",
   bodyTwoHeight: "26px",
   bodyThreeHeight: "24px",

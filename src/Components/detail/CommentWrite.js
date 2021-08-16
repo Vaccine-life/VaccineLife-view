@@ -8,6 +8,7 @@ import theme from "../../styles/theme";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
 import styled from "styled-components";
 import { actionAddCommentList } from "../../redux/modules/comment";
+import { isMobileOnly } from "react-device-detect";
 
 const CommentWrite = (props) => {
   const { board, boardId } = props;
@@ -49,6 +50,64 @@ const CommentWrite = (props) => {
     // 코멘트 작성 후 인풋태크에 있는 글 없애기
     setComment();
   };
+
+  if (isMobileOnly) {
+    return (
+      <React.Fragment>
+        {/* <div style={{display:"inline-block" ,verticalAlign:"top"}}> */}
+        <Grid padding="0 16px 0 16px">
+          {is_login && <NicknameWrapper>{nickname}</NicknameWrapper>}
+          <Grid
+            is_flex="space_column"
+            border={`1px solid ${theme.typoLightGrey2}`}
+          >
+            <Grid margin="0 5rem">
+              {/* <div contentEditable="true"> */}
+              <Input
+                multiLine
+                rows={3}
+                border="none"
+                value={comment}
+                placeholder={
+                  is_login ? "댓글을 남겨보세요." : "로그인 후 이용해 주세요."
+                }
+                maxLength="300"
+                _onChange={changeComment}
+                // 엔터키로 등록
+                // onSubmit={write}
+                contentEditable="true"
+                fontSize={theme.bodyfourSize}
+              />
+              {/* </div> */}
+            </Grid>
+
+            <Grid is_flex="space_row" border="none">
+              <Grid bg="#ffffff" align="right">
+                <Text
+                  color={theme.typoGrey3}
+                  size={theme.bodyfourSize}
+                  lineHeight={theme.bodyfourHeight}
+                  margin="0 24px 0 0"
+                >
+                  <span>{comment?.length || 0}</span> / 300
+                </Text>
+              </Grid>
+
+              <Button
+                width="88px"
+                height="32px"
+                fontSize={theme.bodyfourSize}
+                _onClick={write}
+              >
+                등록
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* </div> */}
+      </React.Fragment>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -104,9 +163,9 @@ const CommentWrite = (props) => {
 };
 
 const NicknameWrapper = styled.div`
-  width: 10rem;
-  height: 140px;
   text-align: start;
+  margin-bottom: 4px;
+  color: ${theme.bg};
 `;
 
 export default CommentWrite;

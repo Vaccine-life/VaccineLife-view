@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  const { shape, src, size, width, height, cursor, margin } = props;
+  const { shape, src, size, width, height, cursor, margin,_onClick } = props;
 
   const styles = {
     src: src,
@@ -20,7 +20,7 @@ const Image = (props) => {
   if (shape === "rectangle") {
     return (
       <AspectOutter>
-        <AspectInner {...styles}></AspectInner>
+        <AspectInner {...styles} onClick={_onClick}></AspectInner>
       </AspectOutter>
     );
   }
@@ -41,6 +41,7 @@ Image.defaultProps = {
   size: "40px",
   cursor: "",
   margin: false,
+  _onclick: () => {}
 };
 
 const ImageDefault = styled.div`

@@ -22,6 +22,8 @@ import Spinner from "../shared/Spinner";
 import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
+import { isMobileOnly } from "react-device-detect";
+import BoardName from "../components/mobile/BoardName";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -55,6 +57,74 @@ const QuarantineDetail = () => {
   const handleMoveTotal = () => {
     history.push("/quarantine");
   };
+
+  if (isMobileOnly) {
+    return (
+      <Grid margin="0 auto 40px auto">
+        <MetaScript title={`슬기로운 백신생활 | ${title}`} />
+        <BoardName board="quarantine" />
+        <BoardInfo
+          board="quarantine"
+          boardId={board_content.boardId}
+          nickname={board_content.nickname}
+          userId={board_content.userId}
+          title={board_content.title}
+          totalVisitors={board_content.totalVisitors}
+          createdAt={board_content.createdAt}
+          likeCount={board_content.likeCount}
+        />
+
+        <CenterLineM />
+
+        <Contents
+          board="quarantine"
+          boardId={board_content.boardId}
+          contents={board_content.contents}
+          likeCount={board_content.likeCount}
+        />
+
+        {confirm_status && (
+          <Confirm
+            confirmMessage="게시글을 삭제하시겠습니까?"
+            activeFunction={handleDelete}
+          />
+        )}
+        <Grid is_flex="space_row" padding="0 16px 0 16px">
+          <p
+            style={{
+              fontSize: `${theme.SubHeadTwoSize}`,
+              lineHeight: `${theme.SubHeadTwoHeight}`,
+              textAlign: "start",
+              fontWeight: "700",
+              margin: "20px 0 20px 0",
+            }}
+          >
+            댓글 {comment_list.length}개
+          </p>
+
+          <TextDivM onClick={handleMoveTotal}>전체 게시글</TextDivM>
+        </Grid>
+        <CommentWrite board="quarantine" boardId={boardId_detail} />
+        {comment_list?.map((each, index) => {
+          return (
+            <CommentList
+              key={index}
+              board="quarantine"
+              commentId={each.id}
+              boardId={each.quarBoardId}
+              comment={each.quarcomment}
+              createdAt={each.createdAt}
+              userId={each.userId}
+              nickname={each.nickname}
+            />
+          );
+        })}
+        {modal_status && <Login />}
+        {alert_status && <Alert />}
+        {isLoading && <Spinner />}
+      </Grid>
+    );
+  }
 
   return (
     <Grid width={theme.detailWidth} margin="160px auto 120px auto">
@@ -138,7 +208,20 @@ const TextDiv = styled.div`
 const CenterLine = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${theme.typoGrey3};
+  background-color: ${theme.typoLightGrey2};
+`;
+
+const CenterLineM = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${theme.typoLightGrey2};
+`;
+const TextDivM = styled.div`
+  font-size: ${theme.SubHeadTwoSize};
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 700;
 `;
 
 export default QuarantineDetail;

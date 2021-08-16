@@ -40,7 +40,7 @@ const Banner = (props) => {
           </EachDiv>
 
           <Stick>
-            <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+            <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
           </Stick>
 
           <EachDiv
@@ -56,7 +56,7 @@ const Banner = (props) => {
           </EachDiv>
 
           <Stick>
-            <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+            <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
           </Stick>
 
           <EachDiv
@@ -90,7 +90,7 @@ const Banner = (props) => {
         </EachDiv>
 
         <Stick>
-          <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+          <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
         </Stick>
 
         <EachDiv onClick={() => {window.open(newsAddress)}}>
@@ -104,7 +104,7 @@ const Banner = (props) => {
         </EachDiv>
 
         <Stick>
-          <Text color="#c1c1c1" size="20px" margin="5px">|</Text>
+          <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
         </Stick>
 
         <EachDiv onClick={() => {window.open(phoneAddress)}}>
@@ -130,7 +130,7 @@ const FixedBanner = styled.div`
 const EachDiv = styled.div`
   white-space: nowrap;
   cursor: pointer;
-  width: 100%;
+  width: auto;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -143,7 +143,6 @@ const EachDiv = styled.div`
 
 const Common = styled.div`
   display: flex;
-  /* flex-direction: row; */
   padding: 3rem 10rem;
   align-items: center;
   @media (max-width: 960px) {
@@ -156,7 +155,10 @@ const Common = styled.div`
 
 const Stick = styled.div`
   @media (max-width: 960px) {
-    display: none;
+    transform: rotate(90deg);
+    transform-origin: 50% 60%;
+    -ms-transform: rotate(90deg); // IE 9 이상에서 사용
+    -webkit-transform: rotate(90deg); // 사파리, 크롬, 오페라 브라우저 사용
   }
 `;
 

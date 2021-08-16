@@ -97,7 +97,7 @@ const MainNivoBar = () => {
                                 legendOffset: -40
                             }}
                             enableGridY={false}
-                            enableLabel={true}
+                            enableLabel={false}
                             labelSkipWidth={12}
                             labelSkipHeight={12}
                             labelTextColor="white"
@@ -207,7 +207,7 @@ const MainNivoBar = () => {
                                 legendOffset: -40
                             }}
                             enableGridY={false}
-                            enableLabel={true}
+                            enableLabel={false}
                             labelSkipWidth={12}
                             labelSkipHeight={12}
                             labelTextColor="white"
