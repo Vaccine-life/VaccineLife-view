@@ -76,7 +76,7 @@ const LoginComponent = ({ status, setStatus }) => {
           <Button
             type="submit"
             _onClick={() => {
-              setStatus("survey");
+              setStatus("signup");
             }}
             margin="0"
             width="6em"

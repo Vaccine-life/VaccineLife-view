@@ -7,7 +7,7 @@ import { userAxios } from "../shared/api";
 import logger from "../shared/logger";
 import { useDispatch } from "react-redux";
 
-const SignupComponent = ({ formik }) => {
+const SignupComponent = ({ formik, setStatus, status }) => {
   const dispatch = useDispatch();
 
   const [idDupOk, setIdDupOk] = useState(false);
@@ -117,8 +117,11 @@ const SignupComponent = ({ formik }) => {
           type="submit"
           bg={theme.btnColor}
           fontSize={theme.bodyTwoSize}
+          _onClick={() => {
+            setStatus("survey");
+          }}
         >
-          회원가입
+          다음단계
         </Button>
       </Wrapper>
     </>

@@ -510,14 +510,8 @@ const Survey = ({ setStatus, inputs, setInputs, submitSurvey }) => {
           {/* <div></div> */}
         </SurveyItem>
 
-        <SubmitButton
-          type="submit"
-          disabled={disableSubmitButton()}
-          onClick={() => {
-            setStatus("signup");
-          }}
-        >
-          다음단계
+        <SubmitButton type="submit" disabled={disableSubmitButton()}>
+          회원가입
         </SubmitButton>
       </form>
     </>

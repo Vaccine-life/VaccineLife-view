@@ -99,20 +99,20 @@ const Login = (props) => {
             <LoginComponent status={status} setStatus={setStatus} />
           )}
 
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              formik={formik}
+            />
+          )}
+
           {status === "survey" && (
             <Survey
               status={status}
               setStatus={setStatus}
               inputs={inputs}
               setInputs={setInputs}
-            />
-          )}
-
-          {status === "signup" && (
-            <SignupComponent
-              status={status}
-              setStatus={setStatus}
-              formik={formik}
             />
           )}
         </MobileLogin>
@@ -142,20 +142,20 @@ const Login = (props) => {
             <LoginComponent status={status} setStatus={setStatus} />
           )}
 
+          {status === "signup" && (
+            <SignupComponent
+              status={status}
+              setStatus={setStatus}
+              formik={formik}
+            />
+          )}
+
           {status === "survey" && (
             <Survey
               status={status}
               setStatus={setStatus}
               inputs={inputs}
               setInputs={setInputs}
-            />
-          )}
-
-          {status === "signup" && (
-            <SignupComponent
-              status={status}
-              setStatus={setStatus}
-              formik={formik}
             />
           )}
         </Modal>
