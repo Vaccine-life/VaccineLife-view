@@ -15,6 +15,7 @@ import {
 } from "../../redux/modules/popup";
 import logger from "../../shared/logger";
 import { actionDeleteCommentList } from "../../redux/modules/comment";
+import { isMobileOnly } from "react-device-detect";
 
 const CommentList = (props) => {
   const { board, commentId, boardId, comment, createdAt, userId, nickname } =
@@ -24,6 +25,72 @@ const CommentList = (props) => {
   const comment_status = useSelector((state) => state.popup.commentConfirm);
   const dispatch = useDispatch();
   // 리덕스 이용 comment_list 받기
+
+  if (isMobileOnly) {
+    return (
+      <React.Fragment>
+        <Grid
+          is_flex="space_colomn"
+          margin="16px 0 0 0"
+          padding="0 16px 0 16px"
+        >
+          <Grid is_flex="space_row" margin="0 0 4px 0">
+            <p
+              style={{
+                fontSize: `${theme.bodyfourSize}`,
+                lineHeight: `${theme.bodyfourHeight}`,
+                color: `${theme.bg}`,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {nickname}
+            </p>
+            <Grid is_flex="center" align="right">
+              {is_login && login_user === userId ? (
+                <Text
+                  color={theme.typoLightGrey2}
+                  size={theme.bodyfourSize}
+                  margin="auto 5px auto auto"
+                  cursor="pointer"
+                  _onClick={() => {
+                    dispatch(acionSetCommentObj({ board, commentId, boardId }));
+                    dispatch(actionCommentConfirm());
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </Text>
+              ) : (
+                <Text
+                  color={theme.typoLightGrey2}
+                  size={theme.bodyfourSize}
+                  margin="auto 5px auto auto"
+                ></Text>
+              )}
+              <Text size={theme.bodyfourSize} color={theme.typoGrey2}>
+                {displayedAt(createdAt)}
+              </Text>
+            </Grid>
+          </Grid>
+
+          <Grid align="left">
+            <Text size={theme.bodyfourSize}>{comment}</Text>
+          </Grid>
+          <div
+            style={{
+              height: "1px",
+              width: "100%",
+              backgroundColor: `${theme.typoLightGrey2}`,
+              marginTop: "16px",
+            }}
+          ></div>
+        </Grid>
+
+        {comment_status && (
+          <CommentConfirm confirmMessage="삭제하시겠습니까?" />
+        )}
+      </React.Fragment>
+    );
+  }
 
   return (
     <React.Fragment>
