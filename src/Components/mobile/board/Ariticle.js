@@ -35,7 +35,11 @@ const Ariticle = (props) => {
 
   const handleMovePage = () => {
     dispatch(actionClickContents(board, boardId));
-    history.push(`/detail/${boardId}`);
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else {
+      history.push(`/quarantinedetail/${boardId}`);
+    }
   };
   const typeChanger = (type) => {
     if (type === "아스트라제네카") {
