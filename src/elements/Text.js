@@ -3,7 +3,17 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 
 const Text = (props) => {
-  const { margin, color, size, children, bold, lineHeight, cursor, _onClick, hover } = props;
+  const {
+    margin,
+    color,
+    size,
+    children,
+    bold,
+    lineHeight,
+    cursor,
+    _onClick,
+    hover,
+  } = props;
 
   const styles = {
     margin,
@@ -18,7 +28,9 @@ const Text = (props) => {
 
   return (
     <React.Fragment>
-      <P {...styles} onClick={_onClick}>{children}</P>
+      <P {...styles} onClick={_onClick}>
+        {children}
+      </P>
     </React.Fragment>
   );
 };
@@ -30,7 +42,7 @@ Text.defaultProps = {
   children: false,
   bold: false,
   lineHeight: "",
-  cursor:'',
+  cursor: "",
   _onClick: () => {},
   hover: false,
 };
