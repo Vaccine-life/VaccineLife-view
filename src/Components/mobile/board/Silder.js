@@ -11,6 +11,7 @@ import styled from "styled-components";
 import logger from "../../../shared/logger";
 
 import PopularCard from "../../board/PopularCard";
+import QuarPostCard from "../../board/QuarPostCard";
 
 SwiperCore.use([Pagination]);
 
@@ -38,6 +39,27 @@ const Silder = (props) => {
                 key={index}
                 board={board}
                 boardId={each.vacBoardId}
+                title={each.title}
+                likeCount={each.likeCount}
+                totalVisitors={each.totalVisitors}
+                commentCount={each.commentCount}
+                contents={each.contents}
+                createdAt={each.createdAt}
+                type={each.type}
+              />
+            </SwiperSlide>
+          );
+        })}
+      {board === "quarantine" &&
+        top_list_quar?.map((each, index) => {
+          return (
+            <SwiperSlide
+              style={{ backgroundColor: `transparent`, height: "200px" }}
+            >
+              <QuarPostCard
+                key={index}
+                board={board}
+                boardId={each.quarBoardId}
                 title={each.title}
                 likeCount={each.likeCount}
                 totalVisitors={each.totalVisitors}
