@@ -3,7 +3,7 @@ import { commentAxios, medicalAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
-import { actionAlert, actionSetMessage } from "./popup";
+import { actionAlert, actionSetMessage, acionSetMedicalObj } from "./popup";
 
 const initialState = {
   list: [],
@@ -29,7 +29,7 @@ const comment = createSlice({
     },
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
-      // console.log(action.payload)
+      console.log(action.payload);
       let idx = state.list.findIndex((c) => c.id === medicalId);
       // console.log(idx)
 
@@ -100,7 +100,6 @@ export const actionGetMedical =
     try {
       const getData = await medicalAxios.getMedical();
       const data = getData.data;
-
       dispatch(actionSetComment(data));
     } catch (error) {
       dispatch(
@@ -116,6 +115,9 @@ export const actionAddMedical =
   async (dispatch, getState, { history }) => {
     try {
       await medicalAxios.addMedical(contents);
+      const getData = await medicalAxios.getMedical();
+      const data = getData.data;
+      dispatch(actionSetComment(data));
     } catch (err) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -131,6 +133,7 @@ export const actionDeleteMedical =
     try {
       await medicalAxios.deleteMedical(medicalId);
       dispatch(actionDeleteComment({ medicalId }));
+      dispatch(acionSetMedicalObj());
       history.replace("/medical");
     } catch (err) {
       dispatch(
@@ -147,7 +150,7 @@ export const actionGetTopThreeMedi =
     try {
       dispatch(actionLoading());
       const getData = await medicalAxios.topThreeMedi();
-      console.log(getData);
+      // console.log(getData);
       dispatch(actionSetTopThreeMedi(getData.data));
       dispatch(actionLoading());
     } catch (error) {

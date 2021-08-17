@@ -1,4 +1,5 @@
 import React from "react";
+import theme from "../styles/theme";
 import { useSelector } from "react-redux";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
@@ -30,11 +31,13 @@ const Main = () => {
         {navModal_status && <NavModal />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
-        <Intro />
-        <Map />
-        <MainNivoBar />
-        <MainTo />
-        <MainPopular />
+        <div style={{ margin: `${theme.headerHeight} auto 0 auto` }}>
+          <Intro />
+          <Map />
+          <MainNivoBar />
+          <MainTo />
+          <MainPopular />
+        </div>
       </>
     );
   }

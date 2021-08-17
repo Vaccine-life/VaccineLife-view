@@ -17,7 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
 const CommentList = (props) => {
-  console.log(props);
+  // console.log(props);
   const medi_id = props.id;
 
   const dispatch = useDispatch();
@@ -141,7 +141,7 @@ const CommentList = (props) => {
             </Text>
           </Heart>
 
-          <Grid align="right" margin="auto 0.5rem" padding="0 0 2rem 0">
+          <Grid align="right" margin="auto 0.5rem">
             <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
               {displayedAt(props.createdAt)}
             </Text>
