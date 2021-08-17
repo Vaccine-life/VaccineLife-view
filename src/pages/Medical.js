@@ -14,8 +14,7 @@ import NavModal from "../components/mobile/NavModal";
 import PopularComment from "../components/PopularComment";
 import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
-
-const Medical = () => {
+const Medical = (props) => {
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
   // Medical 페이지에서도 로그인모달창이 뜨게 함
@@ -36,7 +35,7 @@ const Medical = () => {
     // dispatch(actionGetLikeMedi());
   }, []);
 
-  if(isMobileOnly) {
+  if (isMobileOnly) {
     return (
       <>
         <MetaScript title="슬기로운 백신생활 | 의료진" />
@@ -46,21 +45,23 @@ const Medical = () => {
             size={theme.SubHeadOneSize}
             lineHeight={theme.headOneHeight}
             bold
-          >의료진 분들께
+          >
+            의료진 분들께
           </Text>
         </Grid>
 
         <Grid margin={`30px auto 0 auto`}>
           <CommentWrite />
+          <PopularComment />
           {comment_list.map((c, idx) => {
             return <CommentList key={idx} {...c} />;
           })}
         </Grid>
 
-        {modal_status && <NavModal/>}
+        {modal_status && <NavModal />}
         {alert_status && <Alert />}
       </>
-    )
+    );
   }
 
   return (
@@ -79,7 +80,7 @@ const Medical = () => {
         </Grid>
 
         <CommentWrite />
-        {/* <PopularComment /> */}
+        <PopularComment />
         {comment_list.map((c, idx) => {
           return <CommentList key={idx} {...c} />;
         })}
