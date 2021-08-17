@@ -26,7 +26,7 @@ const MainPopular = (props) => {
 
   if (isMobileOnly) {
     return (
-      <div>
+      <>
         <GreyBoxMobile>
           <PopularTitleMobile>
             <h1>백신 접종 후기 인기글</h1>
@@ -59,7 +59,7 @@ const MainPopular = (props) => {
             top_list_quar={top_list_quar}
           />
         </GreyBoxMobile>
-      </div>
+      </>
     );
   }
 
@@ -219,7 +219,7 @@ const PopularCards = styled.div`
 
 const GreyBoxMobile = styled.div`
 background-color: ${theme.typoLightGrey1};
-width: 100%;
+width: 414px;
 height: 640px;
 margin-top: 48px;
 padding-top: 32px;

@@ -273,7 +273,7 @@ height: 120px;
 background: ${theme.bg2};
 border-radius: 16px;
 padding: 16px 0px 0px 16px;
-margin: 40px auto 8px 16px;
+margin: 40px 16px 8px 16px;
 
 & > h3 {
 width: 100px;
@@ -305,17 +305,18 @@ top: 29px;
 
 const CardDownSideMobile = styled.div`
 display: flex;
-flex-direction: row;
+margin-left: 16px;
+width: 382px;
 `;
 
 const ToQuarBoardMobile = styled.div`
 position: relative;
-width: 171px;
+width: 187px;
 height: 120px;
 background: ${theme.bg2};
 border-radius: 16px;
 padding: 16px 0px 0px 16px;
-margin-left: 16px;
+/* margin-left: 16px; */
 margin-right: 8px;
 
 & > h3 {
@@ -348,12 +349,11 @@ top: 29px;
 
 const ToMedicalBoardMobile = styled.div`
 position: relative;
-width: 171px;
+width: 187px;
 height: 120px;
 background: ${theme.bg};
 border-radius: 16px;
 padding: 16px 0px 0px 16px;
-/* margin-left: 16px; */
 
 & > h3 {
 width: 105px;
