@@ -32,7 +32,7 @@ const Quarantine = () => {
 
   if (isMobileOnly) {
     return (
-      <Grid margin="0px auto 40px auto">
+      <Grid margin="80px auto 40px auto">
         <MetaScript title="슬기로운 백신생활 | 격리 후기" />
         {/* props 값 넣기 */}
         <BoardName board="quarantine" />
