@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionGetBoard } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
-import Spinner from "../../shared/Spinner";
 
 const QuarList = (props) => {
   const { board } = props;
@@ -49,7 +48,6 @@ const QuarList = (props) => {
             />
           );
         })}
-        {is_loading && <Spinner />}
       </InfinityScroll>
     );
   }
@@ -87,7 +85,6 @@ const QuarList = (props) => {
               />
             );
           })}
-          {is_loading && <Spinner />}
         </InfinityScroll>
       </tbody>
     </Table>

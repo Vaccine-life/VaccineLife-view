@@ -46,6 +46,7 @@ const Vaccine = () => {
         <List board="vaccine" />
         {isLoading && <BottomSpinner />}
         {navModal_status && <NavModal />}
+        {modal_status && <Login />}
         {alert_status && <Alert />}
       </Grid>
     );
