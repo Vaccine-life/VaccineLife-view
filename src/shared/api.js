@@ -14,6 +14,10 @@ const api = axios.create({
 export const userAxios = {
   login: (user) => api.post("/api/login", user),
   signup: (obj) => api.post("/api/signup", obj),
+  idDupCheck: (username) =>
+    api.get(`/api/signup/username?username=${username}`),
+  nicknameDupCheck: (nickname) =>
+    api.get(`/api/signup/nickname?nickname=${nickname}`),
 };
 
 export const boardAxios = {
