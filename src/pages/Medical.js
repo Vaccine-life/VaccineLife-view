@@ -19,6 +19,7 @@ const Medical = (props) => {
   const alert_status = useSelector((state) => state.popup.alert);
   // Medical 페이지에서도 로그인모달창이 뜨게 함
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
 
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
@@ -58,7 +59,7 @@ const Medical = (props) => {
           })}
         </Grid>
 
-        {modal_status && <NavModal />}
+        {navModal_status && <NavModal />}
         {alert_status && <Alert />}
       </>
     );
