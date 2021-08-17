@@ -21,70 +21,70 @@ const NavModal = (props) => {
         const clicked = e.target.closest(".modal");
         // console.log(clicked);
         if (clicked) {
-        return;
+            return;
         } else {
-        dispatch(actionNavVisible());
+            dispatch(actionNavVisible());
         }
-    }; 
+    };
 
-    if(is_login){
-        return(
+    if (is_login) {
+        return (
             <>
+                <Wrapper
+                    onClick={(e) => {
+                        handleModalOff(e);
+                    }}
+                >
+                    <Modal className="modal">
+                        <Xbutton
+                            onClick={() => {
+                                dispatch(actionNavVisible());
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg" />
+                        </Xbutton>
+
+                        <Grid align="left">
+                            <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+                                <span style={{ color: `{theme.SuccessGreen}` }}>{nickname}</span>님, 환영합니다</Text>
+                            <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
+                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
+                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
+                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
+                            <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
+                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">로그아웃</Text>
+                        </Grid>
+                    </Modal>
+                </Wrapper>
+            </>
+        )
+    }
+    return (
+        <>
             <Wrapper
                 onClick={(e) => {
-                handleModalOff(e);
+                    handleModalOff(e);
                 }}
             >
                 <Modal className="modal">
                     <Xbutton
                         onClick={() => {
-                        dispatch(actionNavVisible());
+                            dispatch(actionNavVisible());
                         }}
-                        >
-                        <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg"/>
+                    >
+                        <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg" margin="2rem 0" />
                     </Xbutton>
 
                     <Grid align="left">
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
-                            <span style={{color: `{theme.SuccessGreen}`}}>{nickname}</span>님, 환영합니다</Text>
-                        <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}/>
+                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>로그인</Text>
+                        <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
                         <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
-                        <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}/>
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">로그아웃</Text>
                     </Grid>
+
                 </Modal>
             </Wrapper>
-            </>
-        )
-    }
-    return(
-        <>
-        <Wrapper
-            onClick={(e) => {
-            handleModalOff(e);
-            }}
-        >
-            <Modal className="modal">
-                <Xbutton
-                    onClick={() => {
-                    dispatch(actionNavVisible());
-                    }}
-                    >
-                    <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg" margin="2rem 0"/>
-                </Xbutton>
-
-                <Grid align="left">
-                    <Text color={theme.typoBlack} size={theme.bodyThreeSize}>로그인</Text>
-                    <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}/>
-                    <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
-                    <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
-                    <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
-                </Grid>
-                
-            </Modal>
-        </Wrapper>
         </>
     )
 }
