@@ -112,6 +112,10 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
+                _onClick={() => {
+                  dispatch(actionNavVisible());
+                  dispatch(actionLogoutCookie());
+                }}
               >
                 로그아웃
               </Text>
@@ -143,7 +147,14 @@ const NavModal = (props) => {
           </Xbutton>
 
           <Grid align="left">
-            <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+            <Text
+              color={theme.typoBlack}
+              size={theme.bodyThreeSize}
+              _onClick={() => {
+                dispatch(actionNavVisible());
+                dispatch(actionVisible());
+              }}
+            >
               로그인
             </Text>
             <div

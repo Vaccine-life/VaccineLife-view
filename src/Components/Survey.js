@@ -563,7 +563,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
             >
               부작용 (중복선택가능)
             </Text>
-            <FourOptions>
+            <ThreeOptions style={{ marginBottom: "5px" }}>
               <Option>
                 <input
                   type="checkbox"
@@ -618,7 +618,9 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                   두통/관절통/근육통
                 </label>
               </Option>
+            </ThreeOptions>
 
+            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
               <Option>
                 <input
                   type="checkbox"
@@ -637,9 +639,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                   피로감
                 </label>
               </Option>
-            </FourOptions>
-
-            <MobileMiddleCheckbox>
               <Option>
                 <input
                   type="checkbox"
@@ -663,27 +662,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 <input
                   type="checkbox"
                   name="afterEffect"
-                  value="접종부위 부기/발적"
-                  id="접종부위부기발적"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="접종부위부기발적"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  접종부위 부기/발적
-                </label>
-              </Option>
-            </MobileMiddleCheckbox>
-
-            <ThreeOptions>
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
                   value="구토/매스꺼움"
                   id="구토매스꺼움"
                   onClick={handleCheckboxClick}
@@ -696,6 +674,27 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                   style={{ fontSize: `${theme.bodyTwoSize}` }}
                 >
                   구토/매스꺼움
+                </label>
+              </Option>
+            </MobileLowerCheckbox>
+
+            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
+              <Option>
+                <input
+                  type="checkbox"
+                  name="afterEffect"
+                  value="접종부위 부기/발적"
+                  id="접종부위부기발적"
+                  onClick={handleCheckboxClick}
+                  disabled={
+                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                  }
+                />
+                <label
+                  htmlFor="접종부위부기발적"
+                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                >
+                  접종부위 부기/발적
                 </label>
               </Option>
 
@@ -736,7 +735,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                   기타
                 </label>
               </Option>
-            </ThreeOptions>
+            </MobileLowerCheckbox>
             {/* <div></div> */}
           </MobileSurveyItem>
 
@@ -1230,7 +1229,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 없음
               </label>
             </Option>
-
             <Option>
               <input
                 type="checkbox"
@@ -1249,7 +1247,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 발열
               </label>
             </Option>
-
             <Option>
               <input
                 type="checkbox"
@@ -1268,26 +1265,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 두통/관절통/근육통
               </label>
             </Option>
-
-            <Option>
-              <input
-                type="checkbox"
-                name="afterEffect"
-                value="접종부위 통증"
-                id="접종부위통증"
-                onClick={handleCheckboxClick}
-                disabled={
-                  (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                }
-              />
-              <label
-                htmlFor="접종부위통증"
-                style={{ fontSize: `${theme.bodyTwoSize}` }}
-              >
-                접종부위 통증
-              </label>
-            </Option>
-
             <Option>
               <input
                 type="checkbox"
@@ -1309,7 +1286,25 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
           </UpperCheckbox>
           <div></div>
 
-          <FourOptions>
+          <TwoOptions>
+            <Option>
+              <input
+                type="checkbox"
+                name="afterEffect"
+                value="접종부위 통증"
+                id="접종부위통증"
+                onClick={handleCheckboxClick}
+                disabled={
+                  (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                }
+              />
+              <label
+                htmlFor="접종부위통증"
+                style={{ fontSize: `${theme.bodyTwoSize}` }}
+              >
+                접종부위 통증
+              </label>
+            </Option>
             <Option>
               <input
                 type="checkbox"
@@ -1328,7 +1323,10 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 접종부위 부기/발적
               </label>
             </Option>
+          </TwoOptions>
+          <div></div>
 
+          <ThreeOptions>
             <Option>
               <input
                 type="checkbox"
@@ -1347,7 +1345,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 구토/매스꺼움
               </label>
             </Option>
-
             <Option>
               <input
                 type="checkbox"
@@ -1385,7 +1382,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 기타
               </label>
             </Option>
-          </FourOptions>
+          </ThreeOptions>
           {/* <div></div> */}
         </SurveyItem>
 
@@ -1423,17 +1420,17 @@ const TwoOptions = styled.div`
 
 const ThreeOptions = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(25%, auto));
+  grid-template-columns: repeat(3, minmax(27%, auto));
 `;
 
 const FourOptions = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(20%, auto));
 `;
 
 const UpperCheckbox = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, minmax(10%, auto));
+  grid-template-columns: repeat(4, minmax(15%, auto));
 `;
 
 const SubmitButton = styled.button`
@@ -1483,9 +1480,9 @@ const MobileSurveyItem = styled.div`
   row-gap: 20px;
 `;
 
-const MobileMiddleCheckbox = styled.div`
+const MobileLowerCheckbox = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(35%, auto));
+  grid-template-columns: repeat(3, minmax(20%, auto));
   margin-bottom: 5px;
 `;
 

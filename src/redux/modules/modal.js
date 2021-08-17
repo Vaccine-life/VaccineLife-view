@@ -21,6 +21,13 @@ const modal = createSlice({
     },
     actionNavVisible: (state, action) => {
       state.navVisible = !state.navVisible;
+
+      // 모달 켜져있을 때 원래화면 스크롤 방지
+      if (state.navVisible) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "unset";
+      }
     },
   },
 });
