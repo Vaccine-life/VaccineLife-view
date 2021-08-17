@@ -5,6 +5,7 @@ import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
 import { actionVisible } from "./modal";
 import { actionAlert, actionSetMessage } from "./popup";
+import { actionGetLikeMedi, actionSetLikeMedi } from "./like";
 
 const initialState = {
   user: {
@@ -66,6 +67,8 @@ export const actionLogin =
       dispatch(actionAlert());
 
       dispatch(actionVisible());
+      // 로그인시 내가 누른 하트 보이게 하기
+      dispatch(actionGetLikeMedi());
     } catch (error) {
       dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
       dispatch(actionAlert());

@@ -26,7 +26,7 @@ const like = createSlice({
     },
     actionSetLikeMedi: (state, action) => {
       state.likeListMedi = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     actionMinusLikeInLikeListVac: (state, action) => {
       state.likeListVac = state.likeListVac.filter((each) => {
