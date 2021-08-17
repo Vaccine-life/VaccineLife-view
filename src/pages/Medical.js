@@ -66,6 +66,7 @@ const Medical = (props) => {
 
         {navModal_status && <NavModal />}
         {alert_status && <Alert />}
+        {modal_status && <Login />}
       </>
     );
   }

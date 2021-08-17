@@ -16,6 +16,7 @@ import MetaScript from "../shared/MetaScript";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import BoardName from "../components/mobile/BoardName";
+import Login from "./Login";
 
 const data = {
   vacBoardId: 0,
@@ -51,6 +52,7 @@ const Modify = () => {
   const alert_status = useSelector((state) => state.popup.alert);
   // 리덕스에서 정보 가져오기
   const board_store = useSelector((state) => state.board.board);
+  const modal_status = useSelector((state) => state.modal.visible);
   // 타이틀 인풋값
   const [title, setTitle] = useState(board_store.title);
   const editor = useRef();
@@ -91,7 +93,7 @@ const Modify = () => {
 
   if (isMobileOnly) {
     return (
-      <Grid margin="16px auto 120px auto">
+      <Grid margin="80px auto 120px auto">
         <MetaScript title="슬기로운 백신생활 | 글쓰기" />
         <BoardName board={board} />
         <Grid margin="16px auto 26px auto" padding="0 16px 0  16px">
@@ -139,6 +141,7 @@ const Modify = () => {
             등록
           </Button>
         </ButtonDiv>
+        {modal_status && <Login />}
       </Grid>
     );
   }
@@ -191,6 +194,7 @@ const Modify = () => {
           등록
         </Button>
       </ButtonDiv>
+      {modal_status && <Login />}
     </Grid>
   );
 };

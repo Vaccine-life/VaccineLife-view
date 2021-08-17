@@ -3,7 +3,8 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import { Grid, Text } from "../../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { actionNavVisible } from "../../redux/modules/modal";
+import { actionVisible, actionNavVisible } from "../../redux/modules/modal";
+import { actionLogoutCookie } from "../../redux/modules/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../redux/configStore";
@@ -111,6 +112,10 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
+                _onClick={() => {
+                  dispatch(actionNavVisible());
+                  dispatch(actionLogoutCookie());
+                }}
               >
                 로그아웃
               </Text>
@@ -142,7 +147,14 @@ const NavModal = (props) => {
           </Xbutton>
 
           <Grid align="left">
-            <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+            <Text
+              color={theme.typoBlack}
+              size={theme.bodyThreeSize}
+              _onClick={() => {
+                dispatch(actionNavVisible());
+                dispatch(actionVisible());
+              }}
+            >
               로그인
             </Text>
             <div

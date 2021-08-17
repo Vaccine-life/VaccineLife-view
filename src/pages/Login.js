@@ -10,6 +10,7 @@ import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
 import Survey from "../components/Survey";
 import Alert from "../components/popup/Alert";
+import { Grid } from "../elements";
 
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
@@ -89,19 +90,15 @@ const Login = (props) => {
 
   if (isMobileOnly) {
     return (
-      <React.Fragment
-        onClick={(e) => {
-          handleModalOff(e);
-        }}
-      >
-        <MobileLogin className="modal">
-          <Xbutton
+      <>
+        <MobileLoginBg>
+          <MobileXbutton
             onClick={() => {
               dispatch(actionVisible());
             }}
           >
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
-          </Xbutton>
+          </MobileXbutton>
 
           {status === "login" && (
             <LoginComponent status={status} setStatus={setStatus} />
@@ -126,9 +123,9 @@ const Login = (props) => {
               formik={formik}
             />
           )}
-        </MobileLogin>
+        </MobileLoginBg>
         {alert_status && <Alert />}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -185,7 +182,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
@@ -214,15 +211,30 @@ const Xbutton = styled.div`
   }
 `;
 
-const MobileLogin = styled.div`
-  width: 100vh;
-  height: 100vh;
+// <========= Mobile ==========>
+
+const MobileLoginBg = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 40px;
+  background-color: white;
+`;
+
+const MobileXbutton = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default Login;

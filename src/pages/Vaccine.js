@@ -15,6 +15,7 @@ import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
 import NavModal from "../components/mobile/NavModal";
+import BottomSpinner from "../shared/BottomSpinner";
 
 const Vaccine = () => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -37,15 +38,16 @@ const Vaccine = () => {
 
   if (isMobileOnly) {
     return (
-      <Grid margin="0 auto 40px auto">
+      <Grid margin="80px auto 40px auto">
         <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
         <BoardName board="vaccine" />
         <Popular board="vaccine" />
         <ListNav board="vaccine" />
         <List board="vaccine" />
+        {isLoading && <BottomSpinner />}
         {navModal_status && <NavModal />}
+        {modal_status && <Login />}
         {alert_status && <Alert />}
-        {isLoading && <Spinner />}
       </Grid>
     );
   }
@@ -57,9 +59,9 @@ const Vaccine = () => {
       <Popular board="vaccine" />
       <ListNav board="vaccine" />
       <List board="vaccine" />
+      {isLoading && <BottomSpinner />}
       {modal_status && <Login />}
       {alert_status && <Alert />}
-      {isLoading && <Spinner />}
     </Grid>
   );
 };
