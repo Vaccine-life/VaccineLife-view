@@ -1,10 +1,11 @@
 import React from "react";
+import theme from "../styles/theme";
 import { useSelector } from "react-redux";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
-import Intro from '../components/Intro';
+import Intro from "../components/Intro";
 
 import Map from "../components/Map";
 import MainTo from "../components/MainTo";
@@ -23,22 +24,22 @@ const Main = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
   if (isMobileOnly) {
     return (
       <>
         {navModal_status && <NavModal />}
         {/* {modal_status && <Login />} */}
         {alert_status && <Alert />}
-        <Intro />
-        <Map />
-        <MainNivoBar />
-        <MainTo />
-        <MainPopular />
+        <div style={{ margin: `${theme.headerHeight} auto 0 auto` }}>
+          <Intro />
+          <Map />
+          <MainNivoBar />
+          <MainTo />
+          <MainPopular />
+        </div>
       </>
     );
   }
-
 
   return (
     <>
@@ -54,7 +55,6 @@ const Main = () => {
     </>
   );
 };
-
 
 const MapAndChart = styled.div`
   display: flex;

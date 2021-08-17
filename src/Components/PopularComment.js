@@ -13,7 +13,10 @@ import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
-import { actionGetTopThreeMedi } from "../redux/modules/comment";
+import {
+  actionGetTopThreeMedi,
+  actionSetTopThreeMedi,
+} from "../redux/modules/comment";
 import { isMobileOnly } from "react-device-detect";
 
 const PopularComment = (props) => {
@@ -21,6 +24,7 @@ const PopularComment = (props) => {
 
   const top_list_medi = useSelector((state) => state.comment.topThreeMedi);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
+  console.log(top_list_medi);
 
   React.useEffect(() => {
     dispatch(actionGetTopThreeMedi());

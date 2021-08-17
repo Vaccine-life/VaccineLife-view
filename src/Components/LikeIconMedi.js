@@ -7,17 +7,19 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
 import { actionMediLike, actionSetLikeMedi } from "../redux/modules/like";
+import { actionSetTopThreeMedi } from "../redux/modules/comment";
 
 const LikeIconMedi = (props) => {
   // console.log(props)
   const { boardId, size, bigHeart } = props;
   const userId = useSelector((state) => state.user.user.userId);
   const like_list_medi = useSelector((state) => state.like.likeListMedi);
-  console.log(like_list_medi)
+  // console.log(like_list_medi)
   const dispatch = useDispatch();
 
   const isHeart = like_list_medi.includes(boardId);
-  console.log(isHeart)
+  // console.log(isHeart)
+  const is_login = useSelector((state) => state.user.is_login);
 
   const likeObj = {
     medicalId: boardId,
@@ -27,8 +29,9 @@ const LikeIconMedi = (props) => {
 
   const handleLikeClick = () => {
     dispatch(actionMediLike(likeObj));
+    // dispatch(actionSetTopThreeMedi());
+    // dispatch(actionSetLikeMedi());
   };
-
 
   if (bigHeart) {
     return (

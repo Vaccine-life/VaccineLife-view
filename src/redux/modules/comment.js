@@ -147,7 +147,7 @@ export const actionGetTopThreeMedi =
     try {
       dispatch(actionLoading());
       const getData = await medicalAxios.topThreeMedi();
-      console.log(getData);
+      // console.log(getData);
       dispatch(actionSetTopThreeMedi(getData.data));
       dispatch(actionLoading());
     } catch (error) {
