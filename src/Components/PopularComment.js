@@ -20,6 +20,7 @@ const PopularComment = (props) => {
   const dispatch = useDispatch();
 
   const top_list_medi = useSelector((state) => state.comment.topThreeMedi);
+  const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
   React.useEffect(() => {
     dispatch(actionGetTopThreeMedi());
@@ -50,6 +51,10 @@ const PopularComment = (props) => {
               );
             })}
           </PopularWrapper>
+
+          {medical_status && (
+            <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
+          )}
         </div>
       </>
     );
@@ -93,9 +98,10 @@ const PopularWrapper = styled.div`
 export default PopularComment;
 
 const PopularCommentItem = (props) => {
-  console.log(props);
+  // console.log(props);
   const { nickname, contents, likeCount, createdAt, boardId, userId } = props;
-  const medi_id = props.id;
+  // const medi_id = props.id;
+  // console.log(medi_id);
 
   const dispatch = useDispatch();
 
@@ -108,7 +114,12 @@ const PopularCommentItem = (props) => {
       <>
         <Grid is_flex="column_left_start" margin="2rem 0">
           <CommentHead>
-            <Grid align="left" width="15rem" padding="1rem 0.5rem">
+            <Grid
+              align="left"
+              width="10rem"
+              padding="1rem 0.5rem"
+              margin="0 auto 0 0"
+            >
               <Text
                 bold
                 size={theme.SubHeadTwoSize}
@@ -119,7 +130,7 @@ const PopularCommentItem = (props) => {
               </Text>
             </Grid>
 
-            <Grid align="right" margin="auto 0.5rem">
+            {/* <Grid align="right" margin="auto 0.5rem">
               {is_login && user_id === userId ? (
                 <Text
                   color={theme.typoGrey3}
@@ -127,7 +138,7 @@ const PopularCommentItem = (props) => {
                   lineHeight={theme.bodyThreeSize}
                   cursor="pointer"
                   _onClick={() => {
-                    dispatch(acionSetMedicalObj({ medi_id }));
+                    dispatch(acionSetMedicalObj({ boardId }));
                     dispatch(actionMedicalConfirm());
                   }}
                 >
@@ -136,7 +147,7 @@ const PopularCommentItem = (props) => {
               ) : (
                 ""
               )}
-            </Grid>
+            </Grid> */}
 
             <Heart>
               <LikeIconMedi boardId={boardId} />
@@ -147,7 +158,7 @@ const PopularCommentItem = (props) => {
                   color: `${theme.typoGrey2}`,
                 }}
               >
-                {likeCount}
+                {props.likeCount}
               </p>
             </Heart>
           </CommentHead>
@@ -194,7 +205,7 @@ const PopularCommentItem = (props) => {
             </Text>
           </Grid>
 
-          <Trash>
+          {/* <Trash>
             {is_login && user_id === userId ? (
               <Text
                 color={theme.typoGrey3}
@@ -202,7 +213,7 @@ const PopularCommentItem = (props) => {
                 lineHeight={theme.bodyThreeSize}
                 cursor="pointer"
                 _onClick={() => {
-                  dispatch(acionSetMedicalObj({ medi_id }));
+                  dispatch(acionSetMedicalObj({ boardId }));
                   dispatch(actionMedicalConfirm());
                 }}
               >
@@ -211,7 +222,7 @@ const PopularCommentItem = (props) => {
             ) : (
               ""
             )}
-          </Trash>
+          </Trash> */}
 
           <Heart>
             <LikeIconMedi boardId={boardId} />
