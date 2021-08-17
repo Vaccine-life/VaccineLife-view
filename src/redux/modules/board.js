@@ -92,7 +92,7 @@ const board = createSlice({
         });
         state.board.likeCount = state.board.likeCount - 1;
       } else {
-        state.listVac = state.listQuar.map((each) => {
+        state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
           }
@@ -112,7 +112,7 @@ const board = createSlice({
         });
         state.board.likeCount = state.board.likeCount + 1;
       } else {
-        state.listVac = state.listQuar.map((each) => {
+        state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
           }

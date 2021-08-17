@@ -91,7 +91,7 @@ const Modify = () => {
 
   if (isMobileOnly) {
     return (
-      <Grid margin="16px auto 120px auto">
+      <Grid margin="80px auto 120px auto">
         <MetaScript title="슬기로운 백신생활 | 글쓰기" />
         <BoardName board={board} />
         <Grid margin="16px auto 26px auto" padding="0 16px 0  16px">
