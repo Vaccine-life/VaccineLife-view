@@ -15,6 +15,7 @@ import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
 import NavModal from "../components/mobile/NavModal";
+import BottomSpinner from "../shared/BottomSpinner";
 
 const Vaccine = () => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -43,9 +44,9 @@ const Vaccine = () => {
         <Popular board="vaccine" />
         <ListNav board="vaccine" />
         <List board="vaccine" />
+        {isLoading && <BottomSpinner />}
         {navModal_status && <NavModal />}
         {alert_status && <Alert />}
-        {isLoading && <Spinner />}
       </Grid>
     );
   }
@@ -57,9 +58,9 @@ const Vaccine = () => {
       <Popular board="vaccine" />
       <ListNav board="vaccine" />
       <List board="vaccine" />
+      {isLoading && <BottomSpinner />}
       {modal_status && <Login />}
       {alert_status && <Alert />}
-      {isLoading && <Spinner />}
     </Grid>
   );
 };

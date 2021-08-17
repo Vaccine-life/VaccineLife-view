@@ -13,6 +13,7 @@ import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
 import NavModal from "../components/mobile/NavModal";
+import BottomSpinner from "../shared/BottomSpinner";
 
 const Quarantine = () => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -39,9 +40,9 @@ const Quarantine = () => {
         <Popular board="quarantine" />
         <ListNav board="quarantine" />
         <QuarList board="quarantine" />
+        {isLoading && <BottomSpinner />}
         {navModal_status && <NavModal />}
         {alert_status && <Alert />}
-        {isLoading && <Spinner />}
       </Grid>
     );
   }
@@ -52,9 +53,9 @@ const Quarantine = () => {
       <Popular board="quarantine" />
       <ListNav board="quarantine" />
       <QuarList board="quarantine" />
+      {isLoading && <BottomSpinner />}
       {modal_status && <Login />}
       {alert_status && <Alert />}
-      {isLoading && <Spinner />}
     </Grid>
   );
 };
