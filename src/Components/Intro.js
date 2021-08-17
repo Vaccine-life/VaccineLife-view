@@ -60,7 +60,7 @@ const MainIntro = styled.div`
 const MainIntroMobile = styled.div`
   position: relative;
   margin-top: 80px;
-  width: 414px;
+  width: 100%;
   height: 140px;
   background-color: ${theme.bg};
 
