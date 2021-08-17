@@ -43,6 +43,7 @@ const Quarantine = () => {
         {isLoading && <BottomSpinner />}
         {navModal_status && <NavModal />}
         {alert_status && <Alert />}
+        {modal_status && <Login />}
       </Grid>
     );
   }

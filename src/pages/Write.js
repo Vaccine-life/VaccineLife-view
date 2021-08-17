@@ -16,12 +16,14 @@ import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
+import Login from "./Login";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
   const dispatch = useDispatch();
   //alert
   const alert_status = useSelector((state) => state.popup.alert);
+  const modal_status = useSelector((state) => state.modal.visible);
   const url = history.location.pathname;
 
   // /vboard/write일때 true /qboard/write 일떄 false
@@ -111,6 +113,7 @@ const Write = () => {
             등록
           </Button>
         </ButtonDiv>
+        {modal_status && <Login />}
       </Grid>
     );
   }
@@ -162,6 +165,7 @@ const Write = () => {
         >
           등록
         </Button>
+        {modal_status && <Login />}
       </ButtonDiv>
     </Grid>
   );
