@@ -18,6 +18,7 @@ const Grid = (props) => {
     border,
     hover,
     color,
+    borderline,
   } = props;
 
   const styles = {
@@ -33,6 +34,7 @@ const Grid = (props) => {
     border,
     hover,
     color,
+    borderline,
   };
   return (
     <Wrapper onClick={_onClick} {...styles}>
@@ -52,17 +54,19 @@ Grid.defaultProps = {
   bg: null,
   border_radius: "",
   align: false,
-  _onClick: () => { },
+  _onClick: () => {},
   cursor: "",
   border: false,
   hover: false,
   color: theme.typoBlack,
+  borderline: false,
 };
 
 const Wrapper = styled.div`
   color: ${(props) => props.color};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  ${(props) => props.borderline && ` border : ${props.borderline};`}
   ${(props) => {
     if (props.is_flex === "center") {
       return `

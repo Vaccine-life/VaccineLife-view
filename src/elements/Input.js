@@ -143,6 +143,9 @@ const ElInput = styled.input`
   box-sizing: border-box;
   ${(props) => (props.height ? `height:${props.height}` : "")};
   ${(props) => (props.maxLength ? `maxLength:${props.maxLength}` : "")};
+  ::placeholder {
+    color: ${theme.typoGrey2};
+  }
 `;
 
 const CommentInput = styled.input`

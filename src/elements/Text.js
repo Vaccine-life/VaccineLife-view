@@ -13,6 +13,7 @@ const Text = (props) => {
     cursor,
     _onClick,
     hover,
+    alignStart,
   } = props;
 
   const styles = {
@@ -24,6 +25,7 @@ const Text = (props) => {
     lineHeight,
     cursor,
     hover,
+    alignStart,
   };
 
   return (
@@ -45,6 +47,7 @@ Text.defaultProps = {
   cursor: "",
   _onClick: () => {},
   hover: false,
+  alignStart: false,
 };
 
 const P = styled.p`
@@ -54,6 +57,13 @@ const P = styled.p`
   margin: ${(props) => props.margin};
   line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
+
+  ${(props) =>
+    props.alignStart
+      ? `
+     text-align: start;
+    `
+      : ``}
   ${(props) =>
     props.hover &&
     `

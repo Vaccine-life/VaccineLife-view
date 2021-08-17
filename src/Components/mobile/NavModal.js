@@ -7,7 +7,8 @@ import { actionVisible, actionNavVisible } from "../../redux/modules/modal";
 import { actionLogoutCookie } from "../../redux/modules/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import Accordion from "@material-ui/core/Accordion";
+import { history } from "../../redux/configStore";
+import { withRouter } from "react-router-dom";
 
 const NavModal = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const NavModal = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
   const modal_status = useSelector((state) => state.modal.visible);
+  const url = history.location.pathname;
 
   // 모달 바깥 부분 클릭시 모달 off
   const handleModalOff = (e) => {
@@ -41,12 +43,7 @@ const NavModal = (props) => {
                 dispatch(actionNavVisible());
               }}
             >
-              <FontAwesomeIcon
-                icon={faTimes}
-                color={theme.bg2}
-                size="lg"
-                margin="2rem 0"
-              />
+              <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg" />
             </Xbutton>
 
             <Grid align="left">
@@ -63,6 +60,18 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
+                nav={
+                  url === "/vaccine" ||
+                  url.includes("/detail") ||
+                  url === "/vaccineboard/write" ||
+                  url.includes("/modify")
+                    ? true
+                    : false
+                }
+                _onClick={() => {
+                  history.push("/vaccine");
+                  dispatch(actionNavVisible());
+                }}
               >
                 백신 접종 후기
               </Text>
@@ -70,6 +79,18 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
+                nav={
+                  url === "/quarantine" ||
+                  url.includes("/quarantinedetail") ||
+                  url === "/quarantineboard/write" ||
+                  url.includes("/quarantinemodify")
+                    ? true
+                    : false
+                }
+                _onClick={() => {
+                  history.push("/quarantine");
+                  dispatch(actionNavVisible());
+                }}
               >
                 자가 격리 후기
               </Text>
@@ -77,6 +98,10 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
+                _onClick={() => {
+                  history.push("/medical");
+                  dispatch(actionNavVisible());
+                }}
               >
                 의료진분들께
               </Text>
@@ -87,10 +112,6 @@ const NavModal = (props) => {
                 color={theme.typoBlack}
                 size={theme.bodyThreeSize}
                 margin="2rem 0"
-                _onClick={() => {
-                  dispatch(actionLogoutCookie());
-                  dispatch(actionNavVisible());
-                }}
               >
                 로그아웃
               </Text>
@@ -122,14 +143,7 @@ const NavModal = (props) => {
           </Xbutton>
 
           <Grid align="left">
-            <Text
-              color={theme.typoBlack}
-              size={theme.bodyThreeSize}
-              _onClick={() => {
-                dispatch(actionNavVisible());
-                dispatch(actionVisible());
-              }}
-            >
+            <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
               로그인
             </Text>
             <div
@@ -139,6 +153,18 @@ const NavModal = (props) => {
               color={theme.typoBlack}
               size={theme.bodyThreeSize}
               margin="2rem 0"
+              nav={
+                url === "/vaccine" ||
+                url.includes("/detail") ||
+                url === "/vaccineboard/write" ||
+                url.includes("/modify")
+                  ? true
+                  : false
+              }
+              _onClick={() => {
+                history.push("/vaccine");
+                dispatch(actionNavVisible());
+              }}
             >
               백신 접종 후기
             </Text>
@@ -146,6 +172,18 @@ const NavModal = (props) => {
               color={theme.typoBlack}
               size={theme.bodyThreeSize}
               margin="2rem 0"
+              nav={
+                url === "/quarantine" ||
+                url.includes("/quarantinedetail") ||
+                url === "/quarantineboard/write" ||
+                url.includes("/quarantinemodify")
+                  ? true
+                  : false
+              }
+              _onClick={() => {
+                history.push("/quarantine");
+                dispatch(actionNavVisible());
+              }}
             >
               자가 격리 후기
             </Text>
@@ -153,6 +191,10 @@ const NavModal = (props) => {
               color={theme.typoBlack}
               size={theme.bodyThreeSize}
               margin="2rem 0"
+              _onClick={() => {
+                history.push("/medical");
+                dispatch(actionNavVisible());
+              }}
             >
               의료진분들께
             </Text>
@@ -199,4 +241,4 @@ const Xbutton = styled.div`
   }
 `;
 
-export default NavModal;
+export default withRouter(NavModal);

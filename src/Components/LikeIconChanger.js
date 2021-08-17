@@ -7,6 +7,7 @@ import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
 import { actionPostLike } from "../redux/modules/like";
+import { isMobileOnly } from "react-device-detect";
 
 const LikeIconChanger = (props) => {
   const { board, boardId, size, bigHeart } = props;
@@ -14,8 +15,6 @@ const LikeIconChanger = (props) => {
   const userId = useSelector((state) => state.user.user.userId);
   const like_list_vac = useSelector((state) => state.like.likeListVac);
   const like_list_quar = useSelector((state) => state.like.likeListQuar);
-  // console.log(like_list_vac)
-  // console.log(like_list_quar)
   const dispatch = useDispatch();
   const isHeart =
     board === "vaccine"
@@ -37,6 +36,29 @@ const LikeIconChanger = (props) => {
   const handleLikeClick = () => {
     dispatch(actionPostLike(board, likeObj));
   };
+  if (isMobileOnly) {
+    if (bigHeart) {
+      return (
+        <BigWrapperM isHeart={isHeart} onClick={handleLikeClick}>
+          {isHeart ? (
+            <FontAwesomeIcon icon={faHeart} size={size} />
+          ) : (
+            <FontAwesomeIcon icon={amptyHeart} size={size} />
+          )}
+        </BigWrapperM>
+      );
+    } else {
+      return (
+        <WrapperM isHeart={isHeart} onClick={handleLikeClick}>
+          {isHeart ? (
+            <FontAwesomeIcon icon={faHeart} size={size} />
+          ) : (
+            <FontAwesomeIcon icon={amptyHeart} size={size} />
+          )}
+        </WrapperM>
+      );
+    }
+  }
 
   if (bigHeart) {
     return (
@@ -88,6 +110,21 @@ const Wrapper = styled.div`
   }
   `}
 `;
+const WrapperM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out;
+  ${(props) =>
+    props.isHeart
+      ? `
+ color: ${theme.bg};
+  `
+      : `
+  color: ${theme.typoGrey2};
+
+  `}
+`;
 
 const BigWrapper = styled.div`
   display: flex;
@@ -109,6 +146,22 @@ const BigWrapper = styled.div`
     cursor: pointer;
     color: ${theme.typoGrey2};
   }
+  `}
+`;
+const BigWrapperM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out;
+  ${(props) =>
+    props.isHeart
+      ? `
+ color: ${theme.bg};
+
+  `
+      : `
+  color: ${theme.bg};
+ 
   `}
 `;
 

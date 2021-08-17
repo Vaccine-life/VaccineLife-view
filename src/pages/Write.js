@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import { actionWriteExperience } from "../redux/modules/board";
 import MetaScript from "../shared/MetaScript";
+import styled from "styled-components";
+import { isMobileOnly } from "react-device-detect";
+import BoardName from "../components/mobile/BoardName";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -58,41 +61,86 @@ const Write = () => {
     }
   };
 
-  logger(contents);
+  if (isMobileOnly) {
+    return (
+      <Grid margin="80px auto 120px auto">
+        <MetaScript title="슬기로운 백신생활 | 글쓰기" />
+        <BoardName board={urlExchanger ? "vaccine" : "quarantine"} />
+        <Grid margin="16px auto 26px auto" padding="0 16px 0  16px">
+          <Text
+            alignStart={true}
+            size={theme.bodyThreeSize}
+            lineHeight={theme.bodyThreeHeight}
+            color={theme.typoGrey3}
+          >
+            {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
+            {urlExchanger ? "백신후기 >" : "격리후기 >"} 글쓰기
+          </Text>
+        </Grid>
+
+        {/* 타이틀 입력 */}
+        <InputDiv isMobile={true}>
+          <Input
+            value={title}
+            height="46px"
+            border="none"
+            _onChange={onTitleChange}
+            fontSize={theme.bodyfourSize}
+            placeholder="제목을 입력해 주세요."
+          />
+        </InputDiv>
+
+        {/* 작성페이지 */}
+        <ExperienceWrite
+          editor={editor}
+          urlExchanger={urlExchanger}
+          editorState={editorState}
+          setEditorState={setEditorState}
+        />
+        {alert_status && <Alert />}
+        <ButtonDiv isMobile={true}>
+          <Button
+            width={theme.mediumButtonWidth}
+            height={theme.mediumButtonHeight}
+            fontSize={theme.SubHeadTwoSize}
+            bold
+            margin="0"
+            bg={theme.bg2}
+            _onClick={handlePostEx}
+          >
+            등록
+          </Button>
+        </ButtonDiv>
+      </Grid>
+    );
+  }
+
   return (
     <Grid width={theme.writeWidth} margin={`160px auto 120px auto`}>
       <MetaScript title="슬기로운 백신생활 | 글쓰기" />
-      <Grid is_flex="space_row" margin="auto auto 26px auto">
-        <Text size={theme.headOneSize} lineHeight={theme.headOneHeight} bold>
-          {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
-          {urlExchanger ? "백신" : "격리"} 후기 글쓰기
-        </Text>
-        <Button
-          width={theme.smallButtonWidth}
-          height={theme.smallButtonHeight}
-          fontSize={theme.SubHeadTwoSize}
-          bold
-          margin="0"
-          bg={theme.bg2}
-          _onClick={handlePostEx}
+      <Grid margin="auto auto 26px auto">
+        <Text
+          alignStart={true}
+          size={theme.bodyThreeSize}
+          lineHeight={theme.bodyThreeHeight}
+          color={theme.typoGrey3}
         >
-          등록
-        </Button>
+          {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
+          {urlExchanger ? "백신후기 >" : "격리후기 >"} 글쓰기
+        </Text>
       </Grid>
-      <Grid height="1px" bg="black"></Grid>
+
       {/* 타이틀 입력 */}
-      <Grid margin="30px 0 0 0">
+      <InputDiv isMobile={false}>
         <Input
-          bg={theme.bg4}
           value={title}
-          width={theme.writeWidth}
-          height="72px"
+          height="62px"
           border="none"
           _onChange={onTitleChange}
-          fontSize={theme.bodyTwoSize}
+          fontSize={theme.bodyOneSize}
           placeholder="제목을 입력해 주세요."
         />
-      </Grid>
+      </InputDiv>
 
       {/* 작성페이지 */}
       <ExperienceWrite
@@ -102,8 +150,36 @@ const Write = () => {
         setEditorState={setEditorState}
       />
       {alert_status && <Alert />}
+      <ButtonDiv isMobile={false}>
+        <Button
+          width="187px"
+          height="48px"
+          fontSize={theme.SubHeadTwoSize}
+          bold
+          margin="0"
+          bg={theme.bg2}
+          _onClick={handlePostEx}
+        >
+          등록
+        </Button>
+      </ButtonDiv>
     </Grid>
   );
 };
+
+const InputDiv = styled.div`
+  border: 1px solid ${theme.typoLightGrey2};
+  padding: 0 0 0 20px;
+  ${(props) => (props.isMobile ? `margin: 0 16px 0 16px` : ``)}
+`;
+const ButtonDiv = styled.div`
+  display: flex;
+  ${(props) =>
+    props.isMobile
+      ? `  align-items: center;
+  justify-content: center;`
+      : `  align-items: center;
+  justify-content: flex-end;`}
+`;
 
 export default Write;
