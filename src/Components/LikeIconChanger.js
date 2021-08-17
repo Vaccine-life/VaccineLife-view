@@ -14,14 +14,14 @@ const LikeIconChanger = (props) => {
   const userId = useSelector((state) => state.user.user.userId);
   const like_list_vac = useSelector((state) => state.like.likeListVac);
   const like_list_quar = useSelector((state) => state.like.likeListQuar);
-  console.log(like_list_vac)
-  console.log(like_list_quar)
+  // console.log(like_list_vac)
+  // console.log(like_list_quar)
   const dispatch = useDispatch();
   const isHeart =
     board === "vaccine"
       ? like_list_vac.includes(boardId)
       : like_list_quar.includes(boardId);
-      // console.log(isHeart)
+  // console.log(isHeart)
 
   const likeObj =
     board === "vaccine"
@@ -33,7 +33,7 @@ const LikeIconChanger = (props) => {
           quarBoardId: boardId,
           userId,
         };
-        
+
   const handleLikeClick = () => {
     dispatch(actionPostLike(board, likeObj));
   };

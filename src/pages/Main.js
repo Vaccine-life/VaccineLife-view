@@ -21,13 +21,14 @@ const Main = () => {
   const alert_status = useSelector((state) => state.popup.alert);
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(modal_status);
   }, []);
 
   if (isMobileOnly) {
     return (
       <>
         {navModal_status && <NavModal />}
-        {/* {modal_status && <Login />} */}
+        {modal_status && <Login />}
         {alert_status && <Alert />}
         <Intro />
         <Map />
