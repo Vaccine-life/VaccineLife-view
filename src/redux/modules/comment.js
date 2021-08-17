@@ -40,6 +40,7 @@ const comment = createSlice({
     // 의료진 좋아요 관련
     actionSetTopThreeMedi: (state, action) => {
       state.topThreeMedi = action.payload;
+      // console.log(action.payload);
     },
     acionMinusLikeMedi: (state, action) => {
       const { boardId } = action.payload;
@@ -146,6 +147,7 @@ export const actionGetTopThreeMedi =
     try {
       dispatch(actionLoading());
       const getData = await medicalAxios.topThreeMedi();
+      console.log(getData);
       dispatch(actionSetTopThreeMedi(getData.data));
       dispatch(actionLoading());
     } catch (error) {

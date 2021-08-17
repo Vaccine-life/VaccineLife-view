@@ -608,7 +608,7 @@ padding-left: 4px;
 const BarBoxMobile = styled.div`
 width: 382px;
 height: 220px;
-margin: auto;
+margin-left: 16px;
 
 border: 1px solid ${theme.typoLightGrey2};
 box-sizing: border-box;

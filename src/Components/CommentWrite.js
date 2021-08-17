@@ -71,18 +71,17 @@ const CommentWrite = (props) => {
     }
   };
 
-
-  if(isMobileOnly) {
+  if (isMobileOnly) {
     return (
       <>
         <Grid is_flex="space_column" padding="0 1rem">
-
           {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
 
           <Grid is_flex="space_column" border="1px solid #c1c1c1">
             <Grid margin="0 5rem">
               <Input
                 multiLine
+                rows={6}
                 border="none"
                 value={comment}
                 placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
@@ -105,6 +104,7 @@ const CommentWrite = (props) => {
                 fontSize={theme.SubHeadOneSize}
                 color={theme.white}
                 bold
+                _onClick={handleMedical}
               >
                 등록
               </Button>
@@ -112,12 +112,11 @@ const CommentWrite = (props) => {
           </Grid>
         </Grid>
       </>
-    )
+    );
   }
   return (
     <React.Fragment>
       <Grid is_flex="space_column" margin="3rem 0" width={theme.medicalWidth}>
-
         {/* <TextareaAutosize aria-label="empty textarea" placeholder="응원의 한마디!" onResize="none" rows="8" width="10rem"/> */}
 
         <Grid is_flex="space_column" border="1px solid #c1c1c1">

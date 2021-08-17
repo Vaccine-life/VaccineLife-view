@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionNavVisible } from "../../redux/modules/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import Accordion from '@material-ui/core/Accordion';
-
+import Accordion from "@material-ui/core/Accordion";
 
 const NavModal = (props) => {
     const dispatch = useDispatch();
@@ -46,18 +45,50 @@ const NavModal = (props) => {
 
                         <Grid align="left">
                             <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
-                                <span style={{ color: `{theme.SuccessGreen}` }}>{nickname}</span>님, 환영합니다</Text>
-                            <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
-                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
-                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
-                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
-                            <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
-                            <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">로그아웃</Text>
+                                <span style={{ color: `{theme.SuccessGreen}` }}>
+                                    {nickname}
+                                </span>
+                                님, 환영합니다
+                            </Text>
+                            <div
+                                style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
+                            />
+                            <Text
+                                color={theme.typoBlack}
+                                size={theme.bodyThreeSize}
+                                margin="2rem 0"
+                            >
+                                백신 접종 후기
+                            </Text>
+                            <Text
+                                color={theme.typoBlack}
+                                size={theme.bodyThreeSize}
+                                margin="2rem 0"
+                            >
+                                자가 격리 후기
+                            </Text>
+                            <Text
+                                color={theme.typoBlack}
+                                size={theme.bodyThreeSize}
+                                margin="2rem 0"
+                            >
+                                의료진분들께
+                            </Text>
+                            <div
+                                style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
+                            />
+                            <Text
+                                color={theme.typoBlack}
+                                size={theme.bodyThreeSize}
+                                margin="2rem 0"
+                            >
+                                로그아웃
+                            </Text>
                         </Grid>
                     </Modal>
                 </Wrapper>
             </>
-        )
+        );
     }
     return (
         <>
@@ -72,22 +103,48 @@ const NavModal = (props) => {
                             dispatch(actionNavVisible());
                         }}
                     >
-                        <FontAwesomeIcon icon={faTimes} color={theme.bg2} size="lg" margin="2rem 0" />
+                        <FontAwesomeIcon
+                            icon={faTimes}
+                            color={theme.bg2}
+                            size="lg"
+                            margin="2rem 0"
+                        />
                     </Xbutton>
 
                     <Grid align="left">
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>로그인</Text>
-                        <div style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }} />
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">백신 접종 후기</Text>
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">자가 격리 후기</Text>
-                        <Text color={theme.typoBlack} size={theme.bodyThreeSize} margin="2rem 0">의료진분들께</Text>
+                        <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+                            로그인
+                        </Text>
+                        <div
+                            style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
+                        />
+                        <Text
+                            color={theme.typoBlack}
+                            size={theme.bodyThreeSize}
+                            margin="2rem 0"
+                        >
+                            백신 접종 후기
+                        </Text>
+                        <Text
+                            color={theme.typoBlack}
+                            size={theme.bodyThreeSize}
+                            margin="2rem 0"
+                        >
+                            자가 격리 후기
+                        </Text>
+                        <Text
+                            color={theme.typoBlack}
+                            size={theme.bodyThreeSize}
+                            margin="2rem 0"
+                        >
+                            의료진분들께
+                        </Text>
                     </Grid>
-
                 </Modal>
             </Wrapper>
         </>
-    )
-}
+    );
+};
 
 const Wrapper = styled.div`
   width: 100%;
