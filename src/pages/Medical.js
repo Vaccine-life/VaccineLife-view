@@ -40,7 +40,12 @@ const Medical = (props) => {
     return (
       <>
         <MetaScript title="슬기로운 백신생활 | 의료진" />
-        <Grid is_flex="center" height="60px" bg={theme.bg2}>
+        <Grid
+          is_flex="center"
+          height="60px"
+          bg={theme.bg2}
+          margin={`${theme.headerHeight} auto 0 auto`}
+        >
           <Text
             color={theme.white}
             size={theme.SubHeadOneSize}

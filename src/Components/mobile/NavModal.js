@@ -69,6 +69,7 @@ const NavModal = (props) => {
                 }
                 _onClick={() => {
                   history.push("/vaccine");
+                  dispatch(actionNavVisible());
                 }}
               >
                 백신 접종 후기
@@ -87,6 +88,7 @@ const NavModal = (props) => {
                 }
                 _onClick={() => {
                   history.push("/quarantine");
+                  dispatch(actionNavVisible());
                 }}
               >
                 자가 격리 후기
@@ -97,6 +99,7 @@ const NavModal = (props) => {
                 margin="2rem 0"
                 _onClick={() => {
                   history.push("/medical");
+                  dispatch(actionNavVisible());
                 }}
               >
                 의료진분들께
@@ -159,6 +162,7 @@ const NavModal = (props) => {
               }
               _onClick={() => {
                 history.push("/vaccine");
+                dispatch(actionNavVisible());
               }}
             >
               백신 접종 후기
@@ -177,6 +181,7 @@ const NavModal = (props) => {
               }
               _onClick={() => {
                 history.push("/quarantine");
+                dispatch(actionNavVisible());
               }}
             >
               자가 격리 후기
@@ -187,6 +192,7 @@ const NavModal = (props) => {
               margin="2rem 0"
               _onClick={() => {
                 history.push("/medical");
+                dispatch(actionNavVisible());
               }}
             >
               의료진분들께

@@ -16,42 +16,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavModal from "./mobile/NavModal";
 
-
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
   const dispatch = useDispatch();
   const url = history.location.pathname;
 
-
   if (isMobileOnly) {
     return (
       <>
-        <Grid is_flex="space_row" padding="1rem 1.5rem">
-            <Image
-              shape="rectangle"
-              width={theme.logoWidth}
-              height={theme.logoHeight}
-              cursor="pointer"
-              src={logo}
-              _onClick={() => {
-                history.push("/");
-              }}
-            />
-          <FontAwesomeIcon 
-            icon={faBars} 
-            color={theme.bg2} 
-            size="2x"
-            onClick={() => dispatch(actionNavVisible())}
+        <MobileWrapper>
+          <Image
+            margin="0 1rem"
+            shape="rectangle"
+            width={theme.logoWidth}
+            height={theme.logoHeight}
+            cursor="pointer"
+            src={logo}
+            _onClick={() => {
+              history.push("/");
+            }}
           />
-        </Grid>
+          <MobileNavIcon>
+            <FontAwesomeIcon
+              icon={faBars}
+              color={theme.bg2}
+              size="2x"
+              onClick={() => dispatch(actionNavVisible())}
+            />
+          </MobileNavIcon>
+        </MobileWrapper>
       </>
     );
   }
   return (
     <React.Fragment>
       <Wrapper>
-        <Grid bg="#ffffff" is_flex="space_row">
+        <Grid bg={theme.white} is_flex="space_row">
           <Grid is_flex="space_row" width="auto" margin="0 0 0 5rem">
             <Grid
               is_flex="center"
@@ -188,6 +189,24 @@ const Wrapper = styled.div`
   @media (max-width: 500px) {
     flex-direction: column;
   }
+`;
+
+const MobileWrapper = styled.div`
+  top: 0;
+  width: 100%;
+  height: ${theme.headerHeight};
+  position: fixed;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${theme.white};
+  /* padding: 1rem 1.5rem; */
+`;
+
+const MobileNavIcon = styled.div`
+  margin: 0 1rem 0 0;
 `;
 
 const EachDiv = styled.div`
