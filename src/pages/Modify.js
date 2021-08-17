@@ -6,7 +6,6 @@ import Text from "../elements/Text";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
 
-import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { EditorState, convertToRaw } from "draft-js";
 import { convertFromRaw } from "draft-js";
@@ -14,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import { actionGetDetail, actionModifyDB } from "../redux/modules/board";
 import MetaScript from "../shared/MetaScript";
+import { isMobileOnly } from "react-device-detect";
+import styled from "styled-components";
+import BoardName from "../components/mobile/BoardName";
 
 const data = {
   vacBoardId: 0,
@@ -87,56 +89,124 @@ const Modify = () => {
     dispatch(actionModifyDB(board, boardId, modifyObj));
   };
 
+  if (isMobileOnly) {
+    return (
+      <Grid margin="16px auto 120px auto">
+        <MetaScript title="슬기로운 백신생활 | 글쓰기" />
+        <BoardName board={board} />
+        <Grid margin="16px auto 26px auto" padding="0 16px 0  16px">
+          <Text
+            alignStart={true}
+            size={theme.bodyThreeSize}
+            lineHeight={theme.bodyThreeHeight}
+            color={theme.typoGrey3}
+          >
+            {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
+            {board === "vaccine" ? "백신후기 > 수정" : "격라후기 > 수정"}
+          </Text>
+        </Grid>
+
+        {/* 타이틀 입력 */}
+        <InputDiv isMobile={true}>
+          <Input
+            value={title}
+            height="46px"
+            border="none"
+            _onChange={onTitleChange}
+            fontSize={theme.bodyfourSize}
+            placeholder="제목을 입력해 주세요."
+          />
+        </InputDiv>
+
+        {/* 작성페이지 */}
+        <ExperienceWrite
+          editor={editor}
+          urlExchanger={board === "vaccine" ? true : false}
+          editorState={editorState}
+          setEditorState={setEditorState}
+        />
+        {alert_status && <Alert />}
+        <ButtonDiv isMobile={true}>
+          <Button
+            width={theme.mediumButtonWidth}
+            height={theme.mediumButtonHeight}
+            fontSize={theme.SubHeadTwoSize}
+            bold
+            margin="0"
+            bg={theme.bg2}
+            _onClick={handlePostEx}
+          >
+            등록
+          </Button>
+        </ButtonDiv>
+      </Grid>
+    );
+  }
+
   return (
-    <Grid width="1192px" margin={`160px auto auto auto`}>
-      <MetaScript title="슬기로운 백신생활 | 수정" />
-      <Grid is_flex="space_row" margin="auto auto 26px auto">
+    <Grid width={theme.writeWidth} margin={`160px auto 120px auto`}>
+      <MetaScript title="슬기로운 백신생활 | 글쓰기" />
+      <Grid margin="auto auto 26px auto">
         <Text
-          size={theme.headOneSize}
-          lineHeight={theme.headOneHeight}
-          color={theme.fontColor}
-          bold
+          alignStart={true}
+          size={theme.bodyThreeSize}
+          lineHeight={theme.bodyThreeHeight}
+          color={theme.typoGrey3}
         >
           {/* 백신이냐 격리냐에 따라 텍스트 바꾸기 */}
-          {board === "vaccine" ? "백신 후기 수정하기" : "격리 후기 수정하기"}
+          {board === "vaccine" ? "백신후기 > 수정" : "격라후기 > 수정"}
         </Text>
-        <Button
-          width="88px"
-          height="42px"
-          fontSize={theme.bodyTwoSize}
-          bold
-          margin="0"
-          bg={theme.bg}
-          _onClick={handlePostEx}
-        >
-          등록
-        </Button>
       </Grid>
-      <Grid height="1px" bg="black"></Grid>
+
       {/* 타이틀 입력 */}
-      <Grid margin="30px 0 0 0">
+      <InputDiv isMobile={false}>
         <Input
           value={title}
-          width="1192px"
-          height="72px"
+          height="62px"
           border="none"
-          fontSize={theme.bodyTwoSize}
-          bg={theme.bg4}
           _onChange={onTitleChange}
+          fontSize={theme.bodyOneSize}
           placeholder="제목을 입력해 주세요."
         />
-      </Grid>
+      </InputDiv>
 
       {/* 작성페이지 */}
       <ExperienceWrite
         editor={editor}
-        urlExchanger={true}
+        urlExchanger={board === "vaccine" ? true : false}
         editorState={editorState}
         setEditorState={setEditorState}
       />
       {alert_status && <Alert />}
+      <ButtonDiv isMobile={false}>
+        <Button
+          width="187px"
+          height="48px"
+          fontSize={theme.SubHeadTwoSize}
+          bold
+          margin="0"
+          bg={theme.bg2}
+          _onClick={handlePostEx}
+        >
+          등록
+        </Button>
+      </ButtonDiv>
     </Grid>
   );
 };
 
+const InputDiv = styled.div`
+  border: 1px solid ${theme.typoLightGrey2};
+  padding: 0 0 0 20px;
+  ${(props) => (props.isMobile ? `margin: 0 16px 0 16px` : ``)}
+`;
+const ButtonDiv = styled.div`
+  display: flex;
+  ${(props) =>
+    props.isMobile
+      ? `  align-items: center;
+  justify-content: center;`
+      : `  align-items: center;
+  justify-content: flex-end;`}
+`;
 export default Modify;

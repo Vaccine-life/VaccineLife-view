@@ -7,63 +7,132 @@ import { faStrikethrough } from "@fortawesome/free-solid-svg-icons";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { faListOl } from "@fortawesome/free-solid-svg-icons";
 import theme from "../../styles/theme";
+import logger from "../../shared/logger";
+import { isMobileOnly } from "react-device-detect";
 
 const Toolbar = (props) => {
-  const { setEditorState, editorState } = props;
-  const [toggle1, setToggle1] = useState(false);
-  const [toggle2, setToggle2] = useState(false);
-  const [toggle3, setToggle3] = useState(false);
-  const [toggle4, setToggle4] = useState(false);
+  const { setEditorState, editorState, handleKeyCommand } = props;
 
-  const handleTogggleClick = (e, inlineStyle) => {
-    e.preventDefault();
-    setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
+  const toggleInlineStyle = (event) => {
+    event.preventDefault();
+    let style = event.currentTarget.getAttribute("data-style");
+    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
   };
-  const handleBlockClick = (e, blockType) => {
-    e.preventDefault();
-    setEditorState(RichUtils.toggleBlockType(editorState, blockType));
+
+  const toggleBlockType = (event) => {
+    event.preventDefault();
+    let block = event.currentTarget.getAttribute("data-block");
+    setEditorState(RichUtils.toggleBlockType(editorState, block));
   };
+
+  const classNameInlineChanger = (style) => {
+    const currentInlineStyle = editorState.getCurrentInlineStyle();
+    let className = "";
+    if (currentInlineStyle.has(style)) {
+      className = "active";
+    }
+    return className;
+  };
+
+  const classNameBlockChanger = (block) => {
+    const currentBlockType = RichUtils.getCurrentBlockType(editorState);
+    let className = "";
+    if (currentBlockType === block) {
+      className = "active";
+    }
+    return className;
+  };
+
+  const preventDefault = (event) => {
+    event.preventDefault();
+  };
+
+  if (isMobileOnly) {
+    return (
+      <Wrapper isMobile={true}>
+        <Btn
+          key="BOLD"
+          value="Bold"
+          data-style="BOLD"
+          className={classNameInlineChanger("BOLD")}
+          onClick={toggleInlineStyle}
+          onMouseDown={preventDefault}
+        >
+          <FontAwesomeIcon icon={faBold} size="lg" />
+        </Btn>
+        <Btn
+          key="STRIKETHROUGH"
+          value="Strikethrough"
+          data-style="STRIKETHROUGH"
+          className={classNameInlineChanger("STRIKETHROUGH")}
+          onClick={toggleInlineStyle}
+          onMouseDown={preventDefault}
+        >
+          <FontAwesomeIcon icon={faStrikethrough} size="lg" />
+        </Btn>
+        <Btn
+          key="ordered-list-item"
+          value="Ordered List"
+          data-block="ordered-list-item"
+          className={classNameBlockChanger("ordered-list-item")}
+          onClick={toggleBlockType}
+          onMouseDown={preventDefault}
+        >
+          <FontAwesomeIcon icon={faListOl} size="lg" />
+        </Btn>
+        <Btn
+          key="unordered-list-item"
+          value="Unordered List"
+          data-block="unordered-list-item"
+          className={classNameBlockChanger("unordered-list-item")}
+          onClick={toggleBlockType}
+          onMouseDown={preventDefault}
+        >
+          <FontAwesomeIcon icon={faListUl} size="lg" />
+        </Btn>
+      </Wrapper>
+    );
+  }
+
   return (
-    <Wrapper>
+    <Wrapper isMobile={false}>
       <Btn
-        toggle={toggle1}
-        onMouseDown={(e) => {
-          handleTogggleClick(e, "BOLD");
-          setToggle1((prev) => !prev);
-        }}
+        key="BOLD"
+        value="Bold"
+        data-style="BOLD"
+        className={classNameInlineChanger("BOLD")}
+        onClick={toggleInlineStyle}
+        onMouseDown={preventDefault}
       >
         <FontAwesomeIcon icon={faBold} size="lg" />
       </Btn>
       <Btn
-        toggle={toggle2}
-        onMouseDown={(e) => {
-          handleTogggleClick(e, "STRIKETHROUGH");
-          setToggle2((prev) => !prev);
-        }}
+        key="STRIKETHROUGH"
+        value="Strikethrough"
+        data-style="STRIKETHROUGH"
+        className={classNameInlineChanger("STRIKETHROUGH")}
+        onClick={toggleInlineStyle}
+        onMouseDown={preventDefault}
       >
         <FontAwesomeIcon icon={faStrikethrough} size="lg" />
       </Btn>
       <Btn
-        toggle={toggle3}
-        onMouseDown={(e) => {
-          handleBlockClick(e, "ordered-list-item");
-          setToggle3((prev) => !prev);
-          if (toggle4) {
-            setToggle4((prev) => !prev);
-          }
-        }}
+        key="ordered-list-item"
+        value="Ordered List"
+        data-block="ordered-list-item"
+        className={classNameBlockChanger("ordered-list-item")}
+        onClick={toggleBlockType}
+        onMouseDown={preventDefault}
       >
         <FontAwesomeIcon icon={faListOl} size="lg" />
       </Btn>
       <Btn
-        toggle={toggle4}
-        onMouseDown={(e) => {
-          handleBlockClick(e, "unordered-list-item");
-          setToggle4((prev) => !prev);
-          if (toggle3) {
-            setToggle3((prev) => !prev);
-          }
-        }}
+        key="unordered-list-item"
+        value="Unordered List"
+        data-block="unordered-list-item"
+        className={classNameBlockChanger("unordered-list-item")}
+        onClick={toggleBlockType}
+        onMouseDown={preventDefault}
       >
         <FontAwesomeIcon icon={faListUl} size="lg" />
       </Btn>
@@ -72,19 +141,24 @@ const Toolbar = (props) => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 30px;
+  ${(props) =>
+    props.isMobile ? ` padding: 8px 0 8px 16px;` : `  padding: 8px; `}
+  height: 46px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 20px;
+  border-bottom: 1px solid ${theme.typoLightGrey2};
+  .active {
+    background-color: ${theme.bg4};
+  }
 `;
 
 const Btn = styled.button`
   border: none;
+  width: 30px;
+  height: 30px;
   margin-right: 5px;
-  background-color: white;
-  color: ${(props) => (props.toggle ? theme.btnColor : theme.fontColor)};
+  background-color: ${theme.white};
   :hover {
     color: ${theme.btnColor};
   }
