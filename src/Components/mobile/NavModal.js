@@ -222,7 +222,6 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  margin-left: auto;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
 `;
@@ -231,22 +230,19 @@ const Modal = styled.div`
   width: 50%;
   height: 90%;
   position: relative;
-  top: 50%;
-  right: 50%;
+  /* top: 50%;
+  transform: translateY(-50%); */
   left: 30%;
-  bottom: 50%;
-  transform: translateY(-50%);
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: right;
   align-items: right;
-  margin-right: 0;
-  padding: 40px;
+  padding: 10%;
 `;
 
 const Xbutton = styled.div`
-  margin: 1rem 0 1rem auto;
+  margin: 0 0 2rem auto;
   &:hover {
     cursor: pointer;
   }
