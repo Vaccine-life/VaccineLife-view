@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { Text } from "../elements/index";
+import { Text, Button } from "../elements/index";
 import { userAxios } from "../shared/api";
 import logger from "../shared/logger";
+import { isMobileOnly } from "react-device-detect";
 
 const SignupComponent = ({
   formik,
@@ -74,6 +75,137 @@ const SignupComponent = ({
       return true;
     }
   };
+
+  if (isMobileOnly) {
+    return (
+      <>
+        <MobileWrapper onSubmit={formik.handleSubmit}>
+          <Text margin="0 auto 70px auto" size={theme.headOneSize} bold>
+            회원가입
+          </Text>
+
+          <InputBox>
+            <SignupInput
+              placeholder="아이디를 입력해주세요"
+              id="username"
+              name="username"
+              type="text"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setSignupInputs({
+                  ...signupInputs,
+                  username: e.target.value,
+                });
+                dispatch(idDupCheck(e.target.value));
+              }}
+              value={formik.values.username}
+            />
+            {formik.errors.username ? (
+              <SignupError>{formik.errors.username}</SignupError>
+            ) : null}
+            {!idDupOk ? <SignupError>{idDupMsg}</SignupError> : null}
+          </InputBox>
+
+          <InputBox>
+            <SignupInput
+              placeholder="비밀번호를 입력해주세요"
+              id="password"
+              name="password"
+              type="password"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setSignupInputs({
+                  ...signupInputs,
+                  password: e.target.value,
+                });
+              }}
+              value={formik.values.password}
+            />
+            {formik.errors.password ? (
+              <SignupError>{formik.errors.password}</SignupError>
+            ) : null}
+          </InputBox>
+
+          <InputBox>
+            <SignupInput
+              placeholder="비밀번호를 다시 입력해주세요"
+              id="passwordChecker"
+              name="passwordChecker"
+              type="password"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setSignupInputs({
+                  ...signupInputs,
+                  passwordChecker: e.target.value,
+                });
+              }}
+              value={formik.values.passwordChecker}
+            />
+            {formik.errors.passwordChecker ? (
+              <SignupError>{formik.errors.passwordChecker}</SignupError>
+            ) : null}
+          </InputBox>
+
+          <InputBox>
+            <SignupInput
+              placeholder="닉네임을 입력해주세요(수정불가)"
+              id="nickname"
+              name="nickname"
+              type="text"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setSignupInputs({
+                  ...signupInputs,
+                  nickname: e.target.value,
+                });
+                dispatch(nicknameDupCheck(e.target.value));
+              }}
+              value={formik.values.nickname}
+            />
+            {formik.errors.nickname ? (
+              <SignupError>{formik.errors.nickname}</SignupError>
+            ) : null}
+            {!nicknameDupOk ? (
+              <SignupError>{nicknameDupMsg}</SignupError>
+            ) : null}
+          </InputBox>
+
+          <MobileNextButton
+            type="submit"
+            disabled={disableNextButton()}
+            onClick={() => {
+              setStatus("survey");
+            }}
+          >
+            다음단계
+          </MobileNextButton>
+
+          <MobileLogin>
+            <Text color={theme.typoGrey2} size={theme.bodyThreeSize}>
+              이미 계정이 있으신가요?
+            </Text>
+            <Button
+              type="submit"
+              _onClick={() => {
+                setStatus("login");
+              }}
+              margin="0"
+              width="6em"
+              bg="transparent"
+              color={theme.typoGrey2}
+              style={{
+                textDecoration: "underline",
+                color: `${theme.typoGrey2}`,
+              }}
+              fontSize={theme.bodyThreeSize}
+            >
+              로그인하기
+            </Button>
+          </MobileLogin>
+        </MobileWrapper>
+      </>
+    );
+  }
 
   // setSignupInputs를 value가 아닌 onChange에 걸어둔 이유: value에 걸어두면 input칸에 타이핑한 값이 보이지 않는다
   return (
@@ -233,6 +365,39 @@ const NextButton = styled.button`
     color: ${theme.btnColor};
     border: 1px solid ${theme.btnColor};
   }
+  :disabled {
+    background-color: ${theme.typoLightGrey2};
+    cursor: default;
+    color: white;
+    border: none;
+  }
+`;
+
+// <========= Mobile ==========>
+
+const MobileWrapper = styled.form`
+  width: 70%;
+  height: auto;
+  padding: auto 0;
+`;
+
+const MobileLogin = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MobileNextButton = styled.button`
+  margin: 70px 0 5px 0;
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  background-color: ${theme.btnColor};
+  border: none;
+  color: white;
+  transition: background-color 0.3s;
+  font-size: ${theme.bodyTwoSize};
   :disabled {
     background-color: ${theme.typoLightGrey2};
     cursor: default;

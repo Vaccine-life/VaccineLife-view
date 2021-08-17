@@ -4,7 +4,7 @@ import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
-import Intro from '../components/Intro';
+import Intro from "../components/Intro";
 
 import Map from "../components/Map";
 import MainTo from "../components/MainTo";
@@ -21,14 +21,14 @@ const Main = () => {
   const alert_status = useSelector((state) => state.popup.alert);
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(modal_status);
   }, []);
-
 
   if (isMobileOnly) {
     return (
       <>
         {navModal_status && <NavModal />}
-        {/* {modal_status && <Login />} */}
+        {modal_status && <Login />}
         {alert_status && <Alert />}
         <Intro />
         <Map />
@@ -38,7 +38,6 @@ const Main = () => {
       </>
     );
   }
-
 
   return (
     <>
@@ -54,7 +53,6 @@ const Main = () => {
     </>
   );
 };
-
 
 const MapAndChart = styled.div`
   display: flex;

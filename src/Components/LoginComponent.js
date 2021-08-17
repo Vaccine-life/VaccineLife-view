@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Button } from "../elements/index";
+import { Text, Button, Grid } from "../elements/index";
 import theme from "../styles/theme";
+import { isMobileOnly } from "react-device-detect";
 
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -26,6 +27,64 @@ const LoginComponent = ({ status, setStatus }) => {
       dispatch(actionLogin(values.username, values.password));
     },
   });
+
+  if (isMobileOnly) {
+    return (
+      <>
+        <MobileWrapper onSubmit={formik.handleSubmit}>
+          <Text margin="0 auto 120px auto" auto size={theme.headOneSize} bold>
+            로그인
+          </Text>
+
+          <MobileLoginInput
+            placeholder="아이디"
+            id="username"
+            name="username"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.username}
+          />
+          {formik.touched.username && formik.errors.username ? (
+            <LoginError>{formik.errors.username}</LoginError>
+          ) : null}
+
+          <MobileLoginInput
+            placeholder="비밀번호"
+            id="password"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <LoginError>{formik.errors.password}</LoginError>
+          ) : null}
+
+          <Grid is_flex="space_column">
+            <Button
+              margin="120px 0 15px 0"
+              width={theme.mediumButtonWidth}
+              height={theme.mediumButtonHeight}
+              type="submit"
+              bg={theme.btnColor}
+              fontSize={theme.bodyTwoSize}
+            >
+              로그인
+            </Button>
+
+            <MobileSignupButton
+              type="submit"
+              onClick={() => {
+                setStatus("signup");
+              }}
+            >
+              회원가입
+            </MobileSignupButton>
+          </Grid>
+        </MobileWrapper>
+      </>
+    );
+  }
 
   return (
     <>
@@ -133,6 +192,40 @@ const Signup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+// <========= Mobile ==========>
+
+const MobileWrapper = styled.form`
+  width: 70%;
+  height: auto;
+  padding: auto 0;
+`;
+
+const MobileLoginInput = styled.input`
+  width: 100%;
+  height: 30px;
+  margin: 15px auto 15px auto;
+  border: none;
+  border-bottom: 1px solid ${theme.typoGrey1};
+  padding: 6px 0px;
+  color: ${theme.typoBlack};
+  font-size: ${theme.bodyTwoSize};
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid ${theme.typoBlack};
+    color: ${theme.typoBlack};
+  }
+`;
+
+const MobileSignupButton = styled.button`
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  margin: 0 0 auto 0;
+  background-color: white;
+  color: ${theme.btnColor};
+  font-size: ${theme.bodyTwoSize};
+  border: 1px solid ${theme.btnColor};
 `;
 
 export default LoginComponent;
