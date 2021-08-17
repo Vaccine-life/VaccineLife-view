@@ -12,11 +12,13 @@ import MetaScript from "../shared/MetaScript";
 import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
+import NavModal from "../components/mobile/NavModal";
 
 const Quarantine = () => {
   const is_login = useSelector((state) => state.user.is_login);
   const isLoading = useSelector((state) => state.isLoading.isLoading);
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   const alert_status = useSelector((state) => state.popup.alert);
   const dispatch = useDispatch();
 
@@ -37,7 +39,7 @@ const Quarantine = () => {
         <Popular board="quarantine" />
         <ListNav board="quarantine" />
         <QuarList board="quarantine" />
-        {modal_status && <Login />}
+        {navModal_status && <NavModal />}
         {alert_status && <Alert />}
         {isLoading && <Spinner />}
       </Grid>

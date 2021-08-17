@@ -17,7 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
 const CommentList = (props) => {
-  // console.log(props)
+  console.log(props);
   const medi_id = props.id;
 
   const dispatch = useDispatch();

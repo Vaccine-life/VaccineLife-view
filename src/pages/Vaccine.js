@@ -14,12 +14,14 @@ import MetaScript from "../shared/MetaScript";
 import Spinner from "../shared/Spinner";
 import theme from "../styles/theme";
 import Login from "./Login";
+import NavModal from "../components/mobile/NavModal";
 
 const Vaccine = () => {
   const is_login = useSelector((state) => state.user.is_login);
   const isLoading = useSelector((state) => state.isLoading.isLoading);
   // vacBoard페이지에서도 모달 로그인창이 뜰수 있게 함
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   // alert
   const alert_status = useSelector((state) => state.popup.alert);
   // like
@@ -41,7 +43,7 @@ const Vaccine = () => {
         <Popular board="vaccine" />
         <ListNav board="vaccine" />
         <List board="vaccine" />
-        {modal_status && <Login />}
+        {navModal_status && <NavModal />}
         {alert_status && <Alert />}
         {isLoading && <Spinner />}
       </Grid>
