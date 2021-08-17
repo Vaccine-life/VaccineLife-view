@@ -6,18 +6,20 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "../shared/logger";
-import { actionMediLike, actionSetLikeMedi } from "../redux/modules/like";
+import { actionMediLike } from "../redux/modules/like";
+import { isMobileOnly } from "react-device-detect";
 
 const LikeIconMedi = (props) => {
   // console.log(props)
   const { boardId, size, bigHeart } = props;
   const userId = useSelector((state) => state.user.user.userId);
   const like_list_medi = useSelector((state) => state.like.likeListMedi);
-  console.log(like_list_medi)
+  // console.log(like_list_medi)
   const dispatch = useDispatch();
 
   const isHeart = like_list_medi.includes(boardId);
-  console.log(isHeart)
+  // console.log(isHeart)
+  const is_login = useSelector((state) => state.user.is_login);
 
   const likeObj = {
     medicalId: boardId,
@@ -29,6 +31,29 @@ const LikeIconMedi = (props) => {
     dispatch(actionMediLike(likeObj));
   };
 
+  if (isMobileOnly) {
+    if (bigHeart) {
+      return (
+        <BigWrapperM isHeart={isHeart} onClick={handleLikeClick}>
+          {isHeart ? (
+            <FontAwesomeIcon icon={faHeart} size={size} />
+          ) : (
+            <FontAwesomeIcon icon={amptyHeart} size={size} />
+          )}
+        </BigWrapperM>
+      );
+    } else {
+      return (
+        <WrapperM isHeart={isHeart} onClick={handleLikeClick}>
+          {isHeart ? (
+            <FontAwesomeIcon icon={faHeart} size={size} />
+          ) : (
+            <FontAwesomeIcon icon={amptyHeart} size={size} />
+          )}
+        </WrapperM>
+      );
+    }
+  }
 
   if (bigHeart) {
     return (
@@ -81,6 +106,22 @@ const Wrapper = styled.div`
   `}
 `;
 
+const WrapperM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out;
+  ${(props) =>
+    props.isHeart
+      ? `
+ color: ${theme.bg};
+  `
+      : `
+  color: ${theme.typoGrey2};
+
+  `}
+`;
+
 const BigWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -101,6 +142,23 @@ const BigWrapper = styled.div`
     cursor: pointer;
     color: ${theme.typoGrey2};
   }
+  `}
+`;
+
+const BigWrapperM = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out;
+  ${(props) =>
+    props.isHeart
+      ? `
+ color: ${theme.bg};
+
+  `
+      : `
+  color: ${theme.bg};
+ 
   `}
 `;
 
