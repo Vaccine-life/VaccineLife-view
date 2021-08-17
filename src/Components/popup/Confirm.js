@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobileOnly } from "react-device-detect";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
@@ -15,7 +16,43 @@ const Confirm = (props) => {
     activeFunction();
     dispatch(actionConfirm());
   };
-
+  if (isMobileOnly) {
+    return (
+      <Wrapper>
+        <Modal>
+          <Grid is_flex="center">
+            <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
+              {confirmMessage}
+            </Text>
+          </Grid>
+          <Grid is_flex="center">
+            <Button
+              margin="30px 15px 0 0"
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.SubHeadTwoSize}
+              lineHeight={theme.SubHeadTwoHeight}
+              bg={theme.typoLightGrey2}
+              _onClick={() => dispatch(actionConfirm())}
+            >
+              취소
+            </Button>
+            <Button
+              margin="30px 0 0 0"
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.SubHeadTwoSize}
+              lineHeight={theme.SubHeadTwoHeight}
+              bg={theme.bg2}
+              _onClick={handleDelete}
+            >
+              삭제
+            </Button>
+          </Grid>
+        </Modal>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <Modal>
@@ -31,7 +68,7 @@ const Confirm = (props) => {
             height={theme.smallButtonHeight}
             fontSize={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
-            bg={theme.shadow}
+            bg={theme.typoLightGrey2}
             _onClick={() => dispatch(actionConfirm())}
           >
             취소
@@ -41,7 +78,7 @@ const Confirm = (props) => {
             width={theme.smallButtonWidth}
             height={theme.smallButtonHeight}
             fontSize={theme.bodyOneSize}
-            bg={theme.bg}
+            bg={theme.bg2}
             _onClick={handleDelete}
           >
             삭제
