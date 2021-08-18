@@ -131,6 +131,8 @@ const Banner = (props) => {
   );
 };
 
+
+
 const FixedBanner = styled.div`
   margin-top: auto;
   width: 100%;
@@ -139,7 +141,7 @@ const FixedBanner = styled.div`
 const EachDiv = styled.div`
   white-space: nowrap;
   cursor: pointer;
-  width: auto;
+  /* width: auto; */
   height: 100%;
   display: flex;
   justify-content: center;
