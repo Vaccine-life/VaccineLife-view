@@ -758,7 +758,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
         >
           회원가입이 곧 마무리됩니다
         </Text>
-        <Text margin="15px auto" size={theme.headOneSize} bold>
+        <Text margin="10px auto" size={theme.headOneSize} bold>
           여러분의 백신 접종 경험을 공유해주세요
         </Text>
 
@@ -1209,8 +1209,6 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
             size={theme.bodyTwoSize}
           >
             부작용
-            <br />
-            (중복선택가능)
           </Text>
           <UpperCheckbox>
             <Option>
@@ -1284,7 +1282,12 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
               </label>
             </Option>
           </UpperCheckbox>
-          <div></div>
+          <Text
+            color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+            size={theme.bodyThreeSize}
+          >
+            (중복선택가능)
+          </Text>
 
           <TwoOptions>
             <Option>
@@ -1434,7 +1437,7 @@ const UpperCheckbox = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  margin: 35px 0 0 0;
+  margin: 30px 0 0 0;
   width: ${theme.mediumButtonWidth};
   height: ${theme.mediumButtonHeight};
   background-color: ${theme.typoBlack};
