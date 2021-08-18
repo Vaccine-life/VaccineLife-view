@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import { userAxios } from "../../shared/api";
 import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
+import { actionResetLike } from "./like";
 import { actionVisible } from "./modal";
 import { actionAlert, actionSetMessage } from "./popup";
 import { actionGetLikeMedi, actionSetLikeMedi } from "./like";
@@ -62,13 +63,15 @@ export const actionLogin =
         type: userInfoDecode.type,
       };
       dispatch(actionSetUser(userInfo));
-
       dispatch(actionSetMessage("로그인 되었습니다"));
       dispatch(actionAlert());
-
       dispatch(actionVisible());
-      // 로그인시 내가 누른 하트 보이게 하기
+
+    history.push("/");
+
+   // 로그인시 내가 누른 하트 보이게 하기
       dispatch(actionGetLikeMedi());
+
     } catch (error) {
       dispatch(actionSetMessage("아이디와 비밀번호를 다시 확인해 주세요"));
       dispatch(actionAlert());
@@ -135,6 +138,7 @@ export const actionSignup =
         )
       );
       dispatch(actionAlert());
+      history.push("/");
     } catch (error) {
       logger(error);
       dispatch(actionSetMessage(error.response.data.message));
@@ -167,6 +171,7 @@ export const actionLogoutCookie =
   () =>
   async (dispatch, getState, { history }) => {
     deleteCookie("vaccine_life_token");
+    dispatch(actionResetLike());
     dispatch(actionLogout());
     dispatch(actionSetMessage("로그아웃 되었습니다"));
     dispatch(actionAlert());
