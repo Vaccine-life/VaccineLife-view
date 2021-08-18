@@ -9,7 +9,7 @@ import { history } from "../redux/configStore";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionGetTopThree } from "../redux/modules/board";
-import { isMobileOnly } from 'react-device-detect';
+import { isMobileOnly } from "react-device-detect";
 
 const MainPopular = (props) => {
   const { board } = props;
@@ -218,41 +218,40 @@ const PopularCards = styled.div`
 `;
 
 const GreyBoxMobile = styled.div`
-background-color: ${theme.typoLightGrey1};
-width: 414px;
-height: 640px;
-margin-top: 48px;
-padding-top: 32px;
-`
+  background-color: ${theme.typoLightGrey1};
+  width: 100%;
+  height: 640px;
+  margin-top: 48px;
+  padding-top: 32px;
+`;
 
 const PopularTitleMobile = styled.div`
-display: flex;
-width: 380px;
-margin: auto;
-justify-content: space-between;
+  display: flex;
+  width: 90%;
+  margin: auto;
+  justify-content: space-between;
 
-& > h1 {
-width: 160px;
-height: 34px;
-font-weight: bold;
-font-size: ${theme.SubHeadOneSize};
-line-height: 34px;
-text-align: center;
-letter-spacing: -0.3px;
-color: #242424;
-}
+  & > h1 {
+    width: 160px;
+    height: 34px;
+    font-weight: bold;
+    font-size: ${theme.SubHeadOneSize};
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: #242424;
+  }
 
-& > h3 {
-width: 50px;
-height: 34px;
-font-weight: normal;
-font-size: ${theme.bodyThreeSize};
-line-height: 34px;
-text-align: center;
-letter-spacing: -0.3px;
-color: ${theme.typoGrey3};
-}
-`
+  & > h3 {
+    width: 50px;
+    height: 34px;
+    font-weight: normal;
+    font-size: ${theme.bodyThreeSize};
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: ${theme.typoGrey3};
+  }
+`;
 
-
-export default MainPopular
+export default MainPopular;
