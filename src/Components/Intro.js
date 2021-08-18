@@ -56,27 +56,32 @@ const MainIntro = styled.div`
 
 // <========= Mobile ===========>
 
+
 const MainIntroWrapperMobile = styled.div`
   /* width: 100%; */
 `;
 
 const MainIntroMobile = styled.div`
+position: relative;
   margin-top: 80px;
-  padding: 0px 50px;
   height: 140px;
   background-color: ${theme.bg};
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   & > img {
+    position: absolute;
     width: auto;
     height: auto;
     max-width: 85%;
     max-height: 85%;
     margin-top: auto;
+    left: 40px;
+    bottom: 0px;
   }
   & > h1 {
-    white-space: nowrap;
+    position: absolute;
+    right: 40px;
+    /* white-space: nowrap; */
     width: max-content;
     text-align: right;
     font-size: ${theme.SubHeadTwoSize};

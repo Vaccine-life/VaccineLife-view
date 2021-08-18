@@ -68,97 +68,100 @@ const Map = () => {
   if (isMobileOnly) {
     return (
       <WrapperMobile>
+
         <MapTitleMobile>
           <img src={disc} alt="" />
-          <h3>지역별 접종수</h3>
+          <h3>지역별 접종수<span> (만 명)</span></h3>
+          {/* <h6>단위: 만</h6> */}
         </MapTitleMobile>
+
         <MapBoxWrapperMobile>
           <MapBoxMobile>
             <img src={SouthKorea} alt="" />
 
             <GyeonggiMobile>
               <h3>경기</h3>
-              <ShotMobile>{GyeonggiShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(GyeonggiShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </GyeonggiMobile>
 
             <GangwonMobile>
               <h3>강원</h3>
-              <ShotMobile>{GangwonShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(GangwonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </GangwonMobile>
 
             <SeoulMobile>
               <h3>서울</h3>
-              <ShotMobile>{SeoulShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(SeoulShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </SeoulMobile>
 
             <IncheonMobile>
               <h3>인천</h3>
-              <ShotMobile>{IncheonShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(IncheonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </IncheonMobile>
 
             <SejongMobile>
               <h3>세종</h3>
-              <ShotMobile>{SejongShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(SejongShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </SejongMobile>
 
             <ChoongNamMobile>
               <h3>충남</h3>
-              <ShotMobile>{ChoongNamShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(ChoongNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </ChoongNamMobile>
 
             <ChoongBookMobile>
               <h3>충북</h3>
-              <ShotMobile>{ChoongBookShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(ChoongBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </ChoongBookMobile>
 
             <GyeongBookMobile>
               <h3>경북</h3>
-              <ShotMobile>{GyeongBookShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(GyeongBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </GyeongBookMobile>
 
             <DaejeonMobile>
               <h3>대전</h3>
-              <ShotMobile>{DaejeonShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(DaejeonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </DaejeonMobile>
 
             <JeonBookMobile>
               <h3>전북</h3>
-              <ShotMobile>{JeonBookShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(JeonBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </JeonBookMobile>
 
             <GwangjuMobile>
               <h3>광주</h3>
-              <ShotMobile>{GwangjuShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(GwangjuShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </GwangjuMobile>
 
             <JeonNamMobile>
               <h3>전남</h3>
-              <ShotMobile>{JeonNamShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(JeonNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </JeonNamMobile>
 
             <JejuMobile>
               <h3>제주</h3>
-              <ShotMobile>{JejuShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(JejuShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </JejuMobile>
 
             <GyeongNamMobile>
               <h3>경남</h3>
-              <ShotMobile>{GyeongNamShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(GyeongNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </GyeongNamMobile>
 
             <DaeguMobile>
               <h3>대구</h3>
-              <ShotMobile>{DaeguShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(DaeguShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </DaeguMobile>
 
             <WoolsanMobile>
               <h3>울산</h3>
-              <ShotMobile>{WoolsanShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(WoolsanShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </WoolsanMobile>
 
             <BusanMobile>
               <h3>부산</h3>
-              <ShotMobile>{BusanShot.toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>{Math.floor(BusanShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
             </BusanMobile>
           </MapBoxMobile>
         </MapBoxWrapperMobile>
@@ -662,6 +665,11 @@ const MapTitleMobile = styled.div`
     order: 1;
     flex-grow: 0;
     padding-left: 4px;
+  
+    & > span {
+      font-size: 1px;
+      font-weight:lighter;
+    }
   }
 `;
 
@@ -687,22 +695,22 @@ const MapBoxMobile = styled.div`
 `;
 
 const ShotMobile = styled.div`
-  padding: 0px 3px;
+  padding: 0px 5px;
   width: max-content;
   height: max-content;
   background: ${theme.bg};
   border-radius: 9px;
   font-weight: normal;
-  font-size: 10px;
-  line-height: 24px;
+  font-size: 12px;
+  line-height: 19px;
   color: #ffffff;
   margin: auto;
 `;
 
 const GyeonggiMobile = styled.div`
   position: absolute;
-  left: 120px;
-  top: 40px;
+  left: 100px;
+  top: 45px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -720,7 +728,7 @@ const GyeonggiMobile = styled.div`
 
 const GangwonMobile = styled.div`
   position: absolute;
-  right: 105px;
+  right: 70px;
   top: 80px;
   width: 70px;
   z-index: 1;
@@ -739,7 +747,7 @@ const GangwonMobile = styled.div`
 
 const SeoulMobile = styled.div`
   position: absolute;
-  left: 130px;
+  left: 105px;
   top: 85px;
   width: 70px;
   z-index: 1;
@@ -758,7 +766,7 @@ const SeoulMobile = styled.div`
 
 const IncheonMobile = styled.div`
   position: absolute;
-  left: 65px;
+  left: 60px;
   top: 75px;
   width: 70px;
   z-index: 1;
@@ -777,7 +785,7 @@ const IncheonMobile = styled.div`
 
 const SejongMobile = styled.div`
   position: absolute;
-  left: 120px;
+  left: 110px;
   top: 128px;
   width: 70px;
   z-index: 1;
@@ -796,8 +804,8 @@ const SejongMobile = styled.div`
 
 const ChoongNamMobile = styled.div`
   position: absolute;
-  left: 85px;
-  top: 165px;
+  left: 75px;
+  top: 150px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -815,8 +823,8 @@ const ChoongNamMobile = styled.div`
 
 const ChoongBookMobile = styled.div`
   position: absolute;
-  left: 170px;
-  top: 140px;
+  left: 150px;
+  top: 120px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -834,8 +842,8 @@ const ChoongBookMobile = styled.div`
 
 const GyeongBookMobile = styled.div`
   position: absolute;
-  right: 80px;
-  top: 170px;
+  right: 60px;
+  top: 160px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -853,8 +861,8 @@ const GyeongBookMobile = styled.div`
 
 const DaejeonMobile = styled.div`
   position: absolute;
-  left: 135px;
-  top: 180px;
+  left: 110px;
+  top: 165px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -872,8 +880,8 @@ const DaejeonMobile = styled.div`
 
 const JeonBookMobile = styled.div`
   position: absolute;
-  left: 130px;
-  bottom: 195px;
+  left: 80px;
+  bottom: 220px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -891,8 +899,8 @@ const JeonBookMobile = styled.div`
 
 const GwangjuMobile = styled.div`
   position: absolute;
-  left: 120px;
-  bottom: 150px;
+  left: 100px;
+  bottom: 180px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -910,8 +918,8 @@ const GwangjuMobile = styled.div`
 
 const JeonNamMobile = styled.div`
   position: absolute;
-  left: 80px;
-  bottom: 110px;
+  left: 45px;
+  bottom: 180px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -929,8 +937,8 @@ const JeonNamMobile = styled.div`
 
 const JejuMobile = styled.div`
   position: absolute;
-  left: 120px;
-  bottom: 50px;
+  left: 80px;
+  bottom: 140px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -948,8 +956,8 @@ const JejuMobile = styled.div`
 
 const GyeongNamMobile = styled.div`
   position: absolute;
-  right: 120px;
-  bottom: 160px;
+  right: 110px;
+  bottom: 180px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -967,8 +975,8 @@ const GyeongNamMobile = styled.div`
 
 const DaeguMobile = styled.div`
   position: absolute;
-  right: 105px;
-  top: 210px;
+  right: 100px;
+  top: 200px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -987,7 +995,7 @@ const DaeguMobile = styled.div`
 const WoolsanMobile = styled.div`
   position: absolute;
   right: 45px;
-  top: 235px;
+  top: 215px;
   width: 70px;
   z-index: 1;
   & > h3 {
@@ -1005,8 +1013,8 @@ const WoolsanMobile = styled.div`
 
 const BusanMobile = styled.div`
   position: absolute;
-  right: 60px;
-  bottom: 140px;
+  right: 55px;
+  bottom: 165px;
   width: 70px;
   z-index: 1;
   & > h3 {
