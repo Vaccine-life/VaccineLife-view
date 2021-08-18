@@ -656,7 +656,6 @@ const MapTitleMobile = styled.div`
   display: flex;
   flex-direction: row;
   width: max-content;
-  width: 100%;
   height: 26px;
   margin: 40px auto 10px 16px;
 
@@ -666,7 +665,6 @@ const MapTitleMobile = styled.div`
   }
 
   & > h3 {
-    /* width: 102px; */
     width: max-content;
     height: 26px;
     font-weight: bold;
