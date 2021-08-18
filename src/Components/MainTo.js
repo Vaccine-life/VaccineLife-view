@@ -241,19 +241,17 @@ const ToMedicalBoard = styled.div`
 //<========= Mobile ===========>
 const WrapperMobile = styled.div`
   width: 100%;
-  padding: 0px 16px;
 `;
 
 const ToVacBoardMobile = styled.div`
   position: relative;
-  width: 366px;
   height: 120px;
   background: ${theme.bg2};
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
-  margin: 40px 16px 8px 0px;
+  margin: 40px 16px 8px 16px;
+
   & > h3 {
-    /* width: 100px; */
     width: max-content;
     height: 50px;
     font-weight: bold;
@@ -279,20 +277,22 @@ const ToVacBoardMobile = styled.div`
 `;
 
 const CardDownSideMobile = styled.div`
-  display: flex;
-  width: 382px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 const ToQuarBoardMobile = styled.div`
   position: relative;
-  width: 187px;
   height: 120px;
   background: ${theme.bg2};
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
   margin-right: 8px;
+  margin-left: 16px;
+  
   & > h3 {
-    /* width: 100px; */
     width: max-content;
     height: 50px;
     font-weight: bold;
@@ -319,11 +319,11 @@ const ToQuarBoardMobile = styled.div`
 
 const ToMedicalBoardMobile = styled.div`
   position: relative;
-  width: 187px;
   height: 120px;
   background: ${theme.bg};
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
+  margin-right: 16px;
   & > h3 {
     /* width: 105px; */
     width: max-content;

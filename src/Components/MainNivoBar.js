@@ -517,14 +517,15 @@ const BarBox = styled.div`
   border-radius: 16px;
 `;
 
+
 // <========= Mobile ===========>
+
 
 const BarTitle1Mobile = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* width: 166px; */
   width: max-content;
   height: 26px;
   margin: 40px auto 10px 16px;
@@ -573,11 +574,10 @@ const BarTitle2Mobile = styled.div`
 
 const BoxWrapperMobile = styled.div`
   width: 100%;
-  padding: 0px 16px;
 `;
 
 const BarBoxMobile = styled.div`
-  width: 382px;
+  margin: 0px 16px;
   height: 220px;
   border: 1px solid ${theme.typoLightGrey2};
   box-sizing: border-box;
