@@ -711,7 +711,7 @@ const ShotMobile = styled.div`
   border-radius: 9px;
   font-weight: normal;
   font-size: 10px;
-  line-height: 24px;
+  line-height: 18px;
   color: #ffffff;
   margin: auto;
 `;
