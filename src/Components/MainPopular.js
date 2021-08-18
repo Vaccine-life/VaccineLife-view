@@ -27,38 +27,40 @@ const MainPopular = (props) => {
   if (isMobileOnly) {
     return (
       <>
-        <GreyBoxMobile>
-          <PopularTitleMobile>
-            <h1>백신 접종 후기 인기글</h1>
-            <h3
-              onClick={() => {
-                history.push("/vaccine");
-              }}
-            >
-              더보기
-            </h3>
-          </PopularTitleMobile>
-          <Slider
-            board="vaccine"
-            top_list_vac={top_list_vac}
-            top_list_quar={top_list_quar}
-          />
-          <PopularTitleMobile style={{ marginTop: "32px" }}>
-            <h1>자가 격리 후기 인기글</h1>
-            <h3
-              onClick={() => {
-                history.push("/vaccine");
-              }}
-            >
-              더보기
-            </h3>
-          </PopularTitleMobile>
-          <Slider
-            board="quarantine"
-            top_list_vac={top_list_vac}
-            top_list_quar={top_list_quar}
-          />
-        </GreyBoxMobile>
+        <MainPopularWrapperMobile>
+          <GreyBoxMobile>
+            <PopularTitleMobile>
+              <h1>백신 접종 후기 인기글</h1>
+              <h3
+                onClick={() => {
+                  history.push("/vaccine");
+                }}
+              >
+                더보기
+              </h3>
+            </PopularTitleMobile>
+            <Slider
+              board="vaccine"
+              top_list_vac={top_list_vac}
+              top_list_quar={top_list_quar}
+            />
+            <PopularTitleMobile style={{ marginTop: "32px" }}>
+              <h1>자가 격리 후기 인기글</h1>
+              <h3
+                onClick={() => {
+                  history.push("/vaccine");
+                }}
+              >
+                더보기
+              </h3>
+            </PopularTitleMobile>
+            <Slider
+              board="quarantine"
+              top_list_vac={top_list_vac}
+              top_list_quar={top_list_quar}
+            />
+          </GreyBoxMobile>
+        </MainPopularWrapperMobile>
       </>
     );
   }
@@ -214,7 +216,15 @@ const PopularCards = styled.div`
   width: 1250px;
   height: 66%;
   margin: auto;
-  /* background-color: gray; */
+
+`;
+
+
+// <========= Mobile ===========>
+
+
+const MainPopularWrapperMobile = styled.div`
+width:100%;
 `;
 
 const GreyBoxMobile = styled.div`
