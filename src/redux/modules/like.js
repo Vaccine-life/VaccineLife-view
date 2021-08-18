@@ -47,6 +47,11 @@ const like = createSlice({
     actionPlusLikeInLikeListMedi: (state, action) => {
       state.likeListMedi.push(action.payload);
     },
+    actionResetLike: (state, action) => {
+      state.likeListMedi = [];
+      state.likeListQuar = [];
+      state.likeListVac = [];
+    },
   },
 });
 
@@ -58,14 +63,11 @@ export const actionGetLike =
       if (!is_login) {
         return;
       }
-      console.log(is_login);
       const userId = getState().user.user.userId;
-      console.log(userId);
       let getData = [];
       let makeData = [];
       if (board === "vaccine") {
         getData = await likeAxios.getLikeListVac(userId);
-        console.log(getData);
         getData.data.map((each) => {
           makeData.push(each.vacBoardId);
         });
@@ -200,6 +202,7 @@ export const {
   actionPlusLikeInLikeListVac,
   actionPlusLikeInLikeListQuar,
   actionPlusLikeInLikeListMedi,
+  actionResetLike,
 } = like.actions;
 
 export default like;
