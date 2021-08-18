@@ -648,7 +648,7 @@ const Busan = styled.div`
   }
 `;
 
-// <========= Mobile ==========>
+// <======================== Mobile =========================>
 
 const WrapperMobile = styled.div`
   margin: "auto";
@@ -726,7 +726,7 @@ const ShotMobile = styled.div`
 
 const GyeonggiMobile = styled.div`
   position: absolute;
-  left: 100px;
+  left: 105px;
   top: 45px;
   width: 70px;
   z-index: 1;
@@ -746,7 +746,7 @@ const GyeonggiMobile = styled.div`
 
 const GangwonMobile = styled.div`
   position: absolute;
-  right: 70px;
+  right: 100px;
   top: 80px;
   width: 70px;
   z-index: 1;
@@ -766,8 +766,8 @@ const GangwonMobile = styled.div`
 
 const SeoulMobile = styled.div`
   position: absolute;
-  left: 105px;
-  top: 85px;
+  left: 110px;
+  top: 90px;
   width: 70px;
   z-index: 1;
 
@@ -806,8 +806,8 @@ const IncheonMobile = styled.div`
 
 const SejongMobile = styled.div`
   position: absolute;
-  left: 110px;
-  top: 128px;
+  left: 120px;
+  top: 150px;
   width: 70px;
   z-index: 1;
 
@@ -886,8 +886,8 @@ const GyeongBookMobile = styled.div`
 
 const DaejeonMobile = styled.div`
   position: absolute;
-  left: 110px;
-  top: 165px;
+  left: 130px;
+  top: 195px;
   width: 70px;
   z-index: 1;
 
