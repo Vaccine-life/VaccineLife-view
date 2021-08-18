@@ -90,10 +90,23 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.topThreeVac = state.topThreeVac.map((each) => {
+          if (each.vacBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+
         state.board.likeCount = state.board.likeCount - 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+        state.topThreeQuar = state.topThreeQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
           }
           return { ...each };
@@ -110,10 +123,22 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.topThreeVac = state.topThreeVac.map((each) => {
+          if (each.vacBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
         state.board.likeCount = state.board.likeCount + 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
+        state.topThreeQuar = state.topThreeQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
           }
           return { ...each };

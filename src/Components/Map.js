@@ -694,18 +694,20 @@ const MapBoxWrapperMobile = styled.div`
 const MapBoxMobile = styled.div`
   position: relative;
   margin: 0px 16px;
-  height: 472px;
+  width: 284px;
+  height: 350px;
   background: ${theme.bg4};
   border: 1px solid ${theme.bg3};
   box-sizing: border-box;
   border-radius: 16px;
+  margin: auto;
 
   & > img {
     width: auto;
     height: auto;
     max-width: 100%;
     max-height: 100%;
-    padding-top: 50px;
+    padding-top: 30px;
   }
 `;
 
@@ -726,8 +728,8 @@ const ShotMobile = styled.div`
 
 const GyeonggiMobile = styled.div`
   position: absolute;
-  left: 105px;
-  top: 45px;
+  left: 80px;
+  top: 28px;
   width: 70px;
   z-index: 1;
 
@@ -746,8 +748,8 @@ const GyeonggiMobile = styled.div`
 
 const GangwonMobile = styled.div`
   position: absolute;
-  right: 100px;
-  top: 80px;
+  right: 70px;
+  top: 50px;
   width: 70px;
   z-index: 1;
 
@@ -766,8 +768,8 @@ const GangwonMobile = styled.div`
 
 const SeoulMobile = styled.div`
   position: absolute;
-  left: 110px;
-  top: 90px;
+  left: 90px;
+  top: 65px;
   width: 70px;
   z-index: 1;
 
@@ -786,8 +788,8 @@ const SeoulMobile = styled.div`
 
 const IncheonMobile = styled.div`
   position: absolute;
-  left: 60px;
-  top: 75px;
+  left: 40px;
+  top: 55px;
   width: 70px;
   z-index: 1;
 
@@ -806,8 +808,8 @@ const IncheonMobile = styled.div`
 
 const SejongMobile = styled.div`
   position: absolute;
-  left: 120px;
-  top: 150px;
+  left: 80px;
+  top: 100px;
   width: 70px;
   z-index: 1;
 
@@ -826,8 +828,8 @@ const SejongMobile = styled.div`
 
 const ChoongNamMobile = styled.div`
   position: absolute;
-  left: 75px;
-  top: 150px;
+  left: 50px;
+  top: 110px;
   width: 70px;
   z-index: 1;
 
@@ -846,8 +848,8 @@ const ChoongNamMobile = styled.div`
 
 const ChoongBookMobile = styled.div`
   position: absolute;
-  left: 150px;
-  top: 120px;
+  left: 120px;
+  top: 95px;
   width: 70px;
   z-index: 1;
 
@@ -866,8 +868,8 @@ const ChoongBookMobile = styled.div`
 
 const GyeongBookMobile = styled.div`
   position: absolute;
-  right: 60px;
-  top: 160px;
+  right: 40px;
+  top: 120px;
   width: 70px;
   z-index: 1;
 
@@ -886,8 +888,8 @@ const GyeongBookMobile = styled.div`
 
 const DaejeonMobile = styled.div`
   position: absolute;
-  left: 130px;
-  top: 195px;
+  left: 90px;
+  top: 143px;
   width: 70px;
   z-index: 1;
 
@@ -906,8 +908,8 @@ const DaejeonMobile = styled.div`
 
 const JeonBookMobile = styled.div`
   position: absolute;
-  left: 80px;
-  bottom: 220px;
+  left: 60px;
+  bottom: 145px;
   width: 70px;
   z-index: 1;
 
@@ -926,8 +928,8 @@ const JeonBookMobile = styled.div`
 
 const GwangjuMobile = styled.div`
   position: absolute;
-  left: 100px;
-  bottom: 180px;
+  left: 80px;
+  bottom: 110px;
   width: 70px;
   z-index: 1;
 
@@ -946,8 +948,8 @@ const GwangjuMobile = styled.div`
 
 const JeonNamMobile = styled.div`
   position: absolute;
-  left: 45px;
-  bottom: 180px;
+  left: 50px;
+  bottom: 90px;
   width: 70px;
   z-index: 1;
 
@@ -967,7 +969,7 @@ const JeonNamMobile = styled.div`
 const JejuMobile = styled.div`
   position: absolute;
   left: 80px;
-  bottom: 140px;
+  bottom: 45px;
   width: 70px;
   z-index: 1;
 
@@ -986,8 +988,8 @@ const JejuMobile = styled.div`
 
 const GyeongNamMobile = styled.div`
   position: absolute;
-  right: 110px;
-  bottom: 180px;
+  right: 90px;
+  bottom: 100px;
   width: 70px;
   z-index: 1;
 
@@ -1006,8 +1008,8 @@ const GyeongNamMobile = styled.div`
 
 const DaeguMobile = styled.div`
   position: absolute;
-  right: 100px;
-  top: 200px;
+  right: 70px;
+  top: 150px;
   width: 70px;
   z-index: 1;
 
@@ -1026,8 +1028,8 @@ const DaeguMobile = styled.div`
 
 const WoolsanMobile = styled.div`
   position: absolute;
-  right: 45px;
-  top: 215px;
+  right: 20px;
+  bottom: 140px;
   width: 70px;
   z-index: 1;
 
@@ -1046,8 +1048,8 @@ const WoolsanMobile = styled.div`
 
 const BusanMobile = styled.div`
   position: absolute;
-  right: 55px;
-  bottom: 165px;
+  right: 50px;
+  bottom: 105px;
   width: 70px;
   z-index: 1;
 
