@@ -98,7 +98,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
           >
             회원가입이 곧 마무리됩니다
           </Text>
-          <Text margin="15px auto" size={theme.bodyfourHeight} bold>
+          <Text margin="15px auto" size={theme.bodyTwoSize} bold>
             여러분의 백신 접종 경험을 공유해주세요
           </Text>
 
@@ -563,7 +563,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
             >
               부작용 (중복선택가능)
             </Text>
-            <ThreeOptions style={{ marginBottom: "5px" }}>
+            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
               <Option>
                 <input
                   type="checkbox"
@@ -575,7 +575,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="없음"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   없음
                 </label>
@@ -594,7 +594,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="발열"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   발열
                 </label>
@@ -613,12 +613,12 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="두통관절통근육통"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   두통/관절통/근육통
                 </label>
               </Option>
-            </ThreeOptions>
+            </MobileLowerCheckbox>
 
             <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
               <Option>
@@ -634,7 +634,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="피로감"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   피로감
                 </label>
@@ -652,7 +652,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="접종부위통증"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   접종부위 통증
                 </label>
@@ -671,7 +671,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="구토매스꺼움"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   구토/매스꺼움
                 </label>
@@ -692,7 +692,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="접종부위부기발적"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   접종부위 부기/발적
                 </label>
@@ -711,7 +711,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="알러지반응"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   알러지 반응
                 </label>
@@ -730,7 +730,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 />
                 <label
                   htmlFor="기타"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  style={{ fontSize: `${theme.bodyThreeSize}` }}
                 >
                   기타
                 </label>

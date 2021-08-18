@@ -376,7 +376,7 @@ const NextButton = styled.button`
 // <========= Mobile ==========>
 
 const MobileWrapper = styled.form`
-  width: 70%;
+  width: 80%;
   height: auto;
   padding: auto 0;
 `;

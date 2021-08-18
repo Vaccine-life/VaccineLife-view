@@ -32,7 +32,7 @@ const LoginComponent = ({ status, setStatus }) => {
     return (
       <>
         <MobileWrapper onSubmit={formik.handleSubmit}>
-          <Text margin="0 auto 120px auto" auto size={theme.headOneSize} bold>
+          <Text margin="0 auto 100px auto" auto size={theme.headOneSize} bold>
             로그인
           </Text>
 
@@ -62,7 +62,7 @@ const LoginComponent = ({ status, setStatus }) => {
 
           <Grid is_flex="space_column">
             <Button
-              margin="120px 0 15px 0"
+              margin="100px 0 15px 0"
               width={theme.mediumButtonWidth}
               height={theme.mediumButtonHeight}
               type="submit"
