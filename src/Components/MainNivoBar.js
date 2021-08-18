@@ -121,7 +121,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
+            <h3>연령대별 백신 접종률<span> (추후 서비스 제공)</span></h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -342,7 +342,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
+          <h3>연령대별 백신 접종률<span> (추후 서비스 제공)</span></h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
