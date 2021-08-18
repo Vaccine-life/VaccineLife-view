@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import { Grid, Text } from "../../elements";
+import { Grid, Image, Text } from "../../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionVisible, actionNavVisible } from "../../redux/modules/modal";
 import { actionLogoutCookie } from "../../redux/modules/user";
@@ -9,13 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../redux/configStore";
 import { withRouter } from "react-router-dom";
+import login from "../../images/login.png";
+import logout from "../../images/logout.png";
 
 const NavModal = (props) => {
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
   const nickname = useSelector((state) => state.user.user.nickname);
-  const modal_status = useSelector((state) => state.modal.visible);
   const url = history.location.pathname;
 
   // 모달 바깥 부분 클릭시 모달 off
@@ -48,7 +49,7 @@ const NavModal = (props) => {
 
             <Grid align="left">
               <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
-                <span style={{ color: `{theme.SuccessGreen}` }}>
+                <span style={{ color: `${theme.SuccessGreen}` }}>
                   {nickname}
                 </span>
                 님, 환영합니다
@@ -108,17 +109,27 @@ const NavModal = (props) => {
               <div
                 style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
               />
-              <Text
-                color={theme.typoBlack}
-                size={theme.bodyThreeSize}
-                margin="2rem 0"
-                _onClick={() => {
+
+              <TextIconWrapper
+                onClick={() => {
                   dispatch(actionNavVisible());
                   dispatch(actionLogoutCookie());
                 }}
               >
-                로그아웃
-              </Text>
+                <Text
+                  color={theme.typoBlack}
+                  size={theme.bodyThreeSize}
+                  margin="2rem 0"
+                >
+                  로그아웃
+                </Text>
+                <Image
+                  shape="square"
+                  size="1.5rem"
+                  margin="0 0 0 3px"
+                  src={logout}
+                />
+              </TextIconWrapper>
             </Grid>
           </Modal>
         </Wrapper>
@@ -147,16 +158,22 @@ const NavModal = (props) => {
           </Xbutton>
 
           <Grid align="left">
-            <Text
-              color={theme.typoBlack}
-              size={theme.bodyThreeSize}
-              _onClick={() => {
+            <TextIconWrapper
+              onClick={() => {
                 dispatch(actionNavVisible());
                 dispatch(actionVisible());
               }}
             >
-              로그인
-            </Text>
+              <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
+                로그인
+              </Text>
+              <Image
+                shape="square"
+                size="1.5rem"
+                margin="0 0 0 3px"
+                src={login}
+              />
+            </TextIconWrapper>
             <div
               style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
             />
@@ -248,4 +265,10 @@ const Xbutton = styled.div`
   }
 `;
 
+const TextIconWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 0;
+`;
 export default withRouter(NavModal);
