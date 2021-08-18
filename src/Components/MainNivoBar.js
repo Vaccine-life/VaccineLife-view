@@ -12,7 +12,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle1Mobile>
             <img src={disc} alt="" />
-            <h3>백신 종류별 접종수</h3>
+            <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
           </BarTitle1Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -121,7 +121,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>연령대별 백신 접종률</h3>
+            <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -235,7 +235,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle1>
           <img src={disc} alt="" />
-          <h3>백신 종류별 접종수</h3>
+          <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
         </BarTitle1>
         <BarBox>
           <ResponsiveBar
@@ -342,7 +342,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>연령대별 백신 접종률</h3>
+          <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
@@ -471,6 +471,7 @@ const BarTitle1 = styled.div`
   }
   & > h3 {
     width: 138px;
+    white-space: nowrap;
     height: 26px;
     font-weight: bold;
     font-size: ${theme.SubHeadOneSize};
@@ -478,9 +479,11 @@ const BarTitle1 = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
-  }
-  & > h6 {
-    width: 200px;
+    
+    & > span {
+      font-size: 12px;
+      font-weight: lighter;
+    }
   }
 `;
 
@@ -499,6 +502,7 @@ const BarTitle2 = styled.div`
   }
   & > h3 {
     width: 155px;
+    white-space: nowrap;
     height: 26px;
     font-weight: bold;
     font-size: ${theme.SubHeadOneSize};
@@ -506,6 +510,11 @@ const BarTitle2 = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
+
+    & > span {
+      font-size: 12px;
+      font-weight: lighter;
+    }
   }
 `;
 
@@ -543,6 +552,11 @@ const BarTitle1Mobile = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
+    
+    & > span {
+      font-size: 1px;
+      font-weight:lighter;
+    }
   }
 `;
 
@@ -569,7 +583,13 @@ const BarTitle2Mobile = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
+
+    & > span {
+      font-size: 1px;
+      font-weight:lighter;
+    }
   }
+ 
 `;
 
 const BoxWrapperMobile = styled.div`
