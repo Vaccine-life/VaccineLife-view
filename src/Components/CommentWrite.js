@@ -80,15 +80,23 @@ const CommentWrite = (props) => {
         <Grid is_flex="space_column" padding="0 1rem">
           <Grid is_flex="space_column" border="1px solid #c1c1c1">
             <Grid margin="0 5rem">
-              <Input
-                multiLine
-                rows={6}
-                border="none"
-                value={comment}
+              <TextareaAutosize
+                style={{
+                  resize: "none",
+                  width: "100%",
+                  padding: "1rem 0.7rem",
+                  boxSizing: "border-box",
+                  border: "none",
+                  fontSize: `${theme.SubHeadTwoSize}`,
+                  fontFamily: "Noto Sans KR",
+                  color: `${theme.typoBlack}`,
+                  focus: { outline: "none" },
+                }}
                 placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
+                minRows="5"
+                value={comment}
+                onChange={changeComment}
                 maxLength="500"
-                color={theme.typoBlack}
-                _onChange={changeComment}
               />
             </Grid>
 
