@@ -7,12 +7,14 @@ import { isMobileOnly } from "react-device-detect";
 const Intro = () => {
   if (isMobileOnly) {
     return (
-      <MainIntroMobile>
-        <img src={IntroCharacter} alt="" />
-        <h1>
-          여러분의 <span>백신 접종 후기</span>를 공유해주세요!
-        </h1>
-      </MainIntroMobile>
+      <MainIntroWrapperMobile>
+        <MainIntroMobile>
+          <img src={IntroCharacter} alt="" />
+          <h1>
+            여러분의 <span>백신 접종 후기</span>를 공유해주세요!
+          </h1>
+        </MainIntroMobile>
+      </MainIntroWrapperMobile>
     );
   }
   return (
@@ -57,15 +59,20 @@ const MainIntro = styled.div`
   }
 `;
 
+
+// <========= Mobile ===========>
+
+const MainIntroWrapperMobile = styled.div`
+width: 100%;
+`;
+
 const MainIntroMobile = styled.div`
   position: relative;
   margin-top: 80px;
   width: 414px;
   height: 140px;
   background-color: ${theme.bg};
-
   display: flex;
-  flex-direction: row;
   align-items: center;
 
   & > img {

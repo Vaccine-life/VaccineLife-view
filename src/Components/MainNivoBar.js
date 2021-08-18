@@ -15,109 +15,111 @@ const MainNivoBar = () => {
                         <img src={disc} alt="" />
                         <h3>백신 종류별 접종수</h3>
                     </BarTitle1Mobile>
-                    <BarBoxMobile>
-                        <ResponsiveBar
-                            data={[
-                                {
-                                    "vaccines": "모더나",
-                                    "vaccine": 61857,
-                                    "vaccineColor": "hsl(227, 86%, 63%)",
-                                },
-                                {
-                                    "vaccines": "얀센",
-                                    "vaccine": 1129771,
-                                    "vaccineColor": "hsl(169, 70%, 50%)",
+                    <BoxWrapperMobile>
+                        <BarBoxMobile>
+                            <ResponsiveBar
+                                data={[
+                                    {
+                                        "vaccines": "모더나",
+                                        "vaccine": 61857,
+                                        "vaccineColor": "hsl(227, 86%, 63%)",
+                                    },
+                                    {
+                                        "vaccines": "얀센",
+                                        "vaccine": 1129771,
+                                        "vaccineColor": "hsl(169, 70%, 50%)",
 
-                                },
-                                {
-                                    "vaccines": "화이자",
-                                    "vaccine": 4627403,
-                                    "vaccineColor": "hsl(227, 86%, 63%)",
-                                },
-                                {
-                                    "vaccines": "AZ",
-                                    "vaccine": 2075320,
-                                    "vaccineColor": "hsl(227, 86%, 63%)",
-                                },
-                            ]}
-                            keys={['vaccine']}
-                            indexBy="vaccines"
-                            margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
-                            padding={0.3}
-                            groupMode="grouped"
-                            layout="horizontal"
-                            valueScale={{ type: 'linear' }}
-                            indexScale={{ type: 'band', round: true }}
-                            valueFormat={{ format: '', enabled: false }}
-                            colors={"hsl(227, 86%, 63%)"}
-                            defs={[
-                                {
-                                    id: 'dots',
-                                    type: 'patternDots',
-                                    background: 'inherit',
-                                    color: '#38bcb2',
-                                    size: 4,
-                                    padding: 1,
-                                    stagger: true
-                                },
-                                {
-                                    id: 'lines',
-                                    type: 'patternLines',
-                                    background: 'inherit',
-                                    color: '#eed312',
-                                    rotation: -45,
-                                    lineWidth: 6,
-                                    spacing: 10
-                                }
-                            ]}
-                            fill={[
-                                {
-                                    match: {
-                                        id: 'fries'
                                     },
-                                    id: 'dots'
-                                },
-                                {
-                                    match: {
-                                        id: 'sandwich'
+                                    {
+                                        "vaccines": "화이자",
+                                        "vaccine": 4627403,
+                                        "vaccineColor": "hsl(227, 86%, 63%)",
                                     },
-                                    id: 'lines'
-                                }
-                            ]}
-                            borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                            axisTop={null}
-                            axisRight={null}
-                            axisBottom={null}
-                            axisLeft={{
-                                tickSize: 5,
-                                tickPadding: 5,
-                                tickRotation: 0,
-                                legend: '',
-                                legendPosition: 'middle',
-                                legendOffset: -40
-                            }}
-                            enableGridY={false}
-                            enableLabel={false}
-                            labelSkipWidth={12}
-                            labelSkipHeight={12}
-                            labelTextColor="white"
-                            legends={[]}
-                            tooltip={({ value, color }) => (
-                                <div
-                                    style={{
-                                        padding: 12,
-                                        color,
-                                        background: "#f7f7f7",
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    <strong>
-                                        {value.toLocaleString('ko-KR')}명
-                                    </strong>
-                                </div>
-                            )}
-                        />
-                    </BarBoxMobile>
+                                    {
+                                        "vaccines": "AZ",
+                                        "vaccine": 2075320,
+                                        "vaccineColor": "hsl(227, 86%, 63%)",
+                                    },
+                                ]}
+                                keys={['vaccine']}
+                                indexBy="vaccines"
+                                margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+                                padding={0.3}
+                                groupMode="grouped"
+                                layout="horizontal"
+                                valueScale={{ type: 'linear' }}
+                                indexScale={{ type: 'band', round: true }}
+                                valueFormat={{ format: '', enabled: false }}
+                                colors={"hsl(227, 86%, 63%)"}
+                                defs={[
+                                    {
+                                        id: 'dots',
+                                        type: 'patternDots',
+                                        background: 'inherit',
+                                        color: '#38bcb2',
+                                        size: 4,
+                                        padding: 1,
+                                        stagger: true
+                                    },
+                                    {
+                                        id: 'lines',
+                                        type: 'patternLines',
+                                        background: 'inherit',
+                                        color: '#eed312',
+                                        rotation: -45,
+                                        lineWidth: 6,
+                                        spacing: 10
+                                    }
+                                ]}
+                                fill={[
+                                    {
+                                        match: {
+                                            id: 'fries'
+                                        },
+                                        id: 'dots'
+                                    },
+                                    {
+                                        match: {
+                                            id: 'sandwich'
+                                        },
+                                        id: 'lines'
+                                    }
+                                ]}
+                                borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                                axisTop={null}
+                                axisRight={null}
+                                axisBottom={null}
+                                axisLeft={{
+                                    tickSize: 5,
+                                    tickPadding: 5,
+                                    tickRotation: 0,
+                                    legend: '',
+                                    legendPosition: 'middle',
+                                    legendOffset: -40
+                                }}
+                                enableGridY={false}
+                                enableLabel={false}
+                                labelSkipWidth={12}
+                                labelSkipHeight={12}
+                                labelTextColor="white"
+                                legends={[]}
+                                tooltip={({ value, color }) => (
+                                    <div
+                                        style={{
+                                            padding: 12,
+                                            color,
+                                            background: "#f7f7f7",
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        <strong>
+                                            {value.toLocaleString('ko-KR')}명
+                                        </strong>
+                                    </div>
+                                )}
+                            />
+                        </BarBoxMobile>
+                    </BoxWrapperMobile>
                 </div>
 
                 <div>
@@ -125,109 +127,111 @@ const MainNivoBar = () => {
                         <img src={disc} alt="" />
                         <h3>연령대별 백신 접종률</h3>
                     </BarTitle2Mobile>
-                    <BarBoxMobile>
-                        <ResponsiveBar
-                            data={[
-                                {
-                                    "ages": "70-80대",
-                                    "age": 45,
-                                    "ageColor": "hsl(227, 86%, 63%)",
-                                },
-                                {
-                                    "ages": "50-60대",
-                                    "age": 35,
-                                    "ageColor": "hsl(169, 70%, 50%)",
+                    <BoxWrapperMobile>
+                        <BarBoxMobile>
+                            <ResponsiveBar
+                                data={[
+                                    {
+                                        "ages": "70-80대",
+                                        "age": 45,
+                                        "ageColor": "hsl(227, 86%, 63%)",
+                                    },
+                                    {
+                                        "ages": "50-60대",
+                                        "age": 35,
+                                        "ageColor": "hsl(169, 70%, 50%)",
 
-                                },
-                                {
-                                    "ages": "30-40대",
-                                    "age": 15,
-                                    "ageColor": "hsl(227, 86%, 63%)",
-                                },
-                                {
-                                    "ages": "10-20대",
-                                    "age": 5,
-                                    "ageColor": "hsl(227, 86%, 63%)",
-                                },
-                            ]}
-                            keys={['age']}
-                            indexBy="ages"
-                            margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
-                            padding={0.3}
-                            groupMode="grouped"
-                            layout="horizontal"
-                            valueScale={{ type: 'linear' }}
-                            indexScale={{ type: 'band', round: true }}
-                            valueFormat={{ format: '', enabled: false }}
-                            colors={"hsl(227, 86%, 63%)"}
-                            defs={[
-                                {
-                                    id: 'dots',
-                                    type: 'patternDots',
-                                    background: 'inherit',
-                                    color: '#38bcb2',
-                                    size: 4,
-                                    padding: 1,
-                                    stagger: true
-                                },
-                                {
-                                    id: 'lines',
-                                    type: 'patternLines',
-                                    background: 'inherit',
-                                    color: '#eed312',
-                                    rotation: -45,
-                                    lineWidth: 6,
-                                    spacing: 10
-                                }
-                            ]}
-                            fill={[
-                                {
-                                    match: {
-                                        id: 'fries'
                                     },
-                                    id: 'dots'
-                                },
-                                {
-                                    match: {
-                                        id: 'sandwich'
+                                    {
+                                        "ages": "30-40대",
+                                        "age": 15,
+                                        "ageColor": "hsl(227, 86%, 63%)",
                                     },
-                                    id: 'lines'
-                                }
-                            ]}
-                            borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                            axisTop={null}
-                            axisRight={null}
-                            axisBottom={null}
-                            axisLeft={{
-                                tickSize: 5,
-                                tickPadding: 5,
-                                tickRotation: 0,
-                                legend: '',
-                                legendPosition: 'middle',
-                                legendOffset: -40
-                            }}
-                            enableGridY={false}
-                            enableLabel={false}
-                            labelSkipWidth={12}
-                            labelSkipHeight={12}
-                            labelTextColor="white"
-                            legends={[]}
-                            tooltip={({ value, color }) => (
-                                <div
-                                    style={{
-                                        padding: 12,
-                                        color,
-                                        background: '#f7f7f7',
-                                        borderRadius: "10px",
-                                    }}
-                                >
-                                    <strong>
-                                        {value}%
-                                    </strong>
-                                </div>
-                            )}
-                        />
-                    </BarBoxMobile>
+                                    {
+                                        "ages": "10-20대",
+                                        "age": 5,
+                                        "ageColor": "hsl(227, 86%, 63%)",
+                                    },
+                                ]}
+                                keys={['age']}
+                                indexBy="ages"
+                                margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+                                padding={0.3}
+                                groupMode="grouped"
+                                layout="horizontal"
+                                valueScale={{ type: 'linear' }}
+                                indexScale={{ type: 'band', round: true }}
+                                valueFormat={{ format: '', enabled: false }}
+                                colors={"hsl(227, 86%, 63%)"}
+                                defs={[
+                                    {
+                                        id: 'dots',
+                                        type: 'patternDots',
+                                        background: 'inherit',
+                                        color: '#38bcb2',
+                                        size: 4,
+                                        padding: 1,
+                                        stagger: true
+                                    },
+                                    {
+                                        id: 'lines',
+                                        type: 'patternLines',
+                                        background: 'inherit',
+                                        color: '#eed312',
+                                        rotation: -45,
+                                        lineWidth: 6,
+                                        spacing: 10
+                                    }
+                                ]}
+                                fill={[
+                                    {
+                                        match: {
+                                            id: 'fries'
+                                        },
+                                        id: 'dots'
+                                    },
+                                    {
+                                        match: {
+                                            id: 'sandwich'
+                                        },
+                                        id: 'lines'
+                                    }
+                                ]}
+                                borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                                axisTop={null}
+                                axisRight={null}
+                                axisBottom={null}
+                                axisLeft={{
+                                    tickSize: 5,
+                                    tickPadding: 5,
+                                    tickRotation: 0,
+                                    legend: '',
+                                    legendPosition: 'middle',
+                                    legendOffset: -40
+                                }}
+                                enableGridY={false}
+                                enableLabel={false}
+                                labelSkipWidth={12}
+                                labelSkipHeight={12}
+                                labelTextColor="white"
+                                legends={[]}
+                                tooltip={({ value, color }) => (
+                                    <div
+                                        style={{
+                                            padding: 12,
+                                            color,
+                                            background: '#f7f7f7',
+                                            borderRadius: "10px",
+                                        }}
+                                    >
+                                        <strong>
+                                            {value}%
+                                        </strong>
+                                    </div>
+                                )}
+                            />
+                        </BarBoxMobile>
+                    </BoxWrapperMobile>
                 </div>
 
             </div>
@@ -542,13 +546,16 @@ box-sizing: border-box;
 border-radius: 16px;
 `;
 
+// <========= Mobile ===========>
+
 const BarTitle1Mobile = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
 
-width: 166px;
+/* width: 166px; */
+width: max-content;
 height: 26px;
 
 margin: 40px auto 10px 16px;
@@ -560,7 +567,8 @@ height: 24px;
 }
 
 & > h3 {
-width: 138px;
+/* width: 138px; */
+width: max-content;
 height: 26px;
 
 font-weight: bold;
@@ -570,10 +578,6 @@ letter-spacing: -0.3px;
 color: #242424;
 
 padding-left: 4px;
-}
-
-& > h6 {
-width: 200px;
 }
 `;
 
@@ -583,7 +587,8 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 margin: 40px auto 10px 16px;
-width: 183px;
+/* width: 183px; */
+width: max-content;
 height: 26px;
 
 & > img {
@@ -592,7 +597,8 @@ height: 24px;
 }
 
 & > h3 {
-width: 155px;
+/* width: 155px; */
+width: max-content;
 height: 26px;
 
 font-weight: bold;
@@ -605,13 +611,17 @@ padding-left: 4px;
 }
 `;
 
+const BoxWrapperMobile = styled.div`
+width: 100%;
+padding: 0px 16px;
+`;
+
 const BarBoxMobile = styled.div`
 width: 382px;
 height: 220px;
-margin-left: 16px;
-
 border: 1px solid ${theme.typoLightGrey2};
 box-sizing: border-box;
 border-radius: 16px;
 `;
+
 export default MainNivoBar
