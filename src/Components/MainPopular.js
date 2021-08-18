@@ -220,7 +220,7 @@ const GreyBoxMobile = styled.div`
 
 const PopularTitleMobile = styled.div`
   display: flex;
-  width: 380px;
+  width: 90%;
   margin: auto;
   justify-content: space-between;
   & > h1 {

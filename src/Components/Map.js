@@ -548,19 +548,15 @@ const Jeju = styled.div`
   top: 425px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
     margin: 0px auto;
-
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
     line-height: 24px;
-
     text-align: center;
     letter-spacing: -0.3px;
-
     color: #242424;
   }
 `;
@@ -570,19 +566,15 @@ const GyeongNam = styled.div`
   top: 280px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
     margin: 0px auto;
-
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
     line-height: 24px;
-
     text-align: center;
     letter-spacing: -0.3px;
-
     color: #242424;
   }
 `;
@@ -628,19 +620,15 @@ const Busan = styled.div`
   top: 320px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
     margin: 0px auto;
-
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
     line-height: 24px;
-
     text-align: center;
     letter-spacing: -0.3px;
-
     color: #242424;
   }
 `;
@@ -658,12 +646,10 @@ const MapTitleMobile = styled.div`
   width: max-content;
   height: 26px;
   margin: 40px auto 10px 16px;
-
   & > img {
     width: 24px;
     height: 24px;
   }
-
   & > h3 {
     width: max-content;
     height: 26px;
@@ -691,7 +677,6 @@ const MapBoxMobile = styled.div`
   border: 1px solid ${theme.bg3};
   box-sizing: border-box;
   border-radius: 16px;
-
   & > img {
     width: auto;
     height: auto;
@@ -700,8 +685,6 @@ const MapBoxMobile = styled.div`
     padding-top: 50px;
   }
 `;
-
-
 
 const ShotMobile = styled.div`
   padding: 0px 3px;
@@ -722,7 +705,6 @@ const GyeonggiMobile = styled.div`
   top: 40px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -742,7 +724,6 @@ const GangwonMobile = styled.div`
   top: 80px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -762,7 +743,6 @@ const SeoulMobile = styled.div`
   top: 85px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -782,7 +762,6 @@ const IncheonMobile = styled.div`
   top: 75px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -802,7 +781,6 @@ const SejongMobile = styled.div`
   top: 128px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -822,7 +800,6 @@ const ChoongNamMobile = styled.div`
   top: 165px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -842,7 +819,6 @@ const ChoongBookMobile = styled.div`
   top: 140px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -862,7 +838,6 @@ const GyeongBookMobile = styled.div`
   top: 170px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -882,7 +857,6 @@ const DaejeonMobile = styled.div`
   top: 180px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -902,7 +876,6 @@ const JeonBookMobile = styled.div`
   bottom: 195px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -922,7 +895,6 @@ const GwangjuMobile = styled.div`
   bottom: 150px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -942,7 +914,6 @@ const JeonNamMobile = styled.div`
   bottom: 110px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -962,7 +933,6 @@ const JejuMobile = styled.div`
   bottom: 50px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -982,7 +952,6 @@ const GyeongNamMobile = styled.div`
   bottom: 160px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -1002,7 +971,6 @@ const DaeguMobile = styled.div`
   top: 210px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -1022,7 +990,6 @@ const WoolsanMobile = styled.div`
   top: 235px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
@@ -1042,7 +1009,6 @@ const BusanMobile = styled.div`
   bottom: 140px;
   width: 70px;
   z-index: 1;
-
   & > h3 {
     width: 30px;
     height: 24px;
