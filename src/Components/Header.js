@@ -80,9 +80,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/vaccine" ||
-                  url.includes("/detail") ||
-                  url === "/vaccineboard/write" ||
-                  url.includes("/modify")
+                    url.includes("/detail") ||
+                    url === "/vaccineboard/write" ||
+                    url.includes("/modify")
                     ? true
                     : false
                 }
@@ -95,9 +95,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/quarantine" ||
-                  url.includes("/quarantinedetail") ||
-                  url === "/quarantineboard/write" ||
-                  url.includes("/quarantinemodify")
+                    url.includes("/quarantinedetail") ||
+                    url === "/quarantineboard/write" ||
+                    url.includes("/quarantinemodify")
                     ? true
                     : false
                 }
