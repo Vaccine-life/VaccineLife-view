@@ -40,11 +40,18 @@ const comment = createSlice({
     // 의료진 좋아요 관련
     actionSetTopThreeMedi: (state, action) => {
       state.topThreeMedi = action.payload;
-      // console.log(action.payload);
+      console.log(action.payload);
     },
     acionMinusLikeMedi: (state, action) => {
       const { boardId } = action.payload;
       state.list = state.list.map((each) => {
+        if (each.id === boardId) {
+          return { ...each, likeCount: each.likeCount - 1 };
+        }
+        return { ...each };
+      });
+      // 인기글에도 바로 반영
+      state.topThreeMedi = state.topThreeMedi.map((each) => {
         if (each.id === boardId) {
           return { ...each, likeCount: each.likeCount - 1 };
         }
@@ -55,6 +62,13 @@ const comment = createSlice({
     acionPlusLikeMedi: (state, action) => {
       const { boardId } = action.payload;
       state.list = state.list.map((each) => {
+        if (each.id === boardId) {
+          return { ...each, likeCount: each.likeCount + 1 };
+        }
+        return { ...each };
+      });
+      // 인기글에도 바로 반영
+      state.topThreeMedi = state.topThreeMedi.map((each) => {
         if (each.id === boardId) {
           return { ...each, likeCount: each.likeCount + 1 };
         }
