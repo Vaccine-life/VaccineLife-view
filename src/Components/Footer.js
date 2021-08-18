@@ -15,7 +15,7 @@ const Footer = () => {
         <MobileWrapper>
           <Grid
             width="auto"
-            margin="0 5rem"
+            margin="1rem 5rem 0 5rem"
             is_flex="center"
             _onClick={() => {
               history.push("/");
@@ -31,7 +31,7 @@ const Footer = () => {
           </Grid>
 
           <Grid margin="2rem 0" width="auto" height="auto">
-            <TitleNav>
+            <MobileTitleNav>
               <Text
                 bold
                 color={theme.white}
@@ -68,9 +68,9 @@ const Footer = () => {
               >
                 의료진분들께
               </Text>
-            </TitleNav>
+            </MobileTitleNav>
 
-            <TeamInfo>
+            <MobileTeamInfo>
               <Text
                 color={theme.typoGrey2}
                 size={theme.bodyThreeSize}
@@ -79,7 +79,7 @@ const Footer = () => {
                 Team. 백신후기관리위원회
               </Text>
 
-              <Stick>
+              <MobileStick>
                 <Text
                   color={theme.typoGrey2}
                   size={theme.bodyThreeSize}
@@ -87,7 +87,7 @@ const Footer = () => {
                 >
                   |
                 </Text>
-              </Stick>
+              </MobileStick>
 
               <Text
                 color={theme.typoGrey2}
@@ -97,7 +97,7 @@ const Footer = () => {
                 Contact. quokkalee654@gmail.com
               </Text>
 
-              <Stick>
+              <MobileStick>
                 <Text
                   color={theme.typoGrey2}
                   size={theme.bodyThreeSize}
@@ -105,7 +105,7 @@ const Footer = () => {
                 >
                   |
                 </Text>
-              </Stick>
+              </MobileStick>
               <Text
                 color={theme.typoGrey2}
                 size={theme.bodyThreeSize}
@@ -115,7 +115,7 @@ const Footer = () => {
               >
                 Github. https://github.com/Vaccine-life
               </Text>
-            </TeamInfo>
+            </MobileTeamInfo>
           </Grid>
         </MobileWrapper>
       </>
@@ -281,6 +281,26 @@ const MobileWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1.2rem 0;
+`;
+
+const MobileTitleNav = styled.div`
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 0 1.8rem 0;
+  justify-content: space-evenly;
+`;
+
+const MobileTeamInfo = styled.ul`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  white-space: nowrap;
+`;
+
+const MobileStick = styled.div`
+  display: none;
 `;
 
 export default Footer;

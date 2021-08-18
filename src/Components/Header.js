@@ -14,7 +14,6 @@ import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobileOnly } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import NavModal from "./mobile/NavModal";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
