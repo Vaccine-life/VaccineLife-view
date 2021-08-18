@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
 import Intro from "../components/Intro";
+import Grid from "../elements/Grid";
 
 import Map from "../components/Map";
 import MainTo from "../components/MainTo";
@@ -27,7 +28,8 @@ const Main = () => {
 
   if (isMobileOnly) {
     return (
-      <>
+
+      <Grid margin="80px auto 40px auto">
         {navModal_status && <NavModal />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
@@ -38,7 +40,7 @@ const Main = () => {
           <MainTo />
           <MainPopular />
         </div>
-      </>
+      </Grid>
     );
   }
 

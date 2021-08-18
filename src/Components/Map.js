@@ -655,8 +655,8 @@ const WrapperMobile = styled.div`
 const MapTitleMobile = styled.div`
   display: flex;
   flex-direction: row;
-  /* width: 130px; */
   width: max-content;
+  width: 100%;
   height: 26px;
   margin: 40px auto 10px 16px;
 
@@ -683,12 +683,11 @@ const MapTitleMobile = styled.div`
 
 const MapBoxWrapperMobile = styled.div`
   width: 100%;
-  padding: 0px 16px;
 `;
 
 const MapBoxMobile = styled.div`
   position: relative;
-  width: 382px;
+  margin: 0px 16px;
   height: 472px;
   background: ${theme.bg4};
   border: 1px solid ${theme.bg3};
@@ -698,11 +697,13 @@ const MapBoxMobile = styled.div`
   & > img {
     width: auto;
     height: auto;
-    max-width: 370px;
-    max-height: 370px;
+    max-width: 100%;
+    max-height: 100%;
     padding-top: 50px;
   }
 `;
+
+
 
 const ShotMobile = styled.div`
   padding: 0px 3px;
@@ -711,7 +712,7 @@ const ShotMobile = styled.div`
   background: ${theme.bg};
   border-radius: 9px;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 24px;
   color: #ffffff;
   margin: auto;

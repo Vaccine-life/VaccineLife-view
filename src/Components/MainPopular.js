@@ -222,14 +222,12 @@ const PopularCards = styled.div`
 
 // <========= Mobile ===========>
 
-
 const MainPopularWrapperMobile = styled.div`
 width:100%;
 `;
 
 const GreyBoxMobile = styled.div`
   background-color: ${theme.typoLightGrey1};
-  width: 100%;
   height: 640px;
   margin-top: 48px;
   padding-top: 32px;
@@ -242,7 +240,7 @@ const PopularTitleMobile = styled.div`
   justify-content: space-between;
 
   & > h1 {
-    width: 160px;
+    width: max-content;
     height: 34px;
     font-weight: bold;
     font-size: ${theme.SubHeadOneSize};
