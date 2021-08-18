@@ -52,6 +52,11 @@ const like = createSlice({
     actionPlusLikeInLikeListMedi: (state, action) => {
       state.likeListMedi.push(action.payload);
     },
+    actionResetLike: (state, action) => {
+      state.likeListMedi = [];
+      state.likeListQuar = [];
+      state.likeListVac = [];
+    },
   },
 });
 
@@ -205,6 +210,7 @@ export const {
   actionPlusLikeInLikeListVac,
   actionPlusLikeInLikeListQuar,
   actionPlusLikeInLikeListMedi,
+  actionResetLike,
 } = like.actions;
 
 export default like;
