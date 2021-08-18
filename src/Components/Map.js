@@ -71,130 +71,131 @@ const Map = () => {
           <img src={disc} alt="" />
           <h3>지역별 접종수</h3>
         </MapTitleMobile>
+        <MapBoxWrapperMobile>
+          <MapBoxMobile>
+            <img src={SouthKorea} alt="" />
 
-        <MapBoxMobile>
-          <img src={SouthKorea} alt="" />
+            <GyeonggiMobile>
+              <h3>경기</h3>
+              <ShotMobile>
+                {GyeonggiShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </GyeonggiMobile>
 
-          <GyeonggiMobile>
-            <h3>경기</h3>
-            <ShotMobile>
-              {GyeonggiShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </GyeonggiMobile>
+            <GangwonMobile>
+              <h3>강원</h3>
+              <ShotMobile>
+                {GangwonShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </GangwonMobile>
 
-          <GangwonMobile>
-            <h3>강원</h3>
-            <ShotMobile>
-              {GangwonShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </GangwonMobile>
+            <SeoulMobile>
+              <h3>서울</h3>
+              <ShotMobile>
+                {SeoulShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </SeoulMobile>
 
-          <SeoulMobile>
-            <h3>서울</h3>
-            <ShotMobile>
-              {SeoulShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </SeoulMobile>
+            <IncheonMobile>
+              <h3>인천</h3>
+              <ShotMobile>
+                {IncheonShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </IncheonMobile>
 
-          <IncheonMobile>
-            <h3>인천</h3>
-            <ShotMobile>
-              {IncheonShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </IncheonMobile>
+            <SejongMobile>
+              <h3>세종</h3>
+              <ShotMobile>
+                {SejongShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </SejongMobile>
 
-          <SejongMobile>
-            <h3>세종</h3>
-            <ShotMobile>
-              {SejongShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </SejongMobile>
+            <ChoongNamMobile>
+              <h3>충남</h3>
+              <ShotMobile>
+                {ChoongNamShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </ChoongNamMobile>
 
-          <ChoongNamMobile>
-            <h3>충남</h3>
-            <ShotMobile>
-              {ChoongNamShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </ChoongNamMobile>
+            <ChoongBookMobile>
+              <h3>충북</h3>
+              <ShotMobile>
+                {ChoongBookShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </ChoongBookMobile>
 
-          <ChoongBookMobile>
-            <h3>충북</h3>
-            <ShotMobile>
-              {ChoongBookShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </ChoongBookMobile>
+            <GyeongBookMobile>
+              <h3>경북</h3>
+              <ShotMobile>
+                {GyeongBookShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </GyeongBookMobile>
 
-          <GyeongBookMobile>
-            <h3>경북</h3>
-            <ShotMobile>
-              {GyeongBookShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </GyeongBookMobile>
+            <DaejeonMobile>
+              <h3>대전</h3>
+              <ShotMobile>
+                {DaejeonShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </DaejeonMobile>
 
-          <DaejeonMobile>
-            <h3>대전</h3>
-            <ShotMobile>
-              {DaejeonShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </DaejeonMobile>
+            <JeonBookMobile>
+              <h3>전북</h3>
+              <ShotMobile>
+                {JeonBookShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </JeonBookMobile>
 
-          <JeonBookMobile>
-            <h3>전북</h3>
-            <ShotMobile>
-              {JeonBookShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </JeonBookMobile>
+            <GwangjuMobile>
+              <h3>광주</h3>
+              <ShotMobile>
+                {GwangjuShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </GwangjuMobile>
 
-          <GwangjuMobile>
-            <h3>광주</h3>
-            <ShotMobile>
-              {GwangjuShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </GwangjuMobile>
+            <JeonNamMobile>
+              <h3>전남</h3>
+              <ShotMobile>
+                {JeonNamShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </JeonNamMobile>
 
-          <JeonNamMobile>
-            <h3>전남</h3>
-            <ShotMobile>
-              {JeonNamShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </JeonNamMobile>
+            <JejuMobile>
+              <h3>제주</h3>
+              <ShotMobile>
+                {JejuShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </JejuMobile>
 
-          <JejuMobile>
-            <h3>제주</h3>
-            <ShotMobile>
-              {JejuShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </JejuMobile>
+            <GyeongNamMobile>
+              <h3>경남</h3>
+              <ShotMobile>
+                {GyeongNamShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </GyeongNamMobile>
 
-          <GyeongNamMobile>
-            <h3>경남</h3>
-            <ShotMobile>
-              {GyeongNamShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </GyeongNamMobile>
+            <DaeguMobile>
+              <h3>대구</h3>
+              <ShotMobile>
+                {DaeguShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </DaeguMobile>
 
-          <DaeguMobile>
-            <h3>대구</h3>
-            <ShotMobile>
-              {DaeguShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </DaeguMobile>
+            <WoolsanMobile>
+              <h3>울산</h3>
+              <ShotMobile>
+                {WoolsanShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </WoolsanMobile>
 
-          <WoolsanMobile>
-            <h3>울산</h3>
-            <ShotMobile>
-              {WoolsanShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </WoolsanMobile>
+            <BusanMobile>
+              <h3>부산</h3>
+              <ShotMobile>
+                {BusanShot.toLocaleString('ko-KR')}
+              </ShotMobile>
+            </BusanMobile>
 
-          <BusanMobile>
-            <h3>부산</h3>
-            <ShotMobile>
-              {BusanShot.toLocaleString('ko-KR')}
-            </ShotMobile>
-          </BusanMobile>
-
-        </MapBoxMobile>
+          </MapBoxMobile>
+        </MapBoxWrapperMobile>
       </WrapperMobile>
     )
   }
@@ -724,7 +725,8 @@ margin: "auto";
 const MapTitleMobile = styled.div`
 display: flex;
 flex-direction: row;
-width: 130px;
+/* width: 130px; */
+width: max-content;
 height: 26px;
 margin: 40px auto 10px 16px;
 
@@ -734,7 +736,8 @@ height: 24px;
 }
 
 & > h3 {
-width: 102px;
+/* width: 102px; */
+width: max-content;
 height: 26px;
 font-weight: bold;
 font-size: ${theme.SubHeadOneSize};
@@ -748,6 +751,11 @@ padding-left: 4px;
 }
 `;
 
+const MapBoxWrapperMobile = styled.div`
+width: 100%;
+padding: 0px 16px;
+`;
+
 const MapBoxMobile = styled.div`
 position: relative;
 width: 382px;
@@ -756,7 +764,6 @@ background: ${theme.bg4};
 border: 1px solid ${theme.bg3};
 box-sizing: border-box;
 border-radius: 16px;
-margin-left: 16px;
 
 & > img {
 width: auto;

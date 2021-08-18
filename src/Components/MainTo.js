@@ -9,13 +9,14 @@ const MainTo = (props) => {
 
     if (isMobileOnly) {
         return (
-            <>
+
+            <WrapperMobile>
                 <ToVacBoardMobile
                     onClick={() => {
                         history.push("/vaccine");
                     }}
                 >
-                    <h3>백신 접종 후기 보러가기</h3>
+                    <h3>백신 접종 후기<br /> 보러가기</h3>
                     <hr />
                     <img src={ToVacImage} alt="" />
                 </ToVacBoardMobile>
@@ -25,7 +26,7 @@ const MainTo = (props) => {
                             history.push("/quarantine");
                         }}
                     >
-                        <h3>자가격리 후기 보러가기</h3>
+                        <h3>자가격리 후기<br /> 보러가기</h3>
                         <hr />
                     </ToQuarBoardMobile>
 
@@ -34,11 +35,12 @@ const MainTo = (props) => {
                             history.push("/medical");
                         }}
                     >
-                        <h3>의료진 분들께 감사인사 전하기</h3>
+                        <h3>의료진 분들께<br /> 감사인사 전하기</h3>
                         <hr />
                     </ToMedicalBoardMobile>
                 </CardDownSideMobile>
-            </>
+            </WrapperMobile>
+
         );
     }
 
@@ -265,6 +267,10 @@ color: #FFFFFF;
 `;
 
 //<========= Mobile ===========>
+const WrapperMobile = styled.div`
+width: 100%;
+padding: 0px 16px;
+`;
 
 const ToVacBoardMobile = styled.div`
 position: relative;
@@ -273,10 +279,11 @@ height: 120px;
 background: ${theme.bg2};
 border-radius: 16px;
 padding: 16px 0px 0px 16px;
-margin: 40px 16px 8px 16px;
+margin: 40px 16px 8px 0px;
 
 & > h3 {
-width: 100px;
+/* width: 100px; */
+width: max-content;
 height: 50px;
 font-weight: bold;
 font-size: ${theme.SubHeadTwoSize};
@@ -296,7 +303,6 @@ width: auto;
 height: auto;
 max-width: 150px;
 max-height: 150px;
-
 position: absolute;
 right: 10px;
 top: 29px;
@@ -305,7 +311,6 @@ top: 29px;
 
 const CardDownSideMobile = styled.div`
 display: flex;
-margin-left: 16px;
 width: 382px;
 `;
 
@@ -316,11 +321,11 @@ height: 120px;
 background: ${theme.bg2};
 border-radius: 16px;
 padding: 16px 0px 0px 16px;
-/* margin-left: 16px; */
 margin-right: 8px;
 
 & > h3 {
-width: 100px;
+/* width: 100px; */
+width: max-content;
 height: 50px;
 font-weight: bold;
 font-size: ${theme.SubHeadTwoSize};
@@ -356,7 +361,8 @@ border-radius: 16px;
 padding: 16px 0px 0px 16px;
 
 & > h3 {
-width: 105px;
+/* width: 105px; */
+width: max-content;
 height: 50px;
 font-weight: bold;
 font-size: ${theme.SubHeadTwoSize};
