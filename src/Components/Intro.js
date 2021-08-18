@@ -7,12 +7,14 @@ import { isMobileOnly } from "react-device-detect";
 const Intro = () => {
   if (isMobileOnly) {
     return (
-      <MainIntroMobile>
-        <img src={IntroCharacter} alt="" />
-        <h1>
-          여러분의 <span>백신 접종 후기</span>를 공유해주세요!
-        </h1>
-      </MainIntroMobile>
+      <MainIntroWrapperMobile>
+        <MainIntroMobile>
+          <img src={IntroCharacter} alt="" />
+          <h1>
+            여러분의 <span>백신 접종 후기</span>를 <br /> 공유해주세요!
+          </h1>
+        </MainIntroMobile>
+      </MainIntroWrapperMobile>
     );
   }
   return (
@@ -57,36 +59,36 @@ const MainIntro = styled.div`
   }
 `;
 
+
+// <========= Mobile ===========>
+
+const MainIntroWrapperMobile = styled.div`
+/* width: 100%; */
+`;
+
 const MainIntroMobile = styled.div`
-  position: relative;
   margin-top: 80px;
-  width: 414px;
+  padding: 0px 50px;
   height: 140px;
   background-color: ${theme.bg};
-
   display: flex;
-  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 
   & > img {
-    position: absolute;
     width: auto;
     height: auto;
-    max-width: 250px;
-    max-height: 250px;
-
-    padding-left: 40px;
+    max-width: 85%;
+    max-height: 85%;
+    margin-top: auto;
   }
 
   & > h1 {
-    position: absolute;
-    right: 50px;
-    width: 180px;
+    white-space: nowrap;
+    width: max-content;
     text-align: right;
-
     font-size: ${theme.SubHeadTwoSize};
     line-height: 25px;
-
     color: #ffffff;
 
     & > span {

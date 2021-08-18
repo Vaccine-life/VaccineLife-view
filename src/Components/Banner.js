@@ -4,10 +4,11 @@ import theme from "../styles/theme";
 import { history } from "../redux/configStore";
 
 import { Text, Image } from "../elements";
-import syringe from "../images/syringe.png"
-import news from "../images/news.png"
-import phone from "../images/phone.png"
+import syringe from "../images/syringe.png";
+import news from "../images/news.png";
+import phone from "../images/phone.png";
 import { withRouter } from "react-router-dom";
+import { isMobileOnly } from "react-device-detect";
 
 const Banner = (props) => {
   const syringeAddress = "https://www.mfds.go.kr/vaccine_covid19.jsp";
@@ -20,8 +21,7 @@ const Banner = (props) => {
   if (url === "/") {
     return (
       <FixedBanner>
-        <Common style={{backgroundColor: "white"}}>
-        
+        <Common style={{ backgroundColor: "white" }}>
           <EachDiv
             onClick={() => {
               window.open(syringeAddress);
@@ -40,7 +40,9 @@ const Banner = (props) => {
           </EachDiv>
 
           <Stick>
-            <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
+            <Text color={theme.typoGrey1} size="20px" margin="5px">
+              |
+            </Text>
           </Stick>
 
           <EachDiv
@@ -56,7 +58,9 @@ const Banner = (props) => {
           </EachDiv>
 
           <Stick>
-            <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
+            <Text color={theme.typoGrey1} size="20px" margin="5px">
+              |
+            </Text>
           </Stick>
 
           <EachDiv
@@ -70,57 +74,64 @@ const Banner = (props) => {
               전자예방접종증명
             </Text>
           </EachDiv>
-
         </Common>
       </FixedBanner>
     );
   }
   return (
     <FixedBanner>
-      <Common style={{backgroundColor:`${theme.typoLightGrey1}`}}>
-
-        <EachDiv onClick={() => {window.open(syringeAddress)}}>
-          <Image shape="square" size="80px" margin="20px 0 0 0" src={syringe}/>
-          <Text 
-            size={theme.bodyTwoSize} 
-            color={theme.typoBlack} 
-            margin="20px">
-              <span style={{color: theme.bg2}}>코로나19</span> 백신·치료제 정보
+      <Common style={{ backgroundColor: `${theme.typoLightGrey1}` }}>
+        <EachDiv
+          onClick={() => {
+            window.open(syringeAddress);
+          }}
+        >
+          <Image shape="square" size="80px" margin="20px 0 0 0" src={syringe} />
+          <Text size={theme.bodyTwoSize} color={theme.typoBlack} margin="20px">
+            <span style={{ color: theme.bg2 }}>코로나19</span> 백신·치료제 정보
           </Text>
         </EachDiv>
 
         <Stick>
-          <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
+          <Text color={theme.typoGrey1} size="20px" margin="5px">
+            |
+          </Text>
         </Stick>
 
-        <EachDiv onClick={() => {window.open(newsAddress)}}>
-          <Image shape="square" size="80px" margin="20px 0 0 0" src={news}/>
-          <Text 
-            size={theme.bodyTwoSize} 
-            color={theme.typoBlack} 
-            margin="20px">
-              <span style={{color: theme.bg2}}>코로나19</span> 관련 안전성서한(속보)
+        <EachDiv
+          onClick={() => {
+            window.open(newsAddress);
+          }}
+        >
+          <Image shape="square" size="80px" margin="20px 0 0 0" src={news} />
+          <Text size={theme.bodyTwoSize} color={theme.typoBlack} margin="20px">
+            <span style={{ color: theme.bg2 }}>코로나19</span> 관련
+            안전성서한(속보)
           </Text>
         </EachDiv>
 
         <Stick>
-          <Text color={theme.typoGrey1} size="20px" margin="5px">|</Text>
+          <Text color={theme.typoGrey1} size="20px" margin="5px">
+            |
+          </Text>
         </Stick>
 
-        <EachDiv onClick={() => {window.open(phoneAddress)}}>
-          <Image shape="square" size="80px" margin="20px 0 0 0" src={phone}/>
-          <Text 
-            size={theme.bodyTwoSize} 
-            color={theme.typoBlack} 
-            margin="20px">
-              <span style={{color: theme.bg2}}>코로나19</span> 전자예방접종증명
+        <EachDiv
+          onClick={() => {
+            window.open(phoneAddress);
+          }}
+        >
+          <Image shape="square" size="80px" margin="20px 0 0 0" src={phone} />
+          <Text size={theme.bodyTwoSize} color={theme.typoBlack} margin="20px">
+            <span style={{ color: theme.bg2 }}>코로나19</span> 전자예방접종증명
           </Text>
         </EachDiv>
-
       </Common>
     </FixedBanner>
   );
 };
+
+
 
 const FixedBanner = styled.div`
   margin-top: auto;
@@ -130,7 +141,7 @@ const FixedBanner = styled.div`
 const EachDiv = styled.div`
   white-space: nowrap;
   cursor: pointer;
-  width: auto;
+  /* width: auto; */
   height: 100%;
   display: flex;
   justify-content: center;
@@ -151,7 +162,7 @@ const Common = styled.div`
     padding: 1rem;
     margin: auto;
   }
-`
+`;
 
 const Stick = styled.div`
   @media (max-width: 960px) {

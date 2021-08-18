@@ -1,10 +1,12 @@
 import React from "react";
+import theme from "../styles/theme";
 import { useSelector } from "react-redux";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import Login from "./Login";
 import Alert from "../components/popup/Alert";
 import Intro from "../components/Intro";
+import Grid from "../elements/Grid";
 
 import Map from "../components/Map";
 import MainTo from "../components/MainTo";
@@ -30,11 +32,13 @@ const Main = () => {
         {navModal_status && <NavModal />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
-        <Intro />
-        <Map />
-        <MainNivoBar />
-        <MainTo />
-        <MainPopular />
+        <div style={{ margin: `${theme.headerHeight} auto 0 auto`, width: "100%" }}>
+          <Intro />
+          <Map />
+          <MainNivoBar />
+          <MainTo />
+          <MainPopular />
+        </div>
       </>
     );
   }
