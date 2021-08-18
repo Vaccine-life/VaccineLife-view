@@ -28,18 +28,20 @@ const Main = () => {
 
   if (isMobileOnly) {
     return (
-      <Grid margin="80px auto 40px auto">
+      <>
         {navModal_status && <NavModal />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
-        <div style={{ margin: `${theme.headerHeight} auto 0 auto` }}>
+        <div
+          style={{ margin: `${theme.headerHeight} auto 0 auto`, width: "100%" }}
+        >
           <Intro />
           <Map />
           <MainNivoBar />
           <MainTo />
           <MainPopular />
         </div>
-      </Grid>
+      </>
     );
   }
 
