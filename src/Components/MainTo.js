@@ -14,18 +14,23 @@ const MainTo = (props) => {
             history.push("/vaccine");
           }}
         >
-          <h3>백신 접종 후기 보러가기</h3>
+          <h3>
+            백신 접종 후기
+            <br /> 보러가기
+          </h3>
           <hr />
           <img src={ToVacImage} alt="" />
         </ToVacBoardMobile>
-
         <CardDownSideMobile>
           <ToQuarBoardMobile
             onClick={() => {
               history.push("/quarantine");
             }}
           >
-            <h3>자가격리 후기 보러가기</h3>
+            <h3>
+              자가격리 후기
+              <br /> 보러가기
+            </h3>
             <hr />
           </ToQuarBoardMobile>
 
@@ -34,7 +39,10 @@ const MainTo = (props) => {
               history.push("/medical");
             }}
           >
-            <h3>의료진 분들께 감사인사 전하기</h3>
+            <h3>
+              의료진 분들께
+              <br /> 감사인사 전하기
+            </h3>
             <hr />
           </ToMedicalBoardMobile>
         </CardDownSideMobile>
@@ -96,64 +104,48 @@ const Wrapper = styled.div`
 const ToVacBoard = styled.div`
   width: 450px;
   height: 450px;
-
   position: relative;
-
   background: ${theme.bg2};
   border-radius: 16px;
-
   padding-left: 50px;
   margin-right: 50px;
-
   cursor: pointer;
   box-shadow: 10px 10px 10px -5px ${theme.typoLightGrey2};
-
   &:hover {
     background-color: ${theme.bg};
     transition-duration: 0.1s;
   }
-
   & > h3 {
     width: 142px;
     height: 68px;
-
     padding-top: 50px;
-
     font-weight: bold;
     font-size: ${theme.headOneSize};
     line-height: 34px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
-
   & > hr {
     width: 160px;
     margin-left: 0px;
   }
-
   & > h6 {
     width: 300px;
     height: 48px;
-
     padding-top: 10px;
-
     font-weight: normal;
     font-size: ${theme.bodyTwoSize};
     line-height: 24px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
-
   & > img {
     width: auto;
     height: auto;
     max-width: 283px;
     max-height: 283px;
-
     position: absolute;
     right: 10px;
     top: 249px;
@@ -168,52 +160,39 @@ const CardRightSide = styled.div`
 const ToQuarBoard = styled.div`
   width: 450px;
   height: 215px;
-
   background: ${theme.bg2};
   border-radius: 16px;
-
   padding-left: 50px;
-
   cursor: pointer;
   box-shadow: 10px 10px 10px -5px ${theme.typoLightGrey2};
-
   &:hover {
     background-color: ${theme.bg};
     transition-duration: 0.1s;
   }
-
   & > h3 {
     width: 142px;
     height: 68px;
-
     padding-top: 45px;
-
     font-weight: bold;
     font-size: ${theme.headOneSize};
     line-height: 34px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
-
   & > hr {
     width: 160px;
     margin-left: 0px;
   }
-
   & > h6 {
     width: 280px;
     height: 48px;
-
     padding-top: 10px;
-
     font-weight: normal;
     font-size: ${theme.bodyTwoSize};
     line-height: 24px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
 `;
@@ -221,74 +200,61 @@ const ToQuarBoard = styled.div`
 const ToMedicalBoard = styled.div`
   width: 450px;
   height: 215px;
-
   background: ${theme.bg};
   border-radius: 16px;
-
   padding-left: 50px;
   margin-top: 20px;
-
   cursor: pointer;
   box-shadow: 10px 10px 10px -5px ${theme.typoLightGrey2};
-
   &:hover {
     background-color: ${theme.bg2};
     transition-duration: 0.1s;
   }
-
   & > h3 {
     width: 158px;
     height: 68px;
-
     padding-top: 45px;
-
     font-weight: bold;
     font-size: ${theme.headOneSize};
     line-height: 34px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
-
   & > hr {
     width: 160px;
     margin-left: 0px;
   }
-
   & > h6 {
     width: 300px;
     height: 48px;
-
     padding-top: 10px;
-
     font-weight: normal;
     font-size: ${theme.bodyTwoSize};
     line-height: 24px;
     letter-spacing: -0.3px;
     text-align: left;
-
     color: #ffffff;
   }
 `;
 
 //<========= Mobile ===========>
-
 const WrapperMobile = styled.div`
   width: 100%;
+  padding: 0px 16px;
 `;
 
 const ToVacBoardMobile = styled.div`
   position: relative;
-  width: 90%;
+  width: 366px;
   height: 120px;
   background: ${theme.bg2};
   border-radius: 16px;
-  padding: 5px 0px 0px 5px;
-  margin: 40px auto 8px auto;
-
+  padding: 16px 0px 0px 16px;
+  margin: 40px 16px 8px 0px;
   & > h3 {
-    width: 100px;
+    /* width: 100px; */
+    width: max-content;
     height: 50px;
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
@@ -297,18 +263,15 @@ const ToVacBoardMobile = styled.div`
     text-align: left;
     color: #ffffff;
   }
-
   & > hr {
     width: 24px;
     margin-left: 0px;
   }
-
   & > img {
     width: auto;
     height: auto;
     max-width: 150px;
     max-height: 150px;
-
     position: absolute;
     right: 10px;
     top: 29px;
@@ -316,25 +279,21 @@ const ToVacBoardMobile = styled.div`
 `;
 
 const CardDownSideMobile = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
+  display: flex;
+  width: 382px;
 `;
 
 const ToQuarBoardMobile = styled.div`
   position: relative;
-  /* width: 187px; */
+  width: 187px;
   height: 120px;
   background: ${theme.bg2};
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
-  /* margin-left: 16px; */
   margin-right: 8px;
-
   & > h3 {
-    width: 100px;
+    /* width: 100px; */
+    width: max-content;
     height: 50px;
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
@@ -343,18 +302,15 @@ const ToQuarBoardMobile = styled.div`
     text-align: left;
     color: #ffffff;
   }
-
   & > hr {
     width: 24px;
     margin-left: 0px;
   }
-
   & > img {
     width: auto;
     height: auto;
     max-width: 150px;
     max-height: 150px;
-
     position: absolute;
     right: 10px;
     top: 29px;
@@ -363,14 +319,14 @@ const ToQuarBoardMobile = styled.div`
 
 const ToMedicalBoardMobile = styled.div`
   position: relative;
-  /* width: 187px; */
+  width: 187px;
   height: 120px;
   background: ${theme.bg};
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
-
   & > h3 {
-    width: 105px;
+    /* width: 105px; */
+    width: max-content;
     height: 50px;
     font-weight: bold;
     font-size: ${theme.SubHeadTwoSize};
@@ -379,18 +335,15 @@ const ToMedicalBoardMobile = styled.div`
     text-align: left;
     color: #ffffff;
   }
-
   & > hr {
     width: 24px;
     margin-left: 0px;
   }
-
   & > img {
     width: auto;
     height: auto;
     max-width: 150px;
     max-height: 150px;
-
     position: absolute;
     right: 10px;
     top: 29px;
