@@ -217,11 +217,12 @@ const TitleWrapper = styled.div`
 `;
 
 const TitleWrapperM = styled.div`
-  width: 100%;
+  width: 300px;
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
   font-weight: 700;
-
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   text-align: start;
   margin-bottom: 8px;

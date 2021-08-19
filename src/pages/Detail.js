@@ -74,14 +74,16 @@ const Detail = () => {
           createdAt={board_content.createdAt}
           likeCount={board_content.likeCount}
         />
-        <UserInfo
-          type={board_content.type}
-          gender={board_content.gender}
-          age={board_content.age}
-          disease={board_content.disease}
-          degree={board_content.degree}
-          afterEffect={board_content.afterEffect}
-        />
+        {board_content.type !== "공지" && (
+          <UserInfo
+            type={board_content.type}
+            gender={board_content.gender}
+            age={board_content.age}
+            disease={board_content.disease}
+            degree={board_content.degree}
+            afterEffect={board_content.afterEffect}
+          />
+        )}
         <Contents
           board="vaccine"
           boardId={board_content.boardId}
@@ -147,14 +149,16 @@ const Detail = () => {
         createdAt={board_content.createdAt}
         likeCount={board_content.likeCount}
       />
-      <UserInfo
-        type={board_content.type}
-        gender={board_content.gender}
-        age={board_content.age}
-        disease={board_content.disease}
-        degree={board_content.degree}
-        afterEffect={board_content.afterEffect}
-      />
+      {board_content.type !== "공지" && (
+        <UserInfo
+          type={board_content.type}
+          gender={board_content.gender}
+          age={board_content.age}
+          disease={board_content.disease}
+          degree={board_content.degree}
+          afterEffect={board_content.afterEffect}
+        />
+      )}
       <Contents
         board="vaccine"
         boardId={board_content.boardId}
