@@ -24,6 +24,7 @@ import styled from "styled-components";
 import { history } from "../redux/configStore";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
+import NavModal from "../components/mobile/NavModal";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -32,6 +33,7 @@ const QuarantineDetail = () => {
 
   // 격리후기때는 MoveBox에 false 기입
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   //confirm 창
   const confirm_status = useSelector((state) => state.popup.confirm);
   //alert 창
@@ -122,6 +124,7 @@ const QuarantineDetail = () => {
         {modal_status && <Login />}
         {alert_status && <Alert />}
         {isLoading && <Spinner />}
+        {navModal_status && <NavModal />}
       </Grid>
     );
   }
@@ -188,6 +191,7 @@ const QuarantineDetail = () => {
       {modal_status && <Login />}
       {alert_status && <Alert />}
       {isLoading && <Spinner />}
+      {navModal_status && <NavModal />}
     </Grid>
   );
 };

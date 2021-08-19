@@ -17,6 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
+import NavModal from "../components/mobile/NavModal";
 
 const data = {
   vacBoardId: 0,
@@ -53,6 +54,7 @@ const Modify = () => {
   // 리덕스에서 정보 가져오기
   const board_store = useSelector((state) => state.board.board);
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   // 타이틀 인풋값
   const [title, setTitle] = useState(board_store.title);
   const editor = useRef();
@@ -142,6 +144,7 @@ const Modify = () => {
           </Button>
         </ButtonDiv>
         {modal_status && <Login />}
+        {navModal_status && <NavModal />}
       </Grid>
     );
   }
@@ -195,6 +198,7 @@ const Modify = () => {
         </Button>
       </ButtonDiv>
       {modal_status && <Login />}
+      {navModal_status && <NavModal />}
     </Grid>
   );
 };
