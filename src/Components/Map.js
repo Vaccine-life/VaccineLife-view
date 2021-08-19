@@ -68,10 +68,11 @@ const Map = () => {
   if (isMobileOnly) {
     return (
       <WrapperMobile>
-
         <MapTitleMobile>
           <img src={disc} alt="" />
-          <h3>지역별 접종수<span> (만 명)</span></h3>
+          <h3>
+            지역별 접종수<span> (만 명)</span>
+          </h3>
           {/* <h6>단위: 만</h6> */}
         </MapTitleMobile>
 
@@ -81,87 +82,121 @@ const Map = () => {
 
             <GyeonggiMobile>
               <h3>경기</h3>
-              <ShotMobile>{Math.floor(GyeonggiShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(GyeonggiShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </GyeonggiMobile>
 
             <GangwonMobile>
               <h3>강원</h3>
-              <ShotMobile>{Math.floor(GangwonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(GangwonShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </GangwonMobile>
 
             <SeoulMobile>
               <h3>서울</h3>
-              <ShotMobile>{Math.floor(SeoulShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(SeoulShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </SeoulMobile>
 
             <IncheonMobile>
               <h3>인천</h3>
-              <ShotMobile>{Math.floor(IncheonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(IncheonShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </IncheonMobile>
 
             <SejongMobile>
               <h3>세종</h3>
-              <ShotMobile>{Math.floor(SejongShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(SejongShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </SejongMobile>
 
             <ChoongNamMobile>
               <h3>충남</h3>
-              <ShotMobile>{Math.floor(ChoongNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(ChoongNamShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </ChoongNamMobile>
 
             <ChoongBookMobile>
               <h3>충북</h3>
-              <ShotMobile>{Math.floor(ChoongBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(ChoongBookShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </ChoongBookMobile>
 
             <GyeongBookMobile>
               <h3>경북</h3>
-              <ShotMobile>{Math.floor(GyeongBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(GyeongBookShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </GyeongBookMobile>
 
             <DaejeonMobile>
               <h3>대전</h3>
-              <ShotMobile>{Math.floor(DaejeonShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(DaejeonShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </DaejeonMobile>
 
             <JeonBookMobile>
               <h3>전북</h3>
-              <ShotMobile>{Math.floor(JeonBookShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(JeonBookShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </JeonBookMobile>
 
             <GwangjuMobile>
               <h3>광주</h3>
-              <ShotMobile>{Math.floor(GwangjuShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(GwangjuShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </GwangjuMobile>
 
             <JeonNamMobile>
               <h3>전남</h3>
-              <ShotMobile>{Math.floor(JeonNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(JeonNamShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </JeonNamMobile>
 
             <JejuMobile>
               <h3>제주</h3>
-              <ShotMobile>{Math.floor(JejuShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(JejuShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </JejuMobile>
 
             <GyeongNamMobile>
               <h3>경남</h3>
-              <ShotMobile>{Math.floor(GyeongNamShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(GyeongNamShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </GyeongNamMobile>
 
             <DaeguMobile>
               <h3>대구</h3>
-              <ShotMobile>{Math.floor(DaeguShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(DaeguShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </DaeguMobile>
 
             <WoolsanMobile>
               <h3>울산</h3>
-              <ShotMobile>{Math.floor(WoolsanShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(WoolsanShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </WoolsanMobile>
 
             <BusanMobile>
               <h3>부산</h3>
-              <ShotMobile>{Math.floor(BusanShot / 10000).toLocaleString("ko-KR")}</ShotMobile>
+              <ShotMobile>
+                {Math.floor(BusanShot / 10000).toLocaleString("ko-KR")}
+              </ShotMobile>
             </BusanMobile>
           </MapBoxMobile>
         </MapBoxWrapperMobile>
@@ -665,10 +700,10 @@ const MapTitleMobile = styled.div`
     order: 1;
     flex-grow: 0;
     padding-left: 4px;
-  
+
     & > span {
       font-size: 1px;
-      font-weight:lighter;
+      font-weight: lighter;
     }
   }
 `;
@@ -686,11 +721,7 @@ const MapBoxMobile = styled.div`
   border: 1px solid ${theme.bg3};
   box-sizing: border-box;
   border-radius: 16px;
-<<<<<<< HEAD
-=======
   margin: auto;
-
->>>>>>> 0cb4d99698d9e8754b238fab4ed2207d6e24edab
   & > img {
     width: auto;
     height: auto;
