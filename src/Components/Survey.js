@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { Text } from "../elements/index";
+import styled from "styled-components";
 import theme from "../styles/theme";
 import survey from "../styles/survey.css";
 import { isMobileOnly } from "react-device-detect";
