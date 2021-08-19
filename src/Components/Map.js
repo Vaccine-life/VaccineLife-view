@@ -702,7 +702,7 @@ const MapTitleMobile = styled.div`
     padding-left: 4px;
 
     & > span {
-      font-size: 1px;
+      font-size: 10px;
       font-weight: lighter;
     }
   }
