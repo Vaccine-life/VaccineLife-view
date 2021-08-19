@@ -20,22 +20,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 61857,
+                    vaccine: 62857,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1129771,
+                    vaccine: 1129783,
                     vaccineColor: "hsl(169, 70%, 50%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 4627403,
+                    vaccine: 5293011,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "AZ",
-                    vaccine: 2075320,
+                    vaccine: 4326676,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -121,7 +121,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
+            <h3>연령대별 백신 접종률<span> (추후 서비스 제공)</span></h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -342,7 +342,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>연령대별 백신 접종률<span> (추후 반영 예정)</span></h3>
+          <h3>연령대별 백신 접종률<span> (추후 서비스 제공)</span></h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
