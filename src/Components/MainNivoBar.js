@@ -20,22 +20,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 61857,
+                    vaccine: 62857,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1129771,
+                    vaccine: 1129783,
                     vaccineColor: "hsl(169, 70%, 50%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 4627403,
+                    vaccine: 5293011,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "AZ",
-                    vaccine: 2075320,
+                    vaccine: 4326676,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
