@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
 import { isMobileOnly } from "react-device-detect";
-import { actionSetLikeMedi, actionGetLikeMedi } from "../redux/modules/like";
 
 const CommentList = (props) => {
   // console.log(props);
