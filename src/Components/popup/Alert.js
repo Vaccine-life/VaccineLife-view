@@ -72,7 +72,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 4;
   background-color: ${theme.shadow};
   /* ${(prop) =>
     prop.isMobile
