@@ -15,7 +15,7 @@ const Alert = () => {
     dispatch(actionSetMessage(""));
   };
 
-  // 회원가입 인삿말을 줄바꿈해서 얼럿 띄우기위한 노력...
+  // 회원가입 인삿말을 줄바꿈&&닉네임 컬러 바꿔서 얼럿 띄우기위한 노력...
 
   const alertMsg = () => {
     if (alertMessage.indexOf("+") !== -1) {

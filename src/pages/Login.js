@@ -74,6 +74,13 @@ const Login = (props) => {
 
     // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다
     onSubmit: () => {
+      if (inputs.afterEffect.indexOf("없음") !== -1) {
+        setInputs({
+          ...inputs,
+          afterEffect: ["없음"],
+        });
+      }
+
       const user = { ...signupInputs, ...inputs };
       dispatch(actionSignup(user));
     },
