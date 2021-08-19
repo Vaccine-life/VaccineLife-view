@@ -68,7 +68,8 @@ const Login = (props) => {
         .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다"),
       nickname: Yup.string()
         .required("닉네임을 입력해주세요")
-        .max(6, "닉네임은 6자리 이하여야 합니다"),
+        .max(6, "닉네임은 6자리 이하여야 합니다")
+        .matches(/[^!]+/, "느낌표는 사용 불가능합니다"),
     }),
 
     // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다

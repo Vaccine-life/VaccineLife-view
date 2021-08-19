@@ -130,11 +130,7 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      dispatch(
-        actionSetMessage(
-          `반갑습니다 ${nickname}님! 회원가입 및 로그인 되었습니다`
-        )
-      );
+      dispatch(actionSetMessage(`${nickname}+회원가입 및 로그인 되었습니다`));
       dispatch(actionAlert());
       history.push("/");
     } catch (error) {
