@@ -18,7 +18,9 @@ const Alert = () => {
   // 회원가입 인삿말을 줄바꿈&&닉네임 컬러 바꿔서 얼럿 띄우기위한 노력...
 
   const alertMsg = () => {
-    if (alertMessage.indexOf("+") !== -1) {
+    // indexOf에 쓰이고, split할 때 쓰이는 +++++++는 절대 닉네임에 포함될 수 없는 문자열로 임의 설정한 것이다.
+
+    if (alertMessage.indexOf("+++++++") !== -1) {
       return (
         <>
           <Text
@@ -28,12 +30,12 @@ const Alert = () => {
           >
             반갑습니다,
             <span style={{ color: `${theme.SuccessGreen}` }}>
-              &nbsp;{alertMessage.split("+")[0]}
+              &nbsp;{alertMessage.split("+++++++")[0]}
             </span>
             님!
           </Text>
           <Text size="17px" lineHeight={theme.bodyThreeHeight}>
-            {alertMessage.split("+")[1]}
+            {alertMessage.split("+++++++")[1]}
           </Text>
         </>
       );
