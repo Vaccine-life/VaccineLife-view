@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { Text } from "../elements/index";
+import styled from "styled-components";
 import theme from "../styles/theme";
 import survey from "../styles/survey.css";
 import { isMobileOnly } from "react-device-detect";
@@ -74,12 +74,14 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
     }
 
     // 유저가 '없음'을 클릭한 경우, 나머지 선택지를 없애고 '없음'만 남긴다.
-    else if (value === "없음") {
-      setInputs({
-        ...inputs,
-        [name]: ["없음"],
-      });
-    } else {
+    // 주석처리한 이유: '발열 체크 - 없음 체크 - 없음 체크 취소 후 발열로 제출하고자 함'이라는 상황에서 이 else if문이 있으면 afterEffect가 빈 배열로 넘어가버린다..
+    // else if (value === "없음") {
+    //   setInputs({
+    //     ...inputs,
+    //     [name]: ["없음"],
+    //   });
+    // }
+    else {
       setInputs({
         ...inputs,
         [name]: [...afterEffect, value],

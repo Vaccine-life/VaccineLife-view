@@ -15,13 +15,46 @@ const Alert = () => {
     dispatch(actionSetMessage(""));
   };
 
+  // 회원가입 인삿말을 줄바꿈&&닉네임 컬러 바꿔서 얼럿 띄우기위한 노력...
+
+  const alertMsg = () => {
+    if (alertMessage.indexOf("+") !== -1) {
+      return (
+        <>
+          <Text
+            size={theme.bodyThreeSize}
+            lineHeight={theme.bodyThreeHeight}
+            margin="0 0 15px 0"
+          >
+            반갑습니다,
+            <span style={{ color: `${theme.SuccessGreen}` }}>
+              &nbsp;{alertMessage.split("+")[0]}
+            </span>
+            님!
+          </Text>
+          <Text size="17px" lineHeight={theme.bodyThreeHeight}>
+            {alertMessage.split("+")[1]}
+          </Text>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
+            {alertMessage}
+          </Text>
+        </>
+      );
+    }
+  };
+
   if (isMobileOnly) {
     return (
       <Wrapper isMobile={true}>
         <Modal isMobile={true}>
           <Grid is_flex="center">
             <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
-              {alertMessage}
+              {alertMsg()}
             </Text>
           </Grid>
           <Grid is_flex="center">
@@ -46,7 +79,7 @@ const Alert = () => {
       <Modal isMobile={false}>
         <Grid is_flex="center">
           <Text size={theme.bodyOneSize} lineHeight={theme.bodyOneHeight}>
-            {alertMessage}
+            {alertMsg()}
           </Text>
         </Grid>
         <Grid is_flex="center">
@@ -72,7 +105,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 4;
   background-color: ${theme.shadow};
   /* ${(prop) =>
     prop.isMobile

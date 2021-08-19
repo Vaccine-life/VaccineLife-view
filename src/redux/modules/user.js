@@ -130,17 +130,14 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
-      dispatch(
-        actionSetMessage(
-          `반갑습니다 ${nickname}님!
-          회원가입 및 로그인 되었습니다`
-        )
-      );
+      dispatch(actionSetMessage(`${nickname}+회원가입 및 로그인 되었습니다`));
       dispatch(actionAlert());
-      // history.push("/");
+      history.push("/");
     } catch (error) {
       logger(error);
-      dispatch(actionSetMessage(error.response.data.message));
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
       dispatch(actionAlert());
     }
   };

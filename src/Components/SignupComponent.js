@@ -47,7 +47,6 @@ const SignupComponent = ({
   // 'formik.errors.어쩌구'는 Login.js에서 설정한 유효성 검사를 모두 통과하면 undefined가 뜬다.
   // idDupOk와 nicknameDupOk는 중복된 것 없이 사용 가능하면 true가 뜬다.
   // 즉 첫 조건문은 모든 input이 유효성 검사를 통과했을 때 버튼을 enabled시키는 녀석이다.
-
   // signupInputs는 아무 값도 input칸에 입력되지 않았을 때 모든 value가 ""로 설정된다.
   // 즉 두번째 조건문은 아무 값도 아직 입력되지 않았을 때 버튼을 disabled시키는 녀석이다.
   const disableNextButton = () => {

@@ -23,7 +23,6 @@ const Main = () => {
   const alert_status = useSelector((state) => state.popup.alert);
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(modal_status);
   }, []);
 
   if (isMobileOnly) {
