@@ -90,7 +90,7 @@ const CommentWrite = (props) => {
                   fontSize: `${theme.SubHeadTwoSize}`,
                   fontFamily: "Noto Sans KR",
                   color: `${theme.typoBlack}`,
-                  focus: { outline: "none" },
+                  whiteSpace: "pre-wrap",
                 }}
                 placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
                 minRows="5"
