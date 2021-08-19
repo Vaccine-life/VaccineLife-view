@@ -14,7 +14,6 @@ import {
   actionCommentConfirm,
 } from "../../redux/modules/popup";
 import logger from "../../shared/logger";
-import { actionDeleteCommentList } from "../../redux/modules/comment";
 import { isMobileOnly } from "react-device-detect";
 
 const CommentList = (props) => {
@@ -73,7 +72,9 @@ const CommentList = (props) => {
           </Grid>
 
           <Grid align="left">
-            <Text size={theme.bodyfourSize}>{comment}</Text>
+            <Text size={theme.bodyfourSize} lineHeight={theme.bodyTwoHeight}>
+              {comment}
+            </Text>
           </Grid>
           <div
             style={{
@@ -95,7 +96,7 @@ const CommentList = (props) => {
   return (
     <React.Fragment>
       <Grid is_flex="space_row" margin="2rem 0">
-        <Grid align="left" width="12rem">
+        <Grid align="left" width="12rem" margin="0 0 auto 0">
           <Text
             bold
             size={theme.SubHeadOneSize}
@@ -107,10 +108,12 @@ const CommentList = (props) => {
         </Grid>
 
         <Grid align="left">
-          <Text size={theme.bodyTwoSize}>{comment}</Text>
+          <Text size={theme.bodyTwoSize} lineHeight={theme.bodyTwoHeight}>
+            {comment}
+          </Text>
         </Grid>
 
-        <Grid align="right" width="6rem">
+        <Grid align="right" width="6rem" margin="0 0 auto 0">
           {is_login && login_user === userId ? (
             <Text
               color={theme.typoLightGrey2}
@@ -129,7 +132,7 @@ const CommentList = (props) => {
           )}
         </Grid>
 
-        <Grid align="right" width="8rem">
+        <Grid align="right" width="8rem" margin="0 0 auto 0">
           <Text size={theme.bodyTwoSize} color={theme.typoGrey2}>
             {displayedAt(createdAt)}
           </Text>
