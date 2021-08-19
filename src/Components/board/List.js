@@ -37,7 +37,7 @@ const List = (props) => {
         <TopArticle
           board={board}
           type="공지"
-          title="슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
+          title="[공지] 슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
           likeCount={0}
           commentCount={0}
           totalVisitors={0}

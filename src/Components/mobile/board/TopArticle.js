@@ -54,19 +54,11 @@ const TopArticle = (props) => {
   return (
     <Grid padding="0 16px 0 16px">
       <TextDiv onClick={handleMovePage}>
-        {board === "vaccine" && (
-          <Text
-            size={theme.bodyfourSize}
-            color={theme.errorColor}
-            bold
-            margin="0 4px 0 0"
-          >
-            [{typeChanger(type)}]
+        <TitleDiv>
+          <Text color={theme.errorColor} size={theme.bodyfourSize}>
+            {title}
           </Text>
-        )}
-        <Text color={theme.errorColor} sizr={theme.bodyfourSize}>
-          {title}
-        </Text>
+        </TitleDiv>
       </TextDiv>
       <Grid is_flex="space_row">
         <TextDiv>
@@ -92,6 +84,7 @@ const TextDiv = styled.div`
   text-align: start;
   display: flex;
 `;
+
 const Div = styled.div`
   background-color: ${theme.typoLightGrey2};
   height: 1px;
@@ -108,4 +101,11 @@ const EachDiv = styled.div`
   margin-right: 16px;
   margin-top: 3px;
 `;
+
+const TitleDiv = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
 export default TopArticle;

@@ -12,8 +12,7 @@ const board = createSlice({
     topThreeVac: [],
     topThreeQuar: [],
     board: {
-      contents:
-        '{"blocks":[{"key":"2qrus","text":"슬기로운 백신생활","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}',
+      contents: "<p>슬기로운 백신생활</p>",
     },
     page: {
       // list에서 각각 board값

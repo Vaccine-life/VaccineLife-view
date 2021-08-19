@@ -14,9 +14,6 @@ const Contents = (props) => {
   const { contents, board, boardId } = props;
   // 클릭했을때 색 변경 추가할것
 
-  const storedState = convertFromRaw(JSON.parse(contents));
-  const editorState = EditorState.createWithContent(storedState);
-
   if (isMobileOnly) {
     return (
       <WrapperM>
@@ -47,7 +44,10 @@ const Contents = (props) => {
             </Text>
           </Grid>
         )}
-        <Editor editorState={editorState} readOnly={true} />
+        <ContentDiv
+          isMobile={true}
+          dangerouslySetInnerHTML={{ __html: contents }}
+        ></ContentDiv>
         <LikeWrapperM>
           <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
           <p
@@ -90,7 +90,10 @@ const Contents = (props) => {
           </Text>
         </Grid>
       )}
-      <Editor editorState={editorState} readOnly={true} />
+      <ContentDiv
+        isMobile={false}
+        dangerouslySetInnerHTML={{ __html: contents }}
+      ></ContentDiv>
       <LikeWrapper>
         <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
         <p
@@ -135,6 +138,22 @@ const WrapperM = styled.div`
     line-height: ${theme.bodyfourHeight};
   }
 `;
+
+const ContentDiv = styled.div`
+  padding: 0 16px 0 16px;
+  text-align: start;
+  ${(props) =>
+    props.isMobile
+      ? `
+    font-size: ${theme.bodyfourSize};
+    line-height: ${theme.bodyfourHeight};
+  `
+      : `
+    font-size: ${theme.bodyOneSize};
+    line-height: ${theme.bodyOneHeight};
+  `}
+`;
+
 const LikeWrapper = styled.div`
   display: flex;
   margin: 87px 0 45px auto;

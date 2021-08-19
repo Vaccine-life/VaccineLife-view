@@ -56,16 +56,8 @@ const Modify = () => {
   const modal_status = useSelector((state) => state.modal.visible);
   // 타이틀 인풋값
   const [title, setTitle] = useState(board_store.title);
-  const editor = useRef();
+  const [value, setValue] = useState(board_store.contents);
   // 데이터 JSON 변환
-  const storedState = convertFromRaw(JSON.parse(board_store.contents));
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithContent(storedState)
-  );
-
-  const contents = JSON.stringify(
-    convertToRaw(editorState.getCurrentContent())
-  );
 
   const onTitleChange = (event) => {
     const value = event.target.value;
@@ -77,13 +69,13 @@ const Modify = () => {
     board === "vaccine"
       ? {
           title,
-          contents,
+          contents: value,
           userId: board_store.userId,
           id: board_store.boardId,
         }
       : {
           title,
-          contents,
+          contents: value,
           userId: board_store.userId,
           id: board_store.boardId,
         };
@@ -129,10 +121,9 @@ const Modify = () => {
 
         {/* 작성페이지 */}
         <ExperienceWrite
-          editor={editor}
           urlExchanger={board === "vaccine" ? true : false}
-          editorState={editorState}
-          setEditorState={setEditorState}
+          value={value}
+          setValue={setValue}
         />
         {alert_status && <Alert />}
         <ButtonDiv isMobile={true}>
@@ -182,10 +173,9 @@ const Modify = () => {
 
       {/* 작성페이지 */}
       <ExperienceWrite
-        editor={editor}
         urlExchanger={board === "vaccine" ? true : false}
-        editorState={editorState}
-        setEditorState={setEditorState}
+        value={value}
+        setValue={setValue}
       />
       {alert_status && <Alert />}
       <ButtonDiv isMobile={false}>
