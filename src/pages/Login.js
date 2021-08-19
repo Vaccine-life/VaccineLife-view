@@ -57,7 +57,7 @@ const Login = (props) => {
         .required("아이디를 입력해주세요")
         .min(6, "아이디는 6자리 이상이어야 합니다")
         .max(12, "아이디는 12자리 이하여야 합니다")
-        .matches(/^[0-9a-zA-Z]+$/, "영문과 숫자만 이용 가능합니다"),
+        .matches(/^[0-9a-z]+$/, "영문 소문자와 숫자만 이용 가능합니다"),
       password: Yup.string()
         .required("비밀번호를 입력해주세요")
         .min(8, "비밀번호는 8자리 이상이어야 합니다.")
@@ -73,6 +73,13 @@ const Login = (props) => {
 
     // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다
     onSubmit: () => {
+      if (inputs.afterEffect.indexOf("없음") !== -1) {
+        setInputs({
+          ...inputs,
+          afterEffect: ["없음"],
+        });
+      }
+
       const user = { ...signupInputs, ...inputs };
       dispatch(actionSignup(user));
     },

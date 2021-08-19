@@ -8,16 +8,15 @@ import Input from "../elements/Input";
 
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
-import { EditorState, convertToRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
-import { actionWriteExperience } from "../redux/modules/board";
 import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
-import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+
+import NavModal from "../components/mobile/NavModal";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -25,6 +24,7 @@ const Write = () => {
   //alert
   const alert_status = useSelector((state) => state.popup.alert);
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   const url = history.location.pathname;
 
   // /vboard/write일때 true /qboard/write 일떄 false
@@ -115,6 +115,7 @@ const Write = () => {
           </Button>
         </ButtonDiv>
         {modal_status && <Login />}
+        {navModal_status && <NavModal />}
       </Grid>
     );
   }
@@ -166,6 +167,7 @@ const Write = () => {
           등록
         </Button>
         {modal_status && <Login />}
+        {navModal_status && <NavModal />}
       </ButtonDiv>
     </Grid>
   );

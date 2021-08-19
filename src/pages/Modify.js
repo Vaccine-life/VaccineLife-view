@@ -1,14 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { history } from "../redux/configStore";
 import theme from "../styles/theme";
 import Grid from "../elements/Grid";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
-
 import ExperienceWrite from "../components/editor/ExperienceWrite";
-import { EditorState, convertToRaw } from "draft-js";
-import { convertFromRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
 import { actionGetDetail, actionModifyDB } from "../redux/modules/board";
@@ -18,6 +15,7 @@ import styled from "styled-components";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import NavModal from "../components/mobile/NavModal";
 
 const data = {
   vacBoardId: 0,
@@ -54,6 +52,7 @@ const Modify = () => {
   // 리덕스에서 정보 가져오기
   const board_store = useSelector((state) => state.board.board);
   const modal_status = useSelector((state) => state.modal.visible);
+  const navModal_status = useSelector((state) => state.modal.navVisible);
   // 타이틀 인풋값
   const [title, setTitle] = useState(board_store.title);
   const [value, setValue] = useState(board_store.contents);
@@ -140,6 +139,7 @@ const Modify = () => {
           </Button>
         </ButtonDiv>
         {modal_status && <Login />}
+        {navModal_status && <NavModal />}
       </Grid>
     );
   }
@@ -192,6 +192,7 @@ const Modify = () => {
         </Button>
       </ButtonDiv>
       {modal_status && <Login />}
+      {navModal_status && <NavModal />}
     </Grid>
   );
 };

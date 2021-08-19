@@ -130,17 +130,19 @@ export const actionSignup =
         type: newuserDecode.type,
       };
       dispatch(actionSetUser(newuser));
+
+      // 왜 +++++++이 붙는가? 닉네임만 보내면 되지 않는가?
+      // 닉네임만 보내면 다른 actionSetMessage와 분간할 수 없다.. 분간해야 얘만 따로 필요한 디자인 적용할 수 있음
       dispatch(
-        actionSetMessage(
-          `반갑습니다 ${nickname}님!
-          회원가입 및 로그인 되었습니다`
-        )
+        actionSetMessage(`${nickname}+++++++회원가입 및 로그인 되었습니다`)
       );
       dispatch(actionAlert());
-      // history.push("/");
+      history.push("/");
     } catch (error) {
       logger(error);
-      dispatch(actionSetMessage(error.response.data.message));
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
       dispatch(actionAlert());
     }
   };
