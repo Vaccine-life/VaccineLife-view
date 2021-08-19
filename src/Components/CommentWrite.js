@@ -9,6 +9,7 @@ import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import { TextareaAutosize } from "@material-ui/core";
+import commentwrite from "../styles/commentwrite.css";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
@@ -79,15 +80,23 @@ const CommentWrite = (props) => {
         <Grid is_flex="space_column" padding="0 1rem">
           <Grid is_flex="space_column" border={`1px solid ${theme.typoGrey1}`}>
             <Grid margin="0 5rem">
-              <Input
-                multiLine
-                rows={6}
-                border="none"
-                value={comment}
+              <TextareaAutosize
+                style={{
+                  resize: "none",
+                  width: "100%",
+                  padding: "1rem 0.7rem",
+                  boxSizing: "border-box",
+                  border: "none",
+                  fontSize: `${theme.SubHeadTwoSize}`,
+                  fontFamily: "Noto Sans KR",
+                  color: `${theme.typoBlack}`,
+                  focus: { outline: "none" },
+                }}
                 placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
+                minRows="5"
+                value={comment}
+                onChange={changeComment}
                 maxLength="500"
-                color={theme.typoBlack}
-                _onChange={changeComment}
               />
             </Grid>
 
@@ -115,20 +124,27 @@ const CommentWrite = (props) => {
     );
   }
   return (
-    <React.Fragment>
+    <>
       <Grid is_flex="space_column" margin="3rem 0" width={theme.medicalWidth}>
-        <Grid is_flex="space_column" border="1px solid #c1c1c1">
+        <Grid is_flex="space_column" border={`1px solid ${theme.typoGrey1}`}>
           <Grid margin="0 5rem">
-            <Input
-              multiLine
-              border="none"
-              value={comment}
+            <TextareaAutosize
+              style={{
+                resize: "none",
+                width: "100%",
+                padding: "1rem 0.7rem",
+                boxSizing: "border-box",
+                border: "none",
+                fontSize: `${theme.SubHeadTwoSize}`,
+                fontFamily: "Noto Sans KR",
+                color: `${theme.typoBlack}`,
+                focus: { outline: "none" },
+              }}
               placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
+              minRows="5"
+              value={comment}
+              onChange={changeComment}
               maxLength="500"
-              color={theme.typoBlack}
-              _onChange={changeComment}
-              // 엔터키로 등록
-              // onSubmit={write}
             />
           </Grid>
 
@@ -152,84 +168,12 @@ const CommentWrite = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </React.Fragment>
+    </>
   );
-  // TextareaAutosize
-  // return(
-  //   <>
-  //   <Grid is_flex="space_column" margin="3rem 0" width={theme.medicalWidth}>
-  //       <Grid is_flex="space_column" border="1px solid #c1c1c1">
-  //         <Grid margin="0 5rem">
-  //           {/* <TextareaAuto> */}
-  //           <TextareaAutosize
-  //             style={{
-  //               resize: "none",
-  //               width: "100%",
-  //               padding: "1rem 0.7rem",
-  //               boxSizing: "border-box",
-  //               border: "none",
-  //               fontSize: `${theme.bodyThreeSize}`,
-  //               fontFamily: "Noto Sans KR",
-  //               color: `${theme.typoBlack}`,
-  //               focus: { outline: "none" },
-  //             }}
-  //             placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
-  //             minRows="5"
-  //             onChange={changeComment}
-  //             maxLength="500"
-  //           />
-  //           {/* </TextareaAuto> */}
-  //         </Grid>
-
-  //         <Grid is_flex="space_row" border="none">
-  //           <Grid align="left" padding="13px" bg={theme.typoLightGrey1}>
-  //             <Text size={theme.bodyThreeSize} color={theme.typoGrey3}>
-  //               <span>{comment?.length || 0}</span> / 500
-  //             </Text>
-  //           </Grid>
-
-  //           <Button
-  //             width={theme.mediumButtonWidth}
-  //             height={theme.mediumButtonHeight}
-  //             fontSize={theme.SubHeadOneSize}
-  //             color={theme.white}
-  //             bold
-  //             _onClick={handleMedical}
-  //           >
-  //             등록
-  //           </Button>
-  //         </Grid>
-  //       </Grid>
-  //     </Grid>
-  //   </>
-  // )
 };
 
 // CommentWrite.defaultProps = {
 //   nickname: "명수는열두살",
 // };
-
-const TextareaAuto = styled.textarea.attrs({
-  defaultValue: "",
-  placeholder:
-    "코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!",
-  rows: 5,
-  maxLength: 500,
-  // onChange: { changeComment },
-})`
-  resize: none;
-  width: 100%;
-  /* width: ${theme.medicalWidth}; */
-  padding: 1rem 0.7rem;
-  box-sizing: border-box;
-  border: none;
-  font-size: 16px;
-  font-family: "Noto Sans KR";
-  color: ${theme.typoBlack};
-  align-items: left;
-  :focus {
-    outline: none;
-  }
-`;
 
 export default CommentWrite;
