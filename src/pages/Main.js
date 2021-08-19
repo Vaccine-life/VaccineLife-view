@@ -32,7 +32,9 @@ const Main = () => {
         {navModal_status && <NavModal />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
-        <div style={{ margin: `${theme.headerHeight} auto 0 auto`, width: "100%" }}>
+        <div
+          style={{ margin: `${theme.headerHeight} auto 0 auto`, width: "100%" }}
+        >
           <Intro />
           <Map />
           <MainNivoBar />

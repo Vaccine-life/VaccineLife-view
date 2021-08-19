@@ -156,54 +156,41 @@ const PopularTitle = styled.div`
   margin: auto;
   padding-bottom: 20px;
   /* background-color: red; */
-
   & > h1 {
     width: 212px;
     height: 34px;
-
     font-weight: bold;
     font-size: ${theme.headOneSize};
     line-height: 34px;
-
     text-align: center;
     letter-spacing: -0.3px;
-
     color: #242424;
-
     padding-top: 5%;
   }
-
   & > div {
     display: flex;
     cursor: pointer;
     margin-top: 6%;
-
     &:hover {
       text-decoration: underline;
       text-underline-position: under;
       color: ${theme.typoGrey1};
     }
-
     & > h3 {
       width: 60px;
       height: 26px;
-
       font-weight: normal;
       font-size: ${theme.bodyOneSize};
       line-height: 26px;
-
       text-align: center;
       letter-spacing: -0.3px;
-
       color: ${theme.typoGrey3};
     }
-
     & > img {
       width: auto;
       height: auto;
       max-width: 15px;
       max-height: 15px;
-
       margin-top: 7px;
       margin-left: 8px;
     }
@@ -216,14 +203,12 @@ const PopularCards = styled.div`
   width: 1250px;
   height: 66%;
   margin: auto;
-
 `;
-
 
 // <========= Mobile ===========>
 
 const MainPopularWrapperMobile = styled.div`
-width:100%;
+  width: 100%;
 `;
 
 const GreyBoxMobile = styled.div`
@@ -238,7 +223,6 @@ const PopularTitleMobile = styled.div`
   width: 90%;
   margin: auto;
   justify-content: space-between;
-
   & > h1 {
     width: max-content;
     height: 34px;
@@ -249,7 +233,6 @@ const PopularTitleMobile = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
   }
-
   & > h3 {
     width: 50px;
     height: 34px;
