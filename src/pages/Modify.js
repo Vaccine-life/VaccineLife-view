@@ -17,6 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 
 const data = {
   vacBoardId: 0,
@@ -88,6 +89,12 @@ const Modify = () => {
         };
 
   const handlePostEx = () => {
+    window.scrollTo(0, 0);
+    if (modifyObj.title === "") {
+      dispatch(actionSetMessage("제목을 입력해 주세요."));
+      dispatch(actionAlert());
+      return;
+    }
     dispatch(actionModifyDB(board, boardId, modifyObj));
   };
 

@@ -17,6 +17,7 @@ import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -54,6 +55,11 @@ const Write = () => {
 
   const handlePostEx = () => {
     window.scrollTo(0, 0);
+    if (contentObj.title === "") {
+      dispatch(actionSetMessage("제목을 입력해 주세요."));
+      dispatch(actionAlert());
+      return;
+    }
     if (urlExchanger) {
       //백신후기 dispatch
       dispatch(actionWriteExperience("vaccine", contentObj));
@@ -114,6 +120,7 @@ const Write = () => {
           </Button>
         </ButtonDiv>
         {modal_status && <Login />}
+        {}
       </Grid>
     );
   }
