@@ -78,7 +78,7 @@ const CommentWrite = (props) => {
     return (
       <>
         <Grid is_flex="space_column" padding="0 1rem">
-          <Grid is_flex="space_column" border="1px solid #c1c1c1">
+          <Grid is_flex="space_column" border={`1px solid ${theme.typoGrey1}`}>
             <Grid margin="0 5rem">
               <TextareaAutosize
                 style={{

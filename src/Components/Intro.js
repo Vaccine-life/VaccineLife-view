@@ -35,36 +35,30 @@ const MainIntro = styled.div`
   width: 100%;
   height: 230px;
   background-color: ${theme.bg};
-
   & > img {
     width: auto;
     height: auto;
     max-width: 330px;
     max-height: 330px;
-
     padding-top: 92px;
   }
-
   & > h1 {
     padding-left: 0px;
     padding-top: 75px;
     font-size: ${theme.headTwoHeight};
     line-height: 42px;
-
     color: #ffffff;
-
     & > span {
       font-weight: 600;
     }
   }
 `;
 
-
 // <========= Mobile ===========>
 
 
 const MainIntroWrapperMobile = styled.div`
-/* width: 100%; */
+  /* width: 100%; */
 `;
 
 const MainIntroMobile = styled.div`
@@ -74,7 +68,6 @@ position: relative;
   background-color: ${theme.bg};
   display: flex;
   align-items: center;
-
   & > img {
     position: absolute;
     width: auto;
@@ -85,7 +78,6 @@ position: relative;
     left: 40px;
     bottom: 0px;
   }
-
   & > h1 {
     position: absolute;
     right: 40px;
@@ -95,7 +87,6 @@ position: relative;
     font-size: ${theme.SubHeadTwoSize};
     line-height: 25px;
     color: #ffffff;
-
     & > span {
       font-weight: 600;
     }

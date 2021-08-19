@@ -18,7 +18,7 @@ const Alert = () => {
   if (isMobileOnly) {
     return (
       <Wrapper isMobile={true}>
-        <Modal>
+        <Modal isMobile={true}>
           <Grid is_flex="center">
             <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
               {alertMessage}
@@ -43,7 +43,7 @@ const Alert = () => {
 
   return (
     <Wrapper isMobile={false}>
-      <Modal>
+      <Modal isMobile={false}>
         <Grid is_flex="center">
           <Text size={theme.bodyOneSize} lineHeight={theme.bodyOneHeight}>
             {alertMessage}
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
   left: 0;
   z-index: 2;
   background-color: ${theme.shadow};
-  ${(prop) =>
+  /* ${(prop) =>
     prop.isMobile
       ? `
    padding: 150px auto 0 auto;
@@ -82,11 +82,18 @@ const Wrapper = styled.div`
       : `
    padding: 300px auto 0 auto;
   `}
-  padding: 300px auto 0 auto;
+  padding: 300px auto 0 auto; */
 `;
 
 const Modal = styled.div`
-  width: max-content;
+  ${(prop) =>
+    prop.isMobile
+      ? `
+      max-width: 50%;;
+  `
+      : `
+      width: max-content;;
+  `}
   height: max-content;
   position: relative;
   top: 50%;
