@@ -752,7 +752,8 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
   // form태그 onSubmit에 제출시 일어날 일을 함수로 주자.. 꼭!
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <Wrapper onSubmit={formik.handleSubmit}>
+        {/* <form > */}
         <Text
           margin="0 auto 15px auto"
           size={theme.bodyThreeSize}
@@ -1394,10 +1395,19 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
         <SubmitButton type="submit" disabled={disableSubmitButton()}>
           회원가입
         </SubmitButton>
-      </form>
+        {/* </form> */}
+      </Wrapper>
     </>
   );
 };
+
+const Wrapper = styled.form`
+  width: max-content;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Line = styled.div`
   width: 100%;
