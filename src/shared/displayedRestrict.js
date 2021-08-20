@@ -1,5 +1,4 @@
 import moment from "moment";
-import logger from "./logger";
 
 const displayedRestrict = (createdAt) => {
   createdAt = String(createdAt);
