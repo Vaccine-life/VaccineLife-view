@@ -17,6 +17,8 @@ import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
 
 import NavModal from "../components/mobile/NavModal";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import { actionWriteExperience } from "../redux/modules/board";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -50,7 +52,7 @@ const Write = () => {
     window.scrollTo(0, 0);
     logger(contentObj);
 
-    /*  if (contentObj.title === "") {
+    if (contentObj.title === "") {
       dispatch(actionSetMessage("제목을 입력해 주세요."));
       dispatch(actionAlert());
       return;
@@ -62,7 +64,7 @@ const Write = () => {
     } else {
       //격리후기 dispatch
       dispatch(actionWriteExperience("quarantine", contentObj));
-    } */
+    }
   };
 
   if (isMobileOnly) {
