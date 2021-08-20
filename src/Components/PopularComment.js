@@ -33,40 +33,42 @@ const PopularComment = (props) => {
   if (isMobileOnly) {
     return (
       <>
-        <Grid align="left" margin="2rem 0" padding="0 1rem">
-          <Text size={theme.headTwoSize} lineHeight={theme.headOneHeight} bold>
+        <Grid align="left" margin="2.5rem auto 0 0" padding="0 1rem">
+          <Text
+            size={theme.SubHeadTwoSize}
+            lineHeight={theme.SubHeadTwoHeight}
+            bold
+          >
             인기응원글
           </Text>
         </Grid>
 
-        <div style={{ padding: "0 1rem" }}>
-          <PopularWrapper>
-            {top_list_medi?.map((each, index) => {
-              return (
-                <PopularCommentItem
-                  key={index}
-                  nickname={each.nickname}
-                  contents={each.contents}
-                  likeCount={each.likeCount}
-                  createdAt={each.createdAt}
-                  boardId={each.id}
-                  userId={each.userId}
-                />
-              );
-            })}
-          </PopularWrapper>
+        <PopularWrapper>
+          {top_list_medi?.map((each, index) => {
+            return (
+              <PopularCommentItem
+                key={index}
+                nickname={each.nickname}
+                contents={each.contents}
+                likeCount={each.likeCount}
+                createdAt={each.createdAt}
+                boardId={each.id}
+                userId={each.userId}
+              />
+            );
+          })}
+        </PopularWrapper>
 
-          {medical_status && (
-            <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
-          )}
-        </div>
+        {medical_status && (
+          <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
+        )}
       </>
     );
   }
   return (
     <>
       <Grid align="left">
-        <Text size={theme.headTwoSize} lineHeight={theme.headOneHeight} bold>
+        <Text size={theme.headTwoSize} lineHeight={theme.headTwoHeight} bold>
           인기응원글
         </Text>
       </Grid>
@@ -91,12 +93,8 @@ const PopularComment = (props) => {
 };
 
 const PopularWrapper = styled.div`
-  width: 100%;
-  height: 100%;
   align-items: center;
-  margin: 1rem 0 4rem 0;
-  background-color: #fcf6f5;
-  padding: 0 0 0.5rem 0;
+  margin: 0 0 1rem 0;
 `;
 
 export default PopularComment;
@@ -116,72 +114,42 @@ const PopularCommentItem = (props) => {
   if (isMobileOnly) {
     return (
       <>
-        <Grid is_flex="column_left_start" margin="2rem 0">
+        <WrapperMobile>
           <CommentHead>
-            <Grid
-              align="left"
-              width="10rem"
-              padding="1rem 0.5rem"
-              margin="0 auto 0 0"
-            >
+            <Grid align="left" width="6rem" padding="0.7rem 0" margin="0">
               <Text
                 bold
-                size={theme.SubHeadTwoSize}
-                lineHeight={theme.SubHeadTwoHeight}
+                size={theme.bodyfourSize}
+                lineHeight={theme.bodyfourHeight}
                 color={theme.bg2}
               >
                 {nickname}
               </Text>
             </Grid>
 
-            {/* <Grid align="right" margin="auto 0.5rem">
-              {is_login && user_id === userId ? (
-                <Text
-                  color={theme.typoGrey3}
-                  size={theme.bodyTwoSize}
-                  lineHeight={theme.bodyThreeSize}
-                  cursor="pointer"
-                  _onClick={() => {
-                    dispatch(acionSetMedicalObj({ boardId }));
-                    dispatch(actionMedicalConfirm());
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </Text>
-              ) : (
-                ""
-              )}
-            </Grid> */}
-
             <Heart>
               <LikeIconMedi boardId={boardId} />
-              <p
-                style={{
-                  fontSize: `${theme.bodyfourSize}`,
-                  marginLeft: "5.55px",
-                  color: `${theme.typoGrey2}`,
-                }}
+              <Text
+                fontSize={theme.bodyfourSize}
+                margin="0 0 0 5.55px"
+                color={theme.typoGrey1}
               >
                 {props.likeCount}
-              </p>
+              </Text>
             </Heart>
           </CommentHead>
 
-          <Grid align="left" padding="1rem 0.5rem" margin="0">
+          <Grid align="left" padding="1rem 0">
             <Text
-              size={theme.bodyThreeSize}
-              lineHeight={theme.bodyThreeHeight}
+              size={theme.bodyfourSize}
+              lineHeight={theme.bodyfourHeight}
               color={theme.typoBlack}
             >
               {contents}
             </Text>
           </Grid>
 
-          <Grid
-            align="left"
-            margin="2.5rem 0.5rem 0 0.5rem"
-            // padding="0 0 2rem 0"
-          >
+          <Grid align="left" padding="3rem 1rem 1rem 0">
             <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
               {displayedAt(props.createdAt)}
             </Text>
@@ -190,15 +158,15 @@ const PopularCommentItem = (props) => {
           {medical_status && (
             <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
           )}
-        </Grid>
+        </WrapperMobile>
       </>
     );
   }
   return (
     <>
-      <Grid is_flex="column_left_start">
+      <Wrapper>
         <CommentHead>
-          <Grid align="left" width="10rem" padding="1rem 0.5rem">
+          <Grid align="left" width="9rem" padding="0.7rem 0" margin="0">
             <Text
               bold
               size={theme.SubHeadTwoSize}
@@ -209,46 +177,21 @@ const PopularCommentItem = (props) => {
             </Text>
           </Grid>
 
-          {/* <Trash>
-            {is_login && user_id === userId ? (
-              <Text
-                color={theme.typoGrey3}
-                size={theme.bodyTwoSize}
-                lineHeight={theme.bodyThreeSize}
-                cursor="pointer"
-                _onClick={() => {
-                  dispatch(acionSetMedicalObj({ boardId }));
-                  dispatch(actionMedicalConfirm());
-                }}
-              >
-                <FontAwesomeIcon icon={faTrashAlt} />
-              </Text>
-            ) : (
-              ""
-            )}
-          </Trash> */}
-
           <Heart>
             <LikeIconMedi boardId={boardId} />
             <p
               style={{
                 fontSize: `${theme.bodyfourSize}`,
-                marginLeft: "5.55px",
+                margin: "0 0 0 5.55px",
                 color: `${theme.typoGrey2}`,
               }}
             >
               {likeCount}
             </p>
           </Heart>
-
-          <Grid align="right" margin="auto 0.5rem">
-            <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
-              {displayedAt(createdAt)}
-            </Text>
-          </Grid>
         </CommentHead>
 
-        <Grid align="left" padding="1rem 0.5rem 4rem 0.5rem">
+        <Grid align="left" padding="1rem 0">
           <Text
             size={theme.bodyThreeSize}
             lineHeight={theme.bodyThreeHeight}
@@ -258,25 +201,49 @@ const PopularCommentItem = (props) => {
           </Text>
         </Grid>
 
+        <Grid align="left" padding="3rem 1rem 1rem 0">
+          <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
+            {displayedAt(createdAt)}
+          </Text>
+        </Grid>
+
         {medical_status && (
           <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
         )}
-      </Grid>
+      </Wrapper>
     </>
   );
 };
 
-const CommentHead = styled.div`
-  width: 100%;
-  height: 100%;
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  border-top: 2px solid ${theme.typoGrey2};
-  border-bottom: 1px solid ${theme.typoLightGrey2};
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border: 1.5px solid ${theme.bg2};
+  background-color: rgba(237, 242, 255, 0.4);
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 1em 0;
+  padding: 0 1rem;
 `;
 
+const CommentHead = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${theme.typoLightGrey2};
+`;
+
+// 아이콘들
 const Heart = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-left: auto;
+`;
+
+const Modify = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -284,6 +251,20 @@ const Heart = styled.div`
 `;
 
 const Trash = styled.div`
-  width: 5rem;
+  width: auto;
   align-items: center;
+  margin: 0 0.5rem;
+`;
+
+const WrapperMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid ${theme.typoLightGrey2};
+  background-color: rgba(237, 242, 255, 0.4);
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 1rem;
+  padding: 0 0.5rem;
 `;

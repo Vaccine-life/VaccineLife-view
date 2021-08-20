@@ -31,6 +31,7 @@ const board = createSlice({
   reducers: {
     actionSetListVac: (state, action) => {
       state.listVac.push(...action.payload.board);
+      console.log(action.payload.board);
       state.pagingVac.nextPage += 1;
       state.pagingVac.totalPage = action.payload.totalPageInData;
     },
@@ -271,7 +272,9 @@ export const actionGetBoard =
 
         const getData = await boardAxios.getPageVac(nextPage);
         const board = getData.data.content;
+        // console.log(board);
         const totalPageInData = getData.data.totalPages;
+        // console.log(totalPageInData);
 
         dispatch(actionSetListVac({ board, totalPageInData }));
       } else {

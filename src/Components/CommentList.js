@@ -5,15 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Grid } from "../elements";
 import MedicalConfirm from "../components/popup/MedicalConfirm";
+import MedicalModifyConfirm from "../components/popup/MedicalModifyConfirm";
 import {
   actionMedicalConfirm,
   acionSetMedicalObj,
 } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { faTrashAlt, faEdit } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
 import { isMobileOnly } from "react-device-detect";
+import ModifyMedical from "./ModifyMedical";
+import { TextareaAutosize } from "@material-ui/core";
 
 const CommentList = (props) => {
   // console.log(props);
@@ -25,28 +28,34 @@ const CommentList = (props) => {
   const userId = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
+  const changeContents = () => {
+    (<FontAwesomeIcon icon={faEdit} />).click(function () {
+      (<Modify />).replaceWith(<TextareaAutosize />);
+    });
+  };
+
   if (isMobileOnly) {
     return (
       <>
-        <Grid is_flex="column_left_start" margin="2rem 0" padding="0 1rem">
+        <WrapperMobile>
           <CommentHead>
-            <Grid align="left" width="15rem" padding="1rem 0.5rem">
+            <Grid align="left" width="6rem" padding="0.7rem 0" margin="0">
               <Text
                 bold
-                size={theme.SubHeadTwoSize}
-                lineHeight={theme.SubHeadTwoHeight}
+                size={theme.bodyfourSize}
+                lineHeight={theme.bodyfourHeight}
                 color={theme.bg2}
               >
                 {props.nickname}
               </Text>
             </Grid>
 
-            <Grid align="right" margin="auto 0.5rem">
+            <Trash>
               {is_login && userId === props.userId ? (
                 <Text
                   color={theme.typoGrey3}
-                  size={theme.bodyTwoSize}
-                  lineHeight={theme.bodyThreeSize}
+                  size={theme.bodyfourSize}
+                  lineHeight={theme.bodyfourHeight}
                   cursor="pointer"
                   _onClick={() => {
                     dispatch(acionSetMedicalObj({ medi_id }));
@@ -58,7 +67,31 @@ const CommentList = (props) => {
               ) : (
                 ""
               )}
-            </Grid>
+            </Trash>
+
+            {/* <Modify>
+            {is_login && userId === props.userId ? <ModifyMedical /> : ""}
+          </Modify> */}
+            {/* <Modify>
+              {is_login && userId === props.userId ? (
+                <Text
+                  color={theme.typoGrey3}
+                  size={theme.bodyfourSize}
+                  lineHeight={theme.bodyfourHeight}
+                  cursor="pointer"
+                  _onClick={() => {
+                    // // dispatch(changeContents());
+                    // dispatch(acionSetMedicalObj({ medi_id }));
+                    // dispatch(actionMedicalConfirm());
+                    console.log("수정!!!!!!!!");
+                  }}
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                </Text>
+              ) : (
+                ""
+              )}
+            </Modify> */}
 
             <Heart>
               <LikeIconMedi boardId={medi_id} />
@@ -72,18 +105,22 @@ const CommentList = (props) => {
             </Heart>
           </CommentHead>
 
-          <Grid align="left" padding="1rem 0.5rem">
+          <Grid align="left" padding="1rem 0">
             <Text
-              size={theme.bodyThreeSize}
-              lineHeight={theme.bodyThreeHeight}
+              size={theme.bodyfourSize}
+              lineHeight={theme.bodyfourHeight}
               color={theme.typoBlack}
             >
               {props.contents}
             </Text>
           </Grid>
 
-          <Grid align="left" margin="2.5rem 0.5rem 0 0.5rem">
-            <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
+          <Grid align="left" padding="3rem 1rem 1rem 0">
+            <Text
+              size={theme.bodyfourSize}
+              lineHeight={theme.bodyfourHeight}
+              color={theme.typoGrey1}
+            >
               {displayedAt(props.createdAt)}
             </Text>
           </Grid>
@@ -91,15 +128,15 @@ const CommentList = (props) => {
           {medical_status && (
             <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
           )}
-        </Grid>
+        </WrapperMobile>
       </>
     );
   }
   return (
     <React.Fragment>
-      <Grid is_flex="column_left_start" margin="4rem 0">
+      <Wrapper>
         <CommentHead>
-          <Grid align="left" width="10rem" padding="1rem 0.5rem">
+          <Grid align="left" width="9rem" padding="0.7rem 0" margin="0">
             <Text
               bold
               size={theme.SubHeadTwoSize}
@@ -129,6 +166,30 @@ const CommentList = (props) => {
             )}
           </Trash>
 
+          {/* <Modify>
+            {is_login && userId === props.userId ? <ModifyMedical /> : ""}
+          </Modify> */}
+          {/* <Modify>
+            {is_login && userId === props.userId ? (
+              <Text
+                color={theme.typoGrey3}
+                size={theme.bodyTwoSize}
+                lineHeight={theme.bodyThreeSize}
+                cursor="pointer"
+                _onClick={() => {
+                  // // dispatch(changeContents());
+                  // dispatch(acionSetMedicalObj({ medi_id }));
+                  // dispatch(actionMedicalConfirm());
+                  console.log("수정!!!!!!!!");
+                }}
+              >
+                <FontAwesomeIcon icon={faEdit} />
+              </Text>
+            ) : (
+              ""
+            )}
+          </Modify> */}
+
           <Heart>
             <LikeIconMedi boardId={medi_id} />
             <Text
@@ -139,15 +200,9 @@ const CommentList = (props) => {
               {props.likeCount}
             </Text>
           </Heart>
-
-          <Grid align="right" margin="auto 0.5rem">
-            <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
-              {displayedAt(props.createdAt)}
-            </Text>
-          </Grid>
         </CommentHead>
 
-        <Grid align="left" padding="1rem 0.5rem">
+        <Grid align="left" padding="1rem 0">
           <Text
             size={theme.bodyThreeSize}
             lineHeight={theme.bodyThreeHeight}
@@ -157,10 +212,16 @@ const CommentList = (props) => {
           </Text>
         </Grid>
 
+        <Grid align="left" padding="3rem 1rem 1rem 0">
+          <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
+            {displayedAt(props.createdAt)}
+          </Text>
+        </Grid>
+
         {medical_status && (
           <MedicalConfirm confirmMessage="삭제하시겠습니까?" />
         )}
-      </Grid>
+      </Wrapper>
     </React.Fragment>
   );
 };
@@ -171,17 +232,34 @@ const CommentList = (props) => {
 //     insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm:ss"),
 // }
 
-const CommentHead = styled.div`
-  width: 100%;
-  height: 100%;
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  border-top: 2px solid ${theme.typoGrey2};
-  border-bottom: 1px solid ${theme.typoLightGrey2};
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border: 1.5px solid ${theme.typoLightGrey2};
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 1em 0;
+  padding: 0 1rem;
 `;
 
+const CommentHead = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${theme.typoLightGrey2};
+`;
+
+// 아이콘들
 const Heart = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-left: auto;
+`;
+
+const Modify = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -189,8 +267,21 @@ const Heart = styled.div`
 `;
 
 const Trash = styled.div`
-  width: 5rem;
+  width: auto;
   align-items: center;
+  margin: 0 0.5rem;
+`;
+
+const WrapperMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid ${theme.typoLightGrey2};
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 1rem;
+  padding: 0 0.5rem;
 `;
 
 export default CommentList;
