@@ -66,6 +66,7 @@ const Wrapper = styled.div`
   color: ${(props) => props.color};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  text-align: start;
   ${(props) => props.borderline && ` border : ${props.borderline};`}
   ${(props) => {
     if (props.is_flex === "center") {
