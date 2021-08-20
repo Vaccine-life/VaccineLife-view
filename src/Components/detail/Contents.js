@@ -53,8 +53,9 @@ const Contents = (props) => {
           <p
             style={{
               fontSize: `${theme.bodyTwoSize}`,
+              marginBottom: "3px",
               marginLeft: "5.55px",
-              fontWeight: "700",
+              fontWeight: "500",
               color: `${theme.bg}`,
             }}
           >
@@ -99,8 +100,9 @@ const Contents = (props) => {
         <p
           style={{
             fontSize: `${theme.headTwoSize}`,
+            marginBottom: "4px",
             marginLeft: "5.55px",
-            fontWeight: "700",
+            fontWeight: "500",
             color: `${theme.bg}`,
           }}
         >
@@ -155,17 +157,27 @@ const ContentDiv = styled.div`
 `;
 
 const LikeWrapper = styled.div`
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
   display: flex;
-  margin: 87px 0 45px auto;
+  justify-content: center;
+  align-items: center;
+  margin: 87px auto 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
+  border: 1.5px solid ${theme.btnColor};
 `;
+
 const LikeWrapperM = styled.div`
+  width: ${theme.smallButtonWidth};
+  height: ${theme.headOneHeight};
   display: flex;
-  margin: 80px 0 25px auto;
-  padding: 0 16px 0 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 80px auto 25px auto;
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
+  border: 1.5px solid ${theme.btnColor};
 `;
 
 export default Contents;
