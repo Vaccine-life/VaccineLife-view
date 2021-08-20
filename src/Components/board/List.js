@@ -14,8 +14,10 @@ const List = (props) => {
   const { board } = props;
   const is_loading = useSelector((state) => state.isLoading.isLoading);
   const pagingVac = useSelector((state) => state.board.pagingVac);
+  // console.log(pagingVac);
   const { nextPage, totalPage } = pagingVac;
   const vac_list = useSelector((state) => state.board.listVac);
+  console.log(vac_list);
   const dispatch = useDispatch();
   const nextCall = () => {
     dispatch(actionGetBoard(board));
