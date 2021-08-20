@@ -8,16 +8,17 @@ import Input from "../elements/Input";
 
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
-import { EditorState, convertToRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../components/popup/Alert";
-import { actionWriteExperience } from "../redux/modules/board";
 import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
+
 import NavModal from "../components/mobile/NavModal";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import { actionWriteExperience } from "../redux/modules/board";
 
 const Write = () => {
   const userId = useSelector((state) => state.user.user.userId);
@@ -34,14 +35,7 @@ const Write = () => {
   // 타이틀 인풋값
   const [title, setTitle] = useState("");
   // 에디터 props값
-  const editor = useRef();
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-  // 데이터 JSON 변환
-  const contents = JSON.stringify(
-    convertToRaw(editorState.getCurrentContent())
-  );
+  const [value, setValue] = useState("");
 
   const onTitleChange = (event) => {
     const value = event.target.value;
@@ -51,11 +45,19 @@ const Write = () => {
   const contentObj = {
     userId: userId,
     title: title,
-    contents: contents,
+    contents: value,
   };
 
   const handlePostEx = () => {
     window.scrollTo(0, 0);
+    logger(contentObj);
+
+    if (contentObj.title === "") {
+      dispatch(actionSetMessage("제목을 입력해 주세요."));
+      dispatch(actionAlert());
+      return;
+    }
+
     if (urlExchanger) {
       //백신후기 dispatch
       dispatch(actionWriteExperience("vaccine", contentObj));
@@ -96,10 +98,9 @@ const Write = () => {
 
         {/* 작성페이지 */}
         <ExperienceWrite
-          editor={editor}
           urlExchanger={urlExchanger}
-          editorState={editorState}
-          setEditorState={setEditorState}
+          value={value}
+          setValue={setValue}
         />
         {alert_status && <Alert />}
         <ButtonDiv isMobile={true}>
@@ -150,10 +151,9 @@ const Write = () => {
 
       {/* 작성페이지 */}
       <ExperienceWrite
-        editor={editor}
         urlExchanger={urlExchanger}
-        editorState={editorState}
-        setEditorState={setEditorState}
+        value={value}
+        setValue={setValue}
       />
       {alert_status && <Alert />}
       <ButtonDiv isMobile={false}>

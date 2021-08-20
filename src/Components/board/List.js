@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionGetBoard } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
+import TopArticle from "../mobile/board/TopArticle";
+import TopTable from "./TopTable";
 
 const List = (props) => {
   const { board } = props;
@@ -32,6 +34,16 @@ const List = (props) => {
         size={750}
       >
         {/* map돌리기 */}
+        <TopArticle
+          board={board}
+          type="공지"
+          title="[공지] 슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
+          likeCount={0}
+          commentCount={0}
+          totalVisitors={0}
+          createAt="2021-08-19 16:33:33"
+          boardId={70}
+        />
         {vac_list?.map((each, index) => {
           return (
             <Ariticle
@@ -71,6 +83,15 @@ const List = (props) => {
           size={300}
         >
           {/* map돌리기 */}
+          <TopTable
+            type="공지"
+            title="슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
+            likeCount={0}
+            commentCount={0}
+            totalVisitors={0}
+            createAt="2021-08-19 16:33:33"
+            boardId={70}
+          />
           {vac_list?.map((each, index) => {
             return (
               <TableTr

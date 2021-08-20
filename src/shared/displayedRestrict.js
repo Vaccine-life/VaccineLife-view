@@ -4,7 +4,7 @@ const displayedRestrict = (createdAt) => {
   const timeValue = new Date(createdAt);
   const getTime = timeValue.getTime();
   const getDate = new Date(getTime);
-  const result = moment(getDate).format("YYYY.MM.DD hh:mm");
+  const result = moment(getDate).format("YYYY.MM.DD HH:mm");
   return result;
 };
 

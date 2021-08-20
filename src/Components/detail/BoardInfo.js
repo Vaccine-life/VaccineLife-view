@@ -24,7 +24,7 @@ const BoardInfo = (props) => {
     nickname,
     likeCount,
   } = props;
-  //logger(boardId);
+
   const dispatch = useDispatch();
   const handleOnClick = () => {
     if (board === "vaccine") {

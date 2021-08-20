@@ -26,9 +26,6 @@ const QuarPostCard = (props) => {
 
   /* 로그인 했을때 isHeart 구현*/
 
-  const storedState = convertFromRaw(JSON.parse(contents));
-  const editorState = EditorState.createWithContent(storedState);
-
   const handleMoveDetail = () => {
     history.push(`/quarantinedetail/${boardId}`);
   };
@@ -48,9 +45,9 @@ const QuarPostCard = (props) => {
 
         <TitleWrapperM>{title}</TitleWrapperM>
 
-        <ContentWrapperM>
-          <Editor editorState={editorState} readOnly={true} />
-        </ContentWrapperM>
+        <ContentWrapperM
+          dangerouslySetInnerHTML={{ __html: contents }}
+        ></ContentWrapperM>
 
         <Grid
           height={theme.headOneSize}
@@ -123,9 +120,9 @@ const QuarPostCard = (props) => {
 
       <TitleWrapper>{title}</TitleWrapper>
 
-      <ContentWrapper>
-        <Editor editorState={editorState} readOnly={true} />
-      </ContentWrapper>
+      <ContentWrapper
+        dangerouslySetInnerHTML={{ __html: contents }}
+      ></ContentWrapper>
 
       <Grid height={theme.headOneSize} is_flex="space_row" margin="72px 0 0 0">
         <Text

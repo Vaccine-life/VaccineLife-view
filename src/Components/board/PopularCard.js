@@ -10,6 +10,7 @@ import LikeIconChanger from "../LikeIconChanger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 import { isMobileOnly } from "react-device-detect";
+import logger from "../../shared/logger";
 
 // 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
@@ -17,8 +18,8 @@ const PopularCard = (props) => {
   const {
     board,
     title,
-    contents,
     likeCount,
+    contents,
     totalVisitors,
     commentCount,
     createdAt,
@@ -27,9 +28,7 @@ const PopularCard = (props) => {
   } = props;
 
   /* 로그인 했을때 isHeart 구현*/
-
-  const storedState = convertFromRaw(JSON.parse(contents));
-  const editorState = EditorState.createWithContent(storedState);
+  //const  contents =
 
   const handleMoveDetail = () => {
     history.push(`/detail/${boardId}`);
@@ -62,9 +61,9 @@ const PopularCard = (props) => {
 
         <TitleWrapperM>{title}</TitleWrapperM>
 
-        <ContentWrapperM>
-          <Editor editorState={editorState} readOnly={true} />
-        </ContentWrapperM>
+        <ContentWrapperM
+          dangerouslySetInnerHTML={{ __html: contents }}
+        ></ContentWrapperM>
 
         <Grid
           height={theme.headOneSize}
@@ -139,9 +138,9 @@ const PopularCard = (props) => {
 
       <TitleWrapper>{title}</TitleWrapper>
 
-      <ContentWrapper>
-        <Editor editorState={editorState} readOnly={true} />
-      </ContentWrapper>
+      <ContentWrapper
+        dangerouslySetInnerHTML={{ __html: contents }}
+      ></ContentWrapper>
 
       <Grid height={theme.headOneSize} is_flex="space_row" margin="72px 0 0 0">
         <Text
@@ -217,11 +216,12 @@ const TitleWrapper = styled.div`
 `;
 
 const TitleWrapperM = styled.div`
-  width: 100%;
+  width: 300px;
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
   font-weight: 700;
-
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   text-align: start;
   margin-bottom: 8px;

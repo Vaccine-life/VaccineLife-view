@@ -35,7 +35,7 @@ const UserInfo = (props) => {
             <TableTrM style={{ color: `${theme.typoGrey3}` }}>
               <Th>{typeChanger(type)}</Th>
               <Th>{degree} 차</Th>
-              <Th>{age}</Th>
+              <Th>{age} 대</Th>
               <Th>{gender}</Th>
               <Th>{disease}</Th>
             </TableTrM>
@@ -69,7 +69,7 @@ const UserInfo = (props) => {
           <TableTr>
             <Th>{typeChanger(type)}</Th>
             <Th>{degree} 차</Th>
-            <Th>{age}</Th>
+            <Th>{age} 대</Th>
             <Th>{gender}</Th>
             <Th>{disease}</Th>
           </TableTr>

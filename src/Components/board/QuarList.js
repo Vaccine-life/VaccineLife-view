@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionGetBoard } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
+import TopArticle from "../mobile/board/TopArticle";
+import TopQuarTable from "./TopQuarTable";
 
 const QuarList = (props) => {
   const { board } = props;
@@ -32,6 +34,16 @@ const QuarList = (props) => {
         is_loading={is_loading}
         size={750}
       >
+        <TopArticle
+          board={board}
+          type="공지"
+          title="[공지] 슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
+          likeCount={0}
+          commentCount={0}
+          totalVisitors={0}
+          createAt="2021-08-19 16:33:33"
+          boardId={48}
+        />
         {/* map돌리기 */}
         {quar_list?.map((each, index) => {
           return (
@@ -71,6 +83,16 @@ const QuarList = (props) => {
           size={300}
         >
           {/* map돌리기 */}
+          <TopQuarTable
+            board={board}
+            type="공지"
+            title="[공지] 슬기로운 백신생활을 이용하고 피드백을 남겨주세요!"
+            likeCount={0}
+            commentCount={0}
+            totalVisitors={0}
+            createAt="2021-08-19 16:33:33"
+            boardId={48}
+          />
           {quar_list?.map((each, index) => {
             return (
               <QuarTableTr
