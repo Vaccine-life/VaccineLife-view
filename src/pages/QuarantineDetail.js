@@ -25,6 +25,7 @@ import { history } from "../redux/configStore";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import NavModal from "../components/mobile/NavModal";
+import Arrow from "../images/Arrow.png";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -104,7 +105,9 @@ const QuarantineDetail = () => {
             댓글 {comment_list.length}개
           </p>
 
-          <TextDivM onClick={handleMoveTotal}>전체 게시글</TextDivM>
+          <TextDivM onClick={handleMoveTotal}>
+            전체 게시글 <img src={Arrow} alt="" />
+          </TextDivM>
         </Grid>
         <CommentWrite board="quarantine" boardId={boardId_detail} />
         {comment_list?.map((each, index) => {
@@ -171,7 +174,9 @@ const QuarantineDetail = () => {
           댓글 {comment_list.length} 개
         </p>
 
-        <TextDiv onClick={handleMoveTotal}>전체 게시글</TextDiv>
+        <TextDiv onClick={handleMoveTotal}>
+          전체 게시글 <img src={Arrow} alt="" />
+        </TextDiv>
       </Grid>
       <CommentWrite board="quarantine" boardId={boardId_detail} />
       {comment_list?.map((each, index) => {
@@ -197,15 +202,30 @@ const QuarantineDetail = () => {
 };
 
 const TextDiv = styled.div`
-  font-size: ${theme.bodyTwoSize};
-  width: ${theme.totalButtonWidth};
-  height: ${theme.mediumButtonHeight};
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  font-weight: 700;
+  width: max-content;
+  height: 26px;
+  font-weight: normal;
+  font-size: ${theme.bodyOneSize};
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: ${theme.typoGrey3};
   :hover {
     cursor: pointer;
-    color: ${theme.typoGrey2};
+    text-decoration: underline;
+    text-underline-position: under;
+    color: ${theme.typoGrey1};
+  }
+  & > img {
+    width: auto;
+    height: auto;
+    max-width: 15px;
+    max-height: 15px;
+    margin-top: 4px;
+    margin-left: 6px;
   }
 `;
 
@@ -220,12 +240,29 @@ const CenterLineM = styled.div`
   height: 1px;
   background-color: ${theme.typoLightGrey2};
 `;
+
 const TextDivM = styled.div`
-  font-size: ${theme.SubHeadTwoSize};
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-weight: 700;
+  width: max-content;
+  height: 26px;
+  font-weight: normal;
+  font-size: ${theme.SubHeadTwoSize};
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: ${theme.typoGrey2};
+  text-decoration: underline;
+  text-underline-position: under;
+  & > img {
+    width: auto;
+    height: auto;
+    max-width: 13px;
+    max-height: 13px;
+    margin-top: 4px;
+    margin-left: 6px;
+  }
 `;
 
 export default QuarantineDetail;
