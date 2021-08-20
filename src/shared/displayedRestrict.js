@@ -1,10 +1,11 @@
 import moment from "moment";
+import logger from "./logger";
 
 const displayedRestrict = (createdAt) => {
+  createdAt = String(createdAt);
+  createdAt = createdAt.replace(/-/g, "/");
   const timeValue = new Date(createdAt);
-  const getTime = timeValue.getTime();
-  const getDate = new Date(getTime);
-  const result = moment(getDate).format("YYYY.MM.DD HH:mm");
+  const result = moment(timeValue).format("yyyy.MM.DD HH:mm");
   return result;
 };
 
