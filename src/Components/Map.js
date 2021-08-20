@@ -312,7 +312,7 @@ const MapTitle = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 130px;
+  width: max-content;
   height: 26px;
   margin-bottom: 10px;
   & > img {
