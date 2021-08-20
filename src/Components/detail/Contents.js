@@ -11,7 +11,7 @@ import { isMobileOnly } from "react-device-detect";
 
 const Contents = (props) => {
   // console.log(props)
-  const { contents, board, boardId } = props;
+  const { contents, board, boardId, likeCount } = props;
   // 클릭했을때 색 변경 추가할것
 
   if (isMobileOnly) {
@@ -49,16 +49,16 @@ const Contents = (props) => {
           dangerouslySetInnerHTML={{ __html: contents }}
         ></ContentDiv>
         <LikeWrapperM>
-          <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+          <LikeIconChanger board={board} boardId={boardId} size="1x" bigHeart />
           <p
             style={{
-              fontSize: `${theme.headTwoSize}`,
+              fontSize: `${theme.bodyTwoSize}`,
               marginLeft: "5.55px",
               fontWeight: "700",
               color: `${theme.bg}`,
             }}
           >
-            추천
+            {likeCount}
           </p>
         </LikeWrapperM>
       </WrapperM>
@@ -104,7 +104,7 @@ const Contents = (props) => {
             color: `${theme.bg}`,
           }}
         >
-          추천
+          {likeCount}
         </p>
       </LikeWrapper>
     </Wrapper>
