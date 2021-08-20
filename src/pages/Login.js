@@ -73,6 +73,18 @@ const Login = (props) => {
 
     // 유저가 SignupComponent와 Survey에서 입력한 값들이 user라는 객체에 담겨 한번에 dispatch된다
     onSubmit: () => {
+      if (inputs.isVaccine === 0) {
+        setInputs({
+          ...inputs,
+          degree: undefined,
+          type: undefined,
+          gender: undefined,
+          age: undefined,
+          disease: undefined,
+          afterEffect: [],
+        });
+      }
+
       if (inputs.afterEffect.indexOf("없음") !== -1) {
         setInputs({
           ...inputs,
@@ -81,6 +93,8 @@ const Login = (props) => {
       }
 
       const user = { ...signupInputs, ...inputs };
+      console.log(inputs.isVaccine);
+      console.log(inputs);
       dispatch(actionSignup(user));
     },
   });
