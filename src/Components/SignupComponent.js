@@ -316,9 +316,9 @@ const Wrapper = styled.form`
   width: 350px;
   height: auto;
 
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  align-items: center; */
+  align-items: center;
 `;
 
 const InputBox = styled.div`
