@@ -94,6 +94,17 @@ export const actionSignup =
   async (dispatch, getState, { history }) => {
     try {
       // 여기가 찐 회원가입에만 관여하는 부분
+
+      // 유저가 접종한 것처럼 이것저것 체크한 후 마지막에 '접종하지 않음'으로 변경하고 제출한 경우, 이것저것 체크했던 것들을 다시 기본값으로 돌려버린다.
+      if (isVaccine === 0) {
+        type = undefined;
+        gender = undefined;
+        age = undefined;
+        disease = undefined;
+        degree = undefined;
+        afterEffect = [];
+      }
+
       await userAxios.signup({
         username,
         password,

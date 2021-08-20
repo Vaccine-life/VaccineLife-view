@@ -13,6 +13,7 @@ const board = createSlice({
     topThreeQuar: [],
     board: {
       contents: "<p>슬기로운 백신생활</p>",
+      likeCount: 0,
     },
     page: {
       // list에서 각각 board값
