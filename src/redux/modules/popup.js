@@ -33,7 +33,7 @@ const popup = createSlice({
     },
     acionSetMedicalObj: (state, action) => {
       state.medicalObj = action.payload;
-      console.log(state.medicalObj);
+      // console.log(state.medicalObj);
       // {boardId: 279} 잘 찍힘
     },
   },
