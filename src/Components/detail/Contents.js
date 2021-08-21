@@ -100,7 +100,7 @@ const Contents = (props) => {
         <p
           style={{
             fontSize: `${theme.headTwoSize}`,
-            marginBottom: "4px",
+            marginBottom: "3px",
             marginLeft: "5.55px",
             fontWeight: "500",
             color: `${theme.bg}`,
