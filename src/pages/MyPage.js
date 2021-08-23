@@ -17,12 +17,20 @@ const MyPage = () => {
 
       <Grid is_flex="space_row">
         <Grid width={theme.mediumButtonWidth} margin="0 120px 0 0">
-          <Button>좌단 세로 메뉴</Button>
+          <MenuItem>좌단 세로 메뉴</MenuItem>
           <Button>좌단 세로 메뉴</Button>
           <Button>좌단 세로 메뉴</Button>
           <Line />
         </Grid>
         <Grid is_flex="column" margin="0 0 auto 0">
+          <Text
+            width={theme.userSurveywidth}
+            size={theme.SubHeadOneSize}
+            margin="0 0 40px 0"
+            bold
+          >
+            계정 정보
+          </Text>
           <Grid is_flex="space_row">
             <Text
               width={theme.userSurveywidth}
@@ -51,10 +59,13 @@ const Line = styled.div`
   margin: ${theme.SubHeadTwoHeight} 0;
 `;
 
-const ContentBox = styled.div`
+const MenuItem = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  padding-left: 7px;
 `;
 
 export default MyPage;

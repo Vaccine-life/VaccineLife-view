@@ -11,6 +11,9 @@ const board = createSlice({
     listQuar: [],
     topThreeVac: [],
     topThreeQuar: [],
+    myLikeVac: [],
+    myLikeQuar: [],
+    myLikeMedi: [],
     board: {
       contents: "<p>슬기로운 백신생활</p>",
       likeCount: 0,
@@ -32,7 +35,6 @@ const board = createSlice({
   reducers: {
     actionSetListVac: (state, action) => {
       state.listVac.push(...action.payload.board);
-      console.log(action.payload.board);
       state.pagingVac.nextPage += 1;
       state.pagingVac.totalPage = action.payload.totalPageInData;
     },
@@ -50,12 +52,24 @@ const board = createSlice({
         if (deleteIndex !== -1) {
           state.listVac.splice(deleteIndex, 1);
         }
+        const deleteIndexLike = state.myLikeVac.findIndex(
+          (each) => each.id === boardId
+        );
+        if (deleteIndexLike !== -1) {
+          state.myLikeVac.splice(deleteIndex, 1);
+        }
       } else {
         const deleteIndex = state.listQuar.findIndex(
           (each) => each.id === boardId
         );
         if (deleteIndex !== -1) {
           state.listQuar.splice(deleteIndex, 1);
+        }
+        const deleteIndexLike = state.myLikeQuar.findIndex(
+          (each) => each.id === boardId
+        );
+        if (deleteIndexLike !== -1) {
+          state.myLikeQuar.splice(deleteIndex, 1);
         }
       }
     },
@@ -74,12 +88,23 @@ const board = createSlice({
     actionSetBoard: (state, action) => {
       state.board = action.payload;
     },
-
+    //topthree
     actionSetTopThreeVac: (state, action) => {
       state.topThreeVac = action.payload;
     },
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
+    },
+    // mylike
+    actionSetMyLikeList: (state, action) => {
+      const { board, likeList } = action.payload;
+      if (board === "vaccine") {
+        state.myLikeVac = likeList;
+      } else if (board === "quarantine") {
+        state.myLikeQuar = likeList;
+      } else {
+        state.myLikeMedi = likeList;
+      }
     },
     //like 관련
     acionMinusLike: (state, action) => {
@@ -97,6 +122,12 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myLikeVac = state.myLikeVac.map((each) => {
+          if (each.vacBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
 
         state.board.likeCount = state.board.likeCount - 1;
       } else {
@@ -107,6 +138,12 @@ const board = createSlice({
           return { ...each };
         });
         state.topThreeQuar = state.topThreeQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+        state.myLikeQuar = state.myLikeQuar.map((each) => {
           if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
           }
@@ -130,6 +167,12 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myLikeVac = state.myLikeVac.map((each) => {
+          if (each.vacBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
         state.board.likeCount = state.board.likeCount + 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
@@ -139,6 +182,12 @@ const board = createSlice({
           return { ...each };
         });
         state.topThreeQuar = state.topThreeQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
+        state.myLikeQuar = state.myLikeQuar.map((each) => {
           if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
           }
@@ -458,6 +507,7 @@ export const {
   actionSetBoard,
   actionSetTopThreeVac,
   actionSetTopThreeQuar,
+  actionSetMyLikeList,
   acionMinusLike,
   acionPlusLike,
   actionMinusComment,

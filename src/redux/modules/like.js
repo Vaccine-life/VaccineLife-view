@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { commentAxios, likeAxios } from "../../shared/api";
 import { getCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
-import { acionMinusLike, acionPlusLike } from "./board";
+import { acionMinusLike, acionPlusLike, actionSetMyLikeList } from "./board";
 import {
   acionMinusLikeMedi,
   acionPlusLikeMedi,
@@ -69,20 +69,27 @@ export const actionGetLike =
         return;
       }
       const userId = getState().user.user.userId;
+
       let getData = [];
       let makeData = [];
+
       if (board === "vaccine") {
         getData = await likeAxios.getLikeListVac(userId);
         getData.data.map((each) => {
           makeData.push(each.vacBoardId);
         });
+        const likeList = getData.data;
+        dispatch(actionSetMyLikeList({ board, likeList }));
         dispatch(actionSetLikeVac(makeData));
-      } else {
+      } else if (board === "quarantine") {
         getData = await likeAxios.getLikeListQuar(userId);
         getData.data.map((each) => {
           makeData.push(each.quarBoardId);
         });
+        const likeList = getData.data;
+        dispatch(actionSetMyLikeList({ board, likeList }));
         dispatch(actionSetLikeQuar(makeData));
+      } else {
       }
     } catch (error) {
       dispatch(
@@ -110,6 +117,8 @@ export const actionGetLikeMedi =
       // console.log(getData);
       // 왜 안나옴??? -> dispatch(actionGetLikeMedi())하니까 나옴
       // medicalId가 엉뚱한게 들어가고 있음 => 서버에서 잘 못 내려줌
+      //const likeList = getData.data;
+      //asdas({ board: "medical", likeList });
       getData.data.map((each) => {
         makeData.push(each.medicalId);
       });

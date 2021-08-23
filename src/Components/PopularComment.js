@@ -24,7 +24,7 @@ const PopularComment = (props) => {
 
   const top_list_medi = useSelector((state) => state.comment.topThreeMedi);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
-  console.log(top_list_medi);
+  // console.log(top_list_medi);
 
   React.useEffect(() => {
     dispatch(actionGetTopThreeMedi());

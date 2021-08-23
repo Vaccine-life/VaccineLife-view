@@ -4,16 +4,33 @@ import theme from "../../styles/theme";
 import "draft-js/dist/Draft.css";
 import { convertFromRaw } from "draft-js";
 import { Editor, EditorState } from "draft-js";
-import { Button, Grid, Text } from "../../elements";
+import { Grid, Text } from "../../elements";
 import logger from "../../shared/logger";
 import LikeIconChanger from "../LikeIconChanger";
 import { isMobileOnly } from "react-device-detect";
+import { useDispatch, useSelector } from "react-redux";
+import { actionPostLike } from "../../redux/modules/like";
 
 const Contents = (props) => {
   // console.log(props)
   const { contents, board, boardId, likeCount } = props;
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.user.userId);
   // 클릭했을때 색 변경 추가할것
+  const likeObj =
+    board === "vaccine"
+      ? {
+          vacBoardId: boardId,
+          userId,
+        }
+      : {
+          quarBoardId: boardId,
+          userId,
+        };
 
+  const handleLikeClick = () => {
+    dispatch(actionPostLike(board, likeObj));
+  };
   if (isMobileOnly) {
     return (
       <WrapperM>
@@ -96,7 +113,7 @@ const Contents = (props) => {
         dangerouslySetInnerHTML={{ __html: contents }}
       ></ContentDiv>
       <LikeWrapper>
-        <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+        {/* <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
         <p
           style={{
             fontSize: `${theme.headTwoSize}`,
@@ -107,7 +124,20 @@ const Contents = (props) => {
           }}
         >
           {likeCount}
-        </p>
+        </p> */}
+        <LikeBtn onClick={handleLikeClick}>
+          <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+          <p
+            style={{
+              fontSize: `${theme.headTwoSize}`,
+              marginLeft: "5.55px",
+              fontWeight: "700",
+              color: `${theme.bg}`,
+            }}
+          >
+            {likeCount}
+          </p>
+        </LikeBtn>
       </LikeWrapper>
     </Wrapper>
   );
@@ -160,8 +190,6 @@ const LikeWrapper = styled.div`
   width: ${theme.mediumButtonWidth};
   height: ${theme.mediumButtonHeight};
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 87px auto 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
@@ -178,6 +206,20 @@ const LikeWrapperM = styled.div`
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
   border: 1.5px solid ${theme.btnColor};
+`;
+
+const LikeBtn = styled.button`
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${theme.white};
+  border: 1.5px solid ${theme.bg2};
+  :hover {
+    cursor: pointer;
+    font-size: ${theme.headTwoSize};
+  }
 `;
 
 export default Contents;

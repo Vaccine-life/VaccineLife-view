@@ -23,11 +23,11 @@ const Medical = (props) => {
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const comment_list = useSelector((state) => state.comment.list);
-  console.log(comment_list);
+  // console.log(comment_list);
   const is_login = useSelector((state) => state.user.is_login);
   const is_loading = useSelector((state) => state.isLoading.isLoading);
   const pagingMedi = useSelector((state) => state.comment.pagingMedi);
-  console.log(pagingMedi);
+  // console.log(pagingMedi);
   const { nextPage, totalPage } = pagingMedi;
 
   const nextCall = () => {
@@ -35,7 +35,7 @@ const Medical = (props) => {
   };
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     dispatch(actionGetMedical());
   }, []);
 
@@ -72,16 +72,16 @@ const Medical = (props) => {
               전체응원글
             </Text>
           </Grid>
-          {/* <InfinityScroll
+          <InfinityScroll
             nextCall={nextCall}
             is_next={nextPage <= totalPage ? true : false}
             is_loading={is_loading}
             size={600}
-          > */}
-          {comment_list.map((c, idx) => {
-            return <CommentList key={idx} {...c} />;
-          })}
-          {/* </InfinityScroll> */}
+          >
+            {comment_list.map((c, idx) => {
+              return <CommentList key={idx} {...c} />;
+            })}
+          </InfinityScroll>
         </Grid>
 
         {navModal_status && <NavModal />}
@@ -114,16 +114,16 @@ const Medical = (props) => {
             전체응원글
           </Text>
         </Grid>
-        {/* <InfinityScroll
+        <InfinityScroll
           nextCall={nextCall}
           is_next={nextPage <= totalPage ? true : false}
           is_loading={is_loading}
           size={300}
-        > */}
-        {comment_list.map((c, idx) => {
-          return <CommentList key={idx} {...c} />;
-        })}
-        {/* </InfinityScroll> */}
+        >
+          {comment_list.map((c, idx) => {
+            return <CommentList key={idx} {...c} />;
+          })}
+        </InfinityScroll>
       </Grid>
       {modal_status && <Login />}
       {alert_status && <Alert />}
