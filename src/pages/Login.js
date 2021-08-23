@@ -23,8 +23,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const Login = (props) => {
   const dispatch = useDispatch();
 
-  const [status, setStatus] = useState("modify");
-  // const [status, setStatus] = useState("login");
+  const [status, setStatus] = useState("login");
+  // const [status, setStatus] = useState("modify");
 
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);

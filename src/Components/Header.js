@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionVisible, actionNavVisible } from "../redux/modules/modal";
+import {
+  actionVisible,
+  actionNavVisible,
+  actionSurveyVisible,
+} from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
@@ -140,7 +144,7 @@ const Header = (props) => {
                 >
                   <span
                     style={{ boxShadow: "inset 0 -1px 0 #242424" }}
-                    onClick={() => dispatch(actionVisible())}
+                    onClick={() => dispatch(actionSurveyVisible())}
                   >
                     마이페이지
                   </span>
