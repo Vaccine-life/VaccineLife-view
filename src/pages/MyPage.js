@@ -24,6 +24,7 @@ const MyPage = () => {
       <Grid className="하단좌측그리드" is_flex="space_row">
         <Grid width={theme.mediumButtonWidth} margin="0 120px auto 0">
           <MenuItem
+            menu={menu === "myinfo" ? true : false}
             onClick={() => {
               setMenu("myinfo");
             }}
@@ -31,6 +32,7 @@ const MyPage = () => {
             내 정보
           </MenuItem>
           <MenuItem
+            menu={menu === "mypost" ? true : false}
             onClick={() => {
               setMenu("mypost");
             }}
@@ -38,6 +40,7 @@ const MyPage = () => {
             내가 쓴 글
           </MenuItem>
           <MenuItem
+            menu={menu === "mylike" ? true : false}
             onClick={() => {
               setMenu("mylike");
             }}
@@ -90,6 +93,7 @@ const MenuItem = styled.div`
     background-color: ${theme.typoLightGrey1};
     cursor: pointer;
   }
+  ${(props) => props.menu && `font-weight : 700;`}
 `;
 
 export default MyPage;
