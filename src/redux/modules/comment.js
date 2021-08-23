@@ -28,8 +28,8 @@ const comment = createSlice({
     actionSetComment: (state, action) => {
       // state.list = action.payload;
       state.list.push(...action.payload.medicalTen);
-      console.log(action.payload);
-      console.log(action.payload.medicalTen);
+      // console.log(action.payload);
+      // console.log(action.payload.medicalTen);
       state.pagingMedi.nextPage += 1;
       state.pagingMedi.totalPage = action.payload.totalPageInData;
     },
@@ -65,7 +65,7 @@ const comment = createSlice({
     // 의료진 좋아요 관련
     actionSetTopThreeMedi: (state, action) => {
       state.topThreeMedi = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     acionMinusLikeMedi: (state, action) => {
       const { boardId } = action.payload;
@@ -137,10 +137,10 @@ export const actionGetMedical =
   () =>
   async (dispatch, getState, { history }) => {
     try {
-      dispatch(actionLoading());
       // const getData = await medicalAxios.getMedical();
       // const data = getData.data;
       // dispatch(actionSetComment(data));
+
       const { nextPage, totalPage } = getState().comment.pagingMedi;
       if (nextPage > totalPage && nextPage !== 1) {
         return;
@@ -150,7 +150,7 @@ export const actionGetMedical =
 
       const getData = await medicalAxios.getPageMedi(nextPage);
       const medicalTen = getData.data.content;
-      console.log(medicalTen);
+      // console.log(medicalTen);
       const totalPageInData = getData.data.totalPages;
       // console.log(totalPageInData);
 
@@ -158,6 +158,7 @@ export const actionGetMedical =
       //loading => false
       dispatch(actionLoading());
     } catch (error) {
+      console.error(error);
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
