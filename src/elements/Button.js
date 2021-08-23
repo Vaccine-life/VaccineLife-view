@@ -24,6 +24,7 @@ Button.defaultProps = {
   border_radius: "0px",
   fontSize: "14px",
   bold: false,
+  isFlex: false,
 };
 
 const ButtonEle = styled.button`
@@ -44,6 +45,9 @@ const ButtonEle = styled.button`
     border: 1px solid ${(props) => props.bg};
   }
   color: ${(props) => props.color};
+  ${(props) =>
+    props.isFlex &&
+    `display : flex; justify-contents: center; align-items: center;`}
 `;
 
 export default Button;
