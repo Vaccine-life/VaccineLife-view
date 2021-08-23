@@ -4,17 +4,11 @@ import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionVisible,
-  actionNavVisible,
-  actionSurveyVisible,
-} from "../redux/modules/modal";
+import { actionVisible, actionNavVisible } from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
 import theme from "../styles/theme";
-import { deleteCookie } from "../shared/cookie";
-import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobileOnly } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
