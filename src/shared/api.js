@@ -62,7 +62,10 @@ export const commentAxios = {
 
 export const medicalAxios = {
   getMedical: () => api.get("/api/medical"),
+  getPageMedi: (page) =>
+    api.get(`/api/medical/page?sortBy=id&isAsc=false&size=10&page=${page}`),
   addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
   topThreeMedi: () => api.get("/api/medical/toplike"),
+  modifyMedi: (medicalId, obj) => api.patch(`/api/medical/${medicalId}`, obj),
 };

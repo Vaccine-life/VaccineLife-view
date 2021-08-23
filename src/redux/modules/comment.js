@@ -10,19 +10,28 @@ const initialState = {
   topThreeMedi: [],
   commentVac: [],
   commentQuar: [],
+  // 무한스크롤
+  page: {
+    prev: {},
+    next: {},
+  },
+  pagingMedi: {
+    nextPage: 1,
+    totalPage: 0,
+  },
 };
 
-// createSlice는 initialState, action, reducer를 하나의 객체에 담아 전달받음.
-// action creator와 action type을 가진 reducer 자동 생성
 const comment = createSlice({
-  // 리듀서 이름(액션의 경로를 잡아줄 이름)
   name: "comment",
   initialState,
-  // action을 선언하고 해당 action이 dispatch되면 바로 state를 가지고 action처리 함.
   reducers: {
     actionSetComment: (state, action) => {
-      state.list = action.payload;
-      // state.list.push(...action.payload)
+      // state.list = action.payload;
+      state.list.push(...action.payload.medicalTen);
+      console.log(action.payload);
+      console.log(action.payload.medicalTen);
+      state.pagingMedi.nextPage += 1;
+      state.pagingMedi.totalPage = action.payload.totalPageInData;
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
@@ -32,10 +41,26 @@ const comment = createSlice({
       console.log(action.payload);
       let idx = state.list.findIndex((c) => c.id === medicalId);
       // console.log(idx)
-
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
+    },
+    // 무한스크롤
+    actionResetList: (state, action) => {
+      const { mediContents, totalPageInData } = action.payload;
+      state.list = mediContents;
+      state.pagingMedi.nextPage = 2;
+      state.pagingMedi.totalPage = totalPageInData;
+    },
+    actionSetPrevNextPageMedi: (state, action) => {
+      const currentIndex = state.list.findIndex((each) => {
+        return each.id === action.payload;
+      });
+      const totalLength = state.list.length;
+      state.page.prev =
+        totalLength === currentIndex ? undefined : state.list[currentIndex + 1];
+      state.page.next =
+        0 === currentIndex ? undefined : state.list[currentIndex - 1];
     },
     // 의료진 좋아요 관련
     actionSetTopThreeMedi: (state, action) => {
@@ -112,9 +137,26 @@ export const actionGetMedical =
   () =>
   async (dispatch, getState, { history }) => {
     try {
-      const getData = await medicalAxios.getMedical();
-      const data = getData.data;
-      dispatch(actionSetComment(data));
+      dispatch(actionLoading());
+      // const getData = await medicalAxios.getMedical();
+      // const data = getData.data;
+      // dispatch(actionSetComment(data));
+      const { nextPage, totalPage } = getState().comment.pagingMedi;
+      if (nextPage > totalPage && nextPage !== 1) {
+        return;
+      }
+      //loading => true
+      dispatch(actionLoading());
+
+      const getData = await medicalAxios.getPageMedi(nextPage);
+      const medicalTen = getData.data.content;
+      console.log(medicalTen);
+      const totalPageInData = getData.data.totalPages;
+      // console.log(totalPageInData);
+
+      dispatch(actionSetComment({ medicalTen, totalPageInData }));
+      //loading => false
+      dispatch(actionLoading());
     } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -128,10 +170,18 @@ export const actionAddMedical =
   (contents) =>
   async (dispatch, getState, { history }) => {
     try {
+      // await medicalAxios.addMedical(contents);
+      // const getData = await medicalAxios.getMedical();
+      // const data = getData.data;
+      // dispatch(actionSetComment(data));
+      dispatch(actionLoading());
       await medicalAxios.addMedical(contents);
-      const getData = await medicalAxios.getMedical();
-      const data = getData.data;
-      dispatch(actionSetComment(data));
+      const getData = await medicalAxios.getPageMedi();
+      const mediContetns = getData.data;
+      const totalPageInData = getData.data.totalPages;
+      dispatch(actionSetComment(mediContetns, totalPageInData));
+      dispatch(actionResetList({ mediContetns, totalPageInData }));
+      dispatch(actionLoading());
     } catch (err) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
@@ -145,11 +195,31 @@ export const actionDeleteMedical =
   (medicalId) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(actionLoading());
       await medicalAxios.deleteMedical(medicalId);
       dispatch(actionDeleteComment({ medicalId }));
       dispatch(acionSetMedicalObj());
       history.replace("/medical");
+      dispatch(actionLoading());
     } catch (err) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+// 서버의 medical 수정하기
+export const actionModifyMedical =
+  (contents) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(actionLoading());
+      await medicalAxios.modifyMedi(contents);
+      history.replace("/medical");
+
+      dispatch(actionLoading());
+    } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
@@ -249,6 +319,8 @@ export const {
   actionSetComment,
   actionAddComment,
   actionDeleteComment,
+  actionResetList,
+  actionSetPrevNextPageMedi,
   actionSetTopThreeMedi,
   acionMinusLikeMedi,
   acionPlusLikeMedi,
