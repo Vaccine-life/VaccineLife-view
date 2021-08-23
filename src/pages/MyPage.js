@@ -93,7 +93,9 @@ const MenuItem = styled.div`
     background-color: ${theme.typoLightGrey1};
     cursor: pointer;
   }
-  ${(props) => props.menu && `font-weight : 700;`}
+  ${(props) =>
+    props.menu &&
+    `font-weight : 700; background-color: ${theme.typoLightGrey1}`}
 `;
 
 export default MyPage;
