@@ -146,10 +146,11 @@ const Header = (props) => {
                     로그아웃
                   </span>
                 </Text> */}
-                <EachDiv
-                // onClick={() => {
-                //   history.push("");
-                // }}
+                <MypageDiv
+                  nav={url === "/" ? true : false}
+                  onClick={() => {
+                    history.push("/");
+                  }}
                 >
                   <img
                     src={user}
@@ -160,14 +161,8 @@ const Header = (props) => {
                       margin: "0 5px 0 0",
                     }}
                   />
-                  <Text
-                    color={theme.typoBlack}
-                    size={theme.bodyThreeSize}
-                    margin="0 5rem 0 0"
-                  >
-                    {nickname}
-                  </Text>
-                </EachDiv>
+                  {nickname}
+                </MypageDiv>
               </>
             ) : (
               <Text
@@ -251,7 +246,29 @@ const EachDiv = styled.div`
   @media (max-width: 500px) {
     flex-direction: column;
     align-items: flex-end;
-    /* display: none; */
+  }
+`;
+
+const MypageDiv = styled.div`
+  white-space: nowrap;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5rem 0 0;
+  font-size: ${theme.headTwoSize};
+  line-height: ${theme.headTwoHeight};
+
+  ${(props) =>
+    props.nav &&
+    ` border-bottom: 4px solid #242424;
+  font-weight: 700;`}
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-end;
   }
 `;
 
