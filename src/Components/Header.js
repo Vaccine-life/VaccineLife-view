@@ -14,6 +14,7 @@ import { actionLogoutCookie } from "../redux/modules/user";
 import { isMobileOnly } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import user from "../images/user.png";
 
 const Header = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
@@ -80,9 +81,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/vaccine" ||
-                    url.includes("/detail") ||
-                    url === "/vaccineboard/write" ||
-                    url.includes("/modify")
+                  url.includes("/detail") ||
+                  url === "/vaccineboard/write" ||
+                  url.includes("/modify")
                     ? true
                     : false
                 }
@@ -95,9 +96,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/quarantine" ||
-                    url.includes("/quarantinedetail") ||
-                    url === "/quarantineboard/write" ||
-                    url.includes("/quarantinemodify")
+                  url.includes("/quarantinedetail") ||
+                  url === "/quarantineboard/write" ||
+                  url.includes("/quarantinemodify")
                     ? true
                     : false
                 }
@@ -121,7 +122,7 @@ const Header = (props) => {
           <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
-                <Text
+                {/* <Text
                   size={theme.headTwoSize}
                   lineHeight={theme.headTwoHeight}
                   color={theme.typoBlack}
@@ -144,7 +145,29 @@ const Header = (props) => {
                   >
                     로그아웃
                   </span>
-                </Text>
+                </Text> */}
+                <EachDiv
+                // onClick={() => {
+                //   history.push("");
+                // }}
+                >
+                  <img
+                    src={user}
+                    alt=""
+                    style={{
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      margin: "0 5px 0 0",
+                    }}
+                  />
+                  <Text
+                    color={theme.typoBlack}
+                    size={theme.bodyThreeSize}
+                    margin="0 5rem 0 0"
+                  >
+                    {nickname}
+                  </Text>
+                </EachDiv>
               </>
             ) : (
               <Text
@@ -229,12 +252,6 @@ const EachDiv = styled.div`
     flex-direction: column;
     align-items: flex-end;
     /* display: none; */
-  }
-`;
-
-const Nav = styled.div`
-  @media screen and (max-width: 500px) {
-    flex-direction: column;
   }
 `;
 

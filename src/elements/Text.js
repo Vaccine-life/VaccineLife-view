@@ -14,6 +14,7 @@ const Text = (props) => {
     _onClick,
     hover,
     alignStart,
+    whiteSpace,
   } = props;
 
   const styles = {
@@ -26,6 +27,7 @@ const Text = (props) => {
     cursor,
     hover,
     alignStart,
+    whiteSpace,
   };
 
   return (
@@ -48,6 +50,7 @@ Text.defaultProps = {
   _onClick: () => {},
   hover: false,
   alignStart: false,
+  whiteSpace: false,
 };
 
 const P = styled.p`
@@ -57,6 +60,7 @@ const P = styled.p`
   margin: ${(props) => props.margin};
   line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
+  white-space: ${(props) => props.whiteSpace};
 
   ${(props) =>
     props.alignStart

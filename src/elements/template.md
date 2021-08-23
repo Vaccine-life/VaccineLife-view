@@ -9,7 +9,8 @@
 - lineHeight
 - cursor
 - \_onChange (\ 뺄것 자동저장임)
-- _onClick
+- \_onClick
+- whiteSpace
 
 # Input
 
@@ -36,7 +37,8 @@
 - size
 - width
 - height
-- cursor 
+- cursor
+- color
 
 # Grid
 
