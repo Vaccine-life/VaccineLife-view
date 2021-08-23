@@ -9,6 +9,7 @@ import { actionVisible } from "../redux/modules/modal";
 import LoginComponent from "../components/LoginComponent";
 import SignupComponent from "../components/SignupComponent";
 import Survey from "../components/Survey";
+import ModifySurvey from "../components/ModifySurvey";
 import Alert from "../components/popup/Alert";
 import { Grid } from "../elements";
 
@@ -22,7 +23,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const Login = (props) => {
   const dispatch = useDispatch();
 
-  const [status, setStatus] = useState("login");
+  const [status, setStatus] = useState("modify");
+  // const [status, setStatus] = useState("login");
 
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
@@ -107,6 +109,16 @@ const Login = (props) => {
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
           </MobileXbutton>
 
+          {status === "modify" && (
+            <ModifySurvey
+              status={status}
+              setStatus={setStatus}
+              inputs={inputs}
+              setInputs={setInputs}
+              formik={formik}
+            />
+          )}
+
           {status === "login" && (
             <LoginComponent status={status} setStatus={setStatus} />
           )}
@@ -151,6 +163,16 @@ const Login = (props) => {
           >
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
           </Xbutton>
+
+          {status === "modify" && (
+            <ModifySurvey
+              status={status}
+              setStatus={setStatus}
+              inputs={inputs}
+              setInputs={setInputs}
+              formik={formik}
+            />
+          )}
 
           {status === "login" && (
             <LoginComponent status={status} setStatus={setStatus} />

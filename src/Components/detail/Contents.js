@@ -56,7 +56,7 @@ const Contents = (props) => {
               marginBottom: "3px",
               marginLeft: "5.55px",
               fontWeight: "500",
-              color: `${theme.bg}`,
+              color: `${theme.btnColor}`,
             }}
           >
             {likeCount}
@@ -103,7 +103,7 @@ const Contents = (props) => {
             marginBottom: "3px",
             marginLeft: "5.55px",
             fontWeight: "500",
-            color: `${theme.bg}`,
+            color: `${theme.btnColor}`,
           }}
         >
           {likeCount}

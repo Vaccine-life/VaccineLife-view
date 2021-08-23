@@ -80,9 +80,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/vaccine" ||
-                    url.includes("/detail") ||
-                    url === "/vaccineboard/write" ||
-                    url.includes("/modify")
+                  url.includes("/detail") ||
+                  url === "/vaccineboard/write" ||
+                  url.includes("/modify")
                     ? true
                     : false
                 }
@@ -95,9 +95,9 @@ const Header = (props) => {
               <EachDiv
                 nav={
                   url === "/quarantine" ||
-                    url.includes("/quarantinedetail") ||
-                    url === "/quarantineboard/write" ||
-                    url.includes("/quarantinemodify")
+                  url.includes("/quarantinedetail") ||
+                  url === "/quarantineboard/write" ||
+                  url.includes("/quarantinemodify")
                     ? true
                     : false
                 }
@@ -128,6 +128,22 @@ const Header = (props) => {
                 >
                   <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
                   안녕하세요
+                </Text>
+                <Text
+                  width="5rem"
+                  cursor="pointer"
+                  margin="0 5rem 0 3rem"
+                  size={theme.headTwoSize}
+                  lineHeight={theme.headTwoHeight}
+                  color={theme.typoBlack}
+                  bold
+                >
+                  <span
+                    style={{ boxShadow: "inset 0 -1px 0 #242424" }}
+                    onClick={() => dispatch(actionVisible())}
+                  >
+                    마이페이지
+                  </span>
                 </Text>
                 <Text
                   width="5rem"
