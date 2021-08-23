@@ -34,6 +34,18 @@ const CommentList = (props) => {
     });
   };
 
+  const changeToTextarea = (id, value) => {
+    return (
+      "<input type='text' id='test " +
+      id +
+      "' onChange='javascript:saveValue(" +
+      id +
+      ",this.value)' value='" +
+      value +
+      "'><br>"
+    );
+  };
+
   if (isMobileOnly) {
     return (
       <>
@@ -72,7 +84,7 @@ const CommentList = (props) => {
             {/* <Modify>
             {is_login && userId === props.userId ? <ModifyMedical /> : ""}
           </Modify> */}
-            {/* <Modify>
+            <Modify>
               {is_login && userId === props.userId ? (
                 <Text
                   color={theme.typoGrey3}
@@ -91,7 +103,7 @@ const CommentList = (props) => {
               ) : (
                 ""
               )}
-            </Modify> */}
+            </Modify>
 
             <Heart>
               <LikeIconMedi boardId={medi_id} />
@@ -169,26 +181,26 @@ const CommentList = (props) => {
           {/* <Modify>
             {is_login && userId === props.userId ? <ModifyMedical /> : ""}
           </Modify> */}
-          {/* <Modify>
+          <Modify>
             {is_login && userId === props.userId ? (
               <Text
                 color={theme.typoGrey3}
                 size={theme.bodyTwoSize}
                 lineHeight={theme.bodyThreeSize}
                 cursor="pointer"
-                _onClick={() => {
-                  // // dispatch(changeContents());
-                  // dispatch(acionSetMedicalObj({ medi_id }));
-                  // dispatch(actionMedicalConfirm());
-                  console.log("수정!!!!!!!!");
-                }}
+                // _onClick={() => {
+                //   // // dispatch(changeContents());
+                //   // dispatch(acionSetMedicalObj({ medi_id }));
+                //   // dispatch(actionMedicalConfirm());
+                // }}
+                _onClick={changeToTextarea}
               >
                 <FontAwesomeIcon icon={faEdit} />
               </Text>
             ) : (
               ""
             )}
-          </Modify> */}
+          </Modify>
 
           <Heart>
             <LikeIconMedi boardId={medi_id} />
