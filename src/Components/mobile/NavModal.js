@@ -11,6 +11,8 @@ import { history } from "../../redux/configStore";
 import { withRouter } from "react-router-dom";
 import login from "../../images/login.png";
 import logout from "../../images/logout.png";
+import user from "../../images/user.png";
+import Arrow from "../../images/Arrow.png";
 
 const NavModal = (props) => {
   const dispatch = useDispatch();
@@ -48,12 +50,39 @@ const NavModal = (props) => {
             </Xbutton>
 
             <Grid align="left">
-              <Text color={theme.typoBlack} size={theme.bodyThreeSize}>
-                <span style={{ color: `${theme.SuccessGreen}` }}>
+              <TextIconWrapper
+              // onClick={() => {
+              //   history.push("");
+              //   dispatch(actionNavVisible());
+              // }}
+              >
+                <img
+                  src={user}
+                  alt=""
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    margin: "0 5px 0 0",
+                  }}
+                />
+                <Text
+                  color={theme.typoBlack}
+                  size={theme.bodyThreeSize}
+                  whiteSpace="pre"
+                >
                   {nickname}
-                </span>
-                님, 환영합니다
-              </Text>
+                </Text>
+                <img
+                  src={Arrow}
+                  alt=""
+                  style={{
+                    width: "6px",
+                    height: "12px",
+                    margin: "0 0 0 1rem",
+                    color: `${theme.typoGrey2}`,
+                  }}
+                />
+              </TextIconWrapper>
               <div
                 style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
               />
@@ -106,11 +135,11 @@ const NavModal = (props) => {
               >
                 의료진분들께
               </Text>
-              <div
+              {/* <div
                 style={{ borderBottom: "1px solid #F7F7F7", margin: "2rem 0" }}
-              />
+              /> */}
 
-              <TextIconWrapper
+              {/* <TextIconWrapper
                 onClick={() => {
                   dispatch(actionNavVisible());
                   dispatch(actionLogoutCookie());
@@ -129,7 +158,7 @@ const NavModal = (props) => {
                   margin="0 0 0 3px"
                   src={logout}
                 />
-              </TextIconWrapper>
+              </TextIconWrapper> */}
             </Grid>
           </Modal>
         </Wrapper>
