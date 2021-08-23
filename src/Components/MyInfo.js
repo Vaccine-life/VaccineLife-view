@@ -52,7 +52,7 @@ const MyInfo = () => {
         </Grid>
       </Grid>
 
-      <Grid is_flex="space_row" margin="0 0 40px 0">
+      <Grid className="건강정보 제목줄" is_flex="space_row" margin="0 0 40px 0">
         <Text
           width={theme.userSurveywidth}
           size={theme.SubHeadOneSize}
@@ -75,6 +75,8 @@ const MyInfo = () => {
           수정하기
         </Text>
       </Grid>
+
+      <Grid></Grid>
     </>
   );
 };
