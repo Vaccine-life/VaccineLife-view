@@ -70,9 +70,10 @@ const Contents = (props) => {
           <p
             style={{
               fontSize: `${theme.bodyTwoSize}`,
+              marginBottom: "3px",
               marginLeft: "5.55px",
-              fontWeight: "700",
-              color: `${theme.bg}`,
+              fontWeight: "500",
+              color: `${theme.btnColor}`,
             }}
           >
             {likeCount}
@@ -112,6 +113,18 @@ const Contents = (props) => {
         dangerouslySetInnerHTML={{ __html: contents }}
       ></ContentDiv>
       <LikeWrapper>
+        {/* <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+        <p
+          style={{
+            fontSize: `${theme.headTwoSize}`,
+            marginBottom: "3px",
+            marginLeft: "5.55px",
+            fontWeight: "500",
+            color: `${theme.btnColor}`,
+          }}
+        >
+          {likeCount}
+        </p> */}
         <LikeBtn onClick={handleLikeClick}>
           <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
           <p
@@ -174,17 +187,25 @@ const ContentDiv = styled.div`
 `;
 
 const LikeWrapper = styled.div`
+  width: ${theme.mediumButtonWidth};
+  height: ${theme.mediumButtonHeight};
   display: flex;
   margin: 87px auto 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
+  border: 1.5px solid ${theme.btnColor};
 `;
+
 const LikeWrapperM = styled.div`
+  width: ${theme.smallButtonWidth};
+  height: ${theme.headOneHeight};
   display: flex;
-  margin: 80px 0 25px auto;
-  padding: 0 16px 0 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 80px auto 25px auto;
   font-size: ${theme.SubHeadTwoSize};
   line-height: ${theme.SubHeadTwoHeight};
+  border: 1.5px solid ${theme.btnColor};
 `;
 
 const LikeBtn = styled.button`

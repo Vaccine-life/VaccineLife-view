@@ -96,7 +96,7 @@ const Wrapper = styled.div`
   ${(props) =>
     props.isHeart
       ? `
- color: ${theme.bg};
+ color: ${theme.btnColor};
   :hover {
     cursor: pointer;
     color: ${theme.typoGrey2};
@@ -106,7 +106,7 @@ const Wrapper = styled.div`
   color: ${theme.typoGrey2};
   :hover {
     cursor: pointer;
-    color: ${theme.bg};
+    color: ${theme.btnColor};
   }
   `}
 `;
@@ -118,7 +118,7 @@ const WrapperM = styled.div`
   ${(props) =>
     props.isHeart
       ? `
- color: ${theme.bg};
+ color: ${theme.btnColor};
   `
       : `
   color: ${theme.typoGrey2};
@@ -134,14 +134,14 @@ const BigWrapper = styled.div`
   ${(props) =>
     props.isHeart
       ? `
- color: ${theme.bg};
+ color: ${theme.btnColor};
   :hover {
     cursor: pointer;
     color: ${theme.typoGrey2};
   }
   `
       : `
-  color: ${theme.bg};
+  color: ${theme.btnColor};
   :hover {
     cursor: pointer;
     color: ${theme.typoGrey2};
@@ -156,11 +156,11 @@ const BigWrapperM = styled.div`
   ${(props) =>
     props.isHeart
       ? `
- color: ${theme.bg};
+ color: ${theme.btnColor};
 
   `
       : `
-  color: ${theme.bg};
+  color: ${theme.btnColor};
  
   `}
 `;
