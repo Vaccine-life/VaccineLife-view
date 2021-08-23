@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Image, Text } from "../elements";
 import styled from "styled-components";
+import profile from "../images/profile.png";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -125,45 +126,34 @@ const Header = (props) => {
           <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
+                <Grid
+                  is_flex="center"
+                  _onClick={() => {
+                    history.push("mypage");
+                  }}
+                  width={theme.headOneSize}
+                  margin="0 5px 0 0"
+                >
+                  <Image
+                    shape="rectangle"
+                    width={theme.headOneSize}
+                    height={theme.headOneSize}
+                    cursor="pointer"
+                    src={profile}
+                  />
+                </Grid>
+
                 <Text
                   size={theme.headTwoSize}
                   lineHeight={theme.headTwoHeight}
                   color={theme.typoBlack}
+                  margin="0 5rem 0 0"
+                  _onClick={() => {
+                    history.push("/mypage");
+                  }}
+                  hover
                 >
-                  <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
-                  안녕하세요
-                </Text>
-                <Text
-                  width="5rem"
-                  cursor="pointer"
-                  margin="0 5rem 0 3rem"
-                  size={theme.headTwoSize}
-                  lineHeight={theme.headTwoHeight}
-                  color={theme.typoBlack}
-                  bold
-                >
-                  <span
-                    style={{ boxShadow: "inset 0 -1px 0 #242424" }}
-                    onClick={() => dispatch(actionSurveyVisible())}
-                  >
-                    마이페이지
-                  </span>
-                </Text>
-                <Text
-                  width="5rem"
-                  cursor="pointer"
-                  margin="0 5rem 0 3rem"
-                  size={theme.headTwoSize}
-                  lineHeight={theme.headTwoHeight}
-                  color={theme.typoBlack}
-                  bold
-                >
-                  <span
-                    style={{ boxShadow: "inset 0 -1px 0 #242424" }}
-                    onClick={() => dispatch(actionLogoutCookie())}
-                  >
-                    로그아웃
-                  </span>
+                  <span>{nickname}</span>
                 </Text>
               </>
             ) : (

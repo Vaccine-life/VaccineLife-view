@@ -13,6 +13,7 @@ import Detail from "../pages/Detail";
 import styled from "styled-components";
 import Modify from "../pages/Modify";
 import Quarantine from "../pages/Quarantine";
+import MyPage from "../pages/MyPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCookie } from "./cookie";
@@ -68,6 +69,7 @@ function App() {
           <Route exact path="/quarantinemodify/:id" component={Modify} />
         )}
         <Route exact path="/medical" component={Medical} />
+        {is_login && <Route exact path="/mypage" component={MyPage} />}
         <Redirect from="*" to="/" />
       </Switch>
       <Banner />
