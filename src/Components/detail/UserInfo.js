@@ -42,7 +42,7 @@ const UserInfo = (props) => {
           </tbody>
           <tfoot>
             <TableTrM>
-              <ThSmM>후유증</ThSmM>
+              <ThSmM>부작용</ThSmM>
               <ThLg colSpan="4" style={{ color: `${theme.typoGrey3}` }}>
                 {afterEffect}
               </ThLg>
@@ -76,7 +76,7 @@ const UserInfo = (props) => {
         </tbody>
         <tfoot>
           <TableTr>
-            <ThSm>후유증</ThSm>
+            <ThSm>부작용</ThSm>
             <ThLg colSpan="4">{afterEffect}</ThLg>
           </TableTr>
         </tfoot>

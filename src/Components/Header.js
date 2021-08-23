@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionVisible, actionNavVisible } from "../redux/modules/modal";
+import {
+  actionVisible,
+  actionNavVisible,
+  actionSurveyVisible,
+} from "../redux/modules/modal";
 import { history } from "../redux/configStore";
 
 import logo from "../assets/mainlogo.png";
@@ -127,18 +131,27 @@ const Header = (props) => {
                   lineHeight={theme.headTwoHeight}
                   color={theme.typoBlack}
                 >
-                  <span style={{ fontWeight: "bold" }}>{nickname}</span> 님,
-                  안녕하세요
-                </Text>
+                  <Image
+                    shape="rectangle"
+                    width={theme.headOneSize}
+                    height={theme.headOneSize}
+                    cursor="pointer"
+                    src={profile}
+                  />
+                </Grid>
+
                 <Text
-                  width="5rem"
-                  cursor="pointer"
-                  margin="0 5rem 0 3rem"
                   size={theme.headTwoSize}
                   lineHeight={theme.headTwoHeight}
                   color={theme.typoBlack}
-                  bold
+                  margin="0 5rem 0 0"
+                  _onClick={() => {
+                    history.push("/mypage");
+                  }}
+                  hover
                 >
+                  <span>{nickname}</span>
+                </Text>
                   <span
                     style={{ boxShadow: "inset 0 -1px 0 #242424" }}
                     onClick={() => dispatch(actionLogoutCookie())}
@@ -147,9 +160,9 @@ const Header = (props) => {
                   </span>
                 </Text> */}
                 <MypageDiv
-                  nav={url === "/" ? true : false}
+                  nav={url === "/mypage" ? true : false}
                   onClick={() => {
-                    history.push("/");
+                    history.push("/mypage");
                   }}
                 >
                   <img

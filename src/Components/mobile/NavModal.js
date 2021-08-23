@@ -51,10 +51,10 @@ const NavModal = (props) => {
 
             <Grid align="left">
               <TextIconWrapper
-              // onClick={() => {
-              //   history.push("");
-              //   dispatch(actionNavVisible());
-              // }}
+                onClick={() => {
+                  history.push("/mypage");
+                  dispatch(actionNavVisible());
+                }}
               >
                 <img
                   src={user}
