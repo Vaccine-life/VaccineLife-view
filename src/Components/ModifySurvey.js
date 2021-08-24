@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Text } from "../elements/index";
-import survey from "../styles/survey.css";
+import { Text, Grid } from "../elements/index";
 import { isMobileOnly } from "react-device-detect";
-import { actionSurveyVisible } from "../redux/modules/modal";
+import { actionModifySurvey } from "../redux/modules/modal";
 import { useFormik } from "formik";
 
 import styled from "styled-components";
@@ -26,22 +25,6 @@ const ModifySurvey = (props) => {
     disease: user.disease,
     afterEffect: user.afterEffect.split(", "),
   });
-
-  // React.useEffect(() => {
-  //   setInputs({
-  //     isVaccine: user.isVaccine,
-  //     degree: user.degree,
-  //     type: user.type,
-  //     gender: user.gender,
-  //     age: user.age,
-  //     disease: user.disease,
-  //     afterEffect: user.afterEffect.split(", "),
-  //   });
-
-  //   console.log(inputs);
-  // }, []);
-
-  console.log(inputs);
 
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
@@ -139,659 +122,699 @@ const ModifySurvey = (props) => {
   if (isMobileOnly) {
     return (
       <>
-        <MobileWrapper onSubmit={formik.handleSubmit}>
-          <Text
-            margin="70px auto 10px auto"
-            size={theme.bodyThreeSize}
-            color={theme.typoGrey3}
-          >
-            회원가입이 곧 마무리됩니다
-          </Text>
-          <Text margin="15px auto" size={theme.bodyTwoSize} bold>
-            여러분의 백신 접종 경험을 공유해주세요
-          </Text>
-
-          <MobileLine style={{ borderColor: "#242424" }} />
-          <MobileSurveyItem>
-            <Text bold color={theme.btnColor} size={theme.bodyOneSize}>
-              백신 접종 여부
-            </Text>
-            <TwoOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="isVaccine"
-                  value="1"
-                  id="isVaccine1"
-                  onClick={handleIsVaccineClick}
-                />
-                <label
-                  htmlFor="isVaccine1"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  접종함
-                </label>
-              </Option>
-
-              <Option>
-                <input
-                  type="radio"
-                  name="isVaccine"
-                  value="0"
-                  id="isVaccine0"
-                  onClick={handleIsVaccineClick}
-                />
-                <label
-                  htmlFor="isVaccine0"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  접종하지않음
-                </label>
-              </Option>
-            </TwoOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
-
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
+        <MobileOuter>
+          <MobileInner onSubmit={formik.handleSubmit}>
+            <MobileXbutton
+              onClick={() => {
+                dispatch(actionModifySurvey());
+              }}
             >
-              접종 회차
-            </Text>
-            <TwoOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="degree"
-                  value="1"
-                  id="degree1"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="degree1"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  1차 접종 완료
-                </label>
-              </Option>
+              <FontAwesomeIcon
+                icon={faTimes}
+                color={theme.typoGrey2}
+                size="lg"
+              />
+            </MobileXbutton>
+            <Grid is_flex="center" height="auto">
+              <Text margin="70px auto 10px auto" size={theme.bodyOneSize} bold>
+                백신 설문조사 수정
+              </Text>
+            </Grid>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="degree"
-                  value="2"
-                  id="degree2"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="degree2"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  2차 접종 완료
-                </label>
-              </Option>
-            </TwoOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+            <MobileLine style={{ borderColor: "#242424" }} />
+            <MobileSurveyItem>
+              <Text bold color={theme.btnColor} size={theme.bodyOneSize}>
+                백신 접종 여부
+              </Text>
+              <TwoOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="isVaccine"
+                    value="1"
+                    id="isVaccine1"
+                    onClick={handleIsVaccineClick}
+                    defaultChecked={true === user.isVaccine}
+                  />
+                  <label
+                    htmlFor="isVaccine1"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    접종함
+                  </label>
+                </Option>
 
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
-            >
-              백신 종류
-            </Text>
-            <ThreeOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="type"
-                  value="모더나"
-                  id="모더나"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="모더나"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  모더나
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="isVaccine"
+                    value="0"
+                    id="isVaccine0"
+                    onClick={handleIsVaccineClick}
+                    defaultChecked={false === user.isVaccine}
+                  />
+                  <label
+                    htmlFor="isVaccine0"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    접종하지않음
+                  </label>
+                </Option>
+              </TwoOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="type"
-                  value="얀센"
-                  id="얀센"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="얀센"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  얀센
-                </label>
-              </Option>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
+                접종 회차
+              </Text>
+              <TwoOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="degree"
+                    value="1"
+                    id="degree1"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={1 === user.degree}
+                  />
+                  <label
+                    htmlFor="degree1"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    1차 접종 완료
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="type"
-                  value="아스트라제네카"
-                  id="아스트라제네카"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="아스트라제네카"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  아스트라제네카
-                </label>
-              </Option>
-            </ThreeOptions>
-            <div></div>
+                <Option>
+                  <input
+                    type="radio"
+                    name="degree"
+                    value="2"
+                    id="degree2"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={2 === user.degree}
+                  />
+                  <label
+                    htmlFor="degree2"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    2차 접종 완료
+                  </label>
+                </Option>
+              </TwoOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-            <TwoOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="type"
-                  value="화이자"
-                  id="화이자"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="화이자"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  화이자
-                </label>
-              </Option>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
+                백신 종류
+              </Text>
+              <ThreeOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="type"
+                    value="모더나"
+                    id="모더나"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"모더나" === user.type}
+                  />
+                  <label
+                    htmlFor="모더나"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    모더나
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="type"
-                  value="아스트라제네카 + 화이자"
-                  id="아스트라제네카+화이자"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="아스트라제네카+화이자"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  아스트라제네카 + 화이자
-                </label>
-              </Option>
-            </TwoOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+                <Option>
+                  <input
+                    type="radio"
+                    name="type"
+                    value="얀센"
+                    id="얀센"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"얀센" === user.type}
+                  />
+                  <label
+                    htmlFor="얀센"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    얀센
+                  </label>
+                </Option>
 
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
-            >
-              성별
-            </Text>
-            <TwoOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="남"
-                  id="남"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="남"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  남
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="type"
+                    value="아스트라제네카"
+                    id="아스트라제네카"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"아스트라제네카" === user.type}
+                  />
+                  <label
+                    htmlFor="아스트라제네카"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    아스트라제네카
+                  </label>
+                </Option>
+              </ThreeOptions>
+              <div></div>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="여"
-                  id="여"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="여"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  여
-                </label>
-              </Option>
-            </TwoOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+              <TwoOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="type"
+                    value="화이자"
+                    id="화이자"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"화이자" === user.type}
+                  />
+                  <label
+                    htmlFor="화이자"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    화이자
+                  </label>
+                </Option>
 
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
-            >
-              연령대
-            </Text>
-            <FourOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="10"
-                  id="10대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="10대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  10대
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="type"
+                    value="아스트라제네카 + 화이자"
+                    id="아스트라제네카+화이자"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"아스트라제네카 + 화이자" === user.type}
+                  />
+                  <label
+                    htmlFor="아스트라제네카+화이자"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    아스트라제네카 + 화이자
+                  </label>
+                </Option>
+              </TwoOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="20"
-                  id="20대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="20대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  20대
-                </label>
-              </Option>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text bold color={theme.typoLightGrey2} size={theme.bodyOneSize}>
+                성별
+              </Text>
+              <TwoOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="남"
+                    id="남"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"남" === user.gender}
+                  />
+                  <label
+                    htmlFor="남"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    남
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="30"
-                  id="30대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="30대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  30대
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="여"
+                    id="여"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"여" === user.gender}
+                  />
+                  <label
+                    htmlFor="여"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    여
+                  </label>
+                </Option>
+              </TwoOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="40"
-                  id="40대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="40대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  40대
-                </label>
-              </Option>
-            </FourOptions>
-            <div></div>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text bold color={theme.typoLightGrey2} size={theme.bodyOneSize}>
+                연령대
+              </Text>
+              <FourOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="10"
+                    id="10대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"10" === user.age}
+                  />
+                  <label
+                    htmlFor="10대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    10대
+                  </label>
+                </Option>
 
-            <FourOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="50"
-                  id="50대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="50대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  50대
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="20"
+                    id="20대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"20" === user.age}
+                  />
+                  <label
+                    htmlFor="20대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    20대
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="60"
-                  id="60대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="60대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  60대
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="30"
+                    id="30대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"30" === user.age}
+                  />
+                  <label
+                    htmlFor="30대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    30대
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="70"
-                  id="70대"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="70대"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  70대
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="40"
+                    id="40대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"40" === user.age}
+                  />
+                  <label
+                    htmlFor="40대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    40대
+                  </label>
+                </Option>
+              </FourOptions>
+              <div></div>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="age"
-                  value="80"
-                  id="80대이상"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="80대이상"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  80대 이상
-                </label>
-              </Option>
-            </FourOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+              <FourOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="50"
+                    id="50대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"50" === user.age}
+                  />
+                  <label
+                    htmlFor="50대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    50대
+                  </label>
+                </Option>
 
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
-            >
-              기저 질환
-            </Text>
-            <ThreeOptions>
-              <Option>
-                <input
-                  type="radio"
-                  name="disease"
-                  value="유"
-                  id="유"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="유"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  유
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="60"
+                    id="60대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"60" === user.age}
+                  />
+                  <label
+                    htmlFor="60대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    60대
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="disease"
-                  value="무"
-                  id="무"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="무"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  무
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="70"
+                    id="70대"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"70" === user.age}
+                  />
+                  <label
+                    htmlFor="70대"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    70대
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="radio"
-                  name="disease"
-                  value="모름"
-                  id="모름"
-                  onClick={handleRadioClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="모름"
-                  style={{ fontSize: `${theme.bodyTwoSize}` }}
-                >
-                  모름
-                </label>
-              </Option>
-            </ThreeOptions>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+                <Option>
+                  <input
+                    type="radio"
+                    name="age"
+                    value="80"
+                    id="80대이상"
+                    onClick={handleRadioClick}
+                    disabled={true}
+                    defaultChecked={"80" === user.age}
+                  />
+                  <label
+                    htmlFor="80대이상"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    80대 이상
+                  </label>
+                </Option>
+              </FourOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-          <MobileLine />
-          <MobileSurveyItem>
-            <Text
-              bold
-              color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-              size={theme.bodyOneSize}
-            >
-              부작용 (중복선택가능)
-            </Text>
-            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="없음"
-                  id="없음"
-                  onClick={handleCheckboxClick}
-                  disabled={!isVaccine && "disabled"}
-                />
-                <label
-                  htmlFor="없음"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  없음
-                </label>
-              </Option>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
+                기저 질환
+              </Text>
+              <ThreeOptions>
+                <Option>
+                  <input
+                    type="radio"
+                    name="disease"
+                    value="유"
+                    id="유"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"유" === user.disease}
+                  />
+                  <label
+                    htmlFor="유"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    유
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="발열"
-                  id="발열"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="발열"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  발열
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="radio"
+                    name="disease"
+                    value="무"
+                    id="무"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"무" === user.disease}
+                  />
+                  <label
+                    htmlFor="무"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    무
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="두통/관절통/근육통"
-                  id="두통관절통근육통"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="두통관절통근육통"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  두통/관절통/근육통
-                </label>
-              </Option>
-            </MobileLowerCheckbox>
+                <Option>
+                  <input
+                    type="radio"
+                    name="disease"
+                    value="모름"
+                    id="모름"
+                    onClick={handleRadioClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={"모름" === user.disease}
+                  />
+                  <label
+                    htmlFor="모름"
+                    style={{ fontSize: `${theme.bodyTwoSize}` }}
+                  >
+                    모름
+                  </label>
+                </Option>
+              </ThreeOptions>
+              {/* <div></div> */}
+            </MobileSurveyItem>
 
-            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="피로감"
-                  id="피로감"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="피로감"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  피로감
-                </label>
-              </Option>
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="접종부위 통증"
-                  id="접종부위통증"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="접종부위통증"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  접종부위 통증
-                </label>
-              </Option>
+            <MobileLine />
+            <MobileSurveyItem>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
+                부작용 (중복선택가능)
+              </Text>
+              <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="없음"
+                    id="없음"
+                    onClick={handleCheckboxClick}
+                    disabled={!isVaccine && "disabled"}
+                    defaultChecked={user.afterEffect.includes("없음")}
+                  />
+                  <label
+                    htmlFor="없음"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    없음
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="구토/매스꺼움"
-                  id="구토매스꺼움"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="구토매스꺼움"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  구토/매스꺼움
-                </label>
-              </Option>
-            </MobileLowerCheckbox>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="발열"
+                    id="발열"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("발열")}
+                  />
+                  <label
+                    htmlFor="발열"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    발열
+                  </label>
+                </Option>
 
-            <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="접종부위 부기/발적"
-                  id="접종부위부기발적"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="접종부위부기발적"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  접종부위 부기/발적
-                </label>
-              </Option>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="두통/관절통/근육통"
+                    id="두통관절통근육통"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes(
+                      "두통/관절통/근육통"
+                    )}
+                  />
+                  <label
+                    htmlFor="두통관절통근육통"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    두통/관절통/근육통
+                  </label>
+                </Option>
+              </MobileLowerCheckbox>
 
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="알러지 반응"
-                  id="알러지반응"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="알러지반응"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  알러지 반응
-                </label>
-              </Option>
+              <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="피로감"
+                    id="피로감"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("피로감")}
+                  />
+                  <label
+                    htmlFor="피로감"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    피로감
+                  </label>
+                </Option>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="접종부위 통증"
+                    id="접종부위통증"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("접종부위 통증")}
+                  />
+                  <label
+                    htmlFor="접종부위통증"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    접종부위 통증
+                  </label>
+                </Option>
 
-              <Option>
-                <input
-                  type="checkbox"
-                  name="afterEffect"
-                  value="기타"
-                  id="기타"
-                  onClick={handleCheckboxClick}
-                  disabled={
-                    (!isVaccine || afterEffect.includes("없음")) && "disabled"
-                  }
-                />
-                <label
-                  htmlFor="기타"
-                  style={{ fontSize: `${theme.bodyThreeSize}` }}
-                >
-                  기타
-                </label>
-              </Option>
-            </MobileLowerCheckbox>
-            {/* <div></div> */}
-          </MobileSurveyItem>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="구토/매스꺼움"
+                    id="구토매스꺼움"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("구토/매스꺼움")}
+                  />
+                  <label
+                    htmlFor="구토매스꺼움"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    구토/매스꺼움
+                  </label>
+                </Option>
+              </MobileLowerCheckbox>
 
-          <MobileSubmitButton type="submit" disabled={disableSubmitButton()}>
-            회원가입
-          </MobileSubmitButton>
-        </MobileWrapper>
+              <MobileLowerCheckbox style={{ marginBottom: "5px" }}>
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="접종부위 부기/발적"
+                    id="접종부위부기발적"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes(
+                      "접종부위 부기/발적"
+                    )}
+                  />
+                  <label
+                    htmlFor="접종부위부기발적"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    접종부위 부기/발적
+                  </label>
+                </Option>
+
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="알러지 반응"
+                    id="알러지반응"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("알러지 반응")}
+                  />
+                  <label
+                    htmlFor="알러지반응"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    알러지 반응
+                  </label>
+                </Option>
+
+                <Option>
+                  <input
+                    type="checkbox"
+                    name="afterEffect"
+                    value="기타"
+                    id="기타"
+                    onClick={handleCheckboxClick}
+                    disabled={
+                      (!isVaccine || afterEffect.includes("없음")) && "disabled"
+                    }
+                    defaultChecked={user.afterEffect.includes("기타")}
+                  />
+                  <label
+                    htmlFor="기타"
+                    style={{ fontSize: `${theme.bodyThreeSize}` }}
+                  >
+                    기타
+                  </label>
+                </Option>
+              </MobileLowerCheckbox>
+              {/* <div></div> */}
+            </MobileSurveyItem>
+
+            <Grid is_flex="center" height="auto">
+              <MobileSubmitButton
+                type="submit"
+                disabled={disableSubmitButton()}
+              >
+                수정완료
+              </MobileSubmitButton>
+            </Grid>
+          </MobileInner>
+        </MobileOuter>
       </>
     );
   }
@@ -803,7 +826,7 @@ const ModifySurvey = (props) => {
         <Modal>
           <Xbutton
             onClick={() => {
-              dispatch(actionSurveyVisible());
+              dispatch(actionModifySurvey());
             }}
           >
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
@@ -1015,11 +1038,7 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text
-                bold
-                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-                size={theme.bodyTwoSize}
-              >
+              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
                 성별
               </Text>
               <TwoOptions>
@@ -1030,7 +1049,8 @@ const ModifySurvey = (props) => {
                     value="남"
                     id="남"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"남" === user.gender}
                   />
                   <label
@@ -1048,7 +1068,8 @@ const ModifySurvey = (props) => {
                     value="여"
                     id="여"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"여" === user.gender}
                   />
                   <label
@@ -1064,11 +1085,7 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text
-                bold
-                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
-                size={theme.bodyTwoSize}
-              >
+              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
                 연령대
               </Text>
               <FourOptions>
@@ -1079,7 +1096,8 @@ const ModifySurvey = (props) => {
                     value="10"
                     id="10대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"10" === user.age}
                   />
                   <label
@@ -1097,7 +1115,8 @@ const ModifySurvey = (props) => {
                     value="20"
                     id="20대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"20" === user.age}
                   />
                   <label
@@ -1115,7 +1134,8 @@ const ModifySurvey = (props) => {
                     value="30"
                     id="30대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"30" === user.age}
                   />
                   <label
@@ -1133,7 +1153,8 @@ const ModifySurvey = (props) => {
                     value="40"
                     id="40대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"40" === user.age}
                   />
                   <label
@@ -1154,7 +1175,8 @@ const ModifySurvey = (props) => {
                     value="50"
                     id="50대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"50" === user.age}
                   />
                   <label
@@ -1172,7 +1194,8 @@ const ModifySurvey = (props) => {
                     value="60"
                     id="60대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"60" === user.age}
                   />
                   <label
@@ -1190,7 +1213,8 @@ const ModifySurvey = (props) => {
                     value="70"
                     id="70대"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"70" === user.age}
                   />
                   <label
@@ -1208,7 +1232,8 @@ const ModifySurvey = (props) => {
                     value="80"
                     id="80대이상"
                     onClick={handleRadioClick}
-                    disabled={!isVaccine && "disabled"}
+                    // disabled={!isVaccine && "disabled"}
+                    disabled={true}
                     defaultChecked={"80" === user.age}
                   />
                   <label
@@ -1608,7 +1633,22 @@ const SubmitButton = styled.button`
 
 // <========= Mobile ==========>
 
-const MobileWrapper = styled.form`
+const MobileOuter = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: white;
+`;
+
+const MobileInner = styled.form`
   width: 90%;
   height: 100%;
   overflow-y: auto;
@@ -1650,6 +1690,15 @@ const MobileSubmitButton = styled.button`
     cursor: default;
     color: white;
     border: none;
+  }
+`;
+
+const MobileXbutton = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  &:hover {
+    cursor: pointer;
   }
 `;
 

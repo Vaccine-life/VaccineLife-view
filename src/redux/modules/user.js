@@ -67,7 +67,7 @@ export const actionLogin =
       dispatch(actionAlert());
       dispatch(actionVisible());
 
-      // history.push("/");
+      history.push("/");
 
       // 로그인시 내가 누른 하트 보이게 하기
       dispatch(actionGetLikeMedi());
@@ -149,7 +149,7 @@ export const actionSignup =
       );
       dispatch(actionAlert());
 
-      // history.push("/");
+      history.push("/");
     } catch (error) {
       logger(error);
       dispatch(
