@@ -57,7 +57,7 @@ const QuarList = (props) => {
               commentCount={each.commentCount}
               totalVisitors={each.totalVisitors}
               createAt={each.createdAt}
-              boardId={each.id}
+              boardId={each.quarBoardId}
             />
           );
         })}
@@ -106,7 +106,7 @@ const QuarList = (props) => {
                 commentCount={each.commentCount}
                 totalVisitors={each.totalVisitors}
                 createAt={each.createdAt}
-                boardId={each.id}
+                boardId={each.quarBoardId}
               />
             );
           })}
