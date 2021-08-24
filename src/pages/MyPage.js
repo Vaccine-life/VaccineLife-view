@@ -21,8 +21,8 @@ const MyPage = () => {
         <Line />
       </Grid>
 
-      <Grid className="하단좌측그리드" is_flex="space_row">
-        <Grid width={theme.mediumButtonWidth} margin="0 120px auto 0">
+      <Grid is_flex="space_row">
+        <Grid className="하단좌측그리드" margin="0 7% auto 0" width="15%">
           <MenuItem
             menu={menu === "myinfo" ? true : false}
             onClick={() => {
@@ -65,7 +65,8 @@ const MyPage = () => {
         <Grid
           className="하단우측그리드"
           is_flex="column"
-          margin="10px 0 auto 0"
+          margin="0 0 auto 0"
+          width="78%"
         >
           {menu === "myinfo" && <MyInfo />}
           {menu === "mypost" && <MyPost />}
@@ -78,8 +79,7 @@ const MyPage = () => {
 
 const Line = styled.div`
   width: 100%;
-  height: 1.5px;
-  background-color: ${theme.typoLightGrey2};
+  border-bottom: 1.5px solid ${theme.typoLightGrey2};
   margin: ${theme.SubHeadTwoHeight} 0;
 `;
 
@@ -93,7 +93,9 @@ const MenuItem = styled.div`
     background-color: ${theme.typoLightGrey1};
     cursor: pointer;
   }
-  ${(props) => props.menu && `font-weight : 700;`}
+  ${(props) =>
+    props.menu &&
+    `font-weight : 700; background-color: ${theme.typoLightGrey1}`}
 `;
 
 export default MyPage;

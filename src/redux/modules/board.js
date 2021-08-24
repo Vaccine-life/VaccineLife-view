@@ -361,6 +361,8 @@ export const actionGetDetail =
       let board_input = {};
       if (board === "vaccine") {
         const getData = await boardAxios.getDetailVac(boardId);
+        const getPrevNext = await boardAxios.getPrevNextVac(boardId);
+        logger(getPrevNext);
         const data = getData.data;
         board_input = {
           afterEffect: data.afterEffect,
@@ -383,6 +385,7 @@ export const actionGetDetail =
         };
       } else {
         const getData = await boardAxios.getDetailQuar(boardId);
+        const getPrevNext = await boardAxios.getPrevNextQuar(boardId);
         const data = getData.data;
         board_input = {
           username: data.username,

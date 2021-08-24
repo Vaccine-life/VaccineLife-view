@@ -8,6 +8,7 @@ const MyInfo = () => {
     <>
       <Text
         width={theme.userSurveywidth}
+        lineHeight={theme.mediumButtonHeight}
         size={theme.SubHeadOneSize}
         margin="0 0 40px 0"
         bold

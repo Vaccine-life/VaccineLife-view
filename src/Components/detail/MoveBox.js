@@ -1,24 +1,22 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Grid } from "../../elements";
+
 import theme from "../../styles/theme";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { history } from "../../redux/configStore";
 
+import { isMobileOnly } from "react-device-detect";
+
 const MoveBox = (props) => {
-  const { boardType } = props;
+  const { board } = props;
   const page = useSelector((state) => state.board.page);
 
   const handleClickLeft = () => {
     if (page.prev === undefined) {
       return;
     }
-    if (boardType) {
+    if (board === "vaccine") {
       history.push(`/detail/${page.prev?.boardId}`);
     } else {
       history.push(`/quarantinedetail/${page.prev?.boardId}`);
@@ -28,12 +26,50 @@ const MoveBox = (props) => {
     if (page.next === undefined) {
       return;
     }
-    if (boardType) {
+    if (board === "vaccine") {
       history.push(`/detail/${page.next?.boardId}`);
     } else {
       history.push(`/quarantinedetail/${page.next?.boardId}`);
     }
   };
+
+  const handleMoveTotal = () => {
+    if (board === "vaccine") {
+      history.push("/vaccine");
+    } else {
+      history.push("/quarantine");
+    }
+  };
+
+  if (isMobileOnly) {
+    return (
+      <Wrapper>
+        <Btn
+          direction="left"
+          onClick={handleClickLeft}
+          page={page.prev === undefined ? false : true}
+        >
+          <UpperWord isMobile={true}>
+            <p>{"<"} 이전글</p>
+          </UpperWord>
+        </Btn>
+
+        <TextDiv isMobile={true} onClick={handleMoveTotal}>
+          전체 게시글
+        </TextDiv>
+
+        <Btn
+          direction="right"
+          onClick={handleClickRight}
+          page={page.next === undefined ? false : true}
+        >
+          <UpperWord isMobile={true}>
+            <p>다음글 {">"}</p>
+          </UpperWord>
+        </Btn>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -42,19 +78,22 @@ const MoveBox = (props) => {
         onClick={handleClickLeft}
         page={page.prev === undefined ? false : true}
       >
-        <UpperWord>
-          <FontAwesomeIcon icon={faChevronLeft} />
-          <p>이전글</p>
+        <UpperWord isMobile={false}>
+          <p>{"<"} 이전글</p>
         </UpperWord>
       </Btn>
+
+      <TextDiv isMobile={false} onClick={handleMoveTotal}>
+        전체 게시글
+      </TextDiv>
+
       <Btn
         direction="right"
         onClick={handleClickRight}
         page={page.next === undefined ? false : true}
       >
-        <UpperWord>
-          <p>다음글</p>
-          <FontAwesomeIcon icon={faChevronRight} />
+        <UpperWord isMobile={false}>
+          <p>다음글 {">"}</p>
         </UpperWord>
       </Btn>
     </Wrapper>
@@ -64,36 +103,35 @@ const MoveBox = (props) => {
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+
   height: 60px;
   border-top: 1px solid ${theme.typoGrey3};
   border-bottom: 1px solid ${theme.typoGrey3};
 `;
 
 const Btn = styled.button`
-  width: 200px;
   border: none;
-  background-color: white;
+  background-color: ${theme.white};
   color: ${theme};
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: ${theme.bodyTwoSize};
   ${(props) =>
     props.direction === "left"
       ? `align-items: flex-start;`
       : `align-items: flex-end;
-      margin: 0 0 0 auto;
-      `}
 
-  font-size: ${theme.bodyTwoSize};
-  font-weight: 700;
+      `}
   ${(props) =>
     props.page
       ? `
   color: ${theme.typoGrey3};
   :hover {
     cursor: pointer;
-    color: ${theme.btnColor};
+    color: ${theme.typoLightGrey2};
   }
   `
       : `
@@ -105,6 +143,32 @@ const UpperWord = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  ${(props) =>
+    props.isMobile
+      ? `font-size: ${theme.bodyfourSize};`
+      : `font-size: ${theme.bodyTwoSize};`}
+`;
+
+const TextDiv = styled.div`
+  font-size: ${theme.bodyTwoSize};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: ${theme.typoGrey3};
+  ${(props) =>
+    props.isMobile
+      ? `font-size: ${theme.bodyfourSize};`
+      : `font-size: ${theme.bodyTwoSize};`}
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-position: under;
+    color: ${theme.typoLightGrey2};
+  }
 `;
 
 export default MoveBox;
