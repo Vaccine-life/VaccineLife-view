@@ -11,6 +11,7 @@ import { actionClickContents } from "../../redux/modules/read";
 
 const TableTr = (props) => {
   const {
+    nickname,
     board,
     boardId,
     title,
@@ -34,6 +35,7 @@ const TableTr = (props) => {
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
       </TdTitle>
+      <Td style={{ color: "black" }}>{nickname}</Td>
       <Td>
         <EachTdDiv>
           {" "}

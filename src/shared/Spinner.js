@@ -6,7 +6,7 @@ import theme from "../styles/theme";
 const Spinner = () => {
   return (
     <Wrapper>
-      <Loader type="Oval" color="white" height={80} width={80} />
+      <Loader type="Oval" color={theme.typoLightGrey2} height={80} width={80} />
     </Wrapper>
   );
 };

@@ -33,6 +33,8 @@ export const boardAxios = {
   deleteQuar: (boardId) => api.delete(`/api/quarBoard/${boardId}`),
   topThreeVac: () => api.get("/api/vacBoard/topLike"),
   topThreeQuar: () => api.get("/api/quarBoard/topLike"),
+  getPrevNextVac: (boardId) => api.get(`/api/vacBoard/${boardId}/id`),
+  getPrevNextQuar: (boardId) => api.get(`/api/quarBoard/${boardId}/id`),
 };
 
 export const writeAxios = {

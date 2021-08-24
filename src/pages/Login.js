@@ -11,7 +11,6 @@ import SignupComponent from "../components/SignupComponent";
 import Survey from "../components/Survey";
 import ModifySurvey from "../components/ModifySurvey";
 import Alert from "../components/popup/Alert";
-import { Grid } from "../elements";
 
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";

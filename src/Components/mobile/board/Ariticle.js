@@ -14,6 +14,7 @@ import logger from "../../../shared/logger";
 const Ariticle = (props) => {
   const {
     board,
+    nickname,
     type,
     boardId,
     title,
@@ -65,6 +66,7 @@ const Ariticle = (props) => {
         >
           {title}
         </Text>
+        <NameDiv>{nickname}</NameDiv>
       </TextDiv>
       <Grid is_flex="space_row">
         <TextDiv>
@@ -110,6 +112,12 @@ const EachDiv = styled.div`
   align-items: center;
   margin-right: 16px;
   margin-top: 3px;
+`;
+
+const NameDiv = styled.div`
+  font-size: ${theme.bodyfourSize};
+  color: ${theme.typoBlack};
+  margin: 0 0 0 auto;
 `;
 
 export default Ariticle;

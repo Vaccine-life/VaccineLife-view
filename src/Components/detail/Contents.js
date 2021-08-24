@@ -150,7 +150,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid ${theme.typoLightGrey2};
+
   .public-DraftEditor-content {
     font-size: ${theme.bodyOneSize};
     line-height: ${theme.bodyOneHeight};
@@ -163,7 +163,7 @@ const WrapperM = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid ${theme.typoLightGrey2};
+
   .public-DraftEditor-content {
     padding: 0 16px 0 16px;
     font-size: ${theme.bodyfourSize};
@@ -193,7 +193,6 @@ const LikeWrapper = styled.div`
   margin: 87px auto 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
-  border: 1.5px solid ${theme.btnColor};
 `;
 
 const LikeWrapperM = styled.div`
@@ -215,7 +214,7 @@ const LikeBtn = styled.button`
   justify-content: center;
   align-items: center;
   background-color: ${theme.white};
-  border: 1.5px solid ${theme.bg2};
+  border: 1.5px solid ${theme.btnColor};
   :hover {
     cursor: pointer;
     font-size: ${theme.headTwoSize};

@@ -26,6 +26,7 @@ import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import NavModal from "../components/mobile/NavModal";
 import Arrow from "../images/Arrow.png";
+import MoveBox from "../components/detail/MoveBox";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
@@ -50,15 +51,11 @@ const QuarantineDetail = () => {
     dispatch(actionGetDetail("quarantine", boardId_detail));
     dispatch(actionGetCommentList("quarantine", boardId_detail));
     // dispatch(actionGetLike("quarantine"));
-  }, []);
+  }, [boardId_detail]);
   const board_content = useSelector((state) => state.board.board);
 
   const handleDelete = () => {
     dispatch(actionDeleteEx("quarantine", board_content.boardId));
-  };
-
-  const handleMoveTotal = () => {
-    history.push("/quarantine");
   };
 
   if (isMobileOnly) {
@@ -85,13 +82,14 @@ const QuarantineDetail = () => {
           contents={board_content.contents}
           likeCount={board_content.likeCount}
         />
-
+        <MoveBox board="vaccine" />
         {confirm_status && (
           <Confirm
             confirmMessage="게시글을 삭제하시겠습니까?"
             activeFunction={handleDelete}
           />
         )}
+
         <Grid is_flex="space_row" padding="0 16px 0 16px">
           <p
             style={{
@@ -104,10 +102,6 @@ const QuarantineDetail = () => {
           >
             댓글 {comment_list.length}개
           </p>
-
-          <TextDivM onClick={handleMoveTotal}>
-            전체 게시글 <img src={Arrow} alt="" />
-          </TextDivM>
         </Grid>
         <CommentWrite board="quarantine" boardId={boardId_detail} />
         {comment_list?.map((each, index) => {
@@ -161,6 +155,7 @@ const QuarantineDetail = () => {
           activeFunction={handleDelete}
         />
       )}
+      <MoveBox board="quarantine" />
       <Grid is_flex="space_row">
         <p
           style={{
@@ -173,10 +168,6 @@ const QuarantineDetail = () => {
         >
           댓글 {comment_list.length} 개
         </p>
-
-        <TextDiv onClick={handleMoveTotal}>
-          전체 게시글 <img src={Arrow} alt="" />
-        </TextDiv>
       </Grid>
       <CommentWrite board="quarantine" boardId={boardId_detail} />
       {comment_list?.map((each, index) => {
