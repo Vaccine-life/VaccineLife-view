@@ -2,22 +2,25 @@ import React, { useEffect } from "react";
 import theme from "../styles/theme";
 import styled from "styled-components";
 import { Grid, Text } from "../elements";
-import LikeIconChanger from "./LikeIconChanger";
-import comment from "../images/comment.png";
-import eye from "../images/eye.png";
 import MypageCard from "./MypageCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionGetLike, actionGetLikeMedi } from "../redux/modules/like";
 
 import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MyLike = () => {
   const dispatch = useDispatch();
+  const vac_list = useSelector((state) => state.board.myLikeVac);
+  const quar_list = useSelector((state) => state.board.myLikeQuar);
+  const medi_list = useSelector((state) => state.board.myLikeMedi);
+
   useEffect(() => {
     dispatch(actionGetLike("quarantine"));
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLikeMedi());
   }, []);
+
   if (isMobileOnly) {
     return (
       <>
@@ -47,90 +50,22 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                백신 후기
+                백신 후기 ({vac_list.length})
               </Text>
-              <MobilePost>
-                <Grid
-                  className="작성날짜, 아이콘세개"
-                  is_flex="space_row"
-                  width="100%"
-                  margin="0"
-                >
-                  <Grid is_flex="center">
-                    <Text
-                      size={theme.bodyThreeSize}
-                      color={theme.typoGrey2}
-                      margin="0 auto 0 16px"
-                    >
-                      2020-01-01
-                    </Text>
-                  </Grid>
-
-                  <Grid
-                    className="아이콘세개"
-                    is_flex="space_row"
-                    margin="0 16px 0 auto"
-                  >
-                    <Grid className="추천" is_flex="space_row">
-                      <LikeIconChanger />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          45
-                        </Text>
-                      </Grid>
-                    </Grid>
-                    <Grid className="댓글" is_flex="space_row">
-                      <img
-                        src={comment}
-                        alt=""
-                        style={{
-                          width: `${theme.bodyOneSize}`,
-                          height: `${theme.bodyOneSize}`,
-                        }}
-                      />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          15
-                        </Text>
-                      </Grid>
-                    </Grid>
-                    <Grid className="조회수" is_flex="space_row">
-                      <img
-                        src={eye}
-                        alt=""
-                        style={{
-                          width: `${theme.bodyOneSize}`,
-                          height: `${theme.bodyOneSize}`,
-                        }}
-                      />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          555
-                        </Text>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid className="제목">
-                  <Line />
-                  <MobileTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </MobileTitle>
-                </Grid>
-              </MobilePost>
+              {vac_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    board="vaccine"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
           <Border />
@@ -145,88 +80,6 @@ const MyLike = () => {
               >
                 격리 후기
               </Text>
-              <MobilePost>
-                <Grid
-                  className="작성날짜, 아이콘세개"
-                  is_flex="space_row"
-                  width="100%"
-                  margin="0"
-                >
-                  <Grid is_flex="center">
-                    <Text
-                      size={theme.bodyThreeSize}
-                      color={theme.typoGrey2}
-                      margin="0 auto 0 16px"
-                    >
-                      2020-01-01
-                    </Text>
-                  </Grid>
-
-                  <Grid
-                    className="아이콘세개"
-                    is_flex="space_row"
-                    margin="0 16px 0 auto"
-                  >
-                    <Grid className="추천" is_flex="space_row">
-                      <LikeIconChanger />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          45
-                        </Text>
-                      </Grid>
-                    </Grid>
-                    <Grid className="댓글" is_flex="space_row">
-                      <img
-                        src={comment}
-                        alt=""
-                        style={{
-                          width: `${theme.bodyOneSize}`,
-                          height: `${theme.bodyOneSize}`,
-                        }}
-                      />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          15
-                        </Text>
-                      </Grid>
-                    </Grid>
-                    <Grid className="조회수" is_flex="space_row">
-                      <img
-                        src={eye}
-                        alt=""
-                        style={{
-                          width: `${theme.bodyOneSize}`,
-                          height: `${theme.bodyOneSize}`,
-                        }}
-                      />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          555
-                        </Text>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid className="제목">
-                  <Line />
-                  <MobileTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </MobileTitle>
-                </Grid>
-              </MobilePost>
             </Grid>
           </Grid>
           <Border />
@@ -241,90 +94,6 @@ const MyLike = () => {
               >
                 의료진분들께
               </Text>
-              <MobilePost>
-                <Grid
-                  className="작성날짜, 아이콘"
-                  is_flex="space_row"
-                  width="100%"
-                  margin="0"
-                >
-                  <Grid is_flex="center">
-                    <Text
-                      size={theme.bodyThreeSize}
-                      color={theme.typoGrey2}
-                      margin="0 auto 0 16px"
-                    >
-                      2020-01-01
-                    </Text>
-                  </Grid>
-
-                  <Grid className="아이콘" margin="0 16px 0 auto" width="70px">
-                    <Grid className="추천" is_flex="space_row">
-                      <LikeIconChanger />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          45
-                        </Text>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid className="제목">
-                  <Line />
-                  <MobileTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </MobileTitle>
-                </Grid>
-              </MobilePost>
-              <MobilePost>
-                <Grid
-                  className="작성날짜, 아이콘"
-                  is_flex="space_row"
-                  width="100%"
-                  margin="0"
-                >
-                  <Grid is_flex="center">
-                    <Text
-                      size={theme.bodyThreeSize}
-                      color={theme.typoGrey2}
-                      margin="0 auto 0 16px"
-                    >
-                      2020-01-01
-                    </Text>
-                  </Grid>
-
-                  <Grid className="아이콘" margin="0 16px 0 auto" width="70px">
-                    <Grid className="추천" is_flex="space_row">
-                      <LikeIconChanger />
-                      <Grid is_flex="center">
-                        <Text
-                          size={theme.bodyThreeSize}
-                          color={theme.typoGrey2}
-                        >
-                          45
-                        </Text>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid className="제목">
-                  <Line />
-                  <MobileTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </MobileTitle>
-                </Grid>
-              </MobilePost>
             </Grid>
           </Grid>
         </Grid>
@@ -353,15 +122,21 @@ const MyLike = () => {
           백신 후기
         </Text>
         <Grid>
-          <MypageCard
-            title
-            createdAt
-            likeCount
-            commentCount
-            totalVisitors
-            board
-            boardId
-          />
+          {vac_list?.map((each, index) => {
+            return (
+              <MypageCard
+                onClick={() => history}
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                board="vaccine"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
         </Grid>
 
         <Text

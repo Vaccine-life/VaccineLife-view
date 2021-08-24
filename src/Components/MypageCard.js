@@ -6,6 +6,8 @@ import eye from "../images/eye.png";
 import LikeIconChanger from "./LikeIconChanger";
 import displayedAt from "../shared/displayedAt";
 import { Grid, Text } from "../elements";
+import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MypageCard = (props) => {
   const {
@@ -17,8 +19,89 @@ const MypageCard = (props) => {
     board,
     boardId,
   } = props;
+
+  const handleMoveDetail = () => {
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else if (board === "quarantine") {
+      history.push(`/quarantinedetail/${boardId}`);
+    }
+  };
+  if (isMobileOnly) {
+    return (
+      <MobilePost onClick={handleMoveDetail}>
+        <Grid
+          className="작성날짜, 아이콘세개"
+          is_flex="space_row"
+          width="100%"
+          margin="0"
+        >
+          <Grid is_flex="center">
+            <Text
+              size={theme.bodyThreeSize}
+              color={theme.typoGrey2}
+              margin="0 auto 0 16px"
+            >
+              2020-01-01
+            </Text>
+          </Grid>
+
+          <Grid
+            className="아이콘세개"
+            is_flex="space_row"
+            margin="0 16px 0 auto"
+          >
+            <Grid className="추천" is_flex="space_row">
+              <LikeIconChanger />
+              <Grid is_flex="center">
+                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                  45
+                </Text>
+              </Grid>
+            </Grid>
+            <Grid className="댓글" is_flex="space_row">
+              <img
+                src={comment}
+                alt=""
+                style={{
+                  width: `${theme.bodyOneSize}`,
+                  height: `${theme.bodyOneSize}`,
+                }}
+              />
+              <Grid is_flex="center">
+                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                  15
+                </Text>
+              </Grid>
+            </Grid>
+            <Grid className="조회수" is_flex="space_row">
+              <img
+                src={eye}
+                alt=""
+                style={{
+                  width: `${theme.bodyOneSize}`,
+                  height: `${theme.bodyOneSize}`,
+                }}
+              />
+              <Grid is_flex="center">
+                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                  555
+                </Text>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid className="제목">
+          <Line />
+          <MobileTitle></MobileTitle>
+        </Grid>
+      </MobilePost>
+    );
+  }
+
   return (
-    <Post>
+    <Post onClick={handleMoveDetail}>
       <Grid
         className="작성날짜"
         is_flex="center"
@@ -108,6 +191,7 @@ const Post = styled.div`
   margin-bottom: ${theme.bodyThreeSize};
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -117,6 +201,38 @@ const Title = styled.div`
   display: block;
   overflow: hidden;
   white-space: nowrap;
-  margin: 0 auto 0 0;
+  margin: 0 auto 0 16px;
 `;
+
+const MobileTitle = styled.div`
+  width: 270px;
+  height: 1rem;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto 0 16px;
+`;
+
+const MobilePost = styled.div`
+  width: 100%;
+  height: 86px;
+  border: 1px solid ${theme.typoLightGrey2};
+  border-radius: 6px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  margin: 0 auto 8px auto;
+`;
+
+const Line = styled.div`
+  width: 90%;
+  border-bottom: 1px solid ${theme.typoLightGrey2};
+  margin: 0 auto 8px auto;
+`;
+
+const Border = styled.div`
+  width: 100%;
+  border-bottom: 5px solid ${theme.typoLightGrey1};
+`;
+
 export default MypageCard;

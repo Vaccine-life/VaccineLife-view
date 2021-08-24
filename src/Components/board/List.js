@@ -49,6 +49,7 @@ const List = (props) => {
         {vac_list?.map((each, index) => {
           return (
             <Ariticle
+              nickname={each.nickname}
               key={index}
               board={board}
               type={each.type}
@@ -69,8 +70,16 @@ const List = (props) => {
     <Table>
       <thead>
         <TableThread>
-          <Th style={{ width: `${(100 / 600) * 100}%` }}>태그</Th>
-          <Th style={{ width: `${(300 / 600) * 100}%` }}>글제목</Th>
+          <Th
+            style={{
+              width: `${(80 / 600) * 100}%`,
+              backgroundColor: `rgba(237, 242, 255, 0.5)`,
+            }}
+          >
+            태그
+          </Th>
+          <Th style={{ width: `${(240 / 600) * 100}%` }}>글제목</Th>
+          <Th style={{ width: `${(80 / 600) * 100}%` }}>작성자</Th>
           <Th style={{ width: `${(50 / 600) * 100}%` }}>추천</Th>
           <Th style={{ width: `${(50 / 600) * 100}%` }}>댓글</Th>
           <Th style={{ width: `${(50 / 600) * 100}%` }}>조회</Th>
@@ -97,6 +106,7 @@ const List = (props) => {
           {vac_list?.map((each, index) => {
             return (
               <TableTr
+                nickname={each.nickname}
                 key={index}
                 board={board}
                 type={each.type}
