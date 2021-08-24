@@ -1,22 +1,49 @@
-import React from "react";
-import { isMobileOnly } from "react-device-detect";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
+import { userAxios } from "../../shared/api";
+import logger from "../../shared/logger";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { actionModifyNicknameVisible } from "../../redux/modules/modal";
+
 import { Button, Grid, Text } from "../../elements";
-import { actionConfirm } from "../../redux/modules/popup";
-import { actionModifyNickname } from "../../redux/modules/modal";
+
 import theme from "../../styles/theme";
+import styled from "styled-components";
+import { isMobileOnly } from "react-device-detect";
 
 // 사용시 props에 해당하는 것들을 넣어줄것
 
 const ModifyNickname = (props) => {
-  const { confirmMessage, activeFunction } = props;
   const dispatch = useDispatch();
 
-  const handleModify = () => {
-    activeFunction();
-    dispatch(actionConfirm());
+  const [nicknameDupOk, setNicknameDupOk] = useState(false);
+  const [nicknameDupMsg, setNicknameDupMsg] = useState("");
+
+  const nicknameDupCheck = (nickname) => async () => {
+    try {
+      const nicknameDupRes = await userAxios.nicknameDupCheck(nickname);
+      setNicknameDupOk(nicknameDupRes.data.ok);
+      setNicknameDupMsg(nicknameDupRes.data.msg);
+    } catch (error) {
+      logger(error);
+    }
   };
+
+  const formik = useFormik({
+    initialValues: {
+      nickname: "",
+    },
+
+    validationSchema: Yup.object({
+      nickname: Yup.string()
+        .required("닉네임을 입력해주세요")
+        .max(6, "닉네임은 6자리 이하여야 합니다"),
+    }),
+
+    onSubmit: () => {},
+  });
+
   if (isMobileOnly) {
     return (
       <MobileWrapper>
@@ -46,7 +73,7 @@ const ModifyNickname = (props) => {
             bg={theme.typoBlack}
             fontSize={theme.bodyTwoSize}
             _onClick={() => {
-              dispatch(actionModifyNickname());
+              dispatch(actionModifyNicknameVisible());
             }}
           >
             취소
@@ -56,13 +83,19 @@ const ModifyNickname = (props) => {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper onSubmit={formik.handleSubmit}>
       <Modal>
         <Text size={theme.headOneSize} bold>
           닉네임 변경
         </Text>
         <Grid is_flex="center">
-          <Input placeholder="새로운 닉네임을 입력해주세요" />
+          <Input
+            placeholder="새로운 닉네임을 입력해주세요"
+            id="nickname"
+            name="nickname"
+            type="text"
+            value={formik.values.username}
+          />
         </Grid>
         <Grid is_flex="center">
           <Button
@@ -72,7 +105,7 @@ const ModifyNickname = (props) => {
             fontSize={theme.SubHeadOneSize}
             lineHeight={theme.SubHeadOneHeight}
             bg={theme.typoLightGrey2}
-            _onClick={() => dispatch(actionModifyNickname())}
+            _onClick={() => dispatch(actionModifyNicknameVisible())}
           >
             취소
           </Button>
@@ -82,7 +115,6 @@ const ModifyNickname = (props) => {
             height={theme.smallButtonHeight}
             fontSize={theme.bodyOneSize}
             bg={theme.bg2}
-            _onClick={handleModify}
           >
             변경
           </Button>
