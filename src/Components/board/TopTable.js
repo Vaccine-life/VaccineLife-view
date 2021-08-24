@@ -37,7 +37,7 @@ const TopTable = (props) => {
         style={{
           color: `${theme.errorColor}`,
           fontWeight: "700",
-          borderRight: `2px solid ${theme.typoLightGrey2}`,
+          backgroundColor: `rgba(237, 242, 255, 0.5)`,
         }}
       >
         {type}

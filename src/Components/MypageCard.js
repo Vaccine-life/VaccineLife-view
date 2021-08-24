@@ -7,6 +7,7 @@ import LikeIconChanger from "./LikeIconChanger";
 import displayedAt from "../shared/displayedAt";
 import { Grid, Text } from "../elements";
 import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MypageCard = (props) => {
   const {
@@ -19,9 +20,16 @@ const MypageCard = (props) => {
     boardId,
   } = props;
 
+  const handleMoveDetail = () => {
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else if (board === "quarantine") {
+      history.push(`/quarantinedetail/${boardId}`);
+    }
+  };
   if (isMobileOnly) {
     return (
-      <MobilePost>
+      <MobilePost onClick={handleMoveDetail}>
         <Grid
           className="작성날짜, 아이콘세개"
           is_flex="space_row"
@@ -86,19 +94,14 @@ const MypageCard = (props) => {
 
         <Grid className="제목">
           <Line />
-          <MobileTitle>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </MobileTitle>
+          <MobileTitle></MobileTitle>
         </Grid>
       </MobilePost>
     );
   }
 
   return (
-    <Post>
+    <Post onClick={handleMoveDetail}>
       <Grid
         className="작성날짜"
         is_flex="center"
@@ -188,6 +191,7 @@ const Post = styled.div`
   margin-bottom: ${theme.bodyThreeSize};
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
