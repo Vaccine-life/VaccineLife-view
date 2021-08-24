@@ -108,6 +108,21 @@ const MyLike = () => {
               >
                 의료진분들께 ({medi_list.length})
               </Text>
+              {medi_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    contents={each.contents}
+                    board="medical"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>
