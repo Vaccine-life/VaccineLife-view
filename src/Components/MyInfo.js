@@ -316,6 +316,7 @@ const Line = styled.div`
 
 const Border = styled.div`
   width: 100%;
-  border-bottom: 5px solid ${theme.typoLightGrey1};
+  border-bottom: 8px solid ${theme.typoLightGrey1};
 `;
+
 export default MyInfo;
