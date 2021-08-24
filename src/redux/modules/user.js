@@ -50,6 +50,8 @@ export const actionLogin =
       const userInfoDecode = jwtDecode(userInfoObj.data);
       console.log(userInfoDecode);
       dispatch(actionSetTime(userInfoDecode.exp));
+
+      // username이 sub에 담겨 오는 것에 유의하자!
       const userInfo = {
         afterEffect: userInfoDecode.afterEffect,
         age: userInfoDecode.age,
