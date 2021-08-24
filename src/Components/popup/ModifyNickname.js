@@ -41,7 +41,9 @@ const ModifyNickname = (props) => {
         .max(6, "닉네임은 6자리 이하여야 합니다"),
     }),
 
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      console.log(values);
+    },
   });
 
   if (isMobileOnly) {
@@ -82,49 +84,62 @@ const ModifyNickname = (props) => {
       </MobileWrapper>
     );
   }
+
   return (
-    <Wrapper onSubmit={formik.handleSubmit}>
-      <Modal>
-        <Text size={theme.headOneSize} bold>
-          닉네임 변경
-        </Text>
-        <Grid is_flex="center">
-          <Input
-            placeholder="새로운 닉네임을 입력해주세요"
-            id="nickname"
-            name="nickname"
-            type="text"
-            value={formik.values.username}
-          />
-        </Grid>
-        <Grid is_flex="center">
-          <Button
-            margin="30px 15px 0 0"
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.SubHeadOneSize}
-            lineHeight={theme.SubHeadOneHeight}
-            bg={theme.typoLightGrey2}
-            _onClick={() => dispatch(actionModifyNicknameVisible())}
-          >
-            취소
-          </Button>
-          <Button
-            margin="30px 0 0 0"
-            width={theme.smallButtonWidth}
-            height={theme.smallButtonHeight}
-            fontSize={theme.bodyOneSize}
-            bg={theme.bg2}
-          >
-            변경
-          </Button>
-        </Grid>
-      </Modal>
-    </Wrapper>
+    <>
+      <Wrapper onSubmit={formik.handleSubmit}>
+        <Modal>
+          <Text size={theme.headOneSize} bold>
+            닉네임 변경
+          </Text>
+          <InputBox>
+            <Input
+              placeholder="새로운 닉네임을 입력해주세요"
+              id="nickname"
+              name="nickname"
+              type="text"
+              value={formik.values.nickname}
+              onChange={(e) => {
+                formik.handleChange(e);
+
+                dispatch(nicknameDupCheck(e.target.value));
+              }}
+            />
+            {formik.touched.nickname && formik.errors.nickname ? (
+              <Error>{formik.errors.nickname}</Error>
+            ) : null}
+            {!nicknameDupOk ? <Error>{nicknameDupMsg}</Error> : null}
+          </InputBox>
+          <Grid is_flex="center">
+            <Button
+              margin="30px 15px 0 0"
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.SubHeadOneSize}
+              lineHeight={theme.SubHeadOneHeight}
+              bg={theme.typoLightGrey2}
+              _onClick={() => dispatch(actionModifyNicknameVisible())}
+            >
+              취소
+            </Button>
+            <Button
+              type="submit"
+              margin="30px 0 0 0"
+              width={theme.smallButtonWidth}
+              height={theme.smallButtonHeight}
+              fontSize={theme.bodyOneSize}
+              bg={theme.bg2}
+            >
+              변경
+            </Button>
+          </Grid>
+        </Modal>
+      </Wrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -150,9 +165,16 @@ const Modal = styled.div`
   padding: 60px 40px;
 `;
 
+const InputBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0 60px 0;
+`;
+
 const Input = styled.input`
   width: 300px;
-  margin: 80px auto 80px auto;
+  margin: 0 auto 8px auto;
   border: none;
   border-bottom: 1px solid ${theme.typoGrey1};
   padding: 6px 0px;
@@ -163,6 +185,13 @@ const Input = styled.input`
     border-bottom: 1px solid ${theme.typoBlack};
     color: ${theme.typoBlack};
   }
+`;
+
+const Error = styled.div`
+  width: 100%;
+  text-align: right;
+  font-size: ${theme.bodyfourSize};
+  color: ${theme.errorColor};
 `;
 
 // <========= Mobile ==========>
