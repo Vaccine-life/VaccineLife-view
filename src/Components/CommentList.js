@@ -31,6 +31,8 @@ const CommentList = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const userId = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
+  const medical_content = useSelector((state) => state.comment.list);
+  console.log(medical_content);
 
   // 수정하기
   const [text, setText] = React.useState("");

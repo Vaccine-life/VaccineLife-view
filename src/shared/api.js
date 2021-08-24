@@ -73,8 +73,3 @@ export const medicalAxios = {
   modifyMedi: (medicalId, contents) =>
     api.patch(`/api/medical/${medicalId}`, contents),
 };
-
-export const mypageAxios = {
-  getMyMedical: (userId) => api.get(`/api/mypage/${userId}/medical`),
-  likeMyMedical: (userId) => api.get(`/api/mypage/${userId}/medical/like`),
-};

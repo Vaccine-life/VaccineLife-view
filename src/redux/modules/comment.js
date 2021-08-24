@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { commentAxios, medicalAxios, mypageAxios } from "../../shared/api";
+import { commentAxios, medicalAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
@@ -19,6 +19,7 @@ const initialState = {
     nextPage: 1,
     totalPage: 0,
   },
+  board: {},
 };
 
 const comment = createSlice({
@@ -28,22 +29,26 @@ const comment = createSlice({
     actionSetComment: (state, action) => {
       // state.list = action.payload;
       state.list.push(...action.payload.medicalTen);
-      console.log(action.payload);
-      console.log(action.payload.medicalTen);
+      // console.log(action.payload);
+      // console.log(action.payload.medicalTen);
       state.pagingMedi.nextPage += 1;
       state.pagingMedi.totalPage = action.payload.totalPageInData;
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
+      // console.log(action.payload);
     },
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
       let idx = state.list.findIndex((c) => c.id === medicalId);
-      // console.log(idx)
+      // console.log(idx);
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
+    },
+    actionSetBoard: (state, action) => {
+      state.board = action.payload;
     },
     // 무한스크롤
     actionResetList: (state, action) => {
@@ -147,14 +152,24 @@ export const actionGetMedical =
       }
       //loading => true
       dispatch(actionLoading());
-
+      let medi_input = {};
       const getData = await medicalAxios.getPageMedi(nextPage);
       const medicalTen = getData.data.content;
       // console.log(medicalTen);
       const totalPageInData = getData.data.totalPages;
       // console.log(totalPageInData);
 
+      // 메디컬 하나 디테일 api가 따로 있어야 가지고 올 수 있음?
+      const data = getData.data;
+      console.log(data);
+      medi_input = {
+        userId: data.userId,
+        contents: data.contents,
+        nickname: data.nickname,
+        createdAt: data.createdAt,
+      };
       dispatch(actionSetComment({ medicalTen, totalPageInData }));
+      // dispatch(actionSetBoard(medi_input));
       //loading => false
       dispatch(actionLoading());
     } catch (error) {
@@ -176,13 +191,24 @@ export const actionAddMedical =
       // const data = getData.data;
       // dispatch(actionSetComment(data));
       dispatch(actionLoading());
+      let medi_input = {};
       await medicalAxios.addMedical(contents);
-      const getData = await medicalAxios.getPageMedi(1);
-      const mediContetns = getData.data.content;
-      // console.log(mediContetns);
+      const getData = await medicalAxios.getMedical();
+      // const getData = await medicalAxios.getPageMedi(1);
+      console.log(getData);
+      const mediContents = getData.data;
+      console.log(mediContents);
+      medi_input = {
+        userId: mediContents.userId,
+        contents: mediContents.contents,
+        nickname: mediContents.nickname,
+        createdAt: mediContents.createdAt,
+      };
+      console.log(medi_input);
       const totalPageInData = getData.data.totalPages;
-      dispatch(actionSetComment(mediContetns, totalPageInData));
-      dispatch(actionResetList({ mediContetns, totalPageInData }));
+      // dispatch(actionSetComment(mediContents, totalPageInData));
+      dispatch(actionResetList({ mediContents, totalPageInData }));
+      // dispatch(actionSetBoard(medi_input));
       dispatch(actionLoading());
     } catch (err) {
       dispatch(
@@ -319,26 +345,6 @@ export const actionDeleteCommentList =
     }
   };
 
-// 마이페이지 내가 쓴 의료진 가져오기
-export const actionGetMyMedical =
-  (userId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { user_id } = getState().user.user.userId;
-      console.log(user_id);
-      const getData = await mypageAxios.getMyMedical(userId);
-      console.log(getData);
-      if (user_id === getData.userId) {
-        return dispatch(actionGetMedical({ userId }));
-      }
-    } catch (error) {
-      dispatch(
-        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
-      );
-      dispatch(actionAlert());
-    }
-  };
-
 export const {
   actionSetComment,
   actionAddComment,
@@ -351,6 +357,7 @@ export const {
   actionSetCommentListState,
   actionAddCommentListState,
   actionDeleteCommentListState,
+  actionSetBoard,
 } = comment.actions;
 
 export default comment;

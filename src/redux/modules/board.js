@@ -134,7 +134,7 @@ const board = createSlice({
         state.board.likeCount = state.board.likeCount - 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
-          if (each.quarBoardId === boardId) {
+          if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
           }
           return { ...each };
@@ -178,7 +178,7 @@ const board = createSlice({
         state.board.likeCount = state.board.likeCount + 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
-          if (each.quarBoardId === boardId) {
+          if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
           }
           return { ...each };
@@ -346,6 +346,7 @@ export const actionGetDetail =
         const moveList = getPrevNext.data;
         dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
+        console.log(data);
         board_input = {
           afterEffect: data.afterEffect,
           age: data.age,
