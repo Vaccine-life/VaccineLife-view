@@ -7,6 +7,7 @@ import LikeIconChanger from "./LikeIconChanger";
 import displayedAt from "../shared/displayedAt";
 import { Grid, Text } from "../elements";
 import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MypageCard = (props) => {
   const {
@@ -17,11 +18,19 @@ const MypageCard = (props) => {
     totalVisitors,
     board,
     boardId,
+    contents,
   } = props;
 
+  const handleMoveDetail = () => {
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else if (board === "quarantine") {
+      history.push(`/quarantinedetail/${boardId}`);
+    }
+  };
   if (isMobileOnly) {
     return (
-      <MobilePost>
+      <MobilePost onClick={handleMoveDetail}>
         <Grid
           className="작성날짜, 아이콘세개"
           is_flex="space_row"
@@ -86,19 +95,14 @@ const MypageCard = (props) => {
 
         <Grid className="제목">
           <Line />
-          <MobileTitle>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </MobileTitle>
+          <MobileTitle></MobileTitle>
         </Grid>
       </MobilePost>
     );
   }
 
   return (
-    <Post>
+    <Post onClick={handleMoveDetail}>
       <Grid
         className="작성날짜"
         is_flex="center"
@@ -117,7 +121,7 @@ const MypageCard = (props) => {
         height="1rem"
         margin={`auto ${theme.headOneSize} auto 0`}
       >
-        <Title>{title}</Title>
+        <Title>{board === "medical" ? contents : title}</Title>
       </Grid>
 
       <Grid
@@ -138,44 +142,53 @@ const MypageCard = (props) => {
             </Text>
           </Grid>
         </Grid>
-        <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={comment}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {commentCount}
-            </Text>
+        {board !== "medical" && (
+          <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
+            <img
+              src={comment}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {commentCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid className="조회수" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={eye}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {totalVisitors}
-            </Text>
+        )}
+        {board !== "medical" && (
+          <Grid
+            className="조회수"
+            width="30%"
+            is_flex="center"
+            margin={`auto 0`}
+          >
+            <img
+              src={eye}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {totalVisitors}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Grid>
     </Post>
   );
@@ -188,6 +201,7 @@ const Post = styled.div`
   margin-bottom: ${theme.bodyThreeSize};
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Title = styled.div`

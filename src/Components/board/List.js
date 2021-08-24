@@ -73,7 +73,7 @@ const List = (props) => {
           <Th
             style={{
               width: `${(80 / 600) * 100}%`,
-              borderRight: `2px solid ${theme.typoLightGrey2}`,
+              backgroundColor: `rgba(237, 242, 255, 0.5)`,
             }}
           >
             태그
