@@ -48,6 +48,7 @@ export const actionLogin =
       const userInfoObj = await userAxios.login({ username, password });
       setCookie("vaccine_life_token", userInfoObj.data);
       const userInfoDecode = jwtDecode(userInfoObj.data);
+      console.log(userInfoDecode);
       dispatch(actionSetTime(userInfoDecode.exp));
       const userInfo = {
         afterEffect: userInfoDecode.afterEffect,
@@ -62,6 +63,8 @@ export const actionLogin =
         userId: userInfoDecode.id,
         type: userInfoDecode.type,
       };
+
+      console.log(userInfo);
       dispatch(actionSetUser(userInfo));
       dispatch(actionSetMessage("로그인 되었습니다"));
       dispatch(actionAlert());
