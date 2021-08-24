@@ -6,7 +6,28 @@ import LikeIconChanger from "./LikeIconChanger";
 import comment from "../images/comment.png";
 import eye from "../images/eye.png";
 
-const MyPost = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { actionGetMyMedical } from "../redux/modules/comment";
+
+const MyPost = (props) => {
+  // const dispatch = useDispatch();
+  // const user_id = useSelector((state) => state.user.user.userId);
+  // console.log(user_id);
+  // const comment_list = useSelector((state) => state.comment.list);
+  // console.log(comment_list);
+  // const comment_list_uid = useSelector((state) => state.comment.list.userId);
+  // console.log(comment_list_uid);
+
+  // const myMedical = () => {
+  //   // if(user_id === comment_list_uid)
+  // };
+
+  // React.useEffect(() => {
+  //   if (user_id === comment_list_uid) {
+  //     dispatch(actionGetMyMedical(user_id));
+  //   }
+  // }, []);
+
   return (
     <>
       <Grid width="100%">
@@ -302,7 +323,7 @@ const MyPost = () => {
               is_flex="center"
               margin={`auto 0`}
             >
-              <img
+              {/* <img
                 src={comment}
                 alt=""
                 style={{
@@ -318,7 +339,7 @@ const MyPost = () => {
                 >
                   15
                 </Text>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Grid
               className="조회수"
@@ -326,7 +347,7 @@ const MyPost = () => {
               is_flex="center"
               margin={`auto 0`}
             >
-              <img
+              {/* <img
                 src={eye}
                 alt=""
                 style={{
@@ -342,7 +363,7 @@ const MyPost = () => {
                 >
                   555
                 </Text>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </Post>

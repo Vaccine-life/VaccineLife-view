@@ -67,5 +67,11 @@ export const medicalAxios = {
   addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
   topThreeMedi: () => api.get("/api/medical/toplike"),
-  modifyMedi: (medicalId, obj) => api.patch(`/api/medical/${medicalId}`, obj),
+  modifyMedi: (medicalId, contents) =>
+    api.patch(`/api/medical/${medicalId}`, contents),
+};
+
+export const mypageAxios = {
+  getMyMedical: (userId) => api.get(`/api/mypage/${userId}/medical`),
+  likeMyMedical: (userId) => api.get(`/api/mypage/${userId}/medical/like`),
 };

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { commentAxios, medicalAxios } from "../../shared/api";
+import { commentAxios, medicalAxios, mypageAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionMinusComment, actionPlusComment } from "./board";
 import { actionLoading } from "./isLoading";
@@ -212,11 +212,11 @@ export const actionDeleteMedical =
 
 // 서버의 medical 수정하기
 export const actionModifyMedical =
-  (contents) =>
+  (medicalId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(actionLoading());
-      await medicalAxios.modifyMedi(contents);
+      await medicalAxios.modifyMedi(medicalId, contents);
       history.replace("/medical");
 
       dispatch(actionLoading());
@@ -309,6 +309,26 @@ export const actionDeleteCommentList =
       }
     } catch (error) {
       logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionGetMyMedical =
+  (userId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { user_id } = getState().comment.list;
+      console.log(user_id);
+      const getData = await mypageAxios.getMyMedical(userId);
+
+      console.log(getData);
+      if (user_id === getData.userId) {
+        return dispatch(actionGetMedical({ userId }));
+      }
+    } catch (error) {
       dispatch(
         actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
       );
