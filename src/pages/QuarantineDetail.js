@@ -58,10 +58,6 @@ const QuarantineDetail = () => {
     dispatch(actionDeleteEx("quarantine", board_content.boardId));
   };
 
-  const handleMoveTotal = () => {
-    history.push("/quarantine");
-  };
-
   if (isMobileOnly) {
     return (
       <Grid margin="80px auto 40px auto">

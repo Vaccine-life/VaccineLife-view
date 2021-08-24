@@ -34,6 +34,7 @@ const TopQuarTable = (props) => {
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
       </TdTitle>
+      <Td style={{ color: `${theme.errorColor}` }}>admin</Td>
       <Td></Td>
       <Td></Td>
       <Td></Td>
