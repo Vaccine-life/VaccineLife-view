@@ -163,7 +163,7 @@ export const actionGetUseInfo = () => (dispatch) => {
   const getUserToken = getCookie("vaccine_life_token");
   const userInfoDecode = jwtDecode(getUserToken);
   dispatch(actionSetTime(userInfoDecode.exp));
-
+  logger(userInfoDecode);
   const userInfo = {
     afterEffect: userInfoDecode.afterEffect,
     age: userInfoDecode.age,
@@ -173,7 +173,7 @@ export const actionGetUseInfo = () => (dispatch) => {
     isVaccine: userInfoDecode.isVaccine,
     nickname: userInfoDecode.nickname,
     roles: userInfoDecode.roles,
-    username: userInfoDecode.username,
+    username: userInfoDecode.sub,
     type: userInfoDecode.type,
     userId: userInfoDecode.id,
   };

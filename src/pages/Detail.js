@@ -22,18 +22,18 @@ import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import NavModal from "../components/mobile/NavModal";
 import Arrow from "../images/Arrow.png";
+import MoveBox from "../components/detail/MoveBox";
 
 const Detail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
   const boardId = useParams().id;
   const title = useSelector((state) => state.board.board.title);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(actionGetDetail("vaccine", boardId));
     dispatch(actionGetCommentList("vaccine", boardId));
     //  dispatch(actionGetLike("vaccine"));
-  }, []);
+  }, [boardId]);
 
   //격리후기떄는 id 변경
 
@@ -93,6 +93,7 @@ const Detail = () => {
           contents={board_content.contents}
           likeCount={board_content.likeCount}
         />
+        <MoveBox board="vaccine" />
         {confirm_status && (
           <Confirm
             confirmMessage="게시글을 삭제하시겠습니까?"
@@ -111,10 +112,6 @@ const Detail = () => {
           >
             댓글 {comment_list.length}개
           </p>
-
-          <TextDivM onClick={handleMoveTotal}>
-            전체 게시글 <img src={Arrow} alt="" />
-          </TextDivM>
         </Grid>
 
         <CommentWrite board="vaccine" boardId={boardId} />
@@ -177,6 +174,7 @@ const Detail = () => {
           activeFunction={handleDelete}
         />
       )}
+      <MoveBox board="vaccine" />
       <Grid is_flex="space_row">
         <p
           style={{
@@ -190,10 +188,6 @@ const Detail = () => {
         >
           댓글 {comment_list.length}개
         </p>
-
-        <TextDiv onClick={handleMoveTotal}>
-          전체 게시글 <img src={Arrow} alt="" />
-        </TextDiv>
       </Grid>
       <CommentWrite board="vaccine" boardId={boardId} />
       {comment_list?.map((each, index) => {

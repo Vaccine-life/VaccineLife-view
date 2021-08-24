@@ -117,8 +117,8 @@ export const actionGetLikeMedi =
       // console.log(getData);
       // 왜 안나옴??? -> dispatch(actionGetLikeMedi())하니까 나옴
       // medicalId가 엉뚱한게 들어가고 있음 => 서버에서 잘 못 내려줌
-      //const likeList = getData.data;
-      //asdas({ board: "medical", likeList });
+      const likeList = getData.data;
+      dispatch(actionSetMyLikeList({ board: "medical", likeList }));
       getData.data.map((each) => {
         makeData.push(each.medicalId);
       });
