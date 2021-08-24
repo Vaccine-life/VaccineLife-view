@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import theme from "../styles/theme";
+import styled from "styled-components";
 import { Grid, Text } from "../elements";
 import LikeIconChanger from "./LikeIconChanger";
 import comment from "../images/comment.png";
 import eye from "../images/eye.png";
+import MypageCard from "./MypageCard";
+import { useDispatch } from "react-redux";
+import { actionGetLike, actionGetLikeMedi } from "../redux/modules/like";
 
-import theme from "../styles/theme";
 import { isMobileOnly } from "react-device-detect";
-import styled from "styled-components";
 
 const MyLike = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionGetLike("quarantine"));
+    dispatch(actionGetLike("vaccine"));
+    dispatch(actionGetLikeMedi());
+  }, []);
   if (isMobileOnly) {
     return (
       <>
@@ -335,7 +344,6 @@ const MyLike = () => {
         >
           내가 추천한 글
         </Text>
-
         <Text
           width="100%"
           size={theme.SubHeadTwoSize}
@@ -344,106 +352,17 @@ const MyLike = () => {
         >
           백신 후기
         </Text>
-        <Post>
-          <Grid
-            className="작성날짜"
-            is_flex="center"
-            width="15%"
-            margin={`auto ${theme.headOneSize}`}
-          >
-            <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-              2020-01-01
-            </Text>
-          </Grid>
-
-          <Grid
-            className="제목"
-            is_flex="center"
-            width="60%"
-            height="1rem"
-            margin={`auto ${theme.headOneSize} auto 0`}
-          >
-            <Title>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Title>
-          </Grid>
-
-          <Grid
-            className="아이콘세개"
-            width="25%"
-            is_flex="center"
-            margin={`auto 0`}
-          >
-            <Grid
-              className="추천"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <LikeIconChanger />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  5
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="댓글"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={comment}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  15
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="조회수"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={eye}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  555
-                </Text>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Post>
+        <Grid>
+          <MypageCard
+            title
+            createdAt
+            likeCount
+            commentCount
+            totalVisitors
+            board
+            boardId
+          />
+        </Grid>
 
         <Text
           width="100%"
@@ -453,106 +372,6 @@ const MyLike = () => {
         >
           격리 후기
         </Text>
-        <Post>
-          <Grid
-            className="작성날짜"
-            is_flex="center"
-            width="15%"
-            margin={`auto ${theme.headOneSize}`}
-          >
-            <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-              2020-01-01
-            </Text>
-          </Grid>
-
-          <Grid
-            className="제목"
-            is_flex="center"
-            width="60%"
-            height="1rem"
-            margin={`auto ${theme.headOneSize} auto 0`}
-          >
-            <Title>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Title>
-          </Grid>
-
-          <Grid
-            className="아이콘세개"
-            width="25%"
-            is_flex="center"
-            margin={`auto 0`}
-          >
-            <Grid
-              className="추천"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <LikeIconChanger />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  5
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="댓글"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={comment}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  15
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="조회수"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={eye}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  555
-                </Text>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Post>
 
         <Text
           width="100%"
@@ -562,106 +381,6 @@ const MyLike = () => {
         >
           의료진분들께
         </Text>
-        <Post>
-          <Grid
-            className="작성날짜"
-            is_flex="center"
-            width="15%"
-            margin={`auto ${theme.headOneSize}`}
-          >
-            <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-              2020-01-01
-            </Text>
-          </Grid>
-
-          <Grid
-            className="제목"
-            is_flex="center"
-            width="60%"
-            height="1rem"
-            margin={`auto ${theme.headOneSize} auto 0`}
-          >
-            <Title>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Title>
-          </Grid>
-
-          <Grid
-            className="아이콘세개"
-            width="25%"
-            is_flex="center"
-            margin={`auto 0`}
-          >
-            <Grid
-              className="추천"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <LikeIconChanger />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  5
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="댓글"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={comment}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  15
-                </Text>
-              </Grid>
-            </Grid>
-            <Grid
-              className="조회수"
-              width="30%"
-              is_flex="center"
-              margin={`auto 0`}
-            >
-              <img
-                src={eye}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid width="30%" is_flex="center" margin={`auto 0`}>
-                <Text
-                  size={theme.bodyThreeSize}
-                  color={theme.typoGrey2}
-                  margin="0 0 0 5px"
-                >
-                  555
-                </Text>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Post>
       </Grid>
     </>
   );

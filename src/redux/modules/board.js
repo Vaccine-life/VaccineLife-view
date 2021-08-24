@@ -277,30 +277,9 @@ const board = createSlice({
       }
     },
     // action을  vacBoardId, board 값을 가져옴
-    actionSetPrevNextPageVac: (state, action) => {
-      const currentIndex = state.listVac.findIndex((each) => {
-        return each.id === action.payload;
-      });
-      const totalLength = state.listVac.length;
-      state.page.prev =
-        totalLength === currentIndex
-          ? undefined
-          : state.listVac[currentIndex + 1];
-      state.page.next =
-        0 === currentIndex ? undefined : state.listVac[currentIndex - 1];
-    },
-    actionSetPrevNextPageQuar: (state, action) => {
-      const currentIndex = state.listQuar.findIndex((each) => {
-        return each.id === action.payload;
-      });
-      logger(currentIndex);
-      const totalLength = state.listQuar.length;
-      state.page.prev =
-        totalLength === currentIndex
-          ? undefined
-          : state.listQuar[currentIndex + 1];
-      state.page.next =
-        0 === currentIndex ? undefined : state.listQuar[currentIndex - 1];
+    actionSetPrevNextPage: (state, action) => {
+      state.page.next = action.payload.nextId;
+      state.page.prev = action.payload.prevId;
     },
   },
 });
@@ -361,6 +340,9 @@ export const actionGetDetail =
       let board_input = {};
       if (board === "vaccine") {
         const getData = await boardAxios.getDetailVac(boardId);
+        const getPrevNext = await boardAxios.getPrevNextVac(boardId);
+        const moveList = getPrevNext.data;
+        dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
         board_input = {
           afterEffect: data.afterEffect,
@@ -383,6 +365,9 @@ export const actionGetDetail =
         };
       } else {
         const getData = await boardAxios.getDetailQuar(boardId);
+        const getPrevNext = await boardAxios.getPrevNextQuar(boardId);
+        const moveList = getPrevNext.data;
+        dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
         board_input = {
           username: data.username,
@@ -512,8 +497,7 @@ export const {
   acionPlusLike,
   actionMinusComment,
   actionPlusComment,
-  actionSetPrevNextPageVac,
-  actionSetPrevNextPageQuar,
+  actionSetPrevNextPage,
 } = board.actions;
 
 export default board;

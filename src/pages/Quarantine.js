@@ -24,7 +24,6 @@ const Quarantine = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (!is_login) {
       return;
     }
