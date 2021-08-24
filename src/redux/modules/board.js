@@ -132,7 +132,7 @@ const board = createSlice({
         state.board.likeCount = state.board.likeCount - 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
-          if (each.id === boardId) {
+          if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
           }
           return { ...each };
@@ -176,7 +176,7 @@ const board = createSlice({
         state.board.likeCount = state.board.likeCount + 1;
       } else {
         state.listQuar = state.listQuar.map((each) => {
-          if (each.id === boardId) {
+          if (each.quarBoardId === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
           }
           return { ...each };
