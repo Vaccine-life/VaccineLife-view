@@ -193,7 +193,6 @@ const LikeWrapper = styled.div`
   margin: 87px auto 45px auto;
   font-size: ${theme.SubHeadOneSize};
   line-height: ${theme.SubHeadOneHeight};
-  border: 1.5px solid ${theme.btnColor};
 `;
 
 const LikeWrapperM = styled.div`
@@ -215,7 +214,7 @@ const LikeBtn = styled.button`
   justify-content: center;
   align-items: center;
   background-color: ${theme.white};
-  border: 1.5px solid ${theme.bg2};
+  border: 1.5px solid ${theme.btnColor};
   :hover {
     cursor: pointer;
     font-size: ${theme.headTwoSize};

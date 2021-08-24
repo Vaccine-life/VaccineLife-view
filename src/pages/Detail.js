@@ -33,7 +33,7 @@ const Detail = () => {
     dispatch(actionGetDetail("vaccine", boardId));
     dispatch(actionGetCommentList("vaccine", boardId));
     //  dispatch(actionGetLike("vaccine"));
-  }, []);
+  }, [boardId]);
 
   //격리후기떄는 id 변경
 

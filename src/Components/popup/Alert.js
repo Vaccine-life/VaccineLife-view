@@ -42,7 +42,7 @@ const Alert = () => {
     } else {
       return (
         <>
-          <Text size={theme.bodyThreeSize} lineHeight={theme.bodyThreeHeight}>
+          <Text size={theme.bodyOneSize} lineHeight={theme.bodyThreeHeight}>
             {alertMessage}
           </Text>
         </>

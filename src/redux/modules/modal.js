@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   visible: false,
   navVisible: false,
+  modifyNickname: false,
+  modifySurvey: false,
 };
 
 const modal = createSlice({
@@ -31,11 +33,10 @@ const modal = createSlice({
       }
     },
 
-    // 마이페이지 닉네임수정 클릭시 뜨는 modal
-    actionNicknameVisible: (state, action) => {
-      state.nicknameVisible = !state.nicknameVisible;
+    actionModifyNickname: (state, action) => {
+      state.modifyNickname = !state.modifyNickname;
       // 모달 켜져있을 때 원래화면 스크롤 방지
-      if (state.navVisible) {
+      if (state.modifyNickname) {
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflow = "unset";
@@ -43,8 +44,8 @@ const modal = createSlice({
     },
 
     // 마이페이지 백신설문수정 클릭시 뜨는 modal
-    actionSurveyVisible: (state, action) => {
-      state.surveyVisible = !state.surveyVisible;
+    actionModifySurvey: (state, action) => {
+      state.modifySurvey = !state.modifySurvey;
       // 모달 켜져있을 때 원래화면 스크롤 방지
       if (state.navVisible) {
         document.body.style.overflow = "hidden";
@@ -58,8 +59,8 @@ const modal = createSlice({
 export const {
   actionVisible,
   actionNavVisible,
-  actionNicknameVisible,
-  actionSurveyVisible,
+  actionModifyNickname,
+  actionModifySurvey,
 } = modal.actions;
 
 export default modal;

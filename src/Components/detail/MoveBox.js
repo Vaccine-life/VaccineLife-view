@@ -13,23 +13,23 @@ const MoveBox = (props) => {
   const page = useSelector((state) => state.board.page);
 
   const handleClickLeft = () => {
-    if (page.prev === undefined) {
+    if (page.prev === null) {
       return;
     }
     if (board === "vaccine") {
-      history.push(`/detail/${page.prev?.boardId}`);
+      history.push(`/detail/${page.prev?.id}`);
     } else {
-      history.push(`/quarantinedetail/${page.prev?.boardId}`);
+      history.push(`/quarantinedetail/${page.prev?.id}`);
     }
   };
   const handleClickRight = () => {
-    if (page.next === undefined) {
+    if (page.next === null) {
       return;
     }
     if (board === "vaccine") {
-      history.push(`/detail/${page.next?.boardId}`);
+      history.push(`/detail/${page.next?.id}`);
     } else {
-      history.push(`/quarantinedetail/${page.next?.boardId}`);
+      history.push(`/quarantinedetail/${page.next?.id}`);
     }
   };
 
@@ -47,7 +47,7 @@ const MoveBox = (props) => {
         <Btn
           direction="left"
           onClick={handleClickLeft}
-          page={page.prev === undefined ? false : true}
+          page={page.prev === null ? false : true}
         >
           <UpperWord isMobile={true}>
             <p>{"<"} 이전글</p>
@@ -61,7 +61,7 @@ const MoveBox = (props) => {
         <Btn
           direction="right"
           onClick={handleClickRight}
-          page={page.next === undefined ? false : true}
+          page={page.next === null ? false : true}
         >
           <UpperWord isMobile={true}>
             <p>다음글 {">"}</p>
@@ -76,7 +76,7 @@ const MoveBox = (props) => {
       <Btn
         direction="left"
         onClick={handleClickLeft}
-        page={page.prev === undefined ? false : true}
+        page={page.prev === null ? false : true}
       >
         <UpperWord isMobile={false}>
           <p>{"<"} 이전글</p>
@@ -90,7 +90,7 @@ const MoveBox = (props) => {
       <Btn
         direction="right"
         onClick={handleClickRight}
-        page={page.next === undefined ? false : true}
+        page={page.next === null ? false : true}
       >
         <UpperWord isMobile={false}>
           <p>다음글 {">"}</p>

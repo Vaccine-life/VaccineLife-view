@@ -51,7 +51,7 @@ const QuarantineDetail = () => {
     dispatch(actionGetDetail("quarantine", boardId_detail));
     dispatch(actionGetCommentList("quarantine", boardId_detail));
     // dispatch(actionGetLike("quarantine"));
-  }, []);
+  }, [boardId_detail]);
   const board_content = useSelector((state) => state.board.board);
 
   const handleDelete = () => {
