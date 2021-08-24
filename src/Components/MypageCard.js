@@ -43,7 +43,7 @@ const MypageCard = (props) => {
               color={theme.typoGrey2}
               margin="0 auto 0 16px"
             >
-              2020-01-01
+              {displayedAt(createdAt)}
             </Text>
           </Grid>
 
@@ -56,46 +56,50 @@ const MypageCard = (props) => {
               <LikeIconChanger />
               <Grid is_flex="center">
                 <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  45
+                  {likeCount}
                 </Text>
               </Grid>
             </Grid>
-            <Grid className="댓글" is_flex="space_row">
-              <img
-                src={comment}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  15
-                </Text>
+            {board !== "medical" && (
+              <Grid className="댓글" is_flex="space_row">
+                <img
+                  src={comment}
+                  alt=""
+                  style={{
+                    width: `${theme.bodyOneSize}`,
+                    height: `${theme.bodyOneSize}`,
+                  }}
+                />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {commentCount}
+                  </Text>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid className="조회수" is_flex="space_row">
-              <img
-                src={eye}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  555
-                </Text>
+            )}
+            {board !== "medical" && (
+              <Grid className="조회수" is_flex="space_row">
+                <img
+                  src={eye}
+                  alt=""
+                  style={{
+                    width: `${theme.bodyOneSize}`,
+                    height: `${theme.bodyOneSize}`,
+                  }}
+                />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {totalVisitors}
+                  </Text>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
           </Grid>
         </Grid>
 
         <Grid className="제목">
           <Line />
-          <MobileTitle></MobileTitle>
+          <MobileTitle>{board === "medical" ? contents : title}</MobileTitle>
         </Grid>
       </MobilePost>
     );
