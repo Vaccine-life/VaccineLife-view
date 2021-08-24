@@ -28,8 +28,8 @@ const comment = createSlice({
     actionSetComment: (state, action) => {
       // state.list = action.payload;
       state.list.push(...action.payload.medicalTen);
-      // console.log(action.payload);
-      // console.log(action.payload.medicalTen);
+      console.log(action.payload);
+      console.log(action.payload.medicalTen);
       state.pagingMedi.nextPage += 1;
       state.pagingMedi.totalPage = action.payload.totalPageInData;
     },
@@ -177,8 +177,9 @@ export const actionAddMedical =
       // dispatch(actionSetComment(data));
       dispatch(actionLoading());
       await medicalAxios.addMedical(contents);
-      const getData = await medicalAxios.getPageMedi();
-      const mediContetns = getData.data;
+      const getData = await medicalAxios.getPageMedi(1);
+      const mediContetns = getData.data.content;
+      // console.log(mediContetns);
       const totalPageInData = getData.data.totalPages;
       dispatch(actionSetComment(mediContetns, totalPageInData));
       dispatch(actionResetList({ mediContetns, totalPageInData }));
@@ -198,8 +199,9 @@ export const actionDeleteMedical =
     try {
       dispatch(actionLoading());
       await medicalAxios.deleteMedical(medicalId);
-      dispatch(actionDeleteComment({ medicalId }));
       dispatch(acionSetMedicalObj());
+      dispatch(actionDeleteComment({ medicalId }));
+
       history.replace("/medical");
       dispatch(actionLoading());
     } catch (err) {
@@ -216,6 +218,7 @@ export const actionModifyMedical =
   async (dispatch, getState, { history }) => {
     try {
       dispatch(actionLoading());
+      const { contents } = getState().comment.list.contents;
       await medicalAxios.modifyMedi(medicalId, contents);
       history.replace("/medical");
 
@@ -316,14 +319,14 @@ export const actionDeleteCommentList =
     }
   };
 
+// 마이페이지 내가 쓴 의료진 가져오기
 export const actionGetMyMedical =
   (userId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { user_id } = getState().comment.list;
+      const { user_id } = getState().user.user.userId;
       console.log(user_id);
       const getData = await mypageAxios.getMyMedical(userId);
-
       console.log(getData);
       if (user_id === getData.userId) {
         return dispatch(actionGetMedical({ userId }));

@@ -7,8 +7,21 @@ import eye from "../images/eye.png";
 import theme from "../styles/theme";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { actionGetMyMedical } from "../redux/modules/comment";
 
 const MyPost = () => {
+  const dispatch = useDispatch();
+
+  const user_id = useSelector((state) => state.user.user);
+  console.log(user_id);
+  const contents = useSelector((state) => state.comment.list);
+  console.log(contents);
+
+  // React.useEffect(() => {
+  //   dispatch(actionGetMyMedical());
+  // }, []);
+
   if (isMobileOnly) {
     return (
       <>

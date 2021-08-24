@@ -22,6 +22,7 @@ import { actionModifyMedical } from "../redux/modules/comment";
 
 const CommentList = (props) => {
   const medi_id = props.id;
+  console.log(medi_id);
   const medi_contents = props.contents;
   // console.log(medi_contents);
 

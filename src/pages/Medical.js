@@ -6,7 +6,7 @@ import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
-import { actionGetMedical } from "../redux/modules/comment";
+import { actionGetMedical, actionSetComment } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
 import { isMobileOnly } from "react-device-detect";

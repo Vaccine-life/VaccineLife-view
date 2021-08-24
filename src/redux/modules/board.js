@@ -35,6 +35,8 @@ const board = createSlice({
   reducers: {
     actionSetListVac: (state, action) => {
       state.listVac.push(...action.payload.board);
+      // console.log(action.payload);
+      // console.log(action.payload.board);
       state.pagingVac.nextPage += 1;
       state.pagingVac.totalPage = action.payload.totalPageInData;
     },
