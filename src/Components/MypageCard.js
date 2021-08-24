@@ -18,6 +18,7 @@ const MypageCard = (props) => {
     totalVisitors,
     board,
     boardId,
+    contents,
   } = props;
 
   const handleMoveDetail = () => {
@@ -120,7 +121,7 @@ const MypageCard = (props) => {
         height="1rem"
         margin={`auto ${theme.headOneSize} auto 0`}
       >
-        <Title>{title}</Title>
+        <Title>{board === "medical" ? contents : title}</Title>
       </Grid>
 
       <Grid
@@ -141,44 +142,53 @@ const MypageCard = (props) => {
             </Text>
           </Grid>
         </Grid>
-        <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={comment}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {commentCount}
-            </Text>
+        {board !== "medical" && (
+          <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
+            <img
+              src={comment}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {commentCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid className="조회수" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={eye}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {totalVisitors}
-            </Text>
+        )}
+        {board !== "medical" && (
+          <Grid
+            className="조회수"
+            width="30%"
+            is_flex="center"
+            margin={`auto 0`}
+          >
+            <img
+              src={eye}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {totalVisitors}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Grid>
     </Post>
   );
