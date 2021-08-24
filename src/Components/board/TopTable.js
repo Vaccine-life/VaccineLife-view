@@ -33,12 +33,19 @@ const TopTable = (props) => {
 
   return (
     <TableThread>
-      <Td style={{ color: `${theme.errorColor}`, fontWeight: "700" }}>
+      <Td
+        style={{
+          color: `${theme.errorColor}`,
+          fontWeight: "700",
+          borderRight: `2px solid ${theme.typoLightGrey2}`,
+        }}
+      >
         {type}
       </Td>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
       </TdTitle>
+      <Td style={{ color: `${theme.errorColor}` }}>admin</Td>
       <Td></Td>
       <Td></Td>
       <Td></Td>
@@ -61,6 +68,9 @@ const TdTitle = styled.td`
   line-height: ${theme.bodyTwoHeight};
   color: ${theme.errorColor};
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   :hover {
     color: ${theme.bg2};
   }
