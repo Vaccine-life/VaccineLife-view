@@ -47,20 +47,37 @@ const MypageCard = (props) => {
             </Text>
           </Grid>
 
-          <Grid
-            className="아이콘세개"
-            is_flex="space_row"
-            margin="0 16px 0 auto"
-          >
-            <Grid className="추천" is_flex="space_row">
-              <LikeIconChanger board={board} boardId={boardId} />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  {likeCount}
-                </Text>
+          {board === "medical" && (
+            <Grid
+              className="아이콘세개"
+              is_flex="space_row"
+              margin="0 14px 0 auto"
+              width="65px"
+            >
+              <Grid className="추천" is_flex="space_row">
+                <LikeIconChanger />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {likeCount}
+                  </Text>
+                </Grid>
               </Grid>
             </Grid>
-            {board !== "medical" && (
+          )}
+          {board !== "medical" && (
+            <Grid
+              className="아이콘세개"
+              is_flex="space_row"
+              margin="0 16px 0 auto"
+            >
+              <Grid className="추천" is_flex="space_row">
+                <LikeIconChanger />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {likeCount}
+                  </Text>
+                </Grid>
+              </Grid>
               <Grid className="댓글" is_flex="space_row">
                 <img
                   src={comment}
@@ -76,8 +93,6 @@ const MypageCard = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-            )}
-            {board !== "medical" && (
               <Grid className="조회수" is_flex="space_row">
                 <img
                   src={eye}
@@ -93,8 +108,8 @@ const MypageCard = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-            )}
-          </Grid>
+            </Grid>
+          )}
         </Grid>
 
         <Grid className="제목">
@@ -121,7 +136,7 @@ const MypageCard = (props) => {
       <Grid
         className="제목"
         is_flex="center"
-        width="60%"
+        width="50%"
         height="1rem"
         margin={`auto ${theme.headOneSize} auto 0`}
       >
@@ -132,20 +147,41 @@ const MypageCard = (props) => {
         className="아이콘세개"
         width="25%"
         is_flex="center"
-        margin={`auto 0`}
+        margin="0 0 0 auto"
       >
-        <Grid className="추천" width="30%" is_flex="center" margin={`auto 0`}>
-          <LikeIconChanger board={board} boardId={boardId} />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {likeCount}
-            </Text>
+        {board === "medical" && (
+          <Grid
+            className="추천"
+            width="15%"
+            is_flex="center"
+            margin="0 30px 0 auto"
+          >
+            <LikeIconChanger />
+            <Grid width="30%" is_flex="center">
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 8px"
+              >
+                {likeCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
+        {board !== "medical" && (
+          <Grid className="추천" width="30%" is_flex="center" margin={`auto 0`}>
+            <LikeIconChanger />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {likeCount}
+              </Text>
+            </Grid>
+          </Grid>
+        )}
         {board !== "medical" && (
           <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
             <img
@@ -241,7 +277,7 @@ const MobilePost = styled.div`
 const Line = styled.div`
   width: 90%;
   border-bottom: 1px solid ${theme.typoLightGrey2};
-  margin: 0 auto 8px auto;
+  margin: 0 auto 12px auto;
 `;
 
 const Border = styled.div`
