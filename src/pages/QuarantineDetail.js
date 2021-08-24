@@ -53,7 +53,9 @@ const QuarantineDetail = () => {
     // dispatch(actionGetLike("quarantine"));
   }, [boardId_detail]);
   const board_content = useSelector((state) => state.board.board);
-
+  // console.log(board_content);
+  // const board_con = useSelector((state) => state.board);
+  // console.log(board_con);
   const handleDelete = () => {
     dispatch(actionDeleteEx("quarantine", board_content.boardId));
   };
