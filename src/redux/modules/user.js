@@ -4,7 +4,11 @@ import { userAxios } from "../../shared/api";
 import { deleteCookie, getCookie, setCookie } from "../../shared/cookie";
 import logger from "../../shared/logger";
 import { actionResetLike } from "./like";
-import { actionVisible } from "./modal";
+import {
+  actionVisible,
+  actionModifyNicknameVisible,
+  actionModifySurveyVisible,
+} from "./modal";
 import { actionAlert, actionSetMessage } from "./popup";
 import { actionGetLikeMedi, actionSetLikeMedi } from "./like";
 
@@ -66,7 +70,6 @@ export const actionLogin =
         type: userInfoDecode.type,
       };
 
-      console.log(userInfo);
       dispatch(actionSetUser(userInfo));
       dispatch(actionSetMessage("로그인 되었습니다"));
       dispatch(actionAlert());
@@ -155,6 +158,146 @@ export const actionSignup =
       dispatch(actionAlert());
 
       history.push("/");
+    } catch (error) {
+      logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionNicknameUpdate =
+  ({
+    id,
+    username,
+    nickname,
+    isVaccine,
+    type,
+    gender,
+    age,
+    disease,
+    degree,
+    afterEffect,
+  }) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (isVaccine === 0) {
+        type = undefined;
+        gender = undefined;
+        age = undefined;
+        disease = undefined;
+        degree = undefined;
+        afterEffect = [];
+      }
+
+      const updatedUserObj = await userAxios.userUpdate(id, {
+        id,
+        username,
+        nickname,
+        isVaccine,
+        type,
+        gender,
+        age,
+        disease,
+        degree,
+        afterEffect: afterEffect.sort().join(", "),
+      });
+
+      dispatch(actionModifyNicknameVisible());
+
+      setCookie("vaccine_life_token", updatedUserObj.data);
+      const updatedUserDecode = jwtDecode(updatedUserObj.data);
+      dispatch(actionSetTime(updatedUserDecode.exp));
+      const updatedUser = {
+        afterEffect: updatedUserDecode.afterEffect,
+        age: updatedUserDecode.age,
+        degree: updatedUserDecode.degree,
+        disease: updatedUserDecode.disease,
+        gender: updatedUserDecode.gender,
+        isVaccine: updatedUserDecode.isVaccine,
+        nickname: updatedUserDecode.nickname,
+        roles: updatedUserDecode.roles,
+        username: updatedUserDecode.sub,
+        userId: updatedUserDecode.id,
+        type: updatedUserDecode.type,
+      };
+      dispatch(actionSetUser(updatedUser));
+
+      dispatch(actionSetMessage("닉네임이 수정되었습니다"));
+      dispatch(actionAlert());
+
+      history.push("/");
+    } catch (error) {
+      logger(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
+export const actionSurveyUpdate =
+  ({
+    id,
+    username,
+    nickname,
+    isVaccine,
+    type,
+    gender,
+    age,
+    disease,
+    degree,
+    afterEffect,
+  }) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (isVaccine === 0) {
+        type = undefined;
+        gender = undefined;
+        age = undefined;
+        disease = undefined;
+        degree = undefined;
+        afterEffect = [];
+      }
+
+      const updatedUserObj = await userAxios.userUpdate(id, {
+        id,
+        username,
+        nickname,
+        isVaccine,
+        type,
+        gender,
+        age,
+        disease,
+        degree,
+        afterEffect: afterEffect.sort().join(", "),
+      });
+
+      dispatch(actionModifySurveyVisible());
+
+      setCookie("vaccine_life_token", updatedUserObj.data);
+      const updatedUserDecode = jwtDecode(updatedUserObj.data);
+      dispatch(actionSetTime(updatedUserDecode.exp));
+      const updatedUser = {
+        afterEffect: updatedUserDecode.afterEffect,
+        age: updatedUserDecode.age,
+        degree: updatedUserDecode.degree,
+        disease: updatedUserDecode.disease,
+        gender: updatedUserDecode.gender,
+        isVaccine: updatedUserDecode.isVaccine,
+        nickname: updatedUserDecode.nickname,
+        roles: updatedUserDecode.roles,
+        username: updatedUserDecode.sub,
+        userId: updatedUserDecode.id,
+        type: updatedUserDecode.type,
+      };
+      dispatch(actionSetUser(updatedUser));
+
+      dispatch(actionSetMessage("백신 정보가 수정되었습니다"));
+      dispatch(actionAlert());
+
+      // history.push("/");
     } catch (error) {
       logger(error);
       dispatch(

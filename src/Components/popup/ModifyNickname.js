@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { actionModifyNicknameVisible } from "../../redux/modules/modal";
+import { actionNicknameUpdate } from "../../redux/modules/user";
 
 import { Button, Grid, Text } from "../../elements";
 
@@ -16,6 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 
 const ModifyNickname = (props) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   const [nicknameDupOk, setNicknameDupOk] = useState(false);
   const [nicknameDupMsg, setNicknameDupMsg] = useState("");
@@ -42,7 +44,19 @@ const ModifyNickname = (props) => {
     }),
 
     onSubmit: (values) => {
-      console.log(values);
+      const updatedUser = {
+        id: user.userId,
+        username: user.username,
+        nickname: values.nickname,
+        isVaccine: user.isVaccine,
+        type: user.type,
+        degree: user.degree,
+        gender: user.gender,
+        age: user.age,
+        disease: user.disease,
+        afterEffect: user.afterEffect.split(", "),
+      };
+      dispatch(actionNicknameUpdate(updatedUser));
     },
   });
 
@@ -129,6 +143,7 @@ const ModifyNickname = (props) => {
               height={theme.smallButtonHeight}
               fontSize={theme.bodyOneSize}
               bg={theme.bg2}
+              // _onClick={() => dispatch(actionModifyNicknameVisible())}
             >
               변경
             </Button>

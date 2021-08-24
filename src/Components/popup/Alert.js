@@ -24,9 +24,10 @@ const Alert = () => {
       return (
         <>
           <Text
-            size={theme.bodyThreeSize}
+            size={theme.bodyTwoSize}
             lineHeight={theme.bodyThreeHeight}
-            margin="0 0 15px 0"
+            margin="0 auto 15px auto"
+            bold
           >
             반갑습니다,
             <span style={{ color: `${theme.SuccessGreen}` }}>

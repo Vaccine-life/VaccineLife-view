@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Text, Grid } from "../elements/index";
 import { isMobileOnly } from "react-device-detect";
 import { actionModifySurveyVisible } from "../redux/modules/modal";
+import { actionSurveyUpdate } from "../redux/modules/user";
 import { useFormik } from "formik";
 
 import styled from "styled-components";
@@ -31,17 +32,14 @@ const ModifySurvey = (props) => {
 
   // '접종하지않음'선택시 '다음단계'버튼을 활성화, 어느 하나라도 선택하지 않은 문항이 있다면 '다음단계'버튼을 비활성화
   const disableSubmitButton = () => {
-    if (isVaccine === 0) {
-      return false;
-    }
     if (
-      isVaccine === 2 ||
+      isVaccine === 0 ||
       degree === undefined ||
       type === undefined ||
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect.length === 0
+      afterEffect.includes("")
     ) {
       return true;
     }
@@ -95,6 +93,13 @@ const ModifySurvey = (props) => {
       });
     }
 
+    if (afterEffect.includes("")) {
+      setInputs({
+        ...inputs,
+        [name]: [value],
+      });
+    }
+
     // 유저가 '없음'을 클릭한 경우, 나머지 선택지를 없애고 '없음'만 남긴다.
     // 주석처리한 이유: '발열 체크 - 없음 체크 - 없음 체크 취소 후 발열로 제출하고자 함'이라는 상황에서 이 else if문이 있으면 afterEffect가 빈 배열로 넘어가버린다..
     // else if (value === "없음") {
@@ -115,7 +120,22 @@ const ModifySurvey = (props) => {
     initialValues: inputs,
 
     onSubmit: () => {
-      console.log(inputs);
+      if (inputs.afterEffect.indexOf("없음") !== -1) {
+        setInputs({
+          ...inputs,
+          afterEffect: ["없음"],
+        });
+      }
+
+      const userInfo = {
+        id: user.userId,
+        username: user.username,
+        nickname: user.nickname,
+      };
+
+      const updatedUser = { ...inputs, ...userInfo };
+      console.log(updatedUser);
+      dispatch(actionSurveyUpdate(updatedUser));
     },
   });
 
@@ -869,6 +889,7 @@ const ModifySurvey = (props) => {
                     value="0"
                     id="isVaccine0"
                     onClick={handleIsVaccineClick}
+                    disabled={true}
                     defaultChecked={false === user.isVaccine}
                   />
                   <label
@@ -1038,7 +1059,11 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyTwoSize}
+              >
                 성별
               </Text>
               <TwoOptions>
@@ -1049,8 +1074,7 @@ const ModifySurvey = (props) => {
                     value="남"
                     id="남"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"남" === user.gender}
                   />
                   <label
@@ -1068,8 +1092,7 @@ const ModifySurvey = (props) => {
                     value="여"
                     id="여"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"여" === user.gender}
                   />
                   <label
@@ -1085,7 +1108,11 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyTwoSize}
+              >
                 연령대
               </Text>
               <FourOptions>
@@ -1096,8 +1123,7 @@ const ModifySurvey = (props) => {
                     value="10"
                     id="10대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"10" === user.age}
                   />
                   <label
@@ -1115,8 +1141,7 @@ const ModifySurvey = (props) => {
                     value="20"
                     id="20대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"20" === user.age}
                   />
                   <label
@@ -1134,8 +1159,7 @@ const ModifySurvey = (props) => {
                     value="30"
                     id="30대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"30" === user.age}
                   />
                   <label
@@ -1153,8 +1177,7 @@ const ModifySurvey = (props) => {
                     value="40"
                     id="40대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"40" === user.age}
                   />
                   <label
@@ -1175,8 +1198,7 @@ const ModifySurvey = (props) => {
                     value="50"
                     id="50대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"50" === user.age}
                   />
                   <label
@@ -1194,8 +1216,7 @@ const ModifySurvey = (props) => {
                     value="60"
                     id="60대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"60" === user.age}
                   />
                   <label
@@ -1213,8 +1234,7 @@ const ModifySurvey = (props) => {
                     value="70"
                     id="70대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"70" === user.age}
                   />
                   <label
@@ -1232,8 +1252,7 @@ const ModifySurvey = (props) => {
                     value="80"
                     id="80대이상"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"80" === user.age}
                   />
                   <label
@@ -1516,7 +1535,7 @@ const ModifySurvey = (props) => {
             </SurveyItem>
 
             <SubmitButton type="submit" disabled={disableSubmitButton()}>
-              회원가입
+              수정
             </SubmitButton>
             {/* </form> */}
           </Wrapper>

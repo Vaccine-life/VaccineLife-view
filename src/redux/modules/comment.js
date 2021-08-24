@@ -178,10 +178,13 @@ export const actionAddMedical =
       dispatch(actionLoading());
       await medicalAxios.addMedical(contents);
       const getData = await medicalAxios.getPageMedi();
+      console.log(getData);
       const mediContetns = getData.data;
       const totalPageInData = getData.data.totalPages;
       dispatch(actionSetComment(mediContetns, totalPageInData));
       dispatch(actionResetList({ mediContetns, totalPageInData }));
+      dispatch(actionGetMedical());
+      // history.replace("/medical");
       dispatch(actionLoading());
     } catch (err) {
       dispatch(
