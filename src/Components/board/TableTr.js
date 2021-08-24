@@ -14,6 +14,7 @@ const TableTr = (props) => {
   const {
     board,
     type,
+    nickname,
     boardId,
     title,
     likeCount,
@@ -33,10 +34,18 @@ const TableTr = (props) => {
 
   return (
     <TableThread>
-      <Td style={{ color: "black" }}>{type}</Td>
+      <Td
+        style={{
+          color: `${theme.typoBlack}`,
+          borderRight: `2px solid ${theme.typoLightGrey2}`,
+        }}
+      >
+        {type}
+      </Td>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
       </TdTitle>
+      <Td style={{ color: `${theme.typoGrey2}` }}>{nickname}</Td>
       <Td>
         <EachTdDiv>
           {" "}
@@ -80,6 +89,9 @@ const TdTitle = styled.td`
   :hover {
     color: ${theme.bg2};
   }
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const Td = styled.td`

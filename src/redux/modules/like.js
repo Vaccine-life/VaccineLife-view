@@ -79,6 +79,7 @@ export const actionGetLike =
           makeData.push(each.vacBoardId);
         });
         const likeList = getData.data;
+        logger(getData);
         dispatch(actionSetMyLikeList({ board, likeList }));
         dispatch(actionSetLikeVac(makeData));
       } else if (board === "quarantine") {

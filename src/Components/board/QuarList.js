@@ -48,6 +48,7 @@ const QuarList = (props) => {
         {quar_list?.map((each, index) => {
           return (
             <Ariticle
+              nickname={each.nickname}
               key={index}
               board={board}
               type={each.type}
@@ -68,11 +69,12 @@ const QuarList = (props) => {
     <Table>
       <thead>
         <TableThread>
-          <Th style={{ width: `${(320 / 600) * 100}%` }}>글제목</Th>
-          <Th style={{ width: `${(70 / 600) * 100}%` }}>추천</Th>
-          <Th style={{ width: `${(70 / 600) * 100}%` }}>댓글</Th>
-          <Th style={{ width: `${(70 / 600) * 100}%` }}>조회</Th>
-          <Th style={{ width: `${(70 / 600) * 100}%` }}>날짜</Th>
+          <Th style={{ width: `${(280 / 600) * 100}%` }}>글제목</Th>
+          <Th style={{ width: `${(80 / 600) * 100}%` }}>작성자</Th>
+          <Th style={{ width: `${(60 / 600) * 100}%` }}>추천</Th>
+          <Th style={{ width: `${(60 / 600) * 100}%` }}>댓글</Th>
+          <Th style={{ width: `${(60 / 600) * 100}%` }}>조회</Th>
+          <Th style={{ width: `${(60 / 600) * 100}%` }}>날짜</Th>
         </TableThread>
       </thead>
       <tbody>
@@ -96,6 +98,7 @@ const QuarList = (props) => {
           {quar_list?.map((each, index) => {
             return (
               <QuarTableTr
+                nickname={each.nickname}
                 key={index}
                 board={board}
                 title={each.title}
