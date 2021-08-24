@@ -21,22 +21,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 62919,
+                    vaccine: 63363,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1129784,
+                    vaccine: 1131171,
                     vaccineColor: "hsl(169, 70%, 50%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 5335965,
+                    vaccine: 5342862,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "AZ",
-                    vaccine: 5033850,
+                    vaccine: 5746338,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -243,22 +243,22 @@ const MainNivoBar = () => {
             data={[
               {
                 vaccines: "모더나",
-                vaccine: 62919,
+                vaccine: 63363,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "얀센",
-                vaccine: 1129784,
+                vaccine: 1131171,
                 vaccineColor: "hsl(169, 70%, 50%)",
               },
               {
                 vaccines: "화이자",
-                vaccine: 5335965,
+                vaccine: 5342862,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "AZ",
-                vaccine: 5033850,
+                vaccine: 5746338,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}

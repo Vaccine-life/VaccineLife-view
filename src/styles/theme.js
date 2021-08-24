@@ -28,7 +28,7 @@ const theme = {
   SubHeadTwoSize: "16px",
   bodyOneSize: "20px",
   bodyTwoSize: "18px",
-  bodyThreeSize: "16x",
+  bodyThreeSize: "16px",
   bodyfourSize: "14px",
 
   //line Height
