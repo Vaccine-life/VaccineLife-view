@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  actionModifyNickname,
-  actionModifySurvey,
+  actionModifyNicknameVisible,
+  actionModifySurveyVisible,
 } from "../redux/modules/modal.js";
 
 import { Grid, Text } from "../elements";
@@ -17,8 +17,12 @@ import styled from "styled-components";
 const MyInfo = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const modifyNickname = useSelector((state) => state.modal.modifyNickname);
-  const modifySurvey = useSelector((state) => state.modal.modifySurvey);
+  const modifyNicknameVisible = useSelector(
+    (state) => state.modal.modifyNicknameVisible
+  );
+  const modifySurveyVisible = useSelector(
+    (state) => state.modal.modifySurveyVisible
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,7 +67,7 @@ const MyInfo = () => {
                 src={pencil}
                 alt=""
                 onClick={() => {
-                  dispatch(actionModifyNickname());
+                  dispatch(actionModifyNicknameVisible());
                 }}
               />
             </Grid>
@@ -109,14 +113,14 @@ const MyInfo = () => {
               src={pencil}
               alt=""
               onClick={() => {
-                dispatch(actionModifySurvey());
+                dispatch(actionModifySurveyVisible());
               }}
             />
             <Text
               size={theme.bodyThreeSize}
               color={theme.btnColor}
               _onClick={() => {
-                dispatch(actionModifySurvey());
+                dispatch(actionModifySurveyVisible());
               }}
               hover
             >
@@ -168,8 +172,8 @@ const MyInfo = () => {
             </table>
           </Grid>
 
-          {modifyNickname && <ModifyNickname />}
-          {modifySurvey && <ModifySurvey />}
+          {modifyNicknameVisible && <ModifyNickname />}
+          {modifySurveyVisible && <ModifySurvey />}
         </Grid>
       </>
     );
@@ -202,7 +206,7 @@ const MyInfo = () => {
             src={pencil}
             alt=""
             onClick={() => {
-              dispatch(actionModifyNickname());
+              dispatch(actionModifyNicknameVisible());
             }}
           />
         </Grid>
@@ -235,14 +239,14 @@ const MyInfo = () => {
           src={pencil}
           alt=""
           onClick={() => {
-            dispatch(actionModifySurvey());
+            dispatch(actionModifySurveyVisible());
           }}
         />
         <Text
           size={theme.bodyThreeSize}
           color={theme.btnColor}
           _onClick={() => {
-            dispatch(actionModifySurvey());
+            dispatch(actionModifySurveyVisible());
           }}
           hover
         >
@@ -293,8 +297,8 @@ const MyInfo = () => {
           </tbody>
         </table>
       </Grid>
-      {modifyNickname && <ModifyNickname />}
-      {modifySurvey && <ModifySurvey />}
+      {modifyNicknameVisible && <ModifyNickname />}
+      {modifySurveyVisible && <ModifySurvey />}
     </>
   );
 };

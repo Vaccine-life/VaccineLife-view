@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Text, Grid } from "../elements/index";
 import { isMobileOnly } from "react-device-detect";
-import { actionModifySurvey } from "../redux/modules/modal";
+import { actionModifySurveyVisible } from "../redux/modules/modal";
 import { useFormik } from "formik";
 
 import styled from "styled-components";
@@ -126,7 +126,7 @@ const ModifySurvey = (props) => {
           <MobileInner onSubmit={formik.handleSubmit}>
             <MobileXbutton
               onClick={() => {
-                dispatch(actionModifySurvey());
+                dispatch(actionModifySurveyVisible());
               }}
             >
               <FontAwesomeIcon
@@ -826,7 +826,7 @@ const ModifySurvey = (props) => {
         <Modal>
           <Xbutton
             onClick={() => {
-              dispatch(actionModifySurvey());
+              dispatch(actionModifySurveyVisible());
             }}
           >
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />

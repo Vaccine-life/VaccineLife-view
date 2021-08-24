@@ -37,7 +37,7 @@ const TableTr = (props) => {
       <Td
         style={{
           color: `${theme.typoBlack}`,
-          borderRight: `2px solid ${theme.typoLightGrey2}`,
+          backgroundColor: `rgba(237, 242, 255, 0.5)`,
         }}
       >
         {type}

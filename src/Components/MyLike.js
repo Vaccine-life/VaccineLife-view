@@ -3,18 +3,24 @@ import theme from "../styles/theme";
 import styled from "styled-components";
 import { Grid, Text } from "../elements";
 import MypageCard from "./MypageCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionGetLike, actionGetLikeMedi } from "../redux/modules/like";
 
 import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MyLike = () => {
   const dispatch = useDispatch();
+  const vac_list = useSelector((state) => state.board.myLikeVac);
+  const quar_list = useSelector((state) => state.board.myLikeQuar);
+  const medi_list = useSelector((state) => state.board.myLikeMedi);
+
   useEffect(() => {
     dispatch(actionGetLike("quarantine"));
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLikeMedi());
   }, []);
+
   if (isMobileOnly) {
     return (
       <>
@@ -44,17 +50,22 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                백신 후기
+                백신 후기 ({vac_list.length})
               </Text>
-              <MypageCard
-                title
-                createdAt
-                likeCount
-                commentCount
-                totalVisitors
-                board
-                boardId
-              />
+              {vac_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    board="vaccine"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
           <Border />
@@ -67,8 +78,22 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                격리 후기
+                격리 후기 ({quar_list.length})
               </Text>
+              {quar_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    board="quarantine"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
           <Border />
@@ -81,8 +106,23 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                의료진분들께
+                의료진분들께 ({medi_list.length})
               </Text>
+              {medi_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    contents={each.contents}
+                    board="medical"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>
@@ -108,18 +148,24 @@ const MyLike = () => {
           color={theme.typoGrey3}
           margin={`0 0 ${theme.bodyThreeSize} 0`}
         >
-          백신 후기
+          백신 후기 ({vac_list.length})
         </Text>
         <Grid>
-          <MypageCard
-            title
-            createdAt
-            likeCount
-            commentCount
-            totalVisitors
-            board
-            boardId
-          />
+          {vac_list?.map((each, index) => {
+            return (
+              <MypageCard
+                onClick={() => history}
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                board="vaccine"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
         </Grid>
 
         <Text
@@ -128,17 +174,49 @@ const MyLike = () => {
           color={theme.typoGrey3}
           margin={`${theme.isVaccineHeight} 0 ${theme.bodyThreeSize} 0`}
         >
-          격리 후기
+          격리 후기 ({quar_list.length})
         </Text>
-
+        <Grid>
+          {quar_list?.map((each, index) => {
+            return (
+              <MypageCard
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                board="quarantine"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
+        </Grid>
         <Text
           width="100%"
           size={theme.SubHeadTwoSize}
           color={theme.typoGrey3}
           margin={`${theme.isVaccineHeight} 0 ${theme.bodyThreeSize} 0`}
         >
-          의료진분들께
+          의료진분들께 ({medi_list.length})
         </Text>
+        <Grid>
+          {medi_list?.map((each, index) => {
+            return (
+              <MypageCard
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                contents={each.contents}
+                board="medical"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
+        </Grid>
       </Grid>
     </>
   );

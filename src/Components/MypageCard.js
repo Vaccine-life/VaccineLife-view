@@ -7,6 +7,7 @@ import LikeIconChanger from "./LikeIconChanger";
 import displayedAt from "../shared/displayedAt";
 import { Grid, Text } from "../elements";
 import { isMobileOnly } from "react-device-detect";
+import { history } from "../redux/configStore";
 
 const MypageCard = (props) => {
   const {
@@ -17,11 +18,19 @@ const MypageCard = (props) => {
     totalVisitors,
     board,
     boardId,
+    contents,
   } = props;
 
+  const handleMoveDetail = () => {
+    if (board === "vaccine") {
+      history.push(`/detail/${boardId}`);
+    } else if (board === "quarantine") {
+      history.push(`/quarantinedetail/${boardId}`);
+    }
+  };
   if (isMobileOnly) {
     return (
-      <MobilePost>
+      <MobilePost onClick={handleMoveDetail}>
         <Grid
           className="작성날짜, 아이콘세개"
           is_flex="space_row"
@@ -34,71 +43,85 @@ const MypageCard = (props) => {
               color={theme.typoGrey2}
               margin="0 auto 0 16px"
             >
-              2020-01-01
+              {displayedAt(createdAt)}
             </Text>
           </Grid>
 
-          <Grid
-            className="아이콘세개"
-            is_flex="space_row"
-            margin="0 16px 0 auto"
-          >
-            <Grid className="추천" is_flex="space_row">
-              <LikeIconChanger />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  45
-                </Text>
+          {board === "medical" && (
+            <Grid
+              className="아이콘세개"
+              is_flex="space_row"
+              margin="0 14px 0 auto"
+              width="65px"
+            >
+              <Grid className="추천" is_flex="space_row">
+                <LikeIconChanger />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {likeCount}
+                  </Text>
+                </Grid>
               </Grid>
             </Grid>
-            <Grid className="댓글" is_flex="space_row">
-              <img
-                src={comment}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  15
-                </Text>
+          )}
+          {board !== "medical" && (
+            <Grid
+              className="아이콘세개"
+              is_flex="space_row"
+              margin="0 16px 0 auto"
+            >
+              <Grid className="추천" is_flex="space_row">
+                <LikeIconChanger />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {likeCount}
+                  </Text>
+                </Grid>
+              </Grid>
+              <Grid className="댓글" is_flex="space_row">
+                <img
+                  src={comment}
+                  alt=""
+                  style={{
+                    width: `${theme.bodyOneSize}`,
+                    height: `${theme.bodyOneSize}`,
+                  }}
+                />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {commentCount}
+                  </Text>
+                </Grid>
+              </Grid>
+              <Grid className="조회수" is_flex="space_row">
+                <img
+                  src={eye}
+                  alt=""
+                  style={{
+                    width: `${theme.bodyOneSize}`,
+                    height: `${theme.bodyOneSize}`,
+                  }}
+                />
+                <Grid is_flex="center">
+                  <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
+                    {totalVisitors}
+                  </Text>
+                </Grid>
               </Grid>
             </Grid>
-            <Grid className="조회수" is_flex="space_row">
-              <img
-                src={eye}
-                alt=""
-                style={{
-                  width: `${theme.bodyOneSize}`,
-                  height: `${theme.bodyOneSize}`,
-                }}
-              />
-              <Grid is_flex="center">
-                <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
-                  555
-                </Text>
-              </Grid>
-            </Grid>
-          </Grid>
+          )}
         </Grid>
 
         <Grid className="제목">
           <Line />
-          <MobileTitle>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </MobileTitle>
+          <MobileTitle>{board === "medical" ? contents : title}</MobileTitle>
         </Grid>
       </MobilePost>
     );
   }
 
   return (
-    <Post>
+    <Post onClick={handleMoveDetail}>
       <Grid
         className="작성날짜"
         is_flex="center"
@@ -113,69 +136,99 @@ const MypageCard = (props) => {
       <Grid
         className="제목"
         is_flex="center"
-        width="60%"
+        width="50%"
         height="1rem"
         margin={`auto ${theme.headOneSize} auto 0`}
       >
-        <Title>{title}</Title>
+        <Title>{board === "medical" ? contents : title}</Title>
       </Grid>
 
       <Grid
         className="아이콘세개"
         width="25%"
         is_flex="center"
-        margin={`auto 0`}
+        margin="0 0 0 auto"
       >
-        <Grid className="추천" width="30%" is_flex="center" margin={`auto 0`}>
-          <LikeIconChanger />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {likeCount}
-            </Text>
+        {board === "medical" && (
+          <Grid
+            className="추천"
+            width="15%"
+            is_flex="center"
+            margin="0 30px 0 auto"
+          >
+            <LikeIconChanger />
+            <Grid width="30%" is_flex="center">
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 8px"
+              >
+                {likeCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={comment}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {commentCount}
-            </Text>
+        )}
+        {board !== "medical" && (
+          <Grid className="추천" width="30%" is_flex="center" margin={`auto 0`}>
+            <LikeIconChanger />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {likeCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid className="조회수" width="30%" is_flex="center" margin={`auto 0`}>
-          <img
-            src={eye}
-            alt=""
-            style={{
-              width: `${theme.bodyOneSize}`,
-              height: `${theme.bodyOneSize}`,
-            }}
-          />
-          <Grid width="30%" is_flex="center" margin={`auto 0`}>
-            <Text
-              size={theme.bodyThreeSize}
-              color={theme.typoGrey2}
-              margin="0 0 0 5px"
-            >
-              {totalVisitors}
-            </Text>
+        )}
+        {board !== "medical" && (
+          <Grid className="댓글" width="30%" is_flex="center" margin={`auto 0`}>
+            <img
+              src={comment}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {commentCount}
+              </Text>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
+        {board !== "medical" && (
+          <Grid
+            className="조회수"
+            width="30%"
+            is_flex="center"
+            margin={`auto 0`}
+          >
+            <img
+              src={eye}
+              alt=""
+              style={{
+                width: `${theme.bodyOneSize}`,
+                height: `${theme.bodyOneSize}`,
+              }}
+            />
+            <Grid width="30%" is_flex="center" margin={`auto 0`}>
+              <Text
+                size={theme.bodyThreeSize}
+                color={theme.typoGrey2}
+                margin="0 0 0 5px"
+              >
+                {totalVisitors}
+              </Text>
+            </Grid>
+          </Grid>
+        )}
       </Grid>
     </Post>
   );
@@ -188,6 +241,7 @@ const Post = styled.div`
   margin-bottom: ${theme.bodyThreeSize};
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -223,7 +277,7 @@ const MobilePost = styled.div`
 const Line = styled.div`
   width: 90%;
   border-bottom: 1px solid ${theme.typoLightGrey2};
-  margin: 0 auto 8px auto;
+  margin: 0 auto 12px auto;
 `;
 
 const Border = styled.div`
