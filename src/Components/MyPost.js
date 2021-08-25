@@ -39,7 +39,7 @@ const MyPost = () => {
               lineHeight={theme.headOneHeight}
               bold
             >
-              내가 추천한 글
+              내가 쓴 글
             </Text>
           </Grid>
 
@@ -141,7 +141,7 @@ const MyPost = () => {
           margin="0 0 40px 0"
           bold
         >
-          내가 추천한 글
+          내가 쓴 글
         </Text>
         <Text
           width="100%"
