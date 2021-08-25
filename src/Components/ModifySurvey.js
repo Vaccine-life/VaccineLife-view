@@ -5,7 +5,6 @@ import { Text, Grid } from "../elements/index";
 import { isMobileOnly } from "react-device-detect";
 import { actionModifySurveyVisible } from "../redux/modules/modal";
 import { actionSurveyUpdate } from "../redux/modules/user";
-import { useFormik } from "formik";
 
 import styled from "styled-components";
 import theme from "../styles/theme";
@@ -33,13 +32,13 @@ const ModifySurvey = (props) => {
   // 어느 하나라도 선택하지 않은 문항이 있다면 '수정'버튼을 비활성화
   const disableSubmitButton = () => {
     if (
-      isVaccine === 0 ||
+      isVaccine === 2 ||
       degree === undefined ||
       type === undefined ||
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect.length < 2
+      afterEffect.includes("")
     ) {
       return true;
     }
@@ -57,6 +56,7 @@ const ModifySurvey = (props) => {
   // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    console.log("radio 선택시", name, value);
 
     if (name === "isVaccine" && value === 1) {
       setInputs({
@@ -76,16 +76,12 @@ const ModifySurvey = (props) => {
         ...inputs,
         [name]: value,
       });
-      // console.log("엘스 안쪽이자나여", name, value);
     }
-    // console.log(name, value);
   };
 
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
-    console.log(name, value);
-    console.log(inputs);
 
     // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
     if (afterEffect.includes(value)) {
@@ -97,22 +93,11 @@ const ModifySurvey = (props) => {
 
     // 접종하지않음에서 접종함으로 변경하는 경우, afterEffect의 첫상태가 [""]이다. 이때 발열 체크시 ["", "발열"] 이렇게 들어가기 때문에 원래 있던 ""를 지워줄 수 있어야한다.
     if (afterEffect.includes("")) {
-      console.log("빈문자열포함");
       setInputs({
         ...inputs,
         [name]: [value],
       });
-    }
-
-    // 유저가 '없음'을 클릭한 경우, 나머지 선택지를 없애고 '없음'만 남긴다.
-    // 주석처리한 이유: '발열 체크 - 없음 체크 - 없음 체크 취소 후 발열로 제출하고자 함'이라는 상황에서 이 else if문이 있으면 afterEffect가 빈 배열로 넘어가버린다..
-    // else if (value === "없음") {
-    //   setInputs({
-    //     ...inputs,
-    //     [name]: ["없음"],
-    //   });
-    // }
-    else {
+    } else {
       setInputs({
         ...inputs,
         [name]: [...afterEffect, value],
@@ -120,39 +105,30 @@ const ModifySurvey = (props) => {
     }
   };
 
-  const formik = useFormik({
-    initialValues: { ...inputs },
-
-    onSubmit: () => {
-      if (inputs.afterEffect.indexOf("없음") !== -1) {
-        setInputs({
-          ...inputs,
-          afterEffect: ["없음"],
-        });
-      }
-
+  const handleSubmit = () => {
+    if (inputs.afterEffect.indexOf("없음") !== -1) {
       setInputs({
         ...inputs,
-        afterEffect: [...new Set(afterEffect)],
+        afterEffect: ["없음"],
       });
+    }
 
-      const userInfo = {
-        id: user.userId,
-        username: user.username,
-        nickname: user.nickname,
-      };
+    const userInfo = {
+      id: user.userId,
+      username: user.username,
+      nickname: user.nickname,
+    };
 
-      const updatedUser = { ...inputs, ...userInfo };
-      console.log(updatedUser);
-      dispatch(actionSurveyUpdate(updatedUser));
-    },
-  });
+    const updatedUser = { ...inputs, ...userInfo };
+    console.log(updatedUser);
+    dispatch(actionSurveyUpdate(updatedUser));
+  };
 
   if (isMobileOnly) {
     return (
       <>
         <MobileOuter>
-          <MobileInner onSubmit={formik.handleSubmit}>
+          <MobileInner onSubmit={handleSubmit}>
             <MobileXbutton
               onClick={() => {
                 dispatch(actionModifySurveyVisible());
@@ -861,7 +837,7 @@ const ModifySurvey = (props) => {
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
           </Xbutton>
 
-          <Wrapper onSubmit={formik.handleSubmit}>
+          <Wrapper onSubmit={handleSubmit}>
             {/* <form > */}
 
             <Text margin="10px auto" size={theme.headOneSize} bold>
