@@ -193,11 +193,13 @@ export const actionMediLike =
       if (!result) {
         dispatch(actionMinusLikeInLikeListMedi(boardId));
         dispatch(acionMinusLikeMedi({ boardId }));
+        dispatch(acionMinusLike({ board: "medical", boardId }));
         // dispatch(actionSetLikeMedi());
         // dispatch(actionSetTopThreeMedi());
       } else {
         dispatch(actionPlusLikeInLikeListMedi(boardId));
         dispatch(acionPlusLikeMedi({ boardId }));
+        dispatch(acionPlusLike({ board: "medical", boardId }));
         // dispatch(actionSetLikeMedi());
         // dispatch(actionSetTopThreeMedi());
       }

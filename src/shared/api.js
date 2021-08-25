@@ -36,6 +36,9 @@ export const boardAxios = {
   topThreeQuar: () => api.get("/api/quarBoard/topLike"),
   getPrevNextVac: (boardId) => api.get(`/api/vacBoard/${boardId}/id`),
   getPrevNextQuar: (boardId) => api.get(`/api/quarBoard/${boardId}/id`),
+  getMyWriteVac: (userId) => api.get(`/api/mypage/${userId}/vacBoard`),
+  getMyWriteQuar: (userId) => api.get(`/api/mypage/${userId}/quarBoard`),
+  getMyWriteMedi: (userId) => api.get(`/api/mypage/${userId}/medical`),
 };
 
 export const writeAxios = {

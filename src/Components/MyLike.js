@@ -90,7 +90,7 @@ const MyLike = () => {
                     commentCount={each.commentCount}
                     totalVisitors={each.totalVisitors}
                     board="quarantine"
-                    boardId={each.vacBoardId}
+                    boardId={each.quarBoardId}
                   />
                 );
               })}
@@ -119,7 +119,7 @@ const MyLike = () => {
                     totalVisitors={each.totalVisitors}
                     contents={each.contents}
                     board="medical"
-                    boardId={each.vacBoardId}
+                    boardId={each.medicalId}
                   />
                 );
               })}
@@ -187,7 +187,7 @@ const MyLike = () => {
                 commentCount={each.commentCount}
                 totalVisitors={each.totalVisitors}
                 board="quarantine"
-                boardId={each.vacBoardId}
+                boardId={each.quarBoardId}
               />
             );
           })}
@@ -212,7 +212,7 @@ const MyLike = () => {
                 totalVisitors={each.totalVisitors}
                 contents={each.contents}
                 board="medical"
-                boardId={each.vacBoardId}
+                boardId={each.medicalId}
               />
             );
           })}
