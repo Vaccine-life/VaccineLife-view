@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
@@ -8,17 +8,26 @@ import { mainAxios } from "../shared/api";
 import logger from "../shared/logger";
 
 const MainNivoBar = () => {
+  const [afterEffect0, setAfterEffect0] = useState();
+  const [afterEffect1, setAfterEffect1] = useState();
+  const [afterEffect2, setAfterEffect2] = useState();
+  const [afterEffect3, setAfterEffect3] = useState();
+
   const afterEffectData = async () => {
     try {
       const afterEffectRes = await mainAxios.getAfterEffectChart();
       // console.log("afterEffectRes.data", afterEffectRes.data);
 
       const afterEffectNumArr = Object.values(afterEffectRes.data);
-      // console.log(afterEffectNumArr);
       afterEffectNumArr.sort(function (a, b) {
         return b - a;
       });
       // console.log(afterEffectNumArr);
+      setAfterEffect0(afterEffectNumArr[0]);
+      setAfterEffect1(afterEffectNumArr[1]);
+      setAfterEffect2(afterEffectNumArr[2]);
+      setAfterEffect3(afterEffectNumArr[3]);
+      console.log(afterEffect0, afterEffect1, afterEffect2, afterEffect3);
 
       const getKeybyValue = () => {
         for (let i = 0; i < 4; i++) {
@@ -34,13 +43,18 @@ const MainNivoBar = () => {
       logger(error);
     }
   };
-  // afterEffectRes.data의 value들을 배열에 넣고 내림차순으로 sort해~
-  // -> [50, 47, 36, 35]
-  // -> 이 배열의 요소를 value로 갖는 key를 뱉게 한다 e.g. headache...
 
+  // afterEffectRes.data의 value들을 배열에 넣고 내림차순으로 sort해~
+  // -> e.g. [50, 47, 36, 35]
+  // -> 이 배열의 요소를 value로 갖는 key를 뱉게 한다 e.g. headache...
   useEffect(() => {
     afterEffectData();
   }, []);
+
+  // 내려온 숫자값들 넣기 -> afterEffectNumArr[0], ...
+  // 한글이름(라벨)으로 바꿔주기
+  // -> 상위 4개의 key값을 배열로 만들어주고
+  // -> if문 활용? e.g. if headache => 두통/관절통/근육통으로 print
 
   if (isMobileOnly) {
     return (
