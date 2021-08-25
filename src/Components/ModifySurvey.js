@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Text, Grid } from "../elements/index";
 import { isMobileOnly } from "react-device-detect";
 import { actionModifySurveyVisible } from "../redux/modules/modal";
-import { useFormik } from "formik";
+import { actionSurveyUpdate } from "../redux/modules/user";
 
 import styled from "styled-components";
 import theme from "../styles/theme";
@@ -29,11 +29,8 @@ const ModifySurvey = (props) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
-  // '접종하지않음'선택시 '다음단계'버튼을 활성화, 어느 하나라도 선택하지 않은 문항이 있다면 '다음단계'버튼을 비활성화
+  // 어느 하나라도 선택하지 않은 문항이 있다면 '수정'버튼을 비활성화
   const disableSubmitButton = () => {
-    if (isVaccine === 0) {
-      return false;
-    }
     if (
       isVaccine === 2 ||
       degree === undefined ||
@@ -41,7 +38,8 @@ const ModifySurvey = (props) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect.length === 0
+      afterEffect.includes("") ||
+      afterEffect === []
     ) {
       return true;
     }
@@ -78,52 +76,69 @@ const ModifySurvey = (props) => {
         ...inputs,
         [name]: value,
       });
-      // console.log("엘스 안쪽이자나여", name, value);
     }
-    // console.log(name, value);
   };
 
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
+    // console.log("클릭시 name, value 잘 가져오나?", name, value);
+    // console.log("클릭시 afterEffect의 상태는?", afterEffect);
 
-    // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
-    if (afterEffect.includes(value)) {
+    // 접종하지않음에서 접종함으로 변경하는 경우, afterEffect의 첫상태가 [""]이다. 이때 발열 체크시 ["", "발열"] 이렇게 들어가기 때문에 원래 있던 ""를 지워줄 수 있어야한다.
+    if (afterEffect.includes("")) {
       setInputs({
         ...inputs,
-        [name]: afterEffect.filter((el) => el !== value),
+        [name]: [value],
       });
-    }
-
-    // 유저가 '없음'을 클릭한 경우, 나머지 선택지를 없애고 '없음'만 남긴다.
-    // 주석처리한 이유: '발열 체크 - 없음 체크 - 없음 체크 취소 후 발열로 제출하고자 함'이라는 상황에서 이 else if문이 있으면 afterEffect가 빈 배열로 넘어가버린다..
-    // else if (value === "없음") {
-    //   setInputs({
-    //     ...inputs,
-    //     [name]: ["없음"],
-    //   });
-    // }
-    else {
+    } else {
       setInputs({
         ...inputs,
         [name]: [...afterEffect, value],
       });
     }
+
+    // 이미 클릭한 부작용을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
+    // inputs값이 현재값이라는걸 보장을 해줘야지!!!
+    if (afterEffect.includes(value)) {
+      setInputs((prev) => {
+        const result = {
+          ...prev,
+          [name]: afterEffect.filter((el) => el !== value),
+        };
+        console.log(result.afterEffect);
+        return result;
+      });
+    }
   };
 
-  const formik = useFormik({
-    initialValues: inputs,
+  const handleSubmit = () => {
+    if (afterEffect.indexOf("없음") !== -1) {
+      setInputs((prev) => {
+        const result = {
+          ...prev,
+          afterEffect: ["없음"],
+        };
+        return result;
+      });
+    }
 
-    onSubmit: () => {
-      console.log(inputs);
-    },
-  });
+    const userInfo = {
+      id: user.userId,
+      username: user.username,
+      nickname: user.nickname,
+    };
+
+    const updatedUser = { ...inputs, ...userInfo };
+    console.log(updatedUser);
+    dispatch(actionSurveyUpdate(updatedUser));
+  };
 
   if (isMobileOnly) {
     return (
       <>
         <MobileOuter>
-          <MobileInner onSubmit={formik.handleSubmit}>
+          <MobileInner onSubmit={handleSubmit}>
             <MobileXbutton
               onClick={() => {
                 dispatch(actionModifySurveyVisible());
@@ -341,7 +356,11 @@ const ModifySurvey = (props) => {
 
             <MobileLine />
             <MobileSurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyOneSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
                 성별
               </Text>
               <TwoOptions>
@@ -352,7 +371,7 @@ const ModifySurvey = (props) => {
                     value="남"
                     id="남"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"남" === user.gender}
                   />
                   <label
@@ -370,7 +389,7 @@ const ModifySurvey = (props) => {
                     value="여"
                     id="여"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"여" === user.gender}
                   />
                   <label
@@ -386,7 +405,11 @@ const ModifySurvey = (props) => {
 
             <MobileLine />
             <MobileSurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyOneSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyOneSize}
+              >
                 연령대
               </Text>
               <FourOptions>
@@ -397,7 +420,7 @@ const ModifySurvey = (props) => {
                     value="10"
                     id="10대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"10" === user.age}
                   />
                   <label
@@ -415,7 +438,7 @@ const ModifySurvey = (props) => {
                     value="20"
                     id="20대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"20" === user.age}
                   />
                   <label
@@ -433,7 +456,7 @@ const ModifySurvey = (props) => {
                     value="30"
                     id="30대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"30" === user.age}
                   />
                   <label
@@ -451,7 +474,7 @@ const ModifySurvey = (props) => {
                     value="40"
                     id="40대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"40" === user.age}
                   />
                   <label
@@ -472,7 +495,7 @@ const ModifySurvey = (props) => {
                     value="50"
                     id="50대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"50" === user.age}
                   />
                   <label
@@ -490,7 +513,7 @@ const ModifySurvey = (props) => {
                     value="60"
                     id="60대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"60" === user.age}
                   />
                   <label
@@ -508,7 +531,7 @@ const ModifySurvey = (props) => {
                     value="70"
                     id="70대"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"70" === user.age}
                   />
                   <label
@@ -526,7 +549,7 @@ const ModifySurvey = (props) => {
                     value="80"
                     id="80대이상"
                     onClick={handleRadioClick}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"80" === user.age}
                   />
                   <label
@@ -809,6 +832,10 @@ const ModifySurvey = (props) => {
               <MobileSubmitButton
                 type="submit"
                 disabled={disableSubmitButton()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
               >
                 수정완료
               </MobileSubmitButton>
@@ -832,7 +859,7 @@ const ModifySurvey = (props) => {
             <FontAwesomeIcon icon={faTimes} color={theme.typoGrey2} size="lg" />
           </Xbutton>
 
-          <Wrapper onSubmit={formik.handleSubmit}>
+          <Wrapper onSubmit={handleSubmit}>
             {/* <form > */}
 
             <Text margin="10px auto" size={theme.headOneSize} bold>
@@ -869,6 +896,7 @@ const ModifySurvey = (props) => {
                     value="0"
                     id="isVaccine0"
                     onClick={handleIsVaccineClick}
+                    disabled={true}
                     defaultChecked={false === user.isVaccine}
                   />
                   <label
@@ -1038,7 +1066,11 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyTwoSize}
+              >
                 성별
               </Text>
               <TwoOptions>
@@ -1049,8 +1081,7 @@ const ModifySurvey = (props) => {
                     value="남"
                     id="남"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"남" === user.gender}
                   />
                   <label
@@ -1068,8 +1099,7 @@ const ModifySurvey = (props) => {
                     value="여"
                     id="여"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"여" === user.gender}
                   />
                   <label
@@ -1085,7 +1115,11 @@ const ModifySurvey = (props) => {
 
             <Line />
             <SurveyItem>
-              <Text bold color={theme.typoLightGrey2} size={theme.bodyTwoSize}>
+              <Text
+                bold
+                color={(!isVaccine && "#dfdfdf") || (isVaccine && "#4F72F2")}
+                size={theme.bodyTwoSize}
+              >
                 연령대
               </Text>
               <FourOptions>
@@ -1096,8 +1130,7 @@ const ModifySurvey = (props) => {
                     value="10"
                     id="10대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"10" === user.age}
                   />
                   <label
@@ -1115,8 +1148,7 @@ const ModifySurvey = (props) => {
                     value="20"
                     id="20대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"20" === user.age}
                   />
                   <label
@@ -1134,8 +1166,7 @@ const ModifySurvey = (props) => {
                     value="30"
                     id="30대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"30" === user.age}
                   />
                   <label
@@ -1153,8 +1184,7 @@ const ModifySurvey = (props) => {
                     value="40"
                     id="40대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"40" === user.age}
                   />
                   <label
@@ -1175,8 +1205,7 @@ const ModifySurvey = (props) => {
                     value="50"
                     id="50대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"50" === user.age}
                   />
                   <label
@@ -1194,8 +1223,7 @@ const ModifySurvey = (props) => {
                     value="60"
                     id="60대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"60" === user.age}
                   />
                   <label
@@ -1213,8 +1241,7 @@ const ModifySurvey = (props) => {
                     value="70"
                     id="70대"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"70" === user.age}
                   />
                   <label
@@ -1232,8 +1259,7 @@ const ModifySurvey = (props) => {
                     value="80"
                     id="80대이상"
                     onClick={handleRadioClick}
-                    // disabled={!isVaccine && "disabled"}
-                    disabled={true}
+                    disabled={!isVaccine && "disabled"}
                     defaultChecked={"80" === user.age}
                   />
                   <label
@@ -1515,8 +1541,15 @@ const ModifySurvey = (props) => {
               {/* <div></div> */}
             </SurveyItem>
 
-            <SubmitButton type="submit" disabled={disableSubmitButton()}>
-              회원가입
+            <SubmitButton
+              type="submit"
+              disabled={disableSubmitButton()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              수정
             </SubmitButton>
             {/* </form> */}
           </Wrapper>
