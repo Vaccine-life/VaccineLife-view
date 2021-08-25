@@ -30,7 +30,7 @@ const ModifySurvey = (props) => {
   // inputs에 있는 각각의 값들을 추출
   const { isVaccine, degree, type, gender, age, disease, afterEffect } = inputs;
 
-  // '접종하지않음'선택시 '다음단계'버튼을 활성화, 어느 하나라도 선택하지 않은 문항이 있다면 '다음단계'버튼을 비활성화
+  // 어느 하나라도 선택하지 않은 문항이 있다면 '수정'버튼을 비활성화
   const disableSubmitButton = () => {
     if (
       isVaccine === 0 ||
@@ -39,7 +39,7 @@ const ModifySurvey = (props) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect.includes("")
+      afterEffect.length < 2
     ) {
       return true;
     }
@@ -84,6 +84,8 @@ const ModifySurvey = (props) => {
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
+    console.log(name, value);
+    console.log(inputs);
 
     // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
     if (afterEffect.includes(value)) {
@@ -93,7 +95,9 @@ const ModifySurvey = (props) => {
       });
     }
 
+    // 접종하지않음에서 접종함으로 변경하는 경우, afterEffect의 첫상태가 [""]이다. 이때 발열 체크시 ["", "발열"] 이렇게 들어가기 때문에 원래 있던 ""를 지워줄 수 있어야한다.
     if (afterEffect.includes("")) {
+      console.log("빈문자열포함");
       setInputs({
         ...inputs,
         [name]: [value],
@@ -126,6 +130,11 @@ const ModifySurvey = (props) => {
           afterEffect: ["없음"],
         });
       }
+
+      setInputs({
+        ...inputs,
+        afterEffect: [...new Set(afterEffect)],
+      });
 
       const userInfo = {
         id: user.userId,
