@@ -152,24 +152,14 @@ export const actionGetMedical =
       }
       //loading => true
       dispatch(actionLoading());
-      let medi_input = {};
+
       const getData = await medicalAxios.getPageMedi(nextPage);
       const medicalTen = getData.data.content;
       // console.log(medicalTen);
       const totalPageInData = getData.data.totalPages;
       // console.log(totalPageInData);
-
-      // 메디컬 하나 디테일 api가 따로 있어야 가지고 올 수 있음?
-      const data = getData.data;
-      console.log(data);
-      medi_input = {
-        userId: data.userId,
-        contents: data.contents,
-        nickname: data.nickname,
-        createdAt: data.createdAt,
-      };
       dispatch(actionSetComment({ medicalTen, totalPageInData }));
-      // dispatch(actionSetBoard(medi_input));
+
       //loading => false
       dispatch(actionLoading());
     } catch (error) {
@@ -190,25 +180,11 @@ export const actionAddMedical =
       // const getData = await medicalAxios.getMedical();
       // const data = getData.data;
       // dispatch(actionSetComment(data));
-      dispatch(actionLoading());
-      let medi_input = {};
       await medicalAxios.addMedical(contents);
       const getData = await medicalAxios.getMedical();
-      // const getData = await medicalAxios.getPageMedi(1);
-      console.log(getData);
       const mediContents = getData.data;
-      console.log(mediContents);
-      medi_input = {
-        userId: mediContents.userId,
-        contents: mediContents.contents,
-        nickname: mediContents.nickname,
-        createdAt: mediContents.createdAt,
-      };
-      console.log(medi_input);
       const totalPageInData = getData.data.totalPages;
-      // dispatch(actionSetComment(mediContents, totalPageInData));
       dispatch(actionResetList({ mediContents, totalPageInData }));
-      // dispatch(actionSetBoard(medi_input));
       dispatch(actionLoading());
     } catch (err) {
       dispatch(
