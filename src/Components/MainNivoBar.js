@@ -8,10 +8,8 @@ import { mainAxios } from "../shared/api";
 import logger from "../shared/logger";
 
 const MainNivoBar = () => {
-  const [afterEffect0, setAfterEffect0] = useState();
-  const [afterEffect1, setAfterEffect1] = useState();
-  const [afterEffect2, setAfterEffect2] = useState();
-  const [afterEffect3, setAfterEffect3] = useState();
+  const [dataArr, setDataArr] = useState([]);
+  const [korNames, setKorNames] = useState([]);
 
   const afterEffectData = async () => {
     try {
@@ -22,12 +20,7 @@ const MainNivoBar = () => {
       afterEffectNumArr.sort(function (a, b) {
         return b - a;
       });
-      // console.log(afterEffectNumArr);
-      setAfterEffect0(afterEffectNumArr[0]);
-      setAfterEffect1(afterEffectNumArr[1]);
-      setAfterEffect2(afterEffectNumArr[2]);
-      setAfterEffect3(afterEffectNumArr[3]);
-      console.log(afterEffect0, afterEffect1, afterEffect2, afterEffect3);
+      setDataArr([...afterEffectNumArr]);
 
       const getKeybyValue = () => {
         const korNames = [];
@@ -63,7 +56,7 @@ const MainNivoBar = () => {
             korNames.push("기타");
           }
         }
-        console.log(korNames);
+        setKorNames(korNames);
       };
       getKeybyValue();
     } catch (error) {
@@ -81,7 +74,7 @@ const MainNivoBar = () => {
   // 내려온 숫자값들 넣기 -> afterEffectNumArr[0], ...
   // 한글이름(라벨)으로 바꿔주기
   // -> 상위 4개의 key값을 배열로 만들어주고
-  // -> if문 활용? e.g. if headache => 두통/관절통/근육통으로 print
+  // -> if문 활용 e.g. if headache => 두통/관절통/근육통으로 print
 
   if (isMobileOnly) {
     return (
@@ -105,7 +98,7 @@ const MainNivoBar = () => {
                   {
                     vaccines: "얀센",
                     vaccine: 1135524,
-                    vaccineColor: "hsl(169, 70%, 50%)",
+                    vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "화이자",
@@ -113,14 +106,14 @@ const MainNivoBar = () => {
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    vaccines: "AZ",
+                    vaccines: "아스트라제네카",
                     vaccine: 6335453,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
                 keys={["vaccine"]}
                 indexBy="vaccines"
-                margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+                margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
                 padding={0.3}
                 groupMode="grouped"
                 layout="horizontal"
@@ -178,7 +171,7 @@ const MainNivoBar = () => {
                 enableLabel={false}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
-                labelTextColor="white"
+                labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
                 legends={[]}
                 tooltip={({ value, color }) => (
                   <div
@@ -201,7 +194,7 @@ const MainNivoBar = () => {
           <BarTitle2Mobile>
             <img src={disc} alt="" />
             <h3>
-              백신 부작용 Top4<span> (추후 서비스 제공)</span>
+              백신 부작용 Top4<span> (출처: 자체 설문조사)</span>
             </h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
@@ -209,29 +202,29 @@ const MainNivoBar = () => {
               <ResponsiveBar
                 data={[
                   {
-                    aftereffects: "",
-                    aftereffect: 0,
+                    aftereffects: korNames[3],
+                    aftereffect: dataArr[3],
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "",
-                    aftereffect: 0,
+                    aftereffects: korNames[2],
+                    aftereffect: dataArr[2],
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "",
-                    aftereffect: 0,
+                    aftereffects: korNames[1],
+                    aftereffect: dataArr[1],
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "",
-                    aftereffect: 0,
+                    aftereffects: korNames[0],
+                    aftereffect: dataArr[0],
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
                 keys={["aftereffect"]}
                 indexBy="aftereffects"
-                margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+                margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
                 padding={0.3}
                 groupMode="grouped"
                 layout="horizontal"
@@ -347,14 +340,14 @@ const MainNivoBar = () => {
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
-                vaccines: "AZ",
+                vaccines: "아스트라제네카",
                 vaccine: 6335453,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}
             keys={["vaccine"]}
             indexBy="vaccines"
-            margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+            margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
             padding={0.3}
             groupMode="grouped"
             layout="horizontal"
@@ -434,36 +427,36 @@ const MainNivoBar = () => {
         <BarTitle2>
           <img src={disc} alt="" />
           <h3>
-            백신 부작용 Top 4<span> (추후 서비스 제공)</span>
+            백신 부작용 Top 4<span> (출처: 자체 설문조사)</span>
           </h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
             data={[
               {
-                aftereffects: "",
-                aftereffect: 0,
+                aftereffects: korNames[3],
+                aftereffect: dataArr[3],
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "",
-                aftereffect: 0,
+                aftereffects: korNames[2],
+                aftereffect: dataArr[2],
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "",
-                aftereffect: 0,
+                aftereffects: korNames[1],
+                aftereffect: dataArr[1],
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "",
-                aftereffect: 0,
+                aftereffects: korNames[0],
+                aftereffect: dataArr[0],
                 ageColor: "hsl(227, 86%, 63%)",
               },
             ]}
             keys={["aftereffect"]}
             indexBy="aftereffects"
-            margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
+            margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
             padding={0.3}
             groupMode="grouped"
             layout="horizontal"
@@ -576,6 +569,7 @@ const BarTitle1 = styled.div`
     & > span {
       font-size: 12px;
       font-weight: lighter;
+      color: ${theme.typoGrey3};
     }
   }
 `;
@@ -607,6 +601,7 @@ const BarTitle2 = styled.div`
     & > span {
       font-size: 12px;
       font-weight: lighter;
+      color: ${theme.typoGrey3};
     }
   }
 `;
@@ -647,6 +642,7 @@ const BarTitle1Mobile = styled.div`
     & > span {
       font-size: 10px;
       font-weight: lighter;
+      color: ${theme.typoGrey3};
     }
   }
 `;
@@ -678,6 +674,7 @@ const BarTitle2Mobile = styled.div`
     & > span {
       font-size: 10px;
       font-weight: lighter;
+      color: ${theme.typoGrey3};
     }
   }
 `;

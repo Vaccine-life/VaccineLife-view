@@ -15,45 +15,50 @@ import { faTrashAlt, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
 import { isMobileOnly } from "react-device-detect";
-import ModifyMedical from "./ModifyMedical";
 import { TextareaAutosize } from "@material-ui/core";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import { actionModifyMedical } from "../redux/modules/comment";
+import {
+  actionModifyMedical,
+  actionModifyComment,
+} from "../redux/modules/comment";
 
 const CommentList = (props) => {
   const medi_id = props.id;
-
+  // console.log(medi_id)
   const medi_contents = props.contents;
   // console.log(medi_contents);
+  // console.log(props);
 
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
   const userId = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
-  const medical_content = useSelector((state) => state.comment.list);
 
   // 수정하기
   const [text, setText] = React.useState("");
   const [editable, setEditable] = React.useState(false);
-  const isEditable = () => {
+  // 수정 버튼 클릭시 토글
+  const handleToggle = () => {
     if (!editable) {
       setText(medi_contents);
+    } else {
+      setText(text);
     }
+    // 수정 비수정 왔다갔다 토글
     setEditable((edit) => !edit);
   };
   const handleChange = (e) => {
     setText(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   const changeMedical = () => {
     if (!text) {
       dispatch(actionAlert());
       dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
       return;
-    } else {
-      dispatch(actionModifyMedical(medi_id));
     }
+    dispatch(actionModifyMedical(medi_id, { contents: text }));
   };
 
   if (isMobileOnly) {
@@ -91,29 +96,25 @@ const CommentList = (props) => {
               )}
             </Trash>
 
-            {/* <Modify>
-            {is_login && userId === props.userId ? <ModifyMedical /> : ""}
-          </Modify> */}
-            {/* <Modify>
+            <Modify>
               {is_login && userId === props.userId ? (
                 <Text
                   color={theme.typoGrey3}
                   size={theme.bodyfourSize}
                   lineHeight={theme.bodyfourHeight}
                   cursor="pointer"
-                  _onClick={() => {
-                    // // dispatch(changeContents());
-                    // dispatch(acionSetMedicalObj({ medi_id }));
-                    // dispatch(actionMedicalConfirm());
-                    console.log("수정!!!!!!!!");
-                  }}
+                  _onClick={handleToggle}
                 >
-                  <FontAwesomeIcon icon={faEdit} />
+                  {editable ? (
+                    <FontAwesomeIcon icon={faCheck} onClick={changeMedical} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEdit} />
+                  )}
                 </Text>
               ) : (
                 ""
               )}
-            </Modify> */}
+            </Modify>
 
             <Heart>
               <LikeIconMedi boardId={medi_id} />
@@ -128,13 +129,34 @@ const CommentList = (props) => {
           </CommentHead>
 
           <Grid align="left" padding="1rem 0">
-            <Text
-              size={theme.bodyfourSize}
-              lineHeight={theme.bodyfourHeight}
-              color={theme.typoBlack}
-            >
-              {props.contents}
-            </Text>
+            {editable ? (
+              <TextareaAutosize
+                style={{
+                  resize: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                  borderWidth: "0 0 1px 0",
+                  borderColor: `${theme.typoGrey2}`,
+                  fontSize: `${theme.bodyfourSize}`,
+                  lineHeight: `${theme.bodyfourHeight}`,
+                  fontFamily: "Noto Sans KR",
+                  color: `${theme.typoBlack}`,
+                  whiteSpace: "pre-wrap",
+                }}
+                minRows="1"
+                value={text}
+                onChange={handleChange}
+                maxLength="500"
+              />
+            ) : (
+              <Text
+                size={theme.bodyfourSize}
+                lineHeight={theme.bodyfourHeight}
+                color={theme.typoBlack}
+              >
+                {props.contents}
+              </Text>
+            )}
           </Grid>
 
           <Grid align="left" padding="3rem 1rem 1rem 0">
@@ -195,7 +217,7 @@ const CommentList = (props) => {
                 size={theme.bodyTwoSize}
                 lineHeight={theme.bodyThreeSize}
                 cursor="pointer"
-                _onClick={isEditable}
+                _onClick={handleToggle}
               >
                 {editable ? (
                   <FontAwesomeIcon icon={faCheck} onClick={changeMedical} />

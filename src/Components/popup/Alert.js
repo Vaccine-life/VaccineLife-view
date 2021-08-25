@@ -125,10 +125,10 @@ const Modal = styled.div`
   ${(prop) =>
     prop.isMobile
       ? `
-      max-width: 50%;;
+      max-width: 70%;
   `
       : `
-      width: max-content;;
+      width: max-content;
   `}
   height: max-content;
   position: relative;
@@ -141,7 +141,15 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 40px 60px;
+
+  ${(prop) =>
+    prop.isMobile
+      ? `
+      padding: 40px;
+  `
+      : `
+      padding: 40px 60px;
+  `}
 `;
 
 export default Alert;
