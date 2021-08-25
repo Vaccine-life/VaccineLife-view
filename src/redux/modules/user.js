@@ -297,7 +297,7 @@ export const actionSurveyUpdate =
       dispatch(actionSetMessage("백신 정보가 수정되었습니다"));
       dispatch(actionAlert());
 
-      // history.push("/");
+      history.push("/vaccine");
     } catch (error) {
       logger(error);
       dispatch(

@@ -56,7 +56,6 @@ const ModifySurvey = (props) => {
   // 클릭된 radio의 value를 setState
   const handleRadioClick = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-    console.log("radio 선택시", name, value);
 
     if (name === "isVaccine" && value === 1) {
       setInputs({
@@ -82,14 +81,8 @@ const ModifySurvey = (props) => {
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
-
-    // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
-    if (afterEffect.includes(value)) {
-      setInputs({
-        ...inputs,
-        [name]: afterEffect.filter((el) => el !== value),
-      });
-    }
+    // console.log("클릭시 name, value 잘 가져오나?", name, value);
+    // console.log("클릭시 afterEffect의 상태는?", afterEffect);
 
     // 접종하지않음에서 접종함으로 변경하는 경우, afterEffect의 첫상태가 [""]이다. 이때 발열 체크시 ["", "발열"] 이렇게 들어가기 때문에 원래 있던 ""를 지워줄 수 있어야한다.
     if (afterEffect.includes("")) {
@@ -103,10 +96,19 @@ const ModifySurvey = (props) => {
         [name]: [...afterEffect, value],
       });
     }
+
+    // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
+    if (afterEffect.includes(value)) {
+      setInputs({
+        ...inputs,
+        [name]: afterEffect.filter((el) => el !== value),
+      });
+      // console.log("취소 되는건가?", name, value);
+    }
   };
 
   const handleSubmit = () => {
-    if (inputs.afterEffect.indexOf("없음") !== -1) {
+    if (afterEffect.indexOf("없음") !== -1) {
       setInputs({
         ...inputs,
         afterEffect: ["없음"],

@@ -11,6 +11,10 @@ const api = axios.create({
   Headers: `${getCookie("vaccine_life_token")}`,
 });
 
+export const mainAxios = {
+  getAfterEffectChart: () => api.get("/api/main/afterEffect"),
+};
+
 export const userAxios = {
   login: (user) => api.post("/api/login", user),
   signup: (obj) => api.post("/api/signup", obj),

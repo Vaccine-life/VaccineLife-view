@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import disc from "../images/disc.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import { ResponsiveBar } from "@nivo/bar";
 import { isMobileOnly } from "react-device-detect";
+import { mainAxios } from "../shared/api";
+import logger from "../shared/logger";
 
 const MainNivoBar = () => {
+  const afterEffectData = async () => {
+    try {
+      const afterEffectRes = await mainAxios.getAfterEffectChart();
+      // console.log("afterEffectRes.data", afterEffectRes.data);
+
+      const afterEffectNumArr = Object.values(afterEffectRes.data);
+      // console.log(afterEffectNumArr);
+      afterEffectNumArr.sort(function (a, b) {
+        return b - a;
+      });
+      // console.log(afterEffectNumArr);
+
+      const getKeybyValue = () => {
+        for (let i = 0; i < 4; i++) {
+          console.log(
+            Object.keys(afterEffectRes.data).find(
+              (key) => afterEffectRes.data[key] === afterEffectNumArr[i]
+            )
+          );
+        }
+      };
+      getKeybyValue();
+    } catch (error) {
+      logger(error);
+    }
+  };
+  // afterEffectRes.data의 value들을 배열에 넣고 내림차순으로 sort해~
+  // -> [50, 47, 36, 35]
+  // -> 이 배열의 요소를 value로 갖는 key를 뱉게 한다 e.g. headache...
+
+  useEffect(() => {
+    afterEffectData();
+  }, []);
 
   if (isMobileOnly) {
     return (
@@ -13,7 +48,9 @@ const MainNivoBar = () => {
         <div>
           <BarTitle1Mobile>
             <img src={disc} alt="" />
-            <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
+            <h3>
+              백신 종류별 접종수<span> (출처: 질병관리청)</span>
+            </h3>
           </BarTitle1Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -122,7 +159,9 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>백신 부작용 Top4<span> (추후 서비스 제공)</span></h3>
+            <h3>
+              백신 부작용 Top4<span> (추후 서비스 제공)</span>
+            </h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -244,7 +283,9 @@ const MainNivoBar = () => {
       <div>
         <BarTitle1>
           <img src={disc} alt="" />
-          <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
+          <h3>
+            백신 종류별 접종수<span> (출처: 질병관리청)</span>
+          </h3>
         </BarTitle1>
         <BarBox>
           <ResponsiveBar
@@ -351,7 +392,9 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>백신 부작용 Top 4<span> (추후 서비스 제공)</span></h3>
+          <h3>
+            백신 부작용 Top 4<span> (추후 서비스 제공)</span>
+          </h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
@@ -488,7 +531,7 @@ const BarTitle1 = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
-    
+
     & > span {
       font-size: 12px;
       font-weight: lighter;
@@ -535,9 +578,7 @@ const BarBox = styled.div`
   border-radius: 16px;
 `;
 
-
 // <========= Mobile ===========>
-
 
 const BarTitle1Mobile = styled.div`
   display: flex;
@@ -561,10 +602,10 @@ const BarTitle1Mobile = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
-    
+
     & > span {
       font-size: 10px;
-      font-weight:lighter;
+      font-weight: lighter;
     }
   }
 `;
@@ -595,10 +636,9 @@ const BarTitle2Mobile = styled.div`
 
     & > span {
       font-size: 10px;
-      font-weight:lighter;
+      font-weight: lighter;
     }
   }
- 
 `;
 
 const BoxWrapperMobile = styled.div`
