@@ -19,7 +19,6 @@ const initialState = {
     nextPage: 1,
     totalPage: 0,
   },
-  board: {},
 };
 
 const comment = createSlice({
@@ -47,8 +46,10 @@ const comment = createSlice({
         state.list.splice(idx, 1);
       }
     },
-    actionSetBoard: (state, action) => {
-      state.board = action.payload;
+    actionModifyComment: (state, action) => {
+      const { medicalId, contents } = action.payload;
+      let idx = state.list.findIndex((c) => c.id === medicalId);
+      state.list[idx].contents = contents.contents;
     },
     // 무한스크롤
     actionResetList: (state, action) => {
@@ -220,10 +221,10 @@ export const actionModifyMedical =
   async (dispatch, getState, { history }) => {
     try {
       dispatch(actionLoading());
-      const { contents } = getState().comment.list.contents;
+      dispatch(actionModifyComment({ medicalId, contents }));
       await medicalAxios.modifyMedi(medicalId, contents);
-      history.replace("/medical");
 
+      history.replace("/medical");
       dispatch(actionLoading());
     } catch (error) {
       dispatch(
@@ -325,6 +326,7 @@ export const {
   actionSetComment,
   actionAddComment,
   actionDeleteComment,
+  actionModifyComment,
   actionResetList,
   actionSetPrevNextPageMedi,
   actionSetTopThreeMedi,
@@ -333,7 +335,6 @@ export const {
   actionSetCommentListState,
   actionAddCommentListState,
   actionDeleteCommentListState,
-  actionSetBoard,
 } = comment.actions;
 
 export default comment;
