@@ -30,13 +30,40 @@ const MainNivoBar = () => {
       console.log(afterEffect0, afterEffect1, afterEffect2, afterEffect3);
 
       const getKeybyValue = () => {
+        const korNames = [];
         for (let i = 0; i < 4; i++) {
-          console.log(
-            Object.keys(afterEffectRes.data).find(
-              (key) => afterEffectRes.data[key] === afterEffectNumArr[i]
-            )
+          const engName = Object.keys(afterEffectRes.data).find(
+            (key) => afterEffectRes.data[key] === afterEffectNumArr[i]
           );
+          if (engName === "none") {
+            korNames.push("없음");
+          }
+          if (engName === "fever") {
+            korNames.push("발열");
+          }
+          if (engName === "headache") {
+            korNames.push("두통/관절통/근육통");
+          }
+          if (engName === "fatigue") {
+            korNames.push("피로감");
+          }
+          if (engName === "pain") {
+            korNames.push("접종부위 통증");
+          }
+          if (engName === "swell") {
+            korNames.push("접종부위 부기/발적");
+          }
+          if (engName === "sickness") {
+            korNames.push("구토/매스꺼움");
+          }
+          if (engName === "allergy") {
+            korNames.push("알러지 반응");
+          }
+          if (engName === "others") {
+            korNames.push("기타");
+          }
         }
+        console.log(korNames);
       };
       getKeybyValue();
     } catch (error) {

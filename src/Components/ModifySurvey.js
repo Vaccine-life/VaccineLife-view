@@ -38,7 +38,8 @@ const ModifySurvey = (props) => {
       gender === undefined ||
       age === undefined ||
       disease === undefined ||
-      afterEffect.includes("")
+      afterEffect.includes("") ||
+      afterEffect === []
     ) {
       return true;
     }
@@ -97,23 +98,37 @@ const ModifySurvey = (props) => {
       });
     }
 
+    // {
+    //   ...inputs,
+    //   [name]: afterEffect.filter((el) => el !== value),
+    // }
+
     // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
+    // inputs값이 현재값이라는걸 보장을 해줘야지!!!
     if (afterEffect.includes(value)) {
-      setInputs({
-        ...inputs,
-        [name]: afterEffect.filter((el) => el !== value),
+      setInputs((prev) => {
+        const result = {
+          ...prev,
+          [name]: afterEffect.filter((el) => el !== value),
+        };
+        console.log(result.afterEffect);
+        return result;
       });
-      // console.log("취소 되는건가?", name, value);
     }
   };
 
   const handleSubmit = () => {
     if (afterEffect.indexOf("없음") !== -1) {
-      setInputs({
-        ...inputs,
-        afterEffect: ["없음"],
+      setInputs((prev) => {
+        const result = {
+          ...prev,
+          afterEffect: ["없음"],
+        };
+        return result;
       });
     }
+
+    console.log(afterEffect);
 
     const userInfo = {
       id: user.userId,
@@ -125,6 +140,7 @@ const ModifySurvey = (props) => {
     console.log(updatedUser);
     dispatch(actionSurveyUpdate(updatedUser));
   };
+  // 동기가..아니야... setState는 이벤트처럼 처리됨.
 
   if (isMobileOnly) {
     return (
@@ -1521,7 +1537,14 @@ const ModifySurvey = (props) => {
               {/* <div></div> */}
             </SurveyItem>
 
-            <SubmitButton type="submit" disabled={disableSubmitButton()}>
+            <SubmitButton
+              type="submit"
+              disabled={disableSubmitButton()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
               수정
             </SubmitButton>
             {/* </form> */}
