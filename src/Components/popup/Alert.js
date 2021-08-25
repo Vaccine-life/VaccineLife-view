@@ -24,9 +24,10 @@ const Alert = () => {
       return (
         <>
           <Text
-            size={theme.bodyThreeSize}
+            size={theme.bodyTwoSize}
             lineHeight={theme.bodyThreeHeight}
-            margin="0 0 15px 0"
+            margin="0 auto 15px auto"
+            bold
           >
             반갑습니다,
             <span style={{ color: `${theme.SuccessGreen}` }}>
@@ -124,10 +125,10 @@ const Modal = styled.div`
   ${(prop) =>
     prop.isMobile
       ? `
-      max-width: 50%;;
+      max-width: 70%;
   `
       : `
-      width: max-content;;
+      width: max-content;
   `}
   height: max-content;
   position: relative;
@@ -140,7 +141,15 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 40px 60px;
+
+  ${(prop) =>
+    prop.isMobile
+      ? `
+      padding: 40px;
+  `
+      : `
+      padding: 40px 60px;
+  `}
 `;
 
 export default Alert;

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { actionModifyNicknameVisible } from "../../redux/modules/modal";
+import { actionNicknameUpdate } from "../../redux/modules/user";
 
 import { Button, Grid, Text } from "../../elements";
 
@@ -16,6 +17,7 @@ import { isMobileOnly } from "react-device-detect";
 
 const ModifyNickname = (props) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   const [nicknameDupOk, setNicknameDupOk] = useState(false);
   const [nicknameDupMsg, setNicknameDupMsg] = useState("");
@@ -42,22 +44,51 @@ const ModifyNickname = (props) => {
     }),
 
     onSubmit: (values) => {
-      console.log(values);
+      const updatedUser = {
+        id: user.userId,
+        username: user.username,
+        nickname: values.nickname,
+        isVaccine: user.isVaccine,
+        type: user.type,
+        degree: user.degree,
+        gender: user.gender,
+        age: user.age,
+        disease: user.disease,
+        afterEffect: user.afterEffect.split(", "),
+      };
+      dispatch(actionNicknameUpdate(updatedUser));
     },
   });
 
   if (isMobileOnly) {
     return (
-      <MobileWrapper>
-        <Text margin="100px auto 100px auto" size={theme.headOneSize} bold>
+      <MobileWrapper onSubmit={formik.handleSubmit}>
+        <Text margin="100px auto 50px auto" size={theme.headOneSize} bold>
           닉네임 변경
         </Text>
 
-        <MobileInput placeholder="새로운 닉네임을 입력해주세요" />
+        <MobileInputBox>
+          <MobileInput
+            placeholder="새로운 닉네임을 입력해주세요"
+            id="nickname"
+            name="nickname"
+            type="text"
+            value={formik.values.nickname}
+            onChange={(e) => {
+              formik.handleChange(e);
+
+              dispatch(nicknameDupCheck(e.target.value));
+            }}
+          />
+          {formik.touched.nickname && formik.errors.nickname ? (
+            <Error>{formik.errors.nickname}</Error>
+          ) : null}
+          {!nicknameDupOk ? <Error>{nicknameDupMsg}</Error> : null}
+        </MobileInputBox>
 
         <Grid is_flex="space_column">
           <Button
-            margin="100px 0 15px 0"
+            margin="70px 0 15px 0"
             width={theme.mediumButtonWidth}
             height={theme.mediumButtonHeight}
             type="submit"
@@ -196,7 +227,7 @@ const Error = styled.div`
 
 // <========= Mobile ==========>
 
-const MobileWrapper = styled.div`
+const MobileWrapper = styled.form`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -211,8 +242,15 @@ const MobileWrapper = styled.div`
   background-color: white;
 `;
 
-const MobileInput = styled.input`
+const MobileInputBox = styled.div`
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0 60px 0;
+`;
+
+const MobileInput = styled.input`
+  width: 100%;
   height: 30px;
   margin: 0 auto;
   border: none;

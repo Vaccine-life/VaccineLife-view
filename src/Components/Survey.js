@@ -64,6 +64,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
+    console.log(afterEffect);
 
     // 이미 클릭한 후유증을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
     if (afterEffect.includes(value)) {

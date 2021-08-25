@@ -422,7 +422,6 @@ export const actionGetDetail =
         const moveList = getPrevNext.data;
         dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
-        console.log(data);
         board_input = {
           afterEffect: data.afterEffect,
           age: data.age,

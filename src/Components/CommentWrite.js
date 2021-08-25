@@ -71,7 +71,7 @@ const CommentWrite = (props) => {
       return;
     } else {
       // 의료진분들께 dispatch
-      dispatch(actionAddComment(medicalObj));
+      // dispatch(actionAddComment(medicalObj));
       dispatch(actionAddMedical(medicalObj));
       setComment("");
       // setLength(0);
