@@ -129,23 +129,23 @@ const MainNivoBar = () => {
               <ResponsiveBar
                 data={[
                   {
-                    aftereffects: "없음",
-                    aftereffect: 10,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "발열",
-                    aftereffect: 20,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "피로감",
-                    aftereffect: 30,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    aftereffects: "기타",
-                    aftereffect: 40,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -357,28 +357,28 @@ const MainNivoBar = () => {
           <ResponsiveBar
             data={[
               {
-                afterEffects: "없음",
-                aftereffect: 10,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "발열",
-                aftereffect: 20,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "피로감",
-                aftereffect: 30,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                aftereffects: "기타",
-                aftereffect: 40,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
             ]}
-            keys={["afterEffect"]}
-            indexBy="afterEffects"
+            keys={["aftereffect"]}
+            indexBy="aftereffects"
             margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
             padding={0.3}
             groupMode="grouped"
