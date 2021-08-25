@@ -4,6 +4,7 @@ import theme from "../styles/theme";
 import comment from "../images/comment.png";
 import eye from "../images/eye.png";
 import LikeIconChanger from "./LikeIconChanger";
+import LikeIconMedi from "./LikeIconMedi";
 import displayedAt from "../shared/displayedAt";
 import { Grid, Text } from "../elements";
 import { isMobileOnly } from "react-device-detect";
@@ -53,7 +54,11 @@ const MypageCard = (props) => {
             margin="0 16px 0 auto"
           >
             <Grid className="추천" is_flex="space_row">
-              <LikeIconChanger board={board} boardId={boardId} />
+              {board === "medical" ? (
+                <LikeIconMedi boardId={boardId} />
+              ) : (
+                <LikeIconChanger board={board} boardId={boardId} />
+              )}
               <Grid is_flex="center">
                 <Text size={theme.bodyThreeSize} color={theme.typoGrey2}>
                   {likeCount}
@@ -135,7 +140,11 @@ const MypageCard = (props) => {
         margin={`auto 0`}
       >
         <Grid className="추천" width="30%" is_flex="center" margin={`auto 0`}>
-          <LikeIconChanger board={board} boardId={boardId} />
+          {board === "medical" ? (
+            <LikeIconMedi boardId={boardId} />
+          ) : (
+            <LikeIconChanger board={board} boardId={boardId} />
+          )}
           <Grid width="30%" is_flex="center" margin={`auto 0`}>
             <Text
               size={theme.bodyThreeSize}
