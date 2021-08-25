@@ -78,8 +78,22 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                격리 후기
+                격리 후기 ({quar_list.length})
               </Text>
+              {quar_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    board="quarantine"
+                    boardId={each.vacBoardId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
           <Border />
@@ -92,7 +106,7 @@ const MyLike = () => {
                 color={theme.typoGrey3}
                 margin={`30px 0 ${theme.bodyThreeSize} 0`}
               >
-                의료진분들께
+                의료진분들께 ({medi_list.length})
               </Text>
             </Grid>
           </Grid>
@@ -119,7 +133,7 @@ const MyLike = () => {
           color={theme.typoGrey3}
           margin={`0 0 ${theme.bodyThreeSize} 0`}
         >
-          백신 후기
+          백신 후기 ({vac_list.length})
         </Text>
         <Grid>
           {vac_list?.map((each, index) => {
@@ -145,17 +159,49 @@ const MyLike = () => {
           color={theme.typoGrey3}
           margin={`${theme.isVaccineHeight} 0 ${theme.bodyThreeSize} 0`}
         >
-          격리 후기
+          격리 후기 ({quar_list.length})
         </Text>
-
+        <Grid>
+          {quar_list?.map((each, index) => {
+            return (
+              <MypageCard
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                board="quarantine"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
+        </Grid>
         <Text
           width="100%"
           size={theme.SubHeadTwoSize}
           color={theme.typoGrey3}
           margin={`${theme.isVaccineHeight} 0 ${theme.bodyThreeSize} 0`}
         >
-          의료진분들께
+          의료진분들께 ({medi_list.length})
         </Text>
+        <Grid>
+          {medi_list?.map((each, index) => {
+            return (
+              <MypageCard
+                key={index}
+                title={each.title}
+                createdAt={each.createdAt}
+                likeCount={each.likeCount}
+                commentCount={each.commentCount}
+                totalVisitors={each.totalVisitors}
+                contents={each.contents}
+                board="medical"
+                boardId={each.vacBoardId}
+              />
+            );
+          })}
+        </Grid>
       </Grid>
     </>
   );
