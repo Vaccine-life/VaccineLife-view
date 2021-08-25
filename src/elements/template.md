@@ -38,7 +38,6 @@
 - width
 - height
 - cursor
-- color
 
 # Grid
 
