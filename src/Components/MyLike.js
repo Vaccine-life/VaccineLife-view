@@ -90,7 +90,7 @@ const MyLike = () => {
                     commentCount={each.commentCount}
                     totalVisitors={each.totalVisitors}
                     board="quarantine"
-                    boardId={each.vacBoardId}
+                    boardId={each.quarBoardId}
                   />
                 );
               })}
@@ -108,6 +108,21 @@ const MyLike = () => {
               >
                 의료진분들께 ({medi_list.length})
               </Text>
+              {medi_list?.map((each, index) => {
+                return (
+                  <MypageCard
+                    key={index}
+                    title={each.title}
+                    createdAt={each.createdAt}
+                    likeCount={each.likeCount}
+                    commentCount={each.commentCount}
+                    totalVisitors={each.totalVisitors}
+                    contents={each.contents}
+                    board="medical"
+                    boardId={each.medicalId}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>
@@ -172,7 +187,7 @@ const MyLike = () => {
                 commentCount={each.commentCount}
                 totalVisitors={each.totalVisitors}
                 board="quarantine"
-                boardId={each.vacBoardId}
+                boardId={each.quarBoardId}
               />
             );
           })}
@@ -197,7 +212,7 @@ const MyLike = () => {
                 totalVisitors={each.totalVisitors}
                 contents={each.contents}
                 board="medical"
-                boardId={each.vacBoardId}
+                boardId={each.medicalId}
               />
             );
           })}

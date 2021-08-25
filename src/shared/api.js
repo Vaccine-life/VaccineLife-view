@@ -18,6 +18,7 @@ export const userAxios = {
     api.get(`/api/signup/username?username=${username}`),
   nicknameDupCheck: (nickname) =>
     api.get(`/api/signup/nickname?nickname=${nickname}`),
+  userUpdate: (userId) => api.put(`/api/signup/${userId}`),
 };
 
 export const boardAxios = {
@@ -35,6 +36,9 @@ export const boardAxios = {
   topThreeQuar: () => api.get("/api/quarBoard/topLike"),
   getPrevNextVac: (boardId) => api.get(`/api/vacBoard/${boardId}/id`),
   getPrevNextQuar: (boardId) => api.get(`/api/quarBoard/${boardId}/id`),
+  getMyWriteVac: (userId) => api.get(`/api/mypage/${userId}/vacBoard`),
+  getMyWriteQuar: (userId) => api.get(`/api/mypage/${userId}/quarBoard`),
+  getMyWriteMedi: (userId) => api.get(`/api/mypage/${userId}/medical`),
 };
 
 export const writeAxios = {
@@ -69,5 +73,6 @@ export const medicalAxios = {
   addMedical: (contents) => api.post("/api/medical", contents),
   deleteMedical: (medicalId) => api.delete(`/api/medical/${medicalId}`),
   topThreeMedi: () => api.get("/api/medical/toplike"),
-  modifyMedi: (medicalId, obj) => api.patch(`/api/medical/${medicalId}`, obj),
+  modifyMedi: (medicalId, contents) =>
+    api.patch(`/api/medical/${medicalId}`, contents),
 };

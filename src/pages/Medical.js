@@ -6,7 +6,7 @@ import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
-import { actionGetMedical } from "../redux/modules/comment";
+import { actionGetMedical, actionSetComment } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
 import { isMobileOnly } from "react-device-detect";
@@ -23,7 +23,7 @@ const Medical = (props) => {
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const comment_list = useSelector((state) => state.comment.list);
-  // console.log(comment_list);
+  console.log(comment_list);
   const is_login = useSelector((state) => state.user.is_login);
   const is_loading = useSelector((state) => state.isLoading.isLoading);
   const pagingMedi = useSelector((state) => state.comment.pagingMedi);
