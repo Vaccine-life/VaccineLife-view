@@ -8,17 +8,18 @@ import { actionGetLike, actionGetLikeMedi } from "../redux/modules/like";
 
 import { isMobileOnly } from "react-device-detect";
 import { history } from "../redux/configStore";
+import { actionGetMyWriteDB } from "../redux/modules/board";
 
 const MyPost = () => {
   const dispatch = useDispatch();
-  const vac_list = useSelector((state) => state.board.myLikeVac);
-  const quar_list = useSelector((state) => state.board.myLikeQuar);
-  const medi_list = useSelector((state) => state.board.myLikeMedi);
+  const vac_list = useSelector((state) => state.board.myWriteVac);
+  const quar_list = useSelector((state) => state.board.myWriteQuar);
+  const medi_list = useSelector((state) => state.board.myWriteMedi);
 
   useEffect(() => {
-    dispatch(actionGetLike("quarantine"));
-    dispatch(actionGetLike("vaccine"));
-    dispatch(actionGetLikeMedi());
+    dispatch(actionGetMyWriteDB("quarantine"));
+    dispatch(actionGetMyWriteDB("vaccine"));
+    dispatch(actionGetMyWriteDB("medical"));
   }, []);
 
   if (isMobileOnly) {
@@ -62,7 +63,7 @@ const MyPost = () => {
                     commentCount={each.commentCount}
                     totalVisitors={each.totalVisitors}
                     board="vaccine"
-                    boardId={each.vacBoardId}
+                    boardId={each.id}
                   />
                 );
               })}
@@ -90,7 +91,7 @@ const MyPost = () => {
                     commentCount={each.commentCount}
                     totalVisitors={each.totalVisitors}
                     board="quarantine"
-                    boardId={each.vacBoardId}
+                    boardId={each.quarBoardId}
                   />
                 );
               })}
@@ -119,7 +120,7 @@ const MyPost = () => {
                     totalVisitors={each.totalVisitors}
                     contents={each.contents}
                     board="medical"
-                    boardId={each.vacBoardId}
+                    boardId={each.id}
                   />
                 );
               })}
@@ -162,7 +163,7 @@ const MyPost = () => {
                 commentCount={each.commentCount}
                 totalVisitors={each.totalVisitors}
                 board="vaccine"
-                boardId={each.vacBoardId}
+                boardId={each.id}
               />
             );
           })}
@@ -187,7 +188,7 @@ const MyPost = () => {
                 commentCount={each.commentCount}
                 totalVisitors={each.totalVisitors}
                 board="quarantine"
-                boardId={each.vacBoardId}
+                boardId={each.quarBoardId}
               />
             );
           })}
@@ -212,7 +213,7 @@ const MyPost = () => {
                 totalVisitors={each.totalVisitors}
                 contents={each.contents}
                 board="medical"
-                boardId={each.vacBoardId}
+                boardId={each.id}
               />
             );
           })}

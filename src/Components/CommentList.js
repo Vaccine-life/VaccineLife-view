@@ -22,7 +22,7 @@ import { actionModifyMedical } from "../redux/modules/comment";
 
 const CommentList = (props) => {
   const medi_id = props.id;
-  console.log(medi_id);
+
   const medi_contents = props.contents;
   // console.log(medi_contents);
 
@@ -32,7 +32,6 @@ const CommentList = (props) => {
   const userId = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
   const medical_content = useSelector((state) => state.comment.list);
-  console.log(medical_content);
 
   // 수정하기
   const [text, setText] = React.useState("");
