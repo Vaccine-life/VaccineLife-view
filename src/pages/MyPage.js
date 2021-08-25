@@ -15,6 +15,7 @@ import Alert from "../components/popup/Alert";
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import theme from "../styles/theme";
+import Spinner from "../shared/Spinner";
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const MyPage = () => {
 
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const alert_status = useSelector((state) => state.popup.alert);
-
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
   if (isMobileOnly) {
     return (
       <>
@@ -111,6 +112,7 @@ const MyPage = () => {
         </MobileWrapper>
         {navModal_status && <NavModal />}
         {alert_status && <Alert />}
+        {isLoading && <Spinner />}
       </>
     );
   }
@@ -178,6 +180,7 @@ const MyPage = () => {
         </Grid>
       </Grid>
       {alert_status && <Alert />}
+      {isLoading && <Spinner />}
     </Grid>
   );
 };
