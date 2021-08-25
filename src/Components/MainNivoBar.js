@@ -21,22 +21,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 63363,
+                    vaccine: 63862,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1131171,
+                    vaccine: 1135524,
                     vaccineColor: "hsl(169, 70%, 50%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 5342862,
+                    vaccine: 5349383,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "AZ",
-                    vaccine: 5746338,
+                    vaccine: 6335453,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -122,35 +122,35 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>연령대별 백신 접종률<span> (추후 서비스 제공)</span></h3>
+            <h3>백신 부작용 Top4<span> (추후 서비스 제공)</span></h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
               <ResponsiveBar
                 data={[
                   {
-                    ages: "70-80대",
-                    age: 0,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    ages: "50-60대",
-                    age: 0,
-                    ageColor: "hsl(169, 70%, 50%)",
-                  },
-                  {
-                    ages: "30-40대",
-                    age: 0,
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                   {
-                    ages: "10-20대",
-                    age: 0,
+                    aftereffects: "",
+                    aftereffect: 0,
+                    ageColor: "hsl(227, 86%, 63%)",
+                  },
+                  {
+                    aftereffects: "",
+                    aftereffect: 0,
                     ageColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
-                keys={["age"]}
-                indexBy="ages"
+                keys={["aftereffect"]}
+                indexBy="aftereffects"
                 margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
                 padding={0.3}
                 groupMode="grouped"
@@ -197,6 +197,14 @@ const MainNivoBar = () => {
                 axisTop={null}
                 axisRight={null}
                 axisBottom={null}
+                // {
+                //     tickSize: 5,
+                //     tickPadding: ,
+                //     tickRotation: 0,
+                //     legend: '',
+                //     legendPosition: 'middle',
+                //     legendOffset: 32
+                // }
                 axisLeft={{
                   tickSize: 5,
                   tickPadding: 5,
@@ -209,7 +217,7 @@ const MainNivoBar = () => {
                 enableLabel={false}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
-                labelTextColor="white"
+                labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
                 legends={[]}
                 tooltip={({ value, color }) => (
                   <div
@@ -220,7 +228,7 @@ const MainNivoBar = () => {
                       borderRadius: "10px",
                     }}
                   >
-                    <strong>{value}%</strong>
+                    <strong>{value}명</strong>
                   </div>
                 )}
               />
@@ -243,22 +251,22 @@ const MainNivoBar = () => {
             data={[
               {
                 vaccines: "모더나",
-                vaccine: 63363,
+                vaccine: 63862,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "얀센",
-                vaccine: 1131171,
-                vaccineColor: "hsl(169, 70%, 50%)",
+                vaccine: 1135524,
+                vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "화이자",
-                vaccine: 5342862,
+                vaccine: 5349383,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "AZ",
-                vaccine: 5746338,
+                vaccine: 6335453,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}
@@ -343,34 +351,34 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>백신 후유증 Top 4<span> (추후 서비스 제공)</span></h3>
+          <h3>백신 부작용 Top 4<span> (추후 서비스 제공)</span></h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
             data={[
               {
-                ages: "70-80대",
-                age: 0,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                ages: "50-60대",
-                age: 0,
-                ageColor: "hsl(169, 70%, 50%)",
-              },
-              {
-                ages: "30-40대",
-                age: 0,
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
               {
-                ages: "10-20대",
-                age: 0,
+                aftereffects: "",
+                aftereffect: 0,
+                ageColor: "hsl(227, 86%, 63%)",
+              },
+              {
+                aftereffects: "",
+                aftereffect: 0,
                 ageColor: "hsl(227, 86%, 63%)",
               },
             ]}
-            keys={["age"]}
-            indexBy="ages"
+            keys={["aftereffect"]}
+            indexBy="aftereffects"
             margin={{ top: 0, right: 50, bottom: 0, left: 70 }}
             padding={0.3}
             groupMode="grouped"
@@ -448,7 +456,7 @@ const MainNivoBar = () => {
                   borderRadius: "10px",
                 }}
               >
-                <strong>{value}%</strong>
+                <strong>{value}명</strong>
               </div>
             )}
           />
