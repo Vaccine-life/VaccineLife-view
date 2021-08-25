@@ -117,7 +117,7 @@ const ModifySurvey = (props) => {
   };
 
   const formik = useFormik({
-    initialValues: inputs,
+    initialValues: { ...inputs },
 
     onSubmit: () => {
       if (inputs.afterEffect.indexOf("없음") !== -1) {

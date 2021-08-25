@@ -19,6 +19,7 @@ const initialState = {
     nextPage: 1,
     totalPage: 0,
   },
+  board: {},
 };
 
 const comment = createSlice({
@@ -35,15 +36,19 @@ const comment = createSlice({
     },
     actionAddComment: (state, action) => {
       state.list.unshift(action.payload);
+      // console.log(action.payload);
     },
     actionDeleteComment: (state, action) => {
       const { medicalId } = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
       let idx = state.list.findIndex((c) => c.id === medicalId);
-      // console.log(idx)
+      // console.log(idx);
       if (idx !== -1) {
         state.list.splice(idx, 1);
       }
+    },
+    actionSetBoard: (state, action) => {
+      state.board = action.payload;
     },
     // 무한스크롤
     actionResetList: (state, action) => {
@@ -147,14 +152,24 @@ export const actionGetMedical =
       }
       //loading => true
       dispatch(actionLoading());
-
+      let medi_input = {};
       const getData = await medicalAxios.getPageMedi(nextPage);
       const medicalTen = getData.data.content;
       // console.log(medicalTen);
       const totalPageInData = getData.data.totalPages;
       // console.log(totalPageInData);
 
+      // 메디컬 하나 디테일 api가 따로 있어야 가지고 올 수 있음?
+      const data = getData.data;
+      console.log(data);
+      medi_input = {
+        userId: data.userId,
+        contents: data.contents,
+        nickname: data.nickname,
+        createdAt: data.createdAt,
+      };
       dispatch(actionSetComment({ medicalTen, totalPageInData }));
+      // dispatch(actionSetBoard(medi_input));
       //loading => false
       dispatch(actionLoading());
     } catch (error) {
@@ -176,15 +191,24 @@ export const actionAddMedical =
       // const data = getData.data;
       // dispatch(actionSetComment(data));
       dispatch(actionLoading());
+      let medi_input = {};
       await medicalAxios.addMedical(contents);
-      const getData = await medicalAxios.getPageMedi();
+      const getData = await medicalAxios.getMedical();
+      // const getData = await medicalAxios.getPageMedi(1);
       console.log(getData);
-      const mediContetns = getData.data;
+      const mediContents = getData.data;
+      console.log(mediContents);
+      medi_input = {
+        userId: mediContents.userId,
+        contents: mediContents.contents,
+        nickname: mediContents.nickname,
+        createdAt: mediContents.createdAt,
+      };
+      console.log(medi_input);
       const totalPageInData = getData.data.totalPages;
-      dispatch(actionSetComment(mediContetns, totalPageInData));
-      dispatch(actionResetList({ mediContetns, totalPageInData }));
-      dispatch(actionGetMedical());
-      // history.replace("/medical");
+      // dispatch(actionSetComment(mediContents, totalPageInData));
+      dispatch(actionResetList({ mediContents, totalPageInData }));
+      // dispatch(actionSetBoard(medi_input));
       dispatch(actionLoading());
     } catch (err) {
       dispatch(
@@ -201,8 +225,9 @@ export const actionDeleteMedical =
     try {
       dispatch(actionLoading());
       await medicalAxios.deleteMedical(medicalId);
-      dispatch(actionDeleteComment({ medicalId }));
       dispatch(acionSetMedicalObj());
+      dispatch(actionDeleteComment({ medicalId }));
+
       history.replace("/medical");
       dispatch(actionLoading());
     } catch (err) {
@@ -215,11 +240,12 @@ export const actionDeleteMedical =
 
 // 서버의 medical 수정하기
 export const actionModifyMedical =
-  (contents) =>
+  (medicalId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(actionLoading());
-      await medicalAxios.modifyMedi(contents);
+      const { contents } = getState().comment.list.contents;
+      await medicalAxios.modifyMedi(medicalId, contents);
       history.replace("/medical");
 
       dispatch(actionLoading());
@@ -331,6 +357,7 @@ export const {
   actionSetCommentListState,
   actionAddCommentListState,
   actionDeleteCommentListState,
+  actionSetBoard,
 } = comment.actions;
 
 export default comment;

@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Button, Grid } from "../elements";
 import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
-import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import {
+  acionSetMedicalObj,
+  actionAlert,
+  actionSetMessage,
+} from "../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import { TextareaAutosize } from "@material-ui/core";
 import commentwrite from "../styles/commentwrite.css";
@@ -56,7 +60,7 @@ const CommentWrite = (props) => {
     if (!is_login) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요"));
       dispatch(actionAlert());
-      setComment();
+      setComment("");
       return;
     }
 

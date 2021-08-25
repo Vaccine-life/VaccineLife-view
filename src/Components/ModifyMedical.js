@@ -24,6 +24,18 @@ const ModifyMedical = (props) => {
     contents: comment,
   };
 
+  function changeToTextarea(id, value) {
+    return (
+      "<input type='text' id='test " +
+      id +
+      "' onChange='javascript:saveValue(" +
+      id +
+      ",this.value)' value='" +
+      value +
+      "'><br>"
+    );
+  }
+
   const modifyMedical = () => {
     if (!comment) {
       dispatch(actionAlert());
@@ -72,7 +84,7 @@ const ModifyMedical = (props) => {
               fontSize={theme.SubHeadOneSize}
               color={theme.white}
               bold
-              _onClick={modifyMedical}
+              _onClick={changeToTextarea}
             >
               등록
             </Button>
