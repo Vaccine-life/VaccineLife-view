@@ -14,6 +14,9 @@ const board = createSlice({
     myLikeVac: [],
     myLikeQuar: [],
     myLikeMedi: [],
+    myWriteVac: [],
+    myWriteQuar: [],
+    myWriteMedi: [],
     board: {
       contents: "<p>슬기로운 백신생활</p>",
       likeCount: 0,
@@ -60,18 +63,30 @@ const board = createSlice({
         if (deleteIndexLike !== -1) {
           state.myLikeVac.splice(deleteIndex, 1);
         }
+        const deleteIndexWrite = state.myWriteVac.findIndex(
+          (each) => each.id === boardId
+        );
+        if (deleteIndexWrite !== -1) {
+          state.myWriteVac.splice(deleteIndex, 1);
+        }
       } else {
         const deleteIndex = state.listQuar.findIndex(
-          (each) => each.id === boardId
+          (each) => each.quarBoardId === boardId
         );
         if (deleteIndex !== -1) {
           state.listQuar.splice(deleteIndex, 1);
         }
         const deleteIndexLike = state.myLikeQuar.findIndex(
-          (each) => each.id === boardId
+          (each) => each.quarBoardId === boardId
         );
         if (deleteIndexLike !== -1) {
           state.myLikeQuar.splice(deleteIndex, 1);
+        }
+        const deleteIndexWrite = state.myWriteQuar.findIndex(
+          (each) => each.quarBoardId === boardId
+        );
+        if (deleteIndexWrite !== -1) {
+          state.myWriteQuar.splice(deleteIndex, 1);
         }
       }
     },
@@ -96,6 +111,17 @@ const board = createSlice({
     },
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
+    },
+    //my Write
+    actionSetMyWriteList: (state, action) => {
+      const { board, likeList } = action.payload;
+      if (board === "vaccine") {
+        state.myWriteVac = likeList;
+      } else if (board === "quarantine") {
+        state.myWriteQuar = likeList;
+      } else {
+        state.myWriteMedi = likeList;
+      }
     },
     // mylike
     actionSetMyLikeList: (state, action) => {
@@ -130,9 +156,15 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myWriteVac = state.myWriteVac.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
 
         state.board.likeCount = state.board.likeCount - 1;
-      } else {
+      } else if (board === "quarantine") {
         state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount - 1 };
@@ -151,7 +183,26 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myWriteQuar = state.myWriteQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
         state.board.likeCount = state.board.likeCount - 1;
+      } else {
+        state.myLikeMedi = state.myLikeMedi.map((each) => {
+          if (each.medicalId === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
+        state.myWriteMedi = state.myWriteMedi.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount - 1 };
+          }
+          return { ...each };
+        });
       }
     },
     acionPlusLike: (state, action) => {
@@ -175,8 +226,14 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myWriteVac = state.myWriteVac.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
         state.board.likeCount = state.board.likeCount + 1;
-      } else {
+      } else if (board === "quarantine") {
         state.listQuar = state.listQuar.map((each) => {
           if (each.id === boardId) {
             return { ...each, likeCount: each.likeCount + 1 };
@@ -195,7 +252,26 @@ const board = createSlice({
           }
           return { ...each };
         });
+        state.myWriteQuar = state.myWriteQuar.map((each) => {
+          if (each.quarBoardId === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
         state.board.likeCount = state.board.likeCount + 1;
+      } else {
+        state.myLikeMedi = state.myLikeMedi.map((each) => {
+          if (each.medicalId === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
+        state.myWriteMedi = state.myWriteMedi.map((each) => {
+          if (each.id === boardId) {
+            return { ...each, likeCount: each.likeCount + 1 };
+          }
+          return { ...each };
+        });
       }
     },
     actionMinusComment: (state, action) => {
@@ -487,6 +563,38 @@ export const actionWriteExperience =
     }
   };
 
+export const actionGetMyWriteDB =
+  (board) =>
+  async (dispatch, getState, { history }) => {
+    const is_login = getState().user.is_login;
+    if (!is_login) {
+      return;
+    }
+    const userId = getState().user.user.userId;
+    dispatch(actionLoading());
+    try {
+      if (board === "vaccine") {
+        const getData = await boardAxios.getMyWriteVac(userId);
+        const likeList = getData.data;
+        dispatch(actionSetMyWriteList({ board, likeList }));
+      } else if (board === "quarantine") {
+        const getData = await boardAxios.getMyWriteQuar(userId);
+        const likeList = getData.data;
+        dispatch(actionSetMyWriteList({ board, likeList }));
+      } else {
+        const getData = await boardAxios.getMyWriteMedi(userId);
+        const likeList = getData.data;
+        dispatch(actionSetMyWriteList({ board, likeList }));
+      }
+      dispatch(actionLoading());
+    } catch (error) {
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+
 export const {
   actionSetListVac,
   actionSetListQuar,
@@ -495,6 +603,7 @@ export const {
   actionSetBoard,
   actionSetTopThreeVac,
   actionSetTopThreeQuar,
+  actionSetMyWriteList,
   actionSetMyLikeList,
   acionMinusLike,
   acionPlusLike,

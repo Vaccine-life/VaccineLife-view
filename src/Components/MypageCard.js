@@ -31,7 +31,7 @@ const MypageCard = (props) => {
   };
   if (isMobileOnly) {
     return (
-      <MobilePost onClick={handleMoveDetail}>
+      <MobilePost>
         <Grid
           className="작성날짜, 아이콘세개"
           is_flex="space_row"
@@ -115,13 +115,15 @@ const MypageCard = (props) => {
 
         <Grid className="제목">
           <Line />
-          <MobileTitle>{board === "medical" ? contents : title}</MobileTitle>
+          <MobileTitle onClick={handleMoveDetail}>
+            {board === "medical" ? contents : title}
+          </MobileTitle>
         </Grid>
       </MobilePost>
     );
   }
   return (
-    <Post onClick={handleMoveDetail}>
+    <Post>
       <Grid
         className="작성날짜"
         is_flex="center"
@@ -139,7 +141,9 @@ const MypageCard = (props) => {
         height="1rem"
         margin={`auto ${theme.headOneSize} auto 0`}
       >
-        <Title>{board === "medical" ? contents : title}</Title>
+        <Title onClick={handleMoveDetail}>
+          {board === "medical" ? contents : title}
+        </Title>
       </Grid>
       <Grid
         className="아이콘세개"
@@ -239,7 +243,6 @@ const Post = styled.div`
   margin-bottom: ${theme.bodyThreeSize};
   display: flex;
   align-items: center;
-  cursor: pointer;
 `;
 const Title = styled.div`
   width: 90%;
@@ -249,6 +252,7 @@ const Title = styled.div`
   overflow: hidden;
   white-space: nowrap;
   margin: 0 auto 0 16px;
+  cursor: pointer;
 `;
 const MobileTitle = styled.div`
   width: 270px;
