@@ -15,6 +15,7 @@ const Text = (props) => {
     hover,
     alignStart,
     whiteSpace,
+    block,
   } = props;
 
   const styles = {
@@ -28,6 +29,7 @@ const Text = (props) => {
     hover,
     alignStart,
     whiteSpace,
+    block,
   };
 
   return (
@@ -51,6 +53,7 @@ Text.defaultProps = {
   hover: false,
   alignStart: false,
   whiteSpace: false,
+  block: false,
 };
 
 const P = styled.p`
@@ -61,7 +64,6 @@ const P = styled.p`
   line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
   white-space: ${(props) => props.whiteSpace};
-
   ${(props) =>
     props.alignStart
       ? `
@@ -75,6 +77,15 @@ const P = styled.p`
     cursor: pointer;
     color: ${theme.btnColor};
     }
+  `}
+  ${(props) =>
+    props.block &&
+    `
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
   `}
 `;
 

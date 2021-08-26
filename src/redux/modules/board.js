@@ -361,6 +361,9 @@ const board = createSlice({
       state.page.prev = action.payload.prevId;
     },
     actionSetType: (state, action) => {
+      if (state.type === action.payload) {
+        return;
+      }
       state.type = action.payload;
       state.pagingVac = {
         nextPage: 1,

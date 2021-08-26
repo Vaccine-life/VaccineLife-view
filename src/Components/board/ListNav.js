@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
+import TypeSelector from "./TypeSelector";
 
 const ListNav = (props) => {
   const { board } = props;
@@ -73,6 +74,7 @@ const ListNav = (props) => {
             글쓰기
           </Button>
         </Grid>
+        <TypeSelector />
         <Div></Div>
       </>
     );

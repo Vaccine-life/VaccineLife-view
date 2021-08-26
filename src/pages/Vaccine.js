@@ -40,7 +40,7 @@ const Vaccine = () => {
         <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
         <BoardName board="vaccine" />
         <Popular board="vaccine" />
-        <TypeSelector />
+
         <ListNav board="vaccine" />
         <List board="vaccine" />
         {isLoading && <BottomSpinner />}
@@ -56,8 +56,8 @@ const Vaccine = () => {
       <MetaScript title="슬기로운 백신생활 | 백신접종 후기" />
       {/* props 값 넣기 */}
       <Popular board="vaccine" />
-      <TypeSelector />
       <ListNav board="vaccine" />
+      <TypeSelector />
       <List board="vaccine" />
       {isLoading && <BottomSpinner />}
       {modal_status && <Login />}
