@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid, Text } from "../../elements";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
+import { actionVisible } from "../../redux/modules/modal";
 import theme from "../../styles/theme";
 
 const Alert = () => {
@@ -11,8 +12,14 @@ const Alert = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(actionAlert());
-    dispatch(actionSetMessage(""));
+    if (alertMessage === "로그인 후 이용해 주세요.") {
+      dispatch(actionAlert());
+      dispatch(actionSetMessage(""));
+      dispatch(actionVisible());
+    } else {
+      dispatch(actionAlert());
+      dispatch(actionSetMessage(""));
+    }
   };
 
   // 회원가입 인삿말을 줄바꿈&&닉네임 컬러 바꿔서 얼럿 띄우기위한 노력...

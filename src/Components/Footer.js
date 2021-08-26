@@ -76,7 +76,7 @@ const Footer = () => {
                 size={theme.bodyThreeSize}
                 margin="5px"
               >
-                Team. 백신후기관리위원회
+                Team. 슬기로운 백신생활
               </Text>
 
               <MobileStick>
@@ -187,7 +187,7 @@ const Footer = () => {
               size={theme.bodyThreeSize}
               margin="5px"
             >
-              Team. 백신후기관리위원회
+              Team. 슬기로운 백신생활
             </Text>
 
             <Stick>
