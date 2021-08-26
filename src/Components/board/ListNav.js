@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { history } from "../../redux/configStore";
 import { Button, Grid, Text } from "../../elements";
 import theme from "../../styles/theme";
@@ -47,6 +47,8 @@ const ListNav = (props) => {
       history.push("/quarantineboard/write");
     }
   };
+
+  useEffect(() => {}, [board_type]);
 
   if (isMobileOnly) {
     return (
