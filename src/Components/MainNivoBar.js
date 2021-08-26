@@ -113,7 +113,7 @@ const MainNivoBar = () => {
                 ]}
                 keys={["vaccine"]}
                 indexBy="vaccines"
-                margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
+                margin={{ top: 0, right: 50, bottom: 0, left: 110 }}
                 padding={0.3}
                 groupMode="grouped"
                 layout="horizontal"
@@ -224,7 +224,7 @@ const MainNivoBar = () => {
                 ]}
                 keys={["aftereffect"]}
                 indexBy="aftereffects"
-                margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
+                margin={{ top: 0, right: 50, bottom: 0, left: 110 }}
                 padding={0.3}
                 groupMode="grouped"
                 layout="horizontal"
@@ -347,7 +347,7 @@ const MainNivoBar = () => {
             ]}
             keys={["vaccine"]}
             indexBy="vaccines"
-            margin={{ top: 0, right: 50, bottom: 0, left: 100 }}
+            margin={{ top: 0, right: 50, bottom: 0, left: 120 }}
             padding={0.3}
             groupMode="grouped"
             layout="horizontal"
