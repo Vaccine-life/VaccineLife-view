@@ -60,12 +60,15 @@ const Ariticle = (props) => {
             [{typeChanger(type)}]
           </Text>
         )}
-        <Text
-          color={is_read ? theme.typoGrey2 : theme.bodyfourSize}
-          sizr={theme.bodyfourSize}
-        >
-          {title}
-        </Text>
+        <TitleDiv>
+          <Text
+            block={true}
+            color={is_read ? theme.typoGrey2 : theme.bodyfourSize}
+            size={theme.bodyfourSize}
+          >
+            {title}
+          </Text>
+        </TitleDiv>
         <NameDiv>{nickname}</NameDiv>
       </TextDiv>
       <Grid is_flex="space_row">
@@ -97,6 +100,11 @@ const TextDiv = styled.div`
   text-align: start;
   display: flex;
 `;
+
+const TitleDiv = styled.div`
+  width: 250px;
+`;
+
 const Div = styled.div`
   background-color: ${theme.typoLightGrey2};
   height: 1px;
