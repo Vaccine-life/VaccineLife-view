@@ -102,7 +102,7 @@ const TextDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
-  width: 250px;
+  width: 200px;
 `;
 
 const Div = styled.div`
