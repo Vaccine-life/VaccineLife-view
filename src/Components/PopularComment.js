@@ -11,13 +11,20 @@ import {
 } from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { faTrashAlt, faEdit } from "@fortawesome/free-regular-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
 import {
   actionGetTopThreeMedi,
   actionSetTopThreeMedi,
 } from "../redux/modules/comment";
 import { isMobileOnly } from "react-device-detect";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
+import {
+  actionModifyMedical,
+  actionModifyComment,
+} from "../redux/modules/comment";
+import { TextareaAutosize } from "@material-ui/core";
 
 const PopularComment = (props) => {
   const dispatch = useDispatch();
@@ -111,6 +118,32 @@ const PopularCommentItem = (props) => {
   const user_id = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
+  // 수정하기
+  const [text, setText] = React.useState("");
+  const [editable, setEditable] = React.useState(false);
+  // 수정 버튼 클릭시 토글
+  const handleToggle = () => {
+    if (!editable) {
+      setText(contents);
+    } else {
+      setText(text);
+    }
+    // 수정 비수정 왔다갔다 토글
+    setEditable((edit) => !edit);
+  };
+  const handleChange = (e) => {
+    setText(e.target.value);
+    // console.log(e.target.value);
+  };
+  const changeMedical = () => {
+    if (!text) {
+      dispatch(actionAlert());
+      dispatch(actionSetMessage("응원 문구를 작성해주세요!"));
+      return;
+    }
+    dispatch(actionModifyMedical(boardId, { contents: text }));
+  };
+
   if (isMobileOnly) {
     return (
       <>
@@ -127,6 +160,45 @@ const PopularCommentItem = (props) => {
               </Text>
             </Grid>
 
+            <Trash>
+              {is_login && userId === props.userId ? (
+                <Text
+                  color={theme.typoGrey3}
+                  size={theme.bodyfourSize}
+                  lineHeight={theme.bodyfourHeight}
+                  cursor="pointer"
+                  _onClick={() => {
+                    dispatch(acionSetMedicalObj({ boardId }));
+                    dispatch(actionMedicalConfirm());
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </Text>
+              ) : (
+                ""
+              )}
+            </Trash>
+
+            <Modify>
+              {is_login && userId === props.userId ? (
+                <Text
+                  color={theme.typoGrey3}
+                  size={theme.bodyfourSize}
+                  lineHeight={theme.bodyfourHeight}
+                  cursor="pointer"
+                  _onClick={handleToggle}
+                >
+                  {editable ? (
+                    <FontAwesomeIcon icon={faCheck} onClick={changeMedical} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEdit} />
+                  )}
+                </Text>
+              ) : (
+                ""
+              )}
+            </Modify>
+
             <Heart>
               <LikeIconMedi boardId={boardId} />
               <Text
@@ -134,19 +206,40 @@ const PopularCommentItem = (props) => {
                 margin="0 0 0 5.55px"
                 color={theme.typoGrey1}
               >
-                {props.likeCount}
+                {likeCount}
               </Text>
             </Heart>
           </CommentHead>
 
           <Grid align="left" padding="1rem 0">
-            <Text
-              size={theme.bodyfourSize}
-              lineHeight={theme.bodyfourHeight}
-              color={theme.typoBlack}
-            >
-              {contents}
-            </Text>
+            {editable ? (
+              <TextareaAutosize
+                style={{
+                  resize: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                  borderWidth: "0 0 1px 0",
+                  borderColor: `${theme.typoGrey2}`,
+                  fontSize: `${theme.bodyfourSize}`,
+                  lineHeight: `${theme.bodyfourHeight}`,
+                  fontFamily: "Noto Sans KR",
+                  color: `${theme.typoBlack}`,
+                  whiteSpace: "pre-wrap",
+                }}
+                minRows="1"
+                value={text}
+                onChange={handleChange}
+                maxLength="500"
+              />
+            ) : (
+              <Text
+                size={theme.bodyfourSize}
+                lineHeight={theme.bodyfourHeight}
+                color={theme.typoBlack}
+              >
+                {contents}
+              </Text>
+            )}
           </Grid>
 
           <Grid align="left" padding="3rem 1rem 1rem 0">
@@ -177,28 +270,86 @@ const PopularCommentItem = (props) => {
             </Text>
           </Grid>
 
+          <Trash>
+            {is_login && userId === props.userId ? (
+              <Text
+                color={theme.typoGrey3}
+                size={theme.bodyTwoSize}
+                lineHeight={theme.bodyThreeSize}
+                cursor="pointer"
+                _onClick={() => {
+                  dispatch(acionSetMedicalObj({ boardId }));
+                  dispatch(actionMedicalConfirm());
+                }}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </Text>
+            ) : (
+              ""
+            )}
+          </Trash>
+
+          <Modify>
+            {is_login && userId === props.userId ? (
+              <Text
+                color={theme.typoGrey3}
+                size={theme.bodyTwoSize}
+                lineHeight={theme.bodyThreeSize}
+                cursor="pointer"
+                _onClick={handleToggle}
+              >
+                {editable ? (
+                  <FontAwesomeIcon icon={faCheck} onClick={changeMedical} />
+                ) : (
+                  <FontAwesomeIcon icon={faEdit} />
+                )}
+              </Text>
+            ) : (
+              ""
+            )}
+          </Modify>
+
           <Heart>
             <LikeIconMedi boardId={boardId} />
-            <p
-              style={{
-                fontSize: `${theme.bodyfourSize}`,
-                margin: "0 0 0 5.55px",
-                color: `${theme.typoGrey2}`,
-              }}
+            <Text
+              fontSize={theme.bodyfourSize}
+              margin="0 0 0 5.55px"
+              color={theme.typoGrey1}
             >
               {likeCount}
-            </p>
+            </Text>
           </Heart>
         </CommentHead>
 
         <Grid align="left" padding="1rem 0">
-          <Text
-            size={theme.bodyThreeSize}
-            lineHeight={theme.bodyThreeHeight}
-            color={theme.typoBlack}
-          >
-            {contents}
-          </Text>
+          {editable ? (
+            <TextareaAutosize
+              style={{
+                resize: "none",
+                width: "100%",
+                boxSizing: "border-box",
+                borderWidth: "0 0 1px 0",
+                borderColor: `${theme.typoGrey2}`,
+                fontSize: `${theme.bodyThreeSize}`,
+                lineHeight: `${theme.bodyThreeHeight}`,
+                fontFamily: "Noto Sans KR",
+                color: `${theme.typoBlack}`,
+                whiteSpace: "pre-wrap",
+              }}
+              minRows="1"
+              value={text}
+              onChange={handleChange}
+              maxLength="500"
+            />
+          ) : (
+            <Text
+              size={theme.bodyThreeSize}
+              lineHeight={theme.bodyThreeHeight}
+              color={theme.typoBlack}
+            >
+              {contents}
+            </Text>
+          )}
         </Grid>
 
         <Grid align="left" padding="3rem 1rem 1rem 0">
