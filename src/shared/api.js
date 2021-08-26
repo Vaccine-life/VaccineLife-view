@@ -28,6 +28,10 @@ export const userAxios = {
 export const boardAxios = {
   getPageVac: (page) =>
     api.get(`/api/vacBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
+  getPageVacType: (page, type) =>
+    api.get(
+      `api/vacBoard/type/page?sortBy=id&isAsc=false&size=10&page=${page}&type=${type}`
+    ),
   getPageQuar: (page) =>
     api.get(`/api/quarBoard/page?sortBy=id&isAsc=false&size=10&page=${page}`),
   getDetailVac: (boardId) => api.get(`/api/vacBoard/${boardId}`),

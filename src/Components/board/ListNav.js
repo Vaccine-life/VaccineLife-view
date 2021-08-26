@@ -8,11 +8,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionAlert, actionSetMessage } from "../../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
+import TypeSelector from "./TypeSelector";
 
 const ListNav = (props) => {
   const { board } = props;
   const is_login = useSelector((state) => state.user.is_login);
   const is_vaccine = useSelector((state) => state.user.user.isVaccine);
+  const board_type = useSelector((state) => state.board.type);
+
+  const NameChanger = (type) => {
+    if (type === "전체") {
+      return "전체글";
+    } else if (type === "아스트라제네카") {
+      return "AZ";
+    } else if (type === "아스트라제네카 + 화이자") {
+      return "AZ + PF";
+    } else {
+      return type;
+    }
+  };
+
   const dispatch = useDispatch();
 
   const handleMoveWrite = () => {
@@ -46,7 +61,7 @@ const ListNav = (props) => {
             lineHeight={theme.SubHeadOneHeight}
             bold
           >
-            전체글
+            {board === "vaccine" ? NameChanger(board_type) : "전체글"}
           </Text>
           <Button
             width="89px"
@@ -59,6 +74,7 @@ const ListNav = (props) => {
             글쓰기
           </Button>
         </Grid>
+        <TypeSelector />
         <Div></Div>
       </>
     );
@@ -67,7 +83,7 @@ const ListNav = (props) => {
   return (
     <Grid is_flex="space_row" margin="96px auto 32px auto">
       <Text size={theme.headOneSize} bold lineHeight={theme.headOneHeight}>
-        전체글
+        {board === "vaccine" ? NameChanger(board_type) : "전체글"}
       </Text>
       <Button
         width={theme.totalButtonWidth}
