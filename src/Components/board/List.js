@@ -4,28 +4,39 @@ import theme from "../../styles/theme";
 import TableTr from "./TableTr";
 import InfinityScroll from "../../shared/InfinityScroll";
 import { useDispatch, useSelector } from "react-redux";
-import { actionGetBoard } from "../../redux/modules/board";
+import { actionGetBoard, actionGetBoardType } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
 import TopArticle from "../mobile/board/TopArticle";
 import TopTable from "./TopTable";
+import logger from "../../shared/logger";
 
 const List = (props) => {
   const { board } = props;
   const is_loading = useSelector((state) => state.isLoading.isLoading);
   const pagingVac = useSelector((state) => state.board.pagingVac);
+  const board_type = useSelector((state) => state.board.type);
   // console.log(pagingVac);
   const { nextPage, totalPage } = pagingVac;
   const vac_list = useSelector((state) => state.board.listVac);
   // console.log(vac_list);
   const dispatch = useDispatch();
+
   const nextCall = () => {
-    dispatch(actionGetBoard(board));
+    if (board_type === "전체") {
+      dispatch(actionGetBoard(board));
+    } else {
+      dispatch(actionGetBoardType(board, board_type));
+    }
   };
 
   useEffect(() => {
-    dispatch(actionGetBoard(board));
-  }, []);
+    if (board_type === "전체") {
+      dispatch(actionGetBoard(board));
+    } else {
+      dispatch(actionGetBoardType(board, board_type));
+    }
+  }, [board_type]);
 
   if (isMobileOnly) {
     return (
