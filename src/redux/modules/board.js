@@ -34,6 +34,7 @@ const board = createSlice({
       nextPage: 1,
       totalPage: 0,
     },
+    type: "전체",
   },
   reducers: {
     actionSetListVac: (state, action) => {
@@ -359,6 +360,14 @@ const board = createSlice({
       state.page.next = action.payload.nextId;
       state.page.prev = action.payload.prevId;
     },
+    actionSetType: (state, action) => {
+      state.type = action.payload;
+      state.pagingVac = {
+        nextPage: 1,
+        totalPage: 0,
+      };
+      state.listVac = [];
+    },
   },
 });
 
@@ -398,6 +407,37 @@ export const actionGetBoard =
         const totalPageInData = getData.data.totalPages;
 
         dispatch(actionSetListQuar({ board, totalPageInData }));
+      }
+      //loading => false
+      dispatch(actionLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        actionSetMessage("네트워크 오류입니다. 관리자에게 문의해주세요")
+      );
+      dispatch(actionAlert());
+    }
+  };
+export const actionGetBoardType =
+  (board, type) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      if (board === "vaccine") {
+        // 백신후기
+        const { nextPage, totalPage } = getState().board.pagingVac;
+        if (nextPage > totalPage && nextPage !== 1) {
+          return;
+        }
+        //loading => true
+        dispatch(actionLoading());
+
+        const getData = await boardAxios.getPageVacType(nextPage, type);
+        const board = getData.data.content;
+        // console.log(board);
+        const totalPageInData = getData.data.totalPages;
+        // console.log(totalPageInData);
+
+        dispatch(actionSetListVac({ board, totalPageInData }));
       }
       //loading => false
       dispatch(actionLoading());
@@ -609,6 +649,7 @@ export const {
   actionMinusComment,
   actionPlusComment,
   actionSetPrevNextPage,
+  actionSetType,
 } = board.actions;
 
 export default board;
