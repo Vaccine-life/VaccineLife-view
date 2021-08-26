@@ -5,9 +5,10 @@ import theme from "../styles/theme";
 import { ResponsiveBar } from "@nivo/bar";
 import { isMobileOnly } from "react-device-detect";
 import { mainAxios } from "../shared/api";
-import logger from "../shared/logger";
+import logger from '../shared/logger';
 
 const MainNivoBar = () => {
+
   const [dataArr, setDataArr] = useState([]);
   const [korNames, setKorNames] = useState([]);
 
@@ -71,10 +72,12 @@ const MainNivoBar = () => {
     afterEffectData();
   }, []);
 
+
   // 내려온 숫자값들 넣기 -> afterEffectNumArr[0], ...
   // 한글이름(라벨)으로 바꿔주기
   // -> 상위 4개의 key값을 배열로 만들어주고
   // -> if문 활용 e.g. if headache => 두통/관절통/근육통으로 print
+
 
   if (isMobileOnly) {
     return (
@@ -82,9 +85,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle1Mobile>
             <img src={disc} alt="" />
-            <h3>
-              백신 종류별 접종수<span> (출처: 질병관리청)</span>
-            </h3>
+            <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
           </BarTitle1Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -92,22 +93,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 63862,
+                    vaccine: 64414,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1135524,
+                    vaccine: 1142960,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 5349383,
+                    vaccine: 5360802,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "아스트라제네카",
-                    vaccine: 6335453,
+                    vaccine: 6790063,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -193,9 +194,7 @@ const MainNivoBar = () => {
         <div>
           <BarTitle2Mobile>
             <img src={disc} alt="" />
-            <h3>
-              백신 부작용 Top4<span> (출처: 자체 설문조사)</span>
-            </h3>
+            <h3>백신 부작용 Top4<span> (출처: 자체 설문조사)</span></h3>
           </BarTitle2Mobile>
           <BoxWrapperMobile>
             <BarBoxMobile>
@@ -317,31 +316,29 @@ const MainNivoBar = () => {
       <div>
         <BarTitle1>
           <img src={disc} alt="" />
-          <h3>
-            백신 종류별 접종수<span> (출처: 질병관리청)</span>
-          </h3>
+          <h3>백신 종류별 접종수<span> (출처: 질병관리청)</span></h3>
         </BarTitle1>
         <BarBox>
           <ResponsiveBar
             data={[
               {
                 vaccines: "모더나",
-                vaccine: 63862,
+                vaccine: 64414,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "얀센",
-                vaccine: 1135524,
+                vaccine: 1142960,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "화이자",
-                vaccine: 5349383,
+                vaccine: 5360802,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "아스트라제네카",
-                vaccine: 6335453,
+                vaccine: 6790063,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}
@@ -426,9 +423,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>
-            백신 부작용 Top 4<span> (출처: 자체 설문조사)</span>
-          </h3>
+          <h3>백신 부작용 Top 4<span> (출처: 자체 설문조사)</span></h3>
         </BarTitle2>
         <BarBox>
           <ResponsiveBar
@@ -533,7 +528,7 @@ const MainNivoBar = () => {
                   borderRadius: "10px",
                 }}
               >
-                <strong>{value}명</strong>
+                <strong>{value.toLocaleString("ko-KR")}명</strong>
               </div>
             )}
           />
@@ -565,11 +560,11 @@ const BarTitle1 = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
-
+    
     & > span {
       font-size: 12px;
       font-weight: lighter;
-      color: ${theme.typoGrey3};
+      color: ${theme.typoGrey3}
     }
   }
 `;
@@ -601,7 +596,7 @@ const BarTitle2 = styled.div`
     & > span {
       font-size: 12px;
       font-weight: lighter;
-      color: ${theme.typoGrey3};
+      color: ${theme.typoGrey3}
     }
   }
 `;
@@ -614,7 +609,9 @@ const BarBox = styled.div`
   border-radius: 16px;
 `;
 
+
 // <========= Mobile ===========>
+
 
 const BarTitle1Mobile = styled.div`
   display: flex;
@@ -638,11 +635,11 @@ const BarTitle1Mobile = styled.div`
     letter-spacing: -0.3px;
     color: #242424;
     padding-left: 4px;
-
+    
     & > span {
       font-size: 10px;
-      font-weight: lighter;
-      color: ${theme.typoGrey3};
+      font-weight:lighter;
+      color: ${theme.typoGrey3}
     }
   }
 `;
@@ -673,10 +670,11 @@ const BarTitle2Mobile = styled.div`
 
     & > span {
       font-size: 10px;
-      font-weight: lighter;
-      color: ${theme.typoGrey3};
+      font-weight:lighter;
+      color: ${theme.typoGrey3}
     }
   }
+ 
 `;
 
 const BoxWrapperMobile = styled.div`
