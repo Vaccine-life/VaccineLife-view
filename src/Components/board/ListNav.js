@@ -76,7 +76,7 @@ const ListNav = (props) => {
             글쓰기
           </Button>
         </Grid>
-        <TypeSelector />
+        {board === "vaccine" && <TypeSelector />}
         <Div></Div>
       </>
     );
