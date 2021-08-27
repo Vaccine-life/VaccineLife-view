@@ -180,7 +180,8 @@ export const actionMediLike =
   (obj) =>
   async (dispatch, getState, { history }) => {
     const is_cookie = getCookie("vaccine_life_token");
-    if (is_cookie === undefined) {
+    const is_login = getState().user.is_login;
+    if (is_cookie === undefined || !is_login || is_cookie === null) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요."));
       dispatch(actionAlert());
       return;
