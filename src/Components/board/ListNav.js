@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { history } from "../../redux/configStore";
 import { Button, Grid, Text } from "../../elements";
 import theme from "../../styles/theme";
@@ -48,6 +48,8 @@ const ListNav = (props) => {
     }
   };
 
+  useEffect(() => {}, [board_type]);
+
   if (isMobileOnly) {
     return (
       <>
@@ -74,7 +76,7 @@ const ListNav = (props) => {
             글쓰기
           </Button>
         </Grid>
-        <TypeSelector />
+        {board === "vaccine" && <TypeSelector />}
         <Div></Div>
       </>
     );
