@@ -72,7 +72,7 @@ const Contents = (props) => {
           isMobile={true}
           dangerouslySetInnerHTML={{ __html: contents }}
         ></ContentDiv>
-        <LikeWrapperM>
+        <LikeWrapperM onClick={handleLikeClick}>
           <LikeIconChanger
             board={board}
             boardId={boardId}
