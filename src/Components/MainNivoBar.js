@@ -92,22 +92,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 64414,
+                    vaccine: 65047,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1142960,
+                    vaccine: 1148960,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 5360802,
+                    vaccine: 5374122,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "아스트라제네카",
-                    vaccine: 6790063,
+                    vaccine: 7192797,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -326,28 +326,28 @@ const MainNivoBar = () => {
             data={[
               {
                 vaccines: "모더나",
-                vaccine: 64414,
+                vaccine: 65047,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "얀센",
-                vaccine: 1142960,
+                vaccine: 1148960,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "화이자",
-                vaccine: 5360802,
+                vaccine: 5374122,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "아스트라제네카",
-                vaccine: 6790063,
+                vaccine: 7192797,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}
             keys={["vaccine"]}
             indexBy="vaccines"
-            margin={{ top: 0, right: 50, bottom: 0, left: 120 }}
+            margin={{ top: 0, right: 50, bottom: 0, left: 110 }}
             padding={0.3}
             groupMode="grouped"
             layout="horizontal"
