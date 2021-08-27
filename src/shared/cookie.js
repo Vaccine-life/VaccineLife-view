@@ -1,14 +1,19 @@
 // vaccine_life_token
 
 import jwtDecode from "jwt-decode";
+import logger from "./logger";
 
 //get: 설정된 쿠키를 가져온다
 const getCookie = (name) => {
-  let value = ";" + document.cookie;
+  let value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? value[2] : null;
+
+  /* let value = ";" + document.cookie;
   let parts = value.split(`;${name}=`);
+  logger(parts);
   if (parts.length === 2) {
     return parts.pop().split(";").shift();
-  }
+  } */
 };
 
 //set: 쿠키에 값을 할당해서 새로 만든다

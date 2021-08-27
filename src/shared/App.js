@@ -34,6 +34,7 @@ function App() {
       dispatch(actionLogoutCookie());
     }, remainTime);
   }
+
   useEffect(() => {
     if (!is_login && getCookie("vaccine_life_token")) {
       dispatch(actionGetUseInfo());
