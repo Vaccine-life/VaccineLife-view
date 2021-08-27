@@ -20,15 +20,22 @@ const Contents = (props) => {
   const likeObj =
     board === "vaccine"
       ? {
-          vacBoardId: boardId,
-          userId,
+          vacBoardId: parseInt(boardId),
+          userId: parseInt(userId),
         }
       : {
-          quarBoardId: boardId,
-          userId,
+          quarBoardId: parseInt(boardId),
+          userId: parseInt(userId),
         };
 
   const handleLikeClick = () => {
+    if (
+      likeObj.userId === null ||
+      likeObj?.vacBoardId === null ||
+      likeObj?.quarBoardId === null
+    ) {
+      return;
+    }
     dispatch(actionPostLike(board, likeObj));
   };
   if (isMobileOnly) {
@@ -66,7 +73,13 @@ const Contents = (props) => {
           dangerouslySetInnerHTML={{ __html: contents }}
         ></ContentDiv>
         <LikeWrapperM>
-          <LikeIconChanger board={board} boardId={boardId} size="1x" bigHeart />
+          <LikeIconChanger
+            board={board}
+            boardId={boardId}
+            size="1x"
+            bigHeart
+            inBoard={true}
+          />
           <p
             style={{
               fontSize: `${theme.bodyTwoSize}`,
@@ -126,7 +139,13 @@ const Contents = (props) => {
           {likeCount}
         </p> */}
         <LikeBtn onClick={handleLikeClick}>
-          <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
+          <LikeIconChanger
+            board={board}
+            boardId={boardId}
+            size="lg"
+            bigHeart
+            inBoard={true}
+          />
           <p
             style={{
               fontSize: `${theme.headTwoSize}`,

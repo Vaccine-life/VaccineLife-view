@@ -10,7 +10,7 @@ import { actionPostLike } from "../redux/modules/like";
 import { isMobileOnly } from "react-device-detect";
 
 const LikeIconChanger = (props) => {
-  const { board, boardId, size, bigHeart } = props;
+  const { board, boardId, size, bigHeart, inBoard } = props;
   const is_login = useSelector((state) => state.user.is_login);
   const userId = useSelector((state) => state.user.user.userId);
   const like_list_vac = useSelector((state) => state.like.likeListVac);
@@ -34,6 +34,9 @@ const LikeIconChanger = (props) => {
         };
 
   const handleLikeClick = () => {
+    if (inBoard) {
+      return;
+    }
     if (
       likeObj.userId === null ||
       likeObj?.vacBoardId === null ||
