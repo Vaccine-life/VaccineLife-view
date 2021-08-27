@@ -22,12 +22,15 @@ const LikeIconMedi = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
   const likeObj = {
-    medicalId: boardId,
-    userId,
+    medicalId: parseInt(boardId),
+    userId: parseInt(userId),
   };
   // console.log(likeObj)
 
   const handleLikeClick = () => {
+    if (likeObj.userId === null || likeObj?.medicalId === null) {
+      return;
+    }
     dispatch(actionMediLike(likeObj));
   };
 
