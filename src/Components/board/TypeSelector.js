@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { isMobileOnly } from "react-device-detect";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { actionSetType } from "../../redux/modules/board";
 import theme from "../../styles/theme";
 
 const TypeSelector = (props) => {
-  const [currentClick, setCurrentClick] = useState(1);
-  const [prevClick, setPrevClick] = useState(null);
-
+  const board_type = useSelector((state) => state.board.type);
   const dispatch = useDispatch();
+  const boardTypeChanger = (type) => {
+    if (type === "전체") {
+      return "1";
+    } else if (type === "화이자") {
+      return "5";
+    } else if (type === "모더나") {
+      return "2";
+    } else if (type === "얀센") {
+      return "3";
+    } else if (type === "아스트라제네카") {
+      return "4";
+    } else if (type === "아스트라제네카 + 화이자") {
+      return "6";
+    }
+  };
+  const [currentClick, setCurrentClick] = useState(
+    boardTypeChanger(board_type)
+  );
+  const [prevClick, setPrevClick] = useState(null);
 
   useEffect(
     (e) => {
