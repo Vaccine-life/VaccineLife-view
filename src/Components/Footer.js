@@ -116,6 +116,22 @@ const Footer = () => {
                 Github. https://github.com/Vaccine-life
               </Text>
             </MobileTeamInfo>
+            <div style={{ margin: "20px 5px 10px 5px" }}>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.bodyFourSize}
+                margin="5px"
+              >
+                * 부트캠프를 통한 팀으로 진행된 프로젝트입니다.
+              </Text>
+              <Text
+                color={theme.typoGrey2}
+                size={theme.bodyFourSize}
+                margin="5px"
+              >
+                * 인크루팅 제안은 상기 메일로 연락 부탁드립니다.
+              </Text>
+            </div>
           </Grid>
         </MobileWrapper>
       </>
@@ -227,6 +243,10 @@ const Footer = () => {
               Github. https://github.com/Vaccine-life
             </Text>
           </TeamInfo>
+          <Text color={theme.typoGrey2} size={theme.bodyThreeSize} margin="5px">
+            * 부트캠프를 통한 팀으로 진행된 프로젝트입니다. 인크루팅 제안은 상기
+            메일로 연락 부탁드립니다.
+          </Text>
         </Grid>
       </FixedFooter>
     </React.Fragment>
