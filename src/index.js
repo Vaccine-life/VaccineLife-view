@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
 import FontStyle from "./styles/FontStyle";
 import { HelmetProvider } from "react-helmet-async";
+import { logEvent } from "firebase/analytics";
 import { analytics } from "./shared/firebase";
 
 const rootElement = document.getElementById("root");
@@ -42,10 +43,7 @@ if (rootElement.hasChildNodes()) {
 
 function sendToAnalytics(metric) {
   const _report = JSON.stringify(metric);
-
-  analytics.logEvent("web_vital_report", _report);
-
-  console.log({ _report });
+  logEvent(analytics, "web_vital_report", _report);
 }
 reportWebVitals(sendToAnalytics);
 
