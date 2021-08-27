@@ -53,7 +53,7 @@ export const actionLogin =
       const userInfoObj = await userAxios.login({ username, password });
       setCookie("vaccine_life_token", userInfoObj.data);
       const userInfoDecode = jwtDecode(userInfoObj.data);
-      console.log(userInfoDecode);
+
       dispatch(actionSetTime(userInfoDecode.exp));
 
       // username이 sub에 담겨 오는 것에 유의하자!

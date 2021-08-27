@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./shared/App";
 import FontStyle from "./styles/FontStyle";
 import { HelmetProvider } from "react-helmet-async";
+import { analytics } from "./shared/firebase";
 
 const rootElement = document.getElementById("root");
 
@@ -39,6 +40,15 @@ if (rootElement.hasChildNodes()) {
   );
 }
 
+function sendToAnalytics(metric) {
+  const _report = JSON.stringify(metric);
+
+  analytics.logEvent("web_vital_report", _report);
+
+  console.log({ _report });
+}
+reportWebVitals(sendToAnalytics);
+
 /* 
 ReactDOM.render(
   <Provider store={store}>
@@ -56,4 +66,3 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

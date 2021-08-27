@@ -364,13 +364,16 @@ const board = createSlice({
       if (state.type === action.payload) {
         return;
       }
+      state.listVac = [];
       state.type = action.payload;
       state.pagingVac = {
         nextPage: 1,
         totalPage: 0,
       };
-      state.listVac = [];
     },
+  },
+  actionResetVac: (state, action) => {
+    state.listVac = [];
   },
 });
 

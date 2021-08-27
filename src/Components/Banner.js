@@ -141,8 +141,6 @@ const Banner = (props) => {
   );
 };
 
-
-
 const FixedBanner = styled.div`
   margin-top: auto;
   width: 100%;
