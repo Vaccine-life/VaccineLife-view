@@ -25,15 +25,23 @@ const LikeIconChanger = (props) => {
   const likeObj =
     board === "vaccine"
       ? {
-          vacBoardId: boardId,
-          userId,
+          vacBoardId: parseInt(boardId),
+          userId: parseInt(userId),
         }
       : {
-          quarBoardId: boardId,
-          userId,
+          quarBoardId: parseInt(boardId),
+          userId: parseInt(userId),
         };
 
   const handleLikeClick = () => {
+    if (
+      likeObj.userId === null ||
+      likeObj?.vacBoardId === null ||
+      likeObj?.quarBoardId === null
+    ) {
+      return;
+    }
+
     dispatch(actionPostLike(board, likeObj));
   };
   if (isMobileOnly) {
