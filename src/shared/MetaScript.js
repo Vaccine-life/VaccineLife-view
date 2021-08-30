@@ -13,7 +13,7 @@ const MetaScript = (props) => {
       />
       <meta
         name="keyword"
-        content="코로나, 백신, 격리, 후기, 슬기로운백신생활, 슬기로운, 백신생활"
+        content="코로나, 백신, 격리, 후기, 슬기로운백신생활, 슬기로운, 백신생활, 슬기로운 백신생활, 백신접종, 백신 접종, 접종,화이자, 얀센, 아스트라제네카, AZ, az, 모더나, covid, covid_19, 코로나백신, 코로나 백신, 자가격리, 자가 격리, 백신부작용, 백신 부작용, 격리, 코로나19, 코로나 19"
       />
       <meta property="og:title" content={title} />
       <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
