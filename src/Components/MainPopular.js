@@ -1,21 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-import theme from "../styles/theme";
+import React, { useEffect } from "react";
+import { history } from "../redux/configStore";
+import { useDispatch, useSelector } from "react-redux";
+import { isMobileOnly } from "react-device-detect";
+import { actionGetTopThree } from "../redux/modules/board";
 import PopularCard from "./board/PopularCard";
 import QuarPostCard from "./board/QuarPostCard";
-import Arrow from "../images/Arrow.png";
 import Slider from "./mobile/board/Silder";
-import { history } from "../redux/configStore";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { actionGetTopThree } from "../redux/modules/board";
-import { isMobileOnly } from "react-device-detect";
+import styled from "styled-components";
+import theme from "../styles/theme";
+import Arrow from "../images/Arrow.png";
+
+// MainPopular: 백신접종후기/자가격리후기 인기글
 
 const MainPopular = (props) => {
   const { board } = props;
   const dispatch = useDispatch();
-  // 백신 접종 후기 탑3 dispatch 해주기
-  // 추후 격리용으로 재사용시 참고하기: board==="vaccine"이 true면 백신top3가 나오는거고 false면 격리top3 나오는거
+  // 후기 탑3 dispatch 해주기
+  // board==="vaccine"이 true면 백신후기 Top3가 나오는거고 false면 격리top3 나오는거
   useEffect(() => {
     //  게시판 타입에 따라 디스패치 다르게 할 것
     dispatch(actionGetTopThree("vaccine"));
