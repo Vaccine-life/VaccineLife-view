@@ -15,6 +15,11 @@ import PopularComment from "../components/PopularComment";
 import InfinityScroll from "../shared/InfinityScroll";
 import BottomSpinner from "../shared/BottomSpinner";
 
+// CommentWrite: 의료진 응원글 작성란
+// PopularComment: 인기응원글 3개
+// InfinityScroll: nextCall, children, is_loading, is_next, size를 props로 받아 사용
+// CommentList: 의료진 응원글List (10개씩 보여줌)
+
 const Medical = (props) => {
   const dispatch = useDispatch();
 
