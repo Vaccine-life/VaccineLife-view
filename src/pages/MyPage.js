@@ -17,8 +17,12 @@ import { isMobileOnly } from "react-device-detect";
 import theme from "../styles/theme";
 import Spinner from "../shared/Spinner";
 
+// 마이페이지(로그인 이후 헤더에 뜬 닉네임을 클릭하면 라우트 된다) 상단 '마이 페이지'글자와 좌측 메뉴로 이루어져 있다.
+// components 폴더의 MyInfo, MyPost, MyLike를 자식으로 가지며, 자식은 우측 내용물 부분에 보여진다.
 const MyPage = () => {
   const dispatch = useDispatch();
+
+  // menu의 첫 값은 myinfo이기 때문에, 마이페이지에 처음 들어왔을 때 자식 컴포넌트 중 MyInfo가 보여진다.
   const [menu, setMenu] = useState("myinfo");
 
   const navModal_status = useSelector((state) => state.modal.navVisible);
@@ -41,6 +45,7 @@ const MyPage = () => {
                 </Text>
               </Grid>
 
+              {/* 클릭한 버튼에 따라 setMenu되고, menu에 따라 내용물이 바뀐다 */}
               <Grid className="메뉴" width="100%" margin="24px auto">
                 <MobileMenuItem
                   onClick={() => {

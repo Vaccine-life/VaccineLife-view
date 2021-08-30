@@ -10,7 +10,7 @@ import {
   actionModifySurveyVisible,
 } from "./modal";
 import { actionAlert, actionSetMessage } from "./popup";
-import { actionGetLikeMedi, actionSetLikeMedi } from "./like";
+import { actionGetLikeMedi } from "./like";
 
 const initialState = {
   user: {
@@ -54,6 +54,7 @@ export const actionLogin =
       setCookie("vaccine_life_token", userInfoObj.data);
       const userInfoDecode = jwtDecode(userInfoObj.data);
 
+      // 로그인 2시간 뒤 자동로그아웃 하기 위한 것
       dispatch(actionSetTime(userInfoDecode.exp));
 
       // username이 sub에 담겨 오는 것에 유의하자!
@@ -70,13 +71,12 @@ export const actionLogin =
         userId: userInfoDecode.id,
         type: userInfoDecode.type,
       };
-
       dispatch(actionSetUser(userInfo));
+
+      // 로그인 모달창 닫고, 로그인 성공 얼럿창 띄우기
+      dispatch(actionVisible());
       dispatch(actionSetMessage("로그인 되었습니다"));
       dispatch(actionAlert());
-      dispatch(actionVisible());
-
-      // history.push("/");
 
       // 로그인시 내가 누른 하트 보이게 하기
       dispatch(actionGetLikeMedi());
@@ -102,8 +102,6 @@ export const actionSignup =
   }) =>
   async (dispatch, getState, { history }) => {
     try {
-      // 여기가 찐 회원가입에만 관여하는 부분
-
       // 유저가 접종한 것처럼 이것저것 체크한 후 마지막에 '접종하지 않음'으로 변경하고 제출한 경우, 이것저것 체크했던 것들을 다시 기본값으로 돌려버린다.
       if (isVaccine === 0) {
         type = undefined;
@@ -131,7 +129,6 @@ export const actionSignup =
       dispatch(actionVisible());
 
       //여기부터는 회원가입 즉시 로그인 하기위한 애들
-
       const newuserObj = await userAxios.login({ username, password });
       setCookie("vaccine_life_token", newuserObj.data);
       const newuserDecode = jwtDecode(newuserObj.data);
@@ -168,6 +165,7 @@ export const actionSignup =
     }
   };
 
+// 닉네임 수정
 export const actionNicknameUpdate =
   ({
     id,
@@ -227,7 +225,6 @@ export const actionNicknameUpdate =
 
       dispatch(actionSetMessage("닉네임이 수정되었습니다"));
       dispatch(actionAlert());
-      console.log("닉네임 변경 완료! 리덕스");
 
       history.push("/");
     } catch (error) {
@@ -239,6 +236,7 @@ export const actionNicknameUpdate =
     }
   };
 
+// 설문조사 수정
 export const actionSurveyUpdate =
   ({
     id,
