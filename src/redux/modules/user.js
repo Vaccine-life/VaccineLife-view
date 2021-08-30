@@ -225,7 +225,6 @@ export const actionNicknameUpdate =
 
       dispatch(actionSetMessage("닉네임이 수정되었습니다"));
       dispatch(actionAlert());
-      console.log("닉네임 변경 완료! 리덕스");
 
       history.push("/");
     } catch (error) {

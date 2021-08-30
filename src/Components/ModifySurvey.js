@@ -105,7 +105,6 @@ const ModifySurvey = (props) => {
           ...prev,
           [name]: afterEffect.filter((el) => el !== value),
         };
-        console.log(result.afterEffect);
         return result;
       });
     }
