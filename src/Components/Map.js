@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SouthKorea from "../images/South_Korea.png";
-import disc from "../images/disc.png";
+import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { isMobileOnly } from "react-device-detect";
+import SouthKorea from "../images/South_Korea.png";
+import disc from "../images/disc.png";
+
+// Map: 지도_지역별 접종수
 
 const Map = () => {
   const [GyeonggiShot, setGyeonggiShot] = useState("");
@@ -25,6 +27,7 @@ const Map = () => {
   const [ChoongBookShot, setChoongBookShot] = useState("");
   const [DaejeonShot, setDaejeonShot] = useState("");
 
+  // 공공데이터포털api 가져오기
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
@@ -32,18 +35,21 @@ const Map = () => {
       );
       makeData(res.data.data);
     };
+
+    // makeData: 가져온 데이터 가공하기
     const makeData = (items) => {
-      // todayList는 2000개가 넘던 items 중, 가장 최근인 '오늘'에 해당하는 요소들만 긁어옴
+
+      // todayList: 2000개 넘는 items 중, 가장 최근인(리스트의 끝에 있는) '오늘'에 해당하는 요소들만 긁어옴
       const todayList = items.slice(items.length - 17, items.length);
 
-      // todayNum이라는 빈객체에 {시도: 2차접종자수}로 이루어진 키값쌍을 넣어준다.
-      // 근데 모든 시도를 다 돌아야 하니까 map해줌
+      // todayNum이라는 빈객체에 {지역(sido): 2차접종자수}로 이루어진 키값쌍 넣어주기
+      // 모든 지역을 다 돌아야하니 map돌려주기
       const todayNum = {};
       todayList.map((item) => {
-        // 객체에다가 새로운 "키 = 값" 쌍을 넣어주는 방법
-        todayNum[item.sido] = Math.floor(item.totalSecondCnt);
+        todayNum[item.sido] = item.totalSecondCnt;
       });
-      // console.log(todayNum);
+
+      // 각 지역마다 업데이트 되는 숫자가 들어가게끔 세팅
       setGyeonggiShot(todayNum.경기도);
       setSeoulShot(todayNum.서울특별시);
       setGangwonShot(todayNum.강원도);
@@ -65,6 +71,7 @@ const Map = () => {
     fetchEvents();
   }, []);
 
+  // 모바일의 경우
   if (isMobileOnly) {
     return (
       <WrapperMobile>
@@ -73,12 +80,16 @@ const Map = () => {
           <h3>
             지역별 접종수<span> (만 명)</span>
           </h3>
-          {/* <h6>단위: 만</h6> */}
         </MapTitleMobile>
-
         <MapBoxWrapperMobile>
           <MapBoxMobile>
             <img src={SouthKorea} alt="" />
+
+            {/* 
+              // 이 밑으로 각 지역별 데이터 적용
+              // 모바일의 경우 화면이 협소하여 데이터 별 나누기 10000(만) 후 Math.floor적용(같거나 작은 정수 중 가장 큰 정수 반환)
+              // toLocalString으로 1000단위마다 ','표시하기
+            */}
 
             <GyeonggiMobile>
               <h3>경기</h3>
@@ -204,6 +215,7 @@ const Map = () => {
     );
   }
 
+  // 웹의 경우
   return (
     <Wrapper>
       <MapTitle>
@@ -303,10 +315,15 @@ const Map = () => {
   );
 };
 
+
+// styled-components
+
+// <========= 웹 =========>
 const Wrapper = styled.div`
   margin-right: 50px;
 `;
 
+// MapTitle: 제목_디스크 아이콘(img), 글귀(h3)
 const MapTitle = styled.div`
   display: flex;
   flex-direction: row;
@@ -334,6 +351,7 @@ const MapTitle = styled.div`
   }
 `;
 
+// MapBox: 지도를 감싸고 있는 네모박스_한반도이미지(img)
 const MapBox = styled.div`
   position: relative;
   width: 504px;
@@ -351,6 +369,7 @@ const MapBox = styled.div`
   }
 `;
 
+// Shot: 각 지역명 하단의 데이터 담은 파란박스
 const Shot = styled.div`
   padding: 0px 5px;
   width: max-content;
@@ -364,6 +383,8 @@ const Shot = styled.div`
   margin: auto;
 `;
 
+// Gyeonggi (하기의 다른 지역들에도 통일 적용): 상단의 지역명(h3) + 하단의 데이터 담은 파란박스(Shot)
+// 한반도 이미지 위에 배치하기 위해 묶음
 const Gyeonggi = styled.div`
   position: absolute;
   left: 160px;
@@ -671,7 +692,7 @@ const Busan = styled.div`
   }
 `;
 
-// <======================== Mobile =========================>
+// <========= 모바일 =========>
 
 const WrapperMobile = styled.div`
   margin: "auto";

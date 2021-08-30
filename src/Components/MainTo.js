@@ -1,11 +1,15 @@
 import React from "react";
+import { history } from "../redux/configStore";
+import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { history } from "../redux/configStore";
 import ToVacImage from "../images/ToVacImage.png";
-import { isMobileOnly } from "react-device-detect";
+
+// MainTo: 지도와 차트 밑 백신접종후기/자가격리후기/의료진감사게시판 보러가기
 
 const MainTo = (props) => {
+
+  // 모바일의 경우
   if (isMobileOnly) {
     return (
       <WrapperMobile>
@@ -33,7 +37,6 @@ const MainTo = (props) => {
             </h3>
             <hr />
           </ToQuarBoardMobile>
-
           <ToMedicalBoardMobile
             onClick={() => {
               history.push("/medical");
@@ -50,6 +53,7 @@ const MainTo = (props) => {
     );
   }
 
+  // 웹의 경우 
   return (
     <Wrapper>
       <ToVacBoard
@@ -64,7 +68,6 @@ const MainTo = (props) => {
         </h6>
         <img src={ToVacImage} alt="" />
       </ToVacBoard>
-
       <CardRightSide>
         <ToQuarBoard
           onClick={() => {
@@ -78,7 +81,6 @@ const MainTo = (props) => {
             공유해주세요!
           </h6>
         </ToQuarBoard>
-
         <ToMedicalBoard
           onClick={() => {
             history.push("/medical");
@@ -96,11 +98,17 @@ const MainTo = (props) => {
   );
 };
 
+
+//styled-components
+
+// <========= 웹 =========>
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
+//ToVacBoard: '백신후기' 게시판으로 이동하는 버튼
+// 제목(h3), 부가설명(h6), 서류함 이미지(img)
 const ToVacBoard = styled.div`
   width: 450px;
   height: 450px;
@@ -126,10 +134,6 @@ const ToVacBoard = styled.div`
     text-align: left;
     color: #ffffff;
   }
-  & > hr {
-    width: 160px;
-    margin-left: 0px;
-  }
   & > h6 {
     width: 300px;
     height: 48px;
@@ -152,11 +156,14 @@ const ToVacBoard = styled.div`
   }
 `;
 
+// CardRightSide: '자가격리 후기 보러가기', '의료진분들께 감사인사 전하기' 카드 두개 묶기
 const CardRightSide = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
+// ToQuarBoard: '격리후기' 게시판으로 이동
+// 제목(h3), 부가설명(h6)
 const ToQuarBoard = styled.div`
   width: 450px;
   height: 215px;
@@ -180,10 +187,6 @@ const ToQuarBoard = styled.div`
     text-align: left;
     color: #ffffff;
   }
-  & > hr {
-    width: 160px;
-    margin-left: 0px;
-  }
   & > h6 {
     width: 280px;
     height: 48px;
@@ -197,6 +200,8 @@ const ToQuarBoard = styled.div`
   }
 `;
 
+// ToMedicalBoard: '의료진분들께' 게시판으로 이동
+// 제목(h3), 부가설명(h6)
 const ToMedicalBoard = styled.div`
   width: 450px;
   height: 215px;
@@ -221,10 +226,6 @@ const ToMedicalBoard = styled.div`
     text-align: left;
     color: #ffffff;
   }
-  & > hr {
-    width: 160px;
-    margin-left: 0px;
-  }
   & > h6 {
     width: 300px;
     height: 48px;
@@ -238,7 +239,9 @@ const ToMedicalBoard = styled.div`
   }
 `;
 
+
 //<========= Mobile ===========>
+
 const WrapperMobile = styled.div`
   width: 100%;
 `;
@@ -250,7 +253,6 @@ const ToVacBoardMobile = styled.div`
   border-radius: 16px;
   padding: 16px 0px 0px 16px;
   margin: 40px 16px 8px 16px;
-
   & > h3 {
     width: max-content;
     height: 50px;
@@ -276,6 +278,8 @@ const ToVacBoardMobile = styled.div`
   }
 `;
 
+
+// CardDownSideMobile: (모바일 버전상) '자가격리 후기 보러가기', '의료진분들께 감사인사 전하기' 카드 두개 묶기
 const CardDownSideMobile = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -291,7 +295,6 @@ const ToQuarBoardMobile = styled.div`
   padding: 16px 0px 0px 16px;
   margin-right: 8px;
   margin-left: 16px;
-  
   & > h3 {
     width: max-content;
     height: 50px;
@@ -325,7 +328,6 @@ const ToMedicalBoardMobile = styled.div`
   padding: 16px 0px 0px 16px;
   margin-right: 16px;
   & > h3 {
-    /* width: 105px; */
     width: max-content;
     height: 50px;
     font-weight: bold;

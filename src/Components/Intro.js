@@ -1,22 +1,26 @@
 import React from "react";
+import { isMobileOnly } from "react-device-detect";
 import IntroCharacter from "../images/IntroCharacter.png";
 import styled from "styled-components";
 import theme from "../styles/theme";
-import { isMobileOnly } from "react-device-detect";
+
+// Intro: 헤더밑 '여러분의 백신 접종 후기를 공유해주세요!' 파란div
 
 const Intro = () => {
+
+  // 모바일의 경우
   if (isMobileOnly) {
     return (
-      <MainIntroWrapperMobile>
-        <MainIntroMobile>
-          <img src={IntroCharacter} alt="" />
-          <h1>
-            여러분의 <span>백신 접종 후기</span>를 <br /> 공유해주세요!
-          </h1>
-        </MainIntroMobile>
-      </MainIntroWrapperMobile>
+      <MainIntroMobile>
+        <img src={IntroCharacter} alt="" />
+        <h1>
+          여러분의 <span>백신 접종 후기</span>를 <br /> 공유해주세요!
+        </h1>
+      </MainIntroMobile>
     );
   }
+
+  //웹의 경우
   return (
     <MainIntro>
       <img src={IntroCharacter} alt="" />
@@ -27,6 +31,11 @@ const Intro = () => {
   );
 };
 
+
+// styled-components
+
+// <========= 웹 =========>
+// MainIntro: 사람아이콘(img), 글귀(h1), 볼드처리(span)
 const MainIntro = styled.div`
   display: flex;
   flex-direction: row;
@@ -54,13 +63,7 @@ const MainIntro = styled.div`
   }
 `;
 
-// <========= Mobile ===========>
-
-
-const MainIntroWrapperMobile = styled.div`
-  /* width: 100%; */
-`;
-
+// <========= 모바일 =========>
 const MainIntroMobile = styled.div`
 position: relative;
   margin-top: 80px;
@@ -81,7 +84,6 @@ position: relative;
   & > h1 {
     position: absolute;
     right: 40px;
-    /* white-space: nowrap; */
     width: max-content;
     text-align: right;
     font-size: ${theme.SubHeadTwoSize};
