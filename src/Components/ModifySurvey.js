@@ -11,6 +11,7 @@ import theme from "../styles/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
+// 마이페이지에서 설문조사 수정을 클릭했을 때 뜨는 모달창
 const ModifySurvey = (props) => {
   const dispatch = useDispatch();
 
@@ -82,8 +83,6 @@ const ModifySurvey = (props) => {
   // 클릭된 checkbox의 value를 setState(유저가 후유증을 클릭한 순서대로 배열에 push해준다)
   const handleCheckboxClick = (e) => {
     const { value, name } = e.target;
-    // console.log("클릭시 name, value 잘 가져오나?", name, value);
-    // console.log("클릭시 afterEffect의 상태는?", afterEffect);
 
     // 접종하지않음에서 접종함으로 변경하는 경우, afterEffect의 첫상태가 [""]이다. 이때 발열 체크시 ["", "발열"] 이렇게 들어가기 때문에 원래 있던 ""를 지워줄 수 있어야한다.
     if (afterEffect.includes("")) {
@@ -99,7 +98,7 @@ const ModifySurvey = (props) => {
     }
 
     // 이미 클릭한 부작용을 또 클릭하는 경우, 선택을 취소하는 거니까 배열에서 삭제해준다.
-    // inputs값이 현재값이라는걸 보장을 해줘야지!!!
+    // inputs값이 현재 유저의 화면에 뜨는 값과 같아야 하기 때문에 prev 이용 (얘를 이용하지 않으면 삭제가 안됨)
     if (afterEffect.includes(value)) {
       setInputs((prev) => {
         const result = {
@@ -113,6 +112,7 @@ const ModifySurvey = (props) => {
   };
 
   const handleSubmit = () => {
+    // 제출 직전, 후유증에 "없음"이 포함되어있다면 다른 후유증이 포함되면 안되기 때문에 후유증: ["없음"]으로 setState해준다
     if (afterEffect.indexOf("없음") !== -1) {
       setInputs((prev) => {
         const result = {
@@ -123,6 +123,7 @@ const ModifySurvey = (props) => {
       });
     }
 
+    // api명세서에 따르면 수정될 설문정보 뿐만 아니라 다른 유저정보도 보내줘야 해서, updatedUser에 갈무리해서 보내줌
     const userInfo = {
       id: user.userId,
       username: user.username,
@@ -130,7 +131,6 @@ const ModifySurvey = (props) => {
     };
 
     const updatedUser = { ...inputs, ...userInfo };
-    console.log(updatedUser);
     dispatch(actionSurveyUpdate(updatedUser));
   };
 

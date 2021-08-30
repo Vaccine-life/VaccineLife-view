@@ -7,6 +7,7 @@ const initialState = {
   modifySurveyVisible: false,
 };
 
+// 액션을 실행할 때 마다 true false를 오간다. 스위치를 끄고 켜는 느낌
 const modal = createSlice({
   name: "modal",
   initialState,

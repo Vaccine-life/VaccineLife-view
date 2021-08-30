@@ -1,13 +1,14 @@
 import React from "react";
-import styled from "styled-components";
-import { Text, Button, Grid } from "../elements/index";
-import theme from "../styles/theme";
-import { isMobileOnly } from "react-device-detect";
-
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
 import { actionLogin } from "../redux/modules/user";
+
+import { Text, Button, Grid } from "../elements/index";
+
+import styled from "styled-components";
+import { isMobileOnly } from "react-device-detect";
+import theme from "../styles/theme";
 
 const LoginComponent = ({ status, setStatus }) => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const LoginComponent = ({ status, setStatus }) => {
             onChange={formik.handleChange}
             value={formik.values.username}
           />
+          {/* 상단 validationSchema에서 정해놓은 유효성검사 메세지가 submit버튼 클릭시 뜬다 */}
           {formik.touched.username && formik.errors.username ? (
             <LoginError>{formik.errors.username}</LoginError>
           ) : null}

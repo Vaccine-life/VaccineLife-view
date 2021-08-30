@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { actionSignup } from "../redux/modules/user";
@@ -16,16 +15,27 @@ import { isMobileOnly } from "react-device-detect";
 import theme from "../styles/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import logger from "../shared/logger";
 
 // 어느 페이지에서나 뜨는 로그인모달창이 바로 이녀석입니다
+// 반투명배경과 하얀모달로만 이루어져있고, components폴더의 LoginComponent.js, SignupComponent.js, Survey.js를 자식으로 갖습니다.
 const Login = (props) => {
   const dispatch = useDispatch();
 
   const [status, setStatus] = useState("login");
 
-  //alert 창
+  // alert창
   const alert_status = useSelector((state) => state.popup.alert);
 
+  // SignupComponent.js에서 입력된 값들
+  const [signupInputs, setSignupInputs] = useState({
+    username: "",
+    password: "",
+    passwordChecker: "",
+    nickname: "",
+  });
+
+  // Survey.js에서 선택된 값들
   const [inputs, setInputs] = useState({
     isVaccine: 2,
     degree: undefined,
@@ -36,13 +46,10 @@ const Login = (props) => {
     afterEffect: [],
   });
 
-  const [signupInputs, setSignupInputs] = useState({
-    username: "",
-    password: "",
-    passwordChecker: "",
-    nickname: "",
-  });
+  // 위의 두 state를 왜 부모인 Login.js에서 일괄 관리하느냐?
+  // api명세서에 따르면, 회원가입 할 때 signupInputs와 inputs의 내용들을 한꺼번에 넘겨줘야 함
 
+  // formik, Yup: input값의 validation check를 도와주는 library
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -84,7 +91,7 @@ const Login = (props) => {
     },
   });
 
-  // 모달 바깥 부분 클릭시 모달 off
+  // 모달 바깥 부분 클릭시 모달 꺼짐
   const handleModalOff = (e) => {
     const clicked = e.target.closest(".modal");
     if (clicked) {
@@ -93,6 +100,10 @@ const Login = (props) => {
       dispatch(actionVisible());
     }
   };
+
+  // status의 첫값은 "login"이기 때문에 '로그인'버튼을 누르면 LoginComponent.js가 뜬다
+  // LoginComponent에서 '회원가입'버튼을 누르면 SignupComponent.js로 내용물이 바뀐다
+  // SignupComponent에서 '다음단계'버튼을 누르면 Survey.js로 내용물이 바뀐다
 
   if (isMobileOnly) {
     return (
@@ -209,7 +220,7 @@ const Modal = styled.div`
   padding: 40px;
 `;
 
-// 얘는 로그인, 설문조사, 회원가입에 다 들어가는 버튼이라서, 부모 파일인 Login.js에 넣어논거임!
+// 얘는 (자식인)로그인, 설문조사, 회원가입에 다 들어가는 버튼이라서, 부모인 이곳에 넣어놨습니다!
 const Xbutton = styled.div`
   margin: 0 0 0 auto;
   &:hover {
@@ -218,7 +229,6 @@ const Xbutton = styled.div`
 `;
 
 // <========= Mobile ==========>
-
 const MobileLoginBg = styled.div`
   width: 100%;
   height: 100%;
