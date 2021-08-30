@@ -54,35 +54,23 @@ const TopArticle = (props) => {
   return (
     <Grid padding="0 16px 0 16px">
       <TextDiv onClick={handleMovePage}>
+        <TagDiv>공지</TagDiv>
         <TitleDiv>
-          <Text color={theme.errorColor} size={theme.bodyfourSize}>
+          <Text color={theme.bg2} size={theme.bodyfourSize}>
             {title}
           </Text>
         </TitleDiv>
       </TextDiv>
-      <Grid is_flex="space_row">
-        <TextDiv>
-          <EachDiv>
-            {" "}
-            <FontAwesomeIcon icon={faCommentAlt} />
-            <p style={{ marginLeft: "3px" }}>{commentCount}</p>
-          </EachDiv>
-          <EachDiv>
-            {" "}
-            <FontAwesomeIcon icon={faEye} />
-            <p style={{ marginLeft: "3px" }}>{totalVisitors}</p>
-          </EachDiv>
-        </TextDiv>
-        <Text color={theme.typoGrey1}>{displayedAt(createAt)}</Text>
-      </Grid>
+
       <Div></Div>
     </Grid>
   );
 };
 
 const TextDiv = styled.div`
-  text-align: start;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const Div = styled.div`
@@ -106,6 +94,18 @@ const TitleDiv = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const TagDiv = styled.div`
+  width: 38px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${theme.white};
+  background-color: ${theme.bg2};
+  font-size: ${theme.bodyfourSize};
+  margin-right: 8px;
 `;
 
 export default TopArticle;

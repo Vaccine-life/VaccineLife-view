@@ -214,7 +214,7 @@ const ContentWrapper = styled.div`
   font-size: ${theme.bodyThreeSize};
   line-height: ${theme.bodyThreeHeight};
   color: ${theme.typoGrey2};
-  font-weight: 700;
+
   overflow: hidden;
   text-align: start;
 `;
@@ -225,7 +225,7 @@ const ContentWrapperM = styled.div`
   font-size: ${theme.bodyfourSize};
   line-height: ${theme.bodyfourHeight};
   color: ${theme.typoGrey2};
-  font-weight: 700;
+
   overflow: hidden;
   text-align: start;
 `;

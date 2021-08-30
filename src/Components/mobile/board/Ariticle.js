@@ -56,7 +56,7 @@ const Ariticle = (props) => {
     <Grid padding="0 16px 0 16px">
       <TextDiv onClick={handleMovePage}>
         {board === "vaccine" && (
-          <Text size={theme.bodyfourSize} color={theme.bg} margin="0 4px 0 0">
+          <Text size={theme.bodyfourSize} color={theme.bg2} margin="0 4px 0 0">
             [{typeChanger(type)}]
           </Text>
         )}
@@ -68,6 +68,7 @@ const Ariticle = (props) => {
           >
             {title}
           </Text>
+          <CommentPara>[{commentCount}]</CommentPara>
         </TitleDiv>
         <NameDiv>{nickname}</NameDiv>
       </TextDiv>
@@ -76,17 +77,13 @@ const Ariticle = (props) => {
           <EachDiv>
             {" "}
             <LikeIconChanger board={board} boardId={boardId} />
-            <p style={{ marginLeft: "3px" }}>{likeCount}</p>
+            <p style={{ marginLeft: "5.03px" }}>{likeCount}</p>
           </EachDiv>
-          <EachDiv>
-            {" "}
-            <FontAwesomeIcon icon={faCommentAlt} />
-            <p style={{ marginLeft: "3px" }}>{commentCount}</p>
-          </EachDiv>
+
           <EachDiv>
             {" "}
             <FontAwesomeIcon icon={faEye} />
-            <p style={{ marginLeft: "3px" }}>{totalVisitors}</p>
+            <p style={{ marginLeft: "5.03px" }}>{totalVisitors}</p>
           </EachDiv>
         </TextDiv>
         <Text color={theme.typoGrey1}>{displayedAt(createAt)}</Text>
@@ -99,10 +96,14 @@ const Ariticle = (props) => {
 const TextDiv = styled.div`
   text-align: start;
   display: flex;
+  margin-bottom: 6px;
 `;
 
 const TitleDiv = styled.div`
   width: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const Div = styled.div`
@@ -118,14 +119,19 @@ const EachDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 16px;
-  margin-top: 3px;
+  margin-right: 14px;
 `;
 
 const NameDiv = styled.div`
   font-size: ${theme.bodyfourSize};
   color: ${theme.typoBlack};
   margin: 0 0 0 auto;
+`;
+
+const CommentPara = styled.p`
+  color: ${theme.bg2};
+  font-size: ${theme.bodyfourSize};
+  margin-left: 4px;
 `;
 
 export default Ariticle;

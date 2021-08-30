@@ -16,6 +16,7 @@ const Text = (props) => {
     alignStart,
     whiteSpace,
     block,
+    padding,
   } = props;
 
   const styles = {
@@ -30,6 +31,7 @@ const Text = (props) => {
     alignStart,
     whiteSpace,
     block,
+    padding,
   };
 
   return (
@@ -43,6 +45,7 @@ const Text = (props) => {
 
 Text.defaultProps = {
   margin: false,
+  padding: false,
   color: "black",
   size: "14px",
   children: false,
@@ -61,6 +64,7 @@ const P = styled.p`
   font-weight: ${(props) => (props.bold ? "700" : "400")};
   font-size: ${(props) => props.size};
   margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
   white-space: ${(props) => props.whiteSpace};
