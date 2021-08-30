@@ -35,38 +35,39 @@ const TopTable = (props) => {
     <TableThread>
       <Td
         style={{
-          color: `${theme.errorColor}`,
-          fontWeight: "700",
-          backgroundColor: `rgba(237, 242, 255, 0.5)`,
+          color: `${theme.typoBlack}`,
+          backgroundColor: `${theme.typoLightGrey1}`,
         }}
       >
         {type}
       </Td>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
-        {title}
+        <TextDiv>공지</TextDiv> {title}
       </TdTitle>
-      <Td style={{ color: `${theme.errorColor}` }}>admin</Td>
-      <Td></Td>
       <Td></Td>
       <Td></Td>
 
-      <Td>{displayedAt(createAt)}</Td>
+      <Td></Td>
+
+      <Td></Td>
     </TableThread>
   );
 };
 
 const TableThread = styled.tr`
-  border-bottom: 1px solid ${theme.typoGrey2};
+  border-bottom: 1px solid ${theme.typoLightGrey2};
   height: 40px;
 `;
 
 const TdTitle = styled.td`
-  text-align: start;
-  padding-left: 15px;
-  vertical-align: middle;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 16px 0 16px 16px;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
-  color: ${theme.errorColor};
+  color: ${theme.bg2};
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
@@ -78,17 +79,22 @@ const TdTitle = styled.td`
 
 const Td = styled.td`
   text-align: start;
-  padding-left: 15px;
+  padding: 16px 0 16px 16px;
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
 `;
 
-const EachTdDiv = styled.div`
-  height: 100%;
+const TextDiv = styled.div`
+  width: 49px;
+  height: 26px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  color: ${theme.white};
+  background-color: ${theme.bg2};
+  font-size: ${theme.bodyTwoSize};
+  margin-right: 8px;
 `;
 
 export default TopTable;

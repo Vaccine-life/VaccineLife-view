@@ -34,8 +34,9 @@ const TableTr = (props) => {
     <TableThread>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
+        <CommentPara>[{commentCount}]</CommentPara>
       </TdTitle>
-      <Td style={{ color: "black" }}>{nickname}</Td>
+      <Td style={{ color: `${theme.typoGrey2}` }}>{nickname}</Td>
       <Td>
         <EachTdDiv>
           {" "}
@@ -43,13 +44,7 @@ const TableTr = (props) => {
           <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
         </EachTdDiv>
       </Td>
-      <Td>
-        <EachTdDiv>
-          {" "}
-          <FontAwesomeIcon icon={faCommentAlt} />
-          <p style={{ marginLeft: "5.55px" }}>{commentCount}</p>
-        </EachTdDiv>
-      </Td>
+
       <Td>
         <EachTdDiv>
           {" "}
@@ -63,13 +58,16 @@ const TableTr = (props) => {
 };
 
 const TableThread = styled.tr`
-  border-bottom: 1px solid ${theme.typoGrey2};
+  border-bottom: 1px solid ${theme.typoLightGrey2};
   height: 40px;
 `;
 
 const TdTitle = styled.td`
   text-align: start;
-  padding-left: 15px;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
@@ -78,6 +76,9 @@ const TdTitle = styled.td`
   :hover {
     color: ${theme.bg2};
   }
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const Td = styled.td`
@@ -93,6 +94,12 @@ const EachTdDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+`;
+
+const CommentPara = styled.p`
+  color: ${theme.bg2};
+  font-size: ${theme.bodyTwoSize};
+  margin-left: 4px;
 `;
 
 export default TableTr;
