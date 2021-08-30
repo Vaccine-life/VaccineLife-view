@@ -13,8 +13,7 @@ import theme from "../../styles/theme";
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 
-// 사용시 props에 해당하는 것들을 넣어줄것
-
+// 마이페이지에서 닉네임 수정을 클릭했을 때 뜨는 모달창
 const ModifyNickname = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -22,6 +21,7 @@ const ModifyNickname = (props) => {
   const [nicknameDupOk, setNicknameDupOk] = useState(false);
   const [nicknameDupMsg, setNicknameDupMsg] = useState("");
 
+  // onChange될 때 마다 nicknameDupCheck를 통해 닉네임 중복확인
   const nicknameDupCheck = (nickname) => async () => {
     try {
       const nicknameDupRes = await userAxios.nicknameDupCheck(nickname);
@@ -43,6 +43,7 @@ const ModifyNickname = (props) => {
         .max(6, "닉네임은 6자리 이하여야 합니다"),
     }),
 
+    // api명세서에 따르면 수정될 닉네임 뿐만 아니라 다른 유저정보도 보내줘야 해서, updatedUser에 갈무리해서 보내줌
     onSubmit: (values) => {
       const updatedUser = {
         id: user.userId,
@@ -76,7 +77,6 @@ const ModifyNickname = (props) => {
             value={formik.values.nickname}
             onChange={(e) => {
               formik.handleChange(e);
-
               dispatch(nicknameDupCheck(e.target.value));
             }}
           />

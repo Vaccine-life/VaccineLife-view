@@ -11,6 +11,7 @@ const Alert = () => {
   const alertMessage = useSelector((state) => state.popup.alertMessage);
   const dispatch = useDispatch();
 
+  // '로그인 후 이용해 주세요' 얼럿이 뜨는 경우, 얼럿창을 끄고 로그인모달을 켠다.
   const handleClick = () => {
     if (
       alertMessage === "로그인 후 이용해 주세요." ||
@@ -25,11 +26,10 @@ const Alert = () => {
     }
   };
 
-  // 회원가입 인삿말을 줄바꿈&&닉네임 컬러 바꿔서 얼럿 띄우기위한 노력...
-
   const alertMsg = () => {
-    // indexOf에 쓰이고, split할 때 쓰이는 +++++++는 절대 닉네임에 포함될 수 없는 문자열로 임의 설정한 것이다.
+    // redux modules의 user.js actionSignup에 따르면, 회원가입 및 로그인 성공시 메세지에 '+++++++'이 포함되어 온다.
 
+    // 회원가입 인삿말의 경우 if문 적용(줄바꿈 및 스타일 적용)
     if (alertMessage.indexOf("+++++++") !== -1) {
       return (
         <>
@@ -50,7 +50,9 @@ const Alert = () => {
           </Text>
         </>
       );
-    } else {
+    }
+    // 그 이외의 메세지인 경우 else문 적용
+    else {
       return (
         <>
           <Text size={theme.bodyOneSize} lineHeight={theme.bodyThreeHeight}>

@@ -165,6 +165,7 @@ export const actionSignup =
     }
   };
 
+// 닉네임 수정
 export const actionNicknameUpdate =
   ({
     id,
@@ -236,6 +237,7 @@ export const actionNicknameUpdate =
     }
   };
 
+// 설문조사 수정
 export const actionSurveyUpdate =
   ({
     id,

@@ -101,7 +101,7 @@ const Login = (props) => {
     }
   };
 
-  // status의 첫값은 "login"이기 때문에 '로그인'버튼을 누르면 LoginComponent.js가 먼저 담긴다
+  // status의 첫값은 "login"이기 때문에 '로그인'버튼을 누르면 LoginComponent.js가 뜬다
   // LoginComponent에서 '회원가입'버튼을 누르면 SignupComponent.js로 내용물이 바뀐다
   // SignupComponent에서 '다음단계'버튼을 누르면 Survey.js로 내용물이 바뀐다
 
