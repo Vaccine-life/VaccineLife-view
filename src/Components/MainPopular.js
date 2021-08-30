@@ -16,15 +16,16 @@ const MainPopular = (props) => {
   const { board } = props;
   const dispatch = useDispatch();
   // 후기 탑3 dispatch 해주기
-  // board==="vaccine"이 true면 백신후기 Top3가 나오는거고 false면 격리top3 나오는거
+  // board==="vaccine"이 True면 백신후기 Top3가 나오고, False면 격리후기 Top3가 나옴 
   useEffect(() => {
-    //  게시판 타입에 따라 디스패치 다르게 할 것
+    //  게시판 타입에 따라 디스패치 다르게 하기
     dispatch(actionGetTopThree("vaccine"));
     dispatch(actionGetTopThree("quarantine"));
   }, []);
   const top_list_vac = useSelector((state) => state.board.topThreeVac);
   const top_list_quar = useSelector((state) => state.board.topThreeQuar);
 
+  // 모바일의 경우
   if (isMobileOnly) {
     return (
       <>
@@ -66,6 +67,7 @@ const MainPopular = (props) => {
     );
   }
 
+  // 웹의 경우
   return (
     <div style={{ marginTop: "90px" }}>
       <GreyBox>
@@ -144,19 +146,24 @@ const MainPopular = (props) => {
   );
 };
 
+
+// styled-components
+
+// <========= 웹 =========>
+// GreyBox: 현 컴포넌트를 감싸고 있는 회색div
 const GreyBox = styled.div`
   background-color: ${theme.typoLightGrey1};
   width: 100%;
   height: 550px;
 `;
 
+// PopularTitle: 백신 접종후기 인기글(h1), 더보기>(div)
 const PopularTitle = styled.div`
   display: flex;
   width: 1250px;
   justify-content: space-between;
   margin: auto;
   padding-bottom: 20px;
-  /* background-color: red; */
   & > h1 {
     width: 212px;
     height: 34px;
@@ -198,6 +205,7 @@ const PopularTitle = styled.div`
   }
 `;
 
+// PopularCards: 인기글 카드3개
 const PopularCards = styled.div`
   display: flex;
   justify-content: space-between;
@@ -205,6 +213,7 @@ const PopularCards = styled.div`
   height: 66%;
   margin: auto;
 `;
+
 
 // <========= Mobile ===========>
 

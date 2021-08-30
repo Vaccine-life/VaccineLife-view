@@ -14,6 +14,8 @@ import theme from "../styles/theme";
 import { isMobileOnly } from "react-device-detect";
 import styled from "styled-components";
 
+// 마이페이지 입장 시 우측에 보여지는 내용물
+// 닉네임, 아이디, 내가 제출한 설문조사 결과를 확인할수 있고, 닉네임과 설문조사를 수정할 수 있다
 const MyInfo = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
