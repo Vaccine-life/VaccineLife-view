@@ -5,27 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text } from "../elements";
 
 import MedicalConfirm from "../components/popup/MedicalConfirm";
-import {
-  actionMedicalConfirm,
-  acionSetMedicalObj,
-} from "../redux/modules/popup";
 import displayedAt from "../shared/displayedAt";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import LikeIconMedi from "./LikeIconMedi";
-import {
-  actionGetTopThreeMedi,
-  actionSetTopThreeMedi,
-} from "../redux/modules/comment";
+import { actionGetTopThreeMedi } from "../redux/modules/comment";
 import { isMobileOnly } from "react-device-detect";
 
+// 인기응원글list (3개)
 const PopularComment = (props) => {
   const dispatch = useDispatch();
 
   const top_list_medi = useSelector((state) => state.comment.topThreeMedi);
-  const medical_status = useSelector((state) => state.popup.medicalConfirm);
   // console.log(top_list_medi);
+  const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
+  // 첫 렌더시 인기응원글 3개 가져오기
   React.useEffect(() => {
     dispatch(actionGetTopThreeMedi());
   }, []);
@@ -44,7 +37,7 @@ const PopularComment = (props) => {
         </Grid>
 
         <PopularWrapper>
-          {top_list_medi?.map((each, index) => {
+          {top_list_medi.map((each, index) => {
             return (
               <PopularCommentItem
                 key={index}
@@ -74,7 +67,7 @@ const PopularComment = (props) => {
       </Grid>
 
       <PopularWrapper>
-        {top_list_medi?.map((each, index) => {
+        {top_list_medi.map((each, index) => {
           return (
             <PopularCommentItem
               key={index}
@@ -99,16 +92,11 @@ const PopularWrapper = styled.div`
 
 export default PopularComment;
 
+// 인기응원글 하나(위의 PopularComment에서만 쓰일 것이므로 export하지 않음.)
 const PopularCommentItem = (props) => {
   // console.log(props);
   const { nickname, contents, likeCount, createdAt, boardId, userId } = props;
-  // const medi_id = props.id;
-  // console.log(medi_id);
 
-  const dispatch = useDispatch();
-
-  const is_login = useSelector((state) => state.user.is_login);
-  const user_id = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
   if (isMobileOnly) {
@@ -134,7 +122,7 @@ const PopularCommentItem = (props) => {
                 margin="0 0 0 5.55px"
                 color={theme.typoGrey1}
               >
-                {props.likeCount}
+                {likeCount}
               </Text>
             </Heart>
           </CommentHead>
@@ -151,7 +139,7 @@ const PopularCommentItem = (props) => {
 
           <Grid align="left" padding="3rem 1rem 1rem 0">
             <Text size={theme.bodyfourSize} color={theme.typoGrey1}>
-              {displayedAt(props.createdAt)}
+              {displayedAt(createdAt)}
             </Text>
           </Grid>
 
@@ -235,25 +223,11 @@ const CommentHead = styled.div`
   border-bottom: 1px solid ${theme.typoLightGrey2};
 `;
 
-// 아이콘들
 const Heart = styled.div`
   display: flex;
   justify-content: right;
   align-items: center;
   margin-left: auto;
-`;
-
-const Modify = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 0 0.5rem;
-`;
-
-const Trash = styled.div`
-  width: auto;
-  align-items: center;
-  margin: 0 0.5rem;
 `;
 
 const WrapperMobile = styled.div`

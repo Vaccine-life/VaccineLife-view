@@ -11,12 +11,14 @@ import { withRouter } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
 import BannerMobile from "./mobile/BannerMobile";
 
+// 코로나19관련 정보링크를 뫃아놓은 배너
 const Banner = (props) => {
   const syringeAddress = "https://www.mfds.go.kr/vaccine_covid19.jsp";
   const newsAddress =
     "https://nedrug.mfds.go.kr/pbp/CCBAC01/getItem?&safeLetterNo=458";
   const phoneAddress = "https://ncv.kdca.go.kr/coov";
 
+  // 현재 페이지의 경로명(pathname)을 가져와서 배너 색상을 분기함.
   const url = history.location.pathname;
 
   if (isMobileOnly) {
