@@ -37,7 +37,7 @@ const QuarList = (props) => {
         <TopArticle
           board={board}
           type="공지"
-          title="[공지] 슬기로운 백신생활에서 준비한 이벤트!"
+          title="슬기로운 백신생활에서 준비한 이벤트!"
           likeCount={0}
           commentCount={0}
           totalVisitors={0}
@@ -69,10 +69,9 @@ const QuarList = (props) => {
     <Table>
       <thead>
         <TableThread>
-          <Th style={{ width: `${(280 / 600) * 100}%` }}>글제목</Th>
+          <Th style={{ width: `${(340 / 600) * 100}%` }}>글제목</Th>
           <Th style={{ width: `${(80 / 600) * 100}%` }}>작성자</Th>
           <Th style={{ width: `${(60 / 600) * 100}%` }}>추천</Th>
-          <Th style={{ width: `${(60 / 600) * 100}%` }}>댓글</Th>
           <Th style={{ width: `${(60 / 600) * 100}%` }}>조회</Th>
           <Th style={{ width: `${(60 / 600) * 100}%` }}>날짜</Th>
         </TableThread>
@@ -88,7 +87,7 @@ const QuarList = (props) => {
           <TopQuarTable
             board={board}
             type="공지"
-            title="[공지] 슬기로운 백신생활에서 준비한 이벤트!"
+            title="슬기로운 백신생활에서 준비한 이벤트!"
             likeCount={0}
             commentCount={0}
             totalVisitors={0}
@@ -118,7 +117,7 @@ const QuarList = (props) => {
 
 const Table = styled.table`
   width: 100%;
-  border-top: 1px solid ${theme.typoGrey2};
+  border-top: 1px solid ${theme.typoLightGrey2};
   border-collapse: collapse;
   color: ${theme.typoGrey2};
   font-size: ${theme.bodyTwoSize};
@@ -127,13 +126,12 @@ const Table = styled.table`
 `;
 
 const TableThread = styled.tr`
-  border-bottom: 1px solid ${theme.typoGrey2};
-  height: 40px;
+  border-bottom: 1px solid ${theme.typoLightGrey2};
 `;
 const Th = styled.th`
   text-align: start;
-  line-height: 40px;
+
   vertical-align: middle;
-  padding-left: 15px;
+  padding: 16px 0 16px 16px;
 `;
 export default QuarList;

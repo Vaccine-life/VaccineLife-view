@@ -37,13 +37,14 @@ const TableTr = (props) => {
       <Td
         style={{
           color: `${theme.typoBlack}`,
-          backgroundColor: `rgba(237, 242, 255, 0.5)`,
+          backgroundColor: `${theme.typoLightGrey1}`,
         }}
       >
         {type}
       </Td>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
+        <CommentPara>[{commentCount}]</CommentPara>
       </TdTitle>
       <Td style={{ color: `${theme.typoGrey2}` }}>{nickname}</Td>
       <Td>
@@ -53,13 +54,7 @@ const TableTr = (props) => {
           <p style={{ marginLeft: "5.55px" }}>{likeCount}</p>
         </EachTdDiv>
       </Td>
-      <Td>
-        <EachTdDiv>
-          {" "}
-          <FontAwesomeIcon icon={faCommentAlt} />
-          <p style={{ marginLeft: "5.55px" }}>{commentCount}</p>
-        </EachTdDiv>
-      </Td>
+
       <Td>
         <EachTdDiv>
           {" "}
@@ -74,13 +69,16 @@ const TableTr = (props) => {
 };
 
 const TableThread = styled.tr`
-  border-bottom: 1px solid ${theme.typoGrey2};
+  border-bottom: 1px solid ${theme.typoLightGrey2};
   height: 40px;
 `;
 
 const TdTitle = styled.td`
   text-align: start;
-  padding-left: 15px;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
@@ -96,7 +94,7 @@ const TdTitle = styled.td`
 
 const Td = styled.td`
   text-align: start;
-  padding-left: 15px;
+  padding: 16px 0 16px 16px;
   vertical-align: middle;
   font-size: ${theme.bodyTwoSize};
   line-height: ${theme.bodyTwoHeight};
@@ -107,6 +105,12 @@ const EachTdDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+`;
+
+const CommentPara = styled.p`
+  color: ${theme.bg2};
+  font-size: ${theme.bodyTwoSize};
+  margin-left: 4px;
 `;
 
 export default TableTr;

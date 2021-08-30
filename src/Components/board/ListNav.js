@@ -84,7 +84,12 @@ const ListNav = (props) => {
 
   return (
     <Grid is_flex="space_row" margin="96px auto 32px auto">
-      <Text size={theme.headOneSize} bold lineHeight={theme.headOneHeight}>
+      <Text
+        padding="0 0 0 12px"
+        size={theme.headOneSize}
+        bold
+        lineHeight={theme.headOneHeight}
+      >
         {board === "vaccine" ? NameChanger(board_type) : "전체글"}
       </Text>
       <Button
@@ -105,7 +110,7 @@ const Div = styled.div`
   margin: 0 16px 0 16px;
   background-color: ${theme.typoLightGrey2};
   height: 1px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 `;
 
 export default ListNav;

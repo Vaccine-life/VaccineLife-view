@@ -40,7 +40,7 @@ const TypeSelector = (props) => {
 
       if (prevClick !== null) {
         let prev = document.getElementById(prevClick);
-        prev.style.color = ` ${theme.typoGrey3}`;
+        prev.style.color = ` ${theme.typoBlack}`;
         prev.style.borderBottom = "none";
         prev.style.fontWeight = "400";
       }
@@ -126,7 +126,7 @@ const TypeSelector = (props) => {
           dispatch(actionSetType("전체"));
         }}
       >
-        전체글
+        전체
       </TypeBtn>
       <TypeBtn
         id="5"
@@ -186,11 +186,11 @@ const Wrapper = styled.div`
     props.isMobile
       ? `
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
 
-    padding : 0 16px 0 16px;
-    margin : 0 0 16px 0 ;
+    padding : 0 0 0 24px ;
+    margin : 0 0 20px 0 ;
 `
       : `
     margin : 0 0 32px 0 ;
@@ -199,16 +199,20 @@ const Wrapper = styled.div`
 const TypeBtn = styled.button`
   border: none;
   background-color: ${theme.white};
-  color: ${theme.typoGrey3};
+  color: ${theme.typoBlack};
   ${(props) =>
     props.isMobile
       ? `
+    
        font-size: ${theme.bodyfourSize};
-       margin : 0;
+       padding : 0 0 3px 0;
+       margin-right: 16px;
+
       `
       : `
-      font-size: ${theme.SubHeadOneSize};
-      margin: 0 15px 0 0;
+      font-size: ${theme.bodyOneSize};
+      margin: 0 12px 0 12px;
+      padding: 0 0 6px 0;
       :hover {
         cursor: pointer;
         color: ${theme.typoLightGrey2};
