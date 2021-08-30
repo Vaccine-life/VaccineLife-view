@@ -9,6 +9,7 @@ import news from "../../images/news.png";
 import phone from "../../images/phone.png";
 import { withRouter } from "react-router-dom";
 
+// 모바일버전 배너
 const BannerMobile = (props) => {
   const syringeAddress = "https://www.mfds.go.kr/vaccine_covid19.jsp";
   const newsAddress =
