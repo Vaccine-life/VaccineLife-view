@@ -17,10 +17,7 @@ import LikeIconMedi from "./LikeIconMedi";
 import { isMobileOnly } from "react-device-detect";
 import { TextareaAutosize } from "@material-ui/core";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
-import {
-  actionModifyMedical,
-  actionModifyComment,
-} from "../redux/modules/comment";
+import { actionModifyMedical } from "../redux/modules/comment";
 
 const CommentList = (props) => {
   const medi_id = props.id;
@@ -35,11 +32,12 @@ const CommentList = (props) => {
   const userId = useSelector((state) => state.user.user.userId);
   const medical_status = useSelector((state) => state.popup.medicalConfirm);
 
-  // 수정하기
+  // 수정하기 ==========>
   const [text, setText] = React.useState("");
   const [editable, setEditable] = React.useState(false);
   // 수정 버튼 클릭시 토글
   const handleToggle = () => {
+    // editable이 false일 때, text는 기존내용.
     if (!editable) {
       setText(medi_contents);
     } else {
@@ -48,10 +46,12 @@ const CommentList = (props) => {
     // 수정 비수정 왔다갔다 토글
     setEditable((edit) => !edit);
   };
+  // TextareaAutosize가 변할때마다 setText 넣어서 text 갱신.
   const handleChange = (e) => {
     setText(e.target.value);
     // console.log(e.target.value);
   };
+  // 수정완료 버튼에 onClick으로 적용
   const changeMedical = () => {
     if (!text) {
       dispatch(actionAlert());
@@ -60,6 +60,7 @@ const CommentList = (props) => {
     }
     dispatch(actionModifyMedical(medi_id, { contents: text }));
   };
+  // <==========
 
   if (isMobileOnly) {
     return (
@@ -78,6 +79,7 @@ const CommentList = (props) => {
             </Grid>
 
             <Trash>
+              {/* 로그인 상태이고, 아이디가 일치할때만(본인일때만) 삭제 가능 */}
               {is_login && userId === props.userId ? (
                 <Text
                   color={theme.typoGrey3}
@@ -95,7 +97,7 @@ const CommentList = (props) => {
                 ""
               )}
             </Trash>
-
+            {/* 로그인 상태이고, 아이디가 일치할때만(본인일때만) 수정 가능 */}
             <Modify>
               {is_login && userId === props.userId ? (
                 <Text
