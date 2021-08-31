@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { boardAxios, writeAxios } from "../../shared/api";
+import { api, boardAxios, writeAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
@@ -440,6 +440,17 @@ export const actionGetBoardType =
         }
         //loading => true
         dispatch(actionLoading());
+
+        if (type === "아스트라제네카+화이자") {
+          const getData = await api.get(
+            `api/vacBoard/type/page?sortBy=id&isAsc=false&size=10&page=${nextPage}&type=아스트라제네카%2B화이자`
+          );
+          const board = getData.data.content;
+          const totalPageInData = getData.data.totalPages;
+          dispatch(actionSetListVac({ board, totalPageInData }));
+          dispatch(actionLoading());
+          return;
+        }
 
         const getData = await boardAxios.getPageVacType(nextPage, type);
         const board = getData.data.content;

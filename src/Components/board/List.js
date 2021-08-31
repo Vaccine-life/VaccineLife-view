@@ -4,11 +4,7 @@ import theme from "../../styles/theme";
 import TableTr from "./TableTr";
 import InfinityScroll from "../../shared/InfinityScroll";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionGetBoard,
-  actionGetBoardType,
-  actionResetVac,
-} from "../../redux/modules/board";
+import { actionGetBoard, actionGetBoardType } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
 import TopArticle from "../mobile/board/TopArticle";

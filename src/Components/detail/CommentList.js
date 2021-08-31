@@ -13,7 +13,6 @@ import {
   acionSetCommentObj,
   actionCommentConfirm,
 } from "../../redux/modules/popup";
-import logger from "../../shared/logger";
 import { isMobileOnly } from "react-device-detect";
 
 const CommentList = (props) => {

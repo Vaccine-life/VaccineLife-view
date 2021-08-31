@@ -31,7 +31,16 @@ const TableTr = (props) => {
     dispatch(actionClickContents(board, boardId));
     history.push(`/detail/${boardId}`);
   };
-
+  // 띄어쓰기 용
+  const typeChanger = (type) => {
+    if (type === "아스트라제네카") {
+      return "아스트라제네카";
+    } else if (type === "아스트라제네카+화이자") {
+      return "아스트라제네카 + 화이자";
+    } else {
+      return type;
+    }
+  };
   return (
     <TableThread>
       <Td
@@ -40,7 +49,7 @@ const TableTr = (props) => {
           backgroundColor: `${theme.typoLightGrey1}`,
         }}
       >
-        {type}
+        {typeChanger(type)}
       </Td>
       <TdTitle onClick={handleMovePage} is_read={is_read}>
         {title}
