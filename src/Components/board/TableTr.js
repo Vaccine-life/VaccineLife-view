@@ -3,12 +3,11 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import LikeIconChanger from "../LikeIconChanger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
 import displayedAt from "../../shared/displayedAt";
 import { history } from "../../redux/configStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionClickContents } from "../../redux/modules/read";
-import logger from "../../shared/logger";
 
 const TableTr = (props) => {
   const {
@@ -27,6 +26,7 @@ const TableTr = (props) => {
   const vac_read_list = useSelector((state) => state.read.vacList);
   const is_read = vac_read_list?.includes(boardId);
 
+  // 디테일 페이지 이동
   const handleMovePage = () => {
     dispatch(actionClickContents(board, boardId));
     history.push(`/detail/${boardId}`);

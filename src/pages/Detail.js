@@ -65,6 +65,7 @@ const Detail = () => {
     return (
       <Grid margin="80px auto 40px auto">
         <MetaScript title={`슬기로운 백신생활 | ${title}`} />
+        {/* board에 props 전달시 board이름 변경 */}
         <BoardName board="vaccine" />
         <BoardInfo
           board="vaccine"
@@ -92,6 +93,7 @@ const Detail = () => {
           contents={board_content.contents}
           likeCount={board_content.likeCount}
         />
+        {/* board에 props 전달시 board 타입이 변경 */}
         <MoveBox board="vaccine" />
         {confirm_status && (
           <Confirm

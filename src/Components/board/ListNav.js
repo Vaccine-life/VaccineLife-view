@@ -30,12 +30,15 @@ const ListNav = (props) => {
 
   const dispatch = useDispatch();
 
+  // 글쓰기 페이지 이동 함수
   const handleMoveWrite = () => {
+    // 로그인 확인 코드
     if (!is_login) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요"));
       dispatch(actionAlert());
       return;
     }
+    // 박신 후기 게시판일 경우 설문조사를 수행 했는지 확인하는 코드
     if (board === "vaccine") {
       if (!is_vaccine) {
         dispatch(actionSetMessage("설문조사 후 이용해 주세요"));

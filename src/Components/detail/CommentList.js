@@ -19,8 +19,10 @@ import { isMobileOnly } from "react-device-detect";
 const CommentList = (props) => {
   const { board, commentId, boardId, comment, createdAt, userId, nickname } =
     props;
+  // 현재 유저정보
   const login_user = useSelector((state) => state.user.user.userId);
   const is_login = useSelector((state) => state.user.is_login);
+  // 코멘트 컨펌 상태창
   const comment_status = useSelector((state) => state.popup.commentConfirm);
   const dispatch = useDispatch();
   // 리덕스 이용 comment_list 받기

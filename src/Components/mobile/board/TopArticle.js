@@ -1,11 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../../redux/configStore";
 import { actionClickContents } from "../../../redux/modules/read";
-import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
-import LikeIconChanger from "../../LikeIconChanger";
-import displayedAt from "../../../shared/displayedAt";
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 import { Grid, Text } from "../../../elements";
@@ -14,13 +10,9 @@ import logger from "../../../shared/logger";
 const TopArticle = (props) => {
   const {
     board,
-    type,
+
     boardId,
     title,
-    likeCount,
-    commentCount,
-    totalVisitors,
-    createAt,
   } = props;
   const dispatch = useDispatch();
   // 읽고 쓰기 색변경
@@ -39,15 +31,6 @@ const TopArticle = (props) => {
       history.push(`/detail/${boardId}`);
     } else {
       history.push(`/quarantinedetail/${boardId}`);
-    }
-  };
-  const typeChanger = (type) => {
-    if (type === "아스트라제네카") {
-      return "AZ";
-    } else if (type === "아스트라제네카 + 화이자") {
-      return "AZ + PF";
-    } else {
-      return type;
     }
   };
 

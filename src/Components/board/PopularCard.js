@@ -4,17 +4,12 @@ import { Grid, Text } from "../../elements";
 import theme from "../../styles/theme";
 import { history } from "../../redux/configStore";
 import displayedAt from "../../shared/displayedAt";
-import { convertFromRaw, Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
 import LikeIconChanger from "../LikeIconChanger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
 import { isMobileOnly } from "react-device-detect";
-import logger from "../../shared/logger";
 
-// 사용시 props에 board 타입줄것 (true or false)
 const PopularCard = (props) => {
-  // console.log(props)
   const {
     board,
     title,
@@ -26,10 +21,7 @@ const PopularCard = (props) => {
     boardId,
     type,
   } = props;
-
-  /* 로그인 했을때 isHeart 구현*/
-  //const  contents =
-
+  // 디테일 페이지 이동
   const handleMoveDetail = () => {
     history.push(`/detail/${boardId}`);
   };

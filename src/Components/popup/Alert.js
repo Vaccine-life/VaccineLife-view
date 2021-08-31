@@ -8,6 +8,7 @@ import { actionVisible } from "../../redux/modules/modal";
 import theme from "../../styles/theme";
 
 const Alert = () => {
+  //alert 상태체크
   const alertMessage = useSelector((state) => state.popup.alertMessage);
   const dispatch = useDispatch();
 
@@ -16,7 +17,9 @@ const Alert = () => {
       alertMessage === "로그인 후 이용해 주세요." ||
       alertMessage === "로그인 후 이용해 주세요"
     ) {
+      // alert 끄기
       dispatch(actionAlert());
+      // 메세지 초기화
       dispatch(actionSetMessage(""));
       dispatch(actionVisible());
     } else {

@@ -5,23 +5,27 @@ import { faHeart as amptyHeart } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import logger from "../shared/logger";
 import { actionPostLike } from "../redux/modules/like";
 import { isMobileOnly } from "react-device-detect";
 
 const LikeIconChanger = (props) => {
   const { board, boardId, size, bigHeart, inBoard } = props;
-  const is_login = useSelector((state) => state.user.is_login);
+
+  // 좋아요 클릭시 아이디 전송
   const userId = useSelector((state) => state.user.user.userId);
+  // 좋아요 누른 아이디 리스트 받기
   const like_list_vac = useSelector((state) => state.like.likeListVac);
   const like_list_quar = useSelector((state) => state.like.likeListQuar);
   const dispatch = useDispatch();
+
+  // 현재 게시판 타입에 따라 게시판 아이디가
+  // 좋아요 리스트포함 여부에 따라 true false
   const isHeart =
     board === "vaccine"
       ? like_list_vac.includes(boardId)
       : like_list_quar.includes(boardId);
-  // console.log(isHeart)
 
+  // 좋아요 클릭시 게시판 타입에 따른 객체 구성
   const likeObj =
     board === "vaccine"
       ? {
@@ -34,9 +38,11 @@ const LikeIconChanger = (props) => {
         };
 
   const handleLikeClick = () => {
+    // 상세글 안에 좋아요 클릭버튼이면 리턴
     if (inBoard) {
       return;
     }
+    // null값 존재시 리턴
     if (
       likeObj.userId === null ||
       likeObj?.vacBoardId === null ||

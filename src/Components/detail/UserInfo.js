@@ -8,6 +8,8 @@ import theme from "../../styles/theme";
 const UserInfo = (props) => {
   const board_list = useSelector((state) => state.board.board);
   const { type, gender, age, disease, degree, afterEffect } = board_list;
+
+  // 아스트라제네카, 아스트라제네카 + 화이자
   const typeChanger = (type) => {
     if (type === "아스트라제네카") {
       return "AZ";

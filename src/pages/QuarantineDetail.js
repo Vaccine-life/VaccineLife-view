@@ -56,6 +56,7 @@ const QuarantineDetail = () => {
     return (
       <Grid margin="80px auto 40px auto">
         <MetaScript title={`슬기로운 백신생활 | ${title}`} />
+        {/* board에 props 전달시 board이름 변경 */}
         <BoardName board="quarantine" />
         <BoardInfo
           board="quarantine"
@@ -76,6 +77,7 @@ const QuarantineDetail = () => {
           contents={board_content.contents}
           likeCount={board_content.likeCount}
         />
+        {/* board에 props 전달시 board 타입 변경 */}
         <MoveBox board="vaccine" />
         {confirm_status && (
           <Confirm
@@ -149,6 +151,8 @@ const QuarantineDetail = () => {
           activeFunction={handleDelete}
         />
       )}
+
+      {/* board에 props 전달시 board 타입 변경 */}
       <MoveBox board="quarantine" />
       <Grid is_flex="space_row">
         <p

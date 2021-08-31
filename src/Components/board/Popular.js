@@ -17,7 +17,7 @@ const Popular = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //  게시판 타입에 따라 디스패치 다르게 할 것
+    //  게시판 타입에 따라 디스패치 다르게 실행
     if (board === "vaccine") {
       dispatch(actionGetTopThree("vaccine"));
     } else {
