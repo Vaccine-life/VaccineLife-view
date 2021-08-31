@@ -336,11 +336,11 @@ const ModifySurvey = (props) => {
                   <input
                     type="radio"
                     name="type"
-                    value="아스트라제네카 + 화이자"
+                    value="아스트라제네카+화이자"
                     id="아스트라제네카+화이자"
                     onClick={handleRadioClick}
                     disabled={!isVaccine && "disabled"}
-                    defaultChecked={"아스트라제네카 + 화이자" === user.type}
+                    defaultChecked={"아스트라제네카+화이자" === user.type}
                   />
                   <label
                     htmlFor="아스트라제네카+화이자"
@@ -1046,11 +1046,11 @@ const ModifySurvey = (props) => {
                   <input
                     type="radio"
                     name="type"
-                    value="아스트라제네카 + 화이자"
+                    value="아스트라제네카+화이자"
                     id="아스트라제네카+화이자"
                     onClick={handleRadioClick}
                     disabled={!isVaccine && "disabled"}
-                    defaultChecked={"아스트라제네카 + 화이자" === user.type}
+                    defaultChecked={"아스트라제네카+화이자" === user.type}
                   />
                   <label
                     htmlFor="아스트라제네카+화이자"
