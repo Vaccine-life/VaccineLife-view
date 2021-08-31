@@ -277,7 +277,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
                 <input
                   type="radio"
                   name="type"
-                  value="아스트라제네카 + 화이자"
+                  value="아스트라제네카+화이자"
                   id="아스트라제네카+화이자"
                   onClick={handleRadioClick}
                   disabled={!isVaccine && "disabled"}
@@ -937,7 +937,7 @@ const Survey = ({ setStatus, inputs, setInputs, formik }) => {
               <input
                 type="radio"
                 name="type"
-                value="아스트라제네카 + 화이자"
+                value="아스트라제네카+화이자"
                 id="아스트라제네카+화이자"
                 onClick={handleRadioClick}
                 disabled={!isVaccine && "disabled"}
