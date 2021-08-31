@@ -15,9 +15,14 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import user from "../images/user.png";
 
 const Header = (props) => {
-  const is_login = useSelector((state) => state.user.is_login);
-  const nickname = useSelector((state) => state.user.user.nickname);
   const dispatch = useDispatch();
+
+  // 로그인여부를 리덕스에서 가져와 로그인과 로그아웃 헤더를 분기함.
+  const is_login = useSelector((state) => state.user.is_login);
+  // 닉네임을 리덕스에서 가져와 로그인시 유저닉네임 보여줌.
+  const nickname = useSelector((state) => state.user.user.nickname);
+  // 현재 페이지의 경로명(pathname)을 가져옴.
+  // 이 컴포넌트를 withRouter로 감싸서 history사용할 수 있게 함.
   const url = history.location.pathname;
 
   if (isMobileOnly) {
@@ -120,39 +125,6 @@ const Header = (props) => {
           <Grid is_flex="space_row" width="auto" margin="0">
             {is_login ? (
               <>
-                {/* <Text
-                  size={theme.headTwoSize}
-                  lineHeight={theme.headTwoHeight}
-                  color={theme.typoBlack}
-                >
-                  <Image
-                    shape="rectangle"
-                    width={theme.headOneSize}
-                    height={theme.headOneSize}
-                    cursor="pointer"
-                    src={profile}
-                  />
-                </Grid>
-
-                <Text
-                  size={theme.headTwoSize}
-                  lineHeight={theme.headTwoHeight}
-                  color={theme.typoBlack}
-                  margin="0 5rem 0 0"
-                  _onClick={() => {
-                    history.push("/mypage");
-                  }}
-                  hover
-                >
-                  <span>{nickname}</span>
-                </Text>
-                  <span
-                    style={{ boxShadow: "inset 0 -1px 0 #242424" }}
-                    onClick={() => dispatch(actionLogoutCookie())}
-                  >
-                    로그아웃
-                  </span>
-                </Text> */}
                 <MypageDiv
                   nav={url === "/mypage" ? true : false}
                   onClick={() => {
@@ -201,11 +173,13 @@ Header.defaultProps = {
 };
 
 const Wrapper = styled.div`
+  /* 스크롤 해도 상단 고정 */
+  position: fixed;
   top: 0;
+  z-index: 2;
+
   width: 100%;
   height: ${theme.headerHeight};
-  position: fixed;
-  z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
   color: ${theme.typoBlack};
   display: flex;
@@ -213,24 +187,6 @@ const Wrapper = styled.div`
   @media (max-width: 500px) {
     flex-direction: column;
   }
-`;
-
-const MobileWrapper = styled.div`
-  top: 0;
-  width: 100%;
-  height: ${theme.headerHeight};
-  position: fixed;
-  z-index: 2;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${theme.white};
-  /* padding: 1rem 1.5rem; */
-`;
-
-const MobileNavIcon = styled.div`
-  margin: 0 1rem 0 0;
 `;
 
 const EachDiv = styled.div`
@@ -279,4 +235,22 @@ const MypageDiv = styled.div`
   }
 `;
 
+// <========= Mobile ==========>
+const MobileWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 2;
+
+  width: 100%;
+  height: ${theme.headerHeight};
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${theme.white};
+`;
+
+const MobileNavIcon = styled.div`
+  margin: 0 1rem 0 0;
+`;
 export default withRouter(Header);

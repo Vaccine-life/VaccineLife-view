@@ -20,9 +20,9 @@ const ListNav = (props) => {
     if (type === "전체") {
       return "전체글";
     } else if (type === "아스트라제네카") {
-      return "AZ";
-    } else if (type === "아스트라제네카 + 화이자") {
-      return "AZ + PF";
+      return "아스트라제네카";
+    } else if (type === "아스트라제네카+화이자") {
+      return "아스트라제네카 + 화이자";
     } else {
       return type;
     }

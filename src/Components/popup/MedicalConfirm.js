@@ -7,12 +7,17 @@ import { actionMedicalConfirm } from "../../redux/modules/popup";
 import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 
+// 의료진 삭제 confirm창
 const MedicalConfirm = (props) => {
+  const dispatch = useDispatch();
+
+  // MedicalConfirm에 props로 넘기기
+  // MedicalConfirm 쓸 때, 필요한 confirmMessage 넣어주면 됨.
   const { confirmMessage } = props;
   const { medi_id } = useSelector((state) => state.popup.medicalObj);
   // console.log(medi_id);
-  const dispatch = useDispatch();
 
+  // 삭제시 해당 medi_id삭제
   const handleDelete = () => {
     dispatch(actionDeleteMedical(medi_id));
     dispatch(actionMedicalConfirm());

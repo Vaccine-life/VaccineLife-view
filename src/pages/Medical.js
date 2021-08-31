@@ -6,7 +6,7 @@ import { Text, Grid } from "../elements";
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 import Login from "./Login";
-import { actionGetMedical, actionSetComment } from "../redux/modules/comment";
+import { actionGetMedical } from "../redux/modules/comment";
 import Alert from "../components/popup/Alert";
 import MetaScript from "../shared/MetaScript";
 import { isMobileOnly } from "react-device-detect";
@@ -15,25 +15,38 @@ import PopularComment from "../components/PopularComment";
 import InfinityScroll from "../shared/InfinityScroll";
 import BottomSpinner from "../shared/BottomSpinner";
 
+// CommentWrite: 의료진 응원글 작성란
+// PopularComment: 인기응원글 3개
+// InfinityScroll: nextCall, children, is_loading, is_next, size를 props로 받아 사용
+// CommentList: 의료진 응원글List (10개씩 보여줌)
+
 const Medical = (props) => {
   const dispatch = useDispatch();
 
   const alert_status = useSelector((state) => state.popup.alert);
   // Medical 페이지에서도 로그인모달창이 뜨게 함
   const modal_status = useSelector((state) => state.modal.visible);
+  // 모바일에서 모달찰 뜨게 함
   const navModal_status = useSelector((state) => state.modal.navVisible);
+  // comment모듈에서 list가져와서 map돌리기
   const comment_list = useSelector((state) => state.comment.list);
   // console.log(comment_list);
-  const is_login = useSelector((state) => state.user.is_login);
+
+  // 무한스크롤 ==========>
   const is_loading = useSelector((state) => state.isLoading.isLoading);
+  // 객체 destructuring
   const pagingMedi = useSelector((state) => state.comment.pagingMedi);
   // console.log(pagingMedi);
+  // 프로퍼티 키를 기준으로 디스트럭처링 할당(순서 상관 없음)
+  // 변수 nextPage, totalPage가 선언되고, pagingMedi가 파괴되어 할당됨.
   const { nextPage, totalPage } = pagingMedi;
-
+  // 무한스크롤 nextCall로 서버에 저장된 medical가져오기(10개씩)
   const nextCall = () => {
     dispatch(actionGetMedical());
   };
+  // <==========
 
+  // 첫 렌더시 서버에 저장된 medical불러오기
   React.useEffect(() => {
     // window.scrollTo(0, 0);
     dispatch(actionGetMedical());
@@ -62,7 +75,6 @@ const Medical = (props) => {
         <Grid margin={`20px auto 0 auto`}>
           <CommentWrite />
           <PopularComment />
-          {/* <Grid align="left" padding="0 1rem"> */}
           <Grid align="left" padding="2rem 0 0 1rem">
             <Text
               size={theme.SubHeadTwoSize}

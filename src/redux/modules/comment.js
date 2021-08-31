@@ -155,6 +155,7 @@ export const actionGetMedical =
       //loading => true
       dispatch(actionLoading());
 
+      // 서버에서 다음페이지 가져오기
       const getData = await medicalAxios.getPageMedi(nextPage);
       const medicalTen = getData.data.content;
       // console.log(medicalTen);

@@ -12,6 +12,8 @@ export const api = axios.create({
   Headers: `${getCookie("vaccine_life_token")}`,
 });
 
+
+//메인페이지_차트_백신 부작용 Top4
 export const mainAxios = {
   getAfterEffectChart: () => api.get("/api/main/afterEffect"),
 };

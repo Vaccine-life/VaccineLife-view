@@ -173,7 +173,7 @@ const TypeSelector = (props) => {
         isMobile={false}
         onClick={(e) => {
           setCurrentClick(e.target.id);
-          dispatch(actionSetType("아스트라제네카 + 화이자"));
+          dispatch(actionSetType("아스트라제네카+화이자"));
         }}
       >
         AZ + PF

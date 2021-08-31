@@ -1,16 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import "moment/locale/ko";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, Button, Grid } from "../elements";
-import { actionAddComment, actionAddMedical } from "../redux/modules/comment";
-import {
-  acionSetMedicalObj,
-  actionAlert,
-  actionSetMessage,
-} from "../redux/modules/popup";
+import { actionAddMedical } from "../redux/modules/comment";
+import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import { TextareaAutosize } from "@material-ui/core";
 import commentwrite from "../styles/commentwrite.css";
@@ -22,39 +17,23 @@ const CommentWrite = (props) => {
   const nickname = useSelector((state) => state.user.user.nickname);
   const user_id = useSelector((state) => state.user.user.userId);
 
-  const createdAt = new Date();
-
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState();
-  // const [length, setLength] = React.useState(0);
-
+  // TextareaAutosize가 변할때마다 setComment에 넣어서 comment갱신.
   const changeComment = (e) => {
     setComment(e.target.value);
-    // console.log(e.target.value);
-    // 인풋의 onChange에 넣어주고 콘솔 찍어보기
-    // 바뀌는 내용이 바로 바로 오게 만든것!
-
-    // // 현재 글자 수
-    // const getTextLength = (str) => {
-    //   let len = 0;
-    //   for (let i = 0; i < str.length; i++) {
-    //     if (escape(str.charAt(i)).length === 6) {
-    //       len++;
-    //     }
-    //     len++;
-    //   }
-    //   // console.log(len);
-    //   setLength(len);
-    // };
-    // getTextLength(e.target.value);
   };
 
+  const createdAt = new Date();
+
+  // actionAddMedical에 담아서 보냄
   const medicalObj = {
     userId: user_id,
     contents: comment,
     nickname: nickname,
     createdAt: createdAt,
   };
+  // 내용 추가하는 버튼에 onClick으로 적용.
   const handleMedical = () => {
     // 로그인 후 이용
     if (!is_login) {
@@ -63,7 +42,6 @@ const CommentWrite = (props) => {
       setComment("");
       return;
     }
-
     // 빈 내용이면 alert창
     if (!comment) {
       dispatch(actionAlert());
@@ -71,10 +49,8 @@ const CommentWrite = (props) => {
       return;
     } else {
       // 의료진분들께 dispatch
-      // dispatch(actionAddComment(medicalObj));
       dispatch(actionAddMedical(medicalObj));
       setComment("");
-      // setLength(0);
     }
   };
 

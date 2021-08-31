@@ -293,6 +293,7 @@ const Stick = styled.div`
   }
 `;
 
+// <========= Mobile ==========>
 const MobileWrapper = styled.div`
   margin-top: auto;
   width: 100%;
