@@ -17,16 +17,21 @@ import BottomSpinner from "../shared/BottomSpinner";
 
 const Quarantine = () => {
   const is_login = useSelector((state) => state.user.is_login);
+  // 스피너 변환용
   const isLoading = useSelector((state) => state.isLoading.isLoading);
+  // 모달 상태관리
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
+  // Alert 상태 관리
   const alert_status = useSelector((state) => state.popup.alert);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // 로그인 하지 않았을때는 좋아요한 목록 불러오지 않기
     if (!is_login) {
       return;
     }
+    // 격리 게시판의 좋아요 글 목록 가져오기
     dispatch(actionGetLike("quarantine"));
   }, []);
 

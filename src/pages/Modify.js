@@ -17,29 +17,23 @@ import Login from "./Login";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import NavModal from "../components/mobile/NavModal";
 
-const data = {
-  vacBoardId: 0,
-  userId: "유저 아이디",
-  title: "화이자 1차 썰 푼다",
-  contents: `
-{"blocks":[{"key":"47qis","text":"안녕하세요","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bdep6","text":"두번째 글 입니다.","type":"unordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-  `,
-};
-
 const Modify = () => {
   const dispatch = useDispatch();
-  // /modify일때 true /quarantinemodify 일떄 false
+  // /modify일때 /quarantinemodify  일때 url 가져오기
   const url = history.location.pathname;
   const urlLength = url.length;
-  // true or false
+  // /modify일때 true /quarantinemodify 일떄 false
   const board = url.includes("/modify") ? "vaccine" : "quarantine";
+  // 각각 타입에 따른 id값 가져오기
   let boardId =
     board === "vaccine"
       ? url.substr(8, urlLength - 1)
       : url.substr(18, urlLength - 1);
   // 리덕스 정보 없어졌을시 재저장
   useEffect(() => {
+    //페이지 이동시 스크롤 맨 위로 이동
     window.scrollTo(0, 0);
+    //각각 타입에 따라 디스페치를 다른 값으로 적용시켜주기 위한 코드
     if (board === "vaccine") {
       dispatch(actionGetDetail("vaccine", boardId));
     } else {
@@ -49,15 +43,16 @@ const Modify = () => {
 
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
-  // 리덕스에서 정보 가져오기
+  // 리덕스에서 게시판 정보 가져오기
   const board_store = useSelector((state) => state.board.board);
+  // 모달창 불러오기
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
-  // 타이틀 인풋값
+  // 타이틀 인풋값(초기값)
   const [title, setTitle] = useState(board_store.title);
   const [value, setValue] = useState(board_store.contents);
-  // 데이터 JSON 변환
 
+  // 타이틀 바꿈 체인지 함수
   const onTitleChange = (event) => {
     const value = event.target.value;
     setTitle(value);
@@ -81,11 +76,13 @@ const Modify = () => {
 
   const handlePostEx = () => {
     window.scrollTo(0, 0);
+    // 빈제목 없애주는 코드
     if (modifyObj.title === "") {
       dispatch(actionSetMessage("제목을 입력해 주세요."));
       dispatch(actionAlert());
       return;
     }
+    // 게시판 수정 action 함수
     dispatch(actionModifyDB(board, boardId, modifyObj));
   };
 

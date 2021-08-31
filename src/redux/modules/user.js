@@ -40,6 +40,7 @@ const user = createSlice({
       state.is_login = false;
       state.user = initialState.user;
     },
+    //토큰 만료시간을 state에 기입
     actionSetTime: (state, action) => {
       state.expTime = action.payload * 1000;
     },
@@ -51,9 +52,11 @@ export const actionLogin =
   async (dispatch, getState, { history }) => {
     try {
       const userInfoObj = await userAxios.login({ username, password });
+      // 받은 토큰 정보를 쿠키에 기입
       setCookie("vaccine_life_token", userInfoObj.data);
+      // 토큰을 디코드
       const userInfoDecode = jwtDecode(userInfoObj.data);
-
+      // 디코드한 토큰 만료시간을 state에 기입
       dispatch(actionSetTime(userInfoDecode.exp));
 
       // username이 sub에 담겨 오는 것에 유의하자!
@@ -70,8 +73,9 @@ export const actionLogin =
         userId: userInfoDecode.id,
         type: userInfoDecode.type,
       };
-
+      // 유저정보를 state에 기입
       dispatch(actionSetUser(userInfo));
+      // 로그인 alert 관련
       dispatch(actionSetMessage("로그인 되었습니다"));
       dispatch(actionAlert());
       dispatch(actionVisible());
@@ -330,7 +334,9 @@ export const actionGetUseInfo = () => (dispatch) => {
 export const actionLogoutCookie =
   () =>
   async (dispatch, getState, { history }) => {
+    // 쿠키삭제
     deleteCookie("vaccine_life_token");
+    // 좋아요 지우기
     dispatch(actionResetLike());
     dispatch(actionLogout());
     dispatch(actionSetMessage("로그아웃 되었습니다"));

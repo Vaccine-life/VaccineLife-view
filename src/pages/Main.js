@@ -15,9 +15,11 @@ import MainNivoBar from "../components/MainNivoBar";
 import { useEffect } from "react";
 import NavModal from "../components/mobile/NavModal";
 import ModifySurvey from "../components/ModifySurvey";
+import Spinner from "../shared/Spinner";
 
 const Main = () => {
   // Main페이지에서도 로그인모달창이 뜨게 함
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const surveyModal_status = useSelector((state) => state.modal.surveyVisible);
@@ -31,6 +33,7 @@ const Main = () => {
     return (
       <>
         {navModal_status && <NavModal />}
+        {isLoading && <Spinner />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
         <div
@@ -48,6 +51,7 @@ const Main = () => {
 
   return (
     <>
+      {isLoading && <Spinner />}
       {modal_status && <Login />}
       {alert_status && <Alert />}
       {surveyModal_status && <ModifySurvey />}

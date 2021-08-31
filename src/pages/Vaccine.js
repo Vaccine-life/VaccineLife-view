@@ -28,9 +28,11 @@ const Vaccine = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // 로그인 하지 않았을때는 좋아요한 목록 불러오지 않기
     if (!is_login) {
       return;
     }
+    // 백신 게시판의 좋아요 글 목록 가져오기
     dispatch(actionGetLike("vaccine"));
   }, []);
 

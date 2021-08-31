@@ -2,38 +2,35 @@ import React, { useEffect } from "react";
 import Login from "./Login";
 import BoardInfo from "../components/detail/BoardInfo";
 import Contents from "../components/detail/Contents";
-import { Button, Grid } from "../elements";
+import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionDeleteEx,
-  actionGetDetail,
-  actionSetPrevNextPageQuar,
-} from "../redux/modules/board";
+import { actionDeleteEx, actionGetDetail } from "../redux/modules/board";
 import theme from "../styles/theme";
 import Confirm from "../components/popup/Confirm";
 import Alert from "../components/popup/Alert";
 import CommentWrite from "../components/detail/CommentWrite";
 import CommentList from "../components/detail/CommentList";
 import { useParams } from "react-router-dom";
-import logger from "../shared/logger";
-import { actionGetLike } from "../redux/modules/like";
+
 import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
 import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
-import { history } from "../redux/configStore";
+
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import NavModal from "../components/mobile/NavModal";
-import Arrow from "../images/Arrow.png";
+
 import MoveBox from "../components/detail/MoveBox";
 
 const QuarantineDetail = () => {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
+
+  //게사판 아이디값을 url을 통해 가져오기
   const boardId_detail = useParams().id;
   const title = useSelector((state) => state.board.board.title);
 
-  // 격리후기때는 MoveBox에 false 기입
+  // 모달창 관리
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   //confirm 창
@@ -43,19 +40,14 @@ const QuarantineDetail = () => {
   // 코멘트 리스트 불러오기
   const comment_list = useSelector((state) => state.comment.commentQuar);
 
-  const boardType = false;
-
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(actionGetDetail("quarantine", boardId_detail));
     dispatch(actionGetCommentList("quarantine", boardId_detail));
-    // dispatch(actionGetLike("quarantine"));
   }, [boardId_detail]);
   const board_content = useSelector((state) => state.board.board);
-  // console.log(board_content);
-  // const board_con = useSelector((state) => state.board);
-  // console.log(board_con);
+
   const handleDelete = () => {
     dispatch(actionDeleteEx("quarantine", board_content.boardId));
   };

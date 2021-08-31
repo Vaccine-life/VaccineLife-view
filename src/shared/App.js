@@ -26,9 +26,12 @@ import logger from "./logger";
 function App() {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+  //토큰 만료시간
   const exp_time = useSelector((state) => state.user.expTime);
+  //토큰 남은시간
   let remainTime = new Date(exp_time) - new Date();
 
+  //만료시간이 0일때 자동으로 로그아웃 방지 및 남은 시간 후에 자동로그아웃 코드
   if (exp_time !== 0) {
     setTimeout(() => {
       dispatch(actionLogoutCookie());
@@ -36,10 +39,13 @@ function App() {
   }
 
   useEffect(() => {
+    //Redux 정보 지워졌을때 토큰을 기반으로 로그인 정보 재구축
     if (!is_login && getCookie("vaccine_life_token")) {
       dispatch(actionGetUseInfo());
     }
+    //클릭한 리스트를 로컬스토리지에서 받아오기
     dispatch(actionGetClickList());
+    //좋아요 받아오기
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLike("quarantine"));
     dispatch(actionGetLikeMedi());
