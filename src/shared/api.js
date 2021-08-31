@@ -3,7 +3,7 @@ import { getCookie } from "./cookie";
 import logger from "./logger";
 
 // 얘가 있으면, 앞으로 api라고만 써도 baseURL과 Headers가 따라다닌다.
-const api = axios.create({
+export const api = axios.create({
   // 태현님 api 주소
   //baseURL: "http://52.78.76.184:8080",
   baseURL: "https://namtaehyun.shop",

@@ -4,11 +4,7 @@ import theme from "../../styles/theme";
 import TableTr from "./TableTr";
 import InfinityScroll from "../../shared/InfinityScroll";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionGetBoard,
-  actionGetBoardType,
-  actionResetVac,
-} from "../../redux/modules/board";
+import { actionGetBoard, actionGetBoardType } from "../../redux/modules/board";
 import { isMobileOnly } from "react-device-detect";
 import Ariticle from "../mobile/board/Ariticle";
 import TopArticle from "../mobile/board/TopArticle";
@@ -18,12 +14,14 @@ import logger from "../../shared/logger";
 const List = (props) => {
   const { board } = props;
   const is_loading = useSelector((state) => state.isLoading.isLoading);
+  // 백신보드 페이지 보기(무한스크롤용)
   const pagingVac = useSelector((state) => state.board.pagingVac);
-  const board_type = useSelector((state) => state.board.type);
-  // console.log(pagingVac);
   const { nextPage, totalPage } = pagingVac;
+  // 필터링용 보드타입 전환
+  const board_type = useSelector((state) => state.board.type);
+  // 백신 게시판 리스트 받아오기
   const vac_list = useSelector((state) => state.board.listVac);
-  // console.log(vac_list);
+
   const dispatch = useDispatch();
 
   const nextCall = () => {
@@ -38,6 +36,7 @@ const List = (props) => {
     if (board_type === "전체") {
       dispatch(actionGetBoard(board));
     } else {
+      logger(board_type);
       dispatch(actionGetBoardType(board, board_type));
     }
   }, [board_type]);

@@ -1,4 +1,3 @@
-import moment from "moment";
 import React from "react";
 import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,10 +6,10 @@ import { Button, Grid, Text } from "../../elements";
 import { history } from "../../redux/configStore";
 import { actionConfirm } from "../../redux/modules/popup";
 import displayedRestrict from "../../shared/displayedRestrict";
-import logger from "../../shared/logger";
 import theme from "../../styles/theme";
 
 const BoardInfo = (props) => {
+  // 로그인 유저 정보
   const is_login = useSelector((state) => state.user.is_login);
   const login_userId = useSelector((state) => state.user.user.userId);
 
@@ -26,6 +25,8 @@ const BoardInfo = (props) => {
   } = props;
 
   const dispatch = useDispatch();
+
+  // 수정버튼 클릭 함수
   const handleOnClick = () => {
     if (board === "vaccine") {
       history.push(`/modify/${boardId}`);

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { boardAxios, writeAxios } from "../../shared/api";
+import { api, boardAxios, writeAxios } from "../../shared/api";
 import logger from "../../shared/logger";
 import { actionLoading } from "./isLoading";
 import { actionAlert, actionSetMessage } from "./popup";
@@ -39,8 +39,6 @@ const board = createSlice({
   reducers: {
     actionSetListVac: (state, action) => {
       state.listVac.push(...action.payload.board);
-      // console.log(action.payload);
-      // console.log(action.payload.board);
       state.pagingVac.nextPage += 1;
       state.pagingVac.totalPage = action.payload.totalPageInData;
     },
@@ -52,18 +50,21 @@ const board = createSlice({
     actionDeleteBoardInList: (state, action) => {
       const { board, boardId } = action.payload;
       if (board === "vaccine") {
+        // 일반 리스트 삭제
         const deleteIndex = state.listVac.findIndex(
           (each) => each.id === boardId
         );
         if (deleteIndex !== -1) {
           state.listVac.splice(deleteIndex, 1);
         }
+        // 좋아요 리스트 삭제
         const deleteIndexLike = state.myLikeVac.findIndex(
           (each) => each.id === boardId
         );
         if (deleteIndexLike !== -1) {
           state.myLikeVac.splice(deleteIndex, 1);
         }
+        // 내가 쓴글 리스트 삭제
         const deleteIndexWrite = state.myWriteVac.findIndex(
           (each) => each.id === boardId
         );
@@ -71,6 +72,7 @@ const board = createSlice({
           state.myWriteVac.splice(deleteIndex, 1);
         }
       } else {
+        // 코드 설명 위와 동일
         const deleteIndex = state.listQuar.findIndex(
           (each) => each.quarBoardId === boardId
         );
@@ -91,6 +93,7 @@ const board = createSlice({
         }
       }
     },
+    // 새 글 작성시 전체글 목록 초기화 및 전채글 1번목록 내용 다시 담기
     actionResetList: (state, action) => {
       const { board, boardContents, totalPageInData } = action.payload;
       if (board === "vaccine") {
@@ -113,7 +116,7 @@ const board = createSlice({
     actionSetTopThreeQuar: (state, action) => {
       state.topThreeQuar = action.payload;
     },
-    //my Write
+    //my Write(마이페이지 내)
     actionSetMyWriteList: (state, action) => {
       const { board, likeList } = action.payload;
       if (board === "vaccine") {
@@ -124,7 +127,7 @@ const board = createSlice({
         state.myWriteMedi = likeList;
       }
     },
-    // mylike
+    // mylike(마이페이지 내)
     actionSetMyLikeList: (state, action) => {
       const { board, likeList } = action.payload;
       if (board === "vaccine") {
@@ -275,6 +278,7 @@ const board = createSlice({
         });
       }
     },
+    // 코멘트 더하기 빼기 액션
     actionMinusComment: (state, action) => {
       const { board, boardId } = action.payload;
       const toIntboardId = parseInt(boardId);
@@ -360,10 +364,12 @@ const board = createSlice({
       state.page.next = action.payload.nextId;
       state.page.prev = action.payload.prevId;
     },
+    // 필터링을 위한 타입 변경 후 내용 초기화
     actionSetType: (state, action) => {
       if (state.type === action.payload) {
         return;
       }
+      logger(action.payload);
       state.listVac = [];
       state.type = action.payload;
       state.pagingVac = {
@@ -393,11 +399,9 @@ export const actionGetBoard =
         dispatch(actionLoading());
 
         const getData = await boardAxios.getPageVac(nextPage);
-        const board = getData.data.content;
-        // console.log(board);
+        const board = getData.data.content; // console.log(board);
         const totalPageInData = getData.data.totalPages;
-        // console.log(totalPageInData);
-
+        // 리스트에 불러온 게시글 차례대로 저장
         dispatch(actionSetListVac({ board, totalPageInData }));
       } else {
         // 격리후기
@@ -411,7 +415,7 @@ export const actionGetBoard =
         const getData = await boardAxios.getPageQuar(nextPage);
         const board = getData.data.content;
         const totalPageInData = getData.data.totalPages;
-
+        // 리스트에 불러온 게시글 차례대로 저장
         dispatch(actionSetListQuar({ board, totalPageInData }));
       }
       //loading => false
@@ -424,6 +428,7 @@ export const actionGetBoard =
       dispatch(actionAlert());
     }
   };
+// 위와 동일한 필터링용 함수
 export const actionGetBoardType =
   (board, type) =>
   async (dispatch, getState, { history }) => {
@@ -437,11 +442,20 @@ export const actionGetBoardType =
         //loading => true
         dispatch(actionLoading());
 
+        if (type === "아스트라제네카+화이자") {
+          const getData = await api.get(
+            `api/vacBoard/type/page?sortBy=id&isAsc=false&size=10&page=${nextPage}&type=아스트라제네카%2B화이자`
+          );
+          const board = getData.data.content;
+          const totalPageInData = getData.data.totalPages;
+          dispatch(actionSetListVac({ board, totalPageInData }));
+          dispatch(actionLoading());
+          return;
+        }
+
         const getData = await boardAxios.getPageVacType(nextPage, type);
         const board = getData.data.content;
-        // console.log(board);
         const totalPageInData = getData.data.totalPages;
-        // console.log(totalPageInData);
 
         dispatch(actionSetListVac({ board, totalPageInData }));
       }
@@ -466,6 +480,7 @@ export const actionGetDetail =
         const getData = await boardAxios.getDetailVac(boardId);
         const getPrevNext = await boardAxios.getPrevNextVac(boardId);
         const moveList = getPrevNext.data;
+        // 이전글 다음글 정보 전달
         dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
         board_input = {
@@ -491,6 +506,7 @@ export const actionGetDetail =
         const getData = await boardAxios.getDetailQuar(boardId);
         const getPrevNext = await boardAxios.getPrevNextQuar(boardId);
         const moveList = getPrevNext.data;
+        // 이전글 다음글 정보 전달
         dispatch(actionSetPrevNextPage(moveList));
         const data = getData.data;
         board_input = {
@@ -506,6 +522,7 @@ export const actionGetDetail =
           totalVisitors: data.totalVisitors,
         };
       }
+      // 게시글 상세정보 전달
       dispatch(actionSetBoard(board_input));
       dispatch(actionLoading());
     } catch (error) {
@@ -557,7 +574,7 @@ export const actionDeleteEx =
       dispatch(actionAlert());
     }
   };
-
+// 좋아요 순  최고 3가지 게시글 불러오기
 export const actionGetTopThree =
   (board) =>
   async (dispatch, getState, { history }) => {
@@ -579,6 +596,7 @@ export const actionGetTopThree =
     }
   };
 
+// 후기 글쓰기
 export const actionWriteExperience =
   (board, contenstObj) =>
   async (dispatch, getState, { history }) => {
@@ -589,12 +607,14 @@ export const actionWriteExperience =
         const getData = await boardAxios.getPageVac(1);
         const boardContents = getData.data.content;
         const totalPageInData = getData.data.totalPages;
+        // 전체글 최신화 위한 정보 전달
         dispatch(actionResetList({ board, boardContents, totalPageInData }));
       } else {
         await writeAxios.quarWrite(contenstObj);
         const getData = await boardAxios.getPageQuar(1);
         const boardContents = getData.data.content;
         const totalPageInData = getData.data.totalPages;
+        // 전체글 최신화 위한 정보 전달
         dispatch(actionResetList({ board, boardContents, totalPageInData }));
       }
 
@@ -607,11 +627,12 @@ export const actionWriteExperience =
       dispatch(actionAlert());
     }
   };
-
+// 내가 쓴 글 불러오기 (마이페이지)
 export const actionGetMyWriteDB =
   (board) =>
   async (dispatch, getState, { history }) => {
     const is_login = getState().user.is_login;
+    // 로그인 하지 않았을 시 리턴
     if (!is_login) {
       return;
     }

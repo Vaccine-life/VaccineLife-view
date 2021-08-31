@@ -18,6 +18,7 @@ const like = createSlice({
     likeListMedi: [],
   },
   reducers: {
+    // 좋아요 클릭한 목록 셋팅( 로그인 시)
     actionSetLikeVac: (state, action) => {
       state.likeListVac = action.payload;
     },
@@ -26,8 +27,8 @@ const like = createSlice({
     },
     actionSetLikeMedi: (state, action) => {
       state.likeListMedi = action.payload;
-      // console.log(action.payload);
     },
+    // 좋아요 클릭시 더하고 뺴는 action
     actionMinusLikeInLikeListVac: (state, action) => {
       state.likeListVac = state.likeListVac.filter((each) => {
         return each !== action.payload;
@@ -52,6 +53,7 @@ const like = createSlice({
     actionPlusLikeInLikeListMedi: (state, action) => {
       state.likeListMedi.push(action.payload);
     },
+    // 좋아요 목록 리셋
     actionResetLike: (state, action) => {
       state.likeListMedi = [];
       state.likeListQuar = [];
@@ -65,6 +67,7 @@ export const actionGetLike =
   async (dispatch, getState, { history }) => {
     try {
       const is_login = getState().user.is_login;
+      // 로그인 안했을시 클릭 방지
       if (!is_login) {
         return;
       }
@@ -75,14 +78,18 @@ export const actionGetLike =
 
       if (board === "vaccine") {
         getData = await likeAxios.getLikeListVac(userId);
+        // 유저가 클릭한 좋아요 목록을 받아오는 코드
         getData.data.map((each) => {
           makeData.push(each.vacBoardId);
         });
         const likeList = getData.data;
         logger(getData);
+        // 유저가 클릭한 목록 정보  받기
         dispatch(actionSetMyLikeList({ board, likeList }));
+        // 유저가 클릭한 목록 게시판 아이디값 받기
         dispatch(actionSetLikeVac(makeData));
       } else if (board === "quarantine") {
+        // 코드설명은 위와 동일
         getData = await likeAxios.getLikeListQuar(userId);
         getData.data.map((each) => {
           makeData.push(each.quarBoardId);
@@ -90,7 +97,6 @@ export const actionGetLike =
         const likeList = getData.data;
         dispatch(actionSetMyLikeList({ board, likeList }));
         dispatch(actionSetLikeQuar(makeData));
-      } else {
       }
     } catch (error) {
       dispatch(
@@ -137,6 +143,7 @@ export const actionPostLike =
   async (dispatch, getState, { history }) => {
     const is_cookie = getCookie("vaccine_life_token");
     const is_login = getState().user.is_login;
+    // 쿠키가 없거나 로그인하지 않았을때 로그인 필요함을 알리는 코드
     if (is_cookie === undefined || !is_login || is_cookie === null) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요."));
       dispatch(actionAlert());
@@ -145,16 +152,20 @@ export const actionPostLike =
     try {
       if (board === "vaccine") {
         const getData = await likeAxios.likeVac(obj);
+        // 좋아요를 현재 클릭한 상태이냐 아니냐
         const result = getData.data.ok;
         const boardId = obj.vacBoardId;
         if (!result) {
+          // 클릭했을시 좋아요를 빼는 코드
           dispatch(actionMinusLikeInLikeListVac(boardId));
           dispatch(acionMinusLike({ board, boardId }));
         } else {
+          // 클릭안했을시 좋아요를 더하는 코드
           dispatch(actionPlusLikeInLikeListVac(boardId));
           dispatch(acionPlusLike({ board, boardId }));
         }
       } else {
+        // 코드설명은 위와 동일
         const getData = await likeAxios.likeQuar(obj);
         const result = getData.data.ok;
         const boardId = obj.quarBoardId;

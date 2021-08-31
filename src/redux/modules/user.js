@@ -40,6 +40,7 @@ const user = createSlice({
       state.is_login = false;
       state.user = initialState.user;
     },
+    //토큰 만료시간을 state에 기입
     actionSetTime: (state, action) => {
       state.expTime = action.payload * 1000;
     },
@@ -51,7 +52,9 @@ export const actionLogin =
   async (dispatch, getState, { history }) => {
     try {
       const userInfoObj = await userAxios.login({ username, password });
+      // 받은 토큰 정보를 쿠키에 기입
       setCookie("vaccine_life_token", userInfoObj.data);
+      // 토큰을 디코드
       const userInfoDecode = jwtDecode(userInfoObj.data);
 
       // 로그인 2시간 뒤 자동로그아웃 하기 위한 것
@@ -328,7 +331,9 @@ export const actionGetUseInfo = () => (dispatch) => {
 export const actionLogoutCookie =
   () =>
   async (dispatch, getState, { history }) => {
+    // 쿠키삭제
     deleteCookie("vaccine_life_token");
+    // 좋아요 지우기
     dispatch(actionResetLike());
     dispatch(actionLogout());
     dispatch(actionSetMessage("로그아웃 되었습니다"));

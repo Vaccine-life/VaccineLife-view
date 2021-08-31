@@ -5,7 +5,6 @@ import Grid from "../elements/Grid";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
-
 import logger from "../shared/logger";
 import ExperienceWrite from "../components/editor/ExperienceWrite";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +14,6 @@ import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import Login from "./Login";
-
 import NavModal from "../components/mobile/NavModal";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import { actionWriteExperience } from "../redux/modules/board";
@@ -25,11 +23,12 @@ const Write = () => {
   const dispatch = useDispatch();
   //alert
   const alert_status = useSelector((state) => state.popup.alert);
+  // 모달창 관리
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const url = history.location.pathname;
 
-  // /vboard/write일때 true /qboard/write 일떄 false
+  // /vaccboard/write일때 true /quarboard/write 일떄 false
   const urlExchanger = url === "/vaccineboard/write" ? true : false;
 
   // 타이틀 인풋값
@@ -42,6 +41,7 @@ const Write = () => {
     setTitle(value);
   };
 
+  // axios 전송용 객체
   const contentObj = {
     userId: userId,
     title: title,
@@ -50,7 +50,6 @@ const Write = () => {
 
   const handlePostEx = () => {
     window.scrollTo(0, 0);
-    logger(contentObj);
 
     if (contentObj.title === "") {
       dispatch(actionSetMessage("제목을 입력해 주세요."));

@@ -25,6 +25,7 @@ const TableTr = (props) => {
   const quar_read_list = useSelector((state) => state.read.quarList);
   const is_read = quar_read_list?.includes(boardId);
 
+  // 디테일 페이지 이동
   const handleMovePage = () => {
     dispatch(actionClickContents(board, boardId));
     history.push(`/quarantinedetail/${boardId}`);

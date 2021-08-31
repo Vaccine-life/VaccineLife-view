@@ -12,11 +12,13 @@ import { actionGetMyWriteDB } from "../redux/modules/board";
 
 const MyPost = () => {
   const dispatch = useDispatch();
+  // 내가 쓴 글 redux에서 불러오기
   const vac_list = useSelector((state) => state.board.myWriteVac);
   const quar_list = useSelector((state) => state.board.myWriteQuar);
   const medi_list = useSelector((state) => state.board.myWriteMedi);
 
   useEffect(() => {
+    // 페이지 전환시 내가 쓴 글 데이터베이스에서 불러오기
     dispatch(actionGetMyWriteDB("quarantine"));
     dispatch(actionGetMyWriteDB("vaccine"));
     dispatch(actionGetMyWriteDB("medical"));

@@ -107,6 +107,7 @@ const comment = createSlice({
       });
       state.likeCount = state.likeCount + 1;
     },
+    // 백신, 격리 게시글 댓글  state setup 코드
     actionSetCommentListState: (state, action) => {
       const { board, data } = action.payload;
       if (board === "vaccine") {
@@ -259,6 +260,7 @@ export const actionGetCommentList =
     try {
       dispatch(actionLoading());
       if (board === "vaccine") {
+        // 코멘트 정보 받아오기
         const getData = await commentAxios.getVacComment(boardId);
         const data = getData.data;
         dispatch(actionSetCommentListState({ board, data }));

@@ -29,6 +29,7 @@ const MypageCard = (props) => {
       history.push(`/quarantinedetail/${boardId}`);
     }
   };
+
   if (isMobileOnly) {
     return (
       <MobilePost>

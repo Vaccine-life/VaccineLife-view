@@ -19,7 +19,7 @@ const TypeSelector = (props) => {
       return "3";
     } else if (type === "아스트라제네카") {
       return "4";
-    } else if (type === "아스트라제네카 + 화이자") {
+    } else if (type === "아스트라제네카+화이자") {
       return "6";
     }
   };
@@ -107,7 +107,7 @@ const TypeSelector = (props) => {
           isMobile={true}
           onClick={(e) => {
             setCurrentClick(e.target.id);
-            dispatch(actionSetType("아스트라제네카 + 화이자"));
+            dispatch(actionSetType("아스트라제네카+화이자"));
           }}
         >
           AZ + PF
@@ -173,7 +173,7 @@ const TypeSelector = (props) => {
         isMobile={false}
         onClick={(e) => {
           setCurrentClick(e.target.id);
-          dispatch(actionSetType("아스트라제네카 + 화이자"));
+          dispatch(actionSetType("아스트라제네카+화이자"));
         }}
       >
         AZ + PF

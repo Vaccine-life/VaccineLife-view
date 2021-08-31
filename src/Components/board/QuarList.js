@@ -13,12 +13,15 @@ import TopQuarTable from "./TopQuarTable";
 
 const QuarList = (props) => {
   const { board } = props;
+  // 스피너 구축용
   const is_loading = useSelector((state) => state.isLoading.isLoading);
+  // 무한스크롤을 위한 페이징
   const pagingQuar = useSelector((state) => state.board.pagingQuar);
   const { nextPage, totalPage } = pagingQuar;
   const quar_list = useSelector((state) => state.board.listQuar);
   const dispatch = useDispatch();
   const nextCall = () => {
+    // 무한스크롤 호출 함수
     dispatch(actionGetBoard(board));
   };
 
