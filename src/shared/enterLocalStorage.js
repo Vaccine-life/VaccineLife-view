@@ -1,5 +1,3 @@
-import logger from "./logger";
-
 // 내가 클릭했던  보드, 아이디를 저장
 const setLocalStorage = (board, boardId) => {
   const readList = JSON.parse(localStorage.getItem(board));
