@@ -166,6 +166,7 @@ const PopularTitle = styled.div`
   padding-bottom: 20px;
   & > h1 {
     width: 212px;
+    white-space: nowrap;
     height: 34px;
     font-weight: bold;
     font-size: ${theme.headOneSize};
