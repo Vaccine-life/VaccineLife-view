@@ -15,7 +15,8 @@
 
 ### Contact
 
-> **Email** quokkalee654@gmail.com > **Project Link** https://github.com/Vaccine-life
+> **Email** quokkalee654@gmail.com 
+> **Project Link** https://github.com/Vaccine-life
 
 ### Stack
 
