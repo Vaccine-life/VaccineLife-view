@@ -132,19 +132,7 @@ const CommentList = (props) => {
 
           <Grid align="left" padding="1rem 0">
             {editable ? (
-              <TextareaAutosize
-                style={{
-                  resize: "none",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  borderWidth: "0 0 1px 0",
-                  borderColor: `${theme.typoGrey2}`,
-                  fontSize: `${theme.bodyfourSize}`,
-                  lineHeight: `${theme.bodyfourHeight}`,
-                  fontFamily: "Noto Sans KR",
-                  color: `${theme.typoBlack}`,
-                  whiteSpace: "pre-wrap",
-                }}
+              <TextAreaAutoMobile
                 minRows="1"
                 value={text}
                 onChange={handleChange}
@@ -246,19 +234,7 @@ const CommentList = (props) => {
 
         <Grid align="left" padding="1rem 0">
           {editable ? (
-            <TextareaAutosize
-              style={{
-                resize: "none",
-                width: "100%",
-                boxSizing: "border-box",
-                borderWidth: "0 0 1px 0",
-                borderColor: `${theme.typoGrey2}`,
-                fontSize: `${theme.bodyThreeSize}`,
-                lineHeight: `${theme.bodyThreeHeight}`,
-                fontFamily: "Noto Sans KR",
-                color: `${theme.typoBlack}`,
-                whiteSpace: "pre-wrap",
-              }}
+            <TextAreaAuto
               minRows="1"
               value={text}
               onChange={handleChange}
@@ -334,6 +310,39 @@ const Trash = styled.div`
   align-items: center;
   margin: 0 0.5rem;
 `;
+
+const TextAreaAuto = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  boxSizing: "border-box",
+  borderWidth: "0 0 1px 0",
+  borderColor: `${theme.typoGrey2}`,
+  fontSize: `${theme.bodyThreeSize}`,
+  lineHeight: `${theme.bodyThreeHeight}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  whiteSpace: "pre-wrap",
+  "&:focused": {
+    outline: "none",
+  },
+});
+
+// <========= Mobile ==========>
+const TextAreaAutoMobile = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  boxSizing: "border-box",
+  borderWidth: "0 0 1px 0",
+  borderColor: `${theme.typoGrey2}`,
+  fontSize: `${theme.bodyfourSize}`,
+  lineHeight: `${theme.bodyfourHeight}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  whiteSpace: "pre-wrap",
+  "&:focused": {
+    outline: "none",
+  },
+});
 
 const WrapperMobile = styled.div`
   display: flex;
