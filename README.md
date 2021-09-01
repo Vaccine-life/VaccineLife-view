@@ -23,18 +23,18 @@
   
 ### Stack
 
-    - React
-    - React Router Dom
-    - Redux
-    - React Redux
-    - Redux Toolkit
-    - lodash
-    - moment
+    React
+    React Router Dom
+    Redux
+    React Redux
+    Redux Toolkit
+    lodash
+    moment
 
-    - Spring-boot
-    - JPA
-    - hibernate
-    - MySQL
+    Spring-boot
+    JPA
+    hibernate
+    MySQL
 <br/><br/>
   
 ### Environment
