@@ -8,15 +8,15 @@
 
 ### Team Members
 
-> **Team Leader** 이윤정
-> **Front** 이원교, 이윤정, 연다은, 정효윤
-> **Back** 성찬우, 강지현, 남태현
-> **Designer** 지유정, 정주희, 이규동
+> - **Team Leader** 이윤정
+> - **Front** 이원교, 이윤정, 연다은, 정효윤
+> - **Back** 성찬우, 강지현, 남태현
+> - **Designer** 지유정, 정주희, 이규동
 
 ### Contact
 
-> **Email** quokkalee654@gmail.com 
-> **Project Link** https://github.com/Vaccine-life
+> - **Email** quokkalee654@gmail.com 
+> - **Project Link** https://github.com/Vaccine-life
 
 ### Stack
 
