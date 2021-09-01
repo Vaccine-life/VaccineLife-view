@@ -39,8 +39,8 @@
   
 ### Environment
 
-  **OS** Windows, Mac OS, Android, IOS
-  **Browser support** Chrome, Safari  
+    OS: Windows, Mac OS, Android, IOS  
+    Browser support: Chrome, Safari  
 <br/><br/>
   
 ### License
