@@ -8,7 +8,7 @@ import { actionAddMedical } from "../redux/modules/comment";
 import { actionAlert, actionSetMessage } from "../redux/modules/popup";
 import { isMobileOnly } from "react-device-detect";
 import { TextareaAutosize } from "@material-ui/core";
-import commentwrite from "../styles/commentwrite.css";
+import { styled } from "@material-ui/core/styles";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
@@ -59,19 +59,7 @@ const CommentWrite = (props) => {
       <>
         <Grid is_flex="space_column" padding="0 1rem">
           <Grid is_flex="space_column" border={`1px solid ${theme.typoGrey1}`}>
-            <TextareaAutosize
-              style={{
-                resize: "none",
-                width: "100%",
-                padding: "0.55rem",
-                boxSizing: "border-box",
-                border: "none",
-                fontSize: `${theme.bodyfourSize}`,
-                lineHeight: `${theme.bodyfourHeight}`,
-                fontFamily: "Noto Sans KR",
-                color: `${theme.typoBlack}`,
-                whiteSpace: "pre-wrap",
-              }}
+            <TextAreaAutoMobile
               placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
               minRows="5"
               value={comment}
@@ -110,18 +98,7 @@ const CommentWrite = (props) => {
         width={theme.medicalWidth}
       >
         <Grid is_flex="space_column" border={`1px solid ${theme.typoGrey1}`}>
-          <TextareaAutosize
-            style={{
-              resize: "none",
-              width: "100%",
-              padding: "1rem 0.7rem",
-              boxSizing: "border-box",
-              border: "none",
-              fontSize: `${theme.SubHeadTwoSize}`,
-              fontFamily: "Noto Sans KR",
-              color: `${theme.typoBlack}`,
-              focus: { outline: "none" },
-            }}
+          <TextAreaAuto
             placeholder="코로나 19 최전선에서 헌신하는 의료진을 위한 응원메시지를 남겨주세요!"
             minRows="5"
             value={comment}
@@ -156,5 +133,36 @@ const CommentWrite = (props) => {
 // CommentWrite.defaultProps = {
 //   nickname: "명수는열두살",
 // };
+
+const TextAreaAuto = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  padding: "1rem 0.7rem",
+  boxSizing: "border-box",
+  border: "none",
+  fontSize: `${theme.SubHeadTwoSize}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  "&:focus": {
+    outline: "none",
+  },
+});
+
+// <========= Mobile ==========>
+const TextAreaAutoMobile = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  padding: "0.55rem",
+  boxSizing: "border-box",
+  border: "none",
+  fontSize: `${theme.bodyfourSize}`,
+  lineHeight: `${theme.bodyfourHeight}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  whiteSpace: "pre-wrap",
+  "&:focus": {
+    outline: "none",
+  },
+});
 
 export default CommentWrite;
