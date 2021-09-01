@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import "draft-js/dist/Draft.css";
-import { convertFromRaw } from "draft-js";
-import { Editor, EditorState } from "draft-js";
+
 import { Grid, Text } from "../../elements";
-import logger from "../../shared/logger";
 import LikeIconChanger from "../LikeIconChanger";
 import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionPostLike } from "../../redux/modules/like";
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ReactQuill from "react-quill";
 
 const Contents = (props) => {
   // console.log(props)
@@ -40,6 +40,7 @@ const Contents = (props) => {
     }
     dispatch(actionPostLike(board, likeObj));
   };
+
   if (isMobileOnly) {
     return (
       <WrapperM>
@@ -70,10 +71,13 @@ const Contents = (props) => {
             </Text>
           </Grid>
         )}
-        <ContentDiv
-          isMobile={true}
-          dangerouslySetInnerHTML={{ __html: contents }}
-        ></ContentDiv>
+        <ContentDiv isMobile={true}>
+          <ReactQuill
+            modules={{ toolbar: null }}
+            value={contents}
+            readOnly={true}
+          />
+        </ContentDiv>
         <LikeWrapperM onClick={handleLikeClick}>
           <LikeIconChanger
             board={board}
@@ -123,10 +127,14 @@ const Contents = (props) => {
           </Text>
         </Grid>
       )}
-      <ContentDiv
-        isMobile={false}
-        dangerouslySetInnerHTML={{ __html: contents }}
-      ></ContentDiv>
+      <ContentDiv isMobile={false}>
+        <ReactQuill
+          modules={{ toolbar: null }}
+          value={contents}
+          readOnly={true}
+        />
+      </ContentDiv>
+
       <LikeWrapper>
         {/* <LikeIconChanger board={board} boardId={boardId} size="lg" bigHeart />
         <p
@@ -205,6 +213,53 @@ const ContentDiv = styled.div`
     font-size: ${theme.bodyOneSize};
     line-height: ${theme.bodyOneHeight};
   `}
+  ${(props) =>
+    props.isMobile
+      ? `
+           .quill > .ql-container > .ql-editor.ql-blank::before {
+    font-size: ${theme.bodyfourSize};
+    font-style: normal;
+    font-family: "Noto Sans KR";
+     
+  }
+         .ql-container {
+      font-size: ${theme.bodyfourSize};
+      font-weight: 400;
+      border:none;
+    }
+    .ql-editor{
+      padding: 0;
+    }
+    .ql-editor::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+    }
+    font-size: ${theme.bodyfourSize};
+    line-height: ${theme.bodyfourHeight};
+  `
+      : `
+    .ql-container {
+      font-size: ${theme.bodyOneSize};
+      font-weight: 400;
+      border:none;
+    }
+    .ql-editor{
+      padding: 0;
+    }
+    .ql-editor::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+  
+      .quill > .ql-container > .ql-editor.ql-blank::before {
+    font-size: ${theme.bodyOneSize};
+    font-style: normal;
+    font-family: "Noto Sans KR";
+     
+  }
+    font-size: ${theme.bodyOneSize};
+    line-height: ${theme.bodyOneHeight};
+    
+ `}
 `;
 
 const LikeWrapper = styled.div`
