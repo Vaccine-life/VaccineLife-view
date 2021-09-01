@@ -9,17 +9,17 @@
 
 ### Team Members
 
-**Team Leader** 이윤정  
-**Front** 이원교, 이윤정, 연다은, 정효윤  
-**Back** 성찬우, 강지현, 남태현  
-**Designer** 지유정, 정주희, 이규동  
-
+- **Team Leader** 이윤정  
+- **Front** 이원교, 이윤정, 연다은, 정효윤  
+- **Back** 성찬우, 강지현, 남태현  
+- **Designer** 지유정, 정주희, 이규동  
+<br/><br/>
   
 ### Contact
 
 - **Email** quokkalee654@gmail.com 
 - **Project Link** https://github.com/Vaccine-life  
-
+<br/><br/>
   
 ### Stack
 
@@ -35,33 +35,33 @@
     - JPA
     - hibernate
     - MySQL
-
+<br/><br/>
   
 ### Environment
 
-> - **OS** Windows, Mac OS, Android, IOS
-> - **Browser support** Chrome, Safari  
-
+- **OS** Windows, Mac OS, Android, IOS
+- **Browser support** Chrome, Safari  
+<br/><br/>
   
 ### License
 
     GNU General Public License v2.0
-
+<br/><br/>
   
 ### 개발 기간
 
 2021.07.23. ~ 2021.08.31.  
-
+<br/><br/>
   
 ### 유저 피드백 및 개선기간
 
 2021.08.19. ~ 2021.08.31.  
-
+<br/><br/>
   
 ### 협업 툴
 
 Notion, Slack, Gather  
-
+<br/><br/>
   
 ### 버전 관리
 
