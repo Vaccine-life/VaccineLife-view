@@ -12,6 +12,7 @@ import MainPopular from "../components/MainPopular";
 import MainNivoBar from "../components/MainNivoBar";
 import NavModal from "../components/mobile/NavModal";
 import ModifySurvey from "../components/ModifySurvey";
+import Spinner from "../shared/Spinner";
 
 // Intro: 헤더밑 '여러분의 백신 접종 후기를 공유해주세요!' 파란div
 // Map: 지도_지역별 접종수
@@ -20,7 +21,8 @@ import ModifySurvey from "../components/ModifySurvey";
 // MainPopular: 백신접종후기/자가격리후기 인기글
 
 const Main = () => {
-  // 메인페이지에서도 로그인, 회원가입, 설문조사, 그리고 네브바 모달창이 뜨게 하기
+  // Main페이지에서도 로그인모달창이 뜨게 함
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
   const modal_status = useSelector((state) => state.modal.visible);
   const navModal_status = useSelector((state) => state.modal.navVisible);
   const surveyModal_status = useSelector((state) => state.modal.surveyVisible);
@@ -35,6 +37,7 @@ const Main = () => {
     return (
       <>
         {navModal_status && <NavModal />}
+        {isLoading && <Spinner />}
         {modal_status && <Login />}
         {alert_status && <Alert />}
         <Intro />
@@ -49,6 +52,7 @@ const Main = () => {
   //웹의 경우
   return (
     <>
+      {isLoading && <Spinner />}
       {modal_status && <Login />}
       {alert_status && <Alert />}
       {surveyModal_status && <ModifySurvey />}
@@ -62,7 +66,6 @@ const Main = () => {
     </>
   );
 };
-
 
 // styled-components
 

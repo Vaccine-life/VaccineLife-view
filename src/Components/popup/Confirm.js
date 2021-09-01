@@ -9,6 +9,7 @@ import theme from "../../styles/theme";
 // 사용시 props에 해당하는 것들을 넣어줄것
 
 const Confirm = (props) => {
+  // props에 작동시킬 함수와 메세지 전달
   const { confirmMessage, activeFunction } = props;
   const dispatch = useDispatch();
 

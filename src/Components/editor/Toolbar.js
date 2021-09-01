@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RichUtils } from "draft-js";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,9 +7,10 @@ import { faStrikethrough } from "@fortawesome/free-solid-svg-icons";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { faListOl } from "@fortawesome/free-solid-svg-icons";
 import theme from "../../styles/theme";
-import logger from "../../shared/logger";
+
 import { isMobileOnly } from "react-device-detect";
 
+// 현재 사용하지 않음(draft js)
 const Toolbar = (props) => {
   const { setEditorState, editorState, handleKeyCommand } = props;
 

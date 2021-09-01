@@ -8,10 +8,12 @@ import { history } from "../../redux/configStore";
 
 import { isMobileOnly } from "react-device-detect";
 
+// 이전글, 다음글, 전체페이지 이동 박스
 const MoveBox = (props) => {
   const { board } = props;
   const page = useSelector((state) => state.board.page);
 
+  // 이전글
   const handleClickLeft = () => {
     if (page.prev === null) {
       return;
@@ -22,6 +24,7 @@ const MoveBox = (props) => {
       history.push(`/quarantinedetail/${page.prev?.id}`);
     }
   };
+  // 다음글
   const handleClickRight = () => {
     if (page.next === null) {
       return;
@@ -32,7 +35,7 @@ const MoveBox = (props) => {
       history.push(`/quarantinedetail/${page.next?.id}`);
     }
   };
-
+  // 전체글
   const handleMoveTotal = () => {
     if (board === "vaccine") {
       history.push("/vaccine");

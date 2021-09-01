@@ -12,6 +12,7 @@ const popup = createSlice({
     alertMessage: "",
   },
   reducers: {
+    // 모달을 보이고 안보이게 만드는 action들
     actionAlert: (state, action) => {
       state.alert = !state.alert;
     },

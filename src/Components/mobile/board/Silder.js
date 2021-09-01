@@ -18,8 +18,6 @@ SwiperCore.use([Pagination]);
 const Silder = (props) => {
   const { board, top_list_vac, top_list_quar } = props;
 
-  logger(top_list_vac);
-
   return (
     <Swiper
       style={{

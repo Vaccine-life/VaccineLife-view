@@ -22,6 +22,7 @@ const CommentWrite = (props) => {
   // useState사용해서 인풋의 텍스트 내용 저장
   const [comment, setComment] = React.useState("");
 
+  // 게시판에 따라 comment 객체 구성
   const obj =
     board === "vaccine"
       ? {
@@ -43,11 +44,13 @@ const CommentWrite = (props) => {
   };
 
   const write = () => {
+    // 로그인 체크
     if (!is_login) {
       dispatch(actionSetMessage("로그인 후 이용해 주세요."));
       dispatch(actionAlert());
       return;
     }
+    // 빈 코멘트 체크
     if (!comment) {
       dispatch(actionAlert());
       dispatch(actionSetMessage("댓글 내용을 작성해주세요!"));

@@ -10,14 +10,17 @@ import theme from "../../styles/theme";
 
 const CommentConfirm = (props) => {
   const { confirmMessage } = props;
+  // 코멘트 전용 confirm창
   const { board, commentId, boardId } = useSelector(
     (state) => state.popup.commentObj
   );
-  console.log(board, commentId, boardId);
+
   const dispatch = useDispatch();
 
   const handleDelete = () => {
+    // 코멘트 삭제 액션함수
     dispatch(actionDeleteCommentList(board, commentId, boardId));
+    // 코멘트  모달 없애기 액션함수
     dispatch(actionCommentConfirm());
   };
 

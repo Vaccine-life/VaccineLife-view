@@ -16,7 +16,8 @@ const Contents = (props) => {
   const { contents, board, boardId, likeCount } = props;
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.user.userId);
-  // 클릭했을때 색 변경 추가할것
+
+  // 게시판 타입에 따라 좋아요 객체 구성
   const likeObj =
     board === "vaccine"
       ? {
@@ -27,8 +28,9 @@ const Contents = (props) => {
           quarBoardId: parseInt(boardId),
           userId: parseInt(userId),
         };
-  logger(contents);
+
   const handleLikeClick = () => {
+    // 좋아요 클릭시 null 체크
     if (
       likeObj.userId === null ||
       likeObj?.vacBoardId === null ||

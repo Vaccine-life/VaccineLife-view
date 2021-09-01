@@ -11,11 +11,13 @@ import { history } from "../redux/configStore";
 
 const MyLike = () => {
   const dispatch = useDispatch();
+  // 내가 좋아요 한 글 redux에서 불러오기
   const vac_list = useSelector((state) => state.board.myLikeVac);
   const quar_list = useSelector((state) => state.board.myLikeQuar);
   const medi_list = useSelector((state) => state.board.myLikeMedi);
 
   useEffect(() => {
+    // 페이지 전환시 좋아요 글 데이터베이스에서 불러오기
     dispatch(actionGetLike("quarantine"));
     dispatch(actionGetLike("vaccine"));
     dispatch(actionGetLikeMedi());

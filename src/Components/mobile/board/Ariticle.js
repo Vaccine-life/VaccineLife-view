@@ -27,13 +27,13 @@ const Ariticle = (props) => {
   // 읽고 쓰기 색변경
   const vac_read_list = useSelector((state) => state.read.vacList);
   const quar_read_list = useSelector((state) => state.read.quarList);
+  // 읽기 리스트에 게시판 아이디가 포함되거나 되지 않을 경우
   const is_read =
     board === "vaccine"
       ? vac_read_list?.includes(boardId)
       : quar_read_list?.includes(boardId);
 
-  logger(is_read);
-
+  // 페이지 이동
   const handleMovePage = () => {
     dispatch(actionClickContents(board, boardId));
     if (board === "vaccine") {
@@ -42,10 +42,12 @@ const Ariticle = (props) => {
       history.push(`/quarantinedetail/${boardId}`);
     }
   };
+
+  // 아스트라제네카, 아스트라제네카 + 화이자
   const typeChanger = (type) => {
     if (type === "아스트라제네카") {
       return "AZ";
-    } else if (type === "아스트라제네카 + 화이자") {
+    } else if (type === "아스트라제네카+화이자") {
       return "AZ + PF";
     } else {
       return type;

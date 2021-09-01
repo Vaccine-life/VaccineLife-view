@@ -1,29 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import LikeIconChanger from "../LikeIconChanger";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentAlt, faEye } from "@fortawesome/free-regular-svg-icons";
-import displayedAt from "../../shared/displayedAt";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configStore";
 import { actionClickContents } from "../../redux/modules/read";
 
 const TopQuarTable = (props) => {
-  const {
-    board,
-    boardId,
-    title,
-    likeCount,
-    commentCount,
-    totalVisitors,
-    createAt,
-  } = props;
+  const { board, boardId, title } = props;
   const dispatch = useDispatch();
   // 읽고 쓰기 색변경
   const quar_read_list = useSelector((state) => state.read.quarList);
   const is_read = quar_read_list?.includes(boardId);
 
+  // 공지 디테일 페이지 이동
   const handleMovePage = () => {
     dispatch(actionClickContents(board, boardId));
     history.push(`/quarantinedetail/${boardId}`);

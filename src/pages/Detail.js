@@ -3,7 +3,7 @@ import Login from "./Login";
 import BoardInfo from "../components/detail/BoardInfo";
 import UserInfo from "../components/detail/UserInfo";
 import Contents from "../components/detail/Contents";
-import { Button, Grid } from "../elements";
+import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionDeleteEx, actionGetDetail } from "../redux/modules/board";
 import theme from "../styles/theme";
@@ -14,23 +14,27 @@ import CommentList from "../components/detail/CommentList";
 import { useParams } from "react-router-dom";
 import { actionGetCommentList } from "../redux/modules/comment";
 import Spinner from "../shared/Spinner";
-import logger from "../shared/logger";
 import MetaScript from "../shared/MetaScript";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
 import { isMobileOnly } from "react-device-detect";
 import BoardName from "../components/mobile/BoardName";
 import NavModal from "../components/mobile/NavModal";
-import Arrow from "../images/Arrow.png";
 import MoveBox from "../components/detail/MoveBox";
 
 const Detail = () => {
+  //Spinner 변환
   const isLoading = useSelector((state) => state.isLoading.isLoading);
+  //현재 Board의 Id를 가져오기(URL상)
   const boardId = useParams().id;
   const title = useSelector((state) => state.board.board.title);
+
   useEffect(() => {
+    //페이지 이동시 스크롤 맨 위로 이동
     window.scrollTo(0, 0);
+    //게시판 타입에 따른 디테일 페이지 정보 가져오기
     dispatch(actionGetDetail("vaccine", boardId));
+    //게시판 타입에 따른 디테일 페이지 댓글 가져오기
     dispatch(actionGetCommentList("vaccine", boardId));
     //  dispatch(actionGetLike("vaccine"));
   }, [boardId]);
@@ -47,25 +51,21 @@ const Detail = () => {
   const confirm_status = useSelector((state) => state.popup.confirm);
   //alert 창
   const alert_status = useSelector((state) => state.popup.alert);
-
-  const boardType = true;
-
+  //Redux 내 게시판 정보 불러오기
   const board_content = useSelector((state) => state.board.board);
-
+  //Redux 내 게시판 댓글 불러오기
   const comment_list = useSelector((state) => state.comment.commentVac);
 
   const handleDelete = () => {
+    // action 함수내에 게시판타입, 아이디 전달
     dispatch(actionDeleteEx("vaccine", board_content.boardId));
-  };
-
-  const handleMoveTotal = () => {
-    history.push("/vaccine");
   };
 
   if (isMobileOnly) {
     return (
       <Grid margin="80px auto 40px auto">
         <MetaScript title={`슬기로운 백신생활 | ${title}`} />
+        {/* board에 props 전달시 board이름 변경 */}
         <BoardName board="vaccine" />
         <BoardInfo
           board="vaccine"
@@ -93,6 +93,7 @@ const Detail = () => {
           contents={board_content.contents}
           likeCount={board_content.likeCount}
         />
+        {/* board에 props 전달시 board 타입이 변경 */}
         <MoveBox board="vaccine" />
         {confirm_status && (
           <Confirm
@@ -211,57 +212,5 @@ const Detail = () => {
     </Grid>
   );
 };
-
-const TextDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: max-content;
-  height: 26px;
-  font-weight: normal;
-  font-size: ${theme.bodyOneSize};
-  line-height: 26px;
-  text-align: center;
-  letter-spacing: -0.3px;
-  color: ${theme.typoGrey3};
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-position: under;
-    color: ${theme.typoGrey1};
-  }
-  & > img {
-    width: auto;
-    height: auto;
-    max-width: 15px;
-    max-height: 15px;
-    margin-top: 4px;
-    margin-left: 6px;
-  }
-`;
-
-const TextDivM = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: max-content;
-  height: 26px;
-  font-weight: normal;
-  font-size: ${theme.SubHeadTwoSize};
-  line-height: 26px;
-  text-align: center;
-  letter-spacing: -0.3px;
-  color: ${theme.typoGrey2};
-  text-decoration: underline;
-  text-underline-position: under;
-  & > img {
-    width: auto;
-    height: auto;
-    max-width: 13px;
-    max-height: 13px;
-    margin-top: 4px;
-    margin-left: 6px;
-  }
-`;
 
 export default Detail;
