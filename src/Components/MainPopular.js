@@ -72,7 +72,7 @@ const MainPopular = (props) => {
     <div style={{ marginTop: "90px" }}>
       <GreyBox>
         <PopularTitle>
-          <h1>백신 접종 후기 인기글</h1>
+          <h1 style={{ fontFamily: "Noto Sans KR" }}>백신 접종 후기 인기글</h1>
           <div>
             <h3
               onClick={() => {
@@ -109,7 +109,7 @@ const MainPopular = (props) => {
 
       <GreyBox>
         <PopularTitle>
-          <h1>자가격리 후기 인기글</h1>
+          <h1 style={{ fontFamily: "Noto Sans KR" }}>자가격리 후기 인기글</h1>
           <div>
             <h3
               onClick={() => {

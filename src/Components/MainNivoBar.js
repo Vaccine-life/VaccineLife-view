@@ -316,7 +316,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle1>
           <img src={disc} alt="" />
-          <h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>
             백신 종류별 접종수<span> (출처: 질병관리청)</span>
           </h3>
         </BarTitle1>
@@ -426,7 +426,7 @@ const MainNivoBar = () => {
       <div>
         <BarTitle2>
           <img src={disc} alt="" />
-          <h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>
             백신 부작용 Top 4<span> (출처: 자체 설문조사)</span>
           </h3>
         </BarTitle2>
