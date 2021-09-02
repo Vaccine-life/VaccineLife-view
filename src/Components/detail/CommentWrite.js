@@ -72,18 +72,7 @@ const CommentWrite = (props) => {
             border={`1px solid ${theme.typoLightGrey2}`}
           >
             <Grid margin="0 5rem">
-              <TextareaAutosize
-                style={{
-                  resize: "none",
-                  width: "100%",
-                  padding: "0.5rem",
-                  boxSizing: "border-box",
-                  border: "none",
-                  fontSize: `${theme.bodyfourSize}`,
-                  fontFamily: "Noto Sans KR",
-                  color: `${theme.typoBlack}`,
-                  whiteSpace: "pre-wrap",
-                }}
+              <TextAreaAutoMobile
                 placeholder={
                   is_login ? "댓글을 남겨보세요." : "로그인 후 이용해 주세요."
                 }
@@ -128,18 +117,7 @@ const CommentWrite = (props) => {
       <Grid is_flex="space_row" margin="10px 0" width={theme.medicalWidth}>
         <Grid is_flex="space_column" border="1px solid #c1c1c1">
           <Grid margin="0 5rem">
-            <TextareaAutosize
-              style={{
-                resize: "none",
-                width: "100%",
-                padding: "0.5rem",
-                boxSizing: "border-box",
-                border: "none",
-                fontSize: `${theme.bodyTwoSize}`,
-                fontFamily: "Noto Sans KR",
-                color: `${theme.typoBlack}`,
-                whiteSpace: "pre-wrap",
-              }}
+            <TextAreaAuto
               placeholder={
                 is_login ? "댓글을 남겨보세요." : "로그인 후 이용해 주세요."
               }
@@ -183,5 +161,36 @@ const NicknameWrapper = styled.div`
   margin-bottom: 4px;
   color: ${theme.bg};
 `;
+
+const TextAreaAuto = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  padding: "1rem 0.7rem",
+  boxSizing: "border-box",
+  border: "none",
+  fontSize: `${theme.SubHeadTwoSize}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  "&:focus": {
+    outline: "none",
+  },
+});
+
+// <========= Mobile ==========>
+const TextAreaAutoMobile = styled(TextareaAutosize)({
+  resize: "none",
+  width: "100%",
+  padding: "0.5rem",
+  boxSizing: "border-box",
+  border: "none",
+  fontSize: `${theme.bodyfourSize}`,
+  lineHeight: `${theme.bodyfourHeight}`,
+  fontFamily: "Noto Sans KR",
+  color: `${theme.typoBlack}`,
+  whiteSpace: "pre-wrap",
+  "&:focus": {
+    outline: "none",
+  },
+});
 
 export default CommentWrite;
