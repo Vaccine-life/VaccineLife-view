@@ -7,8 +7,7 @@ import LikeIconChanger from "../LikeIconChanger";
 import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionPostLike } from "../../redux/modules/like";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import ReactQuill from "react-quill";
 
 const Contents = (props) => {
@@ -179,11 +178,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
-  .public-DraftEditor-content {
-    font-size: ${theme.bodyOneSize};
-    line-height: ${theme.bodyOneHeight};
-  }
 `;
 const WrapperM = styled.div`
   margin: 23px 0 0 0;
@@ -192,12 +186,6 @@ const WrapperM = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
-  .public-DraftEditor-content {
-    padding: 0 16px 0 16px;
-    font-size: ${theme.bodyfourSize};
-    line-height: ${theme.bodyfourHeight};
-  }
 `;
 
 const ContentDiv = styled.div`
@@ -229,6 +217,7 @@ const ContentDiv = styled.div`
     }
     .ql-editor{
       padding: 0;
+      line-height: ${theme.bodyfourHeight};
     }
     .ql-editor::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -245,6 +234,7 @@ const ContentDiv = styled.div`
     }
     .ql-editor{
       padding: 0;
+      line-height: ${theme.bodyOneHeight};
     }
     .ql-editor::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
