@@ -7,7 +7,6 @@ import LikeIconChanger from "../LikeIconChanger";
 import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionPostLike } from "../../redux/modules/like";
-
 import ReactQuill from "react-quill";
 
 const Contents = (props) => {

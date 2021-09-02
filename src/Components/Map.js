@@ -339,6 +339,7 @@ const MapTitle = styled.div`
   & > h3 {
     width: 102px;
     height: 26px;
+    white-space: nowrap;
     font-weight: bold;
     font-size: ${theme.SubHeadOneSize};
     line-height: 26px;
@@ -390,6 +391,7 @@ const Gyeonggi = styled.div`
   left: 160px;
   top: 30px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -408,6 +410,7 @@ const Gangwon = styled.div`
   left: 280px;
   top: 70px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -426,6 +429,7 @@ const Seoul = styled.div`
   left: 180px;
   top: 80px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -444,6 +448,7 @@ const Incheon = styled.div`
   left: 90px;
   top: 70px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -462,6 +467,7 @@ const Sejong = styled.div`
   left: 180px;
   top: 130px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -480,6 +486,7 @@ const ChoongNam = styled.div`
   left: 120px;
   top: 170px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -498,6 +505,7 @@ const ChoongBook = styled.div`
   left: 235px;
   top: 160px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -516,6 +524,7 @@ const GyeongBook = styled.div`
   left: 300px;
   top: 185px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -534,6 +543,7 @@ const Daejeon = styled.div`
   left: 185px;
   top: 196px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -552,6 +562,7 @@ const JeonBook = styled.div`
   left: 180px;
   top: 245px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -570,6 +581,7 @@ const Gwangju = styled.div`
   left: 170px;
   top: 295px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -588,6 +600,7 @@ const JeonNam = styled.div`
   left: 130px;
   top: 340px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -606,6 +619,7 @@ const Jeju = styled.div`
   left: 190px;
   top: 425px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -624,6 +638,7 @@ const GyeongNam = styled.div`
   left: 250px;
   top: 280px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -642,6 +657,7 @@ const Daegu = styled.div`
   left: 300px;
   top: 235px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -660,6 +676,7 @@ const Woolsan = styled.div`
   left: 360px;
   top: 270px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;
@@ -678,6 +695,7 @@ const Busan = styled.div`
   left: 320px;
   top: 320px;
   width: 70px;
+  white-space: nowrap;
   z-index: 1;
   & > h3 {
     width: 30px;

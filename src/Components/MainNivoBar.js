@@ -96,22 +96,22 @@ const MainNivoBar = () => {
                 data={[
                   {
                     vaccines: "모더나",
-                    vaccine: 80277,
+                    vaccine: 87827,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "얀센",
-                    vaccine: 1204889,
+                    vaccine: 1222113,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "화이자",
-                    vaccine: 5489442,
+                    vaccine: 5670263,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                   {
                     vaccines: "아스트라제네카",
-                    vaccine: 8974768,
+                    vaccine: 9303157,
                     vaccineColor: "hsl(227, 86%, 63%)",
                   },
                 ]}
@@ -325,22 +325,22 @@ const MainNivoBar = () => {
             data={[
               {
                 vaccines: "모더나",
-                vaccine: 80277,
+                vaccine: 87827,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "얀센",
-                vaccine: 1204889,
+                vaccine: 1222113,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "화이자",
-                vaccine: 5489442,
+                vaccine: 5670263,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
               {
                 vaccines: "아스트라제네카",
-                vaccine: 8974768,
+                vaccine: 9303157,
                 vaccineColor: "hsl(227, 86%, 63%)",
               },
             ]}
@@ -535,7 +535,6 @@ const MainNivoBar = () => {
   );
 };
 
-
 // styled-components
 
 // <========= 웹 =========>
@@ -612,7 +611,6 @@ const BarBox = styled.div`
   box-sizing: border-box;
   border-radius: 16px;
 `;
-
 
 // <========= Mobile ===========>
 
