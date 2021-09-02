@@ -220,94 +220,94 @@ const Map = () => {
     <Wrapper>
       <MapTitle>
         <img src={disc} alt="" />
-        <h3>지역별 접종수</h3>
+        <h3 style={{ fontFamily: "Noto Sans KR" }}>지역별 접종수</h3>
       </MapTitle>
 
       <MapBox>
         <img src={SouthKorea} alt="" />
 
         <Gyeonggi>
-          <h3>경기</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>경기</h3>
           <Shot>{GyeonggiShot.toLocaleString("ko-KR")}</Shot>
         </Gyeonggi>
 
         <Gangwon>
-          <h3>강원</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>강원</h3>
           <Shot>{GangwonShot.toLocaleString("ko-KR")}</Shot>
         </Gangwon>
 
         <Seoul>
-          <h3>서울</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>서울</h3>
           <Shot>{SeoulShot.toLocaleString("ko-KR")}</Shot>
         </Seoul>
 
         <Incheon>
-          <h3>인천</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>인천</h3>
           <Shot>{IncheonShot.toLocaleString("ko-KR")}</Shot>
         </Incheon>
 
         <Sejong>
-          <h3>세종</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>세종</h3>
           <Shot>{SejongShot.toLocaleString("ko-KR")}</Shot>
         </Sejong>
 
         <ChoongNam>
-          <h3>충남</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>충남</h3>
           <Shot>{ChoongNamShot.toLocaleString("ko-KR")}</Shot>
         </ChoongNam>
 
         <ChoongBook>
-          <h3>충북</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>충북</h3>
           <Shot>{ChoongBookShot.toLocaleString("ko-KR")}</Shot>
         </ChoongBook>
 
         <GyeongBook>
-          <h3>경북</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>경북</h3>
           <Shot>{GyeongBookShot.toLocaleString("ko-KR")}</Shot>
         </GyeongBook>
 
         <Daejeon>
-          <h3>대전</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>대전</h3>
           <Shot>{DaejeonShot.toLocaleString("ko-KR")}</Shot>
         </Daejeon>
 
         <JeonBook>
-          <h3>전북</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>전북</h3>
           <Shot>{JeonBookShot.toLocaleString("ko-KR")}</Shot>
         </JeonBook>
 
         <Gwangju>
-          <h3>광주</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>광주</h3>
           <Shot>{GwangjuShot.toLocaleString("ko-KR")}</Shot>
         </Gwangju>
 
         <JeonNam>
-          <h3>전남</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>전남</h3>
           <Shot>{JeonNamShot.toLocaleString("ko-KR")}</Shot>
         </JeonNam>
 
         <Jeju>
-          <h3>제주</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>제주</h3>
           <Shot>{JejuShot.toLocaleString("ko-KR")}</Shot>
         </Jeju>
 
         <GyeongNam>
-          <h3>경남</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>경남</h3>
           <Shot>{GyeongNamShot.toLocaleString("ko-KR")}</Shot>
         </GyeongNam>
 
         <Daegu>
-          <h3>대구</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>대구</h3>
           <Shot>{DaeguShot.toLocaleString("ko-KR")}</Shot>
         </Daegu>
 
         <Woolsan>
-          <h3>울산</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>울산</h3>
           <Shot>{WoolsanShot.toLocaleString("ko-KR")}</Shot>
         </Woolsan>
 
         <Busan>
-          <h3>부산</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>부산</h3>
           <Shot>{BusanShot.toLocaleString("ko-KR")}</Shot>
         </Busan>
       </MapBox>
