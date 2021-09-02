@@ -7,8 +7,6 @@ import LikeIconChanger from "../LikeIconChanger";
 import { isMobileOnly } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionPostLike } from "../../redux/modules/like";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactQuill from "react-quill";
 
 const Contents = (props) => {
@@ -21,13 +19,13 @@ const Contents = (props) => {
   const likeObj =
     board === "vaccine"
       ? {
-          vacBoardId: parseInt(boardId),
-          userId: parseInt(userId),
-        }
+        vacBoardId: parseInt(boardId),
+        userId: parseInt(userId),
+      }
       : {
-          quarBoardId: parseInt(boardId),
-          userId: parseInt(userId),
-        };
+        quarBoardId: parseInt(boardId),
+        userId: parseInt(userId),
+      };
 
   const handleLikeClick = () => {
     // 좋아요 클릭시 null 체크
