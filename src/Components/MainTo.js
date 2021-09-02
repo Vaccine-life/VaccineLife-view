@@ -61,7 +61,7 @@ const MainTo = (props) => {
           history.push("/vaccine");
         }}
       >
-        <h3>백신 접종 후기<br />보러가기</h3>
+        <h3 style={{ fontFamily: "Noto Sans KR" }}>백신 접종 후기<br />보러가기</h3>
         {/* <hr /> */}
         <h6>
           백신 접종자들의 생생한 후기를 확인하고, 나의 경험도 공유해보세요!
@@ -74,7 +74,7 @@ const MainTo = (props) => {
             history.push("/quarantine");
           }}
         >
-          <h3>자가격리 후기<br />보러가기</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>자가격리 후기<br />보러가기</h3>
           {/* <hr /> */}
           <h6>
             다른 사람들은 2주를 어떻게 보냈을까? 다양한 자가격리 후기를
@@ -86,7 +86,7 @@ const MainTo = (props) => {
             history.push("/medical");
           }}
         >
-          <h3>의료진 분들께<br />감사인사 전하기</h3>
+          <h3 style={{ fontFamily: "Noto Sans KR" }}>의료진 분들께<br />감사인사 전하기</h3>
           {/* <hr /> */}
           <h6>
             코로나 19 최전선에서 헌신하는 의료진을 위한 응원 메시지를
