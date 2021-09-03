@@ -49,6 +49,9 @@ const QuarList = (props) => {
         />
         {/* map돌리기 */}
         {quar_list?.map((each, index) => {
+          if (each.quarBoardId === 48 || each.quarBoardId === 85) {
+            return;
+          }
           return (
             <Ariticle
               nickname={each.nickname}
@@ -98,6 +101,9 @@ const QuarList = (props) => {
             boardId={48}
           />
           {quar_list?.map((each, index) => {
+            if (each.quarBoardId === 48 || each.quarBoardId === 85) {
+              return;
+            }
             return (
               <QuarTableTr
                 nickname={each.nickname}

@@ -50,6 +50,7 @@ const List = (props) => {
         size={750}
       >
         {/* map돌리기 */}
+
         <TopArticle
           board={board}
           type="공지"
@@ -61,6 +62,9 @@ const List = (props) => {
           boardId={70}
         />
         {vac_list?.map((each, index) => {
+          if (each.id === 70 || each.id === 203) {
+            return;
+          }
           return (
             <Ariticle
               nickname={each.nickname}
@@ -107,6 +111,7 @@ const List = (props) => {
           size={300}
         >
           {/* map돌리기 */}
+
           <TopTable
             type="공지"
             title="슬기로운 백신생활에서 준비한 이벤트!"
@@ -117,6 +122,9 @@ const List = (props) => {
             boardId={70}
           />
           {vac_list?.map((each, index) => {
+            if (each.id === 70 || each.id === 203) {
+              return;
+            }
             return (
               <TableTr
                 nickname={each.nickname}
