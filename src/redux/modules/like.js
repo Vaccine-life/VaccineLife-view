@@ -83,7 +83,7 @@ export const actionGetLike =
           makeData.push(each.vacBoardId);
         });
         const likeList = getData.data;
-        logger(getData);
+        logger(makeData);
         // 유저가 클릭한 목록 정보  받기
         dispatch(actionSetMyLikeList({ board, likeList }));
         // 유저가 클릭한 목록 게시판 아이디값 받기
