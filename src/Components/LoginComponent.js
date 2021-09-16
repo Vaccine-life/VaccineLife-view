@@ -197,7 +197,6 @@ const Signup = styled.div`
 `;
 
 // <========= Mobile ==========>
-
 const MobileWrapper = styled.form`
   width: 70%;
   height: auto;

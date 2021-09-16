@@ -22,6 +22,12 @@ const SignupComponent = ({
   const [nicknameDupOk, setNicknameDupOk] = useState(false);
   const [nicknameDupMsg, setNicknameDupMsg] = useState("");
 
+  // 인풋 focus하자마자 모든 인풋 아래 validation msg 뜨는거 방지
+  const [IdBlur, setIdBlur] = useState(false);
+  const [pwBlur, setPwBlur] = useState(false);
+  const [pwCheckBlur, setPwCheckBlur] = useState(false);
+  const [nicknameBlur, setNicknameBlur] = useState(false);
+
   // 아이디 중복여부를 확인하기 위해 서버에 request를 보낸다..
   // 서버에서 온 response를 idDupOk, idDupMsg에 담는다. 담기는 값은 api 명세서 참고
   const idDupCheck = (username) => async () => {
@@ -98,10 +104,13 @@ const SignupComponent = ({
                 });
                 dispatch(idDupCheck(e.target.value));
               }}
+              onBlur={() => {
+                setIdBlur(true);
+              }}
               value={formik.values.username}
             />
             {/* Login.js에서 정했던 유효성검사 메세지, 또는 중복검사 메세지가 onChange시 뜬다 */}
-            {formik.errors.username ? (
+            {formik.errors.username && IdBlur ? (
               <SignupError>{formik.errors.username}</SignupError>
             ) : null}
             {!idDupOk ? <SignupError>{idDupMsg}</SignupError> : null}
@@ -120,9 +129,12 @@ const SignupComponent = ({
                   password: e.target.value,
                 });
               }}
+              onBlur={() => {
+                setPwBlur(true);
+              }}
               value={formik.values.password}
             />
-            {formik.errors.password ? (
+            {formik.errors.password && pwBlur ? (
               <SignupError>{formik.errors.password}</SignupError>
             ) : null}
           </InputBox>
@@ -140,9 +152,12 @@ const SignupComponent = ({
                   passwordChecker: e.target.value,
                 });
               }}
+              onBlur={() => {
+                setPwCheckBlur(true);
+              }}
               value={formik.values.passwordChecker}
             />
-            {formik.errors.passwordChecker ? (
+            {formik.errors.passwordChecker && pwCheckBlur ? (
               <SignupError>{formik.errors.passwordChecker}</SignupError>
             ) : null}
           </InputBox>
@@ -161,9 +176,12 @@ const SignupComponent = ({
                 });
                 dispatch(nicknameDupCheck(e.target.value));
               }}
+              onBlur={() => {
+                setNicknameBlur(true);
+              }}
               value={formik.values.nickname}
             />
-            {formik.errors.nickname ? (
+            {formik.errors.nickname && nicknameBlur ? (
               <SignupError>{formik.errors.nickname}</SignupError>
             ) : null}
             {!nicknameDupOk ? (
@@ -230,9 +248,12 @@ const SignupComponent = ({
               });
               dispatch(idDupCheck(e.target.value));
             }}
+            onBlur={() => {
+              setIdBlur(true);
+            }}
             value={formik.values.username}
           />
-          {formik.errors.username ? (
+          {formik.errors.username && IdBlur ? (
             <SignupError>{formik.errors.username}</SignupError>
           ) : null}
           {!idDupOk ? <SignupError>{idDupMsg}</SignupError> : null}
@@ -251,9 +272,12 @@ const SignupComponent = ({
                 password: e.target.value,
               });
             }}
+            onBlur={() => {
+              setPwBlur(true);
+            }}
             value={formik.values.password}
           />
-          {formik.errors.password ? (
+          {formik.errors.password && pwBlur ? (
             <SignupError>{formik.errors.password}</SignupError>
           ) : null}
         </InputBox>
@@ -271,9 +295,12 @@ const SignupComponent = ({
                 passwordChecker: e.target.value,
               });
             }}
+            onBlur={() => {
+              setPwCheckBlur(true);
+            }}
             value={formik.values.passwordChecker}
           />
-          {formik.errors.passwordChecker ? (
+          {formik.errors.passwordChecker && pwCheckBlur ? (
             <SignupError>{formik.errors.passwordChecker}</SignupError>
           ) : null}
         </InputBox>
@@ -292,9 +319,12 @@ const SignupComponent = ({
               });
               dispatch(nicknameDupCheck(e.target.value));
             }}
+            onBlur={() => {
+              setNicknameBlur(true);
+            }}
             value={formik.values.nickname}
           />
-          {formik.errors.nickname ? (
+          {formik.errors.nickname && nicknameBlur ? (
             <SignupError>{formik.errors.nickname}</SignupError>
           ) : null}
           {!nicknameDupOk ? <SignupError>{nicknameDupMsg}</SignupError> : null}
