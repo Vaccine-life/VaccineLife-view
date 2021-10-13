@@ -707,4 +707,4 @@ const BarBoxMobile = styled.div`
   border-radius: 16px;
 `;
 
-export default MainNivoBar
+export default MainNivoBar;
